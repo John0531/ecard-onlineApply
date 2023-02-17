@@ -19,7 +19,7 @@ import 'sweetalert2/dist/sweetalert2.min.css'
 // import '../src/assets/scss/helpers/_alert.scss'
 
 // ?vue-meta
-// import { createMetaManager } from 'vue-meta'
+import { createMetaManager } from 'vue-meta'
 
 // ?vue-gtag-next
 // import VueGtag from 'vue-gtag-next'
@@ -44,7 +44,7 @@ app.use(store)
 app.use(VueAxios, axios)
 app.use(VueSweetalert2)
 
-// app.use(createMetaManager())
+app.use(createMetaManager())
 
 // ? GA 追蹤碼設定
 // app.use(VueGtag, {
