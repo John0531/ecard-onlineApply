@@ -18,30 +18,33 @@
     </div>
     <!-- //主視覺 -->
     <!-- 主要內容 -->
-    <section class=" mainArea">
+    <section class="mainArea">
         <div class="container-xl">
             <div class="row justify-content-md-center">
-                <div class="col-lg-10">
-                    <div class="row justify-content-md-center">
-                        <div class="col-md-6 text-center pt-4">
-                            <div class="Apply_Box">
-                                <div class="item">
-                                    <h3>我是聯邦卡友/存戶</h3>
-                                    <button onclick="location.href='OnLineApply_y.htm'"
-                                        class="btn btn-primary btn-lg rounded-pill" type="submit" value="">立即加辦卡 <i class="fa fa-arrow-circle-right"></i></button><br>
-                                    <h4>※ 貼心提醒<br>存戶身份不含數位存款戶。</h4>
-                                </div>
-                            </div>
+                <div class="col-md-4 col-lg-4 col-xl-3 text-center pt-4">
+                    <div class="not_UBfriend">
+                        <div class="item">
+                            <h3>線上辦卡 <img src="images/form/Apply_icon02.png" class="img-fluid" alt="" /></h3>
+                            <button onclick="location.href='OnLineApply_Chk.htm'" class="btn btn-primary btn-lg rounded-pill" type="submit" value="">立即辦卡 <i class="fa fa-arrow-circle-right"></i></button><br>
+                            <h4>(已持有其他銀行信用卡)</h4>
                         </div>
-                        <div class="col-md-6 text-center pt-4">
-                            <div class="Apply_Box">
-                                <div class="item">
-                                    <h3>我不是聯邦卡友</h3>
-                                    <button onclick="location.href='OnLineApply_n.htm'"
-                                        class="btn btn-primary btn-lg rounded-pill" type="submit" value="">我 要 辦 卡 <i class="fa fa-arrow-circle-right"></i></button><br>
-                                    <h4>※ 貼心提醒<br>請準備好您的身份證與財力證明(如存摺、扣繳憑單、地價稅單和房屋稅單或建物權狀)，以加速辦卡流程。</h4>
-                                </div>
-                            </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-xl-3 text-center pt-4">
+                    <div class="not_UBfriend">
+                        <div class="item">
+                            <h3>線上辦卡 <img src="images/form/Apply_icon03.png" class="img-fluid" alt="" /></h3>
+                            <button onclick="location.href='OnLineApply_ChkSZ.htm'" class="btn btn-primary btn-lg rounded-pill" type="submit" value="">立即辦卡 <i class="fa fa-arrow-circle-right"></i></button><br>
+                            <h4>(已持有其他銀行帳戶)</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-xl-3 text-center pt-4">
+                    <div class="not_UBfriend">
+                        <div class="item">
+                            <h3>書面申請 <img src="images/form/Apply_icon01.png" class="img-fluid" alt="" /></h3>
+                            <button onclick="location.href='OnLineApply_Written.htm'" class="btn btn-primary btn-lg rounded-pill" type="submit" value="">立即辦卡 <i class="fa fa-arrow-circle-right"></i></button><br>
+                            <h4>(無其他銀行信用卡)</h4>
                         </div>
                     </div>
                 </div>
@@ -85,6 +88,10 @@
             </div>
         </div>
     </div>
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
 </body>
-
 </template>
+
+<style scoped>
+</style>
