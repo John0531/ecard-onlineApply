@@ -3,8 +3,10 @@ import { createApp } from 'vue'
 // ? axios
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+
+// ? bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.bundle.js'
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 
 // ? vee-validate
 import { Field, Form, ErrorMessage, defineRule, configure } from 'vee-validate'
@@ -38,6 +40,14 @@ configure({
 setLocale('zh_TW')
 
 const app = createApp(App)
+
+// ?自訂全域屬性
+app.config.globalProperties.$custom = {
+  // validate,
+  bootstrap
+  // moment,
+  // currency
+}
 
 app.use(router)
 app.use(store)
