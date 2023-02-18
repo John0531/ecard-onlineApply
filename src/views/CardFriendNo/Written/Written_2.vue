@@ -128,7 +128,7 @@
                 <!-------------------本人已詳閱---------------------->
                 <div class="terms-group">
                     <div class="terms">
-                        <input id="checkbox" name="checkbox" value="checkbox" class="checkimg position-absolute" type="checkbox" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="checkAgreement(document.getElementById('button_termsOpt_1'));" />
+                        <input v-model="allTerms" @click.prevent="" id="checkbox" name="checkbox" value="checkbox" class="checkimg position-absolute" type="checkbox" data-bs-toggle="modal" data-bs-target="#exampleModal" />
                         <label for="agree">同意，本人對「<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>用卡須知及申請說明</u></a>」「 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>重要告知事項</u></a>」「 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>聯邦信用卡約定條款</u></a>」「<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>電子化帳單服務約定條款</u></a>」內容。(請務必勾選)
                         </label>
                     </div>
@@ -178,7 +178,7 @@
         </div>
     </div>
     <!-- Modal-1 -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div ref="termsModal" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -187,7 +187,7 @@
                 </div>
                 <div class="modal-body">
                     <!------------------1-------------------------------------------->
-                    <div id="terms_box_1" class="terms_box">
+                    <div @scroll="checkTermsScroll($event,1)" id="terms_box_1" class="terms_box">
                         <!--uc1:wuc用卡須知及申請說明 runat="server" id="wuc用卡須知及申請說明" /-->
                         <div class="txt">
                             <h3>用卡須知</h3>
@@ -372,13 +372,13 @@
                         </div>
                     </div>
                     <div id="button_terms" class="button_terms">
-                        <input type="checkbox" id="button_termsOpt_1" onclick="javascript:checkAgreement(this);" disabled="" />
+                        <input type="checkbox" id="button_termsOpt_1" v-model="checkTerms" value="1" disabled />
                         <label id="read_1" for="button_termsOpt_1">我已詳細閱讀。(請勾選)</label>
                     </div>
                     <!----------------//1-------------------------------------------->
 
                     <!------------------2-------------------------------------------->
-                    <div id="terms_box_2" class="terms_box">
+                    <div @scroll="checkTermsScroll($event,2)" id="terms_box_2" class="terms_box">
                         <!--uc1:wuc重要告知事項 runat="server" id="wuc重要告知事項" /-->
                         <div class="txt">
                             <h3>重要告知事項</h3>
@@ -517,13 +517,13 @@
                         </div>
                     </div>
                     <div id="button_terms_2" class="button_terms">
-                        <input type="checkbox" id="button_termsOpt_2" onclick="javascript:checkAgreement(this);" disabled="" />
+                        <input type="checkbox" id="button_termsOpt_2" v-model="checkTerms" value="2" disabled />
                         <label id="read_2" for="button_termsOpt_2">我已詳細閱讀。(請勾選)</label>
                     </div>
                     <!----------------//2-------------------------------------------->
 
                     <!------------------3-------------------------------------------->
-                    <div id="terms_box_3" class="terms_box">
+                    <div @scroll="checkTermsScroll($event,3)" id="terms_box_3" class="terms_box">
                         <!--uc1:wuc聯邦信用卡約定條款 runat="server" id="wuc聯邦信用卡約定條款" /-->
                         <div class="txt">
                             <h3>聯邦信用卡約定條款</h3>
@@ -882,13 +882,13 @@
 
                     </div>
                     <div id="button_terms_3" class="button_terms">
-                        <input type="checkbox" id="button_termsOpt_3" onclick="javascript:checkAgreement(this);" disabled="" />
+                        <input type="checkbox" id="button_termsOpt_3" v-model="checkTerms" value="3" disabled />
                         <label id="read_3" for="button_termsOpt_3">我已詳細閱讀。(請勾選)</label>
                     </div>
                     <!----------------//3-------------------------------------------->
 
                     <!------------------4-------------------------------------------->
-                    <div id="terms_box_4" class="terms_box">
+                    <div @scroll="checkTermsScroll($event,4)" id="terms_box_4" class="terms_box">
                         <!--uc1:wuc電子化帳單服務約定條款 runat="server" id="wuc電子化帳單服務約定條款" /-->
                         <div class="txt">
                             <h3>聯邦銀行信用卡「電子化帳單」服務約定條款</h3>
@@ -969,7 +969,7 @@
 
                     </div>
                     <div id="button_terms_4" class="button_terms">
-                        <input type="checkbox" id="button_termsOpt_4" onclick="javascript:checkAgreement(this);" disabled="" />
+                        <input type="checkbox" id="button_termsOpt_4" v-model="checkTerms" value="4" disabled />
                         <label id="read_4" for="button_termsOpt_4">我已詳細閱讀。(請勾選)</label>
                     </div>
                     <!----------------//4-------------------------------------------->
@@ -978,8 +978,7 @@
 
                 <div class="modal-footer">
                     <div class="col-12 text-center">
-                        <button type="button" class="btn btn-primary btn-lg" onclick="javascript:checkTotal();">確定</button>
-                        <button id="btnTermClose" type="button" class="btn btn-primary btn-lg d-none" data-bs-dismiss="modal" aria-label="Close">確定</button>
+                        <button @click.prevent="checkAllTerms" class="btn btn-primary btn-lg">確定</button>
                     </div>
                 </div>
             </div>
@@ -988,49 +987,45 @@
     <!-- Modal-1 end -->
 </template>
 
-<!------------條款---------------->
-<script type="text/javascript">
-/* eslint-disable */
-// var terms_total = 4
-// var terms_check_btn = document.getElementById('terms_check_btn')
-// var nums = []
-// var boxs = []
-// var ii
-// for (var i = 1; i <= terms_total; i++) {
-//   nums[i] = document.getElementById('button_termsOpt_' + i)
-//   boxs[i] = $('#terms_box_' + i)
-//   boxs[i][0].onscroll = function () {
-//     if (this.scrollHeight - this.scrollTop <= this.clientHeight + 50) {
-//       ii = this.id.replace('terms_box_', '')
-//       $('#button_termsOpt_' + ii).removeAttr('disabled')
-//       $('#read_' + ii).addClass('text-checked')
-//     }
-//   }
-// }
+<script>
+export default {
+  data () {
+    return {
+      termsModal: '',
+      checkTerms: [],
+      allTerms: false
+    }
+  },
+  watch: {
+    checkTerms (n, o) {
+      if (n.length >= 4) {
+        this.allTerms = true
+      } else {
+        this.allTerms = false
+      }
+    }
+  },
+  methods: {
+    checkTermsScroll (event, num) {
+      if (event.target.scrollTop === (event.target.scrollHeight - event.target.offsetHeight)) {
+        document.querySelector(`#button_termsOpt_${num}`).removeAttribute('disabled')
+        document.querySelector(`#read_${num}`).classList.add('text-checked')
+      }
+    },
+    checkAllTerms () {
+      if (this.checkTerms.length < 4) {
+        alert('您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！')
+      } else {
+        this.termsModal.hide()
+      }
+    }
+  },
+  mounted () {
+    this.termsModal = new this.$custom.bootstrap.Modal(this.$refs.termsModal, { backdrop: 'static' })
+  }
+}
 
-// function checkAgreement (myObj) {
-//   /* 用來記錄幾個方框已被勾選 */
-//   var checkCount = 0
-//   var button_termsOpt = myObj.id
-//   for (i = 1; i <= terms_total; i++) {
-//     var buttonName = button_termsOpt.substring(0, button_termsOpt.length - 1) + i
-//     if (document.getElementById(buttonName).checked == true) {
-//       checkCount = checkCount + 1
-//       document.getElementById('myCheckCount').value = checkCount
-//     }
-//   }
-//   if (checkCount == terms_total) {
-//     document.getElementById('checkbox').checked = true
-//   } else {
-//     document.getElementById('checkbox').checked = false
-//   }
-// }
-
-// function checkTotal () {
-//   if (document.getElementById('myCheckCount').value != terms_total) { alert('您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！') } else { $('#btnTermClose').click() }
-// }
-
-// //點擊換圖
+// 點擊換圖
 // var toggle = true;
 //     $(".terms_check_btn1").click(function () {
 //         if (toggle) {
@@ -1041,4 +1036,4 @@
 //             document.getElementById('checkboxUnEnd').checked = false;
 //         }
 //     });
-// </script>
+</script>
