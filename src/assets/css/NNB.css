@@ -1,0 +1,169 @@
+.topimg-Application {
+    background-image: url(../images/form/Application.jpg);
+}
+
+@media screen and (max-width: 768px) {
+	.topimg-Application {
+        background-image: url(../images/form/Application-m.jpg);
+    }
+}
+
+/*------------------New New Bank----------------*/
+.new-new-bank-title{
+	width: 100%;
+	margin: 10px auto 0px;
+}
+.new-new-bank-title img {
+	margin: 0 auto;
+}
+.new-new-bank{
+	width: 100%;
+	border-radius: 15px;
+	margin: 0px auto 30px;
+	padding: 20px;
+	box-sizing: border-box;
+}
+.new-new-bank .h2{
+	font-size: 24px;
+	line-height: 36px;
+	color: #009999;
+	font-weight: 600;
+}
+.new-new-bank .h3{
+	font-size: 20px;
+	line-height: 36px;
+	color: #464747;
+	font-weight: 400;	
+}
+.new-new-bank-title{
+	font-size: 20px;
+	line-height: 36px;
+	color: #000000;
+	font-weight: 600;
+}
+.new-new-bank-title-blue{
+	font-size: 24px;
+	line-height: 36px;
+	color: #0a73c2;
+	font-weight: 600;
+}
+.new-new-bank-title-red{
+	font-size: 24px;
+	line-height: 40px;
+	color: #f81242;
+	font-weight: 600;
+}
+.new-new-bank h4{
+	font-size: 20px;
+	line-height: 36px;
+	color: #464747;
+	font-weight: 600;	
+}
+.new-new-bank-title-s{
+	font-size: 20px;
+	line-height: 40px;
+	color: #2ea5bf;
+	font-weight: 600;
+}
+
+.new-new-bank-txt{
+	font-family: "微軟正黑體", Arial, sans-serif;
+	font-size: 16px;
+	line-height: 26px;
+	color: #1c1c1c;	
+}
+.new-new-bank-btn {
+	display: inline-block;
+	font-size: 18px;
+    line-height: 24px;
+	border-radius: 8px;
+	border: 2px solid #2898b1;
+	padding: 10px 20px;
+	margin: 20px 5px;
+	background-color: #2ea5bf;
+	color: #ffffff;
+	text-decoration:none;
+}
+.new-new-bank-btn:hover{
+    color: #fff;
+	background-color: #585e5f;
+}
+.new-new-bank-btn-y {
+	display: inline-block;
+	border-radius: 8px;
+	font-size: 18px;
+    line-height: 24px;
+	padding: 10px 20px;
+	margin: 20px;
+	background-color: #585757;
+	color: #ffffff;
+	text-decoration:none;
+}
+.new-new-bank-btn-y:hover{
+	color: #ffffff;
+	background-color: #777777;
+}
+.p-number-box{
+	color: #333333;
+    font-size: 1rem;
+    padding: 5px;
+	margin: 2px 5px;
+	width: 100px;
+	height: 30px;
+}
+.p-number-box:focus{
+	color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);}
+#NewNewBank_img{
+	display: block;
+}
+#NewNewBank_img_s{
+	display: none;
+}
+.terms ul {
+	padding-left: 32px;
+    padding-top: 7px;
+	font-size: 16px;
+}
+
+@media screen and (max-width: 768px) {
+	.new-new-bank-title-blue{
+		font-size: 20px;
+		line-height: 30px;	
+	}
+	.new-new-bank-title-red{
+		font-size: 20px;
+		line-height: 30px;
+		color: #f81242;
+		font-weight: 600;
+	}
+	.new-new-bank h4{
+		font-size: 18px;
+		line-height: 30px;
+		color: #464747;
+		font-weight: 600;	
+		margin: 0px -15px;
+	}
+	.new-new-bank-btn {
+		font-size: 16px;
+		line-height: 20px;
+		padding: 8px 15px;
+		margin: 15px 3px;
+	}
+	.new-new-bank-btn-y {
+		font-size: 16px;
+		line-height: 20px;
+		padding: 8px 15px;
+		margin: 15px 3px;	
+	}
+	#NewNewBank_img{
+		display: none;
+    }
+    #NewNewBank_img_s{
+        display: block;
+    }
+}
+/*------------------New New Bank----------------*/

@@ -1,0 +1,4526 @@
+    @charset "utf-8";
+    /****************** 基本 ******************/
+
+    * {
+        font-family: "微軟正黑體", "Microsoft JhengHei", Arial, Geneva, sans-serif;
+    }
+    body {
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 1.8;
+        color: #323232;
+        background-color: #fff;
+        height: 100%;
+        position: relative;
+    }
+    a {
+        color: #009999;
+        text-decoration: none;
+    }
+    a:hover,
+    a:active,
+    a:focus,
+    a:visited {
+        color: #009999;
+        outline: none;
+        text-decoration: none;
+    }
+    .red_text {
+        color: #d60000;
+    }
+    .DarkRed_text {
+        color: #cc0e43;
+    }
+    .blue_text {
+        color: #115b83;
+    }
+    /*湖水綠*/
+    .Green_text {
+        color: #097171;
+    }
+    /*每頁下方的按鈕ex:下一步、重填 */
+    .button_group {
+        border-top: 1px solid #afafaf;
+        padding-top: 15px;
+    }
+    .btn.btn-primary {
+        background: #009999;
+        color: #fff;
+        border: none !important;
+        border: 2px solid transparent !important;
+        display: inline-block;
+        margin-top: 5px;
+        border-radius: 0px;
+    }    
+    .btn.btn-primary:hover,
+    .btn.btn-primary:active,
+    .btn.btn-primary:focus {
+        background: #393e46 !important;
+        color: #fff;
+        outline: none !important;
+    }
+    @media screen and (max-width: 576px) {
+        .btn.btn-primary {
+            padding-top: 10px;
+            padding-right: 8px;
+            padding-left: 8px;
+            padding-bottom: 10px;
+            font-size: 16px;
+        }
+    }
+    /*//每頁下方的按鈕ex:下一步、重填 */
+
+    /*各項事業費用代扣的新增事業費用代扣按鈕*/
+    .btn.btn-red {
+        background: #af1212;
+        color: #fff;
+        border: 2px solid transparent !important;
+        display: inline-block;
+        margin-top: 5px;
+        border-radius: 0px;
+    }
+    @media screen and (max-width: 576px) {
+        .btn.btn-red  {
+            padding-top: 10px;
+            padding-right: 8px;
+            padding-left: 8px;
+            padding-bottom: 10px;
+            font-size: 16px;
+        }
+    }
+    /*辦卡進度查詢按鈕*/
+    .greyBlue_button {
+        display: inline-block;
+        margin: 0 0 0 10px;
+        padding: 2px 10px;
+        font-size: 15px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        color: #ffffff;
+        background-image: linear-gradient(to top, #1c8395, #62b8c7);
+        border: 1px solid #1c8395;
+        border-radius: 8px;
+        box-shadow: 0 4px #89898980;
+    }
+    
+    .greyBlue_button:hover {
+        color: #ffffff;
+        background-image: linear-gradient(to top, #1c8395, #3496a6);
+    }
+    
+    .greyBlue_button:focus {
+        outline: 0px;
+    }
+
+    /* 版面配置 Start */
+    .header {
+        height: 20px;
+    }
+
+    /* 聯邦LOGO Start */
+    .navbar-brand {
+        padding-right: 0;
+    }
+
+    .navbar {
+        padding: 0;
+    }
+
+    .navbar .navbar-brand {
+        margin-right: 0px;
+        margin-left: 20px;
+        width: 180px;
+        height: 60px;
+        background: url(../images/UBOT_logo_180x26.png) no-repeat 0 50%;
+    }
+
+    /* 聯邦LOGO End */
+    /* footer Start */
+    .footer {
+        font-size: 15px;
+    }
+
+    .footer .securityNotice {
+
+        /* color:#FFFFFF; */
+        /* color:#4C4C4C; */
+        color: #666;
+        text-align: center;
+        /* background-color: #1BBBBB; */
+        /* background-color: #D0D0D0; */
+        background-color: #fff;
+        padding: 10px 10px 20px;
+    }
+
+    .footer .serviceItems {
+        color: #4C4C4C;
+        text-align: center;
+        background-color: #D0D0D0;
+        padding: 10px;
+    }
+
+    .footer .serviceItems .links ul {
+        display: flex;
+        justify-content: center;
+        list-style-type: none;
+        margin-bottom: 0;
+    }
+
+    .footer .links a:after {
+        content: "｜";
+    }
+
+    .footer .links a:last-child:after {
+        content: "";
+    }
+
+    .footer .serviceItems a {
+        color: #4C4C4C;
+    }
+
+    .footer .information {
+        color: #FFFFFF;
+        background-color: #575757;
+        padding: 10px;
+    }
+
+    .footer .information .infoLeft {
+        font-size: 28px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footer .information .infoRight {
+        font-size: 12px;
+    }
+
+    @media all and (max-width: 576px) {
+        .footer .information .infoRight {
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    .footer .information .copyright {
+        text-align: center;
+    }
+
+    /* footer End */
+
+    /*--主要內容 mainArea--*/
+    .mainArea {
+        padding: 50px 10px 30px;
+    }
+    .mainArea p{   
+        margin-bottom: 0px;
+    }
+    /*--//主要內容 mainArea--*/
+
+    /*--------------表單頁短的主視覺(主視覺，英文為key vision)--------------*/
+    /*X-Small devices（直向手機，小於 576px）*/
+    .shortKv {
+        height: 180px;
+    }
+
+    .fill-shortKv {
+        width: 100%;
+        height: 100%;
+        background-position: center center;
+        background-size: cover;
+    }
+
+    /*Small devices （橫向手機，576px 及以上）*/
+    @media screen and (min-width: 576px) {}
+
+    /*Medium devices (平板電腦，768px 及以上）*/
+    @media screen and (min-width: 768px) {
+        .shortKv {
+            height: 225px;
+        }
+    }
+    /*Large devices （桌機，992px 及以上）*/
+    @media screen and (min-width: 992px) {
+        .shortKv {
+            height: 250px;
+        }
+    }
+    /*X-Large devices （大型桌機，1200 像素及以上）*/
+    @media screen and (min-width: 1200px) {
+        .shortKv {
+            height: 300px;
+        }
+    }
+    /*XX-Large devices（更大的桌機，1400 像素及以上）*/
+    @media screen and (min-width: 1400px) {
+        ...
+    }
+    /*----------------------------主視覺----------------------------------*/
+    /*--活動登錄--*/
+
+    .topimg-activity-login {
+        background-image: url(../images/form/activity-login-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-activity-login {
+            background-image: url(../images/form/activity-login.jpg);
+        }
+    }
+    /*--紅利積點查詢與各項費用折抵--*/
+    .topimg-bonus-query {
+        background-image: url(../images/form/bonus-query-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-bonus-query {
+            background-image: url(../images/form/bonus-query.jpg);
+        }
+    }
+    /*--兌換hamipoint--*/
+    .topimg-HamiPoint {
+        background-image: url(../images/form/hamiPoint-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-HamiPoint {
+            background-image: url(../images/form/hamiPoint.jpg);
+        }
+    }
+    /*--高鐵tgo點數兌換--*/
+    .topimg-TGo {
+        background-image: url(../images/form/TGo-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-TGo {
+            background-image: url(../images/form/TGo.jpg);
+        }
+    }
+    /*--樂活鈦金卡回饋金查詢/折抵--*/
+    .topimg-lehuotj {
+        background-image: url(../images/form/lehuotj-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-lehuotj {
+            background-image: url(../images/form/lehuotj.jpg);
+        }
+    }
+    /*--各項事業費用代扣--*/
+    .topimg-utilitiespay {
+        background-image: url(../images/form/utilitiespay-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-utilitiespay {
+            background-image: url(../images/form/utilitiespay.jpg);
+        }
+    }
+    /*--線上申辦信用貸款--*/
+    .topimg-PersonalLoaApply {
+        background-image: url(../images/form/PersonalLoaApply-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-PersonalLoaApply {
+            background-image: url(../images/form/PersonalLoaApply.jpg);
+        }
+    }
+    /*--信用貸款電子帳單申請--*/
+    .topimg-EbillApply {
+        background-image: url(../images/form/EbillApply-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-EbillApply {
+            background-image: url(../images/form/EbillApply.jpg);
+        }
+    }
+    /*--滿心期貸費率試算--*/
+    .topimg-LoansHeartRate {
+        background-image: url(../images/form/LoansHeartRate-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-LoansHeartRate {
+            background-image: url(../images/form/LoansHeartRate.jpg);
+        }
+    }
+    /*--費率試算--*/
+    .topimg-rate {
+        background-image: url(../images/form/rate-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-rate {
+            background-image: url(../images/form/rate.jpg);
+        }
+    }
+    /*--我要開卡--*/
+    .topimg-dspPageContent {
+        background-image: url(../images/form/dspPageContent-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-dspPageContent {
+            background-image: url(../images/form/dspPageContent.jpg);
+        }
+    }
+    /*--帳單輕鬆付--*/
+    .topimg-payeasy {
+        background-image: url(../images/form/payeasy-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-payeasy {
+            background-image: url(../images/form/payeasy.jpg);
+        }
+    }
+    /*--想分就分--*/
+    .topimg-wsp {
+        background-image: url(../images/form/wsp-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-wsp {
+            background-image: url(../images/form/wsp.jpg);
+        }
+    }
+    /*--辦卡進度查詢--*/
+    .topimg-inquiry {
+        background-image: url(../images/form/inquiry-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-inquiry {
+            background-image: url(../images/form/inquiry.jpg);
+        }
+    }
+    /*--開運發財金--*/
+    .topimg-LuckyApply {
+        background-image: url(../images/form/LuckyApply-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-LuckyApply {
+            background-image: url(../images/form/LuckyApply.jpg);
+        }
+    }
+    /*--信用貸款進度查詢--*/
+    .topimg-PersonalLoan_inquiry {
+        background-image: url(../images/form/PersonalLoan_inquiry-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-PersonalLoan_inquiry {
+            background-image: url(../images/form/PersonalLoan_inquiry.jpg);
+        }
+    }
+    /*--信用貸款補件上傳--*/
+    .topimg-AdditionalFile {
+        background-image: url(../images/form/AdditionalFile-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-AdditionalFile {
+            background-image: url(../images/form/AdditionalFile.jpg);
+        }
+    }
+    /*--開運發財金進度查詢--*/
+    .topimg-CashAdvance_inquiry {
+        background-image: url(../images/form/CashAdvance_inquiry-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-CashAdvance_inquiry {
+            background-image: url(../images/form/CashAdvance_inquiry.jpg);
+        }
+    }
+    /*--留言板--*/
+    .topimg-sendMsg {
+        background-image: url(../images/form/sendMsg-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-sendMsg {
+            background-image: url(../images/form/sendMsg.jpg);
+        }
+    }
+    /*--線上申辦聯邦卡優先體驗專區--*/
+    .topimg-qryCardinfo {
+        background-image: url(../images/form/qryCardinfo-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-qryCardinfo {
+            background-image: url(../images/form/qryCardinfo.jpg);
+        }
+    }
+    /*--線上辦卡---*/
+    .topimg-OnLineApply {
+        background-image: url(../images/form/OnLineApply-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-OnLineApply {
+            background-image: url(../images/form/OnLineApply.jpg);
+        }
+    }
+    /*------線上簽約---*/
+    .topimg-Contract {
+        background-image: url(../images/form/Contract-m.jpg) !important;
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-Contract {
+            background-image: url(../images/form/Contract.jpg) !important;
+        }
+    }
+    
+    /*--預借現金/專人與我聯絡--*/ 
+    .topimg-mtnApply {
+        background-image: url(../images/form/mtnApply-m.jpg);
+    }
+    @media screen and (min-width: 576px) {
+        .topimg-mtnApply {
+            background-image: url(../images/form/mtnApply.jpg);
+        }
+    }
+    /*----------------------------頁面主標題----------------------------------*/
+
+    .fill-shortKv .container-xl {
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    /*--shortKv-title-3標題總共3個字--*/
+    .fill-shortKv .shortKv-title-3 h2 {
+        width: 90px;
+        text-align: center;
+        margin-left: 1%;
+        font-size: 30px;
+    }
+    .fill-shortKv .shortKv-title-3 h2:after {
+        content: '';
+        display: block;
+        width: 80%;
+        height: 2px;
+        background-color: #0ea9a1;
+        margin: 3px auto 0px;
+    }
+    @media screen and (min-width: 576px) {
+        .fill-shortKv .shortKv-title-3 h2 {
+            margin-left: 8%;
+        }
+    }
+    @media screen and (min-width: 768px) {
+        .fill-shortKv .shortKv-title-3 h2 {
+            width: 110px;
+            font-size: 36px;
+        }
+    }
+    @media screen and (min-width: 992px) {
+        .fill-shortKv .shortKv-title-3 h2 {
+            width: 120px;
+            margin-left: 10%;
+            font-size: 40px;
+        }
+    }
+
+    /*--shortKv-title-4標題總共4個字--*/
+    .fill-shortKv .shortKv-title-4 h2 {
+        width: 145px;
+        text-align: center;
+        margin-left: 1%;
+        font-size: 30px;
+    }
+    .fill-shortKv .shortKv-title-4 h2:after {
+        content: '';
+        display: block;
+        width: 80%;
+        height: 2px;
+        background-color: #0ea9a1;
+        margin: 3px auto 0px;
+    }
+    @media screen and (min-width: 576px) {
+        .fill-shortKv .shortKv-title-4 h2 {
+            margin-left: 8%;
+        }
+    }
+    @media screen and (min-width: 768px) {
+        .fill-shortKv .shortKv-title-4 h2 {
+            width: 150px;
+            font-size: 36px;
+        }
+    }
+    @media screen and (min-width: 992px) {
+        .fill-shortKv .shortKv-title-4 h2 {
+            width: 165px;
+            margin-left: 10%;
+            font-size: 40px;
+        }
+    }
+
+    /*--shortKv-title-5標題總共5個字--*/
+    .fill-shortKv .shortKv-title-5 h2 {
+        width: 150px;
+        text-align: center;
+        margin-left: 1%;
+        font-size: 30px;
+    }
+    .fill-shortKv .shortKv-title-5 h2:after {
+        content: '';
+        display: block;
+        width: 80%;
+        height: 2px;
+        background-color: #0ea9a1;
+        margin: 3px auto 0px;
+    }
+    @media screen and (min-width: 576px) {
+        .fill-shortKv .shortKv-title-5 h2 {
+            margin-left: 8%;
+        }
+    }
+    @media screen and (min-width: 768px) {
+        .fill-shortKv .shortKv-title-5 h2 {
+            width: 180px;
+            font-size: 36px;
+        }
+    }
+    @media screen and (min-width: 992px) {
+        .fill-shortKv .shortKv-title-5 h2 {
+            width: 200px;
+            margin-left: 10%;
+            font-size: 40px;
+        }
+    }
+
+    /*--shortKv-title-6標題總共6個字、4個字時斷行--*/
+    .fill-shortKv .shortKv-title-6 h2 {
+        width: 145px;
+        text-align: center;
+        margin-left: 1%;
+        margin-top: -30px;
+        font-size: 30px;
+        line-height: 45px;
+    }
+    .fill-shortKv .shortKv-title-6 h2:after {
+        content: '';
+        display: block;
+        width: 80%;
+        height: 2px;
+        background-color: #0ea9a1;
+        margin: -2.9rem auto 0px;
+    }
+    @media screen and (min-width: 576px) {
+        .fill-shortKv .shortKv-title-6 h2 {
+            margin-left: 5%;
+        }
+    }
+    @media screen and (min-width: 768px) {
+        .fill-shortKv .shortKv-title-6 h2 {
+            width: 150px;
+            font-size: 36px;
+            line-height: 50px;
+            margin-top: -50px;
+        }
+        .fill-shortKv .shortKv-title-6 h2:after {
+            margin: -3.2rem auto 0px;
+        }
+    }
+    @media screen and (min-width: 992px) {
+        .fill-shortKv .shortKv-title-6 h2 {
+            width: 260px;
+            margin-left: 5%;
+            font-size: 40px;
+        }
+        .fill-shortKv .shortKv-title-6 h2:after {
+            margin: 3px auto 0px;
+        }
+    }
+
+    /*--shortKv-title-8標題總共8個字、4個字時斷行--*/
+    .fill-shortKv .shortKv-title-8 h2 {
+        width: 125px;
+        text-align: center;
+        margin-left: 1%;
+        margin-top: -30px;
+        font-size: 30px;
+        line-height: 45px;
+    }
+    .fill-shortKv .shortKv-title-8 h2:after {
+        content: '';
+        display: block;
+        width: 80%;
+        height: 2px;
+        background-color: #0ea9a1;
+        margin: -2.9rem auto 0px;
+    }
+    @media screen and (min-width: 576px) {
+        .fill-shortKv .shortKv-title-8 h2 {
+            margin-left: 5%;
+        }
+    }
+    @media screen and (min-width: 768px) {
+        .fill-shortKv .shortKv-title-8 h2 {
+            width: 150px;
+            font-size: 36px;
+            line-height: 50px;
+            margin-top: -50px;
+        }
+        .fill-shortKv .shortKv-title-8 h2:after {
+            width: 90%;
+            margin: -3.2rem auto 0px;
+        }
+    }
+    @media screen and (min-width: 992px) {
+        .fill-shortKv .shortKv-title-8 h2 {
+            width: 320px;
+            margin-left: 5%;
+            font-size: 40px;
+        }
+        .fill-shortKv .shortKv-title-8 h2:after {
+            margin: 3px auto 0px;
+        }
+    }
+
+    /*--shortKv-title-twoLines5標題兩行、5個字時斷行--*/
+    .fill-shortKv .shortKv-title-twoLines5 h2 {
+        width: 150px;
+        text-align: center;
+        margin-left: 0%;
+        margin-top: -30px;
+        font-size: 30px;
+        line-height: 45px;
+    }
+    .fill-shortKv .shortKv-title-twoLines5 h2:after {
+        content: '';
+        display: block;
+        width: 80%;
+        height: 2px;
+        background-color: #0ea9a1;
+        margin: -2.9rem auto 0px;
+    }
+    @media screen and (min-width: 576px) {
+        .fill-shortKv .shortKv-title-twoLines5 h2 {
+            margin-left: 5%;
+        }
+    }
+    @media screen and (min-width: 768px) {
+        .fill-shortKv .shortKv-title-twoLines5 h2 {
+            width: 180px;
+            font-size: 36px;
+            line-height: 50px;
+            margin-top: -45px;
+        }
+        .fill-shortKv .shortKv-title-twoLines5 h2:after {
+            margin: -3.2rem auto 0px;
+        }
+    }
+    @media screen and (min-width: 992px) {
+        .fill-shortKv .shortKv-title-twoLines5 h2 {
+            width: 200px;
+            font-size: 40px;
+        }
+        .fill-shortKv .shortKv-title-twoLines5 h2:after {
+            margin: -3.2rem auto 0px;
+        }
+    }
+
+    /*--shortKv-title-twoLines6標題兩行、6個字時斷行--*/
+    .fill-shortKv .shortKv-title-twoLines6 h2 {
+        width: 180px;
+        text-align: center;
+        margin-left: 0%;
+        margin-top: -30px;
+        font-size: 30px;
+        line-height: 45px;
+    }
+    .fill-shortKv .shortKv-title-twoLines6 h2:after {
+        content: '';
+        display: block;
+        width: 80%;
+        height: 2px;
+        background-color: #0ea9a1;
+        margin: -2.9rem auto 0px;
+    }
+    @media screen and (min-width: 576px) {
+        .fill-shortKv .shortKv-title-twoLines6 h2 {
+            margin-left: 5%;
+        }
+    }
+    @media screen and (min-width: 768px) {
+        .fill-shortKv .shortKv-title-twoLines6 h2 {
+            width: 220px;
+            font-size: 36px;
+            line-height: 50px;
+            margin-top: -45px;
+        }
+        .fill-shortKv .shortKv-title-twoLines6 h2:after {
+            margin: -3.2rem auto 0px;
+        }
+    }
+    @media screen and (min-width: 992px) {
+        .fill-shortKv .shortKv-title-twoLines6 h2 {
+            width: 245px;
+            font-size: 40px;
+        }
+        .fill-shortKv .shortKv-title-twoLines6 h2:after {
+            margin: -3.2rem auto 0px;
+        }
+    }
+
+    /*--shortKv-title-twoLines7標題兩行、7個字時斷行--*/
+    .fill-shortKv .shortKv-title-twoLines7 h2 {
+        width: 210px;
+        text-align: center;
+        margin-left: 0%;
+        margin-top: -30px;
+        font-size: 30px;
+        line-height: 45px;
+    }
+
+    .fill-shortKv .shortKv-title-twoLines7 h2:after {
+        content: '';
+        display: block;
+        width: 80%;
+        height: 2px;
+        background-color: #0ea9a1;
+        margin: -2.9rem auto 0px;
+    }
+    @media screen and (min-width: 576px) {
+        .fill-shortKv .shortKv-title-twoLines7 h2 {
+            margin-left: 5%;
+        }
+    }
+    @media screen and (min-width: 768px) {
+        .fill-shortKv .shortKv-title-twoLines7 h2 {
+            width: 260px;
+            font-size: 36px;
+            line-height: 50px;
+            margin-top: -45px;
+        }
+        .fill-shortKv .shortKv-title-twoLines7 h2:after {
+            margin: -3.2rem auto 0px;
+        }
+    }
+    @media screen and (min-width: 992px) {
+        .fill-shortKv .shortKv-title-twoLines7 h2 {
+            width: 280px;
+            font-size: 40px;
+        }
+        .fill-shortKv .shortKv-title-twoLines7 h2:after {
+            margin: -3.2rem auto 0px;
+        }
+    }
+
+    /*--shortKv-title-twoLines8標題兩行、8個字時斷行--*/
+    .fill-shortKv .shortKv-title-twoLines8 h2 {
+        width: 240px;
+        text-align: center;
+        margin-left: 0%;
+        margin-top: -30px;
+        font-size: 30px;
+        line-height: 45px;
+    }
+
+    .fill-shortKv .shortKv-title-twoLines8 h2:after {
+        content: '';
+        display: block;
+        width: 90%;
+        height: 2px;
+        background-color: #0ea9a1;
+        margin: -2.9rem auto 0px;
+    }
+    @media screen and (min-width: 576px) {
+        .fill-shortKv .shortKv-title-twoLines8 h2 {
+            margin-left: 5%;
+        }
+    }
+    @media screen and (min-width: 768px) {
+        .fill-shortKv .shortKv-title-twoLines8 h2 {
+            width: 290px;
+            font-size: 36px;
+            line-height: 50px;
+            margin-top: -45px;
+        }
+        .fill-shortKv .shortKv-title-twoLines8 h2:after {
+            margin: -3.2rem auto 0px;
+        }
+    }
+    @media screen and (min-width: 992px) {
+        .fill-shortKv .shortKv-title-twoLines8 h2 {
+            width: 320px;
+            font-size: 40px;
+        }
+        .fill-shortKv .shortKv-title-twoLines8 h2:after {
+            margin: -3.2rem auto 0px;
+        }
+    }
+    /*----------------------------//頁面主標題----------------------------------*/
+    /*--------------------------查詢結果+謝謝您---------------------------------*/      
+    .result_message {
+        padding: 15px 50px 30px;
+        font-size: 16px;
+        background-color: #ffffff;
+        color: #434343;
+    }
+    .result_message p {
+        font-size: 18px;
+        text-align: left;
+    }
+    .tks_message_end:before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 30px;
+        background-image: url("../images/form/tks_message_line.gif");
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    @media screen and (max-width: 768px) {
+        .result_message {
+            padding: 0px 0px;
+        }
+    }
+    /*--------------------------//查詢結果+謝謝您---------------------------------*/    
+    /*------------------------------登入表單------------------------------------*/
+    .formList {    
+        display: flex;     
+        flex-direction: column;
+        align-items: center;
+        padding-left: 0px;
+    }
+
+    .formList li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .formList label {
+        font-size: 1.25rem;
+        text-align: right;
+        margin-right: .75rem;
+        margin-bottom: 0;
+        color: #009999;
+        font-weight: bold;
+        min-width: 6.5rem;
+    }
+
+    .formList select {
+        margin-left: 5px;
+        margin-right: 5px;
+        min-width: 60px;
+    }
+
+    .formList select:first-of-type {
+        margin-left: 0;
+        min-width: 85px;
+        max-width: 192px;
+    }
+
+    .form-control {
+        color: #333333;
+        font-size: 1.25rem;
+        border-radius: 0;
+        border: 1px solid #a9a9a9;
+        padding: 0.37rem 0.3rem;
+        width: auto;
+    }
+
+    .formList .form-group > .form-control {
+        min-width: 18.3rem;
+    }   
+    /* .formList .form-group > div .form-control {
+        min-width: 18.3rem;
+    } */
+   
+   
+    .formList .label {
+        min-width: 12rem; /*--訂單編號／申請序號--*/
+    }
+   
+    .formList .PositiveCardNo_label {
+        min-width: 13rem; /*--正卡持卡人信用卡卡號--*/
+    } 
+
+   .formList .ValidCardNo_label {
+    min-width: 14rem; /*--本行信用卡任一有效卡號--*/
+   }
+
+    @media screen and (max-width: 576px) {
+        .formList li {       
+            justify-content: start;    
+            flex-wrap: wrap;            
+        }
+        .formList label {
+            width: 100%;
+            text-align: left;
+            margin-right: 0rem;
+        }
+        .formList .label {
+            width: 100%;
+            text-align: left;
+        }
+    }
+
+    /*--圖形驗證碼--*/
+    .formList .inCaptcha .form-control {
+        min-width: 5rem;
+        max-width: 10.8rem;
+    }
+
+    .formList .id_code {
+        max-width: 120px;
+        height: 44px;
+        padding-left: 3px;
+        margin: 0px;
+    }
+    @media screen and (max-width: 576px) {
+        .formList .inCaptcha label {
+            width: 100%;
+        }
+        .formList .inCaptcha .label {
+            width: 100%;
+        }
+    }
+    /*--//圖形驗證碼--*/
+
+    /*--表單年月日--*/
+    .formList .inDate {        
+        display: flex;      
+        justify-content: flex-start;       
+        align-items: center;
+        min-width: 18.3rem;
+    }
+    /*--//表單年月日--*/
+
+    /*--信用卡卡號--*/
+    .formList .cardNumber {
+        margin: 0 2px 0 0;
+        max-width: 4.12rem;
+    }
+
+    .formList .cardDash {
+        width: 5px;
+        height: 2px;
+        background-color: #009999;
+        margin-right: 2px;
+    }
+    /*--//信用卡卡號--*/
+
+    /*--信用卡 效期--*/
+    .formList .cardValidity {
+        margin-right: 5px;
+        min-width: 119px !important;
+    }
+    /*--信用卡 效期--*/
+/*----------------------------//登入表單----------------------------------*/
+/*-------------------------opt簡訊驗證碼----------------------------------*/    
+.formList .inOpt .form-control {
+    width: 9rem;
+}
+
+.formList .inOpt button {
+    display: inline-block;
+    text-align: center;
+    background-color: #1f6aa0;
+    border-radius: 5px;
+    margin: 10px;
+    width: 130px;
+    height: 44px;
+    line-height: 44px;
+    font-size: 16px;
+    color: #ffffff;
+    border: 0px;
+}
+
+.formList .inOpt button:focus {
+    outline: 0px
+}
+
+.formList .inOpt button:hover {
+    background-color: #145686;
+}
+@media screen and (max-width: 576px) {
+    /* .formList .inOpt label {
+        width: 100%;
+    } */         
+}
+/*-------------------------//opt簡訊驗證碼--------------------------------*/
+/*----------------------------雙排表單------------------------------------*/
+    .formList-even {        
+        display: flex;
+        flex-wrap: wrap;
+        padding-left: 0;
+    }
+
+    .formList-even li {       
+        display: flex;
+        margin-bottom: 2rem;
+        flex-direction: column;
+        padding-left: 40px;
+        padding-right: 90px;
+    }
+
+    .formList-even label {
+        font-size: 1.25rem;
+        text-align: left;
+        margin-right: .75rem;
+        margin-bottom: 0;
+        color: #009999;
+        font-weight: bold;
+    }
+    .formList-even input[type=checkbox] {
+        width: 1.2rem;height: 1.2rem
+    }
+
+    .formList-even .label {
+        min-width: 16rem;
+        font-size: 1.25rem;
+        text-align: right;
+        margin-right: .75rem;
+        margin-bottom: 0;
+        color: #009999;
+        font-weight: bold;
+    }
+
+    .formList-even .form-control {
+        padding: .37rem .3rem;
+        width: 100%;
+    }
+    .formList-even .form_Apply_txt {
+        font-size: 20px;
+        line-height: 40px;
+        letter-spacing: 2px;
+        color: #6c757d;
+    }
+    .formList-even
+    .formList-even .inOpt .form-control {
+        min-width: 5rem;
+        max-width: 9rem;
+    }
+    
+    .formList-even .inOpt button {
+        display: inline-block;
+        text-align: center;
+        background-color: #1f6aa0;
+        border-radius: 5px;
+        margin: 10px;
+        width: 130px;
+        height: 44px;
+        line-height: 44px;
+        font-size: 16px;
+        color: #ffffff;
+        border: 0px;
+    }
+    
+    .formList-even .inOpt button:focus {
+        outline: 0px
+    }
+    
+    .formList-even .inOpt button:hover {
+        background-color: #145686;
+    }
+    @media screen and (max-width: 992px) {
+        .formList-even li {
+            padding-left: 0px;
+            padding-right: 10px;
+        }
+    }
+    @media screen and (max-width: 768px) {
+        .formList-even {
+            padding-left: 0px;
+        }
+
+        .formList-even li {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: start;
+            -ms-flex-pack: start;
+            justify-content: flex-start;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            padding-left: 0px;
+            padding-right: 5px;
+        }
+
+        .formList-even li label {
+            text-align: left;
+        }
+
+        .formList-even .label {
+            text-align: left;
+            width: 100%;
+        }      
+    }
+/*-------------------------//雙排表單-------------------------------------*/    
+/*---------------------------確認申請資料---------------------------------*/    
+.container_Confirm {
+    /* background-image: url(../images/form/grey_bg.gif);
+    background-repeat: repeat-x; */
+    background-color: #f3f3f3;
+    padding-top: 45px;
+    margin-top: -83px;
+    padding-bottom: 1.8rem;
+}
+
+.container_Confirm .label_confirm {
+    min-width: 16rem;
+    font-size: 1.25rem;
+    text-align: left;
+    letter-spacing: 3px;
+    margin-right: .75rem;
+    margin-left: 2rem; 
+    margin-bottom: 0;
+    color: #009999;
+    font-weight: bold;
+}
+
+.container_Confirm .nostar {
+    margin-left: 0.77rem;
+}
+
+.container_Confirm .input-data_confirm {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    line-height: 34px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.container_Confirm .input-data_confirm p {
+    display: inline-block;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #6c757d;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 0em;
+}
+.container_Confirm .input-data_confirm p span {
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+@media screen and (max-width: 767px) {
+    .container_Confirm {       
+        margin-top: -63px;
+    }
+    .container_Confirm .label_confirm {
+        letter-spacing: 0px;
+        width: 100%;
+    }
+    .container_Confirm .nostar {
+        margin-left: 0rem;
+    }
+}
+@media screen and (max-width: 576px) {
+    .container_Confirm .label_confirm {
+        margin-left: .25rem;  
+    }    
+}
+ /*--親屬關係--*/    
+ .form-group.label_family {
+    align-items: flex-start;
+}
+
+.family_group {
+    width: 100%;
+}
+
+.family_group_item+.family_group_item {
+    margin-top: 10px;
+}
+
+.family_group_item span {
+    color: #6c757d;
+    right: 20px;
+    bottom: 20px;
+    font-size: 18px;
+    margin-left: 0.77rem;
+    line-height: 2;
+}
+
+@media screen and (max-width: 768px) {
+    .form-group.label_family {
+        align-items: center;
+    }
+    .family_group_item span {
+        margin-left: 0rem;
+    }
+}
+/*--//親屬關係--*/
+/*---------------------------//確認申請資料---------------------------------*/
+/*--input下的說明文字--*/
+    
+.notice-text {
+    display: inline-block;
+    color: #097171;
+    right: 20px;
+    bottom: 20px;
+    font-size: 14px;
+    line-height: 3;
+}    
+@media screen and (max-width: 768px) {
+    .notice-text {
+        left: 20px;
+        bottom: -20px;
+        font-size: 13px;
+        line-height: 2;
+        }
+    }
+/*--//input下的說明文字--*/
+/*--表單中按鈕--*/    
+.blue_button {
+    display: inline-block;
+    margin: 0 0 0 10px;
+    min-width: 5em;
+    padding: 2px 5px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    background-image: linear-gradient(to top, #4f84ba, #366ba1);
+    border: 1px solid #366ba1;
+    border-radius: 8px;
+    box-shadow: 0 4px #89898980;
+}
+
+.blue_button:hover {
+    color: #ffffff;
+    background-image: linear-gradient(to top, #2063a7, #014589);
+}
+
+.blue_button:focus {
+    outline: 0px;
+}
+@media screen and (max-width: 768px) {
+    .blue_button {
+        font-size: 14px;
+        margin: 0 0 0 5px;
+    }
+}
+/*--//表單中按鈕--*/
+/*--rwd-table data-title=四個中文字--*/
+@media screen and (max-width: 768px) {
+    .rwdTable thead {
+        display: none;
+    }
+    .rwdTable tbody td {
+        display: block;
+        text-align: left;
+        padding: 0px 3px 3px;
+        padding-left: 5.8em;
+        text-indent: -5em;
+    }
+    .rwdTable tbody td::before {
+        content: attr(data-title)'：';     
+        padding-right: 6px;
+        width: 5em;
+        display: inline-block;
+        text-align: right;
+    }
+    .rwdTable tbody td:first-child {
+        background-color: #009999;
+        color: #FFFFFF;
+        text-align: center;
+        padding: 8px;
+        padding-left: 0;
+        text-indent: 0;
+        margin-bottom: 0.25rem;
+    }
+    .rwdTable tbody td:first-child::before {
+        content: '';
+        color: #FFFFFF;
+        width: auto;
+    }
+    .rwdTable tbody td:last-child {
+        margin-bottom: 0.25rem;
+    }  
+}
+/*--//rwd-table--*/
+/*--------------------------------縮排------------------------------------*/
+/*--縮排數字(1.)--*/
+.indentNote_OneText {
+    font-size: 15px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    text-align: left;
+    line-height: 2.3em;
+}
+
+.indentNote_OneText p {
+    font-size: 15px;
+    text-align: left;
+    padding-left: 15px;
+    text-indent: -15px;
+    margin-bottom: 0px;
+}
+
+/*-- 縮排(註1.)--*/
+.indentNote_TwoText {
+    font-size: 15px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    text-align: left;
+    line-height: 2.3em;
+}
+
+.indentNote_TwoText p {
+    font-size: 15px;
+    text-align: left;
+    padding-left: 40px;
+    text-indent: -40px;
+    margin-bottom: 0px;
+}
+
+/*--------------------------------//縮排------------------------------------*/
+/*--注意事項--*/
+.note_text {
+    font-size: 15px;
+    list-style-type: none;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+/*--//注意事項--*/
+
+/*--步驟--*/
+.step {
+    width: 100%;
+    margin: 6px auto 40px;
+    display: flex;
+    list-style: none;
+    padding-left: 0px;
+    }
+.step li {
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+.step li .counter_step {
+    width: 60px;
+    height: 60px;
+    border-radius: 60px;
+    line-height: 52px;
+    font-size: 22px;
+    border-width: 4px;
+    text-align: center;
+    border: 3px solid #cccccc;
+    background: #cccccc;
+    color: #ffffff;
+    margin: 0 auto;
+    }
+.step li.completed .counter_step {
+    border-color: #009999;
+    background: #009999;
+}
+.step li.active .counter_step {
+    color: #009999;
+    border-color: #009999;
+    background: #ffffff;
+}
+.step li span {
+    display: block;
+    font-size: 14px;
+    margin-top: 10px;
+    color: #33333F;
+    font-weight: bold;
+    line-height: 1;
+     text-align: center;
+}
+.step li:not(:first-child)::before {
+    content: '';
+    width: 100%;
+    height: 4px;
+    background: #009999;
+    position: absolute;
+    right: 50%;
+    top: 31px;
+    z-index: -1;
+    }
+.step li.active~ ::before {
+    background-color: #cccccc;
+    }
+@media screen and (max-width: 768px) {
+    .step li:not(.active) {
+        display: none;
+    }
+    .step li:first-child::before {
+        content: '';
+        width: 100%;
+        height: 4px;
+        background: #cccccc;
+        position: absolute;
+        right: 0;
+        top: 31px;
+        z-index: -1;
+    }
+    .step li:not(:first-child)::before {
+        right: 0;
+        background-color: #cccccc;
+    }
+}
+/*--//步驟--*/
+
+/*--資料小標題--*/
+.dataTitle {
+    position: relative;
+    margin-bottom: 45PX;
+}
+.dataTitle h3 {
+    color: #009999;
+    font-size: 22px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #e4e2e2;
+}
+.dataTitle h3 span {
+    padding-bottom: 8px;
+    border-bottom: 3px solid #00859a;
+}
+@media screen and (max-width: 768px) {
+    .dataTitle {
+        margin-bottom: 25PX;
+    }
+}
+/*--//資料小標題--*/
+
+/*--有星號必填的資料小標題--*/
+.Star-red-letter {
+    position: absolute;
+    display: inline-block;
+    color: #ff0000;
+    right: 20px;
+    bottom: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+@media screen and (max-width: 768px) {
+    .Star-red-letter {
+        position: absolute;
+        display: inline-block;
+        color: #ff0000;
+        left: 20px;
+        bottom: -20px;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .dataTitle.Star-dataTitle {
+        margin-bottom: 45PX
+    }
+}
+/*--//有星號必填的資料小標題--*/
+
+/*--條款詳閱並同意--*/
+.terms-group {
+    margin-bottom: 16px!important;
+}
+.terms-group .terms {
+    padding-bottom: 16px;
+}
+.terms-group .terms input {
+    margin-top: 2px;
+}
+.terms-group .terms label {
+    font-size: 16px;
+    line-height: 25px;
+    padding-left: 32px;
+}
+/*--條款詳閱並同意--*/
+/*--------------------------------yesgogogo------------------------------------*/
+.yesgogogo_box {
+    border: 1px solid #d8d8d8;
+}
+.yesgogogo_box h3 {
+    color: #ffffff;
+    font-size: 16pt;
+    line-height: 1.5em;
+    font-weight: 600;
+    background-color: #009999;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid #d8d8d8;
+}
+.yesgogogo_txt {
+    color: #7e7e7e;
+    padding: 10px 20px 30px;
+}
+.yesgogogo_txt h4 {
+    color: #115b83;
+    font-size: 15pt;
+    line-height: 1.5em;
+    font-weight: 600;
+}
+.yesgogogo_txt h4 span {
+    color: #7e7e82;
+    font-size: 17px;
+    line-height: 1.5em;
+    font-weight: 400;
+}
+
+/*--修改bootstrap手風琴--*/
+.yesgogogo_box .accordion {
+    padding: 10px;
+}
+.yesgogogo_box .accordion-item {
+    border: 0;
+}
+.yesgogogo_box .accordion-button {
+    color: #115b83;
+    background-color: #E0F8F8;
+    border: 0;
+    padding: 10px;
+    cursor: pointer;
+}
+.yesgogogo_box .accordion-button:not(.collapsed) {
+    color: #115b83;
+    background-color: #E0F8F8;
+    box-shadow: none;
+}
+.yesgogogo_box .accordion-button:focus {
+    box-shadow: none;
+}
+.yesgogogo_box .card-main {
+    font-size: 15px;
+    color: #7e7e7e;
+    padding: 10px;
+    background-color: #fbfbfb
+}
+/*--//修改bootstrap手風琴--*/
+/*--------------------------------//yesgogogo------------------------------------*/
+/*-----------------------------------線上辦卡-----------------------------------*/
+.formList.formApply label {    
+    min-width: 11.5rem;
+}
+.formList.formApply .formApply_form_control {
+    width: 17.5rem;
+}
+/*--表單帶出不可修改的文字資料--*/
+.formList .form-text {
+    font-size: 20px;
+    letter-spacing: 2px;
+    background-color: #eeeeee;
+    padding: 0.2rem 0.5rem;
+    width: 18.4rem;
+    border: 1px solid #a9a9a9;
+}
+.formList-even .form-text {
+    font-size: 20px;
+    letter-spacing: 2px;
+    background-color: #eeeeee;
+    padding: 0.2rem 0.5rem;
+    width: 100%;
+    border: 1px solid #a9a9a9;
+}
+/*--//表單帶出不可修改的文字資料--*/
+/*--我是聯邦卡友 我不是聯邦卡友--*/
+.Apply_Box .item {
+    background: #ffffff;
+    border: 2px solid #c6c6c6;
+    border-radius: 20px;
+    padding: 5rem 2rem;
+    margin-bottom: .75rem;    
+    transform: translateY(0);    
+    transition: all .5s;
+}
+
+.Apply_Box .item h3 {
+    font-size: 24px;
+    color: #707070;
+    font-weight: 800;
+    line-height: 45px;
+}
+
+.Apply_Box .item h4 {
+    display: inline-block;
+    font-size: 14px;
+    color: #707070;
+    line-height: 20px;
+    text-indent: -1em;
+    padding-left: 1em;
+    margin-top: 10px;
+    height: 80px;
+}
+
+.Apply_Box .item .btn {
+    font-size: 24px;
+    padding: 2px 20px;
+    -webkit-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+}
+
+.Apply_Box .item:hover {
+    border: 2px solid #c6c6c6;   
+    transform: translateY(-10px);
+    box-shadow: 10px 10px 0 0 rgba(200, 200, 200, 0.6);
+}
+
+.Apply_Box .item:hover .btn {   
+    box-shadow: 5px 5px 0 0 rgba(200, 200, 200, 0.8);
+}
+
+.Apply_input {
+    width: 1rem;
+    height: 1rem;
+}
+.form-check .form-check-input {
+    float: none;}
+.Apply_note_box {
+    padding: 20px;
+    border: 1px solid #3262a9;
+    background-color: #bdefff;
+}
+.Apply_text {
+    color: #000000;
+    font-size: 13pt;
+}
+.Apply_note {
+    font-size: 15px;
+}
+
+.Apply_terms img {
+    width: 31px !important;
+    height: 31px !important;
+    position: absolute;
+}
+
+.Apply_terms .form-check-label {
+    margin-left: 35px;
+    font-size: 15px;
+}
+
+@media screen and (max-width: 576px) {
+    .Apply_Box .item {
+        padding: 2rem 1rem;
+    }
+    .Apply_Box .item h3 {
+        font-size: 22px;
+        line-height: 40px;
+    }
+    .Apply_Box .item .btn {
+        font-size: 18px;
+        padding: 2px 20px;
+    }
+}
+/*--//我是聯邦卡友 我不是聯邦卡友--*/
+/*--藍色邊框--*/   
+.blue_box {
+    border: 6px solid #40a0a0;
+    padding-left: 0px;
+    padding-right: 0px;
+    position: relative;
+    /* width: calc(100% - 24px);
+    margin: 0 auto; */
+}
+
+.blue_box:before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50px;
+    right: 50px;
+    background: url(../images/form/Apply_line_bg.gif) repeat-x;
+    height: 6px;
+}
+
+.blue_box:after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 50px;
+    right: 50px;
+    background: url(../images/form/Apply_line_bg.gif) repeat-x;
+    height: 6px;
+}
+
+.blue_box_bg {
+    padding: 20px;
+    margin: 3px;
+    background-color: #ecf5f5;
+}
+/*--藍色虛線--*/
+.dashed_line {
+    border-bottom: 1px dashed #40a0a0;
+}
+/*--條款開合--*/
+.card-header {
+    color: #115b83;
+    background-color: #e9f4f4;
+    border: 0;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.card-header:after {
+    content: " ▼ ";
+    display: inline-block;
+    float: right;
+    transform: rotate(0deg);
+    transition: .15s;
+}
+
+.active .card-header:after {
+    transform: rotate(-180deg);
+}
+
+.card-header:not(.collapsed)::after {
+    transform: rotate(-180deg);
+}
+/*--//條款開合--/
+/*--點選下載預覽申請書--*/
+.Down_Apply_button {
+    display: inline-block;
+    margin: 0 0 0 10px;
+    padding: 2px 10px;
+    font-size: 18px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    background-image: linear-gradient(to top, #0c7373, #45a3a3);
+    border: 1px solid #1c8395;
+    border-radius: 8px;
+    box-shadow: 0 4px #89898980;
+}
+
+.Down_Apply_button:hover {
+    color: #ffffff;
+    background-image: linear-gradient(to top, #0c7373, #0d8484);
+}
+
+.Down_Apply_button:focus {
+    outline: 0px;
+}
+
+@media screen and (max-width: 768px) {
+    .Down_Apply_button {
+        font-size: 16px;
+        margin: 10px 0 10px 10px;
+    }
+}
+/*--//點選下載預覽申請書--*/
+/*--申請人資料--*/
+/*身分證發證發證地點*/
+.ID_date .IDCounty,
+.ID_date .IDissue {
+    width: 130px;
+}
+/*--地址郵遞區號與區域--*/
+.apply_address .ZIP,
+.apply_address .Area {
+    width: 200px;
+}
+/*--電話與其他--*/
+.office_tel .AreaCode,
+.office_tel .Ext,
+.other_input {
+    width: 80px;
+}
+@media screen and (max-width: 768px) {
+   
+    .apply_address .ZIP,
+    .apply_address .Area {
+        width: 160px;
+    }
+    .office_tel .AreaCode,
+    .office_tel .Ext {
+        width: 45px;
+    }
+    .other_input {
+        width: 100%;
+    }
+} 
+@media screen and (max-width: 480px) {
+    .apply_address .ZIP,
+    .apply_address .Area {
+        width: 120px;
+    }
+}
+/*--//申請人資料--*/
+/*--他行卡--*/    
+.Apply_Chk label {
+    width: 9em;
+} 
+.formList.Apply_Chk .Apply_Chk_form_control {
+    width: 20.1rem;
+}
+.formList.Apply_Chk .cardNumber {/*他行卡的信用卡欄位寬*/
+    margin: 0 2px 0 0;
+    max-width: 4.3rem;
+}
+.Apply_Chk .not_text,
+.Apply_ChkSZ .not_text {
+    font-size: 15px;/*輸入框下小字*/
+}
+.Apply_Chk .Apply_banksGroup {
+    border-bottom: 1px dashed #115b83;
+    border-top: 1px dashed #115b83;
+    padding: 1em 0;
+}
+/*--其他銀行帳戶--*/
+.Apply_ChkSZ label {
+    width: 7.5rem; 
+} 
+.Apply_ChkSZ .form-control {
+    min-width: 19.6rem; 
+}
+
+.Apply_ChkSZ select.form-select {
+    min-width: 19.6rem;
+    margin-right: 0;
+}
+/*--//其他銀行帳戶--*/
+/*--//他行卡--*/
+/*--線上辦卡資料確認--*/    
+.group_confirm {
+    display: flex;   
+    flex-direction: column;
+}
+
+.group_confirm li {   
+    display: flex;    
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.group_confirm .label_confirm {
+    min-width: 15rem;
+    font-size: 1.25rem;
+    text-align: right;
+    letter-spacing: 3px;
+    margin-right: 0.75rem;
+    margin-bottom: 0;
+    color: #009999;
+    font-weight: bold;
+}
+
+.group_confirm .input-data_confirm {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 10px;
+    line-height: 44px;
+}
+
+.group_confirm .input-data_confirm p {
+    display: inline-block;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #6c757d;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 0em;
+    text-align: left;
+}
+
+@media screen and (max-width: 768px) {
+    .group_confirm li {       
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+    }
+    .group_confirm .label_confirm {
+        text-align: left;
+        letter-spacing: 0px;
+        width: 100%;
+    }
+    .group_confirm .input-data_confirm p {
+        line-height: 35px;
+    }
+}
+/*--//線上辦卡資料確認--*/
+/*-- MyData--*/
+    
+.MyData_modal_dialog {
+    max-width: 600px;
+    margin: 1.75rem auto;
+}
+
+.MyData_input_group {
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    padding-top: 15px;
+}
+
+.MyData_input_group .input_item {
+    width: 100%;
+    margin-bottom: 2rem;
+    text-indent: -1.3em;
+    padding-left: 1.3em;
+}
+
+.MyData_input_note {
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    padding-left: 25px;
+    font-size: 18px;
+}
+
+.MyData_input_note span {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.MyData_modal h5 {
+    color: #009999;
+}
+
+.MyData_modal p {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.MyData-modal-note {
+    color: #f5a017;
+}
+
+.MyData-modal-note span {
+    display: block;
+    text-indent: -0.7em;
+    padding-left: 0.7em;
+}
+
+.MyData-modal-btn {
+    color: #009999;
+    font-size: 18px;
+    border: 2px solid #009999;
+    border-radius: 50px;
+    background-color: #ffffff;
+    line-height: 1;
+}
+
+.MyData-modal-btn-y {
+    color: #ffffff;
+    font-size: 18px;
+    border: 2px solid #009999;
+    border-radius: 50px;
+    background-color: #009999;
+    line-height: 1;
+}
+.MyData-modal-btn:hover, 
+.MyData-modal-btn-y:hover {
+    background: #393e46 !important;
+    color: #fff;
+    outline: none !important;
+}
+
+@media screen and (max-width: 768px) {
+    .MyData_input_group .input_item {
+        margin-bottom: 15px;
+    }
+}
+/*----*/
+
+.MyDataTitle {
+    color: #009999;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.MyDataTitle span {
+    padding-bottom: 5px;
+    border-bottom: 2px solid #00859a;
+}
+
+.termsDetial {
+    font-size: 17px;
+    letter-spacing: 0.06em;
+    color: #333333;
+    line-height: 1.8;
+    padding-top: 30px;
+}
+
+.termsDetial-indent {
+    list-style: none;
+    /* margin-left: -40px; */
+}
+
+.termsDetial-indent li {
+    text-indent: -2em;
+    padding-left: 2em;
+}
+
+.termsDetial-indent li span {
+    display: block;
+    text-indent: -1em;
+    padding-left: 1em;
+}
+
+@media screen and (max-width: 768px) {
+    .MyDataTitle {
+        font-size: 20px;
+    }
+    .MyDataTitle span {
+        padding-bottom: 0px;
+    }
+    .termsDetial {
+        font-size: 15px;
+        padding-top: 30px;
+    }
+}
+/*--//MyData--*/
+/*--首刷禮--*/
+    
+.card_gift_box {
+    padding: 10px 20px 0;
+}
+
+.card_gift_box::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 30px;
+    background-image: url(../images/form/tks_message_line.gif);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.card_gift_box h3 {
+    color: #115b83;
+    font-size: 15pt;
+    line-height: 1.5em;
+    font-weight: 600;
+}
+
+.card_gift_box h3 span {
+    color: #000000;
+    font-size: 17px;
+    line-height: 1.5em;
+    font-weight: 400;
+}
+
+.card_gift_txt>p {
+    text-align: left;
+    padding-left: 1em;
+    text-indent: -0.6em;
+}
+/*--//首刷禮--*/
+/*--fee--*/    
+.fee_box {
+    border: 1px solid #dadbdc;
+    background-color: #f5f3f3;
+    border-radius: 8px;
+    padding: 20px 10px;
+}
+
+.fee_box h3 {
+    color: #115b83;
+    font-size: 15pt;
+    line-height: 1.5em;
+    font-weight: 600;
+}
+
+.fee_box h3 img {
+    vertical-align: baseline;
+}
+
+.fee_content {
+    border: 1px solid #cdcdcd;
+    background-color: #ffffff;
+    padding: 10px;
+}
+
+.fee_table th,
+.fee_table td {
+    padding: 3px;
+    border: 1px solid #a1bbbd;
+    vertical-align: middle;
+}
+
+.fee_table thead {
+    background-color: #e9f4f4;
+    line-height: 2;
+}
+
+.fee_table {
+    text-align: center;
+    line-height: 1.6;
+    vertical-align: middle;
+    border-width: 1px;
+    border-color: #ddd;
+    padding: 10px;
+}
+
+.fee_cardname {
+    color: #097171;
+}
+
+.fee_table .fee_thead {
+    background-color: #fffde5;
+    line-height: 1.6;
+}
+
+@media screen and (max-width: 768px) {
+    .fee_box {
+        padding: 10px 5px;
+    }
+    .fee_content {
+        padding: 5px;
+    }
+    .fee_table thead th {
+        font-size: 14px;
+    }
+    .fee_table td,
+    .fee_table td p {
+        font-size: 14px;
+    }
+    .fee_table {
+        line-height: 1.5;
+    }
+}
+/*--//fee--*/
+/*--非卡友--*/    
+.not_UBfriend .item {
+    background: #ffffff;
+    border: 2px solid #c6c6c6;
+    border-radius: 20px;
+    padding: 5rem 2rem;
+    margin-bottom: .75rem;    
+    transform: translateY(0);    
+    transition: all .5s;
+}
+
+.not_UBfriend .item h3 {
+    font-size: 24px;
+    color: #707070;
+    font-weight: 800;
+    line-height: 45px;
+}
+
+.not_UBfriend .item h4 {
+    display: inline-block;
+    font-size: 14px;
+    color: #707070;
+    line-height: 20px;
+    text-indent: -1em;
+    padding-left: 1em;
+    margin-top: 10px;
+}
+
+.not_UBfriend .item .btn {
+    font-size: 24px;
+    padding: 2px 20px;
+    -webkit-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+}
+
+.not_UBfriend .item:hover {
+    border: 2px solid #c6c6c6;   
+    transform: translateY(-10px);
+    box-shadow: 10px 10px 0 0 rgba(200, 200, 200, 0.6);
+}
+
+.not_UBfriend .item:hover .btn {   
+    box-shadow: 5px 5px 0 0 rgba(200, 200, 200, 0.8);
+}
+@media screen and (max-width: 992px) {
+    .not_UBfriend .item .btn {
+        font-size: 20px;   
+    }
+}
+@media screen and (max-width: 576px) {
+    .not_UBfriend .item {
+        padding: 2rem 1rem;
+    }
+    .not_UBfriend .item h3 {
+        line-height: 40px;
+    }
+    .not_UBfriend .item .btn {
+        font-size: 22px;
+        padding: 2px 20px;
+    }
+}
+/*--//非卡友--*/
+/*--------------------------------//線上辦卡------------------------------------*/
+/*--modal右上方關閉按鈕--*/
+ .modal .btn-close {
+    width: 35px;
+    height: 30px;
+    padding-top: 0;
+    margin-top: -10px;
+    background: none;
+  }
+  .modal .btn-close:focus{
+    box-shadow: none;
+  }
+  /*--//modal--*/
+/*--------------------------------一般活動登錄------------------------------------*/
+/*--活動登錄首頁 限時/一般 兩大按鈕--*/
+.activity_bt01 {
+    position: relative;
+    display: inline-block;
+    max-width: 465px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.activity_bt02 {
+    position: relative;
+    display: inline-block;
+    max-width: 465px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.activity_bt01_text,
+.activity_bt02_text {
+    position: absolute;
+    font-size: 24px;
+    color: #ffffff;
+    line-height: 50px;
+    bottom: 22px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 90px;
+}
+
+.activity_bt01 img,
+.activity_bt02 img {
+    display: block;
+    transform: scale(1) translate3d(0, 0, 0);
+    transform-style: preserve-3d;
+    transition: .4s;
+}
+
+.activity_bt01:hover img,
+.activity_bt02:hover img {
+    display: block;
+    transform: scale(1.05);
+}
+
+@media screen and (max-width: 1200px) {
+    .activity_bt01_text,
+    .activity_bt02_text {
+        bottom: 24px;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .activity_bt01_text,
+    .activity_bt02_text {
+        bottom: 22px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .activity_bt01_text,
+    .activity_bt02_text {
+        bottom: 16px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .activity_bt01 {
+        width: 320px;
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+    .activity_bt02 {
+        width: 320px;
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+    .activity_bt01_text,
+    .activity_bt02_text {
+        font-size: 22px;
+        bottom: 8px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .activity_bt01_text,
+    .activity_bt02_text {
+        font-size: 18px;
+        bottom: 6px;
+    }
+}
+
+/*--//活動登錄首頁 限時/一般 兩大按鈕--*/
+/*---活動查詢登錄---*/
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+    color: #495057;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+.nav-tabs .nav-link {
+    color: #009999;
+}
+.nav-item:hover .nav-link {
+    color: #009999;
+}
+.tab-content {
+    margin-top: 2.5rem;
+    padding-bottom: 1rem;
+}
+.activity-login {    
+    display: flex;    
+    flex-direction: column;   
+    align-items: center;
+    padding-left: 0px;
+}
+
+.activity-login li {   
+    display: flex;   
+    align-items: center;
+    margin-bottom: 0rem;
+}
+
+.activity-login label {
+    font-size: 1.25rem;
+    text-align: left;
+    margin-right: .75rem;
+    margin-bottom: 0;
+    color: #009999;
+    font-weight: bold;
+    min-width: 6.5rem;
+}
+
+.activity-login select {
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 90%;
+    font-size: 17px;
+}
+
+.activity-login .formTitle {
+    background-color: #009999;
+    color: #fff;
+    margin-bottom: 0 ;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: 600;
+}
+.activity-login .formStyle {
+    border-bottom: #eeeeee 1px solid;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+/*--額滿--*/
+.activity-login .fullEnd {
+    flex: 0 0 auto;
+    width: 25%;
+} 
+.activity-login .fullEnd input[type=checkbox] {   
+    width: 22px;
+    height: 22px;
+} 
+.activity-login .fullEnd span {
+    font-size: 16px;
+    color: #fff;
+    border: 2px solid rgb(255, 65, 65);
+    background-color: rgb(255, 65, 65);
+    padding-bottom: 2px;
+    border-radius: 0 7px 0 7px;
+    margin-right: 5px;
+    white-space: nowrap;
+}
+@media screen and (max-width: 768px) {
+    .activity-login select {
+        margin-left: 0px;
+    }
+    .activity-login .fullEnd {
+        width:40px;  
+        margin-left: -40px;      
+    } 
+    .activity-login .formStyle{
+         padding-left: 40px;;
+    }
+}
+ /*--查詢歷史紀錄--*/
+
+.historyTable {
+    width: 100%;
+    box-shadow: none;
+    color: #7e7e7e;
+    border: 1px solid #d8d8d8;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    margin-top: 2.5rem;
+    table-layout: fixed;
+}
+
+.historyTable tr {
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.historyTable th,
+.historyTable td {
+    border: none;
+    padding: 10px 3px;
+    text-align: center;
+}
+
+.historyTable th {
+    color: #fff;
+    background-color: #009999;
+}
+/*--------------------------------//一般活動登錄------------------------------------*/ 
+/*------上傳附件-------*/    
+.upload_title {
+    color: #FFFFFF;
+    font-size: 19pt;
+    background-color: #009999;
+    border-radius: 50px;
+    border: 1px solid #009999;
+    max-width: 350px;
+    margin: 0 auto 30px;
+    line-height: 28pt;
+    text-align: center;
+}
+
+.upload_note_indent {
+    color: #ff0000;
+    margin-left: 0.95rem;
+    text-indent: -0.95rem;
+}
+
+.upload_group {
+    border-radius: 10px;
+    border: 2px solid #CECECE;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 auto 60px;
+    padding: 20px;
+}
+
+.upload_group .Apply_input {
+    width: 1.3rem;
+    height: 1.3rem;
+}
+
+.upload_group .form-check-label {
+    font-size: 1.3rem;
+    line-height: 24px;
+    margin-left: 5px;
+}
+
+.upload_group .upload_items {
+    position: relative;
+    border-radius: 7px;
+    border: 2px solid #118da2;
+    overflow: hidden;
+}
+
+.upload_group .upload_IDtxt {
+    color: #969696;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.8;
+    padding: 10PX;
+}
+
+.upload_group .upload_group_title {
+    color: #2a99ab;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.8;
+    padding: 10PX;
+}
+
+.upload_group .upload_txt {
+    color: #323232;
+    font-size: 13px;
+}
+
+.upload_group .upload {
+    position: absolute;
+    left: 0;
+    top: -40px;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+    opacity: 0;
+}
+.upload_group textarea {
+    display: none;
+}
+/*--------------------------紅利積點查詢與各項費用折抵----------------------------*/ 
+.result_message p.bonus_text {
+    font-size: 24px;
+    line-height: 60px;
+    color: #009999;
+    font-weight: 600; 
+    margin-bottom: 0px;
+}
+.bonus_text span {
+   color: #cc0e43;
+}
+.bonusTable {
+    width: 100%;
+    box-shadow: none;
+    color: #7e7e7e;
+    border: 1px solid #d8d8d8;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    table-layout: fixed;
+}
+
+.bonusTable tr {
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.bonusTable th,
+.bonusTable td {
+    border: none;
+    padding: 10px 3px;
+    text-align: center;
+}
+
+.bonusTable th {
+    color: #fff;
+    background-color: #009999;
+}
+.bonusTable input {
+    width:75px;
+    font-size:20px;
+    height: 30px;
+    display: inline;
+    margin: 10px 0px;
+}
+/*--------------------------//紅利積點查詢與各項費用折抵----------------------------*/ 
+/*--線上申辦信用貸款 申辦訊息--*/
+   .ApplyUpload_group {
+    font-size: 17px;
+    line-height: 30px;
+    color: #707070; 
+    letter-spacing: 4px;
+}
+.ApplyUpload_group .blue_text{
+    font-size: 18px;
+    line-height: 36px;
+    color: #00859a;
+}
+#td001 {
+    border: 2px solid #c64958;
+    border-radius: 8px;
+    width: 210px;
+    height: 58px;
+    margin: 5px;
+    text-align: center;
+    line-height: 48px;
+    float: left;
+    box-sizing: content-box;		
+}	
+#td001a {
+    border: 5px solid #F9D4D9;
+    border-radius: 6px;
+    width: 200px;
+    height: 48px;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: 1px;
+    line-height: 48px;
+    float: left;
+    margin: auto;
+    margin-right: auto;
+    box-sizing: content-box;
+    margin-top: 0px;
+}	
+#td001a span {
+    color: #c64958;
+}          
+#td002 {
+    border: 2px solid #00a8e3;
+    border-radius: 8px;
+    width: 210px;
+    height: 58px;
+    margin: 5px;
+    text-align: center;
+    letter-spacing: 1px;
+    line-height: 48px;
+    float: left;
+    box-sizing: content-box;	
+}	
+#td002a {
+    border: 5px solid #C5F5F6;
+    border-radius: 6px;
+    width: 200px;
+    height: 48px;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: 1px;
+    line-height: 48px;
+    float: left;
+    margin: auto;
+    margin-right: auto;
+    box-sizing: content-box;		
+}
+#td002a span {
+    color: #00a8e3;
+}
+#td003 {
+    border: 2px solid #af62ba;
+    border-radius: 8px;
+    width: 210px;
+    height: 58px;
+    margin: 5px;
+    text-align: center;
+    line-height: 48px;
+    float: left;
+    box-sizing: content-box;	
+}	
+#td003a {
+    border: 5px solid #E3CEF8;
+    border-radius: 6px;
+    width: 200px;
+    height: 48px;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: 1px;
+    line-height: 48px;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: content-box;		
+}
+#td003a span {
+    color: #af62ba;
+}
+#td004 {
+    border: 2px solid #70ad47;
+    border-radius: 8px;
+    width: 210px;
+    height: 58px;
+    margin: 5px;
+    text-align: center;
+    line-height: 48px;
+    float: left;
+    box-sizing: content-box;		
+}	
+#td004a {
+    border: 5px solid #DAF5BE;
+    border-radius: 6px;
+    width: 200px;
+    height: 48px;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: 1px;
+    line-height: 48px;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: content-box;		
+}
+#td004a span {
+    color: #70ad47;
+}
+#td001a span.text,
+#td002a span.text,
+#td003a span.text,
+#td004a span.text {
+    font-size: 18pt;
+}  
+#td001a input {
+    width: 70px; 
+    font-size: 18pt; 
+    font-family: Arial, Helvetica,sans-serif;
+    height: 24pt; 
+    color: #c64958;
+    vertical-align: middle;
+    line-height: 29px;
+}    
+#td002a select {
+    width: 70px; 
+    font-size: 18pt; 
+    font-family: Arial, Helvetica,sans-serif; 
+    height: 24pt; 
+    color: #00a8e3;
+    vertical-align: middle;
+    padding:0;
+}
+.ApplyUpload_table th {
+    background-color: #e9f4f4;
+    text-align: center;
+    font-size: 15px;
+    padding: 5px;
+}
+.ApplyUpload_table td {  
+    text-align: center;  
+    font-size: 15px;
+    padding: 5px;
+}
+.ApplyUpload_table input {
+    width: 16px; 
+    height: 30px;
+    vertical-align: middle;
+}
+@media screen and (max-width: 991px) {
+    #td001,
+    #td002,
+    #td003,
+    #td004 {
+        width: 280px;            	
+    }	
+   #td001a,
+   #td002a,
+   #td003a,
+   #td004a {            
+        width: 270px;            
+    }	 
+}
+/*--//線上申辦信用貸款 申辦訊息--*/
+/*--線上簽約--*/
+.contract {   
+    display: flex;   
+    flex-direction: column;
+}
+.contract .contract-group {
+    display: flex;
+    margin-bottom: 2rem;
+}   
+.contract-label {
+    width: 14rem;
+    font-size: 1.2rem;
+    text-align: right;
+    line-height: 30px;
+    margin-right: .75rem;
+    margin-bottom: 0;
+    color: #009999;
+    font-weight: bold; 
+}
+   
+.contract-text {
+    text-align: left;
+    line-height: 30px;
+    width: 100%;   
+}
+.contract-text select {
+    width: 8rem;
+    font-size: 17px;
+}
+.contractForm_date input {
+    width: 120px;
+    font-size: 20px;
+    height: 30px;
+    display: inline;
+}
+.contractForm-check label {
+    font-size: 15px;
+    line-height: 25px;
+    padding-left: 30px;
+}
+.contractForm-check label > input {
+    width: 120px;
+    font-size: 20px;
+    height: 30px;
+    display: inline;
+}
+@media screen and (max-width: 768px){    
+    .contract .contract-group {       
+        display: flex;       
+        justify-content: flex-start;
+        flex-wrap: wrap;
+       margin-bottom: 1rem;
+    }      
+      
+    .contract-label {
+        text-align: left; 
+        width: 100%;  
+    }
+    .contract-text select {
+        width: 100%;
+    }
+}
+/*--//線上簽約--*/
+/*--兌換中華電信 Hami Point--*/
+.HamiPoint_formList {    
+    display: flex;   
+    flex-direction: column;
+}
+.HamiPoint_formList li {
+    display: flex;
+    flex-wrap:wrap;    
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.HamiPoint_formList .label {
+    min-width: 16rem;
+    font-size: 1.25rem;
+    text-align: right;
+    margin-right: 0.75rem;
+    margin-bottom: 0;
+    color: #009999;
+    font-weight: bold;
+}
+.HamiPoint_formList .input-data p {
+    display: inline;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #6c757d;
+}
+.HamiPoint_formList select {
+    width: 150px;
+}
+.HamiPoint_formList .points_red {
+    color: #e31c45;
+}
+@media screen and (max-width: 768px){
+    .HamiPoint_formList .label {
+      text-align: left;
+      width: 100%;}
+    .HamiPoint_formList .input-data p {
+        display: block;
+        margin-bottom: 0rem;
+    }
+}
+/*--//兌換中華電信 Hami Point--*/
+/*--辦卡進度查詢--*/
+.ApplyCard_inquiry_txt {
+    color: #009999;
+    font-size: 22px;
+    font-weight: 600;
+}
+.ApplyCard_inquiryTable {
+    width: 100%;
+    color: #7e7e7e;
+    border: 1px solid #d8d8d8;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    margin-top: 2.5rem;
+    table-layout: fixed;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ApplyCard_inquiryTable tr {
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.ApplyCard_inquiryTable th {
+    color: #fff;
+    background-color: #009999;
+    padding: 10px;
+    text-align: center;
+}
+.ApplyCard_inquiryTable td {
+    border: none;
+    padding: 10px 3px;
+    text-align: center;
+}
+.ApplyCard_inquiryTable .table-text {
+    text-align: left;
+    line-height: 2em;
+}
+
+.ApplyCard_inquiryTable .table-text p {
+    font-size: 17px;
+    text-align: left;
+    padding-left: 17px;
+    text-indent: -17px;
+}
+@media screen and (max-width: 768px) {
+    .ApplyCard_inquiryTable {
+        border: none;
+        margin-bottom: 1.5rem;
+        margin-top: 0rem;
+    }
+    .ApplyCard_inquiryTable thead {
+        display: none;
+    }
+    .ApplyCard_inquiryTable tbody td {
+        display: block;
+        text-align: left;
+        padding: 10px 6px;
+        padding-left: 5.8em;
+        text-indent: -5em;
+    }
+    .ApplyCard_inquiryTable tr {
+        display: block;
+        border: 1px solid #7f7c7c;
+        margin-bottom: 20px;
+    }
+    .ApplyCard_inquiryTable tbody td::before {
+        content: attr(data-title)'：';
+        font-size: 1.1rem;
+        color: #009999;
+        font-weight: bold;
+        padding-right: 6px;
+        width: 5em;
+        display: inline-block;
+        text-align: right;
+    } 
+    .ApplyCard_inquiryTable td+td {
+        border-top: 1px solid #d8d8d8;
+    }
+    .ApplyCard_inquiryTable .table-text {
+        margin-top: -35px;
+    }
+}
+/*--樂活鈦金卡回饋金查詢/折抵--*/
+.lehuotj_txt {
+    color: #009999;
+    font-size: 22px;
+    font-weight: 600;
+}
+.lehuotjTable {
+    width: 100%;
+    color: #7e7e7e;
+    border: 1px solid #d8d8d8;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    margin-top: 2.5rem;
+    table-layout: fixed;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.lehuotjTable tr {
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.lehuotjTable th {
+    color: #fff;
+    background-color: #009999;
+    padding: 10px;
+    text-align: center;
+}
+.lehuotjTable td {
+    border: none;
+    padding: 10px 3px;
+    text-align: center;
+}
+.lehuotjTable select {
+    width: 75px;
+    font-size: 20px;
+    height: 32px;
+    display: inline;
+    margin: 10px 0px;
+    padding: 0 0 0 10px;
+}
+@media screen and (max-width: 768px) {
+    .lehuotjTable {
+        border: none;
+        margin-bottom: 1.5rem;
+        margin-top: 0rem;
+    }
+    .lehuotjTable thead {
+        display: none;
+    }
+    .lehuotjTable tbody td {
+        display: block;
+        text-align: left;
+        padding: 10px 6px;
+        padding-left: 5.8em;
+        text-indent: -5em;
+    }
+    .lehuotjTable tr {
+        display: block;
+        border: 1px solid #7f7c7c;
+        margin-bottom: 20px;
+    }
+    .lehuotjTable tbody td::before {
+        content: attr(data-title)'：';
+        font-size: 1.1rem;
+        color: #009999;
+        font-weight: bold;
+        padding-right: 6px;
+        width: 11em;
+        display: inline-block;
+        text-align: right;
+    } 
+    .lehuotjTable td+td {
+        border-top: 1px solid #d8d8d8;
+    }   
+}
+/*--//樂活鈦金卡回饋金查詢/折抵--*/
+
+/*--貸款試算--*/
+.rate_trial_txt {
+    color: #009999;
+    font-size: 22px;
+    font-weight: 600;
+}
+.rate_trial label {
+    min-width: 9rem;
+} 
+.rate_trial .input_rate {    
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    min-width: 19.5rem;
+    height: 44px;
+    }
+.rate_trial .input_rate .input_rate_full {
+    width: 17rem;
+    text-align: center;
+}
+.rate_trial .input_rate span {
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.rate_trial .input_rate .input_rate_month {
+    max-width: 38px;
+    text-align: center;
+}
+.rate_trial .input_rate .input_rate_ratio {
+    max-width: 66px;
+    text-align: center;
+}
+.rate_trial .input_rate select {
+    min-width: 230px;
+}
+/*表格*/
+.rateTable {
+    width: 100%;
+    color: #7e7e7e;
+    letter-spacing: 3px;
+    border: 1px solid #d8d8d8;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    margin-top: 2.5rem;
+    table-layout: fixed;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.rateTable tr {
+    border-bottom: 1px solid #d8d8d8;
+}
+.rateTable td+td {
+    border: 1px solid #d8d8d8;
+    padding: 3px 18px 3px 3px;
+}
+.rateTable th {
+    color: #fff;
+    background-color: #009999;
+    padding: 10px;
+    text-align: center;
+}
+.rateTable td {
+    border: none;
+    padding: 10px 10px;
+    text-align: center;
+}
+.rateTable .rate_text_blue {
+    color: #115b83;
+}
+
+.rateTable .rate_text_red {
+    color: #d62872;
+    font-weight: 600;
+}
+
+.rateTable .rate_text_gry {
+    color: #434343;
+    font-weight: 600;
+}
+
+@media screen and (max-width: 480px) {
+    .rateTable {
+        letter-spacing: 0px;
+        margin-top: 0rem;
+    }
+    .rateTable .rate_text {
+        font-size: 15px;
+    }
+    .rateTable .rate_text_s {
+        font-size: 13px;
+    }
+    .rateTable td {
+        padding: 3px;
+    }
+    .rateTable td+td {
+        padding: 3px;
+    }
+}
+
+/*//表格*/
+/*--帳單輕鬆付--*/
+.payeasy_txt {
+    color: #009999;
+    font-size: 22px;
+    font-weight: 600;
+}
+.payeasyTable {
+    width: 100%;
+    color: #7e7e7e;
+    border: 1px solid #d8d8d8;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    margin-top: 2.5rem;
+    table-layout: fixed;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.payeasyTable tr {
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.payeasyTable th {
+    color: #fff;
+    background-color: #009999;
+    padding: 10px;
+    text-align: center;
+}
+.payeasyTable td {
+    border: none;
+    padding: 10px 3px;
+    text-align: center;
+}
+.payeasyTable select {
+    width: 75px;
+    font-size: 20px;
+    height: 32px;
+    display: inline;
+    margin: 10px 0px;
+    padding: 0 0 0 10px;
+}
+@media screen and (max-width: 768px) {
+    .payeasyTable {
+        border: none;
+        margin-bottom: 1.5rem;
+        margin-top: 0rem;
+    }
+    .payeasyTable thead {
+        display: none;
+    }
+    .payeasyTable tbody td {
+        display: block;
+        text-align: left;
+        padding: 10px 6px;
+        padding-left: 5.8em;
+        text-indent: -5em;
+    }
+    .payeasyTable tr {
+        display: block;
+        border: 1px solid #7f7c7c;
+        margin-bottom: 20px;
+    }
+    .payeasyTable tbody td::before {
+        content: attr(data-title)'：';
+        font-size: 1.1rem;
+        color: #009999;
+        font-weight: bold;
+        padding-right: 6px;
+        width: 8em;
+        display: inline-block;
+        text-align: right;
+    } 
+    .payeasyTable td+td {
+        border-top: 1px solid #d8d8d8;
+    }   
+}
+/*--//帳單輕鬆付--*/
+/*--人員編號--*/
+.PersonnelID {
+    display: flex;
+    margin-bottom: 1.5rem;
+    line-height: 44px;
+}
+
+.PersonnelID label {
+    text-align: left;
+    width: 5rem;
+}
+
+.PersonnelID input {
+    width: 100px;
+}
+
+@media screen and (max-width: 768px) {
+    .PersonnelID {
+        margin-top: -20px;
+    }
+}
+/*--//人員編號--*/
+/*--------------------------體驗專區----------------------------*/ 
+.CardInfo_group {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    padding: 15PX 0PX;
+}
+
+.CardInfo_Card {
+    padding: 10px 0;
+}
+
+.CardInfo_data {
+    padding: 10px 0;
+}
+
+.Card_img {
+    width: 370px;
+    height: 230px;
+    margin: auto;
+    background-image: url(../images/form/Mcard.png);
+}
+
+.CardInfo_data .Card_label {
+    width: 35%;
+    font-family: "微軟正黑體";
+    font-size: 15pt;
+    text-align: right;
+    letter-spacing: 3px;
+    color: #026777;
+    line-height: 20pt;
+}
+
+.CardInfo_ok {
+    font-size: 24pt;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 5px;
+    color: #057587;
+}
+
+.CardInfo_ok_txt {
+    color: #057587;
+}
+
+.CardInfo_data ul {
+    list-style: none;
+    padding-inline-start: 0px;
+    text-align: justify;
+}
+
+.CardInfo_data>ul>li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.CardInfo_data .Card_data {
+    font-family: "微軟正黑體";
+    font-size: 15pt;
+    letter-spacing: 3px;
+    color: #666565;
+    line-height: 20pt;
+}
+
+.CardInfo_button {
+    display: inline-block;
+    margin: 0 0 0 10px;
+    padding: 2px 10px;
+    font-size: 18px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    background-image: linear-gradient(to top, #005678, #419fc4);
+    border: 1px solid #1c8395;
+    border-radius: 8px;
+    box-shadow: 0 4px #89898980;
+}
+
+.CardInfo_button:hover {
+    color: #ffffff;
+    background-image: linear-gradient(to top, #005678, #006289);
+}
+
+.CardInfo_button:focus {
+    outline: 0px;
+}
+
+@media screen and (max-width: 768px) {
+    .CardInfo_button {
+        font-size: 16px;
+        margin: 10px 0 10px 10px;
+    }
+}
+@media screen and (max-width: 576px) {
+    .Card_img {
+        width: 310px;
+        height: 193px;
+        background-image: url(../images/form/Mcard-m.png);
+    }
+    .CardInfo_data .Card_label {
+        font-size: 13pt;
+        letter-spacing: 0px;
+    }
+    .CardInfo_ok {
+        font-size: 19pt;
+        font-weight: 600;
+        text-align: center;
+        letter-spacing: 0px;
+        line-height: 60pt;
+    }
+    .CardInfo_data .Card_data {
+        font-size: 13pt;
+        letter-spacing: 0px;
+    }
+    .CardInfo_button {
+        width: 100%;
+    }
+}
+/*綠卡體驗*/
+.Card_img.Gcard {
+    width: 370px;
+    height: 230px;
+    margin: auto;
+    background-image: url(../images/form/Gcard.png);
+}
+
+.Gcard_indentNote {
+    font-size: 15pt;
+    color: #cc0e43;
+    text-align: left;
+    padding-left: 15pt;
+    text-indent: -15pt;
+    margin-bottom: 0px;
+}
+
+.modal-footer.Gcard-modal-footer {
+    justify-content: center;
+}
+
+@media screen and (max-width: 576px) {
+    .Card_img.Gcard {
+        width: 310px;
+        height: 193px;
+        background-image: url(../images/form/Gcard-m.png);
+    }
+    .Gcard_indentNote {
+        font-size: 13pt;
+        padding-left: 13pt;
+        text-indent: -13pt;
+    }
+}
+/*賴點體驗*/
+.Card_img.Lcard {
+    width: 370px;
+    height: 230px;
+    margin: auto;
+    background-image: url(../images/form/LaiDianCard.png);
+}
+
+@media screen and (max-width: 576px) {
+    .Card_img.Lcard {
+        width: 310px;
+        height: 193px;
+        background-image: url(../images/form/LaiDianCard-m.png);
+    }
+}
+/*New New Bank*/
+.newnewbank {
+    width: 100%;
+    margin: 0px auto 30px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.newnewbank ul {
+    list-style-type: none;
+    display: inline-block;
+    margin-top: 30px;
+    padding: 0;
+}
+
+.newnewbank ul li {
+    font-size: 24px;
+    line-height: 40px;
+    color: #f81242;
+    font-weight: 600;
+    text-align: left;
+}
+
+.newnewbank_blue {
+    font-size: 24px;
+    line-height: 36px;
+    color: #0a73c2;
+    font-weight: 600;
+}
+
+.newnewbank h4 {
+    display: inline-block;
+    font-family: "微軟正黑體";
+    font-size: 20px;
+    line-height: 36px;
+    color: #464747;
+    font-weight: 600;
+}
+
+.newnewbank_btn input {
+    display: inline-block;
+    border-radius: 8px;
+    border: 2px solid #2898b1;
+    padding: 8px 15px;
+    margin: 15px 5px;
+    background-color: #2ea5bf;
+    font-size: 16px;
+    color: #ffffff;
+    line-height: 1.33333;
+    text-decoration: none;
+}
+
+.newnewbank_btn input:hover {
+    background-color: #585e5f;
+    text-decoration: none;
+}
+
+.newnewbank_btn_y input {
+    display: inline-block;
+    border-radius: 8px;
+    padding: 8px 15px;
+    margin: 15px 5px;
+    background-color: #585757;
+    font-size: 16px;
+    color: #ffffff;
+    line-height: 1.33333;
+    text-decoration: none;
+}
+
+.newnewbank_btn_y input:hover {
+    background-color: #777777;
+    text-decoration: none;
+}
+.newnewbank_input input {
+    margin-top: 0.5rem;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+.newnewbank_input label {
+    margin-left: 5px;
+    margin-top: 3px;
+    line-height: 1.8rem;
+    margin-bottom: 1rem;
+}
+.newnewbank_input input.promote-input {
+    color: #333333;
+    font-size: 1rem;
+    padding: 5px;
+    margin: 2px 5px;
+    width: 100px;
+    height: 30px;
+}
+
+.newnewbank_input input.promote-input:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+@media screen and (max-width: 576px) {
+    .newnewbank {
+        margin: 0px auto 20px;
+        padding: 0px;
+    }
+    .newnewbank_blue {
+        font-size: 20px;
+    }
+    .newnewbank ul li {
+        font-size: 20px;
+    }
+    .newnewbank h4 {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0px -15px;
+    }
+    .newnewbank_btn input {
+        padding: 8px 10px;
+        margin: 15px 0px;
+        background-color: #2ea5bf;
+        font-size: 16px;
+    }
+    .newnewbank_btn_y input {
+        padding: 8px 10px;
+        margin: 15px 0px;
+        background-color: #585757;
+        font-size: 16px;
+    }
+}
+/*//New New Bank*/
+/*--------------------------//體驗專區----------------------------*/
+/*--------------------------留言板----------------------------*/  
+/*公告條款*/
+.msgTerms_titlle {
+    color: #009999;
+    font-size: 22px;
+    font-weight: 600;
+}  
+.msgTerms_titlle_bg {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f5f3f3;
+    border: 1px solid #dadbdc;
+    margin-bottom: 25px;
+    margin-top: 15px;
+    font-weight: 600;
+    color: #115b83;
+}
+
+.msgTerms_txt_bg {
+    padding: 30px;
+    background-color: #ffffff;
+    border: 1px solid #cdcdcd;
+    margin: 25px 0;
+    font-size: 17px;
+    color: #323232;
+    font-weight: normal;
+}
+
+.msgTerms_txt_bg ul {
+    list-style: none;
+    text-indent: -34px;
+    padding-left: 20px;
+    margin: 0 15px;
+    text-align: justify;
+}
+
+.msgTerms_txt_bg ul li {
+    margin-bottom: 10px;
+}
+
+.msgTerms_txt {
+    text-align: justify;
+    margin-top: 15px;
+}
+
+.msgTerms_txt>p {
+    text-align: left;
+    font-size: 17px;
+    color: #323232;
+    text-indent: -27px;
+    padding-left: 27px;
+    margin-bottom: 10px;
+}
+
+.msgTerms_note {
+    font-size: 15px;
+    font-weight: normal;
+    color: #d60000;
+}
+
+.btn.btn-primary-none {
+    background: #e9e9e9;
+    color: #009999;
+    border: 1px solid #939191;
+    border-radius: 0;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.btn.btn-primary-none:hover {
+    background: #393e46 !important;
+    color: #fff;
+    outline: none !important;
+}
+
+@media screen and (max-width: 768px) {
+    .msgTerms_titlle_bg {
+        padding: 20px 10px;
+    }
+    .msgTerms_txt_bg {
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .btn_msgTerms {
+        width: 95%;
+    }
+    .btn.btn-primary-none {
+        font-size: 16px;
+        padding-top: 10px;
+        padding-right: 8px;
+        padding-left: 8px;
+        padding-bottom: 10px;
+    }
+}
+/*--------------------------//留言板----------------------------*/  
+/*--高鐵TGo點數兌換--*/
+.TGo_formList {   
+    display: flex;    
+    flex-direction: column;
+}
+.TGo_formList li {
+    display: flex;
+    flex-wrap:wrap;    
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.TGo_formList .label {
+    min-width: 14rem;
+    font-size: 1.25rem;
+    text-align: right;
+    margin-right: 0.75rem;
+    margin-bottom: 0;
+    color: #009999;
+    font-weight: bold;
+}
+.TGo_formList .input-data p {
+    display: inline;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #6c757d;
+}
+.TGo_formList input {
+    width: 260px;
+}
+.TGo_formList select {
+    width: 260px;
+}
+.TGo_formList .points_red {
+    color: #e31c45;
+}
+@media screen and (max-width: 768px){
+    .TGo_formList .label {
+        text-align: left;
+        width: 100%;
+    }
+    .TGo_formList .input-data p {
+        display: block;
+        margin-bottom: 0rem;
+    }
+}
+/*--//高鐵TGo點數兌換--*/
+/*--------------------------想分就分----------------------------*/  
+ .wsp_main .item {
+    text-align: center;
+    background: #ffffff;
+    border: 2px solid #88caca;
+    border-radius: 20px;
+    padding: 2rem 0 1.5rem;
+    margin-bottom: .75rem;    
+    transform: translateY(0);    
+    transition: all .5s;
+}
+
+.wsp_main .item h3 {
+    font-size: 30px;
+    color: #04829a;
+    font-weight: 800;
+    line-height: 55px;
+}
+
+.wsp_main .item .btn {
+    font-size: 24px;
+    padding: 2px 20px;   
+    transition: all .5s;
+}
+
+.wsp_main .item:hover {
+    background-color: #f5fdfd;
+    border: 2px solid #009999;    
+    transform: translateY(-10px);    
+    box-shadow: 10px 10px 0 0 rgba(136, 202, 202, 0.8);
+}
+
+.wsp_main .item:hover .btn {    
+    box-shadow: 5px 5px 0 0 rgba(200, 200, 200, 0.8);
+}
+
+@media screen and (max-width: 576px) {
+    .wsp_main .item h3 {
+        font-size: 22px;
+        line-height: 40px;
+    }
+    .wsp_main .item .btn {
+        font-size: 18px;
+        padding: 2px 20px;
+    }
+}
+/*--事前事後--*/
+
+.wsp_proj_txt {
+    color: #226dbe;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.wsp_title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.wsp_title_txt {
+    color: #009999;
+    font-size: 22px;
+    font-weight: 600;
+}
+.wsp_title_txt p {
+    color: #e31c45;
+    font-size: 15px;
+    font-weight: 400;
+    display: inline;
+}
+.wsp_proj_txt {
+    color: #226dbe;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.wsp_table_txt {
+    font-size: 15px;
+    padding-top: 15px;
+}
+
+.wsp_title_txt span {
+    color: #252525;
+}
+
+.wsp_options {
+    color: #003b6a;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.wsp_options a {
+    color: #696868;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.wsp_options .login {
+    margin: 0 5px;
+}
+
+.wsp_options .login:hover {
+    text-decoration: underline;
+}
+
+.wsp_options .wsp_btn {
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+    padding: 2px 15px;
+    background-color: #1c8395;
+    border: 4px solid #99c7d0;
+    border-radius: 50px;
+    color: #fff;
+    font: 18px 微軟正黑體;
+}
+
+.wsp_options .wsp_btn.active {
+    background-image: linear-gradient(to top, #1c8395, #62b8c7);
+}
+
+.wsp_arrow {
+    position: absolute;
+    color: #1c8395;
+    bottom: -16px;
+    left: 40%;
+    display: none;
+}
+
+.wsp_btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+.wsp_btn.active svg {
+    display: block;
+}
+
+.tab-content.wsptab-content {
+    margin-top: 0rem;
+    padding-bottom: 0rem;
+}
+
+.wsp_button {
+    display: inline-block;
+    margin: 0 0 0 10px;
+    padding: 2px 10px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    background-image: linear-gradient(to top, #1c8395, #62b8c7);
+    border: 1px solid #1c8395;
+    border-radius: 8px;
+    box-shadow: 0 4px #89898980;
+}
+
+.wsp_button:hover {
+    color: #ffffff;
+    background-image: linear-gradient(to top, #1c8395, #3496a6);
+}
+
+.wsp_button:focus {
+    outline: 0px;
+}
+
+.wsp_button_grey {
+    display: inline-block;
+    margin: 0 0 0 10px;
+    padding: 2px 10px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    background-image: linear-gradient(to top, #494a4a, #a9b0b1);
+    border: 1px solid #525454;
+    border-radius: 8px;
+    box-shadow: 0 4px #89898980;
+}
+
+.wsp_button_grey:hover {
+    color: #ffffff;
+    background-image: linear-gradient(to top, #5c5f5f, #5c5f5f);
+}
+
+.wsp_button_grey:focus {
+    outline: 0px;
+}
+
+.wsp_Note {
+    font-size: 18px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    text-align: left;
+    line-height: 2.3em;
+}
+
+@media screen and (max-width: 768px) {
+    .wsp_title {
+        flex-wrap: wrap;
+    }
+    .wsp_title_txt {
+        color: #009999;
+        font-size: 22px;
+        font-weight: 600;
+        width: 100%;
+    }
+    .wsp_options {
+        font-size: 15px;
+        padding-top: 15px;
+    }
+    .wsp_options .wsp_btn {
+        margin-left: 5px;
+        padding: 2px 6px;
+        font: 15px 微軟正黑體;
+    }
+    .wsp_arrow {
+        bottom: -12px;
+    }
+    .wsp_btn svg {
+        width: 20px;
+        height: 20px;
+    }
+    .date- {
+        display: none;
+    }
+    .to-date {
+        padding-left: 3px;
+    }
+    .wsp_button {
+        margin: 0 10px 0 0;
+        padding: 2px 10px;
+    }
+}
+/*--想分就分事後分期--*/
+
+.afterProj_bt {
+    position: relative;
+    display: inline-block;
+    max-width: 320px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.afterProj_bt_text {
+    position: absolute;
+    font-size: 24px;
+    color: #009999;
+    line-height: 5rem;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    top: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 40px;
+    font-weight: 900;
+}
+
+.afterProj_bt img {
+    display: block;
+    transform: scale(1) translate3d(0, 0, 0);
+    transform-style: preserve-3d;
+    transition: .4s;
+}
+
+.afterProj_bt:hover img {
+    display: block;
+    transform: scale(1.05);
+}
+
+.afterProj_link a {
+    color: #434343;
+    text-decoration: underline;
+    margin-bottom: 15px;
+}
+
+.afterProj_link a:hover {
+    text-decoration: none;
+}
+
+.Star-red-letter {
+    position: absolute;
+    display: inline-block;
+    color: #ff0000;
+    right: 20px;
+    bottom: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+@media screen and (max-width: 768px) {
+    .Star-red-letter {
+        position: absolute;
+        display: inline-block;
+        color: #ff0000;
+        left: 20px;
+        bottom: -20px;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+}
+/*想分表格*/
+.wspTable {
+    width: 100%;
+    color: #7e7e7e;
+    border: 1px solid #d8d8d8;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    margin-top: 2.5rem;
+    table-layout: fixed;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wspTable tr {
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.wspTable th {
+    color: #fff;
+    background-color: #009999;
+    padding: 10px;
+    text-align: center;
+}
+.wspTable td {
+    border: none;
+    padding: 10px 3px;
+    text-align: center;
+}
+.wspTable select {
+    margin: 10px 0px;
+    width: 90%;
+    font-size: 20px;
+    height: 30px;
+    display: inline;
+    padding: 0 0 0 10px;
+}
+.wspTable select.before_select {
+    margin: 10px 0px;
+    width: 60%;
+    font-size: 20px;
+    height: 30px;
+    display: inline;
+    padding: 0 0 0 10px;
+}
+.wspTable input {
+    width: 120px;
+    font-size: 20px;
+    height: 30px;
+    display: inline-block;
+    margin: 10px 0px;
+}
+.wspTable input.input {
+    width: 1.3rem;
+    height: 1.3rem;
+    position: relative;
+    margin: auto;
+    vertical-align: text-bottom;
+}
+
+.wspTable.wsp_th th {
+    color: #097171;
+    background-color: #E9F4F4;
+}
+.wspTable .total_text {
+    color: #055c5c;
+    font-weight: bold;
+}
+@media screen and (max-width: 992px) {
+    .wspTable select,
+    .wspTable select.before_select {
+        width: 155px;
+    }
+    .wspTable {
+        border: none;
+        margin-bottom: 1.5rem;
+        margin-top: 1rem;
+    }
+    .wspTable thead {
+        display: none;
+    }
+    .wspTable tbody td {
+        display: block;
+        text-align: left;
+        padding: 10px 6px;
+        padding-left: 8em;
+        text-indent: -8.2em;
+    }
+    .wspTable tr {
+        display: block;
+        border: 1px solid #7f7c7c;
+        margin-bottom: 20px;
+    }
+    .wspTable tbody td::before {
+        content: attr(data-title)'：';
+        font-size: 1.1rem;
+        color: #009999;
+        font-weight: bold;
+        padding-right: 6px;
+        width: 8em;
+        display: inline-block;
+        text-align: right;
+    } 
+    .wspTable td+td {
+        border-top: 1px solid #d8d8d8;
+    }  
+    /*確認申請表格*/
+    .wspTable.wsp-confirm tbody td {
+        display: block;
+        text-align: left;
+        padding: 10px 6px;
+        padding-left: 7.5em;
+        text-indent: -6.7em;
+    }
+    .wspTable.wsp-confirm tbody td::before {
+        content: attr(data-title)'：';
+        font-size: 1.1rem;
+        color: #009999;
+        font-weight: bold;
+        padding-right: 6px;
+        width: 6.5em;
+        display: inline-block;
+        text-align: right;
+    }
+    .wspTable.wsp-confirm tbody tr:last-child td::before {
+        display: none;
+    }
+    .wspTable.wsp-confirm tbody tr:last-child td {
+        display: none;
+    }
+    .wspTable.wsp-confirm tbody tr td:first-child {
+        display: block;
+    }
+    .wspTable.wsp-confirm tbody tr td:last-child {
+        display: block;
+    } 
+    /*//確認申請表格*/
+}
+/*--------------------------//想分就分----------------------------*/
+/*-----------------------各項事業費用代扣-------------------------*/
+.utilitiespay_title_txt {
+    color: #009999;
+    font-size: 22px;
+    font-weight: 600;
+} 
+.utilitiespay_title_txt span {
+    color: #323232;
+    font-size: 15px;
+    font-weight: 400;
+}
+/*--卡號-*/
+.utilitiespay {
+    display: flex;
+}
+.utilitiespay .cardNumber  {
+    font-size: 1.25rem;
+    text-align: left;
+    margin: 10px 0px;
+    color: #424242;
+    font-weight: bold;
+    min-width: 6.5rem;
+ }
+ .utilitiespay select {
+    margin: 10px 0px;
+    width: 240px;
+    font-size: 20px;
+    height: 36px;
+    display: inline;
+    padding: 0 0 0 10px;
+ }
+ @media screen and (max-width: 768px) {
+    .utilitiespay {
+        display: block;
+    }
+     .utilitiespay select {        
+        width: 100%;
+     }
+ }
+
+/*--原有代扣項目異動表格--*/
+.utilitiespayTable {
+    width: 100%;
+    color: #7e7e7e;
+    border: 1px solid #d8d8d8;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+    margin-top: 2.5rem;
+    table-layout: fixed;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.utilitiespayTable tr {
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.utilitiespayTable th {
+    color: #fff;
+    background-color: #009999;
+    padding: 10px;
+    text-align: center;
+}
+.utilitiespayTable td {
+    border: none;
+    padding: 10px 3px;
+    text-align: center;
+}
+.utilitiespayTable input {
+    width: 120px;
+    font-size: 20px;
+    height: 30px;
+    display: inline;
+    margin: 10px 0px;
+}
+
+.utilitiespayTable select {
+    margin: 10px 0px;
+    width: 90%;
+    font-size: 20px;
+    height: 40px;
+    display: inline;
+    padding: 0 0 0 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .utilitiespayTable {
+        border: none;
+    }
+    .utilitiespayTable thead {
+        display: none;
+    }
+    .utilitiespayTable tbody td {
+        display: block;
+        text-align: left;
+        padding: 10px 6px;
+        padding-left: 5.8em;
+        text-indent: -5em;
+    }
+    .utilitiespayTable tr {
+        display: block;
+        border: 1px solid #7f7c7c;
+        margin-bottom: 20px;
+    }
+    .utilitiespayTable tbody td::before {
+        content: attr(data-title)'：';
+        font-size: 1.1rem;
+        color: #009999;
+        font-weight: bold;
+        padding-right: 6px;
+        width: 5em;
+        display: inline-block;
+        text-align: right;
+    }
+    .utilitiespayTable td+td {
+        border-top: 1px solid #d8d8d8;
+    }
+    .utilitiespayTable select {
+        margin: 0px 0px;
+        width: 95%;
+        font-size: 17px;
+    }
+}
+/*--//原有代扣項目異動表格--*/
+/*--新增代扣項目異動表格--*/
+.project_box {
+    display: flex;
+    margin-bottom: 20px;
+}
+.project_box .project_title {
+	line-height: 50px;
+	color: #097171;
+    font-weight: bold;
+    background-color: #e9f4f4;
+    border: 1px solid #097171;
+    width: 20%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+.project_box .Project_main {
+    background-color: #ffffff;
+    border: 1px solid #097171;
+    border-left: none;
+    flex-grow: 1;
+}
+.Project_No {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 50px;
+	color: #097171;
+    font-weight: bold;
+    background-color: #e9f4f4;
+} 
+@media screen and (max-width: 992px) {
+    .project_box {
+        flex-flow: column;
+    } 
+    .project_box .project_title {        
+        width: 100%;
+        color: #fff;
+        background-color: #009999;
+        flex-flow: row;
+    }
+    .project_box .Project_main {
+        border: 1px solid #097171;
+        border-top: none;
+        flex-grow: 1;
+    }
+}
+@media screen and (max-width: 767px) {
+    .project_box .project_title {        
+        line-height: 50px;
+        flex-flow:column;
+    }
+    /*--多行--*/
+    .project_box .project_title.multiline {        
+        line-height: 28px;
+    }
+    /*--//多行--*/
+}
+/*----*/
+.utilitiespayTableAdd {
+    width: 100%;
+    color: #7e7e7e;
+    border: 0px;
+    border-collapse: collapse;
+    table-layout: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.utilitiespayTableAdd tr {
+    border-bottom: 1px solid #097171;
+    background-color: #FFFFFF;
+}
+
+.utilitiespayTableAdd th {
+    background-color: #FFFFFF;
+    padding: 10px;
+    text-align: center;
+    border-top: 1px solid #097171;
+}
+.utilitiespayTableAdd th:not(:first-child) {    
+    border-left: 1px solid #097171;
+}
+.utilitiespayTableAdd td {
+    border: none;
+    padding: 10px 3px;
+    text-align: center;
+}
+.utilitiespayTableAdd td:not(:first-child) {    
+    border-left: 1px solid #097171;
+}
+.utilitiespayTableAdd input {
+    width: 32px;   
+    display: inline;
+    margin: 5px 0;
+    text-align: center;
+    padding: 0rem 0rem;   
+}
+.utilitiespayTableAdd select {
+    margin: 10px 0px;
+    width: 80%;
+    font-size: 20px;
+    height: 40px;
+    display: inline;
+    padding: 0 0 0 10px;
+}
+/*車號*/
+.utilitiespayTableAdd input.carinput {
+    width: 45%;
+    margin: 5px 0;
+}
+.project_box .btnAdd {
+    display: inline-block;
+    margin: 10px;
+    padding: 2px 10px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    background-image: linear-gradient(to top, #1c8395, #62b8c7);
+    border: 1px solid #1c8395;
+    border-radius: 8px;
+    box-shadow: 0 4px #89898980;
+}
+
+.project_box .btnAdd:hover {
+    color: #ffffff;
+    background-image: linear-gradient(to top, #1c8395, #3496a6);
+}
+
+.project_box .btnAdd:focus {
+    outline: 0px;
+}
+.project_box .smalltext {
+    font-size: 14px;
+    color: #7e7e7e;
+}
+.project_box .phone_note {
+    display: none;
+}
+@media screen and (max-width: 768px) {
+    .utilitiespayTableAdd {
+        border: none;
+    }
+    .utilitiespayTableAdd thead {
+        display: none;
+    }
+    .utilitiespayTableAdd tbody td {
+        display: block;
+        text-align: left;
+        padding: 10px 6px;
+        padding-left: 5.8em;
+        text-indent: -5.4em;
+    }
+    .utilitiespayTableAdd tr {
+        display: block;        
+    }
+    .utilitiespayTableAdd td:not(:first-child) {    
+        border-left: 0px;
+    }
+    .utilitiespayTableAdd tbody td::before {
+        content: attr(data-title)'：';
+        font-size: 1.1rem;
+        color: #009999;
+        font-weight: bold;
+        padding-right: 6px;
+        width: 5em;
+        display: inline-block;
+        text-align: right;
+    }
+    /*--前面標題5個字--*/
+    .utilitiespayTableAdd.five_words tbody td::before {
+        width: 7em;
+    }
+    .utilitiespayTableAdd.five_words tbody td {
+        padding-left: 7.8em;
+        text-indent: -7.5em;
+    }
+    /*--//前面標題5個字--*/
+   /*--前面標題4個字--*/
+    .utilitiespayTableAdd.four_words tbody td::before {
+    width: 6em;
+   }
+   .utilitiespayTableAdd.four_words tbody td {
+    padding-left: 6.4em;
+    text-indent: -6.45em;}   
+/*--//前面標題4個字--*/
+    
+    .utilitiespayTableAdd td+td {
+        border-top: 1px solid #d8d8d8;
+    }
+    .utilitiespayTableAdd input {
+        /* width: 28px;
+        font-size: 22px;
+        line-height: normal;
+        height: 28px; 
+        display: inline;
+        margin: 5px 0px;
+        vertical-align:middle; */
+    }
+    .utilitiespayTableAdd select {
+        margin: 0px 0px 1px;
+        width: 95%;
+        font-size: 20px;
+    }
+    .project_box .smalltext {
+        text-align: left;
+        padding-left: 0em;    
+       text-indent: 0em;
+    }
+    .project_box .phone_note {
+        display: block;
+    } 
+}
+/*--//新增代扣項目異動表格--*/
+/*----------------------//各項事業費用代扣------------------------*/
+/*------------------------申請網路預借現金----------------------------------*/
+/*--信用卡卡號--*/
+.formList-even .cardNumber {
+    text-align: center;
+    width: 23%;
+}
+
+.formList-even .cardDash {
+    width: 4px;
+    height: 1px;
+    background-color: #000;
+    margin: 0 3px;
+}
+/*--//信用卡卡號--*/
+/*--轉入銀行分行--*/
+.formList-even .inbank {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;}
+.formList-even .inbank input{
+	max-width: 8rem;
+	margin-right: 5px;
+}
+.formList-even .inbank select{
+	width: 100%;
+    min-width: auto;
+	margin-right: 0px;
+	
+}
+/*--//轉入銀行分行--*/
+@media screen and (max-width: 576px){
+    .mtnApplyNetCash_btn {
+        width: 95%;
+    }
+}
+/*------------------------//申請網路預借現金--------------------------------*/
+/*--專人與我聯絡--*/
+.formList-even .form-control.in-tel {
+    width: 78px; 
+}
+.formList-even input.scr-input {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: sub;
+}
+/*--我想了解選項的高度--*/
+.connection-input {
+    height: 43px;
+}
+.bg_connection {
+    background-color: #e5f5f5;
+}
+@media screen and (max-width: 768px){
+    .formList-even .form-control.in-tel {
+        width: 48px; 
+    }
+}
+/*--//專人與我聯絡--*/

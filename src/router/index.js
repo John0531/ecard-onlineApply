@@ -26,8 +26,40 @@ const routes = [
     meta: {
       title: '我不是聯邦卡友'
     }
-  }
+  },
   // ? 非卡友-書面
+  {
+    path: '/Written',
+    name: '申請資料填寫',
+    component: () => import('../views/CardFriendNo/Written/Written.vue'),
+    meta: {
+      title: '申請資料填寫'
+    }
+  },
+  {
+    path: '/Written_1',
+    name: '職業資料',
+    component: () => import('../views/CardFriendNo/Written/Written_1.vue'),
+    meta: {
+      title: '職業資料'
+    }
+  },
+  {
+    path: '/Written_2',
+    name: '個資使用條款',
+    component: () => import('../views/CardFriendNo/Written/Written_2.vue'),
+    meta: {
+      title: '個資使用條款'
+    }
+  },
+  {
+    path: '/Written_3',
+    name: '確認填寫資料',
+    component: () => import('../views/CardFriendNo/Written/Written_3.vue'),
+    meta: {
+      title: '確認填寫資料'
+    }
+  }
   // ? 非卡友-線上-存戶
   // ? 非卡友-線上-他行信用卡驗證
   // ? 非卡友-線上-他行銀行帳戶驗證
@@ -36,6 +68,11 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
+  scrollBehavior (to, from) {
+    return {
+      top: 0
+    }
+  },
   routes
 })
 

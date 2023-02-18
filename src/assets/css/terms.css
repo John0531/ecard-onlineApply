@@ -1,0 +1,355 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+.modal-body {
+    padding: 0rem 1rem 1rem;
+}
+
+.modal-content {
+    border-radius: 1rem;
+}
+
+.modal-dialog {
+    max-width: 900px;
+    margin: 1.75rem auto;
+}
+
+.modal-content button:focus {
+    outline: none;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 2em;
+    letter-spacing: 3px;
+    padding-left: 50px;
+    color: #009999;
+    margin-bottom: 0;
+    margin-left: auto;
+}
+
+.modal-header .close {
+    padding: 1rem 1rem;
+}
+
+.modal-header {
+    border-bottom: none;
+    padding: 1rem 0.5rem 0;
+}
+.modal-body a:link {
+    color: #373741;
+    text-decoration: none;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #009999;
+    border-color: #009999;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #707070;
+    border-color: #707070;
+}
+
+img {
+    max-width: none;
+}
+
+/* 同意條款 */
+
+body ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+body ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: rgba(128, 128, 128, .3);
+}
+
+body ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    margin: 0 5px;
+}
+
+.terms_box {
+    position: relative;
+    width: 90%;
+    height: 130px;
+    margin: 10px auto;
+    background-color: #ebebec;
+    padding: 10px 30px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: left;
+    font-family: Arial, 'Noto Sans TC', '微軟正黑體', "Heiti TC", sans-serif;
+    font-size: 16px;
+    color: #373741;
+    line-height: 28px;
+}
+
+@media screen and (max-width: 576px) {
+    .terms_box {
+        width: 100%;
+        margin: 10px auto;
+        background-color: #ebebec;
+        padding: 10px 10px;
+    }
+    .modal-title {
+        line-height: 1.3em;
+        letter-spacing: 2px;
+        padding-left: 10px;
+    }
+}
+
+
+/*-----一個條款---------*/
+
+.terms_box.oneTerms {
+    height: 500px;
+}
+
+
+/*-----兩個條款---------*/
+
+.terms_box.twoTerms {
+    height: 250px;
+}
+
+@media screen and (max-width: 576px) {
+    .terms_box.oneTerms {
+        height: 400px;
+    }
+}
+
+.terms_box h3 {
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.terms_box h4 {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.terms_box .txt {
+    font-size: 12px;
+    line-height: 1.6rem;
+    margin-top: 2px;
+}
+
+.terms_box .red {
+    color: #dc3f3f;
+}
+.terms_box .blue {
+    color: #0d76b4;
+}
+
+.terms_box .aul {
+    margin-left: -20px;
+    list-style-type: disc;
+}
+
+.button_terms {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    margin: 0px auto 20px;
+}
+
+.button_terms p {
+    margin-bottom: 0px;
+    font-size: 13px;
+    line-height: 1.6rem;
+}
+
+
+/*--我已詳細閱讀。(未勾選)--*/
+
+.button_terms label {
+    margin-bottom: 0px;
+    font-size: 13px;
+    line-height: 1.6rem;
+    color: #cccccc;
+}
+
+
+/*--已勾選--*/
+
+.button_terms label.text-checked {
+    color: #000000;
+}
+
+.button_terms input {
+    width: 35px;
+    height: 25px;
+}
+
+.button_terms button {
+    color: #ffffff;
+    background-color: #0075ff;
+    border-color: #0075ff;
+}
+
+.error-hint {
+    color: #c34c4c;
+    font-size: 13px;
+    line-height: 1.6rem;
+    text-align: center;
+    margin-top: -10px;
+    display: none;
+}
+
+.error-hint.show {
+    display: block;
+}
+
+
+/*--------表格-------*/
+
+.terms_box .table-bordered {
+    border: 1px solid #a1a1a2;
+    background-color: #f7f7f7;
+}
+
+.terms_box .table-bordered td {
+    padding: 5px;
+    font-size: 12px;
+    line-height: 1.6rem;
+    border: 1px solid #a1a1a2;
+}
+
+
+/*---------條款內縮---------------------*/
+
+/*--內縮2個中文字--*/
+.l-one-em {
+    text-indent: -1em;
+    padding-left: 1em;
+}
+.l-two-em {
+    padding-left: 2em;
+}
+
+.l-two-em p {
+    text-indent: -2em;
+    padding-left: 2em;
+    margin-bottom: 0rem;
+}
+
+
+.level-one ol {
+    text-indent: 0em;
+    margin-bottom: 0;
+    padding-left: 1em;
+}
+
+
+/*---( 一、二、三、) ---*/
+.level-one .cjk-ideographic {
+    text-indent: -2em;
+    padding-left: 2em;
+}
+
+/*--( 十一、十二、十三、) ---*/
+.level-one .cjk-ideographic-two {
+    text-indent: -3em;
+    padding-left: 3em;
+}
+/*--( 二十一、二十二、二十三、) ---*/
+.level-one .cjk-ideographic-three {
+    text-indent: -4em;
+    padding-left: 4em;
+}
+
+
+/*---(1)---*/
+.level-number {
+    text-indent: -1.5em;
+    padding-left: 1.5em;
+    margin-bottom: 0rem;
+}
+
+/*--內縮2個中文字--*/
+.level-two p {
+    text-indent: -2em;
+    padding-left: 2em;
+    margin-bottom: 0rem;
+}
+
+.level-two ol {
+    text-indent: 0em;
+    margin-bottom: 0;
+}
+
+/*--內縮4個中文字ex:第一條、 --*/
+.level-four {
+    text-indent: -4em;
+    padding-left: 4em;
+    margin-bottom: 10px;
+}
+/*--契約書--*/
+.border_dark_bold {
+    border: 2px solid #000000;
+    padding: 10px 5px;
+    margin: 1px;
+}
+.terms_box h2 {
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 700;
+}
+.terms_box table td {
+    font-size: 12px;
+    line-height: 1.6rem;
+    color: #373741;
+}
+/*------input-----*/
+input.checkimg[type="checkbox"] {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    border-radius: 4px;
+    appearance: none;
+    -webkit-appearance: none;
+    border:1px solid #bfbfbf;
+    cursor: default; 
+  }
+  input.checkimg[type="checkbox"]:hover { 
+    border:1px solid #afafaf; 
+  }
+  input.checkimg:checked[type="checkbox"]::before {
+    content: '';
+    position: absolute;
+    width: 23px;
+    height: 23px;
+    border-radius: 4px;
+    top:0; 
+    left: 0;
+    background-image:url(../images/form/checkimg.png);
+    background-size: contain;  
+  }
+  input.checkimg[type="checkbox"]:disabled {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    border-radius: 4px;
+    appearance: none;
+    border:1px solid #ddddde;
+    border-color: rgba(118, 118, 118, 0.3);
+    cursor: default; 
+  }
+  input.checkimg[type="checkbox"]:checked {
+    width: 25px;
+    height: 25px;
+    border-radius: 4px;
+    background-image:url(../images/form/checkimg.png);
+    background-size: contain;  
+  }
+/*------input-----*/
