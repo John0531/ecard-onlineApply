@@ -59,9 +59,17 @@ const routes = [
     meta: {
       title: '確認填寫資料'
     }
-  }
+  },
   // ? 非卡友-線上-存戶
   // ? 非卡友-線上-他行信用卡驗證
+  {
+    path: '/OnLineApply_Chk',
+    name: '線上辦卡(已持有其他銀行信用卡)',
+    component: () => import('../views/CardFriendNo/Online/OnLineApply_Chk.vue'),
+    meta: {
+      title: '線上辦卡(已持有其他銀行信用卡)'
+    }
+  }
   // ? 非卡友-線上-他行銀行帳戶驗證
   // ? 非卡友-線上-共用
 ]
