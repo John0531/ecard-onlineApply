@@ -26,6 +26,9 @@ import { createMetaManager } from 'vue-meta'
 // ?vue-gtag-next
 // import VueGtag from 'vue-gtag-next'
 
+// ?表單驗證
+import validate from './utilities/validate'
+
 import App from './App.vue'
 import store from './store'
 import router from './router'
@@ -43,7 +46,7 @@ const app = createApp(App)
 
 // ?自訂全域屬性
 app.config.globalProperties.$custom = {
-  // validate,
+  validate,
   bootstrap
   // moment,
   // currency

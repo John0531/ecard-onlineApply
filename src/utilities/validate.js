@@ -272,7 +272,7 @@ const validate = {
     } else {
       return true
     }
-  },
+  }
 
   //* ==== 13. 確認辦卡地址 ====(非聯邦卡友)
   //* 來源： Utility.js
@@ -311,89 +311,90 @@ const validate = {
   //* 來源： Utility.js
   //= === 日期的Check 和 Convert(strKind: 1.國曆 2.西曆) ====
   // ------------------------------------------------------------------------------
-  Conv_Date (strDate, strKind) {
-    var strYear, strMonth, strDay, strResult
+  // Conv_Date (strDate, strKind) {
+  //   var strYear, strMonth, strDay, strResult
 
-    if (strDate.Trim === '') {
-      return ''
-    }
+  //   if (strDate.Trim === '') {
+  //     return ''
+  //   }
 
-    switch (strDate.length) {
-      case 6:
-        strYear = strDate.substr(0, 2)
-        strMonth = strDate.substr(2, 2)
-        strDay = strDate.substr(4, 2)
+  //   switch (strDate.length) {
+  //     case 6:
+  //       strYear = strDate.substr(0, 2)
+  //       strMonth = strDate.substr(2, 2)
+  //       strDay = strDate.substr(4, 2)
 
-        strYear = (parseInt(strYear) + 1911).toString()
-        break
+  //       strYear = (parseInt(strYear) + 1911).toString()
+  //       break
 
-      case 7:
-        strYear = strDate.substr(0, 3)
-        strMonth = strDate.substr(3, 2)
-        strDay = strDate.substr(5, 2)
+  //     case 7:
+  //       strYear = strDate.substr(0, 3)
+  //       strMonth = strDate.substr(3, 2)
+  //       strDay = strDate.substr(5, 2)
 
-        strYear = (parseInt(strYear) + 1911).toString()
-        break
+  //       strYear = (parseInt(strYear) + 1911).toString()
+  //       break
 
-      case 8:
-        strYear = strDate.substr(0, 4)
-        strMonth = strDate.substr(4, 2)
-        strDay = strDate.substr(6, 2)
-        break
-    }
+  //     case 8:
+  //       strYear = strDate.substr(0, 4)
+  //       strMonth = strDate.substr(4, 2)
+  //       strDay = strDate.substr(6, 2)
+  //       break
+  //   }
 
-    strResult = strYear + '/' + strMonth + '/' + strDay
+  //   strResult = strYear + '/' + strMonth + '/' + strDay
 
-    if (validate.CheckDate(strResult) === false) {
-      return ''
-    }
+  //   if (validate.CheckDate(strResult) === false) {
+  //     return ''
+  //   }
 
-    if (strKind === '1') {
-      strResult = (parseInt(strYear) - 1911).toString() + '/' + strMonth + '/' + strDay
-    }
+  //   if (strKind === '1') {
+  //     strResult = (parseInt(strYear) - 1911).toString() + '/' + strMonth + '/' + strDay
+  //   }
 
-    return strResult
-  },
+  //   return strResult
+  // },
 
   //* ==== 15. 確認身分證發證日期-2 ====(非聯邦卡友)
+  // TODO 日期組格式
   //* 來源： dspApplicationFillinOTCard
-  cheIdDate () {
-    var objIdDate; objIdDate = document.getElementById('ddlIDyear').value + ('0' + document.getElementById('ddlIDMonth').value).substr(-2) + ('0' + document.getElementById('ddlIDDay').value).substr(-2)
-    if (Conv_Date(objIdDate, '1') === '') {
-      strMsgCollect = strMsgCollect + '!!* 您身分證發證日期填寫有誤。!!'
-      document.getElementById('ddlIDyear').selectedIndex = 0
-      document.getElementById('ddlIDMonth').selectedIndex = 0
-      document.getElementById('ddlIDDay').selectedIndex = 0
-      return false
-    } else {
-      return true
-    }
-  },
+  // cheIdDate () {
+  //   var objIdDate; objIdDate = document.getElementById('ddlIDyear').value + ('0' + document.getElementById('ddlIDMonth').value).substr(-2) + ('0' + document.getElementById('ddlIDDay').value).substr(-2)
+  //   if (Conv_Date(objIdDate, '1') === '') {
+  //     strMsgCollect = strMsgCollect + '!!* 您身分證發證日期填寫有誤。!!'
+  //     document.getElementById('ddlIDyear').selectedIndex = 0
+  //     document.getElementById('ddlIDMonth').selectedIndex = 0
+  //     document.getElementById('ddlIDDay').selectedIndex = 0
+  //     return false
+  //   } else {
+  //     return true
+  //   }
+  // },
 
   //= === 日期檢核 ====
-  CheckDate (strDate) {
-    var tempDate = new Date(strDate)
-    var yy = tempDate.getFullYear()
-    var mm = tempDate.getMonth() + 1
-    var dd = tempDate.getDate()
-    var myDay = ''
+  // CheckDate (strDate) {
+  //   var tempDate = new Date(strDate)
+  //   var yy = tempDate.getFullYear()
+  //   var mm = tempDate.getMonth() + 1
+  //   var dd = tempDate.getDate()
+  //   var myDay = ''
 
-    if (mm.toString().length === 1) {
-      mm = '0' + mm
-    }
+  //   if (mm.toString().length === 1) {
+  //     mm = '0' + mm
+  //   }
 
-    if (dd.toString().length === 1) {
-      dd = '0' + dd
-    }
+  //   if (dd.toString().length === 1) {
+  //     dd = '0' + dd
+  //   }
 
-    myDay = yy + '/' + mm + '/' + dd
+  //   myDay = yy + '/' + mm + '/' + dd
 
-    if (myDay !== strDate) {
-      return false
-    }
+  //   if (myDay !== strDate) {
+  //     return false
+  //   }
 
-    return true
-  }
+  //   return true
+  // }
 
 }
 
