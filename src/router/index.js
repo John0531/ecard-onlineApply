@@ -18,6 +18,22 @@ const routes = [
       title: '我是聯邦卡友/存戶'
     }
   },
+  {
+    path: '/OnLineApply_OTP',
+    name: '手機OTP驗證',
+    component: () => import('../views/CardFriendYes/OnLineApply_OTP.vue'),
+    meta: {
+      title: '手機OTP驗證'
+    }
+  },
+  {
+    path: '/OnLineApply_Fillin',
+    name: '資料確認，詳閱各項條款',
+    component: () => import('../views/CardFriendYes/OnLineApply_Fillin.vue'),
+    meta: {
+      title: '資料確認，詳閱各項條款'
+    }
+  },
   // ? 非卡友
   {
     path: '/OnLineApply_n',
