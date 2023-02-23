@@ -276,35 +276,36 @@ const validate = {
 
   //* ==== 13. 確認辦卡地址 ====(非聯邦卡友)
   //* 來源： Utility.js
-  //= === 確認辦卡地址長度 縣市10 地區10 路10 巷弄號樓5 其他100
+  // TODO 可用 veevalide length
+  // TODO 確認辦卡地址長度 縣市10 地區10 路10 巷弄號樓5 其他100
   // ------------------------------------------------------------------------------
-  CheckAddress (strAddressID, strAddressName) {
-    var arrAddress = strAddressID.split('**')
-    // var arrCtrlCName = strCtrlCName.split('**');
-    var strChk = 'Y'
-    var strMessage = ''
-    for (var i = 0; i < arrAddress.length; i++) {
-      strChk = 'Y'
-      if (i === 0 || i === 1 || i === 2) {
-        if (window.document.getElementById(arrAddress[i]).value.length > 10) {
-          strChk = 'N'
-        }
-      } else if (i === 3 || i === 4 || i === 5 || i === 6 || i === 7) {
-        if (window.document.getElementById(arrAddress[i]).value.length > 5) {
-          strChk = 'N'
-        }
-      } else if (i === 8) {
-        if (window.document.getElementById(arrAddress[i]).value.length > 100) {
-          strChk = 'N'
-        }
-      }
-      if (strChk === 'N') {
-        strMessage = '!!*【' + strAddressName + '地址】' + '格式有誤。'
-        return strMessage
-      }
-    }
-    return strMessage
-  },
+  // CheckAddress (strAddressID, strAddressName) {
+  //   var arrAddress = strAddressID.split('**')
+  //   // var arrCtrlCName = strCtrlCName.split('**');
+  //   var strChk = 'Y'
+  //   var strMessage = ''
+  //   for (var i = 0; i < arrAddress.length; i++) {
+  //     strChk = 'Y'
+  //     if (i === 0 || i === 1 || i === 2) {
+  //       if (window.document.getElementById(arrAddress[i]).value.length > 10) {
+  //         strChk = 'N'
+  //       }
+  //     } else if (i === 3 || i === 4 || i === 5 || i === 6 || i === 7) {
+  //       if (window.document.getElementById(arrAddress[i]).value.length > 5) {
+  //         strChk = 'N'
+  //       }
+  //     } else if (i === 8) {
+  //       if (window.document.getElementById(arrAddress[i]).value.length > 100) {
+  //         strChk = 'N'
+  //       }
+  //     }
+  //     if (strChk === 'N') {
+  //       strMessage = '!!*【' + strAddressName + '地址】' + '格式有誤。'
+  //       return strMessage
+  //     }
+  //   }
+  //   return strMessage
+  // },
 
   //* ==== 14. 確認身分證發證日期-1 ====(非聯邦卡友)
   //* 來源： Utility.js
@@ -356,18 +357,18 @@ const validate = {
 
   //* ==== 15. 確認身分證發證日期-2 ====(非聯邦卡友)
   //* 來源： dspApplicationFillinOTCard
-  // function cheIdDate () {
-  //   var objIdDate; objIdDate = document.getElementById('ddlIDyear').value + ('0' + document.getElementById('ddlIDMonth').value).substr(-2) + ('0' + document.getElementById('ddlIDDay').value).substr(-2)
-  //   if (Conv_Date(objIdDate, '1') === '') {
-  //     strMsgCollect = strMsgCollect + '!!* 您身分證發證日期填寫有誤。!!'
-  //     document.getElementById('ddlIDyear').selectedIndex = 0
-  //     document.getElementById('ddlIDMonth').selectedIndex = 0
-  //     document.getElementById('ddlIDDay').selectedIndex = 0
-  //     return false
-  //   } else {
-  //     return true
-  //   }
-  // }
+  cheIdDate () {
+    var objIdDate; objIdDate = document.getElementById('ddlIDyear').value + ('0' + document.getElementById('ddlIDMonth').value).substr(-2) + ('0' + document.getElementById('ddlIDDay').value).substr(-2)
+    if (Conv_Date(objIdDate, '1') === '') {
+      strMsgCollect = strMsgCollect + '!!* 您身分證發證日期填寫有誤。!!'
+      document.getElementById('ddlIDyear').selectedIndex = 0
+      document.getElementById('ddlIDMonth').selectedIndex = 0
+      document.getElementById('ddlIDDay').selectedIndex = 0
+      return false
+    } else {
+      return true
+    }
+  },
 
   //= === 日期檢核 ====
   CheckDate (strDate) {
