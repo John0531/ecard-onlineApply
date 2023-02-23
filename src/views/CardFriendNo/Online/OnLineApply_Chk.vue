@@ -951,11 +951,7 @@ export default {
   },
   watch: {
     agreement (n) {
-      if (n.length === 4) {
-        this.agreementAll = true
-      } else {
-        this.agreementAll = false
-      }
+      this.agreementAll = n.length === 4
     }
   },
   mounted () {

@@ -3,6 +3,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
+    component: () => import('../Template/Layout.vue'),
+    children: [
+
+    ]
+  },
+  {
+    path: '/',
     name: '線上辦卡',
     component: () => import('../views/OnlineApply.vue'),
     meta: {
@@ -83,11 +90,75 @@ const routes = [
     name: '線上辦卡(已持有其他銀行信用卡)',
     component: () => import('../views/CardFriendNo/Online/OnLineApply_Chk.vue'),
     meta: {
-      title: '線上辦卡(已持有其他銀行信用卡)'
+      title: '線上辦卡'
+    }
+  },
+  // ? 非卡友-線上-他行銀行帳戶驗證
+  {
+    path: '/OnLineApply_ChkSZ',
+    name: '線上辦卡(已持有其他銀行帳戶)',
+    component: () => import('../views/CardFriendNo/Online/OnLineApply_ChkSZ.vue'),
+    meta: {
+      title: '線上辦卡'
+    }
+  },
+  // ? 非卡友-線上-共用
+  {
+    path: '/OnLineApply_Chk_OTP',
+    name: '手機OTP驗證',
+    component: () => import('../views/CardFriendNo/Online/Fillin/OnLineApply_Chk_OTP.vue'),
+    meta: {
+      title: '手機OTP驗證'
+    }
+  },
+  {
+    path: '/OnLineApply_ChkSZ_OTP',
+    name: '手機OTP驗證(他行帳戶)',
+    component: () => import('../views/CardFriendNo/Online/Fillin/OnLineApply_ChkSZ_OTP.vue'),
+    meta: {
+      title: '手機OTP驗證'
+    }
+  },
+  {
+    path: '/OnLineApply_Fillin_OT',
+    name: '非卡友-申請書資料填寫',
+    component: () => import('../views/CardFriendNo/Online/Fillin/OnLineApply_Fillin_OT.vue'),
+    meta: {
+      title: '申請書資料填寫'
+    }
+  },
+  {
+    path: '/OnLineApply_Fillin_OT_1',
+    name: '非卡友-個資使用條款',
+    component: () => import('../views/CardFriendNo/Online/Fillin/OnLineApply_Fillin_OT_1.vue'),
+    meta: {
+      title: '申請書資料填寫'
+    }
+  },
+  {
+    path: '/OnLineApply_Fillin_OT_2',
+    name: '非卡友-確認填寫資料',
+    component: () => import('../views/CardFriendNo/Online/Fillin/OnLineApply_Fillin_OT_2.vue'),
+    meta: {
+      title: '申請書資料填寫'
+    }
+  },
+  {
+    path: '/OnLineApply_Fillin_OT_Up',
+    name: '非卡友-檢附財力證明',
+    component: () => import('../views/CardFriendNo/Online/Fillin/OnLineApply_Fillin_OT_Up.vue'),
+    meta: {
+      title: '檢附財力證明'
+    }
+  },
+  {
+    path: '/dspApplicationNNB',
+    name: '非卡友-NewNewBank',
+    component: () => import('../views/CardFriendNo/Online/Fillin/dspApplicationNNB.vue'),
+    meta: {
+      title: 'NewNewBank'
     }
   }
-  // ? 非卡友-線上-他行銀行帳戶驗證
-  // ? 非卡友-線上-共用
 ]
 
 const router = createRouter({
