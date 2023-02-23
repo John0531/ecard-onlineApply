@@ -127,6 +127,14 @@ const routes = [
     meta: {
       title: '檢附財力證明'
     }
+  },
+  {
+    path: '/dspApplicationNNB',
+    name: '非卡友-NewNewBank',
+    component: () => import('../views/CardFriendNo/Online/Fillin/dspApplicationNNB.vue'),
+    meta: {
+      title: 'NewNewBank'
+    }
   }
 ]
 
