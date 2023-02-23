@@ -125,10 +125,51 @@
               </div>
 
               <div class="text-center button_group">
-                  <button class="btn btn-primary btn-lg mx-1" type="submit" value="" data-bs-toggle="modal" data-bs-target="#MsgModal">送出申請</button>
+                  <button class="btn btn-primary btn-lg mx-1" type="" @click="showResult">送出申請</button>
                   <button onclick="location.href='#'" class="btn btn-primary btn-lg mx-1" type="submit" value="">預覽申請書</button>
               </div>
           </div>
       </div>
   </section>
+  <!---------------------上傳成功跳轉NNB--------------------------->
+  <div ref="NNBModal" class="modal fade" id="NNBModal" tabindex="-1" role="dialog" aria-labelledby="apply" aria-hidden="true" data-backdrop="static">
+      <div class="modal-dialog modal-dialog-centered MyData_modal_dialog" role="document">
+          <div class="modal-content MyData_modal">
+              <div class="modal-header text-center">
+                  <h5 class="modal-title w-100 ps-0"><strong>上傳成功</strong></h5>
+              </div>
+              <p class="modal-body text-left text-md-center pt-4">
+                  祝您 順心 如意 !!如您仍有其他疑問，請電洽聯邦銀行信用卡客戶服務專線： <br>(02) 2545-5168或(07) 226-9393
+              </p>
+              <div class="text-center">
+                  <button type="button" class="btn btn-primary btn-lg mx-1" @click="goToNNB">確定</button>
+              </div>
+              <br/>
+          </div>
+      </div>
+  </div>
 </template>
+
+<script>
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
+
+export default {
+  data () {
+    return {
+      NNBModal: ''
+    }
+  },
+  methods: {
+    goToNNB () {
+      this.NNBModal.hide()
+      this.$router.push('/dspApplicationNNB')
+    },
+    showResult () {
+      this.NNBModal.show()
+    }
+  },
+  mounted () {
+    this.NNBModal = new bootstrap.Modal(this.$refs.NNBModal, { backdrop: 'static' })
+  }
+}
+</script>
