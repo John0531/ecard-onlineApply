@@ -3,6 +3,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
+    component: () => import('../Template/Layout.vue'),
+    children: [
+
+    ]
+  },
+  {
+    path: '/',
     name: '線上辦卡',
     component: () => import('../views/OnlineApply.vue'),
     meta: {
