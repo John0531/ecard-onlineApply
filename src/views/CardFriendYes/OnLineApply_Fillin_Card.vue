@@ -3,7 +3,7 @@
   <!-- 主視覺 -->
   <div class="shortKv">
     <div class="fill-shortKv topimg-OnLineApply">
-      <div class="container-xlr shortKv-title-4">
+      <div class="container-xl shortKv-title-4">
         <h2>線上辦卡</h2>
       </div>
     </div>
@@ -198,7 +198,7 @@
           <h3 class="upload_title mt-5">檢附身分證</h3>
           <div class="text-md-center mb-3">
             <span class="d-block red_text"
-              >※上傳格式限JPG及GIF檔，總檔案數為6個，單一檔案上限為5MB。</span
+              >※上傳格式限JPG及GIF檔，單一檔案上限為5MB。</span
             >
           </div>
           <div class="row upload_group">
