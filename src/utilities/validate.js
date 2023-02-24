@@ -258,20 +258,57 @@ const validate = {
 
   //* ==== 12. 只可輸入數字
   //* 來源： Utility.js
-  OnlyNumPress (e) {
-    var objKeyCode = window.event ? e.keyCode : e.charCode
-    // 48 ~ 57 為數字
-    if ((objKeyCode === 13) || (objKeyCode === 9)) {
-      return true
+  OnlyNumPress (value) {
+    console.log(value)
+    if (!value) {
+      return ''
     }
-    if (objKeyCode === 0) {
-      return true
+    const a = value.toString()
+    console.log(a)
+    if (a.length > 5) {
+      return parseInt(a.slice(0, 5))
     }
-    if ((objKeyCode < 48) || (objKeyCode >= 58)) {
-      return false
-    } else {
-      return true
+    return parseInt(a)
+    // console.log(e.keyCode)
+    // var objKeyCode = window.event ? e.keyCode : e.charCode
+    // console.log(objKeyCode)
+    // // 48 ~ 57 為數字
+    // if ((objKeyCode === 13) || (objKeyCode === 9)) {
+    //   return true
+    // }
+    // if (objKeyCode === 0) {
+    //   return true
+    // }
+    // if ((objKeyCode < 48) || (objKeyCode >= 58)) {
+    //   return false
+    // } else {
+    //   return true
+    // }
+  },
+
+  Address: {
+    ZipCode: '', // ? 郵遞區號
+    Dist: '', // ? 區
+    Rd: '', // ? 路
+    Ln: '', // ? 巷
+    Aly: '', // ? 弄
+    No_1: '', // ? 號1
+    No_2: '', // ? 號2
+    Floor: '', // ? 樓
+    Other: ''// ? 其他
+  },
+  CheckAddress (Address) {
+    const test = Address.Ln + Address.Aly + Address.No_1 + Address.No_2 + Address.Floor + Address.Other
+    if (test.length < 1) {
+      return '地址格式有誤'
     }
+    if (!Address.ZipCode || !Address.Dist || !Address.Rd) {
+      return '地址格式有誤'
+    }
+    if (Address.Ln > 5 || Address.Aly > 5 || Address.No_1 > 5 || Address.No_2 > 5 || Address.Floor > 5 || Address.Other > 100) {
+      return '地址格式有誤'
+    }
+    return true
   }
 
   //* ==== 13. 確認辦卡地址 ====(非聯邦卡友)

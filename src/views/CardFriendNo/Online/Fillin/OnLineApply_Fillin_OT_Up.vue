@@ -148,15 +148,162 @@
           </div>
       </div>
   </div>
+
+  <!---------------------跳轉MyData--------------------------->
+  <div ref="MyDataModal" class="modal fade" id="MsgModal" tabindex="-1" role="dialog" aria-labelledby="apply" aria-hidden="true" data-backdrop="static">
+      <div class="modal-dialog modal-dialog-centered MyData_modal_dialog" role="document">
+          <div class="modal-content MyData_modal">
+              <div class="modal-header text-center">
+                  <h5 class="modal-title w-100 pl-4"><strong>進入MyData平臺</strong></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img src="@/assets/images/form/close.png" border="0" alt="close" data-bs-dismiss="modal"></button>
+              </div>
+              <p class="modal-body text-left">
+                  您已充分了解個人化資料自主運用(MyData)平臺服務內容，並同意<a href="#" target="_blank" @click.prevent="goToMyDataTerms"><u>服務授權條款</u></a>。接下來您即將離開聯邦銀行網頁，前往MyData平臺，您可透過自然人憑證、行動自然人憑證或健保卡取得下列資訊：<br/> ●勞工保險被保險人投保資料(明細)
+                  <br/> ●財產資料
+                  <br/> ●個人所得資料
+                  <br/> 相關資料將轉由聯邦銀行做為您申請信用卡之財力證明使用。
+              </p>
+              <p class="modal-body text-left MyData-modal-note">
+                  注意事項：
+                  <span>• 提醒您，MyData平臺未支援IE瀏覽器；使用自然人憑證請確認您已備妥讀卡機，並安裝驅動程式。</span>
+                  <span>• MyData平臺服務由國發會提供，若服務過程異常以致無法完成申請，您可轉由本行官網透過自行拍照上傳方式進行補件，以維護您的申辦權益。</span>
+              </p>
+
+              <div class="text-center">
+                  <button type="button" class="btn btn-lg MyData-modal-btn" data-dismiss="modal" onclick="location.replace(location.href);">取消回上一頁</button>
+                  <button type="button" class="btn btn-lg MyData-modal-btn-y" data-dismiss="modal" onclick="location.href='https://mydata.nat.gov.tw/';">同意並前往MyData</button>
+              </div>
+              <br/>
+          </div>
+      </div>
+  </div>
+
+  <!-- Modal-1 -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel-1">請向下滾動，仔細閱讀整份同意書所有內容<input id="myCheckCount" hidden></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img src="@/assets/images/form/close.png" border="0" alt="close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <!------------------1-------------------------------------------->
+                    <div id="terms_box_1" class="terms_box oneTerms">
+                        <!--uc1:wucMyData同意條款 runat="server" id="wucMyData同意條款" /-->
+                        <div class="txt">
+                            <h3>聯邦銀行使用申請人授權MyData個人資料之服務條款</h3>
+                            <div>為協助您了解本服務之功能與內容，以保障您個人之權益，請於使用本服務前詳閱本條款內容，當您開始使用本服務時，即視為您已充分閱讀、瞭解與同意接受本條款之所有內容。
+                            </div>
+                            <div class="cjk-ideographic">一、服務目的與內容<br>
+                                為簡化申請人辦理「信用卡申請服務」流程，聯邦銀行提供申請人於申辦金融服務文件上傳流程使用MyData服務，於前揭線上申請網頁輸入個人身分證統一編號，並完成MyData服務平臺、身分認證檢核及個人授權同意等程序後，本行即取得同意授權之資料。</div>
+                            <div class="cjk-ideographic">
+                                二、資料使用項目與範圍<br>
+                                為使用本服務，您同意提供本行下列個人資料 (詳見附錄： MyData平臺資料傳輸項目明細表)：
+                                <ol class="mb-0">
+                                    <li>財政部財政資訊中心：財產資料。</li>
+                                    <li>財政部財政資訊中心：個人所得資料。</li>
+                                    <li>勞動部勞保局：勞工保險被保險人投保資料(明細)。</li>
+                                </ol>
+                            </div>
+                            <div class="cjk-ideographic">
+                                三、資料儲存與使用方式
+                                <ol class="mb-0">
+                                    <li>您因使用本服務所提供並授權本行使用之個人資料，本行將儲存於本服務資料庫中，儲存期間為自您提供並同意授權個人資料之日起，至本行因應業務執行或工作需要所訂定保存年限之截止日止。</li>
+                                    <li>您因使用本服務所提供並授權本行使用之個人資料，僅限本行提供本服務內容使用。</li>
+                                    <li>前揭個人資料使用對象限本行於國內及國外所在地。</li>
+                                    <li>符合個人資料保護相關法令以自動化機器或其他非自動化之使用方式。</li>
+                                </ol>
+                            </div>
+                            <div class="cjk-ideographic">
+                                四、使用者相關權利：
+                                <ol class="mb-0">
+                                    <li>除法律另有特別規定，本行蒐集您的個人資料後，依個人資料保護法規定，您得向本行行使下列各項權利：<br>
+                                    (1) 查詢或請求閱覽您的個人資料。<br>
+                                    (2) 請求製給您的個人資料複製本。<br>
+                                    (3) 請求補充或更正您的個人資料。<br>
+                                    (4) 請求停止蒐集、處理或使用您的個人資料。<br>
+                                    (5) 請求刪除您的個人資料。</li>
+                                    <li>使用本服務所取得之個人資料，其權利仍歸屬於當事人，若需重新取得檔案，須重新進行授權作業。</li>
+                                    <li>您可使用24小時客服專線(02)2545-5168、(07)226-9393聯繫本行，或於本行官網「留言板」線上留言，本行將儘速依相關法令規定，處理與回覆您的請求。</li>
+                                </ol>
+                            </div>
+                            <div class="cjk-ideographic">
+                                五、服務條款修訂
+                                <ol class="mb-0">
+                                    <li>本行有權於任何時間修改、變更本服務條款之內容，修改或變更時，以本行公告之服務條款為準，若有其他未盡事宜，悉依本行相關規定或解釋辦理。</li>
+                                    <li>如您於本服務條款修改或變更後仍續使用本服務，則視為您已閱讀、瞭解與同意接受本服務條款修改或變更，若您不同意本服務條款之修改或變更，請通知本行，本行將停止使用您對本服務之授權內容。</li>
+                                </ol>
+                            </div>
+                            <div class="cjk-ideographic">
+                                六、注意事項
+                                <ol class="mb-0">
+                                    <li>您得自由選擇是否提供個人資料，惟您若拒絕提供相關個人資料，本行將無法進行必要之審核及處理相關作業，因此將無法受理您前揭權利之行使或提供您相關服務。</li>
+                                    <li>本行對於MyData平臺取得您個人之資料係由資料提供者提供，若對資料內容有疑問，請逕洽該所屬資料提供者。</li>
+                                    <li>本告知事項日後如有更新內容將於本行官網另行公告。</li>
+                                </ol>
+                            </div>
+                            <div>附錄、MyData平臺資料傳輸項目明細表<br>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th width="5%" bgcolor="#f6f6f6" class="text-center">項次</th>
+                                            <th width="12%" class="text-center" bgcolor="#f6f6f6">部會機關名稱</th>
+                                            <th width="10%" class="text-center" bgcolor="#f6f6f6">資料集名稱</th>
+                                            <th class="text-center" bgcolor="#f6f6f6">資料集欄位說明</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td align="center">1</td>
+                                            <td align="center">財政部財政資訊中心</td>
+                                            <td align="center">財產資料</td>
+                                            <td>身分證統一編號、姓名、財產稅籍編號、縣市別、房地面積、房地現值金額、持分比率(汽缸容量)、土地標示(車廠牌名稱)、地目(車年)、房屋座落。</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center">2</td>
+                                            <td align="center">財政部財政資訊中心</td>
+                                            <td align="center">個人所得資料</td>
+                                            <td>所得檔案編號、所得類別、所得人身分證統一編號、所得人姓名、給付總額、扣繳稅額、所得格式代號、所得註記、證號別、總收入、可扣抵稅額。</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center">3</td>
+                                            <td align="center">勞動部勞工保險局</td>
+                                            <td align="center">勞工保險被保險人投保資料(明細)</td>
+                                            <td>保險別、保險證號、出生日期、勞保被保險人識別碼、單位名稱、姓名、就保註記代碼、工作部門註記、年資(年)、年資(日)、年資起日、年資迄日、投保薪資、異動別代碼、異動日期。</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="py-2">*資料傳輸項目依各部會機關實際提供者為準。</div>
+                        </div>
+                    </div>
+                    <div id="button_terms" class="button_terms">
+                        <input type="checkbox" id="button_termsOpt_1" onclick="javascript:checkAgreement(this);"
+                            disabled="" />
+                        <label id="read_1" for="button_termsOpt_1">我已詳細閱讀。(請勾選)</label>
+                    </div>
+                    <!----------------//1-------------------------------------------->
+                </div>
+
+                <div class="modal-footer">
+                    <div class="col-12 text-center">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="javascript:checkTotal();">確定</button>
+                        <button id="btnTermClose" type="button" class="btn btn-primary btn-lg d-none"
+                            data-bs-dismiss="modal" aria-label="Close">確定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
-
 export default {
   data () {
     return {
-      NNBModal: ''
+      NNBModal: '', //* 上傳完成倒轉 NNB
+      MyDataModal: '' //* 倒轉 MyData
     }
   },
   methods: {
@@ -165,11 +312,18 @@ export default {
       this.$router.push('/dspApplicationNNB')
     },
     showResult () {
-      this.NNBModal.show()
+      //* 判斷要跳哪個 Modal(待處理)
+    //   this.NNBModal.show()
+      this.MyDataModal.show()
+    },
+    goToMyDataTerms () {
+      const routeData = this.$router.resolve({ name: '非卡友- MyData服務授權條款' })
+      window.open(routeData.href, '_blank')
     }
   },
   mounted () {
-    this.NNBModal = new bootstrap.Modal(this.$refs.NNBModal, { backdrop: 'static' })
+    this.NNBModal = new this.$custom.bootstrap.Modal(this.$refs.NNBModal, { backdrop: 'static' })
+    this.MyDataModal = new this.$custom.bootstrap.Modal(this.$refs.MyDataModal, { backdrop: 'static' })
   }
 }
 </script>
