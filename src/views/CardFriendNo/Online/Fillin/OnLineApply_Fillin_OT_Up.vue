@@ -148,15 +148,43 @@
           </div>
       </div>
   </div>
+
+  <!---------------------跳轉MyData--------------------------->
+  <div ref="MyDataModal" class="modal fade" id="MsgModal" tabindex="-1" role="dialog" aria-labelledby="apply" aria-hidden="true" data-backdrop="static">
+      <div class="modal-dialog modal-dialog-centered MyData_modal_dialog" role="document">
+          <div class="modal-content MyData_modal">
+              <div class="modal-header text-center">
+                  <h5 class="modal-title w-100 pl-4"><strong>進入MyData平臺</strong></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img src="@/assets/images/form/close.png" border="0" alt="close" data-bs-dismiss="modal"></button>
+              </div>
+              <p class="modal-body text-left">
+                  您已充分了解個人化資料自主運用(MyData)平臺服務內容，並同意<a href="#" target="_blank" @click.prevent="goToMyDataTerms"><u>服務授權條款</u></a>。接下來您即將離開聯邦銀行網頁，前往MyData平臺，您可透過自然人憑證、行動自然人憑證或健保卡取得下列資訊：<br/> ●勞工保險被保險人投保資料(明細)
+                  <br/> ●財產資料
+                  <br/> ●個人所得資料
+                  <br/> 相關資料將轉由聯邦銀行做為您申請信用卡之財力證明使用。
+              </p>
+              <p class="modal-body text-left MyData-modal-note">
+                  注意事項：
+                  <span>• 提醒您，MyData平臺未支援IE瀏覽器；使用自然人憑證請確認您已備妥讀卡機，並安裝驅動程式。</span>
+                  <span>• MyData平臺服務由國發會提供，若服務過程異常以致無法完成申請，您可轉由本行官網透過自行拍照上傳方式進行補件，以維護您的申辦權益。</span>
+              </p>
+
+              <div class="text-center">
+                  <button type="button" class="btn btn-lg MyData-modal-btn" data-dismiss="modal" onclick="location.replace(location.href);">取消回上一頁</button>
+                  <button type="button" class="btn btn-lg MyData-modal-btn-y" data-dismiss="modal" onclick="location.href='https://mydata.nat.gov.tw/';">同意並前往MyData</button>
+              </div>
+              <br/>
+          </div>
+      </div>
+  </div>
 </template>
 
 <script>
-import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
-
 export default {
   data () {
     return {
-      NNBModal: ''
+      NNBModal: '', //* 上傳完成倒轉 NNB
+      MyDataModal: '' //* 倒轉 MyData
     }
   },
   methods: {
@@ -165,11 +193,18 @@ export default {
       this.$router.push('/dspApplicationNNB')
     },
     showResult () {
-      this.NNBModal.show()
+      //* 判斷要跳哪個 Modal(待處理)
+      // this.NNBModal.show()
+      this.MyDataModal.show()
+    },
+    goToMyDataTerms () {
+      const routeData = this.$router.resolve({ name: '非卡友- MyData服務授權條款' })
+      window.open(routeData.href, '_blank')
     }
   },
   mounted () {
-    this.NNBModal = new bootstrap.Modal(this.$refs.NNBModal, { backdrop: 'static' })
+    this.NNBModal = new this.$custom.bootstrap.Modal(this.$refs.NNBModal, { backdrop: 'static' })
+    this.MyDataModal = new this.$custom.bootstrap.Modal(this.$refs.MyDataModal, { backdrop: 'static' })
   }
 }
 </script>

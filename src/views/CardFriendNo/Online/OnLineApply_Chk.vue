@@ -68,7 +68,7 @@
               <div class="terms">
                   <input id="checkbox" name="checkbox" class="checkimg position-absolute" type="checkbox" @click="checkAgreement" v-model="agreementAll"
                    />
-                  <label for="agree">同意，本人對「 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>用卡須知及申請說明</u></a>」「 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>重要告知事項</u></a>」「 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>聯邦信用卡約定條款</u></a>」「<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>電子化帳單服務約定條款</u></a>」內容。(請務必勾選)
+                  <label for="agree">同意，本人對「 <a href="#" @click.prevent="checkAgreement"><u>用卡須知及申請說明</u></a>」「 <a href="#" @click.prevent="checkAgreement"><u>重要告知事項</u></a>」「 <a href="#" @click.prevent="checkAgreement"><u>聯邦信用卡約定條款</u></a>」「<a href="#" @click.prevent="checkAgreement"><u>電子化帳單服務約定條款</u></a>」內容。(請務必勾選)
                   </label>
               </div>
               <div class="terms">
@@ -904,8 +904,6 @@
 </template>
 
 <script>
-import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
-
 export default {
   data () {
     return {
@@ -956,7 +954,7 @@ export default {
   },
   mounted () {
     this.scrollEvent()
-    this.agreeModal = new bootstrap.Modal(this.$refs.agreeModal, { backdrop: 'static' })
+    this.agreeModal = new this.$custom.bootstrap.Modal(this.$refs.agreeModal, { backdrop: 'static' })
   }
 }
 </script>

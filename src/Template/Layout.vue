@@ -27,4 +27,5 @@ export default {
         -webkit-appearance: none;
         margin:0;
   }
+  @import "~@/assets/css/NNB.css";
 </style>

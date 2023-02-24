@@ -1,49 +1,285 @@
 <template>
+  <!--nav end-->
+  <!-- 主視覺 -->
   <div class="shortKv">
     <div class="fill-shortKv topimg-OnLineApply">
-      <div class="container-xl shortKv-title-4">
+      <div class="container-xlr shortKv-title-4">
         <h2>線上辦卡</h2>
       </div>
     </div>
   </div>
-  <!-- //主視覺 -->
   <!-- 主要內容 -->
   <section class="mainArea">
     <div class="container-xl">
-      <div class="row justify-content-md-center">
+      <div class="row justify-content-md-center pt-1 pt-md-3">
+        <div class="mb-4 text-left OnLineApply_pl">
+          <strong>申請人基本資料確認及更新作業（空值欄位請一併更新）</strong>
+        </div>
         <div class="formGroup">
-          <ul class="formList formApply">
-            <li class="col-12 mb-2">
-              <label for="">申請人身分證字號</label>
+          <ul class="formList-even">
+            <li class="col-12 col-md-6">
+              <label for="">身分證字號</label>
+              <div class="form-text">A12345****</div>
             </li>
-            <input
-              required=""
-              name="login[id]"
-              type="text"
-              maxlength="10"
-              placeholder="限正卡持卡人"
-              class="formApply_form_control form-control"
-            />
-            <li class="col-12">
-              <label for=""></label>
-              <span class="red_text">(外籍人士請輸入居留簽證的統一證號)</span>
+            <li class="col-12 col-md-6">
+              <label for="">出生日期</label>
+              <div class="form-text">1981/12/25</div>
             </li>
-            <li class="col-12">
-              <label for="input1">西元出生年月日</label>
+            <li class="col-12 col-md-6">
+              <label for="">1.中文姓名</label>
+              <div class="form-text">ubot@ubot.com.tw</div>
+            </li>
+            <li class="col-12 col-md-6">
+              <label for="">2.戶籍地址：</label>
+              <div class="d-flex flex-wrap">
+                <div class="form_Apply_txt">台北市內湖區瑞光路399號5樓</div>
+                <button type="button" class="OnLineApply_button">變更</button>
+              </div>
+            </li>
+            <li class="col-12 col-md-12">
+              <div
+                class="d-flex flex-wrap flex-md-nowrap apply_address align-items-center"
+              >
+                <select name="" runat="server" class="form-select form-control ZIP mb-2">
+                  <option>110000</option>
+                  <option>110000</option>
+                </select>
+                <select
+                  name=""
+                  runat="server"
+                  id=""
+                  class="form-select form-control Area mx-1 mx-md-2 mb-2"
+                >
+                  <option>南港區</option>
+                  <option>松山區</option>
+                  <option>內湖區</option>
+                </select>
+                <select
+                  name=""
+                  runat="server"
+                  id=""
+                  class="form-select form-control Road mb-2"
+                >
+                  <option>忠孝東路五段</option>
+                  <option>忠孝東路五段</option>
+                  <option>忠孝東路五段</option>
+                </select>
+              </div>
+              <div class="d-flex apply_address align-items-center">
+                <input
+                  required=""
+                  name="login[id]"
+                  type="text"
+                  placeholder=" "
+                  class="form-control me-1"
+                />巷
+                <input
+                  required=""
+                  name="login[id]"
+                  type="text"
+                  placeholder=" "
+                  class="form-control mx-1"
+                />弄
+                <input
+                  required=""
+                  name="login[id]"
+                  type="text"
+                  placeholder=" "
+                  class="form-control mx-1"
+                />-
+                <input
+                  required=""
+                  name="login[id]"
+                  type="text"
+                  placeholder=" "
+                  class="form-control mx-1"
+                />號
+                <input
+                  required=""
+                  name="login[id]"
+                  type="text"
+                  placeholder=" "
+                  class="form-control mx-1"
+                />樓
+                <input
+                  required=""
+                  name="login[id]"
+                  type="text"
+                  placeholder=" "
+                  class="form-control ms-1"
+                />
+              </div>
+            </li>
+            <li class="col-12 col-md-6">
+              <label for="">3.出生地</label>
+              <select name="" runat="server" id="" class="form-select form-control">
+                <option></option>
+                <option></option>
+                <option></option>
+              </select>
+            </li>
+            <li class="col-12 col-md-6">
+              <label for="">4.國籍</label>
+              <select name="" runat="server" id="" class="form-select form-control">
+                <option></option>
+                <option></option>
+                <option></option>
+              </select>
+            </li>
+            <li class="col-12 col-md-6">
+              <label for="">5.職業別</label>
+              <div class="d-flex flex-wrap flex-md-nowrap align-items-center">
+                <select
+                  name=""
+                  runat="server"
+                  id=""
+                  class="form-select form-control me-1"
+                >
+                  <option></option>
+                  <option></option>
+                  <option></option>
+                </select>
+                <div class="d-flex align-items-center">
+                  <span class="text-nowrap">其他</span>
+                  <input
+                    required=""
+                    name="login[id]"
+                    type="text"
+                    placeholder=" "
+                    class="form-control other_input ms-1 my-2 my-md-0"
+                  />
+                </div>
+              </div>
+            </li>
+            <li class="col-12 col-md-6">
+              <label for="">6.職級別</label>
+              <select name="" runat="server" id="" class="form-select form-control">
+                <option></option>
+                <option></option>
+                <option></option>
+              </select>
+            </li>
+            <li class="col-12 col-md-6">
+              <label for="">7.主要所得及資金來源</label>
+              <div class="d-flex flex-wrap flex-md-nowrap align-items-center">
+                <select
+                  name=""
+                  runat="server"
+                  id=""
+                  class="form-select form-control me-1"
+                >
+                  <option></option>
+                  <option></option>
+                  <option></option>
+                </select>
+                <div class="d-flex align-items-center">
+                  <span class="text-nowrap">其他</span>
+                  <input
+                    required=""
+                    name="login[id]"
+                    type="text"
+                    placeholder=" "
+                    class="form-control other_input ms-1 my-2 my-md-0"
+                  />
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="mb-3">
+          <span class="d-block red_text OnLineApply_text pb-0 pb-mb-3"
+            ><strong
+              >※如1~3項資料有異動，需檢附身分證正反面，並填寫發證日期及地點。</strong
+            ></span
+          >
+        </div>
+        <!-------------------檢附證件---------------------->
+        <div class="">
+          <h3 class="upload_title mt-5">檢附身分證</h3>
+          <div class="text-md-center mb-3">
+            <span class="d-block red_text"
+              >※上傳格式限JPG及GIF檔，總檔案數為6個，單一檔案上限為5MB。</span
+            >
+          </div>
+          <div class="row upload_group">
+            <div class="col-12 col-md-6">
+              <div class="upload_items text-center">
+                <img
+                  src="@/assets/images/form/upload_photo.png"
+                  class="img-fluid"
+                  alt=""
+                />
+                <input
+                  type="file"
+                  name="upload1"
+                  id="upload1"
+                  accept="image/*"
+                  class="upload"
+                  data-sigil="file-input"
+                /><textarea
+                  name="TBupload1"
+                  id="TBupload1"
+                  style="display: none"
+                ></textarea>
+              </div>
+              <div class="upload_IDtxt text-center">身分證正面</div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="upload_items text-center">
+                <img
+                  src="@/assets/images/form/upload_photo.png"
+                  class="img-fluid"
+                  alt=""
+                />
+                <input
+                  type="file"
+                  name="upload2"
+                  id="upload2"
+                  accept="image/*"
+                  class="upload"
+                  data-sigil="file-input"
+                /><textarea
+                  name="TBupload2"
+                  id="TBupload2"
+                  style="display: none"
+                ></textarea>
+              </div>
+              <div class="upload_IDtxt text-center">身分證反面</div>
+            </div>
+          </div>
+        </div>
+        <!-------------------//檢附證件---------------------->
+        <div>
+          <ul class="formList-even">
+            <li class="col-12 col-md-6">
+              <label for=""><span class="red_text">* </span>身分證發證日期</label>
               <div class="d-flex align-items-center">
-                <select name="" runat="server" class="form-select form-control">
-                  <option>1990</option>
-                  <option>1991</option>
-                  <option>1991</option>
-                  <option>1991</option>
-                  <option>1992</option>
-                  <option>1991</option>
-                  <option>1993</option>
-                  <option>1991</option>
-                  <option>1994</option>
-                  <option>1991</option></select
+                <span class="text-nowrap">民國</span>
+                <select
+                  name=""
+                  runat="server"
+                  class="form-select form-control mx-1 mx-md-2"
+                >
+                  <option>99</option>
+                  <option>100</option>
+                  <option>101</option>
+                  <option>102</option>
+                  <option>103</option>
+                  <option>104</option>
+                  <option>105</option>
+                  <option>106</option>
+                  <option>107</option>
+                  <option>108</option>
+                  <option>109</option>
+                  <option>110</option>
+                  <option>111</option></select
                 >年
-                <select name="" runat="server" id="SelM" class="form-select form-control">
+                <select
+                  name=""
+                  runat="server"
+                  id="SelM"
+                  class="form-select form-control mx-1 mx-md-2"
+                >
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>
@@ -57,7 +293,12 @@
                   <option>11</option>
                   <option>12</option></select
                 >月
-                <select name="" runat="server" id="SelD" class="form-select form-control">
+                <select
+                  name=""
+                  runat="server"
+                  id="SelD"
+                  class="form-select form-control mx-1 mx-md-2"
+                >
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>
@@ -73,228 +314,41 @@
                 >日
               </div>
             </li>
-          </ul>
-        </div>
-        <div class="col-xl-10 d-flex flex-wrap">
-          <div class="col-12 col-md-4 text-center">
-            <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="" />
-            <div class="form-check my-2">
-              <input
-                class="form-check-input Apply_input"
-                type="radio"
-                name="exampleRadios"
-                id="exampleRadios1"
-                value="option1"
-              />
-              <label
-                class="form-check-label text-start text-md-center fw-bold"
-                for="exampleRadios1"
-              >
-                微風悠遊聯名卡MasterCard悠遊鈦金卡
-              </label>
-            </div>
-          </div>
-          <div class="col-12 col-md-4 text-center">
-            <img src="@/assets/images/form/card_b4bs.jpg" class="img-fluid" alt="" />
-            <div class="form-check my-2">
-              <input
-                class="form-check-input Apply_input"
-                type="radio"
-                name="exampleRadios"
-                id="exampleRadios2"
-                value="option1"
-              />
-              <label
-                class="form-check-label text-start text-md-center fw-bold"
-                for="exampleRadios2"
-              >
-                微風悠遊聯名卡JCB悠遊晶緻卡
-              </label>
-            </div>
-          </div>
-          <div class="col-12 col-md-4 text-center">
-            <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="" />
-            <div class="form-check my-2">
-              <input
-                class="form-check-input Apply_input"
-                type="radio"
-                name="exampleRadios"
-                id="exampleRadios3"
-                value="option1"
-              />
-              <label
-                class="form-check-label text-start text-md-center fw-bold"
-                for="exampleRadios3"
-              >
-                微風悠遊聯名卡VISA悠遊御璽卡
-              </label>
-            </div>
-          </div>
-        </div>
-        <!----------------yesgogogo ---------------->
-        <div class="mt-3 mt-md-5">
-          <div class="yesgogogo_box">
-            <h3>yesgogogo即食購–在地美食，安心品質 (聯邦紅利指定折抵網站)</h3>
-            <div class="yesgogogo_txt">
-              <h4>yesgogogo會員加碼禮<span> (新舊戶卡友皆適用)</span></h4>
-              活動期間：111年1月1日~111年6月30日。<br />
-              活動內容：活動期間至聯邦信用卡官網進行開卡並點選註冊成為yesgogogo會員，或經由yesgogogo即食購之聯邦卡友專屬註冊頁完成註冊者，即可獲贈加碼禮。
-              <ul>
-                <li>成為會員享1,000元折價券。(新舊會員皆適用)</li>
-                <li>新會員首購單筆滿499元贈好禮+購物金點數回饋100%。</li>
-                <li>週二聯邦日：週週享購物金點數回饋100%。</li>
-              </ul>
-              ※ 每會員限領乙份折價券，更多說明及限制詳參<a
-                href="https://card.ubot.com.tw/eCard/activity/2022yesgogogo/index.htm"
-                ><u>活動官網</u>。</a
-              >
-            </div>
-          </div>
-        </div>
-        <!----------------//yesgogogo ---------------->
-        <!----------------fee ---------------->
-        <div class="mt-3 mt-md-5">
-          <div class="fee_box mb-3">
-            <h3>
-              <img
-                src="images/form/fee_icon.gif"
-                class="img-fluid"
-                alt=""
-              />年費定價說明：
-            </h3>
-            <div class="fee_content">
-              <table class="fee_table">
-                <thead>
-                  <tr>
-                    <th width="20%">卡別</th>
-                    <th width="10%">首年</th>
-                    <th>第二年度起</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="fee_cardname">
-                      <strong>微風悠遊聯名卡<br />VISA<br />悠遊御璽卡</strong>
-                    </td>
-                    <td class="redWord text-center" rowspan="3">免年費</td>
-                    <td rowspan="3">
-                      <p class="text-left">
-                        第二年起統計正、附卡年度合併消費未達36,000元，收取全額年費。
-                      </p>
-                      <table width="100%">
-                        <thead class="fee_thead">
-                          <tr>
-                            <th class="text-center">年消費</th>
-                            <th class="text-center">年費</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td class="text-center">36,000元(含)以上</td>
-                            <td class="redWord text-center">免年費</td>
-                          </tr>
-                          <tr>
-                            <td class="text-center">未達36,000 元</td>
-                            <td class="text-center">2,000元</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="fee_cardname">
-                      <strong>微風悠遊聯名卡<br />MasterCard<br />悠遊鈦金卡</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="fee_cardname">
-                      <strong>微風悠遊聯名卡<br />JCB<br />悠遊晶緻卡</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="fee_cardname">
-                      <strong>微風悠遊聯名卡<br />VISA<br />悠遊白金卡</strong>
-                    </td>
-                    <td class="redWord text-center" rowspan="2">免年費</td>
-                    <td rowspan="2">
-                      <p class="text-left">
-                        依據每張卡片年費到期日往前推算一年，檢核同一身分證字號下之消費，若不符合標準則以單卡按以下標準計算收取年費(不分正、附卡)：
-                      </p>
-                      <table width="100%">
-                        <thead class="fee_thead">
-                          <tr>
-                            <th class="text-center">年消費</th>
-                            <th class="text-center">年費</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td class="text-center">1萬元(含)以上或消費10次(含)以上</td>
-                            <td class="redWord text-center">免年費</td>
-                          </tr>
-                          <tr>
-                            <td class="text-center">5,000元(含)或5次(含)以上</td>
-                            <td class="text-center">500元</td>
-                          </tr>
-                          <tr>
-                            <td class="text-center">未達5,000元或5次</td>
-                            <td class="text-center">1,000元</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="fee_cardname">
-                      <strong>微風悠遊聯名卡<br />MasterCard<br />悠遊白金卡</strong>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="indentNote_OneText">
-                <p>
-                  ※每一卡別所提供之年費減免或折價優惠，每一持卡人僅得享有一次優惠，若於年費優惠期間截止前將卡片停用後又重新申請者，恕不再享有優惠。
-                </p>
+            <li class="col-12 col-md-6">
+              <label for="">發證地點</label>
+              <div class="d-flex ID_date align-items-center">
+                <select
+                  name=""
+                  runat="server"
+                  class="form-select form-control IDCounty mr-1 mr-md-2"
+                >
+                  <option>台北市</option>
+                  <option>新北市</option>
+                </select>
+                <select
+                  name=""
+                  runat="server"
+                  id=""
+                  class="form-select form-control IDissue mx-1 mx-md-2"
+                >
+                  <option>換發</option>
+                  <option>補發</option>
+                  <option>初發</option>
+                </select>
               </div>
-            </div>
-          </div>
-        </div>
-        <!----------------//fee ---------------->
-        <!-------------------本人已詳閱---------------------->
-        <div class="terms-group">
-          <div class="terms">
-            <input
-              id="checkbox"
-              name="checkbox"
-              value="checkbox"
-              class="checkimg position-absolute"
-              type="checkbox"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-              v-model="agreementAll"
-              @click="checkAgreement()"
-            />
-            <label for="agree" @click="checkAgreement"
-              >本人已詳閱並同意「<a
-                href="#"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-                @click.prevent="this.contractModal.show()"
-                ><u>聯邦銀行電子銀行服務申請約定條款</u></a
-              >」內容。(請務必勾選)</label
-            >
-          </div>
-          <div class="terms">
-            <input type="checkbox" class="checkimg position-absolute" id="agree1" />
-            <label for="agree1"
-              >本人同意申辦貴行業務時，因中途退出或雖未完成所有申請步驟所留存之相關個人資料，貴行得用以提供後續聯繫及服務時使用。</label
+            </li>
+          </ul>
+          <div class="Apply_note_box mb-5">
+            <span class="red_text"
+              ><strong
+                >貼心提醒：<br />此頁信用卡留存之基本資料項目確認完成後，本行其他業務（如：存款帳戶）之客戶基本資料，將參照一併更新（排除證券、一般信託）。</strong
+              ></span
             >
           </div>
         </div>
-        <!-------------------//本人已詳閱---------------------->
         <div class="text-center button_group">
           <button
-            @click.prevent="$router.push('/OnLineApply_OTP')"
+            onclick="location.href='OnLineApply_Fillin_1.htm'"
             class="btn btn-primary btn-lg mx-1"
             type="submit"
             value=""
@@ -318,7 +372,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel-1">
-            請向下滾動，仔細閱讀整份同意書所有內容<input id="myCheckCount" hidden />
+            親愛的客戶您好：<input id="myCheckCount" hidden />
           </h5>
           <button
             type="button"
@@ -889,60 +943,43 @@
 </template>
 
 <script>
-import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
-
 export default {
   data () {
     return {
-      contractModal: '',
-      agreement: false,
-      agreementAll: false
-    }
-  },
-  methods: {
-    //* 我已詳細閱讀條款
-    scrollEvent () {
-      this.$refs.termBox1.onscroll = function () {
-        if (this.scrollHeight - this.scrollTop <= this.clientHeight + 50) {
-          const btn = document.querySelector('#button_termsOpt_1')
-          const label = document.querySelector('#read_1')
-          btn.removeAttribute('disabled')
-          label.classList.add('text-checked')
-        }
-      }
-    },
-    checkAgreement () {
-      this.contractModal.show()
-      const ck = document.querySelector('#checkbox')
-      if (!this.agreement) {
-        this.agreementAll = false
-        ck.checked = false
-        return
-      }
-      this.agreementAll = true
-      ck.checked = true
-    },
-    checkTotal () {
-      if (!this.agreement) {
-        this.$swal.fire({
-          title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-          showConfirmButton: false,
-          timer: 2500
-        })
-        return
-      }
-      this.contractModal.hide()
-      this.agreementAll = true
+      termsModal: '',
+      checkTerms: [],
+      allTerms: false
     }
   },
   watch: {
-    agreement (n) {
-      this.agreementAll = n
+    checkTerms (n, o) {
+      if (n.length >= 4) {
+        this.allTerms = true
+      } else {
+        this.allTerms = false
+      }
+    }
+  },
+  methods: {
+    checkTermsScroll (event, num) {
+      if (
+        event.target.scrollTop ===
+        event.target.scrollHeight - event.target.offsetHeight
+      ) {
+        document.querySelector(`#button_termsOpt_${num}`).removeAttribute('disabled')
+        document.querySelector(`#read_${num}`).classList.add('text-checked')
+      }
+    },
+    checkAllTerms () {
+      if (this.checkTerms.length < 5) {
+        alert('您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！')
+      } else {
+        this.termsModal.hide()
+      }
     }
   },
   mounted () {
-    this.scrollEvent()
-    this.contractModal = new bootstrap.Modal(this.$refs.contractModal, {
+    this.termsModal = new this.$custom.bootstrap.Modal(this.$refs.termsModal, {
       backdrop: 'static'
     })
   }

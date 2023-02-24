@@ -8,28 +8,6 @@
             </div>
         </div>
     </div>
-    <!-- //主視覺 -->
-    <section class="mainArea">
-        <div class="container-xl">
-            <div class="row justify-content-md-center pt-1 pt-md-3">
-                <div class="mb-4 text-md-center DarkRed_text">按下「獲取簡訊驗證碼」，系統將發送至您留存本行信用卡資料之手機號碼，驗證碼於10分鐘內有效。</div>
-                <div class="formGroup">
-                    <ul class="formList">
-                        <li class="inOpt">
-                            <label for="">簡訊驗證碼</label>
-                            <input required="" name="login[]" type="text" maxlength="6" placeholder="請輸入驗證碼" class="form-control">
-                            <button onclick="location.href='#'" class="ResendOpt" type="submit" value="">獲取簡訊驗證碼</button>
-                            <span class="countdown">(21秒後可重新發送)</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="text-center button_group">
-                    <button onclick="location.href='OnLineApply_Fillin.htm'" class="btn btn-primary btn-lg mx-1" type="submit" value="">下一步</button>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- 主要內容 END -->
     <!-- 主要內容 -->
     <section class="mainArea">
         <div class="container-xl">
@@ -194,8 +172,8 @@
         </div>
     </section>
     <!-- 主要內容 END -->
-<!-- Modal-1 -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal-1 -->
+    <div ref="termsModal" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -204,7 +182,7 @@
                 </div>
                 <div class="modal-body">
                     <!------------------1-------------------------------------------->
-                    <div id="terms_box_1" class="terms_box">
+                    <div id="terms_box_1" class="terms_box" @scroll="checkTermsScroll($event,1)">
                         <!--uc1:wuc用卡須知及申請說明 runat="server" id="wuc用卡須知及申請說明" /-->
                         <div class="txt">
                             <h3>用卡須知</h3>
@@ -395,13 +373,13 @@
                         </div>
                     </div>
                     <div id="button_terms" class="button_terms">
-                        <input type="checkbox" id="button_termsOpt_1" onclick="javascript:checkAgreement(this);" disabled="" />
+                        <input type="checkbox" id="button_termsOpt_1" disabled="" v-model="checkTerms" value="1"/>
                         <label id="read_1" for="button_termsOpt_1">我已詳細閱讀。(請勾選)</label>
                     </div>
                     <!----------------//1-------------------------------------------->
 
                     <!------------------2-------------------------------------------->
-                    <div id="terms_box_2" class="terms_box">
+                    <div id="terms_box_2" class="terms_box" @scroll="checkTermsScroll($event,2)">
                         <!--uc1:wuc重要告知事項 runat="server" id="wuc重要告知事項" /-->
                         <div class="txt">
                             <h3>重要告知事項</h3>
@@ -538,13 +516,13 @@
                         </div>
                     </div>
                     <div id="button_terms_2" class="button_terms">
-                        <input type="checkbox" id="button_termsOpt_2" onclick="javascript:checkAgreement(this);" disabled="" />
+                        <input type="checkbox" id="button_termsOpt_2" v-model="checkTerms" disabled="" value="2"/>
                         <label id="read_2" for="button_termsOpt_2">我已詳細閱讀。(請勾選)</label>
                     </div>
                     <!----------------//2-------------------------------------------->
 
                     <!------------------3-------------------------------------------->
-                    <div id="terms_box_3" class="terms_box">
+                    <div id="terms_box_3" class="terms_box" @scroll="checkTermsScroll($event,3)">
                         <!--uc1:wuc聯邦信用卡約定條款 runat="server" id="wuc聯邦信用卡約定條款" /-->
                         <!--uc1:wuc悠遊聯名卡特別約定條款 runat="server" id="wuc悠遊聯名卡特別約定條款" Visible="false" /-->
                         <!--uc1:wuc一卡通聯名卡特別約定條款 runat="server" id="wuc一卡通聯名卡特別約定條款" Visible="false" /-->
@@ -935,13 +913,13 @@
                         </div>
                     </div>
                     <div id="button_terms_3" class="button_terms">
-                        <input type="checkbox" id="button_termsOpt_3" onclick="javascript:checkAgreement(this);"  disabled="" />
+                        <input type="checkbox" id="button_termsOpt_3" v-model="checkTerms" disabled="" value="3"  />
                         <label id="read_3" for="button_termsOpt_3">我已詳細閱讀。(請勾選)</label>
                     </div>
                     <!----------------//3-------------------------------------------->
 
                     <!------------------4-------------------------------------------->
-                    <div id="terms_box_4" class="terms_box">
+                    <div id="terms_box_4" class="terms_box" @scroll="checkTermsScroll($event,4)">
                         <!--uc1:wuc電子化帳單服務約定條款 runat="server" id="wuc電子化帳單服務約定條款" /-->
                         <div class="txt">
                             <h3>聯邦銀行信用卡「電子化帳單」服務約定條款</h3>
@@ -1022,13 +1000,13 @@
 
                     </div>
                     <div id="button_terms_4" class="button_terms">
-                        <input type="checkbox" id="button_termsOpt_4" onclick="javascript:checkAgreement(this);" disabled="" />
+                        <input type="checkbox" id="button_termsOpt_4" v-model="checkTerms" disabled="" value="4" />
                         <label id="read_4" for="button_termsOpt_4">我已詳細閱讀。(請勾選)</label>
                     </div>
                     <!----------------//4-------------------------------------------->
 
                     <!------------------5-------------------------------------------->
-                    <div id="terms_box_5" class="terms_box">
+                    <div id="terms_box_5" class="terms_box" @scroll="checkTermsScroll($event,5)">
                         <!--uc1:wuc微風積點禮遇會員同意及注意事項 runat="server" id="wuc微風積點禮遇會員同意及注意事項" /-->
                         <div class="txt">
                             <h3>Breeze Rewards微風積點禮遇會員同意及注意事項</h3>
@@ -1082,7 +1060,7 @@
                         </div>
                     </div>
                     <div id="button_terms_5" class="button_terms">
-                        <input type="checkbox" id="button_termsOpt_5" onclick="javascript:checkAgreement(this);" disabled="" />
+                        <input type="checkbox" id="button_termsOpt_5" v-model="checkTerms" disabled="" value="5"/>
                         <label id="read_5" for="button_termsOpt_5">我已詳細閱讀。(請勾選)</label>
                     </div>
                     <!----------------//5-------------------------------------------->
@@ -1090,7 +1068,7 @@
 
                 <div class="modal-footer">
                     <div class="col-12 text-center">
-                        <button type="button" class="btn btn-primary btn-lg" onclick="javascript:checkTotal();">確定</button>
+                        <button type="button" class="btn btn-primary btn-lg" @click="checkAllTerms">確定</button>
                         <button id="btnTermClose" type="button" class="btn btn-primary btn-lg d-none" data-bs-dismiss="modal" aria-label="Close">確定</button>
                     </div>
                 </div>
@@ -1098,42 +1076,6 @@
         </div>
     </div>
     <!-- Modal-1 end -->
-    <div class="footer">
-        <div class="serviceItems">
-            <div class="container-fluid">
-                <div class="contact">服務專線：<a href="tel:+886-2-25455168">(02)2545-5168</a>、<a href="tel:+886-7-226-9393">(07)226-9393</a>、拒絕接受行銷專線<a href="tel:+886-800-066-678">0800-066-678</a>、<a href="https://web.ubot.com.tw/call/notice_ecard202101.html" target="_blank">線上客服</a></div>
-                <div class="links">
-                    <a href="index.htm">回首頁</a>
-                    <a href="https://www.ubot.com.tw/" target="_blank">關於聯邦</a>
-                    <a href="http://61.219.193.132/eCard/activity/2020newHomepage_6/sendMsg.htm" target="_blank">留言板</a>
-                    <a href="https://www.ubot.com.tw/service_location" target="_blank">服務據點</a>
-                    <a href="Announcement.htm">重要訊息公告</a>
-                    <a href="CreditCard_info.htm">信用卡金融資訊</a>
-                    <a href="https://web.ubot.com.tw/call/notice_ecard.html" target="_blank">無障礙服務專區</a>
-                    <a href="Foreigner.htm">外籍人士專區 Foreigner Area</a>
-                    <a href="Map.htm">網站導覽</a>
-                    <a href="https://www.facebook.com/unionbankoftaiwan" target="_blank"><i class="fab fa-facebook-square"></i>聯邦粉絲團</a>
-                    <a href="https://liff.line.me/1645278921-kWRPP32q?accountId=ubot" target="_blank"><i class="fab fa-line"></i>LINE官方帳號</a>
-                </div>
-            </div>
-        </div>
-        <div class="information">
-            <div class="container-fluid">
-                <div class="row info">
-                    <div class="infoLeft col-12 col-md-4 offset-md-2">謹慎理財 信用至上</div>
-                    <div class="infoRight col-12 col-md-6 ">
-                        <ul class="text-left">
-                            <li>循環利率：5%~15%</li>
-                            <li>循環利率之基準日為104年9月1日</li>
-                            <li>預借現金手續費：預借金額x3.5%+100元</li>
-                            <li>其他費用請至卡友服務(各項費用計費說明)查詢</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="copyright">&copy; 聯邦銀行 All Rights Reserved.</div>
-            </div>
-        </div>
-    </div>
 </template>
 
 <script>
@@ -1141,11 +1083,37 @@
 export default {
   data () {
     return {
+      termsModal: '',
+      checkTerms: [],
+      allTerms: false
+    }
+  },
+  watch: {
+    checkTerms (n, o) {
+      if (n.length >= 4) {
+        this.allTerms = true
+      } else {
+        this.allTerms = false
+      }
     }
   },
   methods: {
+    checkTermsScroll (event, num) {
+      if (event.target.scrollTop === (event.target.scrollHeight - event.target.offsetHeight)) {
+        document.querySelector(`#button_termsOpt_${num}`).removeAttribute('disabled')
+        document.querySelector(`#read_${num}`).classList.add('text-checked')
+      }
+    },
+    checkAllTerms () {
+      if (this.checkTerms.length < 5) {
+        alert('您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！')
+      } else {
+        this.termsModal.hide()
+      }
+    }
   },
   mounted () {
+    this.termsModal = new this.$custom.bootstrap.Modal(this.$refs.termsModal, { backdrop: 'static' })
   }
 }
 </script>

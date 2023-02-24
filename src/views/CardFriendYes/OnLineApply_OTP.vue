@@ -24,7 +24,7 @@
                     </ul>
                 </div>
                 <div class="text-center button_group">
-                    <button onclick="location.href='OnLineApply_Fillin.htm'" class="btn btn-primary btn-lg mx-1" type="submit" value="">下一步</button>
+                    <button @click="$router.push('OnLineApply_Fillin')" class="btn btn-primary btn-lg mx-1" type="submit" value="">下一步</button>
                 </div>
             </div>
         </div>
