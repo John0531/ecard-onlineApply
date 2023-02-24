@@ -22,4 +22,9 @@ export default {
   @import "~@/assets/css/form_Common.css";
   @import "~@/assets/css/OnLineApply.css";
   @import "~@/assets/css/terms.css";
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button{
+        -webkit-appearance: none;
+        margin:0;
+  }
 </style>

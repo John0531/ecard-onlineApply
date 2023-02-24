@@ -214,12 +214,12 @@
                                     </select>
                                 </div>
                                 <div class="d-flex apply_address align-items-center">
-                                    <input required="" name="login[id]" type="text" placeholder=" " class="form-control me-1">巷
-                                    <input required="" name="login[id]" type="text" placeholder=" " class="form-control mx-1">弄
-                                    <input required="" name="login[id]" type="text" placeholder=" " class="form-control mx-1">-
-                                    <input required="" name="login[id]" type="text" placeholder=" " class="form-control mx-1">號
-                                    <input required="" name="login[id]" type="text" placeholder=" " class="form-control mx-1">樓
-                                    <input required="" name="login[id]" type="text" placeholder=" " class="form-control ms-1">
+                                    <input v-model.number="test" @keyup="test=$custom.validate.OnlyNumPress(test)" type="number" placeholder="" class="form-control me-1">巷
+                                    <input maxlength="5" name="login[id]" type="text" placeholder="" class="form-control mx-1">弄
+                                    <input maxlength="5" type="text" placeholder="" class="form-control mx-1">-
+                                    <input maxlength="5" type="text" placeholder="" class="form-control mx-1">號
+                                    <input maxlength="5" type="text" placeholder="" class="form-control mx-1">樓
+                                    <input maxlength="5" type="text" placeholder="" class="form-control ms-1">
                                 </div>
                             </li>
                             <li class="col-12 col-md-12">
@@ -413,6 +413,11 @@
 
 <script>
 export default {
+  data () {
+    return {
+      test: ''
+    }
+  },
   methods: {
 
   }
