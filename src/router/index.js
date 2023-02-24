@@ -24,18 +24,50 @@ const routes = [
       },
       {
         path: '/OnLineApply_OTP',
-        name: '手機OTP驗證',
+        name: '卡友-手機OTP驗證',
         component: () => import('../views/CardFriendYes/OnLineApply_OTP.vue'),
         meta: {
-          title: '手機OTP驗證'
+          title: '卡友-手機OTP驗證'
         }
       },
       {
         path: '/OnLineApply_Fillin',
-        name: '資料確認，詳閱各項條款',
+        name: '卡友-資料確認，詳閱各項條款',
         component: () => import('../views/CardFriendYes/OnLineApply_Fillin.vue'),
         meta: {
-          title: '資料確認，詳閱各項條款'
+          title: '卡友-資料確認，詳閱各項條款'
+        }
+      },
+      {
+        path: '/OnLineApply_Fillin_Card',
+        name: '卡友-KYC資料確認',
+        component: () => import('../views/CardFriendYes/OnLineApply_Fillin_Card.vue'),
+        meta: {
+          title: '卡友-KYC資料確認'
+        }
+      },
+      {
+        path: '/OnLineApply_Fillin_1',
+        name: '卡友-個資使用條款',
+        component: () => import('../views/CardFriendYes/OnLineApply_Fillin_1.vue'),
+        meta: {
+          title: '卡友-個資使用條款'
+        }
+      },
+      {
+        path: '/OnLineApply_Fillin_Download',
+        name: '卡友-點選下載申請書',
+        component: () => import('../views/CardFriendYes/OnLineApply_Fillin_Download.vue'),
+        meta: {
+          title: '卡友-點選下載申請書'
+        }
+      },
+      {
+        path: '/OnLineApply_Fillin_Finish',
+        name: '卡友-送出申請',
+        component: () => import('../views/CardFriendYes/OnLineApply_Fillin_Finish.vue'),
+        meta: {
+          title: '卡友-送出申請'
         }
       },
       // ? 非卡友
