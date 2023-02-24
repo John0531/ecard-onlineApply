@@ -1,133 +1,172 @@
 <template>
+ <!--nav end-->
     <!-- 主視覺 -->
     <div class="shortKv">
         <div class="fill-shortKv topimg-OnLineApply">
-            <div class="container-xl shortKv-title-4">
+            <div class="container-xlr shortKv-title-4">
                 <h2>線上辦卡</h2>
             </div>
         </div>
     </div>
-    <!-- //主視覺 -->
     <!-- 主要內容 -->
     <section class="mainArea">
         <div class="container-xl">
             <div class="row justify-content-md-center pt-1 pt-md-3">
-                <!------------------------步驟---------------------------------->
-                <div class="stepGroup">
-                    <ul class="step">
-                        <li class="completed">
-                            <div class="counter_step">1</div><span>申請人資料</span></li>
-                        <li class="completed">
-                            <div class="counter_step">2</div><span>職業資料</span></li>
-                        <li class="active">
-                            <div class="counter_step">3</div><span>個人資料使用特別商議條款</span></li>
+                <div class="formGroup">
+                    <ul class="formList-even">
+                        <li class="col-12 col-md-6">
+                            <label for="">申請人身份證號</label>
+                            <div class="form-text">A12345****</div>
+                        </li>
+                        <li class="col-12 col-md-6">
+                            <label for="">姓名</label>
+                            <div class="form-text">王小邦</div>
+                        </li>
+                        <li class="col-12 col-md-6">
+                            <label for="">行動電話</label>
+                            <div class="form-text">0999***888</div>
+                        </li>
+                        <li class="col-12 col-md-6">
+                            <label for="">電子信箱</label>
+                            <input required="" name="login[id]" type="text" placeholder="ubot@ubot.com.tw" class="form-control">
+                        </li>
+                        <li class="col-12 col-md-6">
+                            <label for="">*安麗直銷商會員編號</label>
+                            <input required="" name="login[id]" type="text" placeholder="" class="form-control">
+                        </li>
+                        <li class="col-12 col-md-6">
+                            <label for="">推廣單位代號</label>
+                            <input required="" name="login[id]" type="text" placeholder="" class="form-control">
+                        </li>
+                        <li class="col-12 col-md-6">
+                            <label for="">推廣人員編號</label>
+                            <input required="" name="login[id]" type="text" placeholder="" class="form-control">
+                        </li>
+                        <li class="col-12 col-md-12">
+                            <label for="">*帳單形式</label>
+                            <div class="d-flex flex-wrap flex-column flex-md-row">
+                                <div class="form-check me-4">
+                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                    <div class="form_Apply_txt">
+                                        EMAIL帳單
+                                    </div>
+                                </div>
+                                <div class="form-check me-4">
+                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios2" value="option1">
+                                    <div class="form_Apply_txt">
+                                        行動帳單(簡訊)
+                                    </div>
+                                </div>
+                                <div class="form-check me-4">
+                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios3" value="option1">
+                                    <div class="form_Apply_txt">
+                                        LINE帳單
+                                    </div>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios3" value="option1">
+                                    <div class="form_Apply_txt">
+                                        紙本帳單
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_Apply_txt">
+                                <span class="red_text">※申請E-mail帳單請務必收取聯邦銀行電子帳單認證信，點選驗證網址始完成申請。<br>
+                                ※帳單接收型式將依本次選擇做為日後帳單寄送依據，如未點選E-mail認證信則依原帳單型式或紙本寄送。</span>
+                            </div>
+                        </li>
+                        <li class="col-12 col-md-12">
+                            <label for="">*寄卡地址</label>
+                            <div class="d-flex flex-wrap flex-column flex-md-row">
+                                <div class="form-check me-4">
+                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                    <div class="form_Apply_txt">
+                                        同帳單地址
+                                    </div>
+                                </div>
+                                <div class="form-check me-4">
+                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios2" value="option1">
+                                    <div class="form_Apply_txt">
+                                        同公司地址
+                                    </div>
+                                </div>
+                                <div class="form-check me-4">
+                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios2" value="option1">
+                                    <div class="form_Apply_txt">
+                                        其他
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form_Apply_txt">台北市內湖區康寧路Ｏ段ＯＯＯ巷ＯＯ號Ｏ樓</div>
+                                <div class="d-flex flex-wrap justify-content-start align-items-center">
+                                    <label for="" class="me-0">
+                                        請輸入您持有之任一卡號末四碼：
+                                    </label>
+                                    <input required="" name="login[id]" type="text" placeholder="" class="form-control end_four">
+                                    <button type="button" class="OnLineApply_button ms-2 mb-0">確認</button>
+                                </div>
+
+                        </li>
+                        <li>
+                            <div class="d-flex flex-wrap flex-md-nowrap apply_address align-items-center">
+                                <select name="" runat="server" class="form-select form-control ZIP mb-2">
+                                    <option>110000</option>
+                                    <option>110000</option>
+                                </select>
+                                <select name="" runat="server" id="" class="form-select form-control Area mx-1 mx-md-2 mb-2">
+                                    <option>南港區</option>
+                                    <option>松山區</option>
+                                    <option>內湖區</option>
+                                </select>
+                                <select name="" runat="server" id="" class="form-select form-control Road mb-2">
+                                    <option>忠孝東路五段</option>
+                                    <option>忠孝東路五段</option>
+                                    <option>忠孝東路五段</option>
+                                </select>
+                            </div>
+                            <div class="d-flex apply_address align-items-center">
+                                <input required="" name="login[id]" type="text" placeholder=" " class="form-control me-1">巷
+                                <input required="" name="login[id]" type="text" placeholder=" " class="form-control mx-1">弄
+                                <input required="" name="login[id]" type="text" placeholder=" " class="form-control mx-1">-
+                                <input required="" name="login[id]" type="text" placeholder=" " class="form-control mx-1">號
+                                <input required="" name="login[id]" type="text" placeholder=" " class="form-control mx-1">樓
+                                <input required="" name="login[id]" type="text" placeholder=" " class="form-control ms-1">
+                            </div>
+                        </li>
+                        <li class="col-12 col-md-12">
+                            <label for="">申請數位卡</label>
+                            <div class="d-flex flex-wrap flex-column flex-md-row">
+                                <div class="form-check me-4">
+                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                    <div class="form_Apply_txt text-nowrap">
+                                        是 (有效期至核卡後次月底)
+                                    </div>
+                                </div>
+                                <div class="form-check me-4">
+                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios2" value="option1">
+                                    <div class="form_Apply_txt">
+                                        否
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="note_text pt-0">
+                                <strong>(非必填欄位)</strong><br>
+                                    數位卡說明：如果您急需用卡，請勾選「是」，將立即享有網路購物及行動支付之便利，本行將於審核通過後先行發送簡訊代碼至申請人之行動電話，您可憑此代碼至本行網站中查詢信用卡資訊。
+                            </div>
+                        </li>
                     </ul>
-                </div>
-                  <!------------------------//步驟---------------------------------->
-                <div class="mb-4"><strong>聯邦銀行個人資料使用同意條款</strong> <small class="red_text">*請務必勾選</small></div>
-                <div class="blue_box mb-4">
-                    <div class="blue_box_bg">
-                        <input class="Apply_input" name="radioALL" id="radioALL" runat="server" type="radio" value="Y" />
-                        <label class="form-check-label fw-bold" for="radioALL">全部同意</label>
-                        <div class="accordion" id="accordionExample">
-                            <div class="dashed_line mb-3">
-                                <div class="card-header pb-3 collapsed" id="headingOne" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <strong>個人資料使用條款：</strong>
-                                </div>
-
-                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <span class="red_text">※申請聯邦微風聯名卡包括成為Breeze Rewards微風積點禮遇會員。<br>
-                                      ※本人確認業經合理期間詳細審閱並完全了解貴行依個人資料保護法第八條所進行之告知內容及本申請書所列信用卡相關利率、費用項目及收取標準(詳如信用卡利率/費用一覽表)，並就上述聲明事項、正反面所載有關申請聯邦銀行信用卡用卡須知、重要約定事項之內容及Breeze Rewards微風積點禮遇會員同意及注意事項表列之重要告知，同意提供個人資料予貴行及遵守信用卡約定條款之規定，茲簽名如下以示負責。【附卡申請人同意貴行將約定條款或其他業務上應為之通知（如帳單等)，向正卡申請人送達即對附卡申請人發生相同之效力。】<br>
-                                      ※申請一卡通聯名卡者同意卡片已開啟自動加值功能。(AUTOLOAD)<br>
-                                      ※申請聯邦全國加油聯名卡包括成為全國大利點會員，同享全國大利點會員優惠。 <br>
-                                      ※若不符聯邦全國加油聯名卡片申請資格，將同意由全國加油站改發現金大利會員卡一張(限每人一卡)。<br>
-                                      若申請人未依約繳款，本行除得委外催收或依法聲請強制執行外，並得依規就逾期未清償帳款，出售予資產管理公司，另依相關規定登錄於財團法人金融聯合徵信中心，可能影響申請人未來申辦其他貸款、信用卡之權利。上述紀錄揭露期間，請上聯徵中心網站www.jcic.org.tw「社會大眾專區」之「資料揭露期限」查詢。<br /></span>
-                                        <span class="blue_text">貴行之聯名/認同集團與有特約合作之第三人，為行銷、提供各項產品、服務、權益及各式優惠資訊(包含特定商店、商品、保險等)之目的範圍內，貴行得將本人之中英文姓名、身分證字號、生日、電話、地址、電子郵件、卡號及消費屬性等個人基本資料，由貴行提供予聯名/認同集團與有特約合作之第三人、並基於特定目的範圍內，得為蒐集、處理、國際傳輸及利用。貴行之聯名/認同集團與有特約合作之第三人應對個人資料依法保密。<br /></span>
-                                        <span class="red_text">全國加油站為行銷、提供各項產品、服務、權益及各式優惠資訊(包含特定商店、商品、保險等)之目的範圍內，得將本人之中英文姓名、身分證字號、生日、電話、地址、電子郵件、全國加油站會員資料、大利點及消費屬性等個人基本資料，提供予貴行，並基於特定目的範圍內，得為蒐集、處理、國際傳輸及利用。貴行應對該等個人資料依法保密。</span>
-                                    </div>
-                                    <div class="card-body">
-                                        <span class="red_text" id="PersonNote_Travel">
-                                        ※本人確認業經合理期間詳細審閱並完全了解貴行依個人資料保護法第八條所進行之告知內容及本申請書所列信用卡相關利率、費用項目及收取標準(詳如信用卡利率/費用一覽表)，並就上述聲明事項、正反面所載有關申請聯邦銀行信用卡用卡須知、重要約定事項之內容及注意事項表列之重要告知，同意提供個人資料予貴行及遵守信用卡約定條款之規定，茲簽名如下以示負責。【附卡申請人同意貴行將約定條款或其他業務上應為之通知（如帳單等)，向正卡申請人送達即對附卡申請人發生相同之效力。】<br>
-                                        ※申請一卡通聯名卡者同意卡片已開啟自動加值功能。(AUTOLOAD)<br>
-                                        若申請人未依約繳款，本行除得委外催收或依法聲請強制執行外，並得依規就逾期未清償帳款，出售予資產管理公司，另依相關規定登錄於財團法人金融聯合徵信中心，可能影響申請人未來申辦其他貸款、信用卡之權利。上述紀錄揭露期間，請上聯徵中心網站www.jcic.org.tw「社會大眾專區」之「資料揭露期限」查詢。<br />
-                                        </span>
-                                        <span class="blue_text">貴行之聯名/認同集團與有特約合作之第三人，為行銷、提供各項產品、服務、權益及各式優惠資訊(包含特定商店、商品、保險等)之目的範圍內，貴行得將本人之中英文姓名、身分證字號、生日、電話、地址、電子郵件、卡號及消費屬性等個人基本資料，由貴行提供予聯名/認同集團與有特約合作之第三人、並基於特定目的範圍內，得為蒐集、處理、國際傳輸及利用。貴行之聯名/認同集團與有特約合作之第三人應對個人資料依法保密。<br /></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dashed_line mb-3">
-                                <div class="card-header collapsed" id="headingTwo" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <span class="red_text">*</span><strong> 第三人行銷：</strong>
-                                </div>
-                                <div class="col-12">
-                                    <div class="mb-3">
-                                        <input class="Apply_input" name="" id="" runat="server" type="radio" value="Y" />
-                                        <label class="form-check-label red_text me-3 fw-bold" for="redWord">同意</label><input class="Apply_input" name="" id="" runat="server" type="radio" value="Y" />
-                                        <label class="form-check-label red_text fw-bold" for="redWord">不同意</label><span class="red_text">提供個人資料予貴行有特約合作之第三人</span>
-                                    </div>
-                                </div>
-                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        如不同意將無法享有第三人提供之相關資訊與服務。(特約合作第三人名單目前為保誠人壽保險股份有限公司、安達國際人壽保險股份有限公司、新加坡商三得利健益亞太股份有限公司台灣分公司、聯閤科技股份有限公司、富日科技股份有限公司，並同意貴行如有新增或變更，得揭露於貴行信用卡網站供申請人查詢。)
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dashed_line mb-3">
-                                <div class="card-header collapsed" id="headingThree" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    <div><span class="red_text">*</span><strong>聯名集團共同行銷：</strong></div>
-                                    <div><strong>票證功能及帳單形式同意條款：</strong></div>
-                                </div>
-                                <div class="col-12 mb-3"><input class="Apply_input" name="" id="" runat="server" type="radio" value="Y" />
-                                    <label class="form-check-label red_text me-3 fw-bold" for="redWord">同意</label><input class="Apply_input" name="" id="" runat="server" type="radio" value="Y" />
-                                    <label class="form-check-label red_text fw-bold" for="redWord">不同意</label></div>
-
-                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <span class="red_text">提供個人資料予貴行聯名/認同集團包含連加網路商業股份有限公司、台灣連線股份有限公司(LINE帳單)及個人選擇或附加電票功能之悠遊卡股份有限公司或一卡通票證股份有限公司等；申請聯名/認同卡所屬之該聯名/認同集團，包含但不限於全國加油站股份有限公司、萊爾富股份有限公司、微風廣場實業股份有限公司及其相關企業與合作廠商</span>，聯名/認同集團有權於行銷、提供各項產品、服務、權益及各項優惠資訊之目的範圍內使用本人之個人資料，如不同意將無法核發所申請之聯名/認同卡或電子化帳單，並同意貴行得轉發其他信用卡或其他帳單形式(另配合個人資料保護法實施，悠遊卡公司、一卡通公司已將應告知事項載於官網www.easycard.com.tw、www.i-pass.com.tw，若有任何疑義，歡迎您撥打悠遊卡客服專線412-8880及一卡通客服專線(07)791-2000)<br>
-                                        <span class="red_text">本人確認業經合理期間詳細審閱並完全同意上述條款係經個別商議所訂定，並完成系統驗證，提醒您如未勾選視為不同意，恐無法取得相關服務與優惠，另您亦得隨時來電客服中心辦理同意事項變更為不同意。(拒絕接受行銷專線0800-066678)</span>
-                                    </div>
-                                    <div class="card-body" id="ShareNote_Travel">
-                                        <span class="red_text">提供個人資料予申請人所選擇之附加電子票證功能(悠遊卡股份有限公司或一卡通票證股份有限公司)或台灣連線股份有限公司(LINE帳單)，作為提供票證聯名卡記名或LINE帳單服務依據，</span>如不同意將無法核發所申請之信用卡或提供LINE帳單服務；<span class="t13_c_red">申請人得隨時要求停止前述個人資料之利用</span>，並視為申請停用該信用卡或電子化帳單。(另配合個人資料保護法實施，悠遊卡公司、一卡通公司已將應告知事項載於官網www.easycard.com.tw、www.i-pass.com.tw，若有任何疑義，歡迎您撥打悠遊卡客服專線412-8880及一卡通客服專線(07)791-2000。<span class="t13_c_red">若未申請LINE帳單服務者，本行不會提供您個人資料予台灣連線股份有限公司</span>)。<br>
-                                        <span class="red_text">本人確認業經合理期間詳細審閱並完全同意上述條款係經個別商議所訂定，並完成系統驗證，提醒您如未勾選視為不同意，恐無法取得相關服務與優惠，另您亦得隨時來電客服中心辦理同意事項變更為不同意。(拒絕接受行銷專線0800-066678)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dashed_line mb-3">
-                                <div class="card-header collapsed" id="headingFour" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                    <div><span class="red_text">*</span><strong>聯邦銀行LINE官方綁定個人化服務：</strong></div>
-                                </div>
-                                <div class="col-12 mb-3"><input class="Apply_input" name="" id="" runat="server" type="radio" value="Y" />
-                                    <label class="form-check-label red_text me-3 fw-bold" for="redWord">同意</label><input class="Apply_input" name="" id="" runat="server" type="radio" value="Y" />
-                                    <label class="form-check-label red_text fw-bold" for="redWord">不同意</label></div>
-
-                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        為提供信用卡通知服務之目的範圍，得將本人之手機號碼由貴行提供予台灣連線股份有限公司(LINE)，得為蒐集、處理、國際傳輸及利用。貴行與台灣連線股份有限公司應對該等個人資料依法保密。
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dashed_line mb-3">
-                                <div class="card-header_blue"><strong>申請悠遊聯名卡者同意卡片已開啟自動加值功能</strong></div>
-                                <div class="col-12 mb-3">
-                                    <input class="Apply_input" name="" id="" runat="server" type="checkbox" value="Y" />
-                                    <label class="form-check-label fw-bold me-3" for="redWord">不同意開啟</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <!-------------------本人已詳閱---------------------->
                 <div class="terms-group">
                     <div class="terms">
-                        <input v-model="allTerms" @click.prevent="" id="checkbox" name="checkbox" value="checkbox" class="checkimg position-absolute" type="checkbox" data-bs-toggle="modal" data-bs-target="#exampleModal" />
-                        <label for="agree">同意，本人對「<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>用卡須知及申請說明</u></a>」「 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>重要告知事項</u></a>」「 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>聯邦信用卡約定條款</u></a>」「<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>電子化帳單服務約定條款</u></a>」內容。(請務必勾選)
+                        <input id="checkbox" name="checkbox" value="checkbox" class="checkimg position-absolute" type="checkbox" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="checkAgreement(document.getElementById('button_termsOpt_1'));" />
+                        <label for="agree">同意，本人對「<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>用卡須知及申請說明</u></a>」「<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>重要告知事項</u></a>」「 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>聯邦信用卡約定條款</u></a>」「 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>電子化帳單服務約定條款</u></a>」「<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>Breeze Rewards微風積點禮遇會員同意及注意事項</u></a>」內容。(請務必勾選)
                         </label>
                     </div>
                 </div>
                 <!-------------------//本人已詳閱---------------------->
                 <div class="text-center button_group">
-                    <button @click.prevent="$router.push('/Written_3')" class="btn btn-primary btn-lg mx-1">預覽申請書</button>
+                    <button onclick="location.href='OnLineApply_Fillin_Card.htm?notice'" class="btn btn-primary btn-lg mx-1" type="submit" value="">下一步</button>
                 </div>
             </div>
         </div>
@@ -139,11 +178,11 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel-1">請向下滾動，仔細閱讀整份同意書所有內容<input id="myCheckCount" hidden></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img src="@/assets/images/close.png" border="0" alt="close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img src="@/assets/images/form/close.png" border="0" alt="close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <!------------------1-------------------------------------------->
-                    <div @scroll="checkTermsScroll($event,1)" id="terms_box_1" class="terms_box">
+                    <div id="terms_box_1" class="terms_box" @scroll="checkTermsScroll($event,1)">
                         <!--uc1:wuc用卡須知及申請說明 runat="server" id="wuc用卡須知及申請說明" /-->
                         <div class="txt">
                             <h3>用卡須知</h3>
@@ -165,20 +204,16 @@
                                                 <li>其他經主管機關規定應納入最低應繳金額之交易金額。</li>
                                             </ol>
                                         </p>
-                                        <p>
-                                            (二) 循環信用利息之計算，以各筆帳款入帳日為起息日
+                                        <p>(二) 循環信用利息之計算，以各筆帳款入帳日為起息日
                                             <ol>
                                                 <li>持卡人使用循環利息，本行信用卡循環利息之利息起算日為『入帳日』，所謂『入帳日』：指本行代持卡人付款項予收單機構或特約商店或為您負擔墊款義務或將餘額代償款項撥至持卡人所指定帳戶，並登錄於本行帳務之日，與『結帳日』、『繳款截止日』不同。</li>
                                                 <li>因『入帳日』為本行實際為您給付款項予商店或撥款交付之日，本行之資金成本隨之產生，故循環信用利息 由此時開始起算。</li>
                                             </ol>
                                         </p>
-                                        <p>(三)
-                                            本行現採各筆帳款之入帳日為起息日，各筆循環信用利息之計算，係將每筆「得計入循環信用本金之帳款」，自各筆帳款入帳日起（每期應付分期本金遲延利息之計算，係自繳款截止日起計算），就該帳款之金額以帳款入帳日時適用之約定利率計算至該筆帳款結清之日止（元以下四捨五入），惟繳款後剩餘未付款項不足新臺幣1,000元，則各筆帳款入帳日後發生之循環信用利息及違約金，不予計收。</p>
-                                        <p class="red">(四)
-                                            本行將視持卡人往來狀況及金融機構之債信情形綜合評斷結果，包含但不限於繳款紀錄、使用情形、債信紀錄、負債情形及收支比等因素訂定信用卡差別利率及其期間，並以考量資金成本、營運成本為由，調整持卡人所適用之利率。循環信用利率依貴行每季定期覆審之結果進行調整。
+                                        <p>(三) 本行現採各筆帳款之入帳日為起息日，各筆循環信用利息之計算，係將每筆「得計入循環信用本金之帳款」，自各筆帳款入帳日起（每期應付分期本金遲延利息之計算，係自繳款截止日起計算），就該帳款之金額以帳款入帳日時適用之約定利率計算至該筆帳款結清之日止（元以下四捨五入），惟繳款後剩餘未付款項不足新臺幣1,000元，則各筆帳款入帳日後發生之循環信用利息及違約金，不予計收。</p>
+                                        <p class="red">(四) 本行將視持卡人往來狀況及金融機構之債信情形綜合評斷結果，包含但不限於繳款紀錄、使用情形、債信紀錄、負債情形及收支比等因素訂定信用卡差別利率及其期間，並以考量資金成本、營運成本為由，調整持卡人所適用之利率。循環信用利率依貴行每季定期覆審之結果進行調整。
                                         </p>
-                                        <p>
-                                            (五) 如持卡人未能於每月繳款截止日前付清當期最低應繳金額或遲誤繳款期限者，本行得加計違約金或催收費用，各帳單週期之違約金計算方式為：
+                                        <p>(五) 如持卡人未能於每月繳款截止日前付清當期最低應繳金額或遲誤繳款期限者，本行得加計違約金或催收費用，各帳單週期之違約金計算方式為：
                                             <ol class="red">
                                                 <li>逾期第一期者，應繳納違約金新臺幣300元</li>
                                                 <li>連續逾期第二期者，應繳納違約金新臺幣400元。</li>
@@ -187,7 +222,10 @@
                                             <span class="red">持卡人違反約定連續達三期(含)以上者，其違約金之計收最高以三期為限。</span><br>
                                             計息範例如下：
                                             <br>
-                                            例：小蓮之信用卡消費明細表（帳單）結帳日為每月3日，繳款截止日為每月18日，2月份小蓮信用卡帳單尚餘循環掛帳金額為3,000元，之後2/19刷卡消費2,000元，該筆消費款銀行入帳日為2/20。小蓮3月份帳單顯示應繳總金額為5,000元，最低應繳金額1,000元。（以年息15％為例計算，個案則因各別利率而異之）<br>
+                                            例：小蓮之信用卡消費明細表（帳單）結帳日為每月3日，繳款截止日為每月18日，2月份小蓮信用卡帳單尚餘
+                                            循環掛帳金額為3,000元，之後2/19刷卡消費2,000元，該筆消費款銀行入帳日為2/20。小蓮3月份帳單顯示應繳總
+                                            金額為5,000元，最低應繳金額1,000元。（以年息15％為例計算，個案則因各別利率而異之）
+                                            <br>
                                             <strong>【假設1】</strong><br>
                                             3/18繳款截止日，收到小蓮繳納最低應繳金額1,000元，則4/3結帳日，應付上月循環信用利息為61元。
                                             因已於繳款截止日收到小蓮繳納最低應繳金額，不計收違約金。<br>
@@ -198,7 +236,8 @@
                                             《循環信用利息圖示說明》
                                             <img src="img/terms_img.gif" class="img-fluid" alt="" /><br>
                                             <strong>【假設2】</strong><br>
-                                            承上例，若於3/18繳款截止日，未收到小蓮繳款，則4/3結帳日，應付上月循環信用利息為：3,000×31天(3/4-4/3)×15%÷365＋$2,000×43天(2/20-4/3)×15%÷365＝74元。因未於繳款截止日收到繳款金額，尚有消費款5,000元未償付，未繳金額在新臺幣1,000元以上且為逾一期，故4/3結帳日計收違約金300元。
+                                            承上例，若於3/18繳款截止日，未收到小蓮繳款，則4/3結帳日，應付上月循環信用利息為：3,000×31
+                                            天(3/4-4/3)×15%÷365＋$2,000×43天(2/20-4/3)×15%÷365＝74元。因未於繳款截止日收到繳款金額，尚有消費款5,000元未償付，未繳金額在新臺幣1,000元以上且為逾一期，故4/3結帳日計收違約金300元。
                                         </p>
                                     </div>
                                 </div>
@@ -206,11 +245,13 @@
                                     二、卡片使用
                                     <div class="level-two">
                                         <p>(一)
-                                            持卡人之信用卡屬於本行之財產，持卡人應妥善保管及使用信用卡。本行僅授權正卡持卡人或附卡持卡人本人在信用卡有效期限內分別使用，不得讓與、轉借、提供擔保或以其他方法將信用卡之占有轉讓予第三人或交其使用。</p>
+                                            持卡人之信用卡屬於本行之財產，持卡人應妥善保管及使用信用卡。本行僅授權正卡持卡人或附卡持卡人本人在信用卡有效期限內分別使用，不得讓與、轉借、提供擔保或以其他方法將信用卡之占有轉讓予第三人
+                                            或交其使用。</p>
                                         <p>(二) 申請人收到信用卡後，應立即在信用卡上簽名，以降低遭第三人冒用之可能性。</p>
                                         <p>(三) 持卡人簽帳消費時，帳單上之簽名應與信用卡簽名欄上之簽名相同，且不得以簽名不同為由拒絕付款。如經本行同意特定金額下之免簽名交易，於消費時得不簽名。</p>
                                         <p class="red">(四)
-                                            持卡人於國內原須以簽名方式結帳之交易，倘消費金額於新臺幣3,000元以下者，部分之美食街、電影院、大賣場或加油站等特約商店得以免簽名方式結帳。惟實際各特約商店得以免簽名方式結帳之金額仍應依信用卡國際組織規範、各特約商店與收單機構間之約定為準。</p>
+                                            持卡人於國內原須以簽名方式結帳之交易，倘消費金額於新臺幣3,000元以下者，部分之美食街、電影院、大賣場或加油站等特約商店得以免簽名方式結帳。惟實際各特約商店得以免簽名方式結帳之金額仍應依信用卡
+                                            國際組織規範、各特約商店與收單機構間之約定為準。</p>
                                         <p>(五) 如持卡人對免簽名交易之帳款有疑慮者，經本行調查認定非屬持卡人本人所為交易，且持卡人亦未違反 信用卡約定條款者，持卡人免負付款之責。</p>
                                         <p>(六) 信用卡正、附卡為一體關係，正卡掛失或經停止使用時，附卡亦應停止使用。</p>
                                     </div>
@@ -248,11 +289,13 @@
                                                 <li>持卡人於辦理信用卡掛失手續後，未提出本行所請求之文件、拒絕協助調查或其他違反誠信原則之行為。</li>
                                             </ol>
                                         </p>
-                                        <p>(五) 持卡人在自動化設備辦理預借現金及其他必須以交易密碼進行交易部份，對於辦妥掛失停用手續前被冒用所發生之損失，悉由持卡人負擔，不適用本條第〈三〉項自負額之約定。
+                                        <p>(五)
+                                            持卡人在自動化設備辦理預借現金及其他必須以交易密碼進行交易部份，對於辦妥掛失停用手續前被冒用所發生之損失，悉由持卡人負擔，不適用本條第〈三〉項自負額之約定。
                                         </p>
                                     </div>
                                 </div>
-                                <div class="cjk-ideographic">五、持卡人以信用卡辦理預借現金時，須依本行及辦理預借現金之機構有關規定及程序辦理，並應繳付本行依 每筆預借現金金額<span class="red">3.5%+新臺幣＄100元計算之手續費（元以下四捨五入）</span>。持卡人得隨時申請開啟或要求停止使用預借現金功能。申請開啟者，本行得隨時視持卡人之信用狀況審核是否同意抑或調整預借現金之額度。</div>
+                                <div class="cjk-ideographic">五、持卡人以信用卡辦理預借現金時，須依本行及辦理預借現金之機構有關規定及程序辦理，並應繳付本行依 每筆預借現金金額<span class="red">3.5%+新臺幣＄100元計算之手續費（元以下四捨五入）</span>。持卡人得隨時申請開啟或要求停止
+                                    使用預借現金功能。申請開啟者，本行得隨時視持卡人之信用狀況審核是否同意抑或調整預借現金之額度。</div>
                                 <div class="cjk-ideographic">
                                     六、信用額度
                                     <div class="level-two">
@@ -277,9 +320,11 @@
                                     九、學生及未成年人持卡注意事項
                                     <div class="level-two">
                                         <p>(一) 學生或未成年人在使用信用卡時，應先詳閱信用卡約定條款以了解雙方權利義務，並了解使用循環信用 與預借現金將容易擴張信用。</p>
-                                        <p>(二) 二十至二十四歲之持卡人，如於申請之時未填載為學生身分或尚非學生者，嗣後本行如經由其他管道或接獲家長反映其子女為具有學生身分之正卡持卡人，且有超出清償能力刷卡情形時，本行應立即配合持卡人家長處理，並應於財團法人金融聯合徵信中心登錄其學生身分。
+                                        <p>(二)
+                                            二十至二十四歲之持卡人，如於申請之時未填載為學生身分或尚非學生者，嗣後本行如經由其他管道或接獲家長反映其子女為具有學生身分之正卡持卡人，且有超出清償能力刷卡情形時，本行應立即配合持卡人家長處理，並應於財團法人金融聯合徵信中心登錄其學生身分。
                                         </p>
-                                        <p>(三) 學生或未成年人在使用信用卡時，應該先向父母告知溝通，並藉由信用卡的使用，讓自己學習自主理財的負責態度。本行得因學生及未成年人之父母親（法定代理人）要求，無須事先通知或催告，停止持卡人使用信用卡之權利。
+                                        <p>(三)
+                                            學生或未成年人在使用信用卡時，應該先向父母告知溝通，並藉由信用卡的使用，讓自己學習自主理財的負責態度。本行得因學生及未成年人之父母親（法定代理人）要求，無須事先通知或催告，停止持卡人使用信用卡之權利。
                                         </p>
                                         <p>(四) 以學生身分申請信用卡者，本行會將發卡情事通知其父母或法定代理人。</p>
                                     </div>
@@ -328,21 +373,19 @@
                         </div>
                     </div>
                     <div id="button_terms" class="button_terms">
-                        <input type="checkbox" id="button_termsOpt_1" v-model="checkTerms" value="1" disabled />
+                        <input type="checkbox" id="button_termsOpt_1" disabled="" v-model="checkTerms" value="1"/>
                         <label id="read_1" for="button_termsOpt_1">我已詳細閱讀。(請勾選)</label>
                     </div>
                     <!----------------//1-------------------------------------------->
 
                     <!------------------2-------------------------------------------->
-                    <div @scroll="checkTermsScroll($event,2)" id="terms_box_2" class="terms_box">
+                    <div id="terms_box_2" class="terms_box" @scroll="checkTermsScroll($event,2)">
                         <!--uc1:wuc重要告知事項 runat="server" id="wuc重要告知事項" /-->
                         <div class="txt">
                             <h3>重要告知事項</h3>
-                            <div>
-                                一、提供之證明文件及申請書上所載各項資料均正確無誤，以作為徵審之依據，同意貴行、貴行委託之第三人、往來之金融機構、財團法人金融聯合徵信中心、財團法人聯合信用卡處理中心、財金資訊股份有限公司、信用卡國際組織或其他經本人同意之單位及主管機關指定之機構得基於特定目的或其他法令許可範圍內隨時查詢、蒐集、處理、國際傳遞及利用本人及附卡相關資料，並授權貴行利用本人及附卡申請人於貴行留存各項資料（包含信託及證券交易往來資料）及同意由貴行依法令規定，判斷上述特定目的是否消失。受貴行委任處理事務之第三人，依法令規定而有繼續保存資料之必要時，於貴行及第三人仍願續負保守秘密義務之前提下，本人及附卡申請人同意貴行及第三人繼續保留相關資料。
+                            <div>一、提供之證明文件及申請書上所載各項資料均正確無誤，以作為徵審之依據，同意貴行、貴行委託之第三人、往來之金融機構、財團法人金融聯合徵信中心、財團法人聯合信用卡處理中心、財金資訊股份有限公司、信用卡國際組織或其他經本人同意之單位及主管機關指定之機構得基於特定目的或其他法令許可範圍內隨時查詢、蒐集、處理、國際傳遞及利用本人及附卡相關資料，並授權貴行利用本人及附卡申請人於貴行留存各項資料（包含信託及證券交易往來資料）及同意由貴行依法令規定，判斷上述特定目的是否消失。受貴行委任處理事務之第三人，依法令規定而有繼續保存資料之必要時，於貴行及第三人仍願續負保守秘密義務之前提下，本人及附卡申請人同意貴行及第三人繼續保留相關資料。
                             </div>
-                            <div>
-                                二、為向貴行申請信用卡，本人同意依所勾選或附加之一卡通、悠遊卡儲值功能，履行信用卡約定條款、一卡通特別約定條款、悠遊卡特別約定條款及各項專案所定注意事項，並知悉約定條款將與信用卡同時寄送，如對約定條款有異議時應於七日內將卡片剪斷寄回，否則視為本人允諾該約定條款，本人於七日內亦得不附理由及負擔費用通知解除契約，惟已用卡者不在此限。
+                            <div>二、為向貴行申請信用卡，本人同意依所勾選或附加之一卡通、悠遊卡儲值功能，履行信用卡約定條款、一卡通特別約定條款、悠遊卡特別約定條款及各項專案所定注意事項，並知悉約定條款將與信用卡同時寄送，如對約定條款有異議時應於七日內將卡片剪斷寄回，否則視為本人允諾該約定條款，本人於七日內亦得不附理由及負擔費用通知解除契約，惟已用卡者不在此限。
                             </div>
                             <div>三、貴行主動調高信用卡信用額度前，將先徵得本人書面同意。惟本人如已持有貴行信用卡，再向貴行申請其他信用卡者，新卡申請書視為調高額度之申請，貴行得隨同調高原信用卡之信用額度。
                             </div>
@@ -355,7 +398,7 @@
                             <div>九、本人如需超過貴行原核給信用額度使用卡片時，需事先徵得貴行同意或超過部份以現金補足。另經<span class="red">貴行考量本人之信用及往來狀況亦得特別授權特約商店接受本人使用信用卡交易，且超過信用額度使用之帳款本人仍將負清償責任，並納入當期最低應繳款項。</span>
                             </div>
                             <div>十、本人同意貴行得依電子簽章法規定經由貴行服務專線或電子服務為本人辦理信用卡相關產品及服務，並同意電話語音及電磁紀錄得為電子文件表示方式，且得作為書面同意之依據。</div>
-                            <div>十一、本申請書上記載之權益、優惠及異業結盟業者提供優惠權益之期間，除各優惠活動另有記載外，其餘均至<span class="red">民國111年12月31日止</span>，其詳細內容限制依權益手冊記載者為依據。嗣後期間如有延長或權益、優惠內容有異動，將於聯邦銀行信用卡網站公告，<span class="red">如因信用卡商品或服務所生爭議得來電本行客服中心（02）2545-5168（07）226-9393。</span></div>
+                            <div>十一、本申請書上記載之權益、優惠及異業結盟業者提供優惠權益之期間，除各優惠活動另有記載外，其餘均至<span  class="red">民國111年12月31日止</span>，其詳細內容限制依權益手冊記載者為依據。嗣後期間如有延長或權益、優惠內容有異動，將於聯邦銀行信用卡網站公告，<span class="red">如因信用卡商品或服務所生爭議得來電本行客服中心（02）2545-5168（07）226-9393。</span></div>
                             <div class="red">十二、本人同意信用卡契約之相關通知，包含信用卡約定條款、卡友權益手冊、電子票證特別約定條款等，約定貴行得以電子郵件、手機簡訊、QR code或其他電子文件方式寄送或通知本人審閱，如日後相關條款或權益變更時亦同。如本人欲以紙本寄送到本人於貴行最後留存之地址，本人將致電通知貴行客服。</div>
                             <div>十三、本人同意倘賴點卡之刷卡消費有取消、退貨或帳務調整等事情，將自LINE帳號扣回原先已贈送之LINE POINTS點數。如持卡人已有使用該等LINE POINTS點數折抵或兌換導致無法扣回，且LINE POINTS點數負點持續2個月以上，本行得以1點等同於新台幣1元之比例，將不足點數之約當金額，列示為信用卡帳單之應繳金額向持卡人收取。相關規定悉依貴行最新公告為準。</div>
                             <div>十四、申請人同意 貴行基於回饋與服務卡友之立場，核發卡別可獲得聯邦銀行提供之消費回饋為連加網路商業股份有限公司LINE Biz+ Taiwan Ltd.(以]下簡稱LINE Pay)之LINE POINTS點數，並得將申請人基本資料、往來交易資料等提供與LINE Pay，作為消費回饋處理、資料串接、訊息通知及點數發放等相關目的範圍內使用。</div>
@@ -432,7 +475,7 @@
                                         </tr>
                                         <tr>
                                             <td align="center">電子化繳費稅處理平台</td>
-                                            <td colspan="2"><span class="red">◎於111年12月31日前免收手續費(不含罰單) ◎政府規費之罰單手續費：3元/筆。(本平台完整繳費項目及手續費詳見聯邦信用卡網站，實際適用通路、罰單類交易之判定及手續費金額依財金資訊股份有限公司或各繳費機構現場公告為準。)</span></td>
+                                            <td colspan="2"><span class="red">◎於111年12月31日前免收手續費(不含罰單)◎政府規費之罰單手續費：3元/筆。(本平台完整繳費項目及手續費詳見聯邦信用卡網站，實際適用通路、罰單類交易之判定及手續費金額依財金資訊股份有限公司或各繳費機構現場公告為準。)</span></td>
                                         </tr>
                                         <tr>
                                             <td align="center">調閱簽單手續費</td>
@@ -473,14 +516,16 @@
                         </div>
                     </div>
                     <div id="button_terms_2" class="button_terms">
-                        <input type="checkbox" id="button_termsOpt_2" v-model="checkTerms" value="2" disabled />
+                        <input type="checkbox" id="button_termsOpt_2" v-model="checkTerms" disabled="" value="2"/>
                         <label id="read_2" for="button_termsOpt_2">我已詳細閱讀。(請勾選)</label>
                     </div>
                     <!----------------//2-------------------------------------------->
 
                     <!------------------3-------------------------------------------->
-                    <div @scroll="checkTermsScroll($event,3)" id="terms_box_3" class="terms_box">
+                    <div id="terms_box_3" class="terms_box" @scroll="checkTermsScroll($event,3)">
                         <!--uc1:wuc聯邦信用卡約定條款 runat="server" id="wuc聯邦信用卡約定條款" /-->
+                        <!--uc1:wuc悠遊聯名卡特別約定條款 runat="server" id="wuc悠遊聯名卡特別約定條款" Visible="false" /-->
+                        <!--uc1:wuc一卡通聯名卡特別約定條款 runat="server" id="wuc一卡通聯名卡特別約定條款" Visible="false" /-->
                         <div class="txt">
                             <h3>聯邦信用卡約定條款</h3>
                             <p>
@@ -546,15 +591,27 @@
                                 第五條（信用額度）
                                 <div class="l-two-em">
                                     發卡機構得視持卡人之信用狀況核給信用額度，<span class="red">且得由發卡機構或依持卡人之申請調整，並以書面通知持卡人。持卡人如不同意者，得通知發卡機構終止本契約。發卡機構如調高持卡人信用額度，</span>應事先通知正卡持卡人，並取得其書面同意後為之。<br>
-                                    <span class="red">發卡機構各卡別設有最低額度下限</span>，持卡人得要求發卡機構調高或降低信用額度；如調降信用額度至各卡別最低額度以上者，發卡機構不得拒絕。<span class="red">如低於發卡機構所設之下限者，持卡人同意更換卡別或接受調整至發卡機構所設之最低限額</span>。<br>
-                                    前項信用額度調整，若原徵有保證人者，除調高信用額度應事先通知保證人並獲其書面同意外，應於調整核准後通知保證人。<br>
-                                    第一項書面同意之方式，持卡人亦得透過網路認證或自動提款機或自動貸款機之方式為之。如發卡機構未確實驗證持卡人或保證人身分，應就持卡人或保證人信用額度調高所造成損失，負擔相關損失責任，<span class="red">但前揭損失係持卡人或保證人故意或重大過失致驗證身分同一性方式遭偽冒第三人知悉者，發卡機構無須負擔。</span><br><span class="red">持卡人申請二張以上信用卡(含附卡)，仍共用原有信用額度。持卡人除有第八條第四項第五款但書所定情形外，不得超過發卡機構核給之信用額度使用信用卡。但持卡人對超過信用額度使用之帳款仍負清償責任。</span>
+                                    <span  class="red">發卡機構各卡別設有最低額度下限</span>，持卡人得要求發卡機構調高或降低信用額度；如調降信用額度至各卡別最低額度以上者，發卡機構不得拒絕。<span  class="red">如低於發卡機構所設之下限者，持卡人同意更換卡別或接受調整至發卡機構所設之最低限額</span>。<br>
+                                    前項信用額度調整，若原徵有保證人者，除調高信用額度應事先通知保證人並獲其書面同意外，應於調整核准後通知保證人。
+                                    <br>
+                                    第一項書面同意之方式，持卡人亦得透過網路認證或自動提款機或自動貸款機之方式為之。如發卡機構未確實驗證持卡人或保證人身分，應就持卡人或保證人信用額度調高所造成損失，負擔相關損失責任，
+                                    <span class="red">但前揭損失係持卡人或保證人故意或重大過失致驗證身分同一性方式遭偽冒第三人知悉者，發卡機構無須負擔。</span><br>
+                                    <span class="red">持卡人申請二張以上信用卡(含附卡)，仍共用原有信用額度。持卡人除有第八條第四項第五款但書所定情形外，不得超過發卡機構核給之信用額度使用信用卡。但持卡人對超過信用額度使用之帳款仍負清償責任。</span>
                                 </div>
                             </div>
                             <div>
                                 第六條（契約雙方之基本義務）
                                 <div class="l-two-em">
-                                    發卡機構應以<span class="red">善良管理人之注意</span>，確保持卡人於發卡機構自行訂約或由各收單機構提供之特約商店，使用信用卡而取得商品、勞務、其他利益或預借現金，並依持卡人約定之指示方式為持卡人處理使用信用卡交易款項之清償事宜。<span class="red">如經發卡機構同意減收或免收年費者，亦同</span>。<br>持卡人之信用卡屬於發卡機構之財產，<span class="red">持卡人應妥善保管及使用信用卡</span>。持卡人應親自使用信用卡，不得以任何方式將信用卡或其卡片上資料交付或授權他人使用。<br>持卡人就其開卡密碼或其他辨識持卡人同一性之方式應予以保密，不得告知第三人。<br>持卡人不得與他人或特約商店為虛偽不實交易行為或共謀詐欺，以使用信用卡方式折換現金或取得利益，<span class="red">持卡人應依誠信原則享有發卡機構所給予之信用卡使用優惠，不得違反正常交易習慣或其他故意以損害發卡機構利益之方式取得相關優惠</span>。<br>持卡人違反第二項至第四項約定致生之應付帳款者，亦應對之負清償責任。<br>發卡機構應確保廣告內容之真實，對持卡人所負之義務不得低於廣告之內容。
+                                    發卡機構應以<span class="red">善良管理人之注意</span>，確保持卡人於發卡機構自行訂約或由各收單機構提供之特約商店，使用信用卡而取得商品、勞務、其他利益或預借現金，並依持卡人約定之指示方式為持卡人處理使用信用卡交易款項之清償事宜。<span class="red">如經發卡機構同意減收或免收年費者，亦同</span>。<br>
+                                    持卡人之信用卡屬於發卡機構之財產，
+                                    <span class="red">持卡人應妥善保管及使用信用卡</span>。持卡人應親自使用信用卡，不得以任何方式將信用卡或其卡片上資料交付或授權他人使用。<br>
+                                    持卡人就其開卡密碼或其他辨識持卡人同一性之方式應予以保密，不得告知第三人。
+                                    <br>
+                                    持卡人不得與他人或特約商店為虛偽不實交易行為或共謀詐欺，以使用信用卡方式折換現金或取得利益，
+                                    <span  class="red">持卡人應依誠信原則享有發卡機構所給予之信用卡使用優惠，不得違反正常交易習慣或其他故意以損害發卡機構利益之方式取得相關優惠</span>。<br>
+                                    持卡人違反第二項至第四項約定致生之應付帳款者，亦應對之負清償責任。
+                                    <br>
+                                    發卡機構應確保廣告內容之真實，對持卡人所負之義務不得低於廣告之內容。
                                 </div>
                             </div>
                             <div>
@@ -581,7 +638,8 @@
                                     <p>四、持卡之人在簽帳單上之簽名與信用卡上之簽名不符、持卡之人與信用卡上之照片不符，或得以其他方式證明持卡之人非發卡機構同意核發信用卡之本人者。</p>
                                     <p>五、持卡人累計本次交易後，已超過發卡機構原核給信用額度者。<span class="red">但超過部分經持卡人以現金補足，或經發卡機構考量持卡人之信用及往來狀況，特別授權特約商店得接受其使用信用卡交易者，不在此限。</span>
                                     </p>
-                                    <span class="red">前項第一款、第二款或第四款之情形者，特約商店得拒絕返還該信用卡。<br>持卡人如遇有特約商店或辦理預借現金機構依第四項各款以外之事由拒絕持卡人使用信用卡交易，或以使用信用卡為由要求增加商品或服務價格者，得向發卡機構提出申訴，發卡機構應自行或於轉請收單機構查明後，將處理情形告知持卡人。如經查明就特約商店或預借現金機構上述情事，發卡機構有故意或重大過失者，應對持卡人負損害賠償責任。</span>
+                                    <span class="red">前項第一款、第二款或第四款之情形者，特約商店得拒絕返還該信用卡。<br>
+                                        持卡人如遇有特約商店或辦理預借現金機構依第四項各款以外之事由拒絕持卡人使用信用卡交易，或以使用信用卡為由要求增加商品或服務價格者，得向發卡機構提出申訴，發卡機構應自行或於轉請收單機構查明後，將處理情形告知持卡人。如經查明就特約商店或預借現金機構上述情事，發卡機構有故意或重大過失者，應對持卡人負損害賠償責任。</span>
                                 </div>
                             </div>
                             <div>
@@ -604,22 +662,23 @@
                                 第十一條（暫停支付）
                                 <div class="l-two-em">
                                     持卡人如與特約商店就有關商品或服務之品質、數量、金額，或與委託辦理預借現金機構就取得金錢之金額有所爭議時，應向特約商店或委託辦理預借現金機構尋求解決，不得以此作為向發卡機構拒繳應付帳款之抗辯。<br>
-                                    <span class="red">持卡人使用信用卡時，如符合各信用卡組織作業規定之下列特殊情形：如預訂商品未獲特約商店移轉商品或其數量不符、預訂服務未獲提供，或於自動化設備上預借現金而未取得金錢或數量不符時，應先向特約商店或辦理預借現金機構尋求解決。如無法解決時，應於繳款截止日前，檢具發卡機構要求之相關證明文件</span>，請求發卡機構就該筆交易以<span class="red">第十三條帳款疑義處理程序辦理</span>，不受前項約定之限制。<br>
-                                    持卡人使用信用卡進行郵購買賣或<span class="red">訪問買賣後</span>，依消費者保護法第十九條規定向特約商店解除契約者，準用前項之約定。
+                                    <span class="red">持卡人使用信用卡時，如符合各信用卡組織作業規定之下列特殊情形：如預訂商品未獲特約商店移轉商品或其數量不符、預訂服務未獲提供，或於自動化設備上預借現金而未取得金錢或數量不符時，應先向特約商店或辦理預借現金機構尋求解決。如無法解決時，應於繳款截止日前，檢具發卡機構要求之相關證明文件</span>，請求發卡機構就該筆交易以<span
+                                        class="red">第十三條帳款疑義處理程序辦理</span>，不受前項約定之限制。<br>
+                                    持卡人使用信用卡進行郵購買賣或
+                                    <span class="red">訪問買賣後</span>，依消費者保護法第十九條規定向特約商店解除契約者，準用前項之約定。
                                 </div>
                             </div>
                             <div>
                                 第十二條（帳單及其他通知）
                                 <div class="l-two-em">
-                                    <span class="red">持卡人之應付帳款如於當期結帳日前發生變動或尚未清償，除持卡人已逾期繳款進入催收程序將依發卡機構催收方式辦理外，發卡機構應按約定依持卡人指定之帳單地址或事先與持卡人約定之電子文件或其他方式寄送帳單。如持卡人於當期繳款截止日起七日前，仍未收到帳單，得向發卡機構查詢，並得請求以掛號郵件、限時郵件、普通郵件、電子文件、傳真或其他適當方式補送，其費用由發卡機構負擔。<br>發卡機構得就正卡及附卡之帳單合併印製。但附卡持卡人得請求提供附卡消費明細清單。<br>持卡人得致電發卡機構消費者服務專線，請求發卡機構免費提供最近二個帳款期間(含當期)內之交易明細。但倘持卡人要求發卡機構提供超過二個帳款期間以前之帳單，發卡機構得按每帳款期間收取新臺幣100元之補發帳單手續費。另如因可歸責於持卡人之事由致每期補送(含當期)帳單次數超逾2次者，發卡機構得按次收取新臺幣100元之補發帳單手續費。發卡機構已依約定方式寄出帳單時，持卡人不得以未收到帳單為由拒絕付款，仍應按約定期限繳款。如有溢繳應付帳款之情形，持卡人得通知發卡機構。發卡機構將持卡人延遲繳款超過一個月以上、強制停卡、催收及呆帳等信用不良之紀錄登錄於聯徵中心前，須於報送五日前將登錄信用不良原因及對持卡人可能之影響情形，以書面或事先與持卡人約定之電子文件告知持卡人。</span><br>
-                                    持卡人於申請表格所載之聯絡地址或其他聯絡方式
-                                    <span class="red">（以下均包含電子文件）</span>有所變更而未通知發卡機構者，<span class="red">則以最後通知之聯絡地址或申請表格上所載聯絡地址為發卡機構應為送達之處所</span>。發卡機構將業務上有關文書或應為之通知，向持卡人最後通知之聯絡地址或申請表格所載聯絡地址發出後，經通常郵遞之期間，即推定已合法送達。
+                                    <span class="red">持卡人之應付帳款如於當期結帳日前發生變動或尚未清償，除持卡人已逾期繳款進入催收程序將依發卡機構催收方式辦理外，發卡機構應按約定依持卡人指定之帳單地址或事先與持卡人約定之電子文件或其他方式寄送帳單。如持卡人於當期繳款截止日起七日前，仍未收到帳單，得向發卡機構查詢，並得請求以掛號郵件、限時郵件、普通郵件、電子文件、傳真或其他適當方式補送，其費用由發卡機構負擔。<br>發卡機構得就正卡及附卡之帳單合併印製。但附卡持卡人得請求提供附卡消費明細清單。<br>持卡人得致電發卡機構消費者服務專線，請求發卡機構免費提供最近二個帳款期間(含當期)內之交易明細。但倘持卡人要求發卡機構提供超過二個帳款期間以前之帳單，發卡機構得按每帳款期間收取新臺幣100元之補發帳單手續費。另如因可歸責於持卡人之事由致每期補送(含當期)帳單次數超逾2次者，發卡機構得按次收取新臺幣100元之補發帳單手續費。發卡機構已依約定方式寄出帳單時，持卡人不得以未收到帳單為由拒絕付款，仍應按約定期限繳款。如有溢繳應付帳款之情形，持卡人得通知發卡機構。發卡機構將持卡人延遲繳款超過一個月以上、強制停卡、催收及呆帳等信用不良之紀錄登錄於聯徵中心前，須於報送五日前將登錄信用不良原因及對持卡人可能之影響情形，以書面或事先與持卡人約定之電子文件告知持卡人。</span><br>持卡人於申請表格所載之聯絡地址或其他聯絡方式<span class="red">（以下均包含電子文件）</span>有所變更而未通知發卡機構者，<span class="red">則以最後通知之聯絡地址或申請表格上所載聯絡地址為發卡機構應為送達之處所</span>。發卡機構將業務上有關文書或應為之通知，向持卡人最後通知之聯絡地址或申請表格所載聯絡地址發出後，經通常郵遞之期間，即推定已合法送達。
                                 </div>
                             </div>
                             <div>
                                 第十三條（帳款疑義之處理程序）
                                 <div class="l-two-em">
-                                    持卡人於<span class="red">當期繳款截止日前</span>，如<span class="red">對帳單所載</span>之交易明細有疑義，得檢具理由及發卡機構要求之證明文件（如簽帳單或退款單收執聯等）通知發卡機構協助處理，或同意負擔調單手續費<span class="red">（每筆新臺幣100元）</span>後，請發卡機構向收單機構<span class="red">調閱簽帳單或退款單</span>。持卡人請求發卡機構向收單機構<span class="red">調閱簽帳單或退款單時，約定由持卡人給付調單手續費者</span>，如調查結果發現持卡人確係遭人盜刷或帳款疑義非可歸責於持卡人之事由時，其調閱簽帳單手續費由發卡機構負擔。<br>
+                                    持卡人於<span class="red">當期繳款截止日前</span>，如<span class="red">對帳單所載</span>之交易明細有疑義，得檢具理由及發卡機構要求之證明文件（如簽帳單或退款單收執聯等）通知發卡機構協助處理，或同意負擔調單手續費<span class="red">（每筆新臺幣100元）</span>後，請發卡機構向收單機構<span class="red">調閱簽帳單或退款單</span>。持卡人請求發卡機構向收單機構
+                                    <span class="red">調閱簽帳單或退款單時，約定由持卡人給付調單手續費者</span>，如調查結果發現持卡人確係遭人盜刷或帳款疑義非可歸責於持卡人之事由時，其調閱簽帳單手續費由發卡機構負擔。<br>
                                     <span class="red">如持卡人主張暫停支付時，於其同意依各信用卡國際組織作業規定繳付帳款疑義處理費用後，得請發卡機構向收單機構或辦理預借現金機構進行扣款、信用卡國際組織仲裁等主張，並得就該筆交易對發卡機構提出暫停付款之要求。<br>因發生疑義而暫停付款之帳款，如持卡人不同意繳付前項帳款疑義處理費用或經發卡機構證明無誤或因非可歸責於發卡機構之事由而不得扣款時，持卡人於受發卡機構通知後應立即繳付之，並自原繳款期限之次日起，以持卡人適用之信用卡循環利率計付利息予發卡機構。<br>持卡人與特約商店發生消費糾紛時，發卡機構應予協助，有疑義時，並應為有利於持卡人之處理。</span>
                                 </div>
                             </div>
@@ -637,11 +696,7 @@
                                     <p class="red">五、超過信用卡額度之款項。</p>
                                     <p class="red">六、循環信用利息及年費、違約金、補寄帳單手續費、預借現金手續費、掛失補發手續費、調閱簽帳單手續費等其他應繳費用。</p>
                                     <p class="red">七、依持卡人整體信用往來狀況，據以核發信用額度1萬6,000元國民旅遊卡之當期應繳帳款。</p>
-                                    <p class="red">
-                                        八、其他經主管機關規定應納入最低應繳金額之交易金額。持卡人應依第一項約定繳款，持卡人就剩餘未付款項得延後付款，且得隨時清償原延後付款金額之全部或一部。已付款項應依序抵沖當期帳款中之費用、利息、前期剩餘未付款項、新增當期帳款之本金，並就抵沖後之帳款餘額，計付循環信用利息。但主管機關規定全額納入最低應繳帳款或不得動用循環信用款項，除費用、利息外，得約定優先於其他帳款抵沖。<br>
-                                        持卡人如有溢繳應付帳款之情形，應依持卡人指示或雙方約定方式處理。如持卡人無其他約定或特別指示，於領回前由發卡機構無息保管並得以之抵付後續須給付發卡機構之應付帳款。
-                                        <br>
-                                        發卡機構對於持卡人到期未續卡，而其帳戶內尚有溢繳款項者，於寄發帳單時，應以顯著文字提醒持卡人並主動聯絡持卡人指示發卡機構處理。
+                                    <p class="red">八、其他經主管機關規定應納入最低應繳金額之交易金額。持卡人應依第一項約定繳款，持卡人就剩餘未付款項得延後付款，且得隨時清償原延後付款金額之全部或一部。已付款項應依序抵沖當期帳款中之費用、利息、前期剩餘未付款項、新增當期帳款之本金，並就抵沖後之帳款餘額，計付循環信用利息。但主管機關規定全額納入最低應繳帳款或不得動用循環信用款項，除費用、利息外，得約定優先於其他帳款抵沖。<br>持卡人如有溢繳應付帳款之情形，應依持卡人指示或雙方約定方式處理。如持卡人無其他約定或特別指示，於領回前由發卡機構無息保管並得以之抵付後續須給付發卡機構之應付帳款。<br>發卡機構對於持卡人到期未續卡，而其帳戶內尚有溢繳款項者，於寄發帳單時，應以顯著文字提醒持卡人並主動聯絡持卡人指示發卡機構處理。
                                     </p>
                                 </div>
                             </div>
@@ -651,12 +706,27 @@
                                     <span class="red">持卡人應依第十四條第一項約定繳款，並應依第十四條第四項規定計付循環信用利息。發卡機構帳務處理係以身分證字號歸戶，各筆循環信用利息之計算，係將每筆「得計入循環信用本金之帳款」，自各筆帳款入帳日起（每期應付分期本金遲延利息之計算，係自繳款截止日起計算），就該帳款之餘額〈各期一般消費款、預借現金款項及未償還餘額〉以各筆帳款入帳日時應適用之循環信用利率〈約定利率最高為年息15%〉計算至該筆帳款結清之日止（元以下四捨五入）。持卡人於當期繳款截止日前結清全部應付帳款，或繳款後剩餘未付款項不足新臺幣1000元（或等值約定結付外幣），則各筆帳款入帳日後發生之循環信用利息及違約金，不予計收。發卡機構應於核卡同意後通知持卡人適用之循環信用利率。<br>持卡人如未於每月繳款截止日前付清當期最低應繳金額，應依前項約定計付循環信用利息，並同意發卡機構得依本約款收取違約金或催收費用，各帳單週期之違約金計算方式為：</span>
                                     <p class="red">一、逾期一期者，當期應繳納違約金新臺幣300元。</p>
                                     <p class="red">二、連續逾期二期者，第二期應繳納違約金新臺幣400元。</p>
-                                    <p><span class="red">三、連續逾期三期者，第三期應繳納違約金新臺幣500元。<br>持卡人違反約定連續達三期（含）以上者，其違約金連續計收期數最高以三期為限。</span><br>
+                                    <p>
+                                        <span class="red">三、連續逾期三期者，第三期應繳納違約金新臺幣500元。<br>持卡人違反約定連續達三期（含）以上者，其違約金連續計收期數最高以三期為限。</span><br>
                                         <strong>【範 例】</strong><br>
-                                        小蓮之信用卡消費明細表(帳單)結帳日為每月3日，繳款截止日為每月18日，2月份小蓮信用卡帳單尚餘循環掛帳金額為3,000元，之後2/19刷卡消費2,000元，該筆消費款銀行入帳日為2/20。小蓮3月份帳單顯示應繳總金額為5,000元，最低應繳金額1,000元。<br>（以年息15％為例計算，個案則因各別利率而異之）<br>
-                                        <strong>【假設1】</strong><br>3/18繳款截止日，收到小蓮繳納最低應繳金額1,000元，則4/3結帳日，應付上月循環信用利息為61元。因已於繳款截止日收到小蓮繳納最低應繳金額，不計收違約金。<br>《循環信用利息計算說明》<br>($3,000-$1,000)×14天(3/4-3/17) ×15%÷365＝$11.51<br>＋$2,000×26天(2/20-3/17)×15%÷365＝$21.37<br>＋$4,000×17天(3/18-4/3) ×15%÷365＝$27.95<br>
-                                        合 計 $61元<br>《循環信用利息圖示說明》<br><img src="img/terms_img.gif" class="img-fluid" alt="" /><br>
-                                        <strong>【假設2】</strong><br>承上例，若於3/18繳款截止日，未收到小蓮繳款，則4/3結帳日，應付上月循環信用利息為：$3,000×31天(3/4-4/3)×15%÷365＋$2,000×43天(2/20-4/3)×15%÷365＝74元。因未於繳款截止日收到繳款金額，尚有消費款5,000元未償付，未繳金額在新臺幣1,000元以上且為逾一期，故4/3結帳日計收違約金300元。
+                                        小蓮之信用卡消費明細表(帳單)結帳日為每月3日，繳款截止日為每月18日，2月份小蓮信用卡帳單尚餘循環掛帳金額為3,000元，之後2/19刷卡消費2,000元，該筆消費款銀行入帳日為2/20。小蓮3月份帳單顯示應繳總金額為5,000元，最低應繳金額1,000元。
+                                        <br>
+                                        （以年息15％為例計算，個案則因各別利率而異之）
+                                        <br>
+                                        <strong>【假設1】</strong><br>
+                                        3/18繳款截止日，收到小蓮繳納最低應繳金額1,000元，則4/3結帳日，應付上月循環信用利息為61元。因已於繳款截止日收到小蓮繳納最低應繳金額，不計收違約金。<br>
+                                        《循環信用利息計算說明》
+                                        <br>
+                                        ($3,000-$1,000)×14天(3/4-3/17) ×15%÷365＝$11.51<br>
+                                        ＋$2,000×26天(2/20-3/17)×15%÷365＝$21.37
+                                        <br>
+                                        ＋$4,000×17天(3/18-4/3) ×15%÷365＝$27.95<br>
+                                        合 計 $61元<br>
+                                        《循環信用利息圖示說明》
+                                        <br>
+                                        <img src="img/terms_img.gif" class="img-fluid" alt="" /><br>
+                                        <strong>【假設2】</strong><br>
+                                        承上例，若於3/18繳款截止日，未收到小蓮繳款，則4/3結帳日，應付上月循環信用利息為：$3,000×31天(3/4-4/3)×15%÷365＋$2,000×43天(2/20-4/3)×15%÷365＝74元。因未於繳款截止日收到繳款金額，尚有消費款5,000元未償付，未繳金額在新臺幣1,000元以上且為逾一期，故4/3結帳日計收違約金300元。
                                     </p>
                                 </div>
                             </div>
@@ -672,19 +742,21 @@
                                     <span class="red">持卡人之信用卡如有遺失、被竊、被搶、詐取或其他遭持卡人以外之他人占有之情形（以下簡稱遺失等情形），應儘速以電話或其他方式通知發卡機構或其他經發卡機構指定機構辦理掛失手續，並繳交掛失手續費每卡新臺幣200元(無限卡/世界卡/個人商務卡不收取掛失費)。但如發卡機構認有必要時，應於受理掛失手續日起十日內通知持卡人，要求於受通知日起三日內向當地警察機關報案或以書面補行通知發卡機構。持卡人於依發卡機構要求辦理始完成全部手續。<br>持卡人自辦理掛失手續時起被冒用所發生之損失，概由發卡機構負擔。但有下列情形之一者，持卡人仍應負擔辦理掛失手續後被冒用之損失：</span>
                                     <p class="red">一、他人之冒用為持卡人容許或故意將信用卡交其使用者。</p>
                                     <p class="red">二、持卡人因故意或重大過失將使用自動化設備辦理預借現金或進行其他交易之交易密碼或其他辨識持卡人同一性之方式使第三人知悉者。</p>
-                                    <div class="red">三、持卡人與他人或特約商店為虛偽不實交易或共謀詐欺者。 <br>
+                                    <div class="red">三、持卡人與他人或特約商店為虛偽不實交易或共謀詐欺者。<br>
                                         辦理掛失手續前持卡人被冒用之自負額以新臺幣3000元為上限。但有下列情形者，持卡人免負擔自負額：
                                         <div class="l-two-em">
                                             <p class="red">一、持卡人於辦理信用卡掛失手續時起前二十四小時內被冒用者。</p>
                                             <p class="red">二、冒用者在簽單上之簽名，以肉眼即可辨識與持卡人之簽名顯不相同或以善良管理人之注意而可辨識與持卡人之簽名不相同者。</p>
                                             <div class="red">
-                                              三、冒用者於發卡機構同意辦理特定金額內免簽名之特約商店進行免簽名交易，經確認非持卡人本人之交易且非持卡人串謀之交易者。<br>
+                                                三、冒用者於發卡機構同意辦理特定金額內免簽名之特約商店進行免簽名交易，經確認非持卡人本人之交易且非持卡人串謀之交易者。<br>
                                                 持卡人有本條第二項但書及下列情形之一者，且發卡機構能證明已盡善良管理人之注意義務者，其被冒用之自負額不適用前項約定：
                                                 <div class="l-two-em">
-                                                    <p class="red">一、持卡人得知信用卡遺失或被竊等情形而怠於立即通知發卡機構，或持卡人發生信用卡遺失或被竊等情形後，自當期繳款截止日起已逾二十日仍未通知發卡機構者。
+                                                    <p class="red">
+                                                        一、持卡人得知信用卡遺失或被竊等情形而怠於立即通知發卡機構，或持卡人發生信用卡遺失或被竊等情形後，自當期繳款截止日起已逾二十日仍未通知發卡機構者。
                                                     </p>
                                                     <p class="red">二、持卡人違反第八條第一項約定，未於信用卡簽名致他人冒用者。</p>
-                                                    <p class="red">三、持卡人於辦理信用卡掛失手續後，未提出發卡機構所請求之文件、拒絕協助調查或其他違反誠信原則之行為者。
+                                                    <p class="red">
+                                                        三、持卡人於辦理信用卡掛失手續後，未提出發卡機構所請求之文件、拒絕協助調查或其他違反誠信原則之行為者。
                                                     </p>
                                                 </div>
                                             </div>
@@ -696,9 +768,11 @@
                             <div>
                                 第十八條 （遭冒用之特殊交易）
                                 <div class="l-two-em">
-                                    <span class="red">持卡人之信用卡如有遭他人冒用為第九條特殊交易之情形，持卡人應儘速以電話或其他方式通知發卡機構或其他經發卡機構指定機構辦理停卡及換卡手續。但如發卡機構認有必要時，得於受理停卡及換卡手續日起十日內通知持卡人，要求於受通知日起三日內向當地警察機關報案或以書面補行通知發卡機構。<br>持卡人辦理停卡及換卡手續前被冒用所發生之損失，概由發卡機構負擔。但有前條第二項但書或下列情形之一者，持卡人應負擔辦理停卡及換卡手續前被冒用之全部損失：
+                                    <span class="red">持卡人之信用卡如有遭他人冒用為第九條特殊交易之情形，持卡人應儘速以電話或其他方式通知發卡機構或其他經發卡機構指定機構辦理停卡及換卡手續。但如發卡機構認有必要時，得於受理停卡及換卡手續日起十日內通知持卡人，要求於受通知日起三日內向當地警察機關報案或以書面補行通知發卡機構。<br>
+                                        持卡人辦理停卡及換卡手續前被冒用所發生之損失，概由發卡機構負擔。但有前條第二項但書或下列情形之一者，持卡人應負擔辦理停卡及換卡手續前被冒用之全部損失：
                                     </span>
-                                    <p class="red">一、持卡人得知信用卡遺失或被竊等情形而怠於立即通知發卡機構，或持卡人發生信用卡遺失或被竊等情形後，自當期繳款截止日起已逾二十日仍未通知發卡機構者。</p>
+                                    <p class="red">一、持卡人得知信用卡遺失或被竊等情形而怠於立即通知發卡機構，或持卡人發生信用卡遺失或被竊等情形後，自當期繳款截止日起已逾二十日仍未通知發卡機構者。
+                                    </p>
                                     <p class="red">二、持卡人經發卡機構通知辦理換卡，但怠於辦理或拒絕辦理換卡者。</p>
                                     <p class="red">三、持卡人於辦理信用卡停卡及換卡手續後，未提出發卡機構所請求之文件、拒絕協助調查或有其他違反誠信原則之行為者。</p>
                                 </div>
@@ -707,9 +781,9 @@
                                 第十九條（補發新卡、換發新卡及屆期續發新卡）
                                 <div class="l-two-em">
                                     持卡人發生信用卡遺失或被竊等情形或污損、消磁、刮傷或其他原因致令信用卡不堪使用，發卡機構得依持卡人之申請補發新卡。<br>
-                                    <span class="red">前項情形發生，持卡人應予折斷或繳回發卡機構。如卡片有效期限屆滿或於前項情形發生時持卡人未將卡片折斷或繳回發卡機構，持卡人繼續使用因而致生損害或應付帳款，概由持卡人負責。<br>因信用卡遺失或被竊而向發卡機構要求授權其他信用卡機構代理發給持卡人之緊急替代卡，其效力與發卡機構所發行之信用卡相同。持卡人對該緊急替代卡之消費、預借現金或取得服務，仍適用本契約之全部規定，並負一切清償之責。</span><br>發卡機構於信用卡有效期間屆滿時，如未依第二十三條終止契約者，應續發新卡供持卡人繼續使用。
-                                    <br>
-                                    <span class="red">信用卡有效期間屆滿前，持卡人如無續用之意願，須於有效期限屆滿前，事先通知發卡機構終止本契約，或於接獲續發新卡後七日內以書面或以信用卡截斷寄回發卡機構方式通知發卡機構終止本契約，無須說明理由及負擔任何信用卡相關費用或價款，但已使用核發新卡者，不在此限。</span>
+                                    <span class="red">前項情形發生，持卡人應予折斷或繳回發卡機構。如卡片有效期限屆滿或於前項情形發生時持卡人未將卡片折斷或繳回發卡機構，持卡人繼續使用因而致生損害或應付帳款，概由持卡人負責。<br>因信用卡遺失或被竊而向發卡機構要求授權其他信用卡機構代理發給持卡人之緊急替代卡，其效力與發卡機構所發行之信用卡相同。持卡人對該緊急替代卡之消費、預借現金或取得服務，仍適用本契約之全部規定，並負一切清償之責。</span><br>
+                                    發卡機構於信用卡有效期間屆滿時，如未依第二十三條終止契約者，應續發新卡供持卡人繼續使用。
+                                    <br><span class="red">信用卡有效期間屆滿前，持卡人如無續用之意願，須於有效期限屆滿前，事先通知發卡機構終止本契約，或於接獲續發新卡後七日內以書面或以信用卡截斷寄回發卡機構方式通知發卡機構終止本契約，無須說明理由及負擔任何信用卡相關費用或價款，但已使用核發新卡者，不在此限。</span>
                                 </div>
                             </div>
                             <div>
@@ -735,7 +809,8 @@
                                     <p>六、持卡人對他人無權使用其信用卡後所發生之權利義務關係。</p>
                                     <p>七、有關信用卡交易帳款疑義之處理程序<span class="red">與涉及持卡人權利義務之信用卡國際組織相關重要規範。</span></p>
                                     <p class="red">八、提供持卡人之各項權益、優惠或服務之期間及適用條件。<br>發卡機構至少每季應定期覆核持卡人所適用利率。除有不可歸責於發卡機構之事由而有需於提供期間內調整之情形外，或發卡機構已公告或通知之持卡人權益、優惠或服務之期間及適用條件外，發卡機構得每季調整持卡人所適用利率、向持卡人收取之年費、各項手續費、循環信用利息及違約金等之計算方式及可能負擔之一切費用、其他持卡人權益、優惠或服務之期間及適用條件。
-                                    </p>發卡機構依第一項或第二項通知持卡人變更契約約款時，如持卡人於異議期限內表示異議，並因而終止契約者，發卡機構對於使用循環信用方式或分期付款方式繳款之持卡人，應給予至少六期之緩衝期，但原分期付款剩餘期數小於六期者，依原契約繼續履行。原信用卡契約第四、十四、十五、二十至二十三、二十五至二十九條約定，因繼續履行契約之需要，對發卡機構與持卡人依然有效。
+                                    </p>
+                                    發卡機構依第一項或第二項通知持卡人變更契約約款時，如持卡人於異議期限內表示異議，並因而終止契約者，發卡機構對於使用循環信用方式或分期付款方式繳款之持卡人，應給予至少六期之緩衝期，但原分期付款剩餘期數小於六期者，依原契約繼續履行。原信用卡契約第四、十四、十五、二十至二十三、二十五至二十九條約定，因繼續履行契約之需要，對發卡機構與持卡人依然有效。
                                 </div>
                             </div>
                             <div>
@@ -774,14 +849,14 @@
                                     發卡機構於第一項或第二項之事由消滅後，或經發卡機構同意持卡人釋明相當理由，或持卡人清償部分款項或提供適當之擔保者，得恢復持卡人原得延後付款期限或使用循環利息之期限利益。
                                     <span class="red">持卡人得隨時將信用卡截斷並註記事由寄回發卡機構或得以書面通知發卡機構終止本契約。</span><br>
                                     持卡人如有前條第一項或第二項之事由，或信用卡有效期限屆至者，發卡機構得以
-                                    <span class="red">書面、電子文件或其他持卡人同意之方式通知</span>持卡人終止契約。<br><span class="red">本契約終止或解除後，正卡持卡人及附卡持卡人均不得再使用信用卡（含有效期限尚未屆至者）。但如終止或解除其中一種信用卡契約，則僅就該契約發生效力，其他信用卡契約仍為有效。<br>持卡人如依銀行法規定為屬於發卡機構之利害關係者人者，持卡人使用循環信用額度不得超過新臺幣20萬元，超逾時，發卡機構得於通知持卡人後就超逾部分主張到期，並要求持卡人返還超逾部分款項。</span>
+                                    <span class="red">書面、電子文件或其他持卡人同意之方式通知</span>持卡人終止契約。<br>
+                                    <span class="red">本契約終止或解除後，正卡持卡人及附卡持卡人均不得再使用信用卡（含有效期限尚未屆至者）。但如終止或解除其中一種信用卡契約，則僅就該契約發生效力，其他信用卡契約仍為有效。<br>持卡人如依銀行法規定為屬於發卡機構之利害關係者人者，持卡人使用循環信用額度不得超過新臺幣20萬元，超逾時，發卡機構得於通知持卡人後就超逾部分主張到期，並要求持卡人返還超逾部分款項。</span>
                                 </div>
                             </div>
                             <div>
                                 第二十四條 （其他手續費）
                                 <div class="l-two-em">
-                                    <span class="red">如持卡人以支票付款而未能兌現時，發卡機構每張得加收新臺幣300元手續費。</span><br>
-                                    如持卡人要求補寄
+                                    <span class="red">如持卡人以支票付款而未能兌現時，發卡機構每張得加收新臺幣300元手續費。</span><br>如持卡人要求補寄
                                     <span class="red">自當月起算三個月〈含〉</span>以上之帳單，發卡機構依每帳款期間得酌收新臺幣100元手續費。<br>
                                     <span class="red">本契約終止後，持卡人如已清償全部債務，得請求開立清償證明，每次酌收新臺幣300元手續費。</span><br>
                                     持卡人信用卡帳款如有溢繳，得通知發卡機構以匯款方式退款。如要求匯入發卡機構帳戶者，發卡機構得自退回金額中收取新臺幣100元之手續費；
@@ -793,8 +868,7 @@
                                 <div class="l-two-em">
                                     二十至二十四歲之持卡人，如於申請之時未填載為學生身分或尚非學生者，嗣後發卡機構如經由其他管道或接獲家長反映其子女為具有學生身分之正卡持卡人，且有超出清償能力刷卡情形時，發卡機構應立即配合持卡人家長處理，並應於財團法人金融聯合徵信中心登錄其學生身分。<br>
                                     前項學生或未成年人在使用信用卡時，應該先向父母或家長告知溝通，並藉由信用卡的使用，讓自己學習自主理財的負責態度。發卡機構得因學生及未年人之父母（法定代理人）或家長要求，無須事先通知或催告，停止持卡人使用信用卡之權利。
-                                    <br>
-                                    以學生身分申請信用卡者，發卡機構應將發卡情事通知其父母或法定代理人。
+                                    <br>以學生身分申請信用卡者，發卡機構應將發卡情事通知其父母或法定代理人。
                                 </div>
                             </div>
                             <div>
@@ -807,8 +881,10 @@
                             <div>
                                 第二十七條（委外業務之一般處理）
                                 <div class="l-two-em">
-                                    持卡人同意發卡機構之交易帳款收付業務、<span class="red">資料處理業務或其他經主管機關許可得委託他人處理</span>之作業項目，於必要時得委託適當之第三人或與各信用卡組織之會員機構合作辦理。<br>
-                                    <span class="red">發卡機構依前項規定委外處理業務時，應督促並確保該等資料利用人遵照銀行法及其他相關法令之保密規定，不得將該等有關資料洩漏予第三人。<br>受發卡機構委託處理資料利用人，違反個人資料保護法規定，致個人資料遭不法蒐集、處理、利用或其他侵害持卡人權利者，持卡人得依民法、個人資料保護法或其他相關法令規定，向發卡機構及其委託處理資料利用人請求連帶賠償。</span>
+                                    持卡人同意發卡機構之交易帳款收付業務、<span
+                                        class="red">資料處理業務或其他經主管機關許可得委託他人處理</span>之作業項目，於必要時得委託適當之第三人或與各信用卡組織之會員機構合作辦理。<br>
+                                    <span class="red">發卡機構依前項規定委外處理業務時，應督促並確保該等資料利用人遵照銀行法及其他相關法令之保密規定，不得將該等有關資料洩漏予第三人。<br>
+                                        受發卡機構委託處理資料利用人，違反個人資料保護法規定，致個人資料遭不法蒐集、處理、利用或其他侵害持卡人權利者，持卡人得依民法、個人資料保護法或其他相關法令規定，向發卡機構及其委託處理資料利用人請求連帶賠償。</span>
                                 </div>
                             </div>
                             <div>
@@ -835,16 +911,15 @@
                             </div>
                             <div class="text-right mt-4">1711UB</div>
                         </div>
-
                     </div>
                     <div id="button_terms_3" class="button_terms">
-                        <input type="checkbox" id="button_termsOpt_3" v-model="checkTerms" value="3" disabled />
+                        <input type="checkbox" id="button_termsOpt_3" v-model="checkTerms" disabled="" value="3"  />
                         <label id="read_3" for="button_termsOpt_3">我已詳細閱讀。(請勾選)</label>
                     </div>
                     <!----------------//3-------------------------------------------->
 
                     <!------------------4-------------------------------------------->
-                    <div @scroll="checkTermsScroll($event,4)" id="terms_box_4" class="terms_box">
+                    <div id="terms_box_4" class="terms_box" @scroll="checkTermsScroll($event,4)">
                         <!--uc1:wuc電子化帳單服務約定條款 runat="server" id="wuc電子化帳單服務約定條款" /-->
                         <div class="txt">
                             <h3>聯邦銀行信用卡「電子化帳單」服務約定條款</h3>
@@ -925,16 +1000,76 @@
 
                     </div>
                     <div id="button_terms_4" class="button_terms">
-                        <input type="checkbox" id="button_termsOpt_4" v-model="checkTerms" value="4" disabled />
+                        <input type="checkbox" id="button_termsOpt_4" v-model="checkTerms" disabled="" value="4" />
                         <label id="read_4" for="button_termsOpt_4">我已詳細閱讀。(請勾選)</label>
                     </div>
                     <!----------------//4-------------------------------------------->
 
+                    <!------------------5-------------------------------------------->
+                    <div id="terms_box_5" class="terms_box" @scroll="checkTermsScroll($event,5)">
+                        <!--uc1:wuc微風積點禮遇會員同意及注意事項 runat="server" id="wuc微風積點禮遇會員同意及注意事項" /-->
+                        <div class="txt">
+                            <h3>Breeze Rewards微風積點禮遇會員同意及注意事項</h3>
+                            歡迎您一同加入Breeze Rewards微風積點禮遇會員點石成金的行列，為確保會員權益，請詳細閱讀各項服務辦法及條款，當您完成會員資料的申請，即表示您已同意接受各項說明辦法。辦法與條款若有任何修改，將公布於微風官方網站。Breeze Rewards微風積點禮遇會員正式會員資格僅限本人使用。
+                            <ol>
+                                <li>會員點數規劃<br>
+                                    會員點數累積門檻：單筆消費50元可得一點，未滿50元倍數不予以計算。會員點數折抵門檻：累計滿1,000點可折抵100元；每次最低折抵100元。(未填寫完整會員資料，將無法使用點數折抵消費)
+                                </li>
+                                <li>會員點數使用方式<br>
+                                    會員點數積點：顧客於每次消費時，掃描手機載具上會員條碼，即可依據該筆消費金額，完成積點；若未攜帶手機載具，可憑手機號碼做為認證積點。<br>
+                                    會員點數折抵：任何點數折抵(無論是折抵消費金額，或是兌換贈品)皆需要使用微風積點禮遇會員本人手機應用程式，掃描會員條碼之後方可折抵。(未填寫完整會員資料，將無法使用點數折抵消費、或是兌換贈品)<br>
+                                    註：點數折抵恕不找零、折現。基本點數（消費50元得1點）及週二點數6倍狂飆於特定活動檔期之當館(全專櫃)將以酬賓券優惠為主，基本點數與6倍送活動點數恕不重複執行，詳情依特定活動檔期之公告為主。
+                                </li>
+                                <li>微風積點禮遇會員卡限本人於微風集團各店消費使用，不可與他人及其他帳號點數合併使用，亦不可移轉予他人及其他帳號使用。
+                                </li>
+                                <li>會員不得以不當或取巧之方式累計會員點數，本公司對此保有審核及決定是否給予之權利。如經查證會員確有前揭不當或取巧之行為累計會員點數，本公司得視其情節，暫時停止或永久終止該會員之權利，並將依法請求損害賠償並提出刑事告訴。
+                                </li>
+                                <li>本會員卡僅提供消費點數累積、折抵、兌換贈品等優惠。
+                                </li>
+                                <li>完成卡友資料登錄程序後，結帳前須出示行動載具會員條碼或(鑽石)會員卡，始得享有專屬會員優惠、消費累計、微風集團各店點數累計及兌換，未出示行動載具會員條碼或(鑽石)會員卡，僅能消費積點、相關會員服務，如消費折抵、辦理退貨及兌換禮贈品等，皆須出示本人行動載具會員條碼及(鑽石)會員卡。
+                                </li>
+                                <li>電子酬賓券及銀行滿額禮兌換/使用<br>電子酬賓券自動兌換：如遇各館檔期活動發送電子酬賓券，會員需事先完成APP會員驗證並開通，並於消費時宣告並出示APP內之會員條碼，方可於APP兌換電子酬賓券，事後補登發票恕無法參加。電子酬賓券使用折抵：結帳時主動告知使用電子酬賓券，折抵金額以100元為單位，需使用微風積點禮遇會員本人手機APP掃描會員條碼後方可折抵。電子酬賓券使用期限：使用期限依頁面顯示為準，如逾期未使用將由系統自動回收，相關使用說明請參閱該檔期之完整活動辦法，如有未盡事宜依現場或APP公告為準。
+                                </li>
+                                <li class="red">會員可享不定期活動、積點、兌換贈品之相關優惠，優惠辦法等細節，以微風暨關係企業官網、各館粉絲團、各檔期DM或現場公告為準。</li>
+                                <li>消費積點限當日單筆發票金額計算，請於結帳時出示會員條碼累積或辦理折抵。點數折抵之金額不另開發票，恕無法參加積點活動。
+                                </li>
+                                <li>10.2017年5月1日起會員於消費當下，若無告知會員電話或未登錄會員專屬條碼，於服務台補登點數時將以50元為1點計算，亦不可享有當日活動優惠。補登點數時需持紙本電子發票及銷貨明細至原消費館別服務台補登點數(微風廣場1F服務台、微風南京3F服務台、微風松高B1F服務台、微風信義3F服務台、微風台北車站2F服務台、微風台大醫院B1F服務台、微風三總商店街B1F服務台、微風中央研究院1F服務台、微風南山B2F服務台)，點數補登以消費當日7日內為限。
+                                </li>
+                                <li>辦理退貨時，該筆消費所累積之年度消費金額及所累積之點數將予以扣除及回收。若卡片內點數餘額不足回收，最低補足點數新臺幣壹元起，採無條件進位計算。若卡片內電子酬賓券餘額不足回收，將以現金補足不足之金額。
+                                </li>
+                                <li>消費獲得之基本點數累積有效期限之計算， 2020年9月1日起產生之點數，有效期限至2022年12月31日，活動點數依活動辦法公告為準。
+                                </li>
+                                <li class="red">會員升等金額累積有效期限為當年度1月1日至12月31日，逾期失效，恕不另行通知。
+                                </li>
+                                <li>星辰卡及琉金卡會員若於會員資格有效期間內，達下一等級會員門檻，即可立刻升等；琉金卡及鑽石卡會員若未達該會員等級續卡資格，則會員等級將會於每年12月31日系統審核後予以降等；星辰卡會員若2年內未有消費紀錄， 會員資格將被凍結， 若需重啟請致電客服中心(02-6600-8888#9)
+                                </li>
+                                <li>點數兌換之贈品以現場實物為準，不得退貨或要求折現，如為瑕疵將以同等級贈品替代。
+                                </li>
+                                <li>微風廣場實業股份有限公司(下稱「本公司」)暨關係企業(包括但不限於微風置地股份有限公司及微風場站開發股份有限公司)依個人資料保護法規定告知：本公司就申請人資料蒐集之目的為行銷會員管理、內部滿意度及消費統計調查與分析，蒐集方式以自動化機器或其他非自動化之利用方式，類別為識別個人、識別政府資料、個人描述等。本公司或關係企業將於營運期間或完成前述目的之必要地區內，蒐集、處理、利用或國際傳輸申請人填載於本公司會員卡申請書之個人資料或日後經會員同意而提供之其他個人資料。上開蒐集目的範圍內，本公司或關係企業亦得將會員全部或部分個人資料提供予合作廠商辦理會員服務提供。會員應提供完整詳實且真實之個人資料，如有任何虛假或冒用他人名義之情事，應自負法律責任。為避免會員權益通知無法送達，會員應立即告知Breeze Center微風集團任何會員資料變更，如地址、姓名、聯絡方式等，以利及時更新。會員就其個人資料得隨時請求查詢、閱覽、取得複製本，或要求停止蒐集、處理及利用或請求刪除，惟將無法進行核卡資格審核及相關處理作業或提供完善服務等優惠權益。會員查詢及閱覽個人資料或請求複製本之提供，本公司依法得酌收新臺幣100元工本費。前揭有關申請人資料蒐集處理目的、類別及用途等如有變更，本公司將於官網公告，不再另行通知。
+                                </li>
+                                <li>使用現金禮券、酬賓券、商品禮券、抵用券、其他券類、信用卡折抵及會員點數折抵之金額皆不列入積點金額計算。
+                                </li>
+                                <li>微風集團保有核准發卡與否及修正、暫停或終止卡片之權利。
+                                </li>
+                                <li>詳細點數折抵櫃位依現場公告為準。
+                                </li>
+                                <li>微風集團保留隨時修正會員權益之權利。相關會員權益、活動辦法及未盡事宜，以電子會員權益函或官方網站公告為準。申請人若有任何疑問，請致電本公司(02)6600-8888轉9，由客服人員為您服務。
+                                </li>
+                            </ol>
+                            <div class="text-right mt-4">UB202201版</div>
+                        </div>
+                    </div>
+                    <div id="button_terms_5" class="button_terms">
+                        <input type="checkbox" id="button_termsOpt_5" v-model="checkTerms" disabled="" value="5"/>
+                        <label id="read_5" for="button_termsOpt_5">我已詳細閱讀。(請勾選)</label>
+                    </div>
+                    <!----------------//5-------------------------------------------->
                 </div>
 
                 <div class="modal-footer">
                     <div class="col-12 text-center">
-                        <button @click.prevent="checkAllTerms" class="btn btn-primary btn-lg">確定</button>
+                        <button type="button" class="btn btn-primary btn-lg" @click="checkAllTerms">確定</button>
+                        <button id="btnTermClose" type="button" class="btn btn-primary btn-lg d-none" data-bs-dismiss="modal" aria-label="Close">確定</button>
                     </div>
                 </div>
             </div>
@@ -944,6 +1079,7 @@
 </template>
 
 <script>
+
 export default {
   data () {
     return {
@@ -969,7 +1105,7 @@ export default {
       }
     },
     checkAllTerms () {
-      if (this.checkTerms.length < 4) {
+      if (this.checkTerms.length < 5) {
         alert('您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！')
       } else {
         this.termsModal.hide()
@@ -980,16 +1116,4 @@ export default {
     this.termsModal = new this.$custom.bootstrap.Modal(this.$refs.termsModal, { backdrop: 'static' })
   }
 }
-
-// 點擊換圖
-// var toggle = true;
-//     $(".terms_check_btn1").click(function () {
-//         if (toggle) {
-//             toggle = false;
-//             document.getElementById('checkboxUnEnd').checked = true;
-//         } else {
-//             toggle = true;
-//             document.getElementById('checkboxUnEnd').checked = false;
-//         }
-//     });
 </script>

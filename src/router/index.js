@@ -22,6 +22,54 @@ const routes = [
           title: '我是聯邦卡友/存戶'
         }
       },
+      {
+        path: '/OnLineApply_OTP',
+        name: '卡友-手機OTP驗證',
+        component: () => import('../views/CardFriendYes/OnLineApply_OTP.vue'),
+        meta: {
+          title: '卡友-手機OTP驗證'
+        }
+      },
+      {
+        path: '/OnLineApply_Fillin',
+        name: '卡友-資料確認，詳閱各項條款',
+        component: () => import('../views/CardFriendYes/OnLineApply_Fillin.vue'),
+        meta: {
+          title: '卡友-資料確認，詳閱各項條款'
+        }
+      },
+      {
+        path: '/OnLineApply_Fillin_Card',
+        name: '卡友-KYC資料確認',
+        component: () => import('../views/CardFriendYes/OnLineApply_Fillin_Card.vue'),
+        meta: {
+          title: '卡友-KYC資料確認'
+        }
+      },
+      {
+        path: '/OnLineApply_Fillin_1',
+        name: '卡友-個資使用條款',
+        component: () => import('../views/CardFriendYes/OnLineApply_Fillin_1.vue'),
+        meta: {
+          title: '卡友-個資使用條款'
+        }
+      },
+      {
+        path: '/OnLineApply_Fillin_Download',
+        name: '卡友-點選下載申請書',
+        component: () => import('../views/CardFriendYes/OnLineApply_Fillin_Download.vue'),
+        meta: {
+          title: '卡友-點選下載申請書'
+        }
+      },
+      {
+        path: '/OnLineApply_Fillin_Finish',
+        name: '卡友-送出申請',
+        component: () => import('../views/CardFriendYes/OnLineApply_Fillin_Finish.vue'),
+        meta: {
+          title: '卡友-送出申請'
+        }
+      },
       // ? 非卡友
       {
         path: '/OnLineApply_n',
@@ -65,14 +113,6 @@ const routes = [
         }
       },
       // ? 非卡友-線上-存戶
-      {
-        path: '/OnLineApply_Chks',
-        name: '線上辦卡(聯邦存戶)',
-        component: () => import('../views/CardFriendNo/Online/OnLineApply_Chks.vue'),
-        meta: {
-          title: '線上辦卡'
-        }
-      },
       // ? 非卡友-線上-他行信用卡驗證
       {
         path: '/OnLineApply_Chk',
@@ -141,50 +181,11 @@ const routes = [
         }
       },
       {
-        path: '/OnLineApply_Fillin_OT_MyDataTerms',
-        name: '非卡友- MyData服務授權條款',
-        component: () => import('../views/CardFriendNo/Online/Fillin/OnLineApply_Fillin_OT_MyDataTerms.vue'),
-        meta: {
-          title: 'MyData服務授權條款'
-        }
-      },
-      {
-        path: '/OnLineApply_Fillin_OT_MyDataFinish',
-        name: '非卡友- MyData完成申請',
-        component: () => import('../views/CardFriendNo/Online/Fillin/OnLineApply_Fillin_OT_MyDataFinish.vue'),
-        meta: {
-          title: 'MyData完成申請'
-        }
-      },
-      {
         path: '/dspApplicationNNB',
         name: '非卡友-NewNewBank',
         component: () => import('../views/CardFriendNo/Online/Fillin/dspApplicationNNB.vue'),
         meta: {
           title: 'NewNewBank'
-        }
-      },
-      {
-        path: '/dspApplicationNNB_Apply',
-        name: '非卡友-NewNewBank申請',
-        component: () => import('../views/CardFriendNo/Online/Fillin/dspApplicationNNB_Apply.vue'),
-        meta: {
-          title: 'NewNewBank申請'
-        }
-      },
-      {
-        path: '/dspApplicationNNB_finish',
-        name: '非卡友-NewNewBank申請完成',
-        component: () => import('../views/CardFriendNo/Online/Fillin/dspApplicationNNB_finish.vue'),
-        meta: {
-          title: 'NewNewBank申請完成'
-        }
-      },
-      {
-        // ?未對應的路由重新導向到首頁
-        path: '/:pathMatch(.*)*',
-        redirect: {
-          name: '線上辦卡'
         }
       }
     ]
