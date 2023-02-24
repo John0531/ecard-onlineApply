@@ -22,4 +22,5 @@ export default {
   @import "~@/assets/css/form_Common.css";
   @import "~@/assets/css/OnLineApply.css";
   @import "~@/assets/css/terms.css";
+  @import "~@/assets/css/NNB.css";
 </style>
