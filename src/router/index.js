@@ -181,11 +181,43 @@ const routes = [
         }
       },
       {
+        path: '/OnLineApply_Fillin_OT_MyDataTerms',
+        name: '非卡友- MyData服務授權條款',
+        component: () => import('../views/CardFriendNo/Online/Fillin/OnLineApply_Fillin_OT_MyDataTerms.vue'),
+        meta: {
+          title: 'MyData服務授權條款'
+        }
+      },
+      {
+        path: '/OnLineApply_Fillin_OT_MyDataFinish',
+        name: '非卡友-MyData申請完成',
+        component: () => import('../views/CardFriendNo/Online/Fillin/OnLineApply_Fillin_OT_MyDataFinish.vue'),
+        meta: {
+          title: 'MyData申請完成'
+        }
+      },
+      {
         path: '/dspApplicationNNB',
         name: '非卡友-NewNewBank',
         component: () => import('../views/CardFriendNo/Online/Fillin/dspApplicationNNB.vue'),
         meta: {
           title: 'NewNewBank'
+        }
+      },
+      {
+        path: '/dspApplicationNNB_Apply',
+        name: '非卡友-NewNewBank申請',
+        component: () => import('../views/CardFriendNo/Online/Fillin/dspApplicationNNB_Apply.vue'),
+        meta: {
+          title: 'NewNewBank申請'
+        }
+      },
+      {
+        path: '/dspApplicationNNB_finish',
+        name: '非卡友-NewNewBank申請完成',
+        component: () => import('../views/CardFriendNo/Online/Fillin/dspApplicationNNB_finish.vue'),
+        meta: {
+          title: 'NewNewBank申請完成'
         }
       }
     ]
