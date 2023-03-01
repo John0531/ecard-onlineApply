@@ -313,8 +313,8 @@ export default {
     },
     showResult () {
       //* 判斷要跳哪個 Modal(待處理)
-    //   this.NNBModal.show()
-      this.MyDataModal.show()
+      this.NNBModal.show()
+    //   this.MyDataModal.show()
     },
     goToMyDataTerms () {
       const routeData = this.$router.resolve({ name: '非卡友- MyData服務授權條款' })

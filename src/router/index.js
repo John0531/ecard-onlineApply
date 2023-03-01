@@ -113,6 +113,14 @@ const routes = [
         }
       },
       // ? 非卡友-線上-存戶
+      {
+        path: '/OnLineApply_Chks',
+        name: '線上辦卡(已持有聯邦存戶)',
+        component: () => import('../views/CardFriendNo/Online/OnLineApply_Chks.vue'),
+        meta: {
+          title: '線上辦卡'
+        }
+      },
       // ? 非卡友-線上-他行信用卡驗證
       {
         path: '/OnLineApply_Chk',
