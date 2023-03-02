@@ -3,7 +3,7 @@
     <!-- 主視覺 -->
     <div class="shortKv">
         <div class="fill-shortKv topimg-OnLineApply">
-            <div class="container-xlr shortKv-title-4">
+            <div class="container-xl shortKv-title-4">
                 <h2>線上辦卡</h2>
             </div>
         </div>
@@ -166,7 +166,7 @@
                 </div>
                 <!-------------------//本人已詳閱---------------------->
                 <div class="text-center button_group">
-                    <button onclick="location.href='OnLineApply_Fillin_Card.htm?notice'" class="btn btn-primary btn-lg mx-1" type="submit" value="">下一步</button>
+                    <button @click="$router.push('/OnLineApply_Fillin_1')" class="btn btn-primary btn-lg mx-1" type="submit" value="">下一步</button>
                 </div>
             </div>
         </div>

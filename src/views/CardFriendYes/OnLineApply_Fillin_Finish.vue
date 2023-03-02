@@ -3,7 +3,7 @@
   <!-- 主視覺 -->
   <div class="shortKv">
     <div class="fill-shortKv topimg-OnLineApply">
-      <div class="container-xlr shortKv-title-4">
+      <div class="container-xl shortKv-title-4">
         <h2>線上辦卡</h2>
       </div>
     </div>

@@ -3,7 +3,7 @@
   <!-- 主視覺 -->
   <div class="shortKv">
     <div class="fill-shortKv topimg-OnLineApply">
-      <div class="container-xlr shortKv-title-4">
+      <div class="container-xl shortKv-title-4">
         <h2>線上辦卡</h2>
       </div>
     </div>
@@ -257,7 +257,7 @@
         </div>
         <div class="col-12 text-center button_group">
           <button
-            onclick="location.href='#'"
+            onclick="location.href='OnLineApply_Fillin_Card'"
             class="btn btn-primary btn-lg mx-1"
             type="submit"
             value=""
@@ -265,7 +265,7 @@
             上一步
           </button>
           <button
-            onclick="location.href='OnLineApply_Fillin_Download.htm'"
+            onclick="location.href='OnLineApply_Fillin_Download'"
             class="btn btn-primary btn-lg mx-1"
             type="submit"
             value=""

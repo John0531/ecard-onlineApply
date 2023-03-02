@@ -11,126 +11,139 @@
   <section class="mainArea">
     <div class="container-xl">
       <div class="row justify-content-md-center">
-        <div class="formGroup">
-            <ul class="formList formApply">
-                <li class="col-12 mb-2">
-                    <label for="">申請人身分證字號</label>
-                    <input required="" name="login[id]" type="text" maxlength="10" placeholder="限正卡持卡人" class="formApply_form_control form-control">
-                </li>
-                <li class="col-12">
-                    <label for=""></label>
-                    <span class="red_text">(外籍人士請輸入居留簽證的統一證號)</span>
-                </li>
-                <li class="col-12">
-                    <label for="input1">西元出生年月日</label>
-                    <div class="d-flex align-items-center">
-                        <select name="" runat="server" class="form-select form-control">
-                            <option>1990</option>
-                            <option>1991</option>
-                            <option>1991</option>
-                            <option>1991</option>
-                            <option>1992</option>
-                            <option>1991</option>
-                            <option>1993</option>
-                            <option>1991</option>
-                            <option>1994</option>
-                            <option>1991</option>
-                        </select>年
-                        <select name="" runat="server" id="SelM" class="form-select form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                            <option>10</option>
-                            <option>11</option>
-                            <option>12</option>
-                        </select>月
-                        <select name="" runat="server" id="SelD" class="form-select form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                            <option>10</option>
-                            <option>11</option>
-                            <option>12</option>
-                        </select>日
+        <Form
+            v-slot="{errors}"
+            @submit="applySubmit"
+        >
+            <div class="formGroup">
+                <ul class="formList formApply">
+                    <li class="col-12 mb-2">
+                        <label for="">申請人身分證字號</label>
+                        <div class="mb-1">
+                            <Field
+                            v-model.trim="Identification"
+                            name="login[id]"
+                            type="text" maxlength="10"
+                            placeholder="限正卡持卡人"
+                            :class="{ 'is-invalid': errors['login[id]'] }"
+                            class="formApply_form_control form-control"
+                            :rules="checkId"/>
+                            <ErrorMessage
+                            name="login[id]"
+                            class="invalid-feedback"
+                                                  ></ErrorMessage>
+                        </div>
+                    </li>
+                    <li class="col-12">
+                        <label for=""></label>
+                        <span class="red_text">(外籍人士請輸入居留簽證的統一證號)</span>
+                    </li>
+                    <li class="col-12">
+                        <label for="input1">西元出生年月日</label>
+                        <div class="d-flex align-items-center">
+                            <select name=""  class="form-select form-control">
+                                <option value="" selected></option>
+                                <option v-for="n in Array.from({length: 80}, (v, i) => i + (new Date().getFullYear() - 95))" :value="n" :key="n+1">
+                                {{n}}
+                                </option>
+                            </select>年
+                            <select name=""  id="SelM" class="form-select form-control">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                                <option>11</option>
+                                <option>12</option>
+                            </select>月
+                            <select name=""  id="SelD" class="form-select form-control">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                                <option>11</option>
+                                <option>12</option>
+                            </select>日
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-10 d-flex flex-wrap">
+                <div class="col-12 col-md-4 text-center">
+                <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="" />
+                <div class="form-check my-2">
+                    <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                    <label class="form-check-label text-start text-md-center fw-bold" for="exampleRadios1">
+                        微風悠遊聯名卡MasterCard悠遊鈦金卡
+                    </label>
+                </div>
+                </div>
+                <div class="col-12 col-md-4 text-center">
+                <img src="@/assets/images/form/card_b4bs.jpg" class="img-fluid" alt="" />
+                <div class="form-check my-2">
+                    <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios2" value="option1">
+                    <label class="form-check-label text-start text-md-center fw-bold" for="exampleRadios2">
+                        微風悠遊聯名卡JCB悠遊晶緻卡
+                    </label>
+                </div>
+                </div>
+                <div class="col-12 col-md-4 text-center">
+                <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="" />
+                <div class="form-check my-2">
+                    <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios3" value="option1">
+                    <label class="form-check-label text-start text-md-center fw-bold" for="exampleRadios3">
+                        微風悠遊聯名卡VISA悠遊御璽卡
+                    </label>
+                </div>
+                </div>
+            </div>
+            <!----------------首刷禮---------------->
+            <div class="card_gift_box">
+                <h3><img src="images/form/card_gift_icon.gif" class="img-fluid" alt="" />首刷禮：<span>(新戶定義：核卡前六個月內未曾持有任何一聯邦信用卡者。)</span>
+                </h3>
+                <div class="col-12 card_gift_txt">
+                    <p>◆活動期間：111年01月01日至111年06月30日</p>
+                    <p>◆活動內容：新戶核卡後30日內，消費累積滿1,288元(含)以上，且不限地點首次自動加值，即可享首刷好禮多選一；如符合首刷禮條件並有使用本行任一行動支付新增不限金額之一般消費，即可升級獲贈「無線行動電源」。
+                    </p>
+                    <div class="form-check mt-2 ms-3">
+                        <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios4" value="option1">
+                        <label class="form-check-label fw-bold" for="exampleRadios4">
+                            好禮一：智能垃圾桶（代碼5）
+                        </label>
                     </div>
-                </li>
-            </ul>
-        </div>
-        <div class="col-lg-10 d-flex flex-wrap">
-            <div class="col-12 col-md-4 text-center">
-              <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="" />
-              <div class="form-check my-2">
-                <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
-                <label class="form-check-label text-start text-md-center fw-bold" for="exampleRadios1">
-                    微風悠遊聯名卡MasterCard悠遊鈦金卡
-                </label>
-              </div>
-            </div>
-            <div class="col-12 col-md-4 text-center">
-              <img src="@/assets/images/form/card_b4bs.jpg" class="img-fluid" alt="" />
-              <div class="form-check my-2">
-                <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios2" value="option1">
-                <label class="form-check-label text-start text-md-center fw-bold" for="exampleRadios2">
-                    微風悠遊聯名卡JCB悠遊晶緻卡
-                </label>
-              </div>
-            </div>
-            <div class="col-12 col-md-4 text-center">
-              <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="" />
-              <div class="form-check my-2">
-                  <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios3" value="option1">
-                  <label class="form-check-label text-start text-md-center fw-bold" for="exampleRadios3">
-                      微風悠遊聯名卡VISA悠遊御璽卡
-                  </label>
-              </div>
-            </div>
-        </div>
-        <!----------------首刷禮---------------->
-        <div class="card_gift_box">
-            <h3><img src="images/form/card_gift_icon.gif" class="img-fluid" alt="" />首刷禮：<span>(新戶定義：核卡前六個月內未曾持有任何一聯邦信用卡者。)</span>
-            </h3>
-            <div class="col-12 card_gift_txt">
-                <p>◆活動期間：111年01月01日至111年06月30日</p>
-                <p>◆活動內容：新戶核卡後30日內，消費累積滿1,288元(含)以上，且不限地點首次自動加值，即可享首刷好禮多選一；如符合首刷禮條件並有使用本行任一行動支付新增不限金額之一般消費，即可升級獲贈「無線行動電源」。
-                </p>
-                <div class="form-check mt-2 ms-3">
-                    <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios4" value="option1">
-                    <label class="form-check-label fw-bold" for="exampleRadios4">
-                        好禮一：智能垃圾桶（代碼5）
-                    </label>
-                </div>
-                <div class="form-check mt-2 ms-3">
-                    <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios5" value="option1">
-                    <label class="form-check-label fw-bold" for="exampleRadios5">
-                        好禮二：20吋璀璨灰登機箱（代碼9）
-                    </label>
-                </div>
-                <div class="form-check mt-2 ms-3">
-                    <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios6" value="option1">
-                    <label class="form-check-label fw-bold" for="exampleRadios6">
-                        好禮三：刷卡金500元（代碼3）
-                    </label>
-                </div>
-                <div class="form-check mt-2 ms-3">
-                    <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios7" value="option1">
-                    <label class="form-check-label fw-bold" for="exampleRadios7">
-                        好禮四：無線行動電源（代碼2）
-                    </label>
+                    <div class="form-check mt-2 ms-3">
+                        <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios5" value="option1">
+                        <label class="form-check-label fw-bold" for="exampleRadios5">
+                            好禮二：20吋璀璨灰登機箱（代碼9）
+                        </label>
+                    </div>
+                    <div class="form-check mt-2 ms-3">
+                        <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios6" value="option1">
+                        <label class="form-check-label fw-bold" for="exampleRadios6">
+                            好禮三：刷卡金500元（代碼3）
+                        </label>
+                    </div>
+                    <div class="form-check mt-2 ms-3">
+                        <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios7" value="option1">
+                        <label class="form-check-label fw-bold" for="exampleRadios7">
+                            好禮四：無線行動電源（代碼2）
+                        </label>
+                    </div>
                 </div>
             </div>
-        </div>
+        </Form>
+
         <!--------------//首刷禮---------------->
         <!----------------yesgogogo---------------->
         <div class="mt-3 mt-md-5">
@@ -270,7 +283,7 @@
           <div class="modal-body">
             <!------------------1-------------------------------------------->
             <div ref="termBox1" id="terms_box_1" class="terms_box oneTerms">
-              <!--uc1:wuc聯邦銀行電子銀行服務申請約定條款 runat="server" id="wuc聯邦銀行電子銀行服務申請約定條款" /-->
+              <!--uc1:wuc聯邦銀行電子銀行服務申請約定條款  id="wuc聯邦銀行電子銀行服務申請約定條款" /-->
               <div class="txt">
                 <h3>聯邦銀行電子銀行服務申請約定條款</h3>
                 <div class="text-center">(線上申辦電子銀行服務) 111.03</div>
@@ -660,7 +673,7 @@
           </div>
           <div class="modal-footer">
             <div class="col-12 text-center">
-              <button type="button" class="btn btn-primary btn-lg" @click="checkTotal">確定</button>
+              <button type="submit" class="btn btn-primary btn-lg" @click="checkTotal">確定</button>
             </div>
           </div>
         </div>
@@ -677,7 +690,8 @@ export default {
     return {
       agreement: false,
       agreementAll: false,
-      contractModal: ''
+      contractModal: '',
+      Identification: ''
     }
   },
   methods: {
@@ -713,6 +727,18 @@ export default {
       }
       this.contractModal.hide()
       this.agreementAll = true
+    },
+    checkId (id) {
+      // ? 身分證驗證
+      console.log(id)
+      const idRule = /^[a-z](1|2)\d{8}$/i
+      if (idRule.test(id)) {
+        return true
+      }
+      return '請輸入正確格式身份證'
+    },
+    applySubmit () {
+      //
     }
   },
   watch: {
