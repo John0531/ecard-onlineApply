@@ -213,14 +213,17 @@
                                         <option>忠孝東路五段</option>
                                     </select>
                                 </div>
-                                <div class="d-flex apply_address align-items-center">
-                                    <input v-model.number="test" @keyup="test=$custom.validate.OnlyNumPress(test)" type="number" placeholder="" class="form-control me-1">巷
-                                    <input maxlength="5" name="login[id]" type="text" placeholder="" class="form-control mx-1">弄
-                                    <input maxlength="5" type="text" placeholder="" class="form-control mx-1">-
-                                    <input maxlength="5" type="text" placeholder="" class="form-control mx-1">號
-                                    <input maxlength="5" type="text" placeholder="" class="form-control mx-1">樓
-                                    <input maxlength="5" type="text" placeholder="" class="form-control ms-1">
-                                </div>
+                                <Form v-slot="{errors}">
+                                    <div class="d-flex apply_address align-items-center">
+                                        <input type="text" v-model="Address.Ln" @change="errors=$custom.validate.CheckAddress(Address)" @keyup="test=$custom.validate.OnlyNumPress(Address.Ln)" maxlength="5" placeholder="" class="form-control me-1">巷
+                                        <input type="text" v-model="Address.Aly" @change="$custom.validate.CheckAddress(Address)" @keyup="test=$custom.validate.OnlyNumPress(Address.Aly)" maxlength="5" placeholder="" class="form-control mx-1">弄
+                                        <input type="text" v-model="Address.No_1" @change="$custom.validate.CheckAddress(Address)" @keyup="test=$custom.validate.OnlyNumPress(Address.No_1)" maxlength="5" placeholder="" class="form-control mx-1">-
+                                        <input type="text" v-model="Address.No_2" @change="$custom.validate.CheckAddress(Address)" @keyup="test=$custom.validate.OnlyNumPress(Address.No_2)" maxlength="5" placeholder="" class="form-control mx-1">號
+                                        <input type="text" v-model="Address.Floor" @change="$custom.validate.CheckAddress(Address)" @keyup="test=$custom.validate.OnlyNumPress(Address.Floor)" maxlength="5" placeholder="" class="form-control mx-1">樓
+                                        <input type="text" v-model="Address.Other" @change="$custom.validate.CheckAddress(Address)" maxlength="5" placeholder="" class="form-control ms-1">
+                                        <ErrorMessage></ErrorMessage>
+                                    </div>
+                                </Form>
                             </li>
                             <li class="col-12 col-md-12">
                                 <label for=""><span class="red_text">* </span>居住地址</label>
@@ -404,7 +407,7 @@
                 </div>
                 <div class="mb-4 text-left text-md-center red_text">* 請務必填寫至最後步驟並列印出「簽名欄位」及黏貼「身份證影本欄位」，<br> 切勿自行按瀏覽器之列印功能以免資料不全造成辦卡時間之延誤。</div>
                 <div class="text-center button_group">
-                    <button @click.prevent="$router.push('/Written_1')" class="btn btn-primary btn-lg mx-1">下一步</button>
+                    <button @click.prevent="$router.push('/OnLineApply_Written_1')" class="btn btn-primary btn-lg mx-1">下一步</button>
                 </div>
             </div>
         </div>
@@ -415,7 +418,7 @@
 export default {
   data () {
     return {
-      test: ''
+      Address: {}
     }
   },
   methods: {

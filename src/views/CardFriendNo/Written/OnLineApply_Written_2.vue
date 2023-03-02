@@ -127,7 +127,7 @@
                 </div>
                 <!-------------------//本人已詳閱---------------------->
                 <div class="text-center button_group">
-                    <button @click.prevent="$router.push('/Written_3')" class="btn btn-primary btn-lg mx-1">預覽申請書</button>
+                    <button @click.prevent="$router.push('/OnLineApply_Written_3')" class="btn btn-primary btn-lg mx-1">預覽申請書</button>
                 </div>
             </div>
         </div>

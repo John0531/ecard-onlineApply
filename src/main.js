@@ -10,7 +10,7 @@ import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 
 // ? vee-validate
 import { Field, Form, ErrorMessage, defineRule, configure } from 'vee-validate'
-import { required, email, min } from '@vee-validate/rules'
+import AllRules from '@vee-validate/rules'
 import { localize, setLocale } from '@vee-validate/i18n'
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
 
@@ -33,9 +33,10 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 
-defineRule('required', required)
-defineRule('email', email)
-defineRule('min', min)
+// ?加入所有表單驗證規則
+Object.keys(AllRules).forEach((rule) => {
+  defineRule(rule, AllRules[rule])
+})
 configure({
   generateMessage: localize({ zh_TW: zhTW }),
   validateOnInput: true

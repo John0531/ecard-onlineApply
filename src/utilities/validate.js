@@ -259,16 +259,24 @@ const validate = {
   //* ==== 12. 只可輸入數字
   //* 來源： Utility.js
   OnlyNumPress (value) {
-    console.log(value)
-    if (!value) {
-      return ''
-    }
-    const a = value.toString()
-    console.log(a)
-    if (a.length > 5) {
-      return parseInt(a.slice(0, 5))
-    }
-    return parseInt(a)
+    value = value.replace(/^(0+)|[^\d]+/g, '')
+    return value
+    // value = value.toString().replace(/^(0+)|[^\d]+/g, '')
+    // console.log(value)
+    // if (value) {
+    //   return parseInt(value)
+    // } else {
+    //   return ''
+    // }
+    // if (!value) {
+    //   return ''
+    // }
+    // const a = value.toString()
+    // console.log(a)
+    // if (a.length > 5) {
+    //   return parseInt(a.slice(0, 5))
+    // }
+
     // console.log(e.keyCode)
     // var objKeyCode = window.event ? e.keyCode : e.charCode
     // console.log(objKeyCode)
@@ -298,6 +306,7 @@ const validate = {
     Other: ''// ? 其他
   },
   CheckAddress (Address) {
+    console.log(Address)
     const test = Address.Ln + Address.Aly + Address.No_1 + Address.No_2 + Address.Floor + Address.Other
     if (test.length < 1) {
       return '地址格式有誤'

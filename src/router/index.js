@@ -81,33 +81,33 @@ const routes = [
       },
       // ? 非卡友-書面
       {
-        path: '/Written',
+        path: '/OnLineApply_Written',
         name: '申請資料填寫',
-        component: () => import('../views/CardFriendNo/Written/Written.vue'),
+        component: () => import('../views/CardFriendNo/Written/OnLineApply_Written.vue'),
         meta: {
           title: '申請資料填寫'
         }
       },
       {
-        path: '/Written_1',
+        path: '/OnLineApply_Written_1',
         name: '職業資料',
-        component: () => import('../views/CardFriendNo/Written/Written_1.vue'),
+        component: () => import('../views/CardFriendNo/Written/OnLineApply_Written_1.vue'),
         meta: {
           title: '職業資料'
         }
       },
       {
-        path: '/Written_2',
+        path: '/OnLineApply_Written_2',
         name: '個資使用條款',
-        component: () => import('../views/CardFriendNo/Written/Written_2.vue'),
+        component: () => import('../views/CardFriendNo/Written/OnLineApply_Written_2.vue'),
         meta: {
           title: '個資使用條款'
         }
       },
       {
-        path: '/Written_3',
+        path: '/OnLineApply_Written_3',
         name: '確認填寫資料',
-        component: () => import('../views/CardFriendNo/Written/Written_3.vue'),
+        component: () => import('../views/CardFriendNo/Written/OnLineApply_Written_3.vue'),
         meta: {
           title: '確認填寫資料'
         }

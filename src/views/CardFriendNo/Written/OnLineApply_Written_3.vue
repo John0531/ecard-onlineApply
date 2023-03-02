@@ -355,7 +355,7 @@
                     <span class="blue_text"><strong>＊申請書資料已確認完成請按下一步同意送出，並請繼續完成證件及財力上傳流程。</strong></span>
                 </div>
                 <div class="text-center button_group">
-                    <button @click.prevent="$router.push('/Written')" class="btn btn-primary btn-lg mx-1">修改資料</button>
+                    <button @click.prevent="$router.push('/OnLineApply_Written')" class="btn btn-primary btn-lg mx-1">修改資料</button>
                     <button onclick="location.href='#'" class="btn btn-primary btn-lg mx-1" type="submit" value="">下一步</button>
                 </div>
             </div>

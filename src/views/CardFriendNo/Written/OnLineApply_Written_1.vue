@@ -186,7 +186,7 @@
                 <div class="mb-4 text-md-center red_text">* 請務必填寫至最後步驟並列印出「簽名欄位」及黏貼「身份證影本欄位」，<br> 切勿自行按瀏覽器之列印功能以免資料不全造成辦卡時間之延誤。
                 </div>
                 <div class="text-center button_group">
-                    <button @click.prevent="$router.push('/Written_2')" class="btn btn-primary btn-lg mx-1">下一步</button>
+                    <button @click.prevent="$router.push('/OnLineApply_Written_2')" class="btn btn-primary btn-lg mx-1">下一步</button>
                 </div>
             </div>
         </div>
