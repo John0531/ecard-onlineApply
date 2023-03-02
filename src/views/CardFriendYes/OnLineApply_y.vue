@@ -131,27 +131,6 @@
             </div>
           </div>
         </div>
-        <!----------------yesgogogo ---------------->
-        <div class="mt-3 mt-md-5">
-          <div class="yesgogogo_box">
-            <h3>yesgogogo即食購–在地美食，安心品質 (聯邦紅利指定折抵網站)</h3>
-            <div class="yesgogogo_txt">
-              <h4>yesgogogo會員加碼禮<span> (新舊戶卡友皆適用)</span></h4>
-              活動期間：111年1月1日~111年6月30日。<br />
-              活動內容：活動期間至聯邦信用卡官網進行開卡並點選註冊成為yesgogogo會員，或經由yesgogogo即食購之聯邦卡友專屬註冊頁完成註冊者，即可獲贈加碼禮。
-              <ul>
-                <li>成為會員享1,000元折價券。(新舊會員皆適用)</li>
-                <li>新會員首購單筆滿499元贈好禮+購物金點數回饋100%。</li>
-                <li>週二聯邦日：週週享購物金點數回饋100%。</li>
-              </ul>
-              ※ 每會員限領乙份折價券，更多說明及限制詳參<a
-                href="https://card.ubot.com.tw/eCard/activity/2022yesgogogo/index.htm"
-                ><u>活動官網</u>。</a
-              >
-            </div>
-          </div>
-        </div>
-        <!----------------//yesgogogo ---------------->
         <!----------------fee ---------------->
         <div class="mt-3 mt-md-5">
           <div class="fee_box mb-3">
@@ -163,7 +142,7 @@
               />年費定價說明：
             </h3>
             <div class="fee_content">
-              <table class="fee_table">
+              <table class="fee_table w-100">
                 <thead>
                   <tr>
                     <th width="20%">卡別</th>
@@ -174,12 +153,12 @@
                 <tbody>
                   <tr>
                     <td class="fee_cardname">
-                      <strong>微風悠遊聯名卡<br />VISA<br />悠遊御璽卡</strong>
+                      <strong>LINE Bank悠遊聯名卡<br />VISA<br />悠遊御璽卡</strong>
                     </td>
                     <td class="redWord text-center" rowspan="3">免年費</td>
                     <td rowspan="3">
                       <p class="text-left">
-                        第二年起統計正、附卡年度合併消費未達36,000元，收取全額年費。
+                        第二年起統計正、附卡年度合併消費未達60,000元，收取全額年費。
                       </p>
                       <table width="100%">
                         <thead class="fee_thead">
@@ -190,63 +169,15 @@
                         </thead>
                         <tbody>
                           <tr>
-                            <td class="text-center">36,000元(含)以上</td>
+                            <td class="text-center">60,000元(含)以上</td>
                             <td class="redWord text-center">免年費</td>
                           </tr>
                           <tr>
-                            <td class="text-center">未達36,000 元</td>
-                            <td class="text-center">2,000元</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="fee_cardname">
-                      <strong>微風悠遊聯名卡<br />MasterCard<br />悠遊鈦金卡</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="fee_cardname">
-                      <strong>微風悠遊聯名卡<br />JCB<br />悠遊晶緻卡</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="fee_cardname">
-                      <strong>微風悠遊聯名卡<br />VISA<br />悠遊白金卡</strong>
-                    </td>
-                    <td class="redWord text-center" rowspan="2">免年費</td>
-                    <td rowspan="2">
-                      <p class="text-left">
-                        依據每張卡片年費到期日往前推算一年，檢核同一身分證字號下之消費，若不符合標準則以單卡按以下標準計算收取年費(不分正、附卡)：
-                      </p>
-                      <table width="100%">
-                        <thead class="fee_thead">
-                          <tr>
-                            <th class="text-center">年消費</th>
-                            <th class="text-center">年費</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td class="text-center">1萬元(含)以上或消費10次(含)以上</td>
-                            <td class="redWord text-center">免年費</td>
-                          </tr>
-                          <tr>
-                            <td class="text-center">5,000元(含)或5次(含)以上</td>
-                            <td class="text-center">500元</td>
-                          </tr>
-                          <tr>
-                            <td class="text-center">未達5,000元或5次</td>
+                            <td class="text-center">未達60,000 元</td>
                             <td class="text-center">1,000元</td>
                           </tr>
                         </tbody>
                       </table>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="fee_cardname">
-                      <strong>微風悠遊聯名卡<br />MasterCard<br />悠遊白金卡</strong>
                     </td>
                   </tr>
                 </tbody>

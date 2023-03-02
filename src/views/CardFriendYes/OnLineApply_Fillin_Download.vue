@@ -40,7 +40,7 @@
         </div>
         <div class="text-center button_group">
           <button
-            onclick="location.href='OnLineApply_Fillin_finish.htm'"
+            onclick="location.href='OnLineApply_Fillin_finish'"
             class="btn btn-primary btn-lg mx-1"
             type="submit"
             value=""
