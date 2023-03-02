@@ -919,4 +919,12 @@
   .modal .btn-close:focus{
     box-shadow: none;
   }
+  .is-invalid {
+    border-color: #db0031;
+    background-image: none;
+  }
+  .invalid-feedback {
+    color: #db0031;
+    font-size: 1em !important;
+  }
   /*--//modal--*/
