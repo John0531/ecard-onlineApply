@@ -113,17 +113,13 @@
             <li class="col-12 col-md-6">
               <label for="">3.出生地</label>
               <select name="" runat="server" id="" class="form-select form-control">
-                <option></option>
-                <option></option>
-                <option></option>
+                <option v-for="birthArea in form.birthPlace" :key="birthArea.SORT" :value="birthArea.VALUE">{{ birthArea.SHOW }}</option>
               </select>
             </li>
             <li class="col-12 col-md-6">
               <label for="">4.國籍</label>
               <select name="" runat="server" id="" class="form-select form-control">
-                <option></option>
-                <option></option>
-                <option></option>
+                <option v-for="national in form.citizenShip" :key="national.SORT" :value="national.VALUE">{{ national.SHOW }}</option>
               </select>
             </li>
             <li class="col-12 col-md-6">
@@ -135,9 +131,7 @@
                   id=""
                   class="form-select form-control me-1"
                 >
-                  <option></option>
-                  <option></option>
-                  <option></option>
+                  <option v-for="jobType in form.jobSort" :key="jobType.SORT" :value="jobType.VALUE">{{ jobType.SHOW }}</option>
                 </select>
                 <div class="d-flex align-items-center">
                   <span class="text-nowrap">其他</span>
@@ -154,9 +148,7 @@
             <li class="col-12 col-md-6">
               <label for="">6.職級別</label>
               <select name="" runat="server" id="" class="form-select form-control">
-                <option></option>
-                <option></option>
-                <option></option>
+                <option v-for="job in form.jobLevel" :key="job.SORT" :value="job.VALUE">{{ job.SHOW }}</option>
               </select>
             </li>
             <li class="col-12 col-md-6">
@@ -168,9 +160,7 @@
                   id=""
                   class="form-select form-control me-1"
                 >
-                  <option></option>
-                  <option></option>
-                  <option></option>
+                  <option v-for="incomes in form.incomeOptions" :key="incomes.VALUE" :value="incomes.VALUE">{{ incomes.SHOW}}</option>
                 </select>
                 <div class="d-flex align-items-center">
                   <span class="text-nowrap">其他</span>
@@ -390,7 +380,14 @@ import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 export default {
   data () {
     return {
-      noticeModal: ''
+      noticeModal: '',
+      form: {
+        birthPlace: [], // *出生地
+        incomeOptions: [], // *主要收入來源
+        citizenShip: [], // *國籍,
+        jobSort: [], // *職嘔別
+        jobLevel: [] // *職業級
+      }
     }
   },
   methods: {
@@ -403,10 +400,22 @@ export default {
         })
         noticeModal.show()
       }
+    },
+    getUtilities () {
+      const utilityurl = 'https://yesgoimages.s3.ap-northeast-1.amazonaws.com/ecard/Uitlity.json'
+      this.axios.get(utilityurl).then((res) => {
+        this.form.incomeOptions = res.data.INCOME
+        this.form.birthPlace = res.data.BIRTHPLACE
+        this.form.citizenShip = res.data.NATIONALITY
+        this.form.jobSort = res.data.JOBTYPE
+        this.form.jobLevel = res.data.JOBLV
+        console.log(res)
+      })
     }
   },
   mounted () {
     this.getNotice()
+    this.getUtilities()
   }
 }
 </script>
