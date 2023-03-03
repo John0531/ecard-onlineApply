@@ -926,5 +926,10 @@
   .invalid-feedback {
     color: #db0031;
     font-size: 1em !important;
-  }
+}
+@media(max-width:768px) {
+.invalid-feedback{
+    font-size: 0.8em !important;
+}
+}
   /*--//modal--*/

@@ -318,7 +318,7 @@ const validate = {
       return '地址格式有誤'
     }
     return true
-  }
+  },
 
   //* ==== 13. 確認辦卡地址 ====(非聯邦卡友)
   //* 來源： Utility.js
@@ -441,7 +441,16 @@ const validate = {
 
   //   return true
   // }
-
+  //* ==== 16. 檢查身分證格式 ====
+  //* 來源： Utility.js
+  checkId (id) {
+    // ? 身分證驗證
+    const idRule = /^[a-z](1|2)\d{8}$/i
+    if (idRule.test(id)) {
+      return true
+    }
+    return '請輸入正確格式身份證'
+  }
 }
 
 export default validate

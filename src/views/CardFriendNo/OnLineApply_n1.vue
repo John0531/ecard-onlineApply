@@ -17,7 +17,7 @@
                     <div class="not_UBfriend">
                         <div class="item">
                             <h3>線上辦卡 <img src="images/form/Apply_icon02.png" class="img-fluid" alt="" /></h3>
-                            <button onclick="location.href='OnLineApply_Chk.htm'" class="btn btn-primary btn-lg rounded-pill" type="submit" value="">立即辦卡 <i class="fa fa-arrow-circle-right"></i></button><br>
+                            <router-link to="/OnLineApply_Chk" class="btn btn-primary btn-lg rounded-pill" >立即辦卡 <i class="fa fa-arrow-circle-right"></i></router-link><br>
                             <h4>(已持有其他銀行信用卡)</h4>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                     <div class="not_UBfriend">
                         <div class="item">
                             <h3>線上辦卡 <img src="images/form/Apply_icon03.png" class="img-fluid" alt="" /></h3>
-                            <button onclick="location.href='OnLineApply_ChkSZ.htm'" class="btn btn-primary btn-lg rounded-pill" type="submit" value="">立即辦卡 <i class="fa fa-arrow-circle-right"></i></button><br>
+                            <router-link to="/OnLineApply_ChkSZ" class="btn btn-primary btn-lg rounded-pill" >立即辦卡 <i class="fa fa-arrow-circle-right"></i></router-link><br>
                             <h4>(已持有其他銀行帳戶)</h4>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                     <div class="not_UBfriend">
                         <div class="item">
                             <h3>書面申請 <img src="images/form/Apply_icon01.png" class="img-fluid" alt="" /></h3>
-                            <button onclick="location.href='OnLineApply_Written.htm'" class="btn btn-primary btn-lg rounded-pill" type="submit" value="">立即辦卡 <i class="fa fa-arrow-circle-right"></i></button><br>
+                            <router-link to="OnLineApply_Written" class="btn btn-primary btn-lg rounded-pill" >立即辦卡 <i class="fa fa-arrow-circle-right"></i></router-link><br>
                             <h4>(無其他銀行信用卡)</h4>
                         </div>
                     </div>

@@ -22,13 +22,15 @@
                         <label for="">申請人身分證字號</label>
                         <div class="mb-1">
                             <Field
-                            v-model.trim="applierInfo.Identification"
+                            v-model="applierInfo.Identification"
                             name="login[id]"
                             type="text" maxlength="10"
                             placeholder="限正卡持卡人"
                             :class="{ 'is-invalid': errors['login[id]'] }"
                             class="formApply_form_control form-control"
-                            :rules="checkId"/>
+                            :validateOnBlur="true"
+                            :rules="$custom.validate.checkId"
+                            />
                             <ErrorMessage
                             name="login[id]"
                             class="invalid-feedback"
@@ -57,7 +59,7 @@
                             <div>
                                 <Field as="select" name="出生月" rules="required" :class="{ 'is-invalid': errors['出生月'] }" class="form-select form-control" v-model="applierInfo.month" @change="getDay">
                                     <option value="" selected></option>
-                                    <option v-for="month in Array.from({length: 13}, (v, i) => i + 0)" :value="month" :key="month+1">
+                                    <option v-for="month in dateList.monthList" :value="month" :key="month+1">
                                     {{month}}
                                     </option>
                                 </Field>
@@ -710,6 +712,9 @@ export default {
     }
   },
   methods: {
+    toUpperCase (value) {
+      console.log(value)
+    },
     scorllEvent () {
       this.$refs.termBox1.onscroll = function () {
         if (this.scrollHeight - this.scrollTop <= this.clientHeight + 50) {
@@ -742,15 +747,6 @@ export default {
       }
       this.contractModal.hide()
       this.agreementAll = true
-    },
-    checkId (id) {
-      // ? 身分證驗證
-      console.log(id)
-      const idRule = /^[a-z](1|2)\d{8}$/i
-      if (idRule.test(id)) {
-        return true
-      }
-      return '請輸入正確格式身份證'
     },
     getYearMonth () {
       // ? 產生生日"年"、"月"選單
@@ -791,16 +787,14 @@ export default {
           this.dateList.dayList.push(i)
         }
       }
-      console.log(this.dateList.dayList)
       // ?月對應的天數如比前一個天數少，清空日
       if (this.dateList.dayList.length < this.applierInfo.day) {
         this.applierInfo.day = ''
       }
-      console.log(this.dateList.dayList)
     },
     onInvalidSubmit ({ values, errors, results }) { // !總表單驗證
       this.$swal.fire({
-        title: '尚有必填欄位未填寫',
+        title: '尚有必填欄位未填寫正確',
         showConfirmButton: false,
         // timer: 2500,
         customClass: {
@@ -821,7 +815,7 @@ export default {
       }
       if (!this.agreePersonalData) {
         this.$swal.fire({
-          title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+          title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
           showConfirmButton: false,
           customClass: {
             title: 'text-class'
@@ -835,6 +829,10 @@ export default {
   watch: {
     agreement (n) {
       this.agreementAll = n
+    },
+    'applierInfo.Identification' (n) {
+      this.applierInfo.Identification = this.applierInfo.Identification.toUpperCase()
+      console.log('轉大小寫')
     }
   },
   mounted () {

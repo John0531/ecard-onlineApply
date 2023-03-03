@@ -39,7 +39,10 @@ Object.keys(AllRules).forEach((rule) => {
 })
 configure({
   generateMessage: localize({ zh_TW: zhTW }),
-  validateOnInput: true
+  validateOnInput: false,
+  validateOnBlur: true,
+  validateOnChange: false,
+  validateOnModelUpdate: false
 })
 setLocale('zh_TW')
 
