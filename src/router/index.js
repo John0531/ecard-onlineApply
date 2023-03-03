@@ -79,6 +79,14 @@ const routes = [
           title: '我不是聯邦卡友'
         }
       },
+      {
+        path: '/OnLineApply_n1',
+        name: '非卡友線上申請',
+        component: () => import('../views/CardFriendNo/OnLineApply_n1.vue'),
+        meta: {
+          title: '非卡友線上申請'
+        }
+      },
       // ? 非卡友-書面
       {
         path: '/OnLineApply_Written',

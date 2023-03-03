@@ -1,0 +1,12 @@
+.text-class {
+  font-size: 16px !important;
+  font-weight: normal !important;
+  text-align: left !important;
+  padding: 1.25em 1.25em 0 !important;
+}
+.confirm-btn-class {
+  padding: 6px 24px !important;
+}
+.swal2-actions {
+  margin: 1.25em 1em 0 auto !important;
+}

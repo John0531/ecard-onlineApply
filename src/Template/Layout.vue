@@ -22,6 +22,7 @@ export default {
   @import "~@/assets/css/OnLineApply.css";
   @import "~@/assets/css/NNB.css";
   @import "~@/assets/css/terms.css";
+  @import "~@/assets/css/alert.css";
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button{
         -webkit-appearance: none;

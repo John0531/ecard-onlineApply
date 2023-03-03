@@ -14,6 +14,7 @@
         <Form
             v-slot="{errors}"
             @submit="applySubmit"
+            @invalid-submit="onInvalidSubmit"
         >
             <div class="formGroup">
                 <ul class="formList formApply">
@@ -21,7 +22,7 @@
                         <label for="">申請人身分證字號</label>
                         <div class="mb-1">
                             <Field
-                            v-model.trim="Identification"
+                            v-model.trim="applierInfo.Identification"
                             name="login[id]"
                             type="text" maxlength="10"
                             placeholder="限正卡持卡人"
@@ -31,7 +32,7 @@
                             <ErrorMessage
                             name="login[id]"
                             class="invalid-feedback"
-                                                  ></ErrorMessage>
+                            ></ErrorMessage>
                         </div>
                     </li>
                     <li class="col-12">
@@ -41,67 +42,69 @@
                     <li class="col-12">
                         <label for="input1">西元出生年月日</label>
                         <div class="d-flex align-items-center">
-                            <select name=""  class="form-select form-control">
-                                <option value="" selected></option>
-                                <option v-for="n in Array.from({length: 80}, (v, i) => i + (new Date().getFullYear() - 95))" :value="n" :key="n+1">
-                                {{n}}
-                                </option>
-                            </select>年
-                            <select name=""  id="SelM" class="form-select form-control">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
-                                <option>11</option>
-                                <option>12</option>
-                            </select>月
-                            <select name=""  id="SelD" class="form-select form-control">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
-                                <option>11</option>
-                                <option>12</option>
-                            </select>日
+                            <!-- 辦卡人出生年 -->
+                            <div>
+                                <Field as="select" name="出生年" rules="required"  class="form-select form-control" :class="{ 'is-invalid': errors['出生年'] }" v-model="applierInfo.year" @change="getDay">
+                                    <option value="" selected></option>
+                                    <option v-for="n in Array.from({length: 80}, (v, i) => i + (new Date().getFullYear() - 95))" :value="n" :key="n+1">
+                                    {{n}}
+                                    </option>
+                                </Field>
+                                <ErrorMessage name="出生年" class="invalid-feedback">
+                                </ErrorMessage>
+                            </div>年
+                            <!-- 辦卡人出生月 -->
+                            <div>
+                                <Field as="select" name="出生月" rules="required" :class="{ 'is-invalid': errors['出生月'] }" class="form-select form-control" v-model="applierInfo.month" @change="getDay">
+                                    <option value="" selected></option>
+                                    <option v-for="month in Array.from({length: 13}, (v, i) => i + 0)" :value="month" :key="month+1">
+                                    {{month}}
+                                    </option>
+                                </Field>
+                                <ErrorMessage name="出生月" class="invalid-feedback">
+                                </ErrorMessage>
+                            </div>月
+                            <!-- 辦卡人出生日 -->
+                            <div>
+                                <Field as="select" name="出生日" rules="required" :class="{ 'is-invalid': errors['出生日'] }"  class="form-select form-control" v-model="applierInfo.day">
+                                    <option value="" selected></option>
+                                    <option v-for="date in dateList.dayList" :value="date" :key="date+1">
+                                    {{date}}
+                                    </option>
+                                </Field>
+                                <ErrorMessage name="出生日" class="invalid-feedback">
+                                </ErrorMessage>
+                            </div>日
                         </div>
                     </li>
                 </ul>
             </div>
             <div class="col-lg-10 d-flex flex-wrap">
+                <!-- 卡種1 -->
                 <div class="col-12 col-md-4 text-center">
                 <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="" />
                 <div class="form-check my-2">
-                    <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                    <input v-model="applierInfo.cardPicked" class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
                     <label class="form-check-label text-start text-md-center fw-bold" for="exampleRadios1">
                         微風悠遊聯名卡MasterCard悠遊鈦金卡
                     </label>
                 </div>
                 </div>
+                <!-- 卡種2 -->
                 <div class="col-12 col-md-4 text-center">
                 <img src="@/assets/images/form/card_b4bs.jpg" class="img-fluid" alt="" />
                 <div class="form-check my-2">
-                    <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios2" value="option1">
+                    <input v-model="applierInfo.cardPicked" class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
                     <label class="form-check-label text-start text-md-center fw-bold" for="exampleRadios2">
                         微風悠遊聯名卡JCB悠遊晶緻卡
                     </label>
                 </div>
                 </div>
+                <!-- 卡種3 -->
                 <div class="col-12 col-md-4 text-center">
                 <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="" />
                 <div class="form-check my-2">
-                    <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios3" value="option1">
+                    <input v-model="applierInfo.cardPicked" class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
                     <label class="form-check-label text-start text-md-center fw-bold" for="exampleRadios3">
                         微風悠遊聯名卡VISA悠遊御璽卡
                     </label>
@@ -117,33 +120,31 @@
                     <p>◆活動內容：新戶核卡後30日內，消費累積滿1,288元(含)以上，且不限地點首次自動加值，即可享首刷好禮多選一；如符合首刷禮條件並有使用本行任一行動支付新增不限金額之一般消費，即可升級獲贈「無線行動電源」。
                     </p>
                     <div class="form-check mt-2 ms-3">
-                        <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios4" value="option1">
+                        <input v-model="applierInfo.firstGift" class="form-check-input Apply_input" type="radio" name="firstGift1" id="firstGift1" value="option1" checked>
                         <label class="form-check-label fw-bold" for="exampleRadios4">
                             好禮一：智能垃圾桶（代碼5）
                         </label>
                     </div>
                     <div class="form-check mt-2 ms-3">
-                        <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios5" value="option1">
+                        <input v-model="applierInfo.firstGift" class="form-check-input Apply_input" type="radio" name="firstGift2" id="firstGift2" value="option2">
                         <label class="form-check-label fw-bold" for="exampleRadios5">
                             好禮二：20吋璀璨灰登機箱（代碼9）
                         </label>
                     </div>
                     <div class="form-check mt-2 ms-3">
-                        <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios6" value="option1">
+                        <input v-model="applierInfo.firstGift" class="form-check-input Apply_input" type="radio" name="firstGift3" id="firstGift3" value="option3">
                         <label class="form-check-label fw-bold" for="exampleRadios6">
                             好禮三：刷卡金500元（代碼3）
                         </label>
                     </div>
                     <div class="form-check mt-2 ms-3">
-                        <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios7" value="option1">
+                        <input v-model="applierInfo.firstGift" class="form-check-input Apply_input" type="radio" name="firstGift4" id="firstGift4" value="option4">
                         <label class="form-check-label fw-bold" for="exampleRadios7">
                             好禮四：無線行動電源（代碼2）
                         </label>
                     </div>
                 </div>
             </div>
-        </Form>
-
         <!--------------//首刷禮---------------->
         <!----------------yesgogogo---------------->
         <div class="mt-3 mt-md-5">
@@ -163,7 +164,6 @@
             </div>
         </div>
         <!----------------//yesgogogo ---------------->
-        <!----------------fee ---------------->
         <div class="mt-3 mt-md-5">
             <div class="fee_box mb-3">
                 <h3><img src="images/form/fee_icon.gif" class="img-fluid" alt="" />年費定價說明：</h3>
@@ -249,7 +249,6 @@
                 </div>
             </div>
         </div>
-        <!----------------//fee ---------------->
         <!-------------------本人已詳閱---------------------->
         <div class="terms-group">
             <div class="terms">
@@ -258,15 +257,16 @@
                 </label>
             </div>
             <div class="terms">
-                <input type="checkbox" class="checkimg position-absolute" id="agree1">
+                <input type="checkbox" class="checkimg position-absolute" id="agree1" v-model="agreePersonalData">
                 <label for="agree1">本人同意申辦貴行業務時，因中途退出或雖未完成所有申請步驟所留存之相關個人資料，貴行得用以提供後續聯繫及服務時使用。
                 </label>
             </div>
         </div>
-        <!-------------------//本人已詳閱---------------------->
+        <!-------------------//前往下一頁---------------------->
         <div class="text-center button_group">
-            <button onclick="location.href='OnLineApply_n1.htm'" class="btn btn-primary btn-lg mx-1" type="submit" value="">下一步</button>
+            <button  class="btn btn-primary btn-lg mx-1" type="submit" value="">下一步</button>
         </div>
+        </Form>
       </div>
     </div>
     <!-- Modal-1 -->
@@ -688,10 +688,25 @@ import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 export default {
   data () {
     return {
+      dateList: {
+        // ?日期選單
+        yearList: [],
+        monthList: [],
+        dayList: []
+      },
+      applierInfo: {
+        // ?使用者輸入的出生年月日
+        Identification: '',
+        year: '',
+        month: '',
+        day: '',
+        cardPicked: '',
+        firstGift: ''
+      },
       agreement: false,
-      agreementAll: false,
-      contractModal: '',
-      Identification: ''
+      agreementAll: false, // ?同意申請條款
+      contractModal: '', // ?同意書modal
+      agreePersonalData: false // ?同意個資聲明
     }
   },
   methods: {
@@ -737,8 +752,84 @@ export default {
       }
       return '請輸入正確格式身份證'
     },
+    getYearMonth () {
+      // ? 產生生日"年"、"月"選單
+    //   const year = new Date()
+    //   for (let i = 1930; i < year.getFullYear() + 1; i++) {
+    //     this.dateList.yearList.push(i)
+    //   }
+      for (let i = 1; i < 13; i++) {
+        if (i < 10) {
+          this.dateList.monthList.push('0' + i)
+        } else {
+          this.dateList.monthList.push(i)
+        }
+      }
+    },
+    getDay () {
+      // ? 產生生日"日"選單
+      this.dateList.dayList = []
+      // ?清空西元年，月日一併清空
+      if (!this.applierInfo.year) {
+        this.applierInfo.month = ''
+        this.applierInfo.day = ''
+        return
+      }
+      // ?清空月，日一併清空
+      if (!this.applierInfo.month) {
+        this.applierInfo.day = ''
+        return
+      }
+      const days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+      if (this.applierInfo.year % 4 === 0) {
+        days[1] = 29
+      }
+      for (let i = 1; i < days[parseInt(this.applierInfo.month) - 1] + 1; i++) {
+        if (i < 10) {
+          this.dateList.dayList.push('0' + i)
+        } else {
+          this.dateList.dayList.push(i)
+        }
+      }
+      console.log(this.dateList.dayList)
+      // ?月對應的天數如比前一個天數少，清空日
+      if (this.dateList.dayList.length < this.applierInfo.day) {
+        this.applierInfo.day = ''
+      }
+      console.log(this.dateList.dayList)
+    },
+    onInvalidSubmit ({ values, errors, results }) { // !總表單驗證
+      this.$swal.fire({
+        title: '尚有必填欄位未填寫',
+        showConfirmButton: false,
+        // timer: 2500,
+        customClass: {
+          title: 'text-class'
+        }
+      })
+    },
     applySubmit () {
-      //
+      if (!this.agreement) {
+        this.$swal.fire({
+          title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+          showConfirmButton: false,
+          // timer: 2500
+          customClass: {
+            title: 'text-class'
+          }
+        })
+      }
+      if (!this.agreePersonalData) {
+        this.$swal.fire({
+          title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+          showConfirmButton: false,
+          customClass: {
+            title: 'text-class'
+          }
+          // timer: 2500
+        })
+      }
+      this.$router.push('/OnLineApply_n1')
     }
   },
   watch: {
@@ -749,6 +840,22 @@ export default {
   mounted () {
     this.scorllEvent()
     this.contractModal = new bootstrap.Modal(this.$refs.contractModal, { backdrop: 'static' })
+    this.getYearMonth()
   }
 }
 </script>
+
+<style scoped >
+.text-class {
+  font-size: 16px !important;
+  font-weight: normal !important;
+  text-align: left !important;
+  padding: 1.25em 1.25em 0 !important;
+}
+.confirm-btn-class {
+  padding: 6px 24px !important;
+}
+.swal2-actions {
+  margin: 1.25em 1em 0 auto !important;
+}
+</style>
