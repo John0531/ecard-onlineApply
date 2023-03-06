@@ -11,228 +11,194 @@
   <section class="mainArea">
     <div class="container-xl">
       <div class="row justify-content-md-center">
-        <div class="formGroup">
-          <ul class="formList formApply">
-            <li class="col-12 mb-2">
-              <label for="">申請人身分證字號</label>
-            </li>
-            <input
+        <Form
+          v-slot="{  }"
+          @submit="checkAll"
+          @invalid-submit="invalidSubmit"
+        >
+          <div class="formGroup">
+            <ul class="formList formApply">
+              <li class="col-12 mb-2">
+                <label for="">申請人身份證號</label>
+                <div class="form-text">A12345****</div>
+              </li>
+              <!-- <input
               required=""
               name="login[id]"
               type="text"
               maxlength="10"
               placeholder="限正卡持卡人"
               class="formApply_form_control form-control"
-            />
-            <li class="col-12">
-              <label for=""></label>
-              <span class="red_text">(外籍人士請輸入居留簽證的統一證號)</span>
-            </li>
-            <li class="col-12">
-              <label for="input1">西元出生年月日</label>
-              <div class="d-flex align-items-center">
-                <select name="" runat="server" class="form-select form-control">
-                  <option>1990</option>
-                  <option>1991</option>
-                  <option>1991</option>
-                  <option>1991</option>
-                  <option>1992</option>
-                  <option>1991</option>
-                  <option>1993</option>
-                  <option>1991</option>
-                  <option>1994</option>
-                  <option>1991</option></select
-                >年
-                <select name="" runat="server" id="SelM" class="form-select form-control">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option></select
-                >月
-                <select name="" runat="server" id="SelD" class="form-select form-control">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option></select
-                >日
+            /> -->
+              <li class="col-12">
+                <label for=""></label>
+                <span class="red_text">(外籍人士請輸入居留簽證的統一證號)</span>
+              </li>
+              <li class="col-12">
+                <label for="input1">西元出生年月日</label>
+                <div class="form-text">1977/06/28</div>
+              </li>
+            </ul>
+          </div>
+          <div class="col-xl-10 d-flex flex-wrap">
+            <div class="col-12 col-md-4 text-center">
+              <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="" />
+              <div class="form-check my-2">
+                <input
+                  class="form-check-input Apply_input"
+                  type="radio"
+                  name="exampleRadios"
+                  id="exampleRadios1"
+                  value="option1"
+                  checked
+                />
+                <label
+                  class="form-check-label text-start text-md-center fw-bold"
+                  for="exampleRadios1"
+                >
+                  微風悠遊聯名卡MasterCard悠遊鈦金卡
+                </label>
               </div>
-            </li>
-          </ul>
-        </div>
-        <div class="col-xl-10 d-flex flex-wrap">
-          <div class="col-12 col-md-4 text-center">
-            <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="" />
-            <div class="form-check my-2">
-              <input
-                class="form-check-input Apply_input"
-                type="radio"
-                name="exampleRadios"
-                id="exampleRadios1"
-                value="option1"
-              />
-              <label
-                class="form-check-label text-start text-md-center fw-bold"
-                for="exampleRadios1"
-              >
-                微風悠遊聯名卡MasterCard悠遊鈦金卡
-              </label>
             </div>
-          </div>
-          <div class="col-12 col-md-4 text-center">
-            <img src="@/assets/images/form/card_b4bs.jpg" class="img-fluid" alt="" />
-            <div class="form-check my-2">
-              <input
-                class="form-check-input Apply_input"
-                type="radio"
-                name="exampleRadios"
-                id="exampleRadios2"
-                value="option1"
-              />
-              <label
-                class="form-check-label text-start text-md-center fw-bold"
-                for="exampleRadios2"
-              >
-                微風悠遊聯名卡JCB悠遊晶緻卡
-              </label>
+            <div class="col-12 col-md-4 text-center">
+              <img src="@/assets/images/form/card_b4bs.jpg" class="img-fluid" alt="" />
+              <div class="form-check my-2">
+                <input
+                  class="form-check-input Apply_input"
+                  type="radio"
+                  name="exampleRadios"
+                  id="exampleRadios2"
+                  value="option1"
+                />
+                <label
+                  class="form-check-label text-start text-md-center fw-bold"
+                  for="exampleRadios2"
+                >
+                  微風悠遊聯名卡JCB悠遊晶緻卡
+                </label>
+              </div>
             </div>
-          </div>
-          <div class="col-12 col-md-4 text-center">
-            <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="" />
-            <div class="form-check my-2">
-              <input
-                class="form-check-input Apply_input"
-                type="radio"
-                name="exampleRadios"
-                id="exampleRadios3"
-                value="option1"
-              />
-              <label
-                class="form-check-label text-start text-md-center fw-bold"
-                for="exampleRadios3"
-              >
-                微風悠遊聯名卡VISA悠遊御璽卡
-              </label>
-            </div>
-          </div>
-        </div>
-        <!----------------fee ---------------->
-        <div class="mt-3 mt-md-5">
-          <div class="fee_box mb-3">
-            <h3>
-              <img
-                src="images/form/fee_icon.gif"
-                class="img-fluid"
-                alt=""
-              />年費定價說明：
-            </h3>
-            <div class="fee_content">
-              <table class="fee_table w-100">
-                <thead>
-                  <tr>
-                    <th width="20%">卡別</th>
-                    <th width="10%">首年</th>
-                    <th>第二年度起</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="fee_cardname">
-                      <strong>LINE Bank悠遊聯名卡<br />VISA<br />悠遊御璽卡</strong>
-                    </td>
-                    <td class="redWord text-center" rowspan="3">免年費</td>
-                    <td rowspan="3">
-                      <p class="text-left">
-                        第二年起統計正、附卡年度合併消費未達60,000元，收取全額年費。
-                      </p>
-                      <table width="100%">
-                        <thead class="fee_thead">
-                          <tr>
-                            <th class="text-center">年消費</th>
-                            <th class="text-center">年費</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td class="text-center">60,000元(含)以上</td>
-                            <td class="redWord text-center">免年費</td>
-                          </tr>
-                          <tr>
-                            <td class="text-center">未達60,000 元</td>
-                            <td class="text-center">1,000元</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="indentNote_OneText">
-                <p>
-                  ※每一卡別所提供之年費減免或折價優惠，每一持卡人僅得享有一次優惠，若於年費優惠期間截止前將卡片停用後又重新申請者，恕不再享有優惠。
-                </p>
+            <div class="col-12 col-md-4 text-center">
+              <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="" />
+              <div class="form-check my-2">
+                <input
+                  class="form-check-input Apply_input"
+                  type="radio"
+                  name="exampleRadios"
+                  id="exampleRadios3"
+                  value="option1"
+                />
+                <label
+                  class="form-check-label text-start text-md-center fw-bold"
+                  for="exampleRadios3"
+                >
+                  微風悠遊聯名卡VISA悠遊御璽卡
+                </label>
               </div>
             </div>
           </div>
-        </div>
-        <!----------------//fee ---------------->
-        <!-------------------本人已詳閱---------------------->
-        <div class="terms-group">
-          <div class="terms">
-            <input
-              id="checkbox"
-              name="checkbox"
-              value="checkbox"
-              class="checkimg position-absolute"
-              type="checkbox"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-              v-model="agreementAll"
-              @click="checkAgreement()"
-            />
-            <label for="agree" @click="checkAgreement"
-              >本人已詳閱並同意「<a
-                href="#"
+          <!----------------fee ---------------->
+          <div class="mt-3 mt-md-5">
+            <div class="fee_box mb-3">
+              <h3>
+                <img
+                  src="images/form/fee_icon.gif"
+                  class="img-fluid"
+                  alt=""
+                />年費定價說明：
+              </h3>
+              <div class="fee_content">
+                <table class="fee_table w-100">
+                  <thead>
+                    <tr>
+                      <th width="20%">卡別</th>
+                      <th width="10%">首年</th>
+                      <th>第二年度起</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="fee_cardname">
+                        <strong>LINE Bank悠遊聯名卡<br />VISA<br />悠遊御璽卡</strong>
+                      </td>
+                      <td class="redWord text-center" rowspan="3">免年費</td>
+                      <td rowspan="3">
+                        <p class="text-left">
+                          第二年起統計正、附卡年度合併消費未達60,000元，收取全額年費。
+                        </p>
+                        <table width="100%">
+                          <thead class="fee_thead">
+                            <tr>
+                              <th class="text-center">年消費</th>
+                              <th class="text-center">年費</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="text-center">60,000元(含)以上</td>
+                              <td class="redWord text-center">免年費</td>
+                            </tr>
+                            <tr>
+                              <td class="text-center">未達60,000 元</td>
+                              <td class="text-center">1,000元</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="indentNote_OneText">
+                  <p>
+                    ※每一卡別所提供之年費減免或折價優惠，每一持卡人僅得享有一次優惠，若於年費優惠期間截止前將卡片停用後又重新申請者，恕不再享有優惠。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!----------------//fee ---------------->
+          <!-------------------本人已詳閱---------------------->
+          <div class="terms-group">
+            <div class="terms">
+              <input
+                id="checkbox"
+                name="checkbox"
+                value="checkbox"
+                class="checkimg position-absolute"
+                type="checkbox"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-                @click.prevent="this.contractModal.show()"
-                ><u>聯邦銀行電子銀行服務申請約定條款</u></a
-              >」內容。(請務必勾選)</label
-            >
+                v-model="agreementAll"
+                @click="checkAgreement()"
+              />
+              <label for="agree" @click="checkAgreement"
+                >本人已詳閱並同意「<a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  @click.prevent="this.contractModal.show()"
+                  ><u>聯邦銀行電子銀行服務申請約定條款</u></a
+                >」內容。(請務必勾選)</label
+              >
+            </div>
+            <div class="terms">
+              <input type="checkbox" class="checkimg position-absolute" id="agree1" v-model="terms"/>
+              <label for="agree1"
+                >本人同意申辦貴行業務時，因中途退出或雖未完成所有申請步驟所留存之相關個人資料，貴行得用以提供後續聯繫及服務時使用。</label
+              >
+            </div>
           </div>
-          <div class="terms">
-            <input type="checkbox" class="checkimg position-absolute" id="agree1" />
-            <label for="agree1"
-              >本人同意申辦貴行業務時，因中途退出或雖未完成所有申請步驟所留存之相關個人資料，貴行得用以提供後續聯繫及服務時使用。</label
+          <!-------------------//本人已詳閱---------------------->
+          <div class="text-center button_group">
+            <button
+              class="btn btn-primary btn-lg mx-1"
+              type="submit"
+              value=""
             >
+              下一步
+            </button>
           </div>
-        </div>
-        <!-------------------//本人已詳閱---------------------->
-        <div class="text-center button_group">
-          <button
-            @click.prevent="$router.push('/OnLineApply_OTP')"
-            class="btn btn-primary btn-lg mx-1"
-            type="submit"
-            value=""
-          >
-            下一步
-          </button>
-        </div>
+        </Form>
       </div>
     </div>
   </section>
@@ -827,7 +793,8 @@ export default {
     return {
       contractModal: '',
       agreement: false,
-      agreementAll: false
+      agreementAll: false,
+      terms: false
     }
   },
   methods: {
@@ -864,6 +831,51 @@ export default {
       }
       this.contractModal.hide()
       this.agreementAll = true
+    },
+    // invalidSubmit ({ values, errors, results }) {
+    //   if (this.terms === false) {
+    //     this.$swal.fire({
+    //       title: '尚有必填欄位未填寫',
+    //       showConfirmButton: false,
+    //       // timer: 2500,
+    //       customClass: {
+    //         title: 'text-class'
+    //       }
+    //     })
+    //   }
+    // },
+    // cardApplySubmit () {
+    //   if (this.terms === false) {
+    //     this.$swal.fire({
+    //       title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+    //       showConfirmButton: false,
+    //       // timer: 2500,
+    //       customClass: {
+    //         title: 'text-class'
+    //       }
+    //     })
+    //   }
+    //   if (!this.agreePersonalData) {
+    //     this.$swal.fire({
+    //       title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+    //       showConfirmButton: false,
+    //       customClass: {
+    //         title: 'text-class'
+    //       }
+    //       // timer: 2500
+    //     })
+    //   }
+    // },
+    checkAll () {
+      if (!this.terms || !this.agreementAll) {
+        this.$swal.fire({
+          title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+          showConfirmButton: false,
+          timer: 2500
+        })
+      } else {
+        this.$router.push('/OnLineApply_OTP')
+      }
     }
   },
   watch: {
