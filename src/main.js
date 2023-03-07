@@ -33,10 +33,15 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 
-// ?加入所有表單驗證規則
+// ?加入所有預設表單驗證規則
 Object.keys(AllRules).forEach((rule) => {
   defineRule(rule, AllRules[rule])
 })
+// ?加入validate驗證規則
+Object.keys(validate).forEach((rule) => {
+  defineRule(rule, validate[rule])
+})
+// defineRule('chkKeyValueNumEng', validate.chkKeyValueNumEng)
 configure({
   generateMessage: localize({ zh_TW: zhTW }),
   validateOnInput: false,

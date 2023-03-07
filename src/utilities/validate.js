@@ -247,54 +247,23 @@ const validate = {
   OnlyNumPress (value) {
     value = value.replace(/^(0+)|[^\d]+/g, '')
     return value
-    // value = value.toString().replace(/^(0+)|[^\d]+/g, '')
-    // console.log(value)
-    // if (value) {
-    //   return parseInt(value)
-    // } else {
-    //   return ''
-    // }
-    // if (!value) {
-    //   return ''
-    // }
-    // const a = value.toString()
-    // console.log(a)
-    // if (a.length > 5) {
-    //   return parseInt(a.slice(0, 5))
-    // }
-
-    // console.log(e.keyCode)
-    // var objKeyCode = window.event ? e.keyCode : e.charCode
-    // console.log(objKeyCode)
-    // // 48 ~ 57 為數字
-    // if ((objKeyCode === 13) || (objKeyCode === 9)) {
-    //   return true
-    // }
-    // if (objKeyCode === 0) {
-    //   return true
-    // }
-    // if ((objKeyCode < 48) || (objKeyCode >= 58)) {
-    //   return false
-    // } else {
-    //   return true
-    // }
   },
 
   //* ==== 13. 確認辦卡地址 ====(非聯邦卡友)
   //* 來源： Utility.js
   // TODO 可用 veevalide length
   // TODO 確認辦卡地址長度 縣市10 地區10 路10 巷弄號樓5 其他100
-  Address: {
-    ZipCode: '', // ? 郵遞區號
-    Dist: '', // ? 區
-    Rd: '', // ? 路
-    Ln: '', // ? 巷
-    Aly: '', // ? 弄
-    No_1: '', // ? 號1
-    No_2: '', // ? 號2
-    Floor: '', // ? 樓
-    Other: ''// ? 其他
-  },
+  // ?  Address: {
+  // ?   ZipCode: '',遞區號
+  // ?   Dist: '',區
+  // ?   Rd: '',路
+  // ?   Ln: '',巷
+  // ?   Aly: '',弄
+  // ?   No_1: '',號1
+  // ?   No_2: '',號2
+  // ?   Floor: '',樓
+  // ?   Other: '' 其他
+  // ? },
   CheckAddressAll (Address, FormDom, fieldName) {
     FormDom.setFieldError(fieldName, '')
     const test = Address.Ln + Address.Aly + Address.No_1 + Address.No_2 + Address.Floor + Address.Other
