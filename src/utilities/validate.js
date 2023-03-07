@@ -1,18 +1,4 @@
 const validate = {
-  //* ==== 1. 檢核不可空值 ====
-  //* 來源： Utility.js
-  // TODO 可用 veevalide requied 取代
-  // chkKeyNull (strCtrlID,strMsg) {
-  //   var obj = window.document.getElementById(strCtrlID)
-  //   var strMessage = ''
-  //   if (obj.value === '') {
-  //     strMessage = '*【' + strMsg + '】不可空白，請輸入值。'
-  //   } else {
-  //     strMessage = ''
-  //   }
-  //   return strMessage
-  // },
-
   //* ==== 2. 檢核只可為英數字 ====
   //* 來源： Utility.js
   chkKeyValueNumEng (input) {
@@ -294,6 +280,10 @@ const validate = {
     // }
   },
 
+  //* ==== 13. 確認辦卡地址 ====(非聯邦卡友)
+  //* 來源： Utility.js
+  // TODO 可用 veevalide length
+  // TODO 確認辦卡地址長度 縣市10 地區10 路10 巷弄號樓5 其他100
   Address: {
     ZipCode: '', // ? 郵遞區號
     Dist: '', // ? 區
@@ -305,142 +295,21 @@ const validate = {
     Floor: '', // ? 樓
     Other: ''// ? 其他
   },
-  CheckAddress (Address) {
-    console.log(Address)
+  CheckAddressAll (Address, FormDom, fieldName) {
+    FormDom.setFieldError(fieldName, '')
     const test = Address.Ln + Address.Aly + Address.No_1 + Address.No_2 + Address.Floor + Address.Other
+    console.log(Address)
     if (test.length < 1) {
-      return '地址格式有誤'
+      FormDom.setFieldError(fieldName, '地址格式有誤')
     }
     if (!Address.ZipCode || !Address.Dist || !Address.Rd) {
-      return '地址格式有誤'
+      FormDom.setFieldError(fieldName, '地址格式有誤')
     }
-    if (Address.Ln > 5 || Address.Aly > 5 || Address.No_1 > 5 || Address.No_2 > 5 || Address.Floor > 5 || Address.Other > 100) {
-      return '地址格式有誤'
+    if (Address.Ln.length > 5 || Address.Aly.length > 5 || Address.No_1.length > 5 || Address.No_2.length > 5 || Address.Floor.length > 5 || Address.Other.length > 100) {
+      FormDom.setFieldError(fieldName, '地址格式有誤')
     }
-    return true
   },
 
-  //* ==== 13. 確認辦卡地址 ====(非聯邦卡友)
-  //* 來源： Utility.js
-  // TODO 可用 veevalide length
-  // TODO 確認辦卡地址長度 縣市10 地區10 路10 巷弄號樓5 其他100
-  // ------------------------------------------------------------------------------
-  // CheckAddress (strAddressID, strAddressName) {
-  //   var arrAddress = strAddressID.split('**')
-  //   // var arrCtrlCName = strCtrlCName.split('**');
-  //   var strChk = 'Y'
-  //   var strMessage = ''
-  //   for (var i = 0; i < arrAddress.length; i++) {
-  //     strChk = 'Y'
-  //     if (i === 0 || i === 1 || i === 2) {
-  //       if (window.document.getElementById(arrAddress[i]).value.length > 10) {
-  //         strChk = 'N'
-  //       }
-  //     } else if (i === 3 || i === 4 || i === 5 || i === 6 || i === 7) {
-  //       if (window.document.getElementById(arrAddress[i]).value.length > 5) {
-  //         strChk = 'N'
-  //       }
-  //     } else if (i === 8) {
-  //       if (window.document.getElementById(arrAddress[i]).value.length > 100) {
-  //         strChk = 'N'
-  //       }
-  //     }
-  //     if (strChk === 'N') {
-  //       strMessage = '!!*【' + strAddressName + '地址】' + '格式有誤。'
-  //       return strMessage
-  //     }
-  //   }
-  //   return strMessage
-  // },
-
-  //* ==== 14. 確認身分證發證日期-1 ====(非聯邦卡友)
-  //* 來源： Utility.js
-  //= === 日期的Check 和 Convert(strKind: 1.國曆 2.西曆) ====
-  // ------------------------------------------------------------------------------
-  // Conv_Date (strDate, strKind) {
-  //   var strYear, strMonth, strDay, strResult
-
-  //   if (strDate.Trim === '') {
-  //     return ''
-  //   }
-
-  //   switch (strDate.length) {
-  //     case 6:
-  //       strYear = strDate.substr(0, 2)
-  //       strMonth = strDate.substr(2, 2)
-  //       strDay = strDate.substr(4, 2)
-
-  //       strYear = (parseInt(strYear) + 1911).toString()
-  //       break
-
-  //     case 7:
-  //       strYear = strDate.substr(0, 3)
-  //       strMonth = strDate.substr(3, 2)
-  //       strDay = strDate.substr(5, 2)
-
-  //       strYear = (parseInt(strYear) + 1911).toString()
-  //       break
-
-  //     case 8:
-  //       strYear = strDate.substr(0, 4)
-  //       strMonth = strDate.substr(4, 2)
-  //       strDay = strDate.substr(6, 2)
-  //       break
-  //   }
-
-  //   strResult = strYear + '/' + strMonth + '/' + strDay
-
-  //   if (validate.CheckDate(strResult) === false) {
-  //     return ''
-  //   }
-
-  //   if (strKind === '1') {
-  //     strResult = (parseInt(strYear) - 1911).toString() + '/' + strMonth + '/' + strDay
-  //   }
-
-  //   return strResult
-  // },
-
-  //* ==== 15. 確認身分證發證日期-2 ====(非聯邦卡友)
-  // TODO 日期組格式
-  //* 來源： dspApplicationFillinOTCard
-  // cheIdDate () {
-  //   var objIdDate; objIdDate = document.getElementById('ddlIDyear').value + ('0' + document.getElementById('ddlIDMonth').value).substr(-2) + ('0' + document.getElementById('ddlIDDay').value).substr(-2)
-  //   if (Conv_Date(objIdDate, '1') === '') {
-  //     strMsgCollect = strMsgCollect + '!!* 您身分證發證日期填寫有誤。!!'
-  //     document.getElementById('ddlIDyear').selectedIndex = 0
-  //     document.getElementById('ddlIDMonth').selectedIndex = 0
-  //     document.getElementById('ddlIDDay').selectedIndex = 0
-  //     return false
-  //   } else {
-  //     return true
-  //   }
-  // },
-
-  //= === 日期檢核 ====
-  // CheckDate (strDate) {
-  //   var tempDate = new Date(strDate)
-  //   var yy = tempDate.getFullYear()
-  //   var mm = tempDate.getMonth() + 1
-  //   var dd = tempDate.getDate()
-  //   var myDay = ''
-
-  //   if (mm.toString().length === 1) {
-  //     mm = '0' + mm
-  //   }
-
-  //   if (dd.toString().length === 1) {
-  //     dd = '0' + dd
-  //   }
-
-  //   myDay = yy + '/' + mm + '/' + dd
-
-  //   if (myDay !== strDate) {
-  //     return false
-  //   }
-
-  //   return true
-  // }
   //* ==== 16. 檢查身分證格式 ====
   checkId (id) {
     // ? 身分證驗證
@@ -449,6 +318,15 @@ const validate = {
       return true
     }
     return '請輸入正確格式身份證'
+  },
+
+  //* ==== 17. 顯示錯誤訊息 ====
+  showErrors (errors) {
+    let errMsg = ''
+    for (const [key, value] of Object.entries(errors)) {
+      errMsg += `【${key}】 : ${value}\n`
+    }
+    alert(errMsg)
   },
   //* ==== 18. 檢查信用卡字數 ====
   checkCode (code) {

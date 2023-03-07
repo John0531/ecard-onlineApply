@@ -1,3 +1,6 @@
+<!-- eslint-disable vue/return-in-computed-property -->
+<!-- eslint-disable vue/return-in-computed-property -->
+<!-- eslint-disable no-tabs -->
 <template>
  <!--nav end-->
     <!-- 主視覺 -->
@@ -13,6 +16,8 @@
         <div class="container-xl">
             <div class="row justify-content-md-center pt-1 pt-md-3">
                 <div class="formGroup">
+                  <Form
+                    v-slot="{ errors }" @submit="applySubmit" @invalid-submit="invalidSubmit">
                     <ul class="formList-even">
                         <li class="col-12 col-md-6">
                             <label for="">申請人身份證號</label>
@@ -28,19 +33,38 @@
                         </li>
                         <li class="col-12 col-md-6">
                             <label for="">電子信箱</label>
-                            <input required="" name="login[id]" type="text" placeholder="ubot@ubot.com.tw" class="form-control">
+                            <Field
+                              required=""
+                              name="信箱"
+                              type="text"
+                              :rules="$custom.validate.chkEmail"
+                              placeholder="ubot@ubot.com.tw"
+                              :class="{ 'is-invalid': errors['信箱']}"
+                              class="form-control"
+                              v-model="form.Email">
+                            </Field>
+                            <ErrorMessage
+                              name="信箱"
+                              class="invalid-feedback">
+                            </ErrorMessage>
                         </li>
                         <li class="col-12 col-md-6">
                             <label for="">*安麗直銷商會員編號</label>
-                            <input required="" name="login[id]" type="text" placeholder="" class="form-control">
-                        </li>
+                            <Field required="" name="安麗直銷商會員編號" type="text" placeholder="" :class="{ 'is-invalid': errors['安麗直銷商會員編號']}" class="form-control" :rules="$custom.validate.OnlyNumEngPress" v-model="form.selling" ></Field><ErrorMessage name="安麗直銷商會員編號"
+                              class="invalid-feedback"></ErrorMessage></li>
                         <li class="col-12 col-md-6">
-                            <label for="">推廣單位代號</label>
-                            <input required="" name="login[id]" type="text" placeholder="" class="form-control">
+                            <label for="">推廣單位代號</label><Field :rules="$custom.validate.OnlyNumEngPress"
+                              name="推廣單位代號"
+                              type="text"
+                              :class="{ 'is-invalid': errors['推廣單位代號']}"
+                              class="form-control"
+                              v-model="form.UnitCode"></Field><ErrorMessage name="推廣單位代號"
+                              class="invalid-feedback"></ErrorMessage>
                         </li>
                         <li class="col-12 col-md-6">
                             <label for="">推廣人員編號</label>
-                            <input required="" name="login[id]" type="text" placeholder="" class="form-control">
+                            <Field required="" name="推廣人員編號" type="text" placeholder="" class="form-control" :class="{ 'is-invalid': errors['推廣人員編號']}" :rules="$custom.validate.OnlyNumEngPress" v-model="form.person"></Field><ErrorMessage name="推廣人員編號"
+                              class="invalid-feedback"></ErrorMessage>
                         </li>
                         <li class="col-12 col-md-12">
                             <label for="">*帳單形式</label>
@@ -79,59 +103,60 @@
                             <label for="">*寄卡地址</label>
                             <div class="d-flex flex-wrap flex-column flex-md-row">
                                 <div class="form-check me-4">
-                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
+                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" v-model="selectedOption" checked>
                                     <div class="form_Apply_txt">
                                         同帳單地址
                                     </div>
                                 </div>
                                 <div class="form-check me-4">
-                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios2" value="option1">
+                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" v-model="selectedOption">
                                     <div class="form_Apply_txt">
                                         同公司地址
                                     </div>
                                 </div>
                                 <div class="form-check me-4">
-                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios2" value="option1">
+                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" v-model="selectedOption" >
                                     <div class="form_Apply_txt">
                                         其他
                                     </div>
                                 </div>
                             </div>
-                            <div class="form_Apply_txt">台北市內湖區康寧路Ｏ段ＯＯＯ巷ＯＯ號Ｏ樓</div>
-                                <div class="d-flex flex-wrap justify-content-start align-items-center">
-                                    <label for="" class="me-0">
-                                        請輸入您持有之任一卡號末四碼：
-                                    </label>
-                                    <input required="" name="login[id]" type="text" placeholder="" class="form-control end_four">
-                                    <button type="button" class="OnLineApply_button ms-2 mb-0">確認</button>
-                                </div>
-
-                        </li>
-                        <li>
-                            <div class="d-flex flex-wrap flex-md-nowrap apply_address align-items-center">
-                                <select name="" runat="server" class="form-select form-control ZIP mb-2">
-                                    <option>110000</option>
-                                    <option>110000</option>
-                                </select>
-                                <select name="" runat="server" id="" class="form-select form-control Area mx-1 mx-md-2 mb-2">
-                                    <option>南港區</option>
-                                    <option>松山區</option>
-                                    <option>內湖區</option>
-                                </select>
-                                <select name="" runat="server" id="" class="form-select form-control Road mb-2">
-                                    <option>忠孝東路五段</option>
-                                    <option>忠孝東路五段</option>
-                                    <option>忠孝東路五段</option>
-                                </select>
-                            </div>
-                            <div class="d-flex apply_address align-items-center">
-                                <input required="" name="login[id]" type="text" placeholder=" " class="form-control me-1">巷
-                                <input required="" name="login[id]" type="text" placeholder=" " class="form-control mx-1">弄
-                                <input required="" name="login[id]" type="text" placeholder=" " class="form-control mx-1">-
-                                <input required="" name="login[id]" type="text" placeholder=" " class="form-control mx-1">號
-                                <input required="" name="login[id]" type="text" placeholder=" " class="form-control mx-1">樓
-                                <input required="" name="login[id]" type="text" placeholder=" " class="form-control ms-1">
-                            </div>
+														<div>{{ selectedContent }}</div>
+                            <!-- <div class="form_Apply_txt" v-if="selectedOption === 'option1'" ></div>
+                            <div class="form_Apply_txt" v-if="selectedOption === 'option2'"></div>
+														<div class="d-flex flex-wrap justify-content-start align-items-center" v-if="selectedOption === 'option3'"> -->
+															<!-- <label for="" class="me-0">
+																	請輸入您持有之任一卡號末四碼：
+															</label>
+															<input required="" name="login[id]" type="text" placeholder="" class="form-control end_four">
+															<button type="button" class="OnLineApply_button ms-2 mb-0">確認</button>
+															<li>
+																<div class="d-flex flex-wrap flex-md-nowrap apply_address align-items-center">
+																		<select name="" runat="server" class="form-select form-control ZIP mb-2">
+																				<option>110000</option>
+																				<option>110000</option>
+																		</select>
+																		<select name="" runat="server" id="" class="form-select form-control Area mx-1 mx-md-2 mb-2">
+																				<option>南港區</option>
+																				<option>松山區</option>
+																				<option>內湖區</option>
+																		</select>
+																		<select name="" runat="server" id="" class="form-select form-control Road mb-2">
+																				<option>忠孝東路五段</option>
+																				<option>忠孝東路五段</option>
+																				<option>忠孝東路五段</option>
+																		</select>
+																</div>
+																<div class="d-flex apply_address align-items-center">
+																	<input v-model.number="test" @keyup="test=$custom.validate.OnlyNumPress(test)" type="number" placeholder="" class="form-control me-1">巷
+																		<input maxlength="5" name="login[id]" type="text" placeholder=" " class="form-control mx-1">弄
+																		<input maxlength="5" type="text" placeholder=" " class="form-control mx-1">-
+																		<input maxlength="5" type="text" placeholder=" " class="form-control mx-1">號
+																		<input maxlength="5" type="text" placeholder=" " class="form-control mx-1">樓
+																		<input maxlength="5" type="text" placeholder=" " class="form-control ms-1">
+																</div>
+														</li> -->
+														<!-- </div> -->
                         </li>
                         <li class="col-12 col-md-12">
                             <label for="">申請數位卡</label>
@@ -155,6 +180,7 @@
                             </div>
                         </li>
                     </ul>
+                  </Form>
                 </div>
                 <!-------------------本人已詳閱---------------------->
                 <div class="terms-group">
@@ -166,7 +192,7 @@
                 </div>
                 <!-------------------//本人已詳閱---------------------->
                 <div class="text-center button_group">
-                    <button @click="$router.push('/OnLineApply_Fillin_1')" class="btn btn-primary btn-lg mx-1" type="submit" value="">下一步</button>
+                    <button @click="$router.push('/OnLineApply_Fillin_Card')" class="btn btn-primary btn-lg mx-1" type="submit" value="">下一步</button>
                 </div>
             </div>
         </div>
@@ -1079,13 +1105,33 @@
 </template>
 
 <script>
+import ValidSvc from '@/utilities/validate.js'
 
 export default {
   data () {
     return {
       termsModal: '',
       checkTerms: [],
-      allTerms: false
+      allTerms: false,
+      test: '',
+      form: {
+        email: '',
+        selling: '',
+        UnitCode: '',
+        person: ''
+      },
+      selectedOption: ''
+    }
+  },
+  computed: {
+    selectedContent () {
+      if (this.selectedOption === 'option3') {
+        return '123'
+      } else if (this.selectedOption === 'option2') {
+        return '台北市內湖區康寧路Ｏ段'
+      } else {
+        return '台北市內湖區康寧路Ｏ段ＯＯＯ巷ＯＯ號Ｏ樓'
+      }
     }
   },
   watch: {
@@ -1098,6 +1144,19 @@ export default {
     }
   },
   methods: {
+    invalidSubmit ({ values, errors, results }) {
+      this.$swal.fire({
+        title: '尚有必填欄位格式有誤',
+        showConfirmButton: false,
+        // timer: 2500,
+        customClass: {
+          title: 'text-class'
+        }
+      })
+    },
+    checkUnitCode (value) {
+      return ValidSvc.OnlyNumPress(value)
+    },
     checkTermsScroll (event, num) {
       if (event.target.scrollTop === (event.target.scrollHeight - event.target.offsetHeight)) {
         document.querySelector(`#button_termsOpt_${num}`).removeAttribute('disabled')
@@ -1109,6 +1168,20 @@ export default {
         alert('您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！')
       } else {
         this.termsModal.hide()
+      }
+    },
+    applySubmit () {
+      if (!this.form.msg) {
+        this.$swal.fire({
+          title: '尚有必填欄位未填寫',
+          showConfirmButton: false,
+          customClass: {
+            title: 'text-class'
+          }
+          // timer: 2500
+        })
+      } else {
+        this.$router.push('/OnLineApply_Fillin')
       }
     }
   },
