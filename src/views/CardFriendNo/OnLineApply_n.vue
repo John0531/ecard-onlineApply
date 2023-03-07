@@ -27,13 +27,14 @@
                             type="text" maxlength="10"
                             placeholder="限正卡持卡人"
                             :class="{ 'is-invalid': errors['login[id]'] }"
-                            class="formApply_form_control form-control"
+                            class="formApply_form_control form-control "
                             :validateOnBlur="true"
                             :rules="$custom.validate.checkId"
+                            @input="$custom.validate.watchToUpper(applierInfo.Identification)"
                             />
                             <ErrorMessage
                             name="login[id]"
-                            class="invalid-feedback"
+                            class="invalid-feedback "
                             ></ErrorMessage>
                         </div>
                     </li>
@@ -705,16 +706,13 @@ export default {
         cardPicked: '',
         firstGift: ''
       },
-      agreement: false,
+      agreement: false, // ? Modal上同意欄
       agreementAll: false, // ?同意申請條款
       contractModal: '', // ?同意書modal
       agreePersonalData: false // ?同意個資聲明
     }
   },
   methods: {
-    toUpperCase (value) {
-      console.log(value)
-    },
     scorllEvent () {
       this.$refs.termBox1.onscroll = function () {
         if (this.scrollHeight - this.scrollTop <= this.clientHeight + 50) {
@@ -824,6 +822,9 @@ export default {
         })
       }
       this.$router.push('/OnLineApply_n1')
+    },
+    toUpperCase () {
+      return this.$custom.validate.watchToUpper
     }
   },
   watch: {
