@@ -442,7 +442,6 @@ const validate = {
   //   return true
   // }
   //* ==== 16. 檢查身分證格式 ====
-  //* 來源： Utility.js
   checkId (id) {
     // ? 身分證驗證
     const idRule = /^[a-z](1|2)\d{8}$/i
@@ -450,6 +449,19 @@ const validate = {
       return true
     }
     return '請輸入正確格式身份證'
+  },
+  //* ==== 18. 檢查信用卡字數 ====
+  checkCode (code) {
+    // ? 信用卡字數驗證
+    const idRule = /^\d{4}$/
+    if (idRule.test(code)) {
+      return true
+    }
+    return '請輸入4碼數字'
+  },
+  //* ==== 19. 輸入值強制轉大寫英文 ====
+  watchToUpper (data) {
+    data = data.toUpperCase()
   }
 }
 
