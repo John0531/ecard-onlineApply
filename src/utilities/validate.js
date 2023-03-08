@@ -6,6 +6,9 @@ const validate = {
     if (Rule.test(input)) {
       return true
     }
+    if (input === '') {
+      return true
+    }
     return '只可輸入英數字，請重新輸入。'
   },
 
@@ -267,7 +270,7 @@ const validate = {
     return value.replace(/^(0+)|[^\d]+/g, '')
     // /^(0+)|[^\d]+/g 不可是 0 開頭
   },
-  //* ==== 22. 只可輸入數字，且首字不為零 ====
+  //* ==== 23. radio button 值為布林值時檢核 ====
   radioRequired (value) {
     if (value !== false && value !== true) {
       return '此欄位為必填'

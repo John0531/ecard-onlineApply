@@ -29,6 +29,8 @@ import { createMetaManager } from 'vue-meta'
 // ?表單驗證
 import validate from './utilities/validate'
 
+import PublicService from '@/service/Public.Service.js'
+
 import App from './App.vue'
 import store from './store'
 import router from './router'
@@ -49,6 +51,13 @@ configure({
   validateOnModelUpdate: false
 })
 setLocale('zh_TW')
+
+// ? 取得下拉 Json 資料(存入localStorage)
+if (!JSON.parse(localStorage.getItem('SELECT_JSON'))) {
+  PublicService.getJson().then((result) => {
+    localStorage.setItem('SELECT_JSON', JSON.stringify(result))
+  })
+}
 
 const app = createApp(App)
 
