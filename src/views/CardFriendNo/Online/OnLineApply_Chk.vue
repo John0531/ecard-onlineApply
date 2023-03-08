@@ -30,8 +30,7 @@
               </div>
         </div>
         <Form
-            @submit="applySubmit"
-            @invalid-submit="onInvalidSubmit"
+            v-slot="{errors}"
             ref="myForm">
           <div class="formGroup">
               <ul class="formList Apply_Chk">
@@ -40,45 +39,47 @@
                       <div class="d-flex align-items-center">
                           <Field
                           v-model="cardNumber.code1"
-                          name="card1"
+                          name="code1"
+                          id="cardCode1"
                           type="text" maxlength="4"
                           class="cardNumber form-control"
-                          @blur="keyUpNexts()"
-                          >
-                          </Field>
+                          :class="{ 'is-invalid': errors['卡號'] }"
+                          @change="checkValue($refs.myForm,cardNumber.code1,'卡號','cardCode2')"
+                          />
                           <div class="cardDash text-center mx-1"></div>
                           <Field
                           v-model="cardNumber.code2"
-                          name="第二段卡號"
+                          name="code2"
+                          id="cardCode2"
                           type="password" maxlength="4"
-                          autofocus
-                          autocomplete
                           class="cardNumber form-control"
-                          :validateOnBlur="true"
-                          >
-                          </Field>
+                          :class="{ 'is-invalid': errors['卡號'] }"
+                          @change="checkValue($refs.myForm,cardNumber.code2,'卡號','cardCode3')"
+                          />
                           <div class="cardDash text-center mx-1"></div>
                           <Field
                           v-model="cardNumber.code3"
-                          name="第三段卡號"
+                          name="code3"
+                          id="cardCode3"
                           type="text" maxlength="4"
                           class="cardNumber form-control"
-                          :validateOnBlur="true"
-                          >
-                          </Field>
+                          :class="{ 'is-invalid': errors['卡號'] }"
+                          @change="checkValue($refs.myForm,cardNumber.code3,'卡號','cardCode4')"
+                          />
                           <div class="cardDash text-center mx-1"></div>
                           <Field
                           v-model="cardNumber.code4"
-                          name="第四段卡號"
+                          name="code4"
+                          id="cardCode4"
                           type="password" maxlength="4"
                           class="cardNumber form-control"
-                          :validateOnBlur="true"
-                          >
-                          </Field>
+                           :class="{ 'is-invalid': errors['卡號'] }"
+                           @change="checkValue($refs.myForm,cardNumber.code4,'卡號','')"
+                          />
                       </div>
                   </li>
-                  <li class="col-12">
-                      <ErrorMessage name="card1" class="card-code mt-2 text-center" :class="{'d-block':invalid}"></ErrorMessage>
+                  <li class="col-12" >
+                      {{errors['卡號']}}
                   </li>
                   <li class="col-12 align-items-start">
                       <label for="" class="mt-1">信用卡有效期限</label>
@@ -100,7 +101,6 @@
                   </li>
               </ul>
           </div>
-          <button type="submit"></button>
         </Form>
         <!-------------------本人已詳閱---------------------->
         <div class="terms-group">
@@ -959,10 +959,28 @@ export default {
     }
   },
   methods: {
-    keyUpNexts (dom) {
-      this.$refs.myForm.setErrors({ card1: '123' })
-      this.invalid = true
+    checkValue (dom, code, name, nextid) {
+      console.log(nextid)
+      // ? 清空errors
+      if (this.$custom.validate.checkCode(code) === true) {
+        console.log(nextid)
+        document.getElementById(nextid).focus()
+        console.log(this.$custom.validate.checkCode(code))
+        // node.nextElementSibling.nextElementSibling.focus()
+      } else {
+        dom.setFieldError(name, '')
+        const error = '122'
+        dom.setFieldError(name, error)
+        console.log(dom.getErrors())
+        console.log(dom.values())
+      }
     },
+    // inputHandler (event) {
+    //   console.log(event)
+    //   if (event.target.nodeName === 'INPUT' && event.target.nextElementSibling != null) {
+    //     event.target.nextElementSibling.focus()
+    //   }
+    // },
     revealTest () {
       //
     },
@@ -1000,10 +1018,7 @@ export default {
       this.agreeModal.hide()
     },
     applySubmit () {
-      console.log(123)
-      console.log(this.$refs.myForm)
-      this.$refs.myForm.setErrors({ card1: '123' })
-      this.invalid = true
+      //
     }
   },
   watch: {

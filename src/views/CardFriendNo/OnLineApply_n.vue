@@ -23,17 +23,16 @@
                         <div class="mb-1">
                             <Field
                             v-model="applierInfo.Identification"
-                            name="login[id]"
+                            name="身分證字號"
                             type="text" maxlength="10"
                             placeholder="限正卡持卡人"
-                            :class="{ 'is-invalid': errors['login[id]'] }"
+                            :class="{ 'is-invalid': errors['身分證字號'] }"
                             class="formApply_form_control form-control "
-                            :validateOnBlur="true"
-                            :rules="$custom.validate.checkId"
-                            @input="$custom.validate.watchToUpper(applierInfo.Identification)"
+                            rules="checkId"
+                            @keyup="applierInfo.Identification = $custom.validate.watchToUpper(applierInfo.Identification)"
                             />
                             <ErrorMessage
-                            name="login[id]"
+                            name="身分證字號"
                             class="invalid-feedback "
                             ></ErrorMessage>
                         </div>
@@ -830,11 +829,11 @@ export default {
   watch: {
     agreement (n) {
       this.agreementAll = n
-    },
-    'applierInfo.Identification' (n) {
-      this.applierInfo.Identification = this.applierInfo.Identification.toUpperCase()
-      console.log('轉大小寫')
     }
+    // 'applierInfo.Identification' (n) {
+    //   this.applierInfo.Identification = this.applierInfo.Identification.toUpperCase()
+    //   console.log('轉大小寫')
+    // }
   },
   mounted () {
     this.scorllEvent()

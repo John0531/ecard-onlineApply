@@ -309,6 +309,7 @@ const validate = {
   //* ==== 19. 輸入值強制轉大寫英文 ====
   watchToUpper (data) {
     data = data.toUpperCase()
+    return data
   }
 }
 
