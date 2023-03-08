@@ -44,7 +44,7 @@
                           type="text" maxlength="4"
                           class="cardNumber form-control"
                           :class="{ 'is-invalid': errors['卡號'] }"
-                          @change="checkValue($refs.myForm,cardNumber.code1,'卡號','cardCode2')"
+                          @blur="checkValue($refs.myForm,cardNumber.code1,'卡號','cardCode2')"
                           />
                           <div class="cardDash text-center mx-1"></div>
                           <Field
@@ -54,43 +54,66 @@
                           type="password" maxlength="4"
                           class="cardNumber form-control"
                           :class="{ 'is-invalid': errors['卡號'] }"
-                          @change="checkValue($refs.myForm,cardNumber.code2,'卡號','cardCode3')"
+                          @input="revealText('cardCode2')"
+                          @keyup="hiddenText('cardCode2')"
+                          @blur="checkValue($refs.myForm,cardNumber.code2,'卡號','cardCode3')"
                           />
                           <div class="cardDash text-center mx-1"></div>
                           <Field
                           v-model="cardNumber.code3"
                           name="code3"
                           id="cardCode3"
-                          type="text" maxlength="4"
+                          type="password" maxlength="4"
                           class="cardNumber form-control"
                           :class="{ 'is-invalid': errors['卡號'] }"
-                          @change="checkValue($refs.myForm,cardNumber.code3,'卡號','cardCode4')"
+                          @input="revealText('cardCode3')"
+                          @keyup="hiddenText('cardCode3')"
+                          @blur="checkValue($refs.myForm,cardNumber.code3,'卡號','cardCode4')"
                           />
                           <div class="cardDash text-center mx-1"></div>
                           <Field
                           v-model="cardNumber.code4"
                           name="code4"
                           id="cardCode4"
-                          type="password" maxlength="4"
+                          type="text" maxlength="4"
                           class="cardNumber form-control"
                            :class="{ 'is-invalid': errors['卡號'] }"
-                           @change="checkValue($refs.myForm,cardNumber.code4,'卡號','')"
+                           @blur="checkValue($refs.myForm,cardNumber.code4,'卡號','validThru')"
                           />
                       </div>
                   </li>
-                  <li class="col-12" >
+                  <li class="col-12 text-center invalid-feedback" >
                       {{errors['卡號']}}
                   </li>
                   <li class="col-12 align-items-start">
                       <label for="" class="mt-1">信用卡有效期限</label>
                       <div class="d-flex flex-column">
-                          <input required="" name="login[id]" type="text" maxlength="10" placeholder="" class="Apply_Chk_form_control form-control">
+                          <Field
+                          v-model="cardNumber.validThru"
+                          id="validThru" name="validThru"
+                          type="text" maxlength="4"
+                          class="Apply_Chk_form_control form-control"
+                          :class="{ 'is-invalid': errors['信用卡有效期限'] }"
+                           @blur="checkValue($refs.myForm,cardNumber.validThru,'信用卡有效期限','CSC')"/>
                           <span class="not_text">例如:2017年1月，請輸入0117</span>
                       </div>
                   </li>
+                  <li class="col-12 text-center invalid-feedback mb-0" >
+                      {{errors['信用卡有效期限']}}
+                  </li>
                   <li class="col-12">
                       <label for="input1">信用卡背後末三碼</label>
-                      <input required="" name="login[id]" type="text" maxlength="10" placeholder="" class="Apply_Chk_form_control form-control">
+                      <Field
+                      v-model="cardNumber.CSC"
+                      id="CSC" name="CSC"
+                      type="text" maxlength="3"
+                      class="Apply_Chk_form_control form-control"
+                      :class="{ 'is-invalid': errors['信用卡背後末三碼'] }"
+                      @blur="checkValue($refs.myForm,cardNumber.CSC,'信用卡背後末三碼','')"
+                      />
+                  </li>
+                  <li class="col-12 text-center invalid-feedback mb-0" >
+                      {{errors['信用卡背後末三碼']}}
                   </li>
                   <li class="col-12 align-items-start">
                       <label for="" class="mt-1">行動電話</label>
@@ -953,36 +976,75 @@ export default {
         code1: '',
         code2: '',
         code3: '',
-        code4: ''
+        code4: '',
+        validThru: '',
+        CSC: ''
       },
       invalid: false
     }
   },
   methods: {
     checkValue (dom, code, name, nextid) {
-      console.log(nextid)
       // ? 清空errors
-      if (this.$custom.validate.checkCode(code) === true) {
-        console.log(nextid)
-        document.getElementById(nextid).focus()
-        console.log(this.$custom.validate.checkCode(code))
-        // node.nextElementSibling.nextElementSibling.focus()
-      } else {
-        dom.setFieldError(name, '')
-        const error = '122'
-        dom.setFieldError(name, error)
-        console.log(dom.getErrors())
-        console.log(dom.values())
+      dom.setFieldError(name, '')
+      switch (name) {
+        case '卡號': {
+          if (this.$custom.validate.checkCode(code) === true) {
+            document.getElementById(nextid).focus()
+          } else {
+            const error = this.$custom.validate.checkCode(code)
+            // ? 設定errors
+            dom.setFieldError(name, error)
+          }
+          break
+        }
+        case '信用卡有效期限': {
+          if (this.$custom.validate.checkCode(code) === true) {
+            document.getElementById(nextid).focus()
+          } else {
+            const error = this.$custom.validate.checkCode(code)
+            dom.setFieldError(name, error)
+          }
+          break
+        }
+        case '信用卡背後末三碼': {
+          console.log(this.$custom.validate.checkLast3Code(code))
+          if (this.$custom.validate.checkLast3Code(code) === true) {
+            document.getElementById(nextid).focus()
+            console.log(123)
+          } else {
+            const error = this.$custom.validate.checkLast3Code(code)
+            // ? 設定errors
+            dom.setFieldError(name, error)
+          }
+          break
+        }
+        default: {
+          const error = this.$custom.validate.checkCode(code)
+          // ? 設定errors
+          dom.setFieldError(name, error)
+          break
+        }
       }
+      // if (this.$custom.validate.checkCode(code) === true) {
+      //   document.getElementById(nextid).focus()
+      // } else {
+      //   // ? 清空errors
+      //   dom.setFieldError(name, '')
+      //   const error = this.$custom.validate.checkCode(code)
+      //   // ? 設定errors
+      //   dom.setFieldError(name, error)
+      // }
     },
-    // inputHandler (event) {
-    //   console.log(event)
-    //   if (event.target.nodeName === 'INPUT' && event.target.nextElementSibling != null) {
-    //     event.target.nextElementSibling.focus()
-    //   }
-    // },
-    revealTest () {
-      //
+    revealText (id) {
+      setTimeout(() => {
+        document.getElementById(id).setAttribute('type', 'text')
+      }, 100)
+    },
+    hiddenText (id) {
+      setTimeout(() => {
+        document.getElementById(id).setAttribute('type', 'password')
+      }, 500)
     },
     scrollEvent () {
       for (let i = 1; i < 5; i++) {
@@ -1037,6 +1099,7 @@ export default {
   .form-control.is-invalid {
     background-size:0.5em;
     background-position: right calc(.175em + .1875rem) center;
+    padding-right:0em;
   }
   /* .invalid-feedback.card-code {
     font-size: 0.5em !important;

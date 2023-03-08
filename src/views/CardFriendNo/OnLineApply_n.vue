@@ -28,8 +28,8 @@
                             placeholder="限正卡持卡人"
                             :class="{ 'is-invalid': errors['身分證字號'] }"
                             class="formApply_form_control form-control "
+                            @blur="applierInfo.Identification = $custom.validate.watchToUpper(applierInfo.Identification)"
                             rules="checkId"
-                            @keyup="applierInfo.Identification = $custom.validate.watchToUpper(applierInfo.Identification)"
                             />
                             <ErrorMessage
                             name="身分證字號"
