@@ -41,7 +41,6 @@ Object.keys(AllRules).forEach((rule) => {
 Object.keys(validate).forEach((rule) => {
   defineRule(rule, validate[rule])
 })
-// defineRule('chkKeyValueNumEng', validate.chkKeyValueNumEng)
 configure({
   generateMessage: localize({ zh_TW: zhTW }),
   validateOnInput: false,

@@ -2,33 +2,38 @@ const validate = {
   //* ==== 2. 檢核只可為英數字 ====
   //* 來源： Utility.js
   chkKeyValueNumEng (input) {
-    var strChk = ''
-    var strChk1 = ''
-    var strFlag = '0'
-    if (input !== '') {
-      for (let CharCount = 0; CharCount < input.length; CharCount++) {
-        strChk = input.charAt(CharCount)
-        strChk1 = strChk.charCodeAt(0)
-        if ((strChk1 >= 48) && (strChk1 <= 57)) {
-          strFlag = '1'
-        } else if ((strChk1 >= 65) && (strChk1 <= 90)) {
-          strFlag = '1'
-        } else if ((strChk1 >= 97) && (strChk1 <= 122)) {
-          strFlag = '1'
-        } else if ((strChk1 === 33) || (strChk1 === 35) || (strChk1 === 36) || (strChk1 === 64)) {
-          strFlag = '1'
-        } else {
-          strFlag = '0'
-        }
-      }
-    } else {
-      strFlag = '1'
-    }
-    if (strFlag === '0') {
-      return '只可輸入英數字，請重新輸入。'
-    } else {
+    const Rule = /^[A-Za-z0-9]+$/
+    if (Rule.test(input)) {
       return true
     }
+    return '只可輸入英數字，請重新輸入。'
+    // var strChk = ''
+    // var strChk1 = ''
+    // var strFlag = '0'
+    // if (input !== '') {
+    //   for (let CharCount = 0; CharCount < input.length; CharCount++) {
+    //     strChk = input.charAt(CharCount)
+    //     strChk1 = strChk.charCodeAt(0)
+    //     if ((strChk1 >= 48) && (strChk1 <= 57)) {
+    //       strFlag = '1'
+    //     } else if ((strChk1 >= 65) && (strChk1 <= 90)) {
+    //       strFlag = '1'
+    //     } else if ((strChk1 >= 97) && (strChk1 <= 122)) {
+    //       strFlag = '1'
+    //     } else if ((strChk1 === 33) || (strChk1 === 35) || (strChk1 === 36) || (strChk1 === 64)) {
+    //       strFlag = '1'
+    //     } else {
+    //       strFlag = '0'
+    //     }
+    //   }
+    // } else {
+    //   strFlag = '1'
+    // }
+    // if (strFlag === '0') {
+    //   return '只可輸入英數字，請重新輸入。'
+    // } else {
+    //   return true
+    // }
   },
 
   //* ==== 3. 檢核輸入值(特殊符號） ====
@@ -224,29 +229,33 @@ const validate = {
   //* ==== 11. 僅可輸入英、數字、!、@、#、$ ====
   //* 來源： Utility.js
   // ------------------------------------------------------------------------------
-  OnlyNumEngPress (e) {
-  // 48 ~ 57 為數字、65~90大寫英文、97~122小寫英文
-  // #35、'39、"34、-45、*45、<60、>62、/47、%37、=61、(40、)41、&38、+43-->不可輸入
-  //! 33、@64、#35、$36-->可輸入
-    var objKeyCode = window.event ? e.keyCode : e.charCode
-    if ((objKeyCode >= 48) && (objKeyCode <= 57)) {
+  OnlyNumEngPress (value) {
+    const Rule = /^[A-Za-z0-9!@#$]+$/
+    if (Rule.test(value)) {
       return true
-    } else if ((objKeyCode >= 65) && (objKeyCode <= 90)) {
-      return true
-    } else if ((objKeyCode >= 97) && (objKeyCode <= 122)) {
-      return true
-    } else if (objKeyCode === 0) {
-      return true
-    } else {
-      return false
     }
+    return '僅可輸入英、數字、!、@、#、$，請重新輸入。'
+  // // 48 ~ 57 為數字、65~90大寫英文、97~122小寫英文
+  // // #35、'39、"34、-45、*45、<60、>62、/47、%37、=61、(40、)41、&38、+43-->不可輸入
+  // //! 33、@64、#35、$36-->可輸入
+  //   var objKeyCode = window.event ? e.keyCode : e.charCode
+  //   if ((objKeyCode >= 48) && (objKeyCode <= 57)) {
+  //     return true
+  //   } else if ((objKeyCode >= 65) && (objKeyCode <= 90)) {
+  //     return true
+  //   } else if ((objKeyCode >= 97) && (objKeyCode <= 122)) {
+  //     return true
+  //   } else if (objKeyCode === 0) {
+  //     return true
+  //   } else {
+  //     return false
+  //   }
   },
 
   //* ==== 12. 只可輸入數字
   //* 來源： Utility.js
   OnlyNumPress (value) {
-    value = value.replace(/^(0+)|[^\d]+/g, '')
-    return value
+    return value.replace(/^(0+)|[^\d]+/g, '')
   },
 
   //* ==== 13. 確認辦卡地址 ====(非聯邦卡友)
