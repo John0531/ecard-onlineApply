@@ -81,7 +81,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-lg-10 d-flex flex-wrap">
+            <div class="col-12 d-flex flex-wrap">
                 <!-- 卡種1 -->
                 <div class="col-12 col-md-4 text-center">
                 <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="" />
@@ -675,7 +675,7 @@
           </div>
           <div class="modal-footer">
             <div class="col-12 text-center">
-              <button type="submit" class="btn btn-primary btn-lg" @click="checkTotal">確定</button>
+              <button type="submit" class="btn btn-primary btn-lg" @click.prevent="checkTotal">確定</button>
             </div>
           </div>
         </div>
@@ -809,6 +809,7 @@ export default {
             title: 'text-class'
           }
         })
+        return
       }
       if (!this.agreePersonalData) {
         this.$swal.fire({
@@ -819,11 +820,9 @@ export default {
           }
           // timer: 2500
         })
+        return
       }
       this.$router.push('/OnLineApply_n1')
-    },
-    toUpperCase () {
-      return this.$custom.validate.watchToUpper
     }
   },
   watch: {

@@ -28,4 +28,10 @@ export default {
         -webkit-appearance: none;
         margin:0;
   }
+  .form-control.is-invalid {
+    background-image: none;
+  }
+  .form-select.is-invalid:not([multiple]):not([size]){
+    background-image: none;
+  }
 </style>

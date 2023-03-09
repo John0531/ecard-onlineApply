@@ -31,118 +31,136 @@
         </div>
         <Form
             v-slot="{errors}"
-            ref="myForm">
+            ref="myForm"
+            >
           <div class="formGroup">
               <ul class="formList Apply_Chk">
                   <li class="col-12" id="group1">
                       <label for="">信用卡卡號</label>
-                      <div class="d-flex align-items-center">
-                          <Field
-                          v-model="cardNumber.code1"
-                          name="code1"
-                          id="cardCode1"
-                          type="text" maxlength="4"
-                          class="cardNumber form-control"
-                          :class="{ 'is-invalid': errors['卡號'] }"
-                          @blur="checkValue($refs.myForm,cardNumber.code1,'卡號','cardCode2')"
-                          />
-                          <div class="cardDash text-center mx-1"></div>
-                          <Field
-                          v-model="cardNumber.code2"
-                          name="code2"
-                          id="cardCode2"
-                          type="password" maxlength="4"
-                          class="cardNumber form-control"
-                          :class="{ 'is-invalid': errors['卡號'] }"
-                          @input="revealText('cardCode2')"
-                          @keyup="hiddenText('cardCode2')"
-                          @blur="checkValue($refs.myForm,cardNumber.code2,'卡號','cardCode3')"
-                          />
-                          <div class="cardDash text-center mx-1"></div>
-                          <Field
-                          v-model="cardNumber.code3"
-                          name="code3"
-                          id="cardCode3"
-                          type="password" maxlength="4"
-                          class="cardNumber form-control"
-                          :class="{ 'is-invalid': errors['卡號'] }"
-                          @input="revealText('cardCode3')"
-                          @keyup="hiddenText('cardCode3')"
-                          @blur="checkValue($refs.myForm,cardNumber.code3,'卡號','cardCode4')"
-                          />
-                          <div class="cardDash text-center mx-1"></div>
-                          <Field
-                          v-model="cardNumber.code4"
-                          name="code4"
-                          id="cardCode4"
-                          type="text" maxlength="4"
-                          class="cardNumber form-control"
-                           :class="{ 'is-invalid': errors['卡號'] }"
-                           @blur="checkValue($refs.myForm,cardNumber.code4,'卡號','validThru')"
-                          />
+                      <div class="d-flex flex-column">
+                        <div class="d-flex align-items-center">
+                            <Field
+                            v-model="cardNumber.code1"
+                            name="code1"
+                            id="cardCode1" ref="cardCode1"
+                            type="text" maxlength="4"
+                            class="cardNumber form-control"
+                            :class="{ 'is-invalid': errors['卡號'] }"
+                            @blur="checkValue($refs.myForm,cardNumber,'卡號','cardCode2')"
+                            />
+                            <div class="cardDash text-center mx-1"></div>
+                            <Field
+                            v-model="cardNumber.code2"
+                            name="code2"
+                            id="cardCode2" ref="cardCode2"
+                            type="password" maxlength="4"
+                            class="cardNumber form-control"
+                            :class="{ 'is-invalid': errors['卡號'] }"
+                            @input="revealText('cardCode2')"
+                            @keyup="hiddenText('cardCode2')"
+                            @blur="checkValue($refs.myForm,cardNumber,'卡號','cardCode3')"
+                            />
+                            <div class="cardDash text-center mx-1"></div>
+                            <Field
+                            v-model="cardNumber.code3"
+                            name="code3"
+                            id="cardCode3" ref="cardCode3"
+                            type="password" maxlength="4"
+                            class="cardNumber form-control"
+                            :class="{ 'is-invalid': errors['卡號'] }"
+                            @input="revealText('cardCode3')"
+                            @keyup="hiddenText('cardCode3')"
+                            @blur="checkValue($refs.myForm,cardNumber,'卡號','cardCode4')"
+                            />
+                            <div class="cardDash text-center mx-1"></div>
+                            <Field
+                            v-model="cardNumber.code4"
+                            name="code4"
+                            id="cardCode4" ref="cardCode4"
+                            type="text" maxlength="4"
+                            class="cardNumber form-control"
+                             :class="{ 'is-invalid': errors['卡號'] }"
+                             @blur="checkValue($refs.myForm,cardNumber,'卡號','validThru')"
+                            />
+                        </div>
+                        <div class="d-flex text-center invalid-feedback my-1" >
+                          {{errors['卡號']}}
+                        </div>
                       </div>
-                  </li>
-                  <li class="col-12 text-center invalid-feedback" >
-                      {{errors['卡號']}}
                   </li>
                   <li class="col-12 align-items-start">
                       <label for="" class="mt-1">信用卡有效期限</label>
                       <div class="d-flex flex-column">
                           <Field
                           v-model="cardNumber.validThru"
-                          id="validThru" name="validThru"
+                          id="validThru" name="validThru" ref="validThru"
                           type="text" maxlength="4"
                           class="Apply_Chk_form_control form-control"
                           :class="{ 'is-invalid': errors['信用卡有效期限'] }"
-                           @blur="checkValue($refs.myForm,cardNumber.validThru,'信用卡有效期限','CSC')"/>
+                           @blur="checkValue($refs.myForm,cardNumber,'信用卡有效期限','CSC')"/>
                           <span class="not_text">例如:2017年1月，請輸入0117</span>
+                          <span class="text-center invalid-feedback mb-0" >
+                          {{errors['信用卡有效期限']}}
+                          </span>
                       </div>
-                  </li>
-                  <li class="col-12 text-center invalid-feedback mb-0" >
-                      {{errors['信用卡有效期限']}}
                   </li>
                   <li class="col-12">
                       <label for="input1">信用卡背後末三碼</label>
-                      <Field
-                      v-model="cardNumber.CSC"
-                      id="CSC" name="CSC"
-                      type="text" maxlength="3"
-                      class="Apply_Chk_form_control form-control"
-                      :class="{ 'is-invalid': errors['信用卡背後末三碼'] }"
-                      @blur="checkValue($refs.myForm,cardNumber.CSC,'信用卡背後末三碼','')"
-                      />
-                  </li>
-                  <li class="col-12 text-center invalid-feedback mb-0" >
-                      {{errors['信用卡背後末三碼']}}
+                      <div class="d-flex flex-column">
+                        <Field
+                        v-model="cardNumber.CSC"
+                        id="CSC" name="CSC" ref="CSC"
+                        type="text" maxlength="3"
+                        class="Apply_Chk_form_control form-control"
+                        :class="{ 'is-invalid': errors['信用卡背後末三碼'] }"
+                        @blur="checkValue($refs.myForm,cardNumber,'信用卡背後末三碼','phone')"
+                        />
+                        <span class="text-center invalid-feedback mb-0" >
+                        {{errors['信用卡背後末三碼']}}
+                        </span>
+                      </div>
                   </li>
                   <li class="col-12 align-items-start">
                       <label for="" class="mt-1">行動電話</label>
                       <div class="d-flex flex-column">
-                          <input required="" name="login[id]" type="text" maxlength="10" placeholder="" class="Apply_Chk_form_control form-control">
+                          <Field
+                          v-model="phoneNumber"
+                          id="phone" name="phone" ref="phone"
+                          type="text" maxlength="10"
+                          class="Apply_Chk_form_control form-control"
+                          :class="{ 'is-invalid': errors['phone'] }"
+                          rules="checkPhone"
+                          />
                           <span class="not_text">請填寫信用卡申請時之行動電話，以利資訊驗證</span>
+                          <span class="text-center invalid-feedback mb-0" >
+                            {{errors['phone']}}
+                          </span>
                       </div>
                   </li>
               </ul>
           </div>
-        </Form>
-        <!-------------------本人已詳閱---------------------->
         <div class="terms-group">
             <div class="terms">
-                <input id="checkbox" name="checkbox" class="checkimg position-absolute" type="checkbox" @click="checkAgreement" v-model="agreementAll"
+                <input id="checkbox" name="checkbox"  type="checkbox" class="checkimg position-absolute" @click="checkAgreement" v-model="agreementAll"
                   />
                 <label for="agree">同意，本人對「 <a href="#" @click.prevent="checkAgreement"><u>用卡須知及申請說明</u></a>」「 <a href="#" @click.prevent="checkAgreement"><u>重要告知事項</u></a>」「 <a href="#" @click.prevent="checkAgreement"><u>聯邦信用卡約定條款</u></a>」「<a href="#" @click.prevent="checkAgreement"><u>電子化帳單服務約定條款</u></a>」內容。(請務必勾選)
                 </label>
             </div>
             <div class="terms">
-                <input type="checkbox" class="checkimg position-absolute" id="agree1">
-                <label for="agree1">同意，聯邦商業銀行股份有限公司將本人之基本資料(含身分證字號、信用卡卡號、信用卡有效期限、卡片背面簽名後三碼、行動電話等資料)，透過信用卡授權轉接處理中心(聯合信用卡處理中心)傳輸至發卡機構進行身分認證等相關作業。
+                <input id="checkbox2" name="checkbox2" type="checkbox" class="checkimg position-absolute" v-model="agreePersonalData">
+                <label for="agree2">同意，聯邦商業銀行股份有限公司將本人之基本資料(含身分證字號、信用卡卡號、信用卡有效期限、卡片背面簽名後三碼、行動電話等資料)，透過信用卡授權轉接處理中心(聯合信用卡處理中心)傳輸至發卡機構進行身分認證等相關作業。
                 </label>
             </div>
         </div>
         <!-------------------//本人已詳閱---------------------->
         <div class="text-center button_group">
-            <button onclick="location.href='OnLineApply_Chk_OTP.htm'" class="btn btn-primary btn-lg mx-1" type="submit" value="">下一步</button>
+            <button
+            @click.prevent="applySubmit($refs.myForm)"
+            class="btn btn-primary btn-lg mx-1" type=""
+            value="">下一步</button>
         </div>
+        </Form>
+        <!-------------------本人已詳閱---------------------->
     </div>
   </div>
   <!-- Modal-1 -->
@@ -969,8 +987,8 @@
 export default {
   data () {
     return {
-      agreeModal: '',
-      agreementAll: false,
+      agreeModal: '', // ? Modal上同意欄
+      agreementAll: false, // ?同意申請條款
       agreement: [],
       cardNumber: {
         code1: '',
@@ -980,7 +998,8 @@ export default {
         validThru: '',
         CSC: ''
       },
-      invalid: false
+      phoneNumber: '',
+      agreePersonalData: false // ?同意個資聲明
     }
   },
   methods: {
@@ -989,8 +1008,30 @@ export default {
       dom.setFieldError(name, '')
       switch (name) {
         case '卡號': {
-          if (this.$custom.validate.checkCode(code) === true) {
-            document.getElementById(nextid).focus()
+          if (this.$custom.validate.checkCode(code.code1) === true) {
+            if (nextid) {
+              document.getElementById(nextid).focus()
+            } else {
+              break
+            }
+          } else if (this.$custom.validate.checkCode(code.code2) === true) {
+            if (nextid) {
+              document.getElementById(nextid).focus()
+            } else {
+              break
+            }
+          } else if (this.$custom.validate.checkCode(code.code3) === true) {
+            if (nextid) {
+              document.getElementById(nextid).focus()
+            } else {
+              break
+            }
+          } else if (this.$custom.validate.checkCode(code.code4) === true) {
+            if (nextid) {
+              document.getElementById(nextid).focus()
+            } else {
+              break
+            }
           } else {
             const error = this.$custom.validate.checkCode(code)
             // ? 設定errors
@@ -999,8 +1040,12 @@ export default {
           break
         }
         case '信用卡有效期限': {
-          if (this.$custom.validate.checkCode(code) === true) {
-            document.getElementById(nextid).focus()
+          if (this.$custom.validate.checkCode(code.validThru) === true) {
+            if (nextid) {
+              document.getElementById(nextid).focus()
+            } else {
+              break
+            }
           } else {
             const error = this.$custom.validate.checkCode(code)
             dom.setFieldError(name, error)
@@ -1008,10 +1053,12 @@ export default {
           break
         }
         case '信用卡背後末三碼': {
-          console.log(this.$custom.validate.checkLast3Code(code))
-          if (this.$custom.validate.checkLast3Code(code) === true) {
-            document.getElementById(nextid).focus()
-            console.log(123)
+          if (this.$custom.validate.checkLast3Code(code.CSC) === true) {
+            if (nextid) {
+              document.getElementById(nextid).focus()
+            } else {
+              break
+            }
           } else {
             const error = this.$custom.validate.checkLast3Code(code)
             // ? 設定errors
@@ -1059,6 +1106,7 @@ export default {
       }
     },
     checkAgreement () {
+      console.log(1)
       this.agreeModal.show()
       const ck = document.querySelector('#checkbox')
       if (this.agreement.length !== 4) {
@@ -1079,8 +1127,38 @@ export default {
       }
       this.agreeModal.hide()
     },
-    applySubmit () {
-      //
+    async applySubmit (dom) {
+      this.checkValue(this.$refs.myForm, this.cardNumber, '卡號', '')
+      this.checkValue(this.$refs.myForm, this.cardNumber, '信用卡有效期限', '')
+      this.checkValue(this.$refs.myForm, this.cardNumber, '信用卡背後末三碼', '')
+      console.log(dom.getErrors())
+      //   console.log(dom.setErrors())
+      console.log(dom.validate())
+      const collection = await dom.validate()
+      collection.errors = dom.getErrors()
+      console.log(collection)
+      //   errors = dom.getErrors()
+      //   console.log(dom.getValues())
+      // if (!this.agreement) {
+      //   this.$swal.fire({
+      //     title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+      //     showConfirmButton: false,
+      //     customClass: {
+      //       title: 'text-class'
+      //     }
+      //   })
+      //   return
+      // }
+      if (!this.agreePersonalData) {
+        this.$swal.fire({
+          title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+          showConfirmButton: false,
+          customClass: {
+            title: 'text-class'
+          }
+        })
+      }
+      this.$router.push('/OnLineApply_Chk_OTP')
     }
   },
   watch: {
@@ -1106,6 +1184,6 @@ export default {
     width: 4rem;
   } */
   .formList #group1{
-    margin-bottom: 1rem !important;
+    margin-bottom: 2rem !important;
   }
 </style>
