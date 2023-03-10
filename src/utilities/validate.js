@@ -20,43 +20,15 @@ const validate = {
       return true
     }
     return '輸入無效字元，請重新輸入。'
-    // let blnFlag = false
-    // if (input !== '') {
-    //   if (input.indexOf("'") > -1) {
-    //     blnFlag = true
-    //   }
-    //   if (input.indexOf('"') > -1) {
-    //     blnFlag = true
-    //   }
-    //   if (input.indexOf('-') > -1) {
-    //     blnFlag = true
-    //   }
-    //   if (input.indexOf('*') > -1) {
-    //     blnFlag = true
-    //   }
-    //   if (input.indexOf('/') > -1) {
-    //     blnFlag = true
-    //   }
-    //   if (input.indexOf('=') > -1) {
-    //     blnFlag = true
-    //   }
-    //   if (input.indexOf('+') > -1) {
-    //     blnFlag = true
-    //   }
-    //   if (input.indexOf('&') > -1) {
-    //     blnFlag = true
-    //   }
-    // }
-
-    // if (blnFlag === true) {
-    //   return '輸入無效字元，請重新輸入。'
-    // } else {
-    //   return true
-    // }
   },
 
   //* ==== 4. 檢核欄位長度(指定輸入a~b個字元) ====
-  // ? intStart: 最少輸入字元；intEnd: 最多輸入字元
+  // ? 參數說明:
+  // ? input(字串): v-model綁定的欄位值
+  // ? FormDom(DOM元素): <Form> 標籤的 DOM，用於呼叫套件中的函式
+  // ? fieldName(字串): 驗證欄位的名稱，用於設定套件錯誤訊息
+  // ? intStart(數字): 最少需輸入的字數
+  // ? intEnd(數字): 最多可輸入的字數
   //* 來源： Utility.js
   chkKeyValueLength (input, FormDom, fieldName, intStart, intEnd) {
     console.log(input)
@@ -93,6 +65,7 @@ const validate = {
 
   //* ==== 7. 檢核只可為數字 ====
   //* 來源： Utility.js
+  // TODO 可用規則 12或22 代替
   chkKeyValueNum (value) {
     const Rule = /^[0-9]*$/
     if (Rule.test(value)) {
@@ -182,14 +155,14 @@ const validate = {
 
   //* ==== 12. 只可輸入數字
   //* 來源： Utility.js
+  // ? 搭配@keyup事件使用，直接過濾所有輸入字元必定為數字
   OnlyNumPress (value) {
     return value.replace(/[^\d]+/g, '')
-    // /^(0+)|[^\d]+/g 不可是 0 開頭
   },
 
   //* ==== 13. 確認辦卡地址 ====(非聯邦卡友)
   //* 來源： Utility.js
-  // TODO 可用 veevalide length
+  // TODO 可用在 input 加入屬性 maxlength
   // TODO 確認辦卡地址長度 縣市10 地區10 路10 巷弄號樓5 其他100
   // ?  Address: {
   // ?   ZipCode: '',遞區號
@@ -202,6 +175,10 @@ const validate = {
   // ?   Floor: '',樓
   // ?   Other: '' 其他
   // ? },
+  // * 參數說明:
+  // * Address(物件): 所有地址欄位，在每一輸入框中都需要驗證所有欄位
+  // * FormDom(DOM元素): <Form> 標籤的 DOM，用於呼叫套件中的函式
+  // * fieldName(字串): 驗證欄位的名稱，用於設定套件錯誤訊息
   CheckAddressAll (Address, FormDom, fieldName) {
     FormDom.setFieldError(fieldName, '')
     const test = Address.Ln + Address.Aly + Address.No_1 + Address.No_2 + Address.Floor + Address.Other
@@ -228,6 +205,8 @@ const validate = {
   },
 
   //* ==== 17. 顯示錯誤訊息 ====
+  // ? 參數說明:
+  // ? errors: 使用套件函式取得的錯誤資訊
   showErrors (errors) {
     let errMsg = ''
     for (const [key, value] of Object.entries(errors)) {
@@ -266,6 +245,7 @@ const validate = {
     return '請輸入中文'
   },
   //* ==== 22. 只可輸入數字，且首字不為零 ====
+  // ? 搭配@keyup事件使用，直接過濾所有輸入字元必定為數字
   NumOnlyWithoutFirstZero (value) {
     return value.replace(/^(0+)|[^\d]+/g, '')
     // /^(0+)|[^\d]+/g 不可是 0 開頭
