@@ -86,7 +86,7 @@
                 <div class="col-12 col-md-4 text-center">
                 <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="" />
                 <div class="form-check my-2">
-                    <input v-model="applierInfo.cardPicked" class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                    <input v-model="applierInfo.cardPicked" class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
                     <label class="form-check-label text-start text-md-center fw-bold" for="exampleRadios1">
                         微風悠遊聯名卡MasterCard悠遊鈦金卡
                     </label>
@@ -122,7 +122,7 @@
                     <p>◆活動內容：新戶核卡後30日內，消費累積滿1,288元(含)以上，且不限地點首次自動加值，即可享首刷好禮多選一；如符合首刷禮條件並有使用本行任一行動支付新增不限金額之一般消費，即可升級獲贈「無線行動電源」。
                     </p>
                     <div class="form-check mt-2 ms-3">
-                        <input v-model="applierInfo.firstGift" class="form-check-input Apply_input" type="radio" name="firstGift1" id="firstGift1" value="option1" checked>
+                        <input v-model="applierInfo.firstGift" class="form-check-input Apply_input" type="radio" name="firstGift1" id="firstGift1" value="option1" >
                         <label class="form-check-label fw-bold" for="exampleRadios4">
                             好禮一：智能垃圾桶（代碼5）
                         </label>
