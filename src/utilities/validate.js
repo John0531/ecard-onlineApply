@@ -256,6 +256,15 @@ const validate = {
       return '此欄位為必填'
     }
     return true
+  },
+  //* ==== 24. 檢查3碼信用卡安全碼 ====
+  checkLast3Code (code) {
+    // ? 信用卡末三碼驗證
+    const idRule2 = /^\d{3}$/
+    if (idRule2.test(code)) {
+      return true
+    }
+    return '請輸入3碼信用卡安全碼'
   }
 }
 
