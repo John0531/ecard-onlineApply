@@ -28,4 +28,10 @@ export default {
         -webkit-appearance: none;
         margin:0;
   }
+  .card-body{
+    padding: 1rem 1rem;
+  }
+  .form-check-input.is-invalid{
+    border-color: #dc3545 !important;
+  }
 </style>
