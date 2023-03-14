@@ -146,7 +146,8 @@ const validate = {
   //* 來源： Utility.js
   // ------------------------------------------------------------------------------
   OnlyNumEngPress (value) {
-    const Rule = /^[A-Za-z0-9!@#$]+$/
+    const Rule = /^[a-zA-Z0-9!@#\\$]*$/g
+    // const Rule = /^[A-Za-z0-9!@#$]+$/
     if (Rule.test(value)) {
       return true
     }
