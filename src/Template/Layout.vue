@@ -34,13 +34,10 @@ export default {
   .form-select.is-invalid:not([multiple]):not([size]){
     background-image: none;
   }
-<<<<<<< HEAD
   .card-body{
     padding: 1rem 1rem;
   }
   .form-check-input.is-invalid{
     border-color: #dc3545 !important;
   }
-=======
->>>>>>> 2fd02765070cdf371e5621b9b16e852282156f3e
 </style>
