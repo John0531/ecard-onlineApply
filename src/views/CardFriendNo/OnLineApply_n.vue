@@ -13,14 +13,13 @@
       <div class="row justify-content-md-center">
         <Form
             v-slot="{errors}"
-            @submit="applySubmit"
-            @invalid-submit="onInvalidSubmit"
+            ref="myForm"
         >
             <div class="formGroup">
                 <ul class="formList formApply">
-                    <li class="col-12 mb-2">
+                    <li class="col-12 align-items-start mb-0">
                         <label for="">申請人身分證字號</label>
-                        <div class="mb-1">
+                        <div class="d-flex flex-column mb-1">
                             <Field
                             v-model="applierInfo.Identification"
                             name="身分證字號"
@@ -31,52 +30,68 @@
                             @blur="applierInfo.Identification = $custom.validate.watchToUpper(applierInfo.Identification)"
                             rules="checkId"
                             />
-                            <ErrorMessage
-                            name="身分證字號"
-                            class="invalid-feedback "
-                            ></ErrorMessage>
+                            <div class="d-flex text-center invalid-feedback my-1">
+                                {{errors['身分證字號']}}
+                            </div>
                         </div>
                     </li>
                     <li class="col-12">
-                        <label for=""></label>
                         <span class="red_text">(外籍人士請輸入居留簽證的統一證號)</span>
                     </li>
-                    <li class="col-12">
+                    <li class="col-12 align-items-start">
                         <label for="input1">西元出生年月日</label>
-                        <div class="d-flex align-items-center">
-                            <!-- 辦卡人出生年 -->
-                            <div>
-                                <Field as="select" name="出生年" rules="required"  class="form-select form-control" :class="{ 'is-invalid': errors['出生年'] }" v-model="applierInfo.year" @change="getDay">
-                                    <option value="" selected></option>
-                                    <option v-for="n in Array.from({length: 80}, (v, i) => i + (new Date().getFullYear() - 95))" :value="n" :key="n+1">
-                                    {{n}}
+                        <div class="d-flex flex-column mb-1">
+                            <div class="d-flex align-items-center">
+                                <!-- 辦卡人出生年 -->
+                                <div>
+                                    <Field
+                                    as="select" name="年"
+                                    rules="required"
+                                    class="form-select form-control"
+                                    :class="{ 'is-invalid': errors['年'] }"
+                                    :validateOnChange="true"
+                                    v-model="applierInfo.year"
+                                    >
+                                    <option v-for="year in this.dateList.yearList" :value="year" :key="year+1">
+                                    {{year}}
                                     </option>
-                                </Field>
-                                <ErrorMessage name="出生年" class="invalid-feedback">
-                                </ErrorMessage>
-                            </div>年
-                            <!-- 辦卡人出生月 -->
-                            <div>
-                                <Field as="select" name="出生月" rules="required" :class="{ 'is-invalid': errors['出生月'] }" class="form-select form-control" v-model="applierInfo.month" @change="getDay">
-                                    <option value="" selected></option>
+                                    </Field>
+                                </div>年
+                                <!-- 辦卡人出生月 -->
+                                <div>
+                                    <Field
+                                    as="select" name="月"
+                                    rules="required"
+                                    :class="{ 'is-invalid': errors['月'] }"
+                                    class="form-select form-control"
+                                    :validateOnChange="true"
+                                    v-model="applierInfo.month" @change="getDay">
                                     <option v-for="month in dateList.monthList" :value="month" :key="month+1">
                                     {{month}}
                                     </option>
-                                </Field>
-                                <ErrorMessage name="出生月" class="invalid-feedback">
-                                </ErrorMessage>
-                            </div>月
-                            <!-- 辦卡人出生日 -->
-                            <div>
-                                <Field as="select" name="出生日" rules="required" :class="{ 'is-invalid': errors['出生日'] }"  class="form-select form-control" v-model="applierInfo.day">
-                                    <option value="" selected></option>
+                                    </Field>
+                                </div>月
+                                <!-- 辦卡人出生日 -->
+                                <div>
+                                    <Field
+                                    as="select" name="日"
+                                    rules="required"
+                                    :class="{ 'is-invalid': errors['日'] }"
+                                    class="form-select form-control"
+                                    :validateOnChange="true"
+                                    v-model="applierInfo.day"
+                                    >
                                     <option v-for="date in dateList.dayList" :value="date" :key="date+1">
                                     {{date}}
                                     </option>
-                                </Field>
-                                <ErrorMessage name="出生日" class="invalid-feedback">
-                                </ErrorMessage>
-                            </div>日
+                                    </Field>
+                                </div>日
+                            </div>
+                            <div class="d-flex text-center invalid-feedback my-1">
+                            <span v-if="errors['年'] || errors['月'] || errors['日']">
+                              出生年月日為必填
+                            </span>
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -86,8 +101,16 @@
                 <div class="col-12 col-md-4 text-center">
                 <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="" />
                 <div class="form-check my-2">
-                    <input v-model="applierInfo.cardPicked" class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" >
-                    <label class="form-check-label text-start text-md-center fw-bold" for="exampleRadios1">
+                    <Field
+                    v-model="applierInfo.cardPicked"
+                    class="form-check-input Apply_input" type="radio"
+                    :class="{ 'is-invalid': errors['卡種'] }"
+                    name="卡種" id="exampleRadios1"
+                    :validateOnInput="true"
+                    rules="required"
+                    value="option1"
+                    />
+                    <label class="form-check-label text-start text-md-center text-black fw-bold" for="exampleRadios1">
                         微風悠遊聯名卡MasterCard悠遊鈦金卡
                     </label>
                 </div>
@@ -96,8 +119,16 @@
                 <div class="col-12 col-md-4 text-center">
                 <img src="@/assets/images/form/card_b4bs.jpg" class="img-fluid" alt="" />
                 <div class="form-check my-2">
-                    <input v-model="applierInfo.cardPicked" class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                    <label class="form-check-label text-start text-md-center fw-bold" for="exampleRadios2">
+                    <Field
+                    v-model="applierInfo.cardPicked"
+                    class="form-check-input Apply_input" type="radio"
+                    :class="{ 'is-invalid': errors['卡種'] }"
+                    name="卡種" id="exampleRadios2"
+                    :validateOnInput="true"
+                    rules="required"
+                    value="option2"
+                    />
+                    <label class="form-check-label text-start text-md-center text-black fw-bold" for="exampleRadios2">
                         微風悠遊聯名卡JCB悠遊晶緻卡
                     </label>
                 </div>
@@ -106,12 +137,23 @@
                 <div class="col-12 col-md-4 text-center">
                 <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="" />
                 <div class="form-check my-2">
-                    <input v-model="applierInfo.cardPicked" class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
-                    <label class="form-check-label text-start text-md-center fw-bold" for="exampleRadios3">
+                    <Field
+                    v-model="applierInfo.cardPicked"
+                    class="form-check-input Apply_input"
+                    :class="{ 'is-invalid': errors['卡種'] }"
+                    name="卡種" id="exampleRadios3" type="radio"
+                    :validateOnInput="true"
+                    rules="required"
+                    value="option3"
+                    />
+                    <label class="form-check-label text-start text-md-center text-black fw-bold" for="exampleRadios3">
                         微風悠遊聯名卡VISA悠遊御璽卡
                     </label>
                 </div>
                 </div>
+            </div>
+            <div class="d-flex justify-content-center invalid-feedback my-1">
+                <div>{{errors['卡種']}}</div>
             </div>
             <!----------------首刷禮---------------->
             <div class="card_gift_box">
@@ -122,29 +164,66 @@
                     <p>◆活動內容：新戶核卡後30日內，消費累積滿1,288元(含)以上，且不限地點首次自動加值，即可享首刷好禮多選一；如符合首刷禮條件並有使用本行任一行動支付新增不限金額之一般消費，即可升級獲贈「無線行動電源」。
                     </p>
                     <div class="form-check mt-2 ms-3">
-                        <input v-model="applierInfo.firstGift" class="form-check-input Apply_input" type="radio" name="firstGift1" id="firstGift1" value="option1" >
-                        <label class="form-check-label fw-bold" for="exampleRadios4">
+                        <Field
+                        v-model="applierInfo.firstGift"
+                        class="form-check-input Apply_input"
+                        :class="{ 'is-invalid': errors['首刷禮'] }"
+                        name="首刷禮" id="firstGift1" type="radio"
+                        :validateOnInput="true"
+                        rules="required"
+                        value="option1"
+                        />
+                        <label class="form-check-label text-black fw-bold" for="exampleRadios4">
                             好禮一：智能垃圾桶（代碼5）
                         </label>
                     </div>
                     <div class="form-check mt-2 ms-3">
-                        <input v-model="applierInfo.firstGift" class="form-check-input Apply_input" type="radio" name="firstGift2" id="firstGift2" value="option2">
-                        <label class="form-check-label fw-bold" for="exampleRadios5">
+                        <Field
+                        v-model="applierInfo.firstGift"
+                        class="form-check-input Apply_input"
+                        :class="{ 'is-invalid': errors['首刷禮'] }"
+                        name="首刷禮" id="firstGift2" type="radio"
+                        :validateOnInput="true"
+                        rules="required"
+                        value="option2"
+                        />
+                        <label class="form-check-label text-black fw-bold" for="exampleRadios5">
                             好禮二：20吋璀璨灰登機箱（代碼9）
                         </label>
                     </div>
                     <div class="form-check mt-2 ms-3">
-                        <input v-model="applierInfo.firstGift" class="form-check-input Apply_input" type="radio" name="firstGift3" id="firstGift3" value="option3">
-                        <label class="form-check-label fw-bold" for="exampleRadios6">
+                        <Field
+                        v-model="applierInfo.firstGift"
+                        class="form-check-input Apply_input"
+                        :class="{ 'is-invalid': errors['首刷禮'] }"
+                        name="首刷禮" id="firstGift3" type="radio"
+                        :validateOnInput="true"
+                        rules="required"
+                        value="option3"
+                        />
+                        <label class="form-check-label text-black fw-bold" for="exampleRadios6">
                             好禮三：刷卡金500元（代碼3）
                         </label>
                     </div>
                     <div class="form-check mt-2 ms-3">
-                        <input v-model="applierInfo.firstGift" class="form-check-input Apply_input" type="radio" name="firstGift4" id="firstGift4" value="option4">
-                        <label class="form-check-label fw-bold" for="exampleRadios7">
+                        <Field
+                        v-model="applierInfo.firstGift"
+                        class="form-check-input Apply_input"
+                        :class="{ 'is-invalid': errors['首刷禮'] }"
+                        name="首刷禮" id="firstGift4" type="radio"
+                        :validateOnInput="true"
+                        rules="required"
+                        value="option4"
+                        />
+                        <label class="form-check-label text-black fw-bold" for="exampleRadios7">
                             好禮四：無線行動電源（代碼2）
                         </label>
                     </div>
+                    <div class="d-flex justify-content-start invalid-feedback my-1 ms-3">
+                    <div>
+                        {{errors['首刷禮']}}
+                    </div>
+            </div>
                 </div>
             </div>
         <!--------------//首刷禮---------------->
@@ -266,7 +345,7 @@
         </div>
         <!-------------------//前往下一頁---------------------->
         <div class="text-center button_group">
-            <button  class="btn btn-primary btn-lg mx-1" type="submit" value="">下一步</button>
+            <button  class="btn btn-primary btn-lg mx-1" type="submit"  @click.prevent="applySubmit">下一步</button>
         </div>
         </Form>
       </div>
@@ -688,7 +767,7 @@
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 
 export default {
-  data () {
+	data () {
     return {
       dateList: {
         // ?日期選單
@@ -706,7 +785,7 @@ export default {
         firstGift: ''
       },
       agreement: false, // ? Modal上同意欄
-      agreementAll: false, // ?同意申請條款
+      agreementAll: false, // ?已同意Modal上所有申請條款
       contractModal: '', // ?同意書modal
       agreePersonalData: false // ?同意個資聲明
     }
@@ -747,10 +826,10 @@ export default {
     },
     getYearMonth () {
       // ? 產生生日"年"、"月"選單
-    //   const year = new Date()
-    //   for (let i = 1930; i < year.getFullYear() + 1; i++) {
-    //     this.dateList.yearList.push(i)
-    //   }
+      const year = new Date()
+      for (let i = 1930; i < year.getFullYear() + 1; i++) {
+        this.dateList.yearList.push(i)
+      }
       for (let i = 1; i < 13; i++) {
         if (i < 10) {
           this.dateList.monthList.push('0' + i)
@@ -758,6 +837,9 @@ export default {
           this.dateList.monthList.push(i)
         }
       }
+      // ? 建立預設日期
+      this.applierInfo.year = this.dateList.yearList[0]
+      this.applierInfo.month = this.dateList.monthList[0]
     },
     getDay () {
       // ? 產生生日"日"選單
@@ -789,41 +871,42 @@ export default {
         this.applierInfo.day = ''
       }
     },
-    onInvalidSubmit ({ values, errors, results }) { // !總表單驗證
-      this.$swal.fire({
-        title: '尚有必填欄位未填寫正確',
-        showConfirmButton: false,
-        // timer: 2500,
-        customClass: {
-          title: 'text-class'
-        }
-      })
-    },
-    applySubmit () {
-      if (!this.agreement) {
-        this.$swal.fire({
-          title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-          showConfirmButton: false,
-          // timer: 2500
-          customClass: {
-            title: 'text-class'
-          }
-        })
-        return
-      }
-      if (!this.agreePersonalData) {
-        this.$swal.fire({
-          title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-          showConfirmButton: false,
-          customClass: {
-            title: 'text-class'
-          }
-          // timer: 2500
-        })
-        return
-      }
-      this.$router.push('/OnLineApply_n1')
-    }
+    async applySubmit () {
+			const collection = await this.$refs.myForm.validate()
+			collection.errors = await this.$refs.myForm.getErrors()
+			if (Object.keys(collection.errors).length === 0) {
+				// ? 檢查約定條款 未打勾
+        if (!this.agreement) {
+				this.$swal.fire({
+						title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+						showConfirmButton: false,
+						// timer: 2500
+						customClass: {
+								title: 'text-class'
+								//
+						}
+				})
+				return
+				}
+        // ? 檢查個資條款 未打勾
+				if (!this.agreePersonalData) {
+				this.$swal.fire({
+						title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+						showConfirmButton: false,
+						customClass: {
+								title: 'text-class'
+						}
+				// timer: 2500
+				})
+				return
+				}
+        // ** ===全部通過前往下一頁===
+				this.$router.push('/OnLineApply_n1')
+			} else {
+        // ** ===錯誤訊息彙整===
+        this.$custom.validate.showErrors(collection.errors)
+			}
+		}
   },
   watch: {
     agreement (n) {
@@ -838,6 +921,7 @@ export default {
     this.scorllEvent()
     this.contractModal = new bootstrap.Modal(this.$refs.contractModal, { backdrop: 'static' })
     this.getYearMonth()
+    this.getDay()
   }
 }
 </script>
