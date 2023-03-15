@@ -10,6 +10,10 @@
   <!-- 主要內容 -->
   <section class="mainArea">
       <div class="container-xl">
+        <Form
+          v-slot="{errors}"
+          ref="myForm"
+          >
           <div class="row justify-content-md-center pt-1 pt-md-3">
               <div class="formGroup">
                   <ul class="formList">
@@ -27,13 +31,31 @@
                       </li>
                       <li class="inOpt align-items-start">
                           <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
-                          <div class="d-flex flex-column">
-                              <div class="d-flex align-items-center">
-                                  <input required="" name="login[]" type="text" maxlength="6" placeholder="請輸入驗證碼" class="form-control">
-                                  <button onclick="location.href='#'" class="ResendOpt" type="submit" value="">重發簡訊驗證碼</button>
-                              </div>
-                              <div class="countdown">(21秒後可重新發送)</div>
-                          </div>
+                            <div class="d-flex flex-column">
+                                <div class="d-flex align-items-center">
+                                    <Field
+                                      v-model="mobileMsgCode"
+                                      name="驗證碼" type="text" maxlength="4"
+                                      placeholder="請輸入驗證碼" class="form-control"
+                                      :class="{ 'is-invalid': errors['驗證碼'] }"
+                                      @focus="this.mobileMsgCode=''"
+                                      @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
+                                      rules="required"
+                                    />
+                                    <button
+                                      @click="getMobileMsgCode()"
+                                      class="ResendOpt"
+                                      :disabled="!show"
+                                      type="button"
+                                    >
+                                      <div v-show="show">獲取驗證碼</div>
+                                      <div v-show="!show" class="countdown text-white">{{this.count}}秒後可重新發送</div>
+                                    </button>
+                                </div>
+                                <div class="d-flex justify-content-start invalid-feedback my-1">
+                                  <span>{{errors['驗證碼']}}</span>
+                                </div>
+                            </div>
                       </li>
                   </ul>
               </div>
@@ -44,21 +66,40 @@
               <!-------------------本人已詳閱---------------------->
               <div class="terms-group">
               <div class="terms">
-                  <input id="checkbox" name="checkbox" value="checkbox" class="checkimg position-absolute" type="checkbox" @click="checkAgreement" v-model="agreementAll" />
-                  <label for="agree">同意，本人對「 <a href="#" @click.prevent="checkAgreement"><u>用卡須知及申請說明</u></a>」「 <a href="#" @click.prevent="checkAgreement"><u>重要告知事項</u></a>」「 <a href="#" @click.prevent="checkAgreement"><u>聯邦信用卡約定條款</u></a>」「<a href="#" @click.prevent="checkAgreement"><u>電子化帳單服務約定條款</u></a>」內容。(請務必勾選)
+                  <input
+                    id="checkbox" name="checkbox"
+                    value="checkbox"
+                    class="checkimg position-absolute"
+                    type="checkbox"
+                    @click="checkAgreement"
+                    v-model="agreementAll"
+                    />
+                  <label for="checkbox">同意，本人對「 <a href="#" @click.prevent="checkAgreement"><u>用卡須知及申請說明</u></a>」「 <a href="#" @click.prevent="checkAgreement"><u>重要告知事項</u></a>」「 <a href="#" @click.prevent="checkAgreement"><u>聯邦信用卡約定條款</u></a>」「<a href="#" @click.prevent="checkAgreement"><u>電子化帳單服務約定條款</u></a>」內容。(請務必勾選)
                   </label>
               </div>
               <div class="terms">
-                  <input type="checkbox" class="checkimg position-absolute" id="agree1">
-                  <label for="agree1">同意，聯邦商業銀行股份有限公司將本人之基本資料(含身分證字號、信用卡卡號、信用卡有效期限、卡片背面簽名後三碼、行動電話等資料)，透過信用卡授權轉接處理中心(聯合信用卡處理中心)傳輸至發卡機構進行身分認證等相關作業。
+                  <input
+                    id="checkbox2" name="checkbox2"
+                    type="checkbox"
+                    class="checkimg position-absolute"
+                    v-model="agreePersonalData"
+                  >
+                  <label for="checkbox2">同意，聯邦商業銀行股份有限公司將本人之基本資料(含身分證字號、信用卡卡號、信用卡有效期限、卡片背面簽名後三碼、行動電話等資料)，透過信用卡授權轉接處理中心(聯合信用卡處理中心)傳輸至發卡機構進行身分認證等相關作業。
                   </label>
               </div>
           </div>
           <!-------------------//本人已詳閱---------------------->
           <div class="text-center button_group">
-              <button onclick="location.href='OnLineApply_Chk_OTP.htm'" class="btn btn-primary btn-lg mx-1" type="submit" value="">下一步</button>
+              <button
+              @click.prevent="applySubmit()"
+              class="btn btn-primary btn-lg mx-1"
+              type=""
+              >
+              下一步
+              </button>
           </div>
-        </div>
+          </div>
+        </Form>
       </div>
   </section>
   <!-- Modal-1 -->
@@ -892,9 +933,14 @@
 export default {
   data () {
     return {
-      agreeModal: '',
-      agreementAll: false,
-      agreement: []
+      agreeModal: '', // ? 同意Modal
+      agreement: [], // ? 四項同意欄
+      agreementAll: false, // ?同意申請條款
+      agreePersonalData: false, // ?同意個資聲明
+      mobileMsgCode: '', // *手機驗證碼
+      count: 0, // *手機驗證碼倒數秒數
+      timer: 0,
+      show: true
     }
   },
   methods: {
@@ -920,6 +966,7 @@ export default {
       this.agreementAll = true
       ck.checked = true
     },
+    // ?modal上四欄位確認
     checkTotal () {
       if (this.agreement.length !== 4) {
         this.$swal.fire({
@@ -930,6 +977,122 @@ export default {
         return
       }
       this.agreeModal.hide()
+    },
+      //* 手機驗證碼
+    getMobileMsgCode () {
+      // this.isLoading = true
+      const time = new Date()
+      const getTimer = time.getTime()
+      //* 一天的時間(86400)
+      time.setTime(getTimer + 1000 * (86400 - 100))
+      //* 確認手機是否有填寫
+      // const url = `api${this.mobileMsgCode}`
+      // this.axios
+      //  .get(url, {
+      //    // get params用法
+      //    params: this.mobileMsgCode
+      //  })
+      //  .then(res => {
+      //      if (res.data.rtnCode !== 0) {
+      //        // this.isLoading = false
+      //        this.$swal.fire({
+      //          title: `${res.data.rtnMsg}`,
+      //          allowOutsideClick: true,
+      //          confirmButtonColor: '#003894',
+      //          confirmButtonText: '確認',
+      //          width: 400,
+      //          customClass: {
+      //            title: 'text-class',
+      //            confirmButton: 'confirm-btn-class'
+      //          }
+      //        })
+      //      } else {
+      //        //* 有成功打入API才算
+      //        // this.isLoading = false
+      //        this.$swal.fire({
+      //          title: '驗證碼已發送！！',
+      //          allowOutsideClick: true,
+      //          confirmButtonColor: '#003894',
+      //          confirmButtonText: '確認',
+      //          width: 400,
+      //          customClass: {
+      //            title: 'text-class',
+      //            confirmButton: 'confirm-btn-class'
+      //          }
+      //        })
+      //        //* 驗證碼倒數計時
+      //        this.count = 30
+      //        // this.show = false
+      //        this.timer = setInterval(() => {
+      //          if (this.count > 0 && this.count <= 30) {
+      //            this.count--
+      //          } else {
+      //            // this.show = true
+      //            clearInterval(this.timer)
+      //            this.timer = null
+      //          }
+      //        }, 1000)
+      //      }
+      //    })
+      this.$swal.fire({
+        title: '驗證碼已發送！！',
+        allowOutsideClick: true,
+        confirmButtonColor: '#003894',
+        confirmButtonText: '確認',
+        width: 400,
+        customClass: {
+          title: 'text-class',
+          confirmButton: 'confirm-btn-class'
+        }
+      })
+      //* 驗證碼倒數計時
+      this.count = 30
+       this.show = false
+      this.timer = setInterval(() => {
+        if (this.count > 0 && this.count <= 30) {
+          this.count--
+        } else {
+          // this.show = true
+          clearInterval(this.timer)
+          this.timer = null
+        }
+      }, 1000)
+    },
+    async applySubmit () {
+      const collection = await this.$refs.myForm.validate()
+			collection.errors = await this.$refs.myForm.getErrors()
+        if (Object.keys(collection.errors).length === 0) {
+        // ** ===全部通過前往下一頁===
+				// ? 檢查約定條款 未打勾
+        if (!this.agreementAll) {
+				this.$swal.fire({
+						title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+						showConfirmButton: false,
+						// timer: 2500
+						customClass: {
+								title: 'text-class'
+								//
+						}
+				})
+				return
+				}
+        // ? 檢查個資條款 未打勾
+				if (!this.agreePersonalData) {
+				this.$swal.fire({
+						title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+						showConfirmButton: false,
+						customClass: {
+								title: 'text-class'
+						}
+				// timer: 2500
+				})
+				return
+				}
+        this.$router.push('/OnLineApply_Chk_OTP')
+			} else {
+        // ** ===錯誤訊息彙整===
+        this.$custom.validate.showErrors(collection.errors)
+			}
     }
   },
   watch: {

@@ -1,3 +1,4 @@
+<!-- eslint-disable no-tabs -->
 <template>
 <!-- 主視覺 -->
 <div class="shortKv">
@@ -35,7 +36,7 @@
             >
           <div class="formGroup">
               <ul class="formList Apply_Chk">
-                  <li class="col-12" id="group1">
+                  <li class="col-12 align-items-start" id="group1">
                       <label for="">信用卡卡號</label>
                       <div class="d-flex flex-column">
                         <div class="d-flex align-items-center">
@@ -46,6 +47,7 @@
                             type="text" maxlength="4"
                             class="cardNumber form-control"
                             :class="{ 'is-invalid': errors['卡號'] }"
+                            @keyup="cardNumber.code1 = $custom.validate.OnlyNumPress(cardNumber.code1)"
                             @change="checkValue($refs.myForm,cardNumber,'卡號','cardCode2')"
                             />
                             <div class="cardDash text-center mx-1"></div>
@@ -56,6 +58,7 @@
                             type="password" maxlength="4"
                             class="cardNumber form-control"
                             :class="{ 'is-invalid': errors['卡號'] }"
+                            @keyup="cardNumber.code2 = $custom.validate.OnlyNumPress(cardNumber.code2)"
                             @change="checkValue($refs.myForm,cardNumber,'卡號','cardCode3')"
                             />
                             <div class="cardDash text-center mx-1"></div>
@@ -66,6 +69,7 @@
                             type="password" maxlength="4"
                             class="cardNumber form-control"
                             :class="{ 'is-invalid': errors['卡號'] }"
+                            @keyup="cardNumber.code3 = $custom.validate.OnlyNumPress(cardNumber.code3)"
                             @change="checkValue($refs.myForm,cardNumber,'卡號','cardCode4')"
                             />
                             <div class="cardDash text-center mx-1"></div>
@@ -75,8 +79,9 @@
                             id="cardCode4" ref="cardCode4"
                             type="text" maxlength="4"
                             class="cardNumber form-control"
-                             :class="{ 'is-invalid': errors['卡號'] }"
-                             @change="checkValue($refs.myForm,cardNumber,'卡號','validThru')"
+														:class="{ 'is-invalid': errors['卡號'] }"
+                            @keyup="cardNumber.code4 = $custom.validate.OnlyNumPress(cardNumber.code4)"
+														@change="checkValue($refs.myForm,cardNumber,'卡號','validThru')"
                             />
                         </div>
                         <div class="d-flex text-center invalid-feedback my-1" >
@@ -93,14 +98,16 @@
                           type="text" maxlength="4"
                           class="Apply_Chk_form_control form-control"
                           :class="{ 'is-invalid': errors['信用卡有效期限'] }"
-                           @change="checkValue($refs.myForm,validThru,'信用卡有效期限','CSC')"/>
+                          @keyup="validThru = $custom.validate.OnlyNumPress(validThru)"
+                          @focus="validThru=''"
+													@change="checkValue($refs.myForm,validThru,'信用卡有效期限','CSC')"/>
                           <span class="not_text">例如:2017年1月，請輸入0117</span>
-                          <span class="text-center invalid-feedback mb-0" >
-                          {{errors['信用卡有效期限']}}
-                          </span>
+													<div class="d-flex text-center invalid-feedback my-1" >
+														{{errors['信用卡有效期限']}}
+													</div>
                       </div>
                   </li>
-                  <li class="col-12">
+                  <li class="col-12 align-items-start">
                       <label for="input1">信用卡背後末三碼</label>
                       <div class="d-flex flex-column">
                         <Field
@@ -109,11 +116,13 @@
                         type="text" maxlength="3"
                         class="Apply_Chk_form_control form-control"
                         :class="{ 'is-invalid': errors['信用卡背後末三碼'] }"
-                        @change="checkValue($refs.myForm,CSC,'信用卡背後末三碼','phone')"
+                        @keyup="CSC = $custom.validate.OnlyNumPress(CSC)"
+                        @focus="CSC=''"
+                        @change="checkValue($refs.myForm,CSC,'信用卡背後末三碼','手機')"
                         />
-                        <span class="text-center invalid-feedback mb-0" >
+                        <div class="d-flex text-center invalid-feedback my-1" >
                         {{errors['信用卡背後末三碼']}}
-                        </span>
+                        </div>
                       </div>
                   </li>
                   <li class="col-12 align-items-start">
@@ -121,30 +130,41 @@
                       <div class="d-flex flex-column">
                           <Field
                           v-model="phoneNumber"
-                          id="phone" name="phone" ref="phone"
+                          id="手機" name="手機" ref="手機"
                           type="text" maxlength="10"
                           class="Apply_Chk_form_control form-control"
-                          :class="{ 'is-invalid': errors['phone'] }"
+                          :class="{ 'is-invalid': errors['手機'] }"
+                          @keyup="phoneNumber = $custom.validate.OnlyNumPress(phoneNumber)"
+                          @focus="phoneNumber=''"
                           rules="checkPhone"
                           />
                           <span class="not_text">請填寫信用卡申請時之行動電話，以利資訊驗證</span>
-                          <span class="text-center invalid-feedback mb-0" >
-                            {{errors['phone']}}
-                          </span>
+                          <div class="d-flex text-center invalid-feedback my-1" >
+                            {{errors['手機']}}
+                          </div>
                       </div>
                   </li>
               </ul>
           </div>
         <div class="terms-group">
             <div class="terms">
-                <input id="checkbox" name="checkbox"  type="checkbox" class="checkimg position-absolute" @click="checkAgreement" v-model="agreementAll"
+                <input
+                  id="checkbox" name="checkbox"
+                  type="checkbox"
+                  class="checkimg position-absolute"
+                  @click="checkAgreement"
+                  v-model="agreementAll"
                   />
-                <label for="agree">同意，本人對「 <a href="#" @click.prevent="checkAgreement"><u>用卡須知及申請說明</u></a>」「 <a href="#" @click.prevent="checkAgreement"><u>重要告知事項</u></a>」「 <a href="#" @click.prevent="checkAgreement"><u>聯邦信用卡約定條款</u></a>」「<a href="#" @click.prevent="checkAgreement"><u>電子化帳單服務約定條款</u></a>」內容。(請務必勾選)
+                <label for="checkbox">同意，本人對「 <a href="#" @click.prevent="checkAgreement"><u>用卡須知及申請說明</u></a>」「 <a href="#" @click.prevent="checkAgreement"><u>重要告知事項</u></a>」「 <a href="#" @click.prevent="checkAgreement"><u>聯邦信用卡約定條款</u></a>」「<a href="#" @click.prevent="checkAgreement"><u>電子化帳單服務約定條款</u></a>」內容。(請務必勾選)
                 </label>
             </div>
             <div class="terms">
-                <input id="checkbox2" name="checkbox2" type="checkbox" class="checkimg position-absolute" v-model="agreePersonalData">
-                <label for="agree2">同意，聯邦商業銀行股份有限公司將本人之基本資料(含身分證字號、信用卡卡號、信用卡有效期限、卡片背面簽名後三碼、行動電話等資料)，透過信用卡授權轉接處理中心(聯合信用卡處理中心)傳輸至發卡機構進行身分認證等相關作業。
+                <input
+                  id="checkbox2" name="checkbox2"
+                  type="checkbox"
+                  class="checkimg position-absolute"
+                  v-model="agreePersonalData">
+                <label for="checkbox2">同意，聯邦商業銀行股份有限公司將本人之基本資料(含身分證字號、信用卡卡號、信用卡有效期限、卡片背面簽名後三碼、行動電話等資料)，透過信用卡授權轉接處理中心(聯合信用卡處理中心)傳輸至發卡機構進行身分認證等相關作業。
                 </label>
             </div>
         </div>
@@ -152,8 +172,11 @@
         <div class="text-center button_group">
             <button
             @click.prevent="applySubmit($refs.myForm)"
-            class="btn btn-primary btn-lg mx-1" type=""
-            value="">下一步</button>
+            class="btn btn-primary btn-lg mx-1"
+            type="buttom"
+            >
+            下一步
+            </button>
         </div>
         </Form>
         <!-------------------本人已詳閱---------------------->
@@ -984,8 +1007,8 @@ export default {
   data () {
     return {
       agreeModal: '', // ? 同意Modal
-      agreement: [], // ? 四項同意欄
-      agreementAll: false, // ?同意申請條款
+      agreement: [], // ? Modal四項同意欄
+      agreementAll: false, // ?已同意Modal上所有申請條款
       agreePersonalData: false, // ?同意個資聲明
       cardNumber: {
         code1: '',
@@ -1007,28 +1030,22 @@ export default {
           const idRule = /^\d{4}$/
           if (code.code1) {
             if (!idRule.test(code.code1)) {
-              console.log(1)
               const error = this.$custom.validate.checkCode(code)
               dom.setFieldError(name, error)
             }
             if (idRule.test(code.code1)) {
-              console.log(2)
               if (!this.cardNumber.code2) {
-                console.log(3)
                 document.getElementById(nextid).focus()
               }
             }
           }
           if (code.code2) {
             if (!idRule.test(code.code2)) {
-              console.log(4)
               const error = this.$custom.validate.checkCode(code)
               dom.setFieldError(name, error)
             }
             if (idRule.test(code.code2)) {
-              console.log(5)
               if (!this.cardNumber.code3) {
-                console.log(6)
                 document.getElementById(nextid).focus()
               }
             }
@@ -1036,14 +1053,11 @@ export default {
           }
           if (code.code3) {
             if (!idRule.test(code.code3)) {
-              console.log(7)
               const error = this.$custom.validate.checkCode(code)
               dom.setFieldError(name, error)
             }
             if (idRule.test(code.code3)) {
-              console.log(8)
               if (!this.cardNumber.code4) {
-                console.log(9)
                 document.getElementById(nextid).focus()
               }
             }
@@ -1051,19 +1065,15 @@ export default {
           }
           if (code.code4) {
             if (!idRule.test(code.code4)) {
-              console.log(10)
               const error = this.$custom.validate.checkCode(code)
               dom.setFieldError(name, error)
             }
             if (idRule.test(code.code4)) {
-              console.log(11)
               if (!this.validThru) {
-                console.log(12)
                 document.getElementById(nextid).focus()
               }
             }
           }
-          console.log(typeof !code.code1)
           if (!code.code1 && !code.code2 && !code.code3 && !code.code4) {
             const error = this.$custom.validate.checkCode(code)
             dom.setFieldError(name, error)
@@ -1139,7 +1149,6 @@ export default {
       }
     },
     checkAgreement () {
-      console.log(1)
       this.agreeModal.show()
       const ck = document.querySelector('#checkbox')
       if (this.agreement.length !== 4) {
@@ -1171,35 +1180,24 @@ export default {
       collection.errors = dom.getErrors()
       // *   ====送單判斷====
       // ? 信用卡欄位
-      if (Object.keys(collection.errors).length !== 0) {
-        alert('尚有欄位未填寫')
-        console.log(collection.errors)
-        /* eslint-disable */
-        return
-      } 
+      if (Object.keys(collection.errors).length === 0) {
         // ? 檢查四項條款 或 個資使用同意 未打勾
-      if (!this.agreementAll || !this.agreePersonalData) {
-        this.$swal.fire({
-          title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-          showConfirmButton: false,
-          customClass: {
-            title: 'text-class'
-          }
-        })
-        return
-      }
-        //? 全部檢查通過前往下一頁
+        if (!this.agreementAll || !this.agreePersonalData) {
+          this.$swal.fire({
+            title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+            showConfirmButton: false,
+            customClass: {
+              title: 'text-class'
+            }
+          })
+          return
+        }
+        // ** ===全部檢查通過前往下一頁===
         this.$router.push('/OnLineApply_Chk_OTP')
-      //   // ?個資使用同意
-      //   if (!this.agreePersonalData) {
-      //     this.$swal.fire({
-      //       title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-      //       showConfirmButton: false,
-      //       customClass: {
-      //         title: 'text-class'
-      //       }
-      //     })
-      //   }
+      } else {
+          // ** ===錯誤訊息彙整===
+          this.$custom.validate.showErrors(collection.errors)
+      }
     }
   },
   watch: {
@@ -1211,7 +1209,7 @@ export default {
     // },
     // 'cardNumber.code3' : function (n){
     //     this.textHandler3()
-    // } 
+    // }
   },
   mounted () {
     this.scrollEvent()
@@ -1233,4 +1231,5 @@ export default {
   .formList #group1{
     margin-bottom: 2rem !important;
   }
+
 </style>

@@ -31,9 +31,12 @@ const validate = {
   // ? intEnd(數字): 最多可輸入的字數
   //* 來源： Utility.js
   chkKeyValueLength (input, FormDom, fieldName, intStart, intEnd) {
-    console.log(input)
+    console.log(input, FormDom, fieldName, intStart, intEnd)
     FormDom.setFieldError(fieldName, '')
     const intTotal = input.length
+    console.log(intTotal)
+    console.log(intStart)
+    console.log(intEnd)
     if ((intTotal < intStart) || (intTotal > intEnd)) {
       FormDom.setFieldError(fieldName, `${fieldName}請輸入  ${intStart} - ${intEnd}  字。`)
     }

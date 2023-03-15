@@ -74,7 +74,7 @@ const routes = [
       {
         path: '/OnLineApply_n',
         name: '我不是聯邦卡友',
-        component: () => import('../views/CardFriendNo/OnLineApply_n.vue'),
+        component: () => import('../views/CardFriendNo/Online/OnLineApply_n.vue'),
         meta: {
           title: '我不是聯邦卡友'
         }
@@ -82,7 +82,7 @@ const routes = [
       {
         path: '/OnLineApply_n1',
         name: '非卡友線上申請',
-        component: () => import('../views/CardFriendNo/OnLineApply_n1.vue'),
+        component: () => import('../views/CardFriendNo/Online/OnLineApply_n1.vue'),
         meta: {
           title: '非卡友線上申請'
         }
@@ -139,19 +139,19 @@ const routes = [
         }
       },
       // ? 非卡友-線上-他行銀行帳戶驗證
-      {
-        path: '/OnLineApply_ChkSZ',
-        name: '線上辦卡(已持有其他銀行帳戶)',
-        component: () => import('../views/CardFriendNo/Online/OnLineApply_ChkSZ.vue'),
-        meta: {
-          title: '線上辦卡'
-        }
-      },
+      // {
+      //  path: '/OnLineApply_ChkSZ',
+      //  name: '線上辦卡(已持有其他銀行帳戶)',
+      //  component: () => import('../views/CardFriendNo/Online/OnLineApply_ChkSZ.vue'),
+      //  meta: {
+      //    title: '線上辦卡'
+      //  }
+      // },
       // ? 非卡友-線上-共用
       {
         path: '/OnLineApply_Chk_OTP',
         name: '手機OTP驗證',
-        component: () => import('../views/CardFriendNo/Online/Fillin/OnLineApply_Chk_OTP.vue'),
+        component: () => import('../views/CardFriendNo/Online/OnLineApply_Chk_OTP.vue'),
         meta: {
           title: '手機OTP驗證'
         }
@@ -159,7 +159,7 @@ const routes = [
       {
         path: '/OnLineApply_ChkSZ_OTP',
         name: '手機OTP驗證(他行帳戶)',
-        component: () => import('../views/CardFriendNo/Online/Fillin/OnLineApply_ChkSZ_OTP.vue'),
+        component: () => import('../views/CardFriendNo/Online/OnLineApply_ChkSZ_OTP.vue'),
         meta: {
           title: '手機OTP驗證'
         }
@@ -215,7 +215,7 @@ const routes = [
       {
         path: '/dspApplicationNNB',
         name: '非卡友-NewNewBank',
-        component: () => import('../views/CardFriendNo/Online/Fillin/dspApplicationNNB.vue'),
+        component: () => import('../views/dspApplicationNNB.vue'),
         meta: {
           title: 'NewNewBank'
         }
@@ -223,7 +223,7 @@ const routes = [
       {
         path: '/dspApplicationNNB_Apply',
         name: '非卡友-NewNewBank申請',
-        component: () => import('../views/CardFriendNo/Online/Fillin/dspApplicationNNB_Apply.vue'),
+        component: () => import('../views/dspApplicationNNB_Apply.vue'),
         meta: {
           title: 'NewNewBank申請'
         }
@@ -231,7 +231,7 @@ const routes = [
       {
         path: '/dspApplicationNNB_finish',
         name: '非卡友-NewNewBank申請完成',
-        component: () => import('../views/CardFriendNo/Online/Fillin/dspApplicationNNB_finish.vue'),
+        component: () => import('../views/dspApplicationNNB_finish.vue'),
         meta: {
           title: 'NewNewBank申請完成'
         }
