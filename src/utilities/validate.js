@@ -266,6 +266,62 @@ const validate = {
       return true
     }
     return '請輸入正確的信用卡安全碼格式'
+  },
+  //* ==== 25. 取得下拉選單日期 ====
+  // ? 帶入參數為 v-model 綁定之物件，回傳為下拉年/月/日之物件包陣列
+  // ? selectedDate:{
+  // ?   Year:'',
+  // ?   Month:'',
+  // ?   Day:''
+  // ? }
+  getDateSelect (selectedDate) {
+    console.log('selectedDate', selectedDate)
+    const dateList = {
+      year: [],
+      month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      day: []
+    }
+    // ? 判斷為"民國"或"西元"
+    if (selectedDate.Year > 1000) {
+      for (let i = new Date().getFullYear() - 100; i <= new Date().getFullYear() - 18; i++) {
+        dateList.year.unshift(i)
+      }
+    } else {
+      for (let i = new Date().getFullYear() - 100 - 1911; i <= new Date().getFullYear() - 18 - 1911; i++) {
+        dateList.year.unshift(i)
+      }
+    }
+    // ? 判斷為大月/小月/2月
+    const BigMonth = [1, 3, 5, 7, 8, 10, 12]
+    const SmallMonth = [4, 6, 9, 11]
+    if (BigMonth.includes(selectedDate.Month)) {
+      for (let i = 1; i <= 31; i++) {
+        dateList.day.push(i)
+      }
+    } else if (SmallMonth.includes(selectedDate.Month)) {
+      for (let i = 1; i <= 30; i++) {
+        dateList.day.push(i)
+      }
+    } else if (selectedDate.Month === 2) {
+      // ? 判斷是否為閏年
+      const year = selectedDate.Year > 1000 ? selectedDate.Year : selectedDate.Year + 1911
+      if (year % 4 === 0) {
+        for (let i = 1; i <= 29; i++) {
+          dateList.day.push(i)
+        }
+      }
+      if (year % 4 !== 0) {
+        for (let i = 1; i <= 28; i++) {
+          dateList.day.push(i)
+        }
+      }
+    }
+    // ? 判斷是否超出日期區間
+    if (!dateList.day.includes(selectedDate.Day)) {
+      selectedDate.Day = 1
+    }
+    console.log(dateList)
+    return dateList
   }
 }
 
