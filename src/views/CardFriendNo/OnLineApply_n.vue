@@ -10,11 +10,12 @@
   <!-- 主要內容 -->
   <section class="mainArea">
     <div class="container-xl">
+    <Form
+      v-slot="{errors}"
+      ref="myForm"
+    >
       <div class="row justify-content-md-center">
-        <Form
-            v-slot="{errors}"
-            ref="myForm"
-        >
+
             <div class="formGroup">
                 <ul class="formList formApply">
                     <li class="col-12 align-items-start mb-0">
@@ -333,22 +334,48 @@
         <!-------------------本人已詳閱---------------------->
         <div class="terms-group">
             <div class="terms">
-                <input id="checkbox" name="checkbox" class="checkimg position-absolute" type="checkbox" v-model="agreementAll" @click="checkAgreement" />
-                <label for="agree" @click="checkAgreement">本人已詳閱並同意「<a href="#" @click.prevent="this.contractModal.show()"><u>聯邦銀行電子銀行服務申請約定條款</u></a>」內容。(請務必勾選)
-                </label>
+                <div>
+                  <Field
+                  v-model="agreementAll"
+                  id="checkbox1" name="服務申請約定條款"
+                  type="checkbox"
+                  class="checkimg position-absolute"
+                  :class="{ 'is-invalid': errors['服務申請約定條款'] }"
+                  @click="checkAgreement"
+                  rules="required"
+                  />
+                  <label for="checkbox1" @click="checkAgreement">本人已詳閱並同意「<a href="#" @click.prevent="this.contractModal.show()"><u>聯邦銀行電子銀行服務申請約定條款</u></a>」內容。(請務必勾選)
+                  </label>
+                </div>
+                <div class="d-flex text-center invalid-feedback my-1" >
+                  {{errors['服務申請約定條款']}}
+                </div>
             </div>
             <div class="terms">
-                <input type="checkbox" class="checkimg position-absolute" id="agree1" v-model="agreePersonalData">
-                <label for="agree1">本人同意申辦貴行業務時，因中途退出或雖未完成所有申請步驟所留存之相關個人資料，貴行得用以提供後續聯繫及服務時使用。
-                </label>
+                <div>
+                  <Field
+                  id="agree1" name="個資使用"
+                  type="checkbox"
+                  class="checkimg position-absolute"
+                  :class="{ 'is-invalid': errors['個資使用'] }"
+                  rules="required"
+                  @click="toggle"
+                  value="agree"
+                  />
+                  <label for="agree1">本人同意申辦貴行業務時，因中途退出或雖未完成所有申請步驟所留存之相關個人資料，貴行得用以提供後續聯繫及服務時使用。
+                  </label>
+                </div>
+                <div class="d-flex text-center invalid-feedback my-1" >
+                  {{errors['個資使用']}}
+                </div>
             </div>
         </div>
         <!-------------------//前往下一頁---------------------->
         <div class="text-center button_group">
             <button  class="btn btn-primary btn-lg mx-1" type="submit"  @click.prevent="applySubmit">下一步</button>
         </div>
-        </Form>
       </div>
+    </Form>
     </div>
     <!-- Modal-1 -->
     <div ref="contractModal" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -803,14 +830,13 @@ export default {
     },
     checkAgreement () {
       this.contractModal.show()
-      const ck = document.querySelector('#checkbox')
-      if (!this.agreement) {
-        this.agreementAll = false
+      const ck = document.querySelector('#checkbox1')
+        if (!this.agreement) {
         ck.checked = false
         return
-      }
+        }
       this.agreementAll = true
-      ck.checked = true
+       ck.checked = true
     },
     checkTotal () {
       if (!this.agreement) {
@@ -821,8 +847,18 @@ export default {
         })
         return
       }
-      this.contractModal.hide()
       this.agreementAll = true
+      const ck = document.querySelector('#checkbox1')
+      ck.checked = true
+      this.contractModal.hide()
+    },
+    toggle () {
+      const ck = document.querySelector('#agree1').checked
+      if (ck) {
+      this.agreePersonalData = true
+      } else {
+      this.agreePersonalData = false
+      }
     },
     getYearMonth () {
       // ? 產生生日"年"、"月"選單
@@ -840,6 +876,7 @@ export default {
       // ? 建立預設日期
       this.applierInfo.year = this.dateList.yearList[0]
       this.applierInfo.month = this.dateList.monthList[0]
+      this.getDay()
     },
     getDay () {
       // ? 產生生日"日"選單
@@ -909,9 +946,13 @@ export default {
 		}
   },
   watch: {
-    agreement (n) {
-      this.agreementAll = n
-    }
+        agreement (n) {
+          if (this.agreement) {
+            this.agreementAll = true
+          } else {
+            this.agreementAll = false
+          }
+        }
     // 'applierInfo.Identification' (n) {
     //   this.applierInfo.Identification = this.applierInfo.Identification.toUpperCase()
     //   console.log('轉大小寫')
