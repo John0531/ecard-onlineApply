@@ -795,7 +795,7 @@
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 
 export default {
-	data () {
+  data () {
     return {
       dateList: {
         // ?日期選單
@@ -832,12 +832,12 @@ export default {
     checkAgreement () {
       this.contractModal.show()
       const ck = document.querySelector('#checkbox1')
-        if (!this.agreement) {
+      if (!this.agreement) {
         ck.checked = false
         return
-        }
+      }
       this.agreementAll = true
-       ck.checked = true
+      ck.checked = true
     },
     checkTotal () {
       if (!this.agreement) {
@@ -856,9 +856,9 @@ export default {
     toggle () {
       const ck = document.querySelector('#agree1').checked
       if (ck) {
-      this.agreePersonalData = true
+        this.agreePersonalData = true
       } else {
-      this.agreePersonalData = false
+        this.agreePersonalData = false
       }
     },
     getYearMonth () {
@@ -910,50 +910,50 @@ export default {
       }
     },
     async applySubmit () {
-			const collection = await this.$refs.myForm.validate()
-			collection.errors = await this.$refs.myForm.getErrors()
-			if (Object.keys(collection.errors).length === 0) {
-				// ? 檢查約定條款 未打勾
+      const collection = await this.$refs.myForm.validate()
+      collection.errors = await this.$refs.myForm.getErrors()
+      if (Object.keys(collection.errors).length === 0) {
+        // ? 檢查約定條款 未打勾
         if (!this.agreement) {
-				this.$swal.fire({
-						title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-						showConfirmButton: false,
-						// timer: 2500
-						customClass: {
-								title: 'text-class'
-								//
-						}
-				})
-				return
-				}
+          this.$swal.fire({
+            title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+            showConfirmButton: false,
+            // timer: 2500
+            customClass: {
+              title: 'text-class'
+              //
+            }
+          })
+          return
+        }
         // ? 檢查個資條款 未打勾
-				if (!this.agreePersonalData) {
-				this.$swal.fire({
-						title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-						showConfirmButton: false,
-						customClass: {
-								title: 'text-class'
-						}
-				// timer: 2500
-				})
-				return
-				}
+        if (!this.agreePersonalData) {
+          this.$swal.fire({
+            title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+            showConfirmButton: false,
+            customClass: {
+              title: 'text-class'
+            }
+            // timer: 2500
+          })
+          return
+        }
         // ** ===全部通過前往下一頁===
-				this.$router.push('/OnLineApply_n1')
-			} else {
+        this.$router.push('/OnLineApply_n1')
+      } else {
         // ** ===錯誤訊息彙整===
         this.$custom.validate.showErrors(collection.errors)
-			}
-		}
+      }
+    }
   },
   watch: {
-        agreement (n) {
-          if (this.agreement) {
-            this.agreementAll = true
-          } else {
-            this.agreementAll = false
-          }
-        }
+    agreement (n) {
+      if (this.agreement) {
+        this.agreementAll = true
+      } else {
+        this.agreementAll = false
+      }
+    }
     // 'applierInfo.Identification' (n) {
     //   this.applierInfo.Identification = this.applierInfo.Identification.toUpperCase()
     //   console.log('轉大小寫')

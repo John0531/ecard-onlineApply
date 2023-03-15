@@ -978,7 +978,7 @@ export default {
       }
       this.agreeModal.hide()
     },
-      //* 手機驗證碼
+    //* 手機驗證碼
     getMobileMsgCode () {
       // this.isLoading = true
       const time = new Date()
@@ -1047,7 +1047,7 @@ export default {
       })
       //* 驗證碼倒數計時
       this.count = 30
-       this.show = false
+      this.show = false
       this.timer = setInterval(() => {
         if (this.count > 0 && this.count <= 30) {
           this.count--
@@ -1060,39 +1060,39 @@ export default {
     },
     async applySubmit () {
       const collection = await this.$refs.myForm.validate()
-			collection.errors = await this.$refs.myForm.getErrors()
-        if (Object.keys(collection.errors).length === 0) {
+      collection.errors = await this.$refs.myForm.getErrors()
+      if (Object.keys(collection.errors).length === 0) {
         // ** ===全部通過前往下一頁===
-				// ? 檢查約定條款 未打勾
+        // ? 檢查約定條款 未打勾
         if (!this.agreementAll) {
-				this.$swal.fire({
-						title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-						showConfirmButton: false,
-						// timer: 2500
-						customClass: {
-								title: 'text-class'
-								//
-						}
-				})
-				return
-				}
+          this.$swal.fire({
+            title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+            showConfirmButton: false,
+            // timer: 2500
+            customClass: {
+              title: 'text-class'
+              //
+            }
+          })
+          return
+        }
         // ? 檢查個資條款 未打勾
-				if (!this.agreePersonalData) {
-				this.$swal.fire({
-						title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-						showConfirmButton: false,
-						customClass: {
-								title: 'text-class'
-						}
-				// timer: 2500
-				})
-				return
-				}
+        if (!this.agreePersonalData) {
+          this.$swal.fire({
+            title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+            showConfirmButton: false,
+            customClass: {
+              title: 'text-class'
+            }
+            // timer: 2500
+          })
+          return
+        }
         this.$router.push('/OnLineApply_Chk_OTP')
-			} else {
+      } else {
         // ** ===錯誤訊息彙整===
         this.$custom.validate.showErrors(collection.errors)
-			}
+      }
     }
   },
   watch: {

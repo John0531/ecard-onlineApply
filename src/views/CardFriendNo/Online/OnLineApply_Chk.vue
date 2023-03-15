@@ -1195,8 +1195,8 @@ export default {
         // ** ===全部檢查通過前往下一頁===
         this.$router.push('/OnLineApply_Chk_OTP')
       } else {
-          // ** ===錯誤訊息彙整===
-          this.$custom.validate.showErrors(collection.errors)
+        // ** ===錯誤訊息彙整===
+        this.$custom.validate.showErrors(collection.errors)
       }
     }
   },
