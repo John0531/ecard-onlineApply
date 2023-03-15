@@ -361,6 +361,7 @@
                   rules="required"
                   @click="toggle"
                   value="agree"
+                  :validateOnInput="true"
                   />
                   <label for="agree1">本人同意申辦貴行業務時，因中途退出或雖未完成所有申請步驟所留存之相關個人資料，貴行得用以提供後續聯繫及服務時使用。
                   </label>
