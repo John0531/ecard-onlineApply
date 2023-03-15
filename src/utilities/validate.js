@@ -222,7 +222,7 @@ const validate = {
     if (idRule.test(code)) {
       return true
     }
-    return '請輸入4碼數字'
+    return '請輸入正確的信用卡格式'
   },
   //* ==== 19. 輸入值強制轉大寫英文 ====
   watchToUpper (data) {
@@ -265,7 +265,7 @@ const validate = {
     if (idRule2.test(code)) {
       return true
     }
-    return '請輸入3碼信用卡安全碼'
+    return '請輸入正確的信用卡安全碼格式'
   }
 }
 
