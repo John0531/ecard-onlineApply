@@ -57,11 +57,9 @@ configure({
 setLocale('zh_TW')
 
 // ? 取得下拉 Json 資料(存入localStorage)
-if (!JSON.parse(localStorage.getItem('SELECT_JSON'))) {
-  PublicService.getJson().then((result) => {
-    localStorage.setItem('SELECT_JSON', JSON.stringify(result))
-  })
-}
+PublicService.getJson().then((result) => {
+  localStorage.setItem('SELECT_JSON', JSON.stringify(result))
+})
 
 const app = createApp(App)
 

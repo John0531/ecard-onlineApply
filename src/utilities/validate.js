@@ -274,7 +274,7 @@ const validate = {
   // ?   Month:'',
   // ?   Day:''
   // ? }
-  getDateSelect (selectedDate) {
+  getDateSelect (selectedDate, dateType) {
     console.log('selectedDate', selectedDate)
     const dateList = {
       year: [],
@@ -282,12 +282,12 @@ const validate = {
       day: []
     }
     // ? 判斷為"民國"或"西元"
-    if (selectedDate.Year > 1000) {
-      for (let i = new Date().getFullYear() - 100; i <= new Date().getFullYear() - 18; i++) {
+    if (dateType === '西元') {
+      for (let i = new Date().getFullYear() - 100; i <= new Date().getFullYear(); i++) {
         dateList.year.unshift(i)
       }
-    } else {
-      for (let i = new Date().getFullYear() - 100 - 1911; i <= new Date().getFullYear() - 18 - 1911; i++) {
+    } else if (dateType === '民國') {
+      for (let i = new Date().getFullYear() - 100 - 1911; i <= new Date().getFullYear() - 1911; i++) {
         dateList.year.unshift(i)
       }
     }
@@ -318,10 +318,30 @@ const validate = {
     }
     // ? 判斷是否超出日期區間
     if (!dateList.day.includes(selectedDate.Day)) {
-      selectedDate.Day = 1
+      selectedDate.Day = ''
     }
     console.log(dateList)
     return dateList
+  },
+  //* ==== 26. 檢查下拉日期格式 ====
+  // ? Date:{
+  // ?   Year: '',
+  // ?   Month: '',
+  // ?   Day: ''
+  // ? }
+  checkDate (Date, FormDom, fieldName) {
+    FormDom.setFieldError(fieldName, '')
+    if (!Date.Year || !Date.Month || !Date.Day) {
+      FormDom.setFieldError(fieldName, '日期格式有誤')
+    }
+  },
+  //* ==== 27.簡訊驗證碼驗證 ====
+  checkOTP (code) {
+    const idRule = /^\d{4}$/
+    if (idRule.test(code)) {
+      return true
+    }
+    return '請輸入正確簡訊驗證碼'
   }
 }
 
