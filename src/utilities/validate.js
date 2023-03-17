@@ -337,6 +337,14 @@ const validate = {
     if (!Date.Year || !Date.Month || !Date.Day) {
       FormDom.setFieldError(fieldName, '日期格式有誤')
     }
+  },
+  //* ==== 27.簡訊驗證碼驗證 ====
+  checkOTP (code) {
+    const idRule = /^\d{4}$/
+    if (idRule.test(code)) {
+      return true
+    }
+    return '請輸入正確簡訊驗證碼'
   }
 }
 
