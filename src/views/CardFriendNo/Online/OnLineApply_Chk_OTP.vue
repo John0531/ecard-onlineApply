@@ -40,7 +40,7 @@
                                     type="submit"
                                     value=""
                                     >
-                                      <div v-show="show">獲取驗證碼</div>
+                                      <div v-show="show" @click.prevent="getMobileMsgCode">獲取驗證碼</div>
                                       <div v-show="!show" class="countdown text-white">{{this.count}}秒後可重新發送</div>
                                     </button>
                                 </div>

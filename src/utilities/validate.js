@@ -34,9 +34,6 @@ const validate = {
     console.log(input, FormDom, fieldName, intStart, intEnd)
     FormDom.setFieldError(fieldName, '')
     const intTotal = input.length
-    console.log(intTotal)
-    console.log(intStart)
-    console.log(intEnd)
     if ((intTotal < intStart) || (intTotal > intEnd)) {
       FormDom.setFieldError(fieldName, `${fieldName}請輸入  ${intStart} - ${intEnd}  字。`)
     }

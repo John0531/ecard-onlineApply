@@ -152,7 +152,7 @@
                   v-model="agreementAll"
                   id="checkbox1" name="服務申請約定條款"
                   type="checkbox"
-                  class="checkimg position-absolute"
+                  class="form-check-input checkimg position-absolute"
                   :class="{ 'is-invalid': errors['服務申請約定條款'] }"
                   @click="checkAgreement"
                   rules="required"
@@ -167,7 +167,7 @@
                 <Field
                   id="agree1" name="信用卡基本資料使用同意"
                   type="checkbox"
-                  class="checkimg position-absolute"
+                  class="form-check-input checkimg position-absolute"
                   :class="{ 'is-invalid': errors['信用卡基本資料使用同意'] }"
                   @click="toggle"
                   value="agree"
