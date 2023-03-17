@@ -21,35 +21,12 @@
                           <div class="counter_step">2</div><span>個人資料使用特別商議條款</span>
                       </li>
                       <li class="active">
-                          <div class="counter_step">3</div><span>檢附身份證及財力證明</span>
+                          <div class="counter_step">3</div><span>檢附財力證明</span>
                       </li>
                   </ul>
               </div>
               <!------------------------//步驟---------------------------------->
               <div class="col-lg-10">
-                  <h3 class="upload_title">檢附身分證</h3>
-                  <div class="mb-3">
-                      <h5 class="d-block text-primary">請留意！本網頁操作有效時間：9分40秒</h5>
-                  </div>
-                  <div class="text-md-end mb-3">
-                      <span class="d-block red_text">※上傳格式限JPG及GIF檔，總檔案數為6個，單一檔案上限為5MB。</span>
-                  </div>
-                  <div class="row upload_group">
-                      <div class="col-12 col-md-6">
-                          <div class="upload_items text-center">
-                              <img src="@/assets/images/form/upload_photo.png" class="img-fluid" alt="">
-                              <input type="file" name="upload1" id="upload1" accept="image/*" class="upload" data-sigil="file-input"><textarea name="TBupload1" id="TBupload1" style="display: none;"></textarea>
-                          </div>
-                          <div class="upload_IDtxt text-center">身分證正面</div>
-                      </div>
-                      <div class="col-12 col-md-6">
-                          <div class="upload_items text-center">
-                              <img src="@/assets/images/form/upload_photo.png" class="img-fluid" alt="">
-                              <input type="file" name="upload2" id="upload2" accept="image/*" class="upload" data-sigil="file-input"><textarea name="TBupload2" id="TBupload2" style="display: none;"></textarea>
-                          </div>
-                          <div class="upload_IDtxt text-center">身分證反面</div>
-                      </div>
-                  </div>
                   <div class="col-12">
                       <h3 class="upload_title">檢附財力證明</h3>
                   </div>
@@ -57,10 +34,10 @@
                       <div class="form-check my-2">
                           <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
                           <label class="form-check-label text-md-center fw-bold" for="exampleRadios1">
-                              自行上傳資料
+                              上傳財力資料
                           </label>
-                          <div class="p-1 mb-3 red_text">財力證明：如存褶、薪資單、扣繳憑單、稅單、權狀等。<br> ◆ 網銀帳號(請檢附含帳號、戶名資料) ◆
-                              薪資單(請檢附含公司名稱、姓名資料) ◆ 存摺(請檢附封面、內頁)</div>
+                          <div class="p-1 mb-1 red_text">※上傳格式限JPG及GIF檔，單一檔案上限為5MB。</div>
+                          <div class="d-flex p-1 mb-1 red_text">※財力證明：如存摺、薪資單、扣繳憑單、地價稅單和房屋稅單或建物權狀等。<a href="https://card.ubot.com.tw/eCard/activity/MyData/index.html">上傳範例說明</a></div>
                       </div>
                       <!--------------------------------------------->
                       <div class="col-12 col-md-6 mb-4">
@@ -104,7 +81,7 @@
                       </div>
                       <div class="justify-content-center MyData_input_note">
                           <span class="red_text">※勾選此項目需使用自然人憑證、行動自然人憑證或健保卡</span>
-                          <span>使用MyData調閱個人資料可於國發會個人化資料自主運用(MyData)平臺透過自然人憑證、行動自然人憑證或健保卡取得下列資訊，相關資訊將轉由聯邦銀行做為您申請信用卡相關業務之財力證明使用。更多關於
+                          <span>使用MyData調閱個人資料可於國發會個人化資料自主運用(MyData)平臺透過自然人憑證、行動自然人憑證或健保卡取得下列資訊，相關資訊將轉由聯邦銀行做為您申請信用卡相關業務之財力證明使用，<a href="https://card.ubot.com.tw/eCard/activity/MyData/index.html">使用說明</a>。更多關於
                               <a href="https://mydata.nat.gov.tw/" target="_blank"><u>MyData平臺</u></a>。</span>
                           <span>●勞工保險被保險人投保資料(明細)<br>●財產資料<br>●個人所得資料</span>
                       </div>

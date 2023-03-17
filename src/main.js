@@ -26,6 +26,10 @@ import { createMetaManager } from 'vue-meta'
 // ?vue-gtag-next
 // import VueGtag from 'vue-gtag-next'
 
+// // ?croppie
+import Croppie from 'croppie'
+import 'croppie/croppie.css'
+
 // ?表單驗證
 import validate from './utilities/validate'
 
@@ -64,8 +68,8 @@ const app = createApp(App)
 // ?自訂全域屬性
 app.config.globalProperties.$custom = {
   validate,
-  bootstrap
-  // moment,
+  bootstrap,
+  Croppie
   // currency
 }
 
@@ -73,6 +77,7 @@ app.use(router)
 app.use(store)
 app.use(VueAxios, axios)
 app.use(VueSweetalert2)
+// app.use(Croppie)
 
 app.use(createMetaManager())
 

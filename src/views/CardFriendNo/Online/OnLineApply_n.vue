@@ -53,6 +53,7 @@
                                     :validateOnChange="true"
                                     v-model="applierInfo.year"
                                     >
+                                    <option value="" selected>--</option>
                                     <option v-for="year in this.dateList.yearList" :value="year" :key="year+1">
                                     {{year}}
                                     </option>
@@ -67,6 +68,7 @@
                                     class="form-select form-control"
                                     :validateOnChange="true"
                                     v-model="applierInfo.month" @change="getDay">
+                                    <option value="" selected>--</option>
                                     <option v-for="month in dateList.monthList" :value="month" :key="month+1">
                                     {{month}}
                                     </option>
@@ -82,6 +84,7 @@
                                     :validateOnChange="true"
                                     v-model="applierInfo.day"
                                     >
+                                    <option value="" selected>--</option>
                                     <option v-for="date in dateList.dayList" :value="date" :key="date+1">
                                     {{date}}
                                     </option>
@@ -353,27 +356,27 @@
             </div>
             <div class="terms">
                 <div>
-                  <Field
+                  <input
                   id="agree1" name="個資使用"
                   type="checkbox"
                   class="checkimg position-absolute"
-                  :class="{ 'is-invalid': errors['個資使用'] }"
-                  rules="required"
                   @click="toggle"
                   value="agree"
-                  :validateOnInput="true"
-                  />
+                  >
                   <label for="agree1">本人同意申辦貴行業務時，因中途退出或雖未完成所有申請步驟所留存之相關個人資料，貴行得用以提供後續聯繫及服務時使用。
                   </label>
-                </div>
-                <div class="d-flex text-center invalid-feedback my-1" >
-                  {{errors['個資使用']}}
                 </div>
             </div>
         </div>
         <!-------------------//前往下一頁---------------------->
         <div class="text-center button_group">
-            <button  class="btn btn-primary btn-lg mx-1" type="submit"  @click.prevent="applySubmit">下一步</button>
+            <button
+            class="btn btn-primary btn-lg mx-1"
+            type="submit"
+            @click.prevent="applySubmit"
+            >
+            下一步
+            </button>
         </div>
       </div>
     </Form>
@@ -874,9 +877,9 @@ export default {
           this.dateList.monthList.push(i)
         }
       }
-      // ? 建立預設日期
-      this.applierInfo.year = this.dateList.yearList[0]
-      this.applierInfo.month = this.dateList.monthList[0]
+      // // ? 建立預設日期(2023/03/15得知不須預設)
+      // this.applierInfo.year = this.dateList.yearList[0]
+      // this.applierInfo.month = this.dateList.monthList[0]
       this.getDay()
     },
     getDay () {
@@ -926,18 +929,18 @@ export default {
           })
           return
         }
-        // ? 檢查個資條款 未打勾
-        if (!this.agreePersonalData) {
-          this.$swal.fire({
-            title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-            showConfirmButton: false,
-            customClass: {
-              title: 'text-class'
-            }
-            // timer: 2500
-          })
-          return
-        }
+        // // ? 檢查個資條款 未打勾(2023/3/15得知為選填)
+        // if (!this.agreePersonalData) {
+        //   this.$swal.fire({
+        //     title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+        //     showConfirmButton: false,
+        //     customClass: {
+        //       title: 'text-class'
+        //     }
+        //     // timer: 2500
+        //   })
+        //   return
+        // }
         // ** ===全部通過前往下一頁===
         this.$router.push('/OnLineApply_n1')
       } else {
