@@ -1,4 +1,7 @@
+import AllRules from '@vee-validate/rules'
+
 const validate = {
+  ...AllRules,
   //* ==== 2. 檢核只可為英數字 ====
   //* 來源： Utility.js
   chkKeyValueNumEng (input) {
@@ -31,12 +34,8 @@ const validate = {
   // ? intEnd(數字): 最多可輸入的字數
   //* 來源： Utility.js
   chkKeyValueLength (input, FormDom, fieldName, intStart, intEnd) {
-    console.log(input, FormDom, fieldName, intStart, intEnd)
     FormDom.setFieldError(fieldName, '')
     const intTotal = input.length
-    console.log(intTotal)
-    console.log(intStart)
-    console.log(intEnd)
     if ((intTotal < intStart) || (intTotal > intEnd)) {
       FormDom.setFieldError(fieldName, `${fieldName}請輸入  ${intStart} - ${intEnd}  字。`)
     }
@@ -186,7 +185,6 @@ const validate = {
   CheckAddressAll (Address, FormDom, fieldName) {
     FormDom.setFieldError(fieldName, '')
     const test = Address.Ln + Address.Aly + Address.No_1 + Address.No_2 + Address.Floor + Address.Other
-    console.log(Address)
     if (test.length < 1) {
       FormDom.setFieldError(fieldName, '地址格式有誤')
     }
@@ -278,7 +276,6 @@ const validate = {
   // ?   Day:''
   // ? }
   getDateSelect (selectedDate, dateType) {
-    console.log('selectedDate', selectedDate)
     const dateList = {
       year: [],
       month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
@@ -323,7 +320,6 @@ const validate = {
     if (!dateList.day.includes(selectedDate.Day)) {
       selectedDate.Day = ''
     }
-    console.log(dateList)
     return dateList
   },
   //* ==== 26. 檢查下拉日期格式 ====

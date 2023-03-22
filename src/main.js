@@ -10,7 +10,6 @@ import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 
 // ? vee-validate
 import { Field, Form, ErrorMessage, defineRule, configure } from 'vee-validate'
-import AllRules from '@vee-validate/rules'
 import { localize, setLocale } from '@vee-validate/i18n'
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
 
@@ -35,10 +34,6 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 
-// ?加入所有預設表單驗證規則
-Object.keys(AllRules).forEach((rule) => {
-  defineRule(rule, AllRules[rule])
-})
 // ?加入validate驗證規則
 Object.keys(validate).forEach((rule) => {
   defineRule(rule, validate[rule])
