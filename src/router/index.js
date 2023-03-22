@@ -80,6 +80,15 @@ const routes = [
         }
       },
       {
+        path: '/OnLineApply_OCR',
+        name: 'OCR身份證辨識',
+        component: () => import('../views/CardFriendNo/Online/OnLineApply_OCR.vue'),
+        meta: {
+          title: 'OCR身份證辨識'
+        }
+      },
+
+      {
         path: '/OnLineApply_n1',
         name: '非卡友線上申請',
         component: () => import('../views/CardFriendNo/Online/OnLineApply_n1.vue'),
@@ -139,14 +148,14 @@ const routes = [
         }
       },
       // ? 非卡友-線上-他行銀行帳戶驗證
-      // {
-      //  path: '/OnLineApply_ChkSZ',
-      //  name: '線上辦卡(已持有其他銀行帳戶)',
-      //  component: () => import('../views/CardFriendNo/Online/OnLineApply_ChkSZ.vue'),
-      //  meta: {
-      //    title: '線上辦卡'
-      //  }
-      // },
+      {
+        path: '/OnLineApply_ChkSZ',
+        name: '線上辦卡(已持有其他銀行帳戶)',
+        component: () => import('../views/CardFriendNo/Online/OnLineApply_ChkSZ.vue'),
+        meta: {
+          title: '線上辦卡'
+        }
+      },
       // ? 非卡友-線上-共用
       {
         path: '/OnLineApply_Chk_OTP',
@@ -156,14 +165,14 @@ const routes = [
           title: '手機OTP驗證'
         }
       },
-      {
-        path: '/OnLineApply_ChkSZ_OTP',
-        name: '手機OTP驗證(他行帳戶)',
-        component: () => import('../views/CardFriendNo/Online/OnLineApply_ChkSZ_OTP.vue'),
-        meta: {
-          title: '手機OTP驗證'
-        }
-      },
+      // {
+      //  path: '/OnLineApply_ChkSZ_OTP',
+      //  name: '手機OTP驗證(他行帳戶)',
+      //  component: () => import('../views/CardFriendNo/Online/OnLineApply_ChkSZ_OTP.vue'),
+      //  meta: {
+      //    title: '手機OTP驗證'
+      //  }
+      // },
       {
         path: '/OnLineApply_Fillin_OT',
         name: '非卡友-申請書資料填寫',

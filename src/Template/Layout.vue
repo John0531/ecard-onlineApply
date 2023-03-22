@@ -40,4 +40,7 @@ export default {
   .form-check-input.is-invalid{
     border-color: #dc3545 !important;
   }
+  input.checkimg[type="checkbox"].is-invalid {
+    border-color: #db0031 !important;
+  }
 </style>

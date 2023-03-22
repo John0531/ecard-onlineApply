@@ -40,7 +40,7 @@
                                       :class="{ 'is-invalid': errors['驗證碼'] }"
                                       @focus="this.mobileMsgCode=''"
                                       @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
-                                      rules="required"
+                                      rules="checkCode"
                                     />
                                     <button
                                       @click="getMobileMsgCode()"
@@ -66,26 +66,37 @@
               <!-------------------本人已詳閱---------------------->
               <div class="terms-group">
               <div class="terms">
-                  <input
-                    id="checkbox" name="checkbox"
-                    value="checkbox"
-                    class="checkimg position-absolute"
-                    type="checkbox"
-                    @click="checkAgreement"
+                  <Field
                     v-model="agreementAll"
+                    id="checkbox1" name="服務申請約定條款"
+                    type="checkbox"
+                    class="checkimg position-absolute"
+                    :class="{ 'is-invalid': errors['服務申請約定條款'] }"
+                    @click="checkAgreement"
+                    rules="required"
                     />
-                  <label for="checkbox">同意，本人對「 <a href="#" @click.prevent="checkAgreement"><u>用卡須知及申請說明</u></a>」「 <a href="#" @click.prevent="checkAgreement"><u>重要告知事項</u></a>」「 <a href="#" @click.prevent="checkAgreement"><u>聯邦信用卡約定條款</u></a>」「<a href="#" @click.prevent="checkAgreement"><u>電子化帳單服務約定條款</u></a>」內容。(請務必勾選)
+                  <label for="checkbox1">同意，本人對「 <a href="#" @click.prevent="checkAgreement"><u>用卡須知及申請說明</u></a>」「 <a href="#" @click.prevent="checkAgreement"><u>重要告知事項</u></a>」「 <a href="#" @click.prevent="checkAgreement"><u>聯邦信用卡約定條款</u></a>」「<a href="#" @click.prevent="checkAgreement"><u>電子化帳單服務約定條款</u></a>」內容。(請務必勾選)
                   </label>
+                  <div class="d-flex text-center invalid-feedback my-1" >
+                  {{errors['服務申請約定條款']}}
+                </div>
               </div>
               <div class="terms">
-                  <input
-                    id="checkbox2" name="checkbox2"
-                    type="checkbox"
-                    class="checkimg position-absolute"
+                  <Field
                     v-model="agreePersonalData"
-                  >
+                    id="agree1" name="信用卡基本資料使用同意"
+                    type="checkbox"
+                    class=" checkimg position-absolute"
+                    :class="{ 'is-invalid': errors['信用卡基本資料使用同意'] }"
+                    @click="toggle"
+                    value="agree"
+                    rules="required"
+                  />
                   <label for="checkbox2">同意，聯邦商業銀行股份有限公司將本人之基本資料(含身分證字號、信用卡卡號、信用卡有效期限、卡片背面簽名後三碼、行動電話等資料)，透過信用卡授權轉接處理中心(聯合信用卡處理中心)傳輸至發卡機構進行身分認證等相關作業。
                   </label>
+                  <div class="d-flex text-center invalid-feedback my-1">
+                    {{errors['信用卡基本資料使用同意']}}
+                  </div>
               </div>
           </div>
           <!-------------------//本人已詳閱---------------------->
@@ -958,7 +969,7 @@ export default {
     },
     checkAgreement () {
       this.agreeModal.show()
-      const ck = document.querySelector('#checkbox')
+      const ck = document.querySelector('#checkbox1')
       if (this.agreement.length !== 4) {
         ck.checked = false
         return
@@ -976,6 +987,9 @@ export default {
         })
         return
       }
+      this.agreementAll = true
+      const ck = document.querySelector('#checkbox1')
+      ck.checked = true
       this.agreeModal.hide()
     },
     //* 手機驗證碼
@@ -1097,7 +1111,11 @@ export default {
   },
   watch: {
     agreement (n) {
-      this.agreementAll = n.length === 4
+      if (n.length === 4) {
+        this.agreementAll = true
+      } else {
+        this.agreementAll = false
+      }
     }
   },
   mounted () {

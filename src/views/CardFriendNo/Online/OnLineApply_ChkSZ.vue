@@ -29,6 +29,7 @@
                           class="formApply_form_control form-control "
                           @blur="applierInfo.Identification = $custom.validate.watchToUpper(applierInfo.Identification)"
                           rules="checkId"
+                          disabled
                           />
                           <div class="d-flex text-center invalid-feedback my-1">
                               {{errors['身分證字號']}}
@@ -49,6 +50,7 @@
                                   :validateOnChange="true"
                                   v-model="applierInfo.year"
                                   @blur="getYearMonth"
+                                  disabled
                                   >
                                   <option v-for="year in this.dateList.yearList" :value="year" :key="year+1">
                                   {{year}}
@@ -63,7 +65,9 @@
                                   :class="{ 'is-invalid': errors['月'] }"
                                   class="form-select form-control"
                                   :validateOnChange="true"
-                                  v-model="applierInfo.month" @change="getDay">
+                                  v-model="applierInfo.month" @change="getDay"
+                                  disabled
+                                  >
                                   <option v-for="month in dateList.monthList" :value="month" :key="month+1">
                                   {{month}}
                                   </option>
@@ -78,6 +82,7 @@
                                   class="form-select form-control"
                                   :validateOnChange="true"
                                   v-model="applierInfo.day"
+                                  disabled
                                   >
                                   <option v-for="date in dateList.dayList" :value="date" :key="date+1">
                                   {{date}}
@@ -102,33 +107,37 @@
                 </div>
                 <div class="formGroup">
                     <ul class="formList Apply_ChkSZ">
-                        <li class="col-12 mb-0">
+                        <li class="col-12 align-items-start">
                             <label for="">銀行代號</label>
-                            <Field
-                            v-model="bankCode"
-                            as="select" name="銀行代號"
-                            class="form-select form-control"
-                            :class="{ 'is-invalid': errors['銀行代號'] }"
-                            :validateOnChange="true"
-                            rules="required"
-                            >
-                                <option  value="" selected>請選擇</option>
-                                <option value="123">001 中央信託</option>
-                                <option value="13">003 交通銀行</option>
-                            </Field>
-                        </li>
-                        <li class="col-12 invalid-feedback ">
-                          {{errors['銀行代號']}}
+                            <div class="d-flex flex-column">
+                              <Field
+                              v-model="bankCode"
+                              as="select" name="銀行代號"
+                              class="form-select form-control"
+                              :class="{ 'is-invalid': errors['銀行代號'] }"
+                              :validateOnChange="true"
+                              rules="required"
+                              >
+                                  <!-- <option  value="" selected>請選擇</option> -->
+                                  <option v-for="bank in bankCodes" :value="bank.VALUE" :key="bank+1" >
+                                    {{bank.SHOW}}
+                                  </option>
+                              </Field>
+                              <div class="col-12 invalid-feedback ">
+                                {{errors['銀行代號']}}
+                              </div>
+                            </div>
                         </li>
                         <li class="col-12 align-items-start">
                             <label for="" class="mt-1">銀行帳號</label>
                             <div class="d-flex flex-column">
                                 <Field
                                 v-model="account"
-                                id="" name="銀行帳號"
+                                id="account" name="account"
                                 type="text" maxlength="14"
                                 class="form-control"
                                 :class="{ 'is-invalid': errors['銀行帳號'] }"
+                                :validateOnChange="true"
                                 @keyup="account = $custom.validate.OnlyNumPress(account)"
                                 @focus="account=''"
                                 @change="$custom.validate.chkKeyValueLength(account,$refs.myForm,'銀行帳號','10','14')"
@@ -142,8 +151,20 @@
                         <li class="col-12 align-items-start">
                             <label for="" class="mt-1">行動電話</label>
                             <div class="d-flex flex-column">
-                                <input required="" name="login[id]" type="text" maxlength="10" placeholder="" class="form-control">
+                                <Field
+                                v-model="phone"
+                                id="phone" name="行動電話"
+                                type="text" maxlength="10"
+                                class="form-control"
+                                :class="{ 'is-invalid': errors['行動電話'] }"
+                                @keyup="phone = $custom.validate.OnlyNumPress(phone)"
+                                @focus="phone=''"
+                                rules="checkPhone"
+                                />
                                 <span class="not_text">請填寫帳戶申請時之行動電話，以利資訊驗證</span>
+                                <div class="d-flex text-center invalid-feedback my-1" >
+                                  {{errors['行動電話']}}
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -151,18 +172,47 @@
                 <!-------------------本人已詳閱---------------------->
                 <div class="terms-group">
                     <div class="terms">
-                        <input id="checkbox" name="checkbox" value="checkbox" class="checkimg position-absolute" type="checkbox" @click="checkAgreement" v-model="agreementAll" />
+                        <Field
+                        v-model="agreementAll"
+                        id="checkbox1" name="服務申請約定條款"
+                        type="checkbox"
+                        class=" checkimg position-absolute"
+                        :class="{ 'is-invalid': errors['服務申請約定條款'] }"
+                        @click="checkAgreement"
+                        rules="required"
+                        />
                         <label for="agree">同意，本人對「 <a href="#" @click.prevent="checkAgreement"><u>用卡須知及申請說明</u></a>」「 <a href="#" @click.prevent="checkAgreement"><u>重要告知事項</u></a>」「 <a href="#" @click.prevent="checkAgreement"><u>聯邦信用卡約定條款</u></a>」「<a href="#" @click.prevent="checkAgreement"><u>電子化帳單服務約定條款</u></a>」內容。(請務必勾選)
                         </label>
+                        <div class="d-flex text-center invalid-feedback my-1" >
+                          {{errors['服務申請約定條款']}}
+                        </div>
                     </div>
                     <div class="terms">
-                        <input type="checkbox" class="checkimg position-absolute" id="agree1">
+                        <Field
+                        v-model="agreePersonalData"
+                        id="agree1" name="個資使用同意"
+                        type="checkbox"
+                        class=" checkimg position-absolute"
+                        :class="{ 'is-invalid': errors['個資使用同意'] }"
+                        @click="toggle"
+                        value="agree"
+                        rules="required"
+                        />
                         <label for="agree1">同意，聯邦商業銀行股份有限公司將本人之基本資料(含身分證字號、銀行代號、銀行帳號、行動電話等資料)，透過信用卡授權轉接財金公司「跨行金融帳戶資訊核驗」進行身分認證等相關作業。</label>
+                        <div class="d-flex text-center invalid-feedback my-1">
+                          {{errors['個資使用同意']}}
+                        </div>
                     </div>
                 </div>
                 <!-------------------//本人已詳閱---------------------->
                 <div class="text-center button_group">
-                    <button onclick="location.href='OnLineApply_ChkSZ_OTP.htm'" class="btn btn-primary btn-lg mx-1" type="submit" value="">下一步</button>
+                    <button
+                    class="btn btn-primary btn-lg mx-1"
+                    type=""
+                    @click.prevent="applySubmit"
+                    >
+                    下一步
+                    </button>
                 </div>
             </div>
           </Form>
@@ -1008,13 +1058,16 @@ export default {
       },
       applierInfo: {
         // ?使用者輸入的出生年月日
-        Identification: '',
-        year: '',
-        month: '',
-        day: ''
+        Identification: 'A111111111',
+        year: '1955',
+        month: '01',
+        day: '01'
+      },
+      bankCodes: {
       },
       bankCode: '', // ? 銀行代號
       account: '', // ?銀行帳戶
+      phone: '',
       agreeModal: '', // ?同意書modal
       agreement: [], // ? Modal上同意欄
       agreementAll: false, // ?已同意Modal上所有申請條款
@@ -1053,7 +1106,18 @@ export default {
         })
         return
       }
+      this.agreementAll = true
+      const ck = document.querySelector('#checkbox1')
+      ck.checked = true
       this.agreeModal.hide()
+    },
+    toggle () {
+      const ck = document.querySelector('#agree1').checked
+      if (ck) {
+        this.agreePersonalData = true
+      } else {
+        this.agreePersonalData = false
+      }
     },
     getYearMonth () {
       // ? 產生生日"年"、"月"選單
@@ -1102,17 +1166,59 @@ export default {
       if (this.dateList.dayList.length < this.applierInfo.day) {
         this.applierInfo.day = ''
       }
+    },
+    async applySubmit () {
+      this.$custom.validate.chkKeyValueLength(this.account, this.$refs.myForm, '銀行帳號', '10', '14')
+      const collection = await this.$refs.myForm.validate()
+      collection.errors = this.$refs.myForm.getErrors()
+      if (Object.keys(collection.errors).length === 0) {
+      // ? 檢查約定條款 未打勾
+        if (!this.agreement) {
+          this.$swal.fire({
+            title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+            showConfirmButton: false,
+            // timer: 2500
+            customClass: {
+              title: 'text-class'
+              //
+            }
+          })
+          return
+        }
+        if (!this.agreePersonalData) {
+          this.$swal.fire({
+            title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+            showConfirmButton: false,
+            customClass: {
+              title: 'text-class'
+            }
+            // timer: 2500
+          })
+          return
+        }
+        // ** ===全部通過前往下一頁===
+        this.$router.push('/OnLineApply_Chk_OTP')
+      } else {
+        // ** ===錯誤訊息彙整===
+        this.$custom.validate.showErrors(collection.errors)
+      }
     }
   },
   watch: {
     agreement (n) {
-      this.agreementAll = n.length === 4
+      if (n.length === 4) {
+        this.agreementAll = true
+      } else {
+        this.agreementAll = false
+      }
     }
   },
   mounted () {
     this.scrollEvent()
     this.agreeModal = new this.$custom.bootstrap.Modal(this.$refs.agreeModal, { backdrop: 'static' })
     this.getYearMonth()
+    const bank = JSON.parse(localStorage.getItem('SELECT_JSON'))
+    this.bankCodes = bank.BANK
   }
 }
 </script>

@@ -12,9 +12,10 @@
     <div class="container-xl">
       <div class="row justify-content-md-center">
         <Form
-          v-slot="{  }"
-          @submit="checkAll"
-          @invalid-submit="invalidSubmit"
+          v-slot="{ errors }"
+          @submit="onSubmit"
+          @invalid-submit="invalidCard"
+          :validation-schema="schema"
         >
           <div class="formGroup">
             <ul class="formList formApply">
@@ -22,14 +23,6 @@
                 <label for="">申請人身份證號</label>
                 <div class="form-text">A12345****</div>
               </li>
-              <!-- <input
-              required=""
-              name="login[id]"
-              type="text"
-              maxlength="10"
-              placeholder="限正卡持卡人"
-              class="formApply_form_control form-control"
-            /> -->
               <li class="col-12">
                 <label for=""></label>
                 <span class="red_text">(外籍人士請輸入居留簽證的統一證號)</span>
@@ -40,62 +33,71 @@
               </li>
             </ul>
           </div>
-          <div class="col-xl-10 d-flex flex-wrap">
+          <div class="col-xl-12 d-flex flex-wrap">
             <div class="col-12 col-md-4 text-center">
-              <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="" />
-              <div class="form-check my-2">
-                <input
+              <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="微風悠遊聯名卡MasterCard悠遊鈦金卡" />
+              <div class="form-check my-2 position-relative">
+                <Field
                   class="form-check-input Apply_input"
                   type="radio"
-                  name="exampleRadios"
-                  id="exampleRadios1"
-                  value="option1"
-                  checked
+                  name="信用卡"
+                  value="MasterCard"
+                  v-model="OnlineApply_y_Data.card"
+                  :class="{ 'is-invalid': errors['信用卡'] }"
+                  :validateOnInput="true"
                 />
                 <label
                   class="form-check-label text-start text-md-center fw-bold"
-                  for="exampleRadios1"
+                  for="creditCardTick"
+                  style="color: black;"
                 >
                   微風悠遊聯名卡MasterCard悠遊鈦金卡
                 </label>
               </div>
             </div>
             <div class="col-12 col-md-4 text-center">
-              <img src="@/assets/images/form/card_b4bs.jpg" class="img-fluid" alt="" />
+              <img src="@/assets/images/form/card_b4bs.jpg" class="img-fluid" alt="微風悠遊聯名卡JCB悠遊晶緻卡" />
               <div class="form-check my-2">
-                <input
+                <Field
                   class="form-check-input Apply_input"
                   type="radio"
-                  name="exampleRadios"
-                  id="exampleRadios2"
-                  value="option1"
+                  name="信用卡"
+                  value="JCB"
+                  v-model="OnlineApply_y_Data.card"
+                  :class="{ 'is-invalid': errors['信用卡'] }"
+                  :validateOnInput="true"
                 />
                 <label
                   class="form-check-label text-start text-md-center fw-bold"
-                  for="exampleRadios2"
+                  for="creditCardTick"
+                  style="color: black;"
                 >
                   微風悠遊聯名卡JCB悠遊晶緻卡
                 </label>
               </div>
             </div>
             <div class="col-12 col-md-4 text-center">
-              <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="" />
+              <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="微風悠遊聯名卡VISA悠遊御璽卡" />
               <div class="form-check my-2">
-                <input
+                <Field
                   class="form-check-input Apply_input"
                   type="radio"
-                  name="exampleRadios"
-                  id="exampleRadios3"
-                  value="option1"
+                  name="信用卡"
+                  value="VISA"
+                  v-model="OnlineApply_y_Data.card"
+                  :class="{ 'is-invalid': errors['信用卡'] }"
+                  :validateOnInput="true"
                 />
                 <label
                   class="form-check-label text-start text-md-center fw-bold"
-                  for="exampleRadios3"
+                  for="creditCardTick"
+                  style="color: black;"
                 >
                   微風悠遊聯名卡VISA悠遊御璽卡
                 </label>
               </div>
             </div>
+            <span class="red_text position-relative m-auto">{{errors['信用卡']}}</span>
           </div>
           <!----------------fee ---------------->
           <div class="mt-3 mt-md-5">
@@ -159,30 +161,32 @@
           <!----------------//fee ---------------->
           <!-------------------本人已詳閱---------------------->
           <div class="terms-group">
-            <div class="terms">
-              <input
+            <div class="terms pb-0">
+              <!-- :value="true"回傳布林, 不是字串 -->
+              <Field
                 id="checkbox"
-                name="checkbox"
-                value="checkbox"
+                name="合約書"
                 class="checkimg position-absolute"
                 type="checkbox"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
                 v-model="agreementAll"
-                @click="checkAgreement()"
+                @click="checkAgreement"
+                :class="{ 'is-invalid-important': errors['合約書'] }"
+                :value="true"
               />
-              <label for="agree" @click="checkAgreement"
+              <label for="agree"
                 >本人已詳閱並同意「<a
                   href="#"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
-                  @click.prevent="this.contractModal.show()"
                   ><u>聯邦銀行電子銀行服務申請約定條款</u></a
                 >」內容。(請務必勾選)</label
               >
             </div>
+            <span style="color: #db0031;font-size: 1em !important;">{{ errors["合約書"] }}</span>
             <div class="terms">
-              <input type="checkbox" class="checkimg position-absolute" id="agree1" v-model="terms"/>
+              <Field type="checkbox" class="checkimg position-absolute" id="agree1" v-model="terms" name="合約書非必填" @click="checkTerm"/>
               <label for="agree1"
                 >本人同意申辦貴行業務時，因中途退出或雖未完成所有申請步驟所留存之相關個人資料，貴行得用以提供後續聯繫及服務時使用。</label
               >
@@ -192,7 +196,6 @@
           <div class="text-center button_group">
             <button
               class="btn btn-primary btn-lg mx-1"
-              type="submit"
               value=""
             >
               下一步
@@ -751,15 +754,15 @@
               </div>
             </div>
           </div>
+          <!-- 內部的勾選我同意 -->
           <div id="button_terms" class="button_terms">
             <input
               type="checkbox"
               id="button_termsOpt_1"
-              @click="checkAgreement()"
               disabled=""
               v-model="agreement"
             />
-            <label id="read_1" for="button_termsOpt_1">我已詳細閱讀。(請勾選)</label>
+            <label id="read_1" for="button_termsOpt_1" >我已詳細閱讀。(請勾選)</label>
           </div>
           <!----------------//1-------------------------------------------->
         </div>
@@ -794,11 +797,29 @@ export default {
       contractModal: '',
       agreement: false,
       agreementAll: false,
-      terms: false
+      terms: false,
+      // *判斷radio是否有勾選
+      schema: {},
+      OnlineApply_y_Data: {
+        card: ''
+      }
+    }
+  },
+  created () {
+    // ?預設規則
+    this.schema = {
+      信用卡: 'required',
+      合約書: 'required'
+    }
+  },
+  watch: {
+    // ?監聽是否有勾選我已詳細閱讀
+    agreement (n) {
+      this.agreementAll = n === true
     }
   },
   methods: {
-    //* 我已詳細閱讀條款
+    // ?我已詳細閱讀條款
     scrollEvent () {
       this.$refs.termBox1.onscroll = function () {
         if (this.scrollHeight - this.scrollTop <= this.clientHeight + 50) {
@@ -809,78 +830,32 @@ export default {
         }
       }
     },
-    checkAgreement () {
-      this.contractModal.show()
-      const ck = document.querySelector('#checkbox')
-      if (!this.agreement) {
-        this.agreementAll = false
-        ck.checked = false
-        return
-      }
-      this.agreementAll = true
-      ck.checked = true
-    },
+    // ?檢查是否有勾選我已詳細閱讀
     checkTotal () {
-      if (!this.agreement) {
-        this.$swal.fire({
-          title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-          showConfirmButton: false,
-          timer: 2500
-        })
-        return
-      }
-      this.contractModal.hide()
-      this.agreementAll = true
-    },
-    // invalidSubmit ({ values, errors, results }) {
-    //   if (this.terms === false) {
-    //     this.$swal.fire({
-    //       title: '尚有必填欄位未填寫',
-    //       showConfirmButton: false,
-    //       // timer: 2500,
-    //       customClass: {
-    //         title: 'text-class'
-    //       }
-    //     })
-    //   }
-    // },
-    // cardApplySubmit () {
-    //   if (this.terms === false) {
-    //     this.$swal.fire({
-    //       title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-    //       showConfirmButton: false,
-    //       // timer: 2500,
-    //       customClass: {
-    //         title: 'text-class'
-    //       }
-    //     })
-    //   }
-    //   if (!this.agreePersonalData) {
-    //     this.$swal.fire({
-    //       title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-    //       showConfirmButton: false,
-    //       customClass: {
-    //         title: 'text-class'
-    //       }
-    //       // timer: 2500
-    //     })
-    //   }
-    // },
-    checkAll () {
-      if (!this.terms || !this.agreementAll) {
-        this.$swal.fire({
-          title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-          showConfirmButton: false,
-          timer: 2500
-        })
+      if (this.agreement === false) {
+        alert('您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！')
       } else {
-        this.$router.push('/OnLineApply_OTP')
+        this.contractModal.hide()
       }
-    }
-  },
-  watch: {
-    agreement (n) {
-      this.agreementAll = n
+    },
+    // ?如果有勾選我已詳細閱讀，頁面上的checkbox就要被勾選
+    checkAgreement ($event) {
+      if (this.agreement === true) {
+        this.agreementAll = true
+        $event.target.checked = true
+      } else {
+        this.agreementAll = false
+        $event.target.checked = false
+      }
+    },
+    // ?送出表單
+    onSubmit (values) {
+      console.log(JSON.stringify(this.OnlineApply_y_Data))
+      this.$router.push('OnLineApply_OTP')
+    },
+    // ?驗證表單
+    invalidCard ({ values, errors, results }) {
+      this.$custom.validate.showErrors(errors)
     }
   },
   mounted () {
@@ -891,3 +866,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.is-invalid-important {
+border-color: #dc3545 !important;
+}
+</style>
