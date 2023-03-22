@@ -5,197 +5,220 @@
  <!--nav end-->
     <!-- 主視覺 -->
     <div class="shortKv">
-        <div class="fill-shortKv topimg-OnLineApply">
-            <div class="container-xl shortKv-title-4">
-                <h2>線上辦卡</h2>
-            </div>
-        </div>
+			<div class="fill-shortKv topimg-OnLineApply">
+				<div class="container-xl shortKv-title-4">
+					<h2>線上辦卡</h2>
+				</div>
+			</div>
     </div>
     <!-- 主要內容 -->
     <section class="mainArea">
-        <div class="container-xl">
-            <div class="row justify-content-md-center pt-1 pt-md-3">
-                <div class="formGroup">
-                  <Form
-                    v-slot="{ errors }" @submit="applySubmit" @invalid-submit="invalidSubmit">
-                    <ul class="formList-even">
-                        <li class="col-12 col-md-6">
-                            <label for="">申請人身份證號</label>
-                            <div class="form-text">A12345****</div>
-                        </li>
-                        <li class="col-12 col-md-6">
-                            <label for="">姓名</label>
-                            <div class="form-text">王小邦</div>
-                        </li>
-                        <li class="col-12 col-md-6">
-                            <label for="">行動電話</label>
-                            <div class="form-text">0999***888</div>
-                        </li>
-                        <li class="col-12 col-md-6">
-                            <label for="">電子信箱</label>
-                            <Field
-                              required=""
-                              name="信箱"
-                              type="text"
-                              :rules="$custom.validate.chkEmail"
-                              placeholder="ubot@ubot.com.tw"
-                              :class="{ 'is-invalid': errors['信箱']}"
-                              class="form-control"
-                              v-model="form.Email">
-                            </Field>
-                            <ErrorMessage
-                              name="信箱"
-                              class="invalid-feedback">
-                            </ErrorMessage>
-                        </li>
-                        <li class="col-12 col-md-6">
-                            <label for="">*安麗直銷商會員編號</label>
-                            <Field required="" name="安麗直銷商會員編號" type="text" placeholder="" :class="{ 'is-invalid': errors['安麗直銷商會員編號']}" class="form-control" :rules="$custom.validate.OnlyNumEngPress" v-model="form.selling" ></Field><ErrorMessage name="安麗直銷商會員編號"
-                              class="invalid-feedback"></ErrorMessage></li>
-                        <li class="col-12 col-md-6">
-                            <label for="">推廣單位代號</label><Field :rules="$custom.validate.OnlyNumEngPress"
-                              name="推廣單位代號"
-                              type="text"
-                              :class="{ 'is-invalid': errors['推廣單位代號']}"
-                              class="form-control"
-                              v-model="form.UnitCode"></Field><ErrorMessage name="推廣單位代號"
-                              class="invalid-feedback"></ErrorMessage>
-                        </li>
-                        <li class="col-12 col-md-6">
-                            <label for="">推廣人員編號</label>
-                            <Field required="" name="推廣人員編號" type="text" placeholder="" class="form-control" :class="{ 'is-invalid': errors['推廣人員編號']}" :rules="$custom.validate.OnlyNumEngPress" v-model="form.person"></Field><ErrorMessage name="推廣人員編號"
-                              class="invalid-feedback"></ErrorMessage>
-                        </li>
-                        <li class="col-12 col-md-12">
-                            <label for="">*帳單形式</label>
-                            <div class="d-flex flex-wrap flex-column flex-md-row">
-                                <div class="form-check me-4">
-                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
-                                    <div class="form_Apply_txt">
-                                        EMAIL帳單
-                                    </div>
-                                </div>
-                                <div class="form-check me-4">
-                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios2" value="option1">
-                                    <div class="form_Apply_txt">
-                                        行動帳單(簡訊)
-                                    </div>
-                                </div>
-                                <div class="form-check me-4">
-                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios3" value="option1">
-                                    <div class="form_Apply_txt">
-                                        LINE帳單
-                                    </div>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios3" value="option1">
-                                    <div class="form_Apply_txt">
-                                        紙本帳單
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form_Apply_txt">
-                                <span class="red_text">※申請E-mail帳單請務必收取聯邦銀行電子帳單認證信，點選驗證網址始完成申請。<br>
-                                ※帳單接收型式將依本次選擇做為日後帳單寄送依據，如未點選E-mail認證信則依原帳單型式或紙本寄送。</span>
-                            </div>
-                        </li>
-                        <li class="col-12 col-md-12">
-                            <label for="">*寄卡地址</label>
-                            <div class="d-flex flex-wrap flex-column flex-md-row">
-                                <div class="form-check me-4">
-                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" v-model="selectedOption" checked>
-                                    <div class="form_Apply_txt">
-                                        同帳單地址
-                                    </div>
-                                </div>
-                                <div class="form-check me-4">
-                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" v-model="selectedOption">
-                                    <div class="form_Apply_txt">
-                                        同公司地址
-                                    </div>
-                                </div>
-                                <div class="form-check me-4">
-                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" v-model="selectedOption" >
-                                    <div class="form_Apply_txt">
-                                        其他
-                                    </div>
-                                </div>
-                            </div>
-														<div>{{ selectedContent }}</div>
-                            <!-- <div class="form_Apply_txt" v-if="selectedOption === 'option1'" ></div>
-                            <div class="form_Apply_txt" v-if="selectedOption === 'option2'"></div>
-														<div class="d-flex flex-wrap justify-content-start align-items-center" v-if="selectedOption === 'option3'"> -->
-															<!-- <label for="" class="me-0">
-																	請輸入您持有之任一卡號末四碼：
-															</label>
-															<input required="" name="login[id]" type="text" placeholder="" class="form-control end_four">
-															<button type="button" class="OnLineApply_button ms-2 mb-0">確認</button>
-															<li>
-																<div class="d-flex flex-wrap flex-md-nowrap apply_address align-items-center">
-																		<select name="" runat="server" class="form-select form-control ZIP mb-2">
-																				<option>110000</option>
-																				<option>110000</option>
-																		</select>
-																		<select name="" runat="server" id="" class="form-select form-control Area mx-1 mx-md-2 mb-2">
-																				<option>南港區</option>
-																				<option>松山區</option>
-																				<option>內湖區</option>
-																		</select>
-																		<select name="" runat="server" id="" class="form-select form-control Road mb-2">
-																				<option>忠孝東路五段</option>
-																				<option>忠孝東路五段</option>
-																				<option>忠孝東路五段</option>
-																		</select>
-																</div>
-																<div class="d-flex apply_address align-items-center">
-																	<input v-model.number="test" @keyup="test=$custom.validate.OnlyNumPress(test)" type="number" placeholder="" class="form-control me-1">巷
-																		<input maxlength="5" name="login[id]" type="text" placeholder=" " class="form-control mx-1">弄
-																		<input maxlength="5" type="text" placeholder=" " class="form-control mx-1">-
-																		<input maxlength="5" type="text" placeholder=" " class="form-control mx-1">號
-																		<input maxlength="5" type="text" placeholder=" " class="form-control mx-1">樓
-																		<input maxlength="5" type="text" placeholder=" " class="form-control ms-1">
-																</div>
-														</li> -->
-														<!-- </div> -->
-                        </li>
-                        <li class="col-12 col-md-12">
-                            <label for="">申請數位卡</label>
-                            <div class="d-flex flex-wrap flex-column flex-md-row">
-                                <div class="form-check me-4">
-                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
-                                    <div class="form_Apply_txt text-nowrap">
-                                        是 (有效期至核卡後次月底)
-                                    </div>
-                                </div>
-                                <div class="form-check me-4">
-                                    <input class="form-check-input mt-2 position-absolute" type="radio" name="exampleRadios" id="exampleRadios2" value="option1">
-                                    <div class="form_Apply_txt">
-                                        否
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="note_text pt-0">
-                                <strong>(非必填欄位)</strong><br>
-                                    數位卡說明：如果您急需用卡，請勾選「是」，將立即享有網路購物及行動支付之便利，本行將於審核通過後先行發送簡訊代碼至申請人之行動電話，您可憑此代碼至本行網站中查詢信用卡資訊。
-                            </div>
-                        </li>
-                    </ul>
-                  </Form>
-                </div>
-                <!-------------------本人已詳閱---------------------->
-                <div class="terms-group">
-                    <div class="terms">
-                        <input id="checkbox" name="checkbox" value="checkbox" class="checkimg position-absolute" type="checkbox" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="checkAgreement(document.getElementById('button_termsOpt_1'));" />
-                        <label for="agree">同意，本人對「<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>用卡須知及申請說明</u></a>」「<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>重要告知事項</u></a>」「 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>聯邦信用卡約定條款</u></a>」「 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>電子化帳單服務約定條款</u></a>」「<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>Breeze Rewards微風積點禮遇會員同意及注意事項</u></a>」內容。(請務必勾選)
-                        </label>
-                    </div>
-                </div>
-                <!-------------------//本人已詳閱---------------------->
-                <div class="text-center button_group">
-                    <button @click="$router.push('/OnLineApply_Fillin_Card')" class="btn btn-primary btn-lg mx-1" type="submit" value="">下一步</button>
-                </div>
-            </div>
-        </div>
+			<div class="container-xl">
+					<div class="row justify-content-md-center pt-1 pt-md-3">
+							<div class="formGroup">
+								<Form
+                  :validation-schema="customSchema" @submit="onSubmit" @invalid-submit="onInvalidSubmit"
+									v-slot="{ errors }" ref="addressForm">
+									<ul class="formList-even">
+										<li class="col-12 col-md-6">
+												<label for="">申請人身份證號</label>
+												<div class="form-text">A12345****</div>
+										</li>
+										<li class="col-12 col-md-6">
+												<label for="">姓名</label>
+												<div class="form-text">王小邦</div>
+										</li>
+										<li class="col-12 col-md-6">
+												<label for="">行動電話</label>
+												<div class="form-text">0999***888</div>
+										</li>
+										<li class="col-12 col-md-6">
+										<label for="">電子信箱</label>
+										<Field
+											name="電子信箱"
+											type="text"
+											placeholder="ubot@ubot.com.tw"
+											:class="{ 'is-invalid': errors['電子信箱'],'form-control':true}"
+											class="form-control"
+											v-model="onLineApply_Fillin_Data.email"
+											:validateOnInput="true"
+										>
+										</Field>
+										<span class="invalid-feedback">{{errors['電子信箱']}}</span>
+										</li>
+										<!-- <li class="col-12 col-md-6">
+												<label for="">*安麗直銷商會員編號</label>
+												<Field
+												name="安麗直銷商會員編號"
+												type="text"
+												placeholder="" :validateOnInput="true"
+												:class="{ 'is-invalid': errors['安麗直銷商會員編號'],'form-control':true}"
+												v-model="onLineApply_Fillin_Data.amwayDistributorMembershipNo" value="tbAmwayNo"></Field>
+												<span class="invalid-feedback">{{errors['安麗直銷商會員編號']}}</span>
+										</li> -->
+										<li class="col-12 col-md-6">
+										<label for="">推廣單位代號</label>
+										<Field
+											name="推廣單位代號"
+											type="text"
+											:class="{ 'is-invalid': errors['推廣單位代號'],'form-control':true}"
+											v-model="onLineApply_Fillin_Data.promotionUnitCode"
+											:validateOnInput="true"
+											></Field>
+											<span class="invalid-feedback">{{errors['推廣單位代號']}}</span>
+										</li>
+										<li class="col-12 col-md-6">
+											<label for="">推廣人員編號</label>
+											<Field name="推廣人員編號" type="text" class="form-control" :class="{ 'is-invalid': errors['推廣人員編號']}"
+											v-model="onLineApply_Fillin_Data.promoterID" :validateOnInput="true"></Field>
+											<span class="invalid-feedback">{{errors['推廣人員編號']}}</span>
+										</li>
+										<li class="col-12 col-md-12">
+											<label for="" >*帳單形式</label>
+											<div class="d-flex flex-wrap flex-column flex-md-row">
+											<div class="form-check me-4">
+												<Field  class="form-check-input mt-2 position-absolute" type="radio" name="帳單形式"  value="email" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.bill" :validateOnChange="true"></Field>
+												<div class="form_Apply_txt">
+																EMAIL帳單
+												</div>
+												<span class="invalid-feedback">{{errors['帳單形式']}}</span>
+											</div>
+											<div class="form-check me-4">
+												<Field  class="form-check-input mt-2 position-absolute" type="radio" name="帳單形式"  value="newsletter" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.bill" :validateOnChange="true"></Field>
+												<div class="form_Apply_txt">
+																行動帳單(簡訊)
+												</div>
+											</div>
+											<div class="form-check me-4">
+												<Field  class="form-check-input mt-2 position-absolute" type="radio" name="帳單形式"  value="line" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.bill" :validateOnChange="true"></Field>
+												<div class="form_Apply_txt">
+																LINE帳單
+												</div>
+											</div>
+											<div class="form-check">
+												<Field  class="form-check-input mt-2 position-absolute" type="radio" name="帳單形式"  value="paper" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.bill"></Field>
+												<div class="form_Apply_txt">
+																紙本帳單
+												</div>
+											</div>
+											<div class="form_Apply_txt">
+													<span class="red_text">※申請E-mail帳單請務必收取聯邦銀行電子帳單認證信，點選驗證網址始完成申請。<br>
+													※帳單接收型式將依本次選擇做為日後帳單寄送依據，如未點選E-mail認證信則依原帳單型式或紙本寄送。</span>
+											</div>
+											</div>
+										</li>
+										<li class="col-12 col-md-12">
+											<label for="">*寄卡地址</label>
+											<div class="d-flex flex-wrap flex-column flex-md-row">
+													<div class="form-check me-4">
+															<Field class="form-check-input mt-2 position-absolute" type="radio" name="寄卡地址" value="sameBill"
+															v-model="onLineApply_Fillin_Data.sendCardAddress" :class="{ 'is-invalid': errors['寄卡地址']}" :validateOnChange="true"/>
+															<div class="form_Apply_txt">
+																	同帳單地址
+															</div>
+															<span class="invalid-feedback">{{errors['寄卡地址']}}</span>
+													</div>
+													<div class="form-check me-4">
+															<Field class="form-check-input mt-2 position-absolute" type="radio" name="寄卡地址" value="sameCompany"
+															v-model="onLineApply_Fillin_Data.sendCardAddress" :class="{ 'is-invalid': errors['寄卡地址']}" :validateOnChange="true"/>
+															<div class="form_Apply_txt">
+																	同公司地址
+															</div>
+													</div>
+													<div class="form-check me-4">
+															<Field class="form-check-input mt-2 position-absolute" type="radio" name="寄卡地址" value="other"
+															v-model="onLineApply_Fillin_Data.sendCardAddress"  :class="{ 'is-invalid': errors['寄卡地址']}" :validateOnChange="true"/>
+															<div class="form_Apply_txt">
+																	其他
+															</div>
+													</div>
+											</div>
+											<div class="form_Apply_txt">{{ selectedContent}}</div>
+												<div class="d-flex flex-wrap justify-content-start align-items-center" v-if="onLineApply_Fillin_Data.sendCardAddress === 'other'">
+												<label for="" class="me-0" type="number">
+												請輸入您持有之本行任一卡號末四碼：
+												</label>
+												<Field required="" name="末四碼" type="text" maxlength="4" class="form-control end_four" :class="{ 'is-invalid': errors['末四碼'] }" :validateOnChange="true"/>
+												<span style="color: #db0031;font-size: 1em !important;">{{ errors["末四碼"] }}</span>
+												<li style="padding-left: 0px;" class="mt-3Address.L mt-3" >
+													<div class="d-flex flex-wrap flex-md-nowrap apply_address align-items-center">
+														<!-- 下拉選單型別Field => select -->
+														<Field v-model="onLineApply_Fillin_Data.address.zipCode" as="select"  name="郵遞區號" class="form-control me-1 form-select" type="select" :class="{ 'is-invalid': errors['郵遞區號'] }">
+															<option v-for="cardAddress in option.cardAddress" :key="cardAddress.SORT" :value="cardAddress.VALUE">{{ cardAddress.SHOW }}</option>
+														</Field>
+														<Field v-model="onLineApply_Fillin_Data.address.dist"  as="select" name="市區" class="form-control me-1 form-select" type="select" :class="{ 'is-invalid': errors['市區'] }">
+															<option value="">-----</option>
+															<option value="南港區">南港區</option>
+															<option value="松山區">松山區</option>
+															<option value="內湖區">內湖區</option>
+														</Field>
+														<Field v-model="onLineApply_Fillin_Data.address.rd" as="select" name="路段" class="form-control me-1 form-select" type="select" :class="{ 'is-invalid': errors['路段'] }">
+															<option value="">-----</option>
+															<option value="忠孝東路四段">忠孝東路四段</option>
+															<option value="忠孝東路五段">忠孝東路五段</option>
+															<option value="忠孝東路六段">忠孝東路六段</option>
+														</Field>
+													</div>
+													<div class="d-flex apply_address align-items-center mt-3">
+														<!-- errors不要綁錯 -->
+														<Field v-model="onLineApply_Fillin_Data.address.ln" name="巷" type="number" class="form-control me-1"
+														:class="{ 'is-invalid': errors['巷'] }" :validateOnChange="true"></Field>巷
+														<Field v-model="onLineApply_Fillin_Data.address.aly" name="弄" maxlength="5" type="text" class="form-control mx-1"
+														:class="{ 'is-invalid': errors['弄'] }" :validateOnChange="true"></Field>弄
+														<Field v-model="onLineApply_Fillin_Data.address.no_1" name="號1" maxlength="5" type="text" class="form-control mx-1"
+														:class="{ 'is-invalid': errors['號1'] }" :validateOnChange="true"></Field>-
+														<Field v-model="onLineApply_Fillin_Data.address.no_2"  name="號2" maxlength="5" type="text" class="form-control mx-1"
+														:class="{ 'is-invalid': errors['號2'] }" :validateOnChange="true"></Field>號
+														<Field v-model="onLineApply_Fillin_Data.address.floor" name="樓" maxlength="5" type="text" class="form-control mx-1"
+														:class="{ 'is-invalid': errors['樓'] }" :validateOnChange="true"></Field>樓
+														<Field v-model="onLineApply_Fillin_Data.address.other" name="其他" maxlength="100" type="text" class="form-control ms-1"
+														:class="{ 'is-invalid': errors['其他'] }" :validateOnChange="true"></Field>
+													</div>
+													<!-- 郵遞區號9個欄位是一組，所以共用一個errorMessage -->
+													<span style="color: #db0031;font-size: 1em !important;">{{ addressErrMsg(errors) }}</span>
+												</li>
+											</div>
+										</li>
+										<li class="col-12 col-md-12">
+											<label for="">申請數位卡</label>
+											<div class="d-flex flex-wrap flex-column flex-md-row">
+												<div class="form-check me-4">
+													<Field class="form-check-input mt-2 position-absolute" type="radio" name="申請數位卡" id="exampleRadios1" value="option1"/>
+													<div class="form_Apply_txt text-nowrap">
+															是 (有效期至核卡後次月底)
+													</div>
+												</div>
+												<div class="form-check me-4">
+													<input class="form-check-input mt-2 position-absolute" type="radio" name="digitalRadios" id="exampleRadios2" value="option1">
+													<div class="form_Apply_txt">
+															否
+													</div>
+												</div>
+											</div>
+											<div class="note_text pt-0">
+												<strong>(非必填欄位)</strong><br>
+												數位卡說明：如果您急需用卡，請勾選「是」，將立即享有網路購物及行動支付之便利，本行將於審核通過後先行發送簡訊代碼至申請人之行動電話，您可憑此代碼至本行網站中查詢信用卡資訊。
+											</div>
+										</li>
+									</ul>
+									<!-------------------本人已詳閱---------------------->
+									<div class="terms-group">
+										<div class="terms">
+											<Field  id="checkboxagree"  name="合約書"  v-model="agreementAll"  :value="true"  class="checkimg position-absolute" type="checkbox" data-bs-toggle="modal" data-bs-target="#exampleModal"
+											:class="{ 'is-invalid-important': errors['合約書'] }" @click="checkAgreement"/>
+											<label for="agree">同意，本人對「<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" @click.prevent="checkAgreement"><u>用卡須知及申請說明</u></a>」「<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" @click.prevent="checkAgreement"><u>重要告知事項</u></a>」「 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" @click.prevent="checkAgreement"><u>聯邦信用卡約定條款</u></a>」「 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" @click.prevent="checkAgreement"><u>電子化帳單服務約定條款</u></a>」「<a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" @click.prevent="checkAgreement"><u>Breeze Rewards微風積點禮遇會員同意及注意事項</u></a>」內容。(請務必勾選)
+											</label>
+                      <span style="color: #db0031;font-size: 1em !important;">{{ errors["合約書"] }}</span>
+										</div>
+									</div>
+									<!-------------------//本人已詳閱---------------------->
+									<div class="text-center button_group">
+										<button class="btn btn-primary btn-lg mx-1" type="submit">下一步</button>
+									</div>
+								</Form>
+							</div>
+					</div>
+			</div>
     </section>
     <!-- 主要內容 END -->
     <!-- Modal-1 -->
@@ -203,8 +226,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel-1">請向下滾動，仔細閱讀整份同意書所有內容<input id="myCheckCount" hidden></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img src="@/assets/images/form/close.png" border="0" alt="close" data-bs-dismiss="modal"></button>
+									<h5 class="modal-title" id="exampleModalLabel-1">請向下滾動，仔細閱讀整份同意書所有內容<input id="myCheckCount" hidden></h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img src="@/assets/images/form/close.png" border="0" alt="close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <!------------------1-------------------------------------------->
@@ -218,52 +241,52 @@
                                     一、循環信用利息及手續費
                                     <div class="level-two">
                                         <p class="red">
-                                            (一) 持卡人每期最低應繳金額為以下項次金額合計（若前二款金額合計低於新臺幣1,000元，前二款金額以 1,000元計收）：
-                                            <ol class="red">
-                                                <li>當期新增一般消費金額及預借現金類產品（係指ATM、電話、臨櫃及網路等）金額百分之十，其它專案型預借現金商品依個別約定條款約定。</li>
-                                                <li>前期循環信用餘額之百分之五。</li>
-                                                <li>持卡人每期應付之基金、分期本金。</li>
-                                                <li>前各期逾期未付最低應繳款項之總和。</li>
-                                                <li>超過信用卡額度之款項。</li>
-                                                <li>循環信用利息及年費、預借現金手續費、掛失補發手續費、調閱簽帳單手續費等其他應繳費用。</li>
-                                                <li>本行依持卡人數整體信用往來狀況，據以核發信用額度1萬6,000元國民旅遊卡之當期應繳帳款。</li>
-                                                <li>其他經主管機關規定應納入最低應繳金額之交易金額。</li>
-                                            </ol>
+																					(一) 持卡人每期最低應繳金額為以下項次金額合計（若前二款金額合計低於新臺幣1,000元，前二款金額以 1,000元計收）：
+																					<ol class="red">
+																							<li>當期新增一般消費金額及預借現金類產品（係指ATM、電話、臨櫃及網路等）金額百分之十，其它專案型預借現金商品依個別約定條款約定。</li>
+																							<li>前期循環信用餘額之百分之五。</li>
+																							<li>持卡人每期應付之基金、分期本金。</li>
+																							<li>前各期逾期未付最低應繳款項之總和。</li>
+																							<li>超過信用卡額度之款項。</li>
+																							<li>循環信用利息及年費、預借現金手續費、掛失補發手續費、調閱簽帳單手續費等其他應繳費用。</li>
+																							<li>本行依持卡人數整體信用往來狀況，據以核發信用額度1萬6,000元國民旅遊卡之當期應繳帳款。</li>
+																							<li>其他經主管機關規定應納入最低應繳金額之交易金額。</li>
+																					</ol>
                                         </p>
                                         <p>(二) 循環信用利息之計算，以各筆帳款入帳日為起息日
-                                            <ol>
-                                                <li>持卡人使用循環利息，本行信用卡循環利息之利息起算日為『入帳日』，所謂『入帳日』：指本行代持卡人付款項予收單機構或特約商店或為您負擔墊款義務或將餘額代償款項撥至持卡人所指定帳戶，並登錄於本行帳務之日，與『結帳日』、『繳款截止日』不同。</li>
-                                                <li>因『入帳日』為本行實際為您給付款項予商店或撥款交付之日，本行之資金成本隨之產生，故循環信用利息 由此時開始起算。</li>
-                                            </ol>
+																					<ol>
+																						<li>持卡人使用循環利息，本行信用卡循環利息之利息起算日為『入帳日』，所謂『入帳日』：指本行代持卡人付款項予收單機構或特約商店或為您負擔墊款義務或將餘額代償款項撥至持卡人所指定帳戶，並登錄於本行帳務之日，與『結帳日』、『繳款截止日』不同。</li>
+																						<li>因『入帳日』為本行實際為您給付款項予商店或撥款交付之日，本行之資金成本隨之產生，故循環信用利息 由此時開始起算。</li>
+																					</ol>
                                         </p>
                                         <p>(三) 本行現採各筆帳款之入帳日為起息日，各筆循環信用利息之計算，係將每筆「得計入循環信用本金之帳款」，自各筆帳款入帳日起（每期應付分期本金遲延利息之計算，係自繳款截止日起計算），就該帳款之金額以帳款入帳日時適用之約定利率計算至該筆帳款結清之日止（元以下四捨五入），惟繳款後剩餘未付款項不足新臺幣1,000元，則各筆帳款入帳日後發生之循環信用利息及違約金，不予計收。</p>
                                         <p class="red">(四) 本行將視持卡人往來狀況及金融機構之債信情形綜合評斷結果，包含但不限於繳款紀錄、使用情形、債信紀錄、負債情形及收支比等因素訂定信用卡差別利率及其期間，並以考量資金成本、營運成本為由，調整持卡人所適用之利率。循環信用利率依貴行每季定期覆審之結果進行調整。
                                         </p>
                                         <p>(五) 如持卡人未能於每月繳款截止日前付清當期最低應繳金額或遲誤繳款期限者，本行得加計違約金或催收費用，各帳單週期之違約金計算方式為：
-                                            <ol class="red">
-                                                <li>逾期第一期者，應繳納違約金新臺幣300元</li>
-                                                <li>連續逾期第二期者，應繳納違約金新臺幣400元。</li>
-                                                <li>連續逾期第三期者，應繳納違約金新臺幣500元。</li>
-                                            </ol>
-                                            <span class="red">持卡人違反約定連續達三期(含)以上者，其違約金之計收最高以三期為限。</span><br>
-                                            計息範例如下：
-                                            <br>
-                                            例：小蓮之信用卡消費明細表（帳單）結帳日為每月3日，繳款截止日為每月18日，2月份小蓮信用卡帳單尚餘
-                                            循環掛帳金額為3,000元，之後2/19刷卡消費2,000元，該筆消費款銀行入帳日為2/20。小蓮3月份帳單顯示應繳總
-                                            金額為5,000元，最低應繳金額1,000元。（以年息15％為例計算，個案則因各別利率而異之）
-                                            <br>
-                                            <strong>【假設1】</strong><br>
-                                            3/18繳款截止日，收到小蓮繳納最低應繳金額1,000元，則4/3結帳日，應付上月循環信用利息為61元。
-                                            因已於繳款截止日收到小蓮繳納最低應繳金額，不計收違約金。<br>
-                                            《循環信用利息計算說明》 ($3,000-$1,000)×14天 (3/4-3/17)
-                                            ×15%÷365＋$2,000×26天(2/20-3/17)×15%÷365＋$4,000×17天 (3/18-4/3) ×15%÷365＝
-                                            $11.51＋$21.37＋$27.95＝$61元
-                                            <br>
-                                            《循環信用利息圖示說明》
-                                            <img src="img/terms_img.gif" class="img-fluid" alt="" /><br>
-                                            <strong>【假設2】</strong><br>
-                                            承上例，若於3/18繳款截止日，未收到小蓮繳款，則4/3結帳日，應付上月循環信用利息為：3,000×31
-                                            天(3/4-4/3)×15%÷365＋$2,000×43天(2/20-4/3)×15%÷365＝74元。因未於繳款截止日收到繳款金額，尚有消費款5,000元未償付，未繳金額在新臺幣1,000元以上且為逾一期，故4/3結帳日計收違約金300元。
+																					<ol class="red">
+																							<li>逾期第一期者，應繳納違約金新臺幣300元</li>
+																							<li>連續逾期第二期者，應繳納違約金新臺幣400元。</li>
+																							<li>連續逾期第三期者，應繳納違約金新臺幣500元。</li>
+																					</ol>
+																					<span class="red">持卡人違反約定連續達三期(含)以上者，其違約金之計收最高以三期為限。</span><br>
+																					計息範例如下：
+																					<br>
+																					例：小蓮之信用卡消費明細表（帳單）結帳日為每月3日，繳款截止日為每月18日，2月份小蓮信用卡帳單尚餘
+																					循環掛帳金額為3,000元，之後2/19刷卡消費2,000元，該筆消費款銀行入帳日為2/20。小蓮3月份帳單顯示應繳總
+																					金額為5,000元，最低應繳金額1,000元。（以年息15％為例計算，個案則因各別利率而異之）
+																					<br>
+																					<strong>【假設1】</strong><br>
+																					3/18繳款截止日，收到小蓮繳納最低應繳金額1,000元，則4/3結帳日，應付上月循環信用利息為61元。
+																					因已於繳款截止日收到小蓮繳納最低應繳金額，不計收違約金。<br>
+																					《循環信用利息計算說明》 ($3,000-$1,000)×14天 (3/4-3/17)
+																					×15%÷365＋$2,000×26天(2/20-3/17)×15%÷365＋$4,000×17天 (3/18-4/3) ×15%÷365＝
+																					$11.51＋$21.37＋$27.95＝$61元
+																					<br>
+																					《循環信用利息圖示說明》
+																					<img src="img/terms_img.gif" class="img-fluid" alt="" /><br>
+																					<strong>【假設2】</strong><br>
+																					承上例，若於3/18繳款截止日，未收到小蓮繳款，則4/3結帳日，應付上月循環信用利息為：3,000×31
+																					天(3/4-4/3)×15%÷365＋$2,000×43天(2/20-4/3)×15%÷365＝74元。因未於繳款截止日收到繳款金額，尚有消費款5,000元未償付，未繳金額在新臺幣1,000元以上且為逾一期，故4/3結帳日計收違約金300元。
                                         </p>
                                     </div>
                                 </div>
@@ -400,7 +423,7 @@
                     </div>
                     <div id="button_terms" class="button_terms">
                         <input type="checkbox" id="button_termsOpt_1" disabled="" v-model="checkTerms" value="1"/>
-                        <label id="read_1" for="button_termsOpt_1">我已詳細閱讀。(請勾選)</label>
+                        <label id="read_1" for="button_termsOpt_1" >我已詳細閱讀。(請勾選)</label>
                     </div>
                     <!----------------//1-------------------------------------------->
 
@@ -1105,7 +1128,7 @@
 </template>
 
 <script>
-import ValidSvc from '@/utilities/validate.js'
+import { defineRule, Field } from 'vee-validate'
 
 export default {
   data () {
@@ -1113,56 +1136,207 @@ export default {
       termsModal: '',
       checkTerms: [],
       allTerms: false,
-      test: '',
-      form: {
-        email: '',
-        selling: '',
-        UnitCode: '',
-        person: ''
+      agreement: false,
+      agreementAll: false,
+      schema: {},
+      onLineApply_Fillin_Data: {
+        // amwayDistributorMembershipNo: '',
+        email: 'uitc@uitc.com',
+        promotionUnitCode: '',
+        promoterID: '',
+        bill: '',
+        sendCardAddress: '',
+        address: {
+          zipCode: '',
+          dist: '',
+          rd: '',
+          ln: '',
+          aly: '',
+          no_1: '',
+          no_2: '',
+          floor: '',
+          other: ''
+        }
       },
-      selectedOption: ''
+      option: {
+        cardAddress: []
+      }
     }
   },
+  created () {
+    // ?預設規則
+    this.schema = {
+      電子信箱: 'email',
+      // 安麗直銷商會員編號: 'required|OnlyNumEngPress',
+      推廣單位代號: 'chkKeyValueNumEng',
+      推廣人員編號: 'chkKeyValueNumEng',
+      帳單形式: 'required',
+      寄卡地址: 'required',
+      末四碼: '',
+      郵遞區號: '',
+      市區: '',
+      路段: '',
+      巷: '',
+      弄: '',
+      號1: '',
+      號2: '',
+      樓: '',
+      其他: '',
+      合約書: 'required'
+    }
+    // ? 自訂義巷弄規則
+    //     defineRule('customAddressMustOne', value => {
+    //       const tempAddress = this.onLineApply_Fillin_Data.address.zipCode + this.onLineApply_Fillin_Data.address.dist + this.onLineApply_Fillin_Data.address.rd + this.onLineApply_Fillin_Data.address.ln + this.onLineApply_Fillin_Data.address.aly +
+    // this.onLineApply_Fillin_Data.address.no_1 + this.onLineApply_Fillin_Data.address.no_2 +
+    // this.onLineApply_Fillin_Data.address.floor + this.onLineApply_Fillin_Data.address.other
+    //       if (tempAddress.length < 1) {
+    //         // return '巷弄號樓至少必輸一項'
+    //         return '地址格式有誤'
+    //       }
+    //       return true
+    //     })
+    defineRule('customAddressVaild', value => {
+      const tempAddress = this.onLineApply_Fillin_Data.address.ln + this.onLineApply_Fillin_Data.address.aly + this.onLineApply_Fillin_Data.address.no_1 + this.onLineApply_Fillin_Data.address.no_2 +
+                this.onLineApply_Fillin_Data.address.floor + this.onLineApply_Fillin_Data.address.other
+      if (tempAddress.length < 1 || !this.onLineApply_Fillin_Data.address.zipCode ||
+                !this.onLineApply_Fillin_Data.address.dist || !this.onLineApply_Fillin_Data.address.rd) {
+        return '地址格式有誤'
+      }
+      return true
+    })
+  },
   computed: {
+    // ?判斷寄卡地址是否有勾選其他
     selectedContent () {
-      if (this.selectedOption === 'option3') {
-        return '123'
-      } else if (this.selectedOption === 'option2') {
+      const selected = this.onLineApply_Fillin_Data.sendCardAddress
+      if (selected === 'other') {
+        return ''
+      } else if (selected === 'sameCompany') {
         return '台北市內湖區康寧路Ｏ段'
       } else {
         return '台北市內湖區康寧路Ｏ段ＯＯＯ巷ＯＯ號Ｏ樓'
       }
+    },
+    // ? 客製化驗證郵遞區號schema 電子信箱與寄件地址
+    customSchema () {
+      const schema = { ...this.schema }
+      if (this.onLineApply_Fillin_Data.bill === 'email') {
+        schema.電子信箱 = 'email|required'
+      } else {
+        schema.電子信箱 = 'email'
+      }
+      if (this.onLineApply_Fillin_Data.sendCardAddress === 'other') {
+        schema.末四碼 = 'required|checkCode'
+        schema.郵遞區號 = 'customAddressVaild'
+        schema.市區 = 'customAddressVaild'
+        schema.路段 = 'customAddressVaild'
+        schema.巷 = 'customAddressVaild'
+        schema.弄 = 'customAddressVaild'
+        schema.號1 = 'customAddressVaild'
+        schema.號2 = 'customAddressVaild'
+        schema.樓 = 'customAddressVaild'
+        schema.其他 = 'customAddressVaild'
+      } else {
+        schema.末四碼 = ''
+        schema.郵遞區號 = ''
+        schema.市區 = ''
+        schema.路段 = ''
+        schema.巷 = ''
+        schema.弄 = ''
+        schema.號1 = ''
+        schema.號2 = ''
+        schema.樓 = ''
+        schema.其他 = ''
+      }
+      return schema
     }
   },
   watch: {
-    checkTerms (n, o) {
-      if (n.length >= 4) {
-        this.allTerms = true
-      } else {
-        this.allTerms = false
-      }
+    // ?檢查說明書是否有5個都勾選
+    checkTerms (n) {
+      this.agreementAll = n.length === 5
     }
   },
   methods: {
-    invalidSubmit ({ values, errors, results }) {
-      this.$swal.fire({
-        title: '尚有必填欄位格式有誤',
-        showConfirmButton: false,
-        // timer: 2500,
-        customClass: {
-          title: 'text-class'
+    getUtilities () {
+      const res = JSON.parse(localStorage.getItem('SELECT_JSON'))
+      this.option.cardAddress = res.County
+    },
+    // ? 客製化地址錯誤訊息(頁面上顯示)
+    addressErrMsg (errors) {
+      const errMsgs = []
+      // const keys = ['郵遞區號', '市區', '路段', '巷', '弄', '號1', '號2', '樓', '其他']
+      // for (let i = 0; i < keys.length; i++) {
+      //   const key = keys[i]
+      //   const value = errors[key]
+      //   console.log('key', key)
+      //   console.log('value', value)
+      //   if (value) {
+      //     errMsgs.push(value)
+      //   }
+      // }
+      if (errors.郵遞區號) {
+        errMsgs.push(errors.郵遞區號)
+      }
+      if (errors.市區) {
+        errMsgs.push(errors.市區)
+      }
+      if (errors.路段) {
+        errMsgs.push(errors.路段)
+      }
+      if (errors.巷) {
+        errMsgs.push(errors.巷)
+      }
+      if (errors.弄) {
+        errMsgs.push(errors.弄)
+      }
+      if (errors.號1) {
+        errMsgs.push(errors.號1)
+      }
+      if (errors.號2) {
+        errMsgs.push(errors.號2)
+      }
+      if (errors.樓) {
+        errMsgs.push(errors.樓)
+      }
+      if (errors.其他) {
+        errMsgs.push(errors.其他)
+      }
+      // 在陣列把重複的訊息去除(javascript distinct array), 去除重複的陣列項目
+      const distinctArr = Array.from(new Set(errMsgs))
+      return distinctArr.join('、')
+    },
+    // ?送出表單
+    onSubmit (values) {
+      console.log(JSON.stringify(this.onLineApply_Fillin_Data))
+      this.$router.push('/OnLineApply_Fillin_Card')
+    },
+    // ?驗證表單
+    onInvalidSubmit ({ values, errors, results }) {
+      const addressKeys = ['郵遞區號', '市區', '路段', '巷', '弄', '號1', '號2', '樓', '其他']
+      let isHaveAddressKey = false
+      for (const key of addressKeys) {
+        if (Object.prototype.hasOwnProperty.call(errors, key)) {
+          isHaveAddressKey = true
+          break
         }
-      })
+      }
+      if (isHaveAddressKey) {
+        errors['寄卡地址'] = this.addressErrMsg(errors)
+      }
+      for (const key of addressKeys) {
+        delete errors[key]
+      }
+      this.$custom.validate.showErrors(errors)
     },
-    checkUnitCode (value) {
-      return ValidSvc.OnlyNumPress(value)
-    },
+    // ?檢查滾軸是否有到底部
     checkTermsScroll (event, num) {
       if (event.target.scrollTop === (event.target.scrollHeight - event.target.offsetHeight)) {
         document.querySelector(`#button_termsOpt_${num}`).removeAttribute('disabled')
         document.querySelector(`#read_${num}`).classList.add('text-checked')
       }
     },
+    // ?如果沒有勾選完畢的提醒
     checkAllTerms () {
       if (this.checkTerms.length < 5) {
         alert('您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！')
@@ -1170,23 +1344,30 @@ export default {
         this.termsModal.hide()
       }
     },
-    applySubmit () {
-      if (!this.form.msg) {
-        this.$swal.fire({
-          title: '尚有必填欄位未填寫',
-          showConfirmButton: false,
-          customClass: {
-            title: 'text-class'
-          }
-          // timer: 2500
-        })
+    // ?五項都勾選我已詳閱才算OK
+    checkAgreement ($event) {
+      if (this.checkTerms.length === 5) {
+        this.agreementAll = true
+        $event.target.checked = true
       } else {
-        this.$router.push('/OnLineApply_Fillin')
+        this.agreementAll = false
+        $event.target.checked = false
       }
     }
   },
   mounted () {
+    this.getUtilities()
     this.termsModal = new this.$custom.bootstrap.Modal(this.$refs.termsModal, { backdrop: 'static' })
-  }
+    this.onLineApply_Fillin_Data.address.zipCode = ''
+    this.onLineApply_Fillin_Data.address.dist = ''
+    this.onLineApply_Fillin_Data.address.rd = ''
+  },
+  components: { Field }
 }
 </script>
+
+<style scoped>
+.is-invalid-important {
+border-color: #dc3545 !important;
+}
+</style>

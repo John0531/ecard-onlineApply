@@ -15,23 +15,22 @@
         <div class="mb-4 text-md-center DarkRed_text">
           按下「獲取簡訊驗證碼」，系統將發送至您留存本行信用卡資料之手機號碼，驗證碼於10分鐘內有效。
         </div>
-        <Form v-slot="{ errors }" @invalid-submit="invalidSubmit" @submit="otpSubmit">
+        <Form v-slot="{ errors }" ref="otpForm" :validation-schema="schema" @submit="otpSubmit" @invalid-submit="onInvalidSubmit">
           <div class="formGroup">
             <ul class="formList">
               <li class="inOpt">
                 <label for="">簡訊驗證碼</label>
-                <Field
-                  name="簡訊驗證碼"
-                  type="text"
-                  maxlength="6"
-                  placeholder="請輸入驗證碼"
-                  class="form-control"
-                  :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
-                  v-model="form.msg"
-                  :validateOnBlur="true"
-                  :rules="$custom.validate.chkKeyValue"
-                />
-                <ErrorMessage name="簡訊驗證碼" class="invalid-feedback"></ErrorMessage>
+                <div>
+                  <Field
+                    name="簡訊驗證碼"
+                    type="text"
+                    maxlength="4"
+                    placeholder="請輸入驗證碼"
+                    class="form-control position-relative"
+                    :class="{ 'is-invalid': errors['簡訊驗證碼']}"
+                    v-model="form.msg"
+                  ></Field><span class="invalid-feedback-important position-absolute">{{errors['簡訊驗證碼']}}</span>
+                </div>
                 <button
                   class="ResendOpt"
                   type="submit"
@@ -69,16 +68,23 @@ export default {
       },
       form: {
         msg: ''
-      }
+      },
+      schema: {}
+    }
+  },
+  created () {
+    this.schema = {
+      簡訊驗證碼: 'required|checkOTP'
     }
   },
   methods: {
     getMsgCode () {
       this.msg.phoneNum = this.form.msg
-      this.count = 5
+      alert('發送簡訊驗證碼_作業成功')
+      this.count = 30
       this.show = false
       this.timer = setInterval(() => {
-        if (this.count > 0 && this.count <= 5) {
+        if (this.count > 0 && this.count <= 30) {
           this.count--
         } else {
           this.show = true
@@ -87,31 +93,22 @@ export default {
         }
       }, 1000)
     },
-    invalidSubmit ({ values, errors, results }) {
-      this.$swal.fire({
-        title: '尚有必填欄位格式有誤',
-        showConfirmButton: false,
-        // timer: 2500,
-        customClass: {
-          title: 'text-class'
-        }
-      })
+    onInvalidSubmit ({ values, errors, results }) {
+      this.$custom.validate.showErrors(errors)
     },
-    otpSubmit () {
-      if (!this.form.msg) {
-        this.$swal.fire({
-          title: '尚有必填欄位未填寫',
-          showConfirmButton: false,
-          customClass: {
-            title: 'text-class'
-          }
-          // timer: 2500
-        })
-      } else {
-        this.$router.push('/OnLineApply_Fillin')
-      }
+    otpSubmit (values) {
+      console.log(JSON.stringify(this.form))
+      this.$router.push('/OnLineApply_Fillin')
     }
-  },
-  mounted () {}
+  }
 }
 </script>
+
+<style scoped>
+.invalid-feedback-important {
+  color: #db0031;
+  font-size: 1em !important;
+  width: auto;
+  margin-top: .25rem;
+}
+</style>
