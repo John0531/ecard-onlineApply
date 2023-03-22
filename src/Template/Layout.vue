@@ -40,9 +40,7 @@ export default {
   .form-check-input.is-invalid{
     border-color: #dc3545 !important;
   }
-   .form-control.is-invalid {
-    background-size:0.5em !important;
-    background-position: right calc(.175em + .1875rem) center !important;
-    padding-right:0em !important;
+  input.checkimg[type="checkbox"].is-invalid {
+    border-color: #db0031 !important;
   }
 </style>

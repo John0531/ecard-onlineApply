@@ -342,7 +342,7 @@
                   v-model="agreementAll"
                   id="checkbox1" name="服務申請約定條款"
                   type="checkbox"
-                  class="form-check-input checkimg position-absolute"
+                  class="checkimg position-absolute"
                   :class="{ 'is-invalid': errors['服務申請約定條款'] }"
                   @click="checkAgreement"
                   rules="required"
@@ -382,7 +382,11 @@
     </Form>
     </div>
     <!-- Modal-1 -->
-    <div ref="contractModal" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div
+    ref="contractModal"
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1" >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">

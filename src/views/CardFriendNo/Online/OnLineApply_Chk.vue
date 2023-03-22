@@ -152,7 +152,7 @@
                   v-model="agreementAll"
                   id="checkbox1" name="服務申請約定條款"
                   type="checkbox"
-                  class="form-check-input checkimg position-absolute"
+                  class="checkimg position-absolute"
                   :class="{ 'is-invalid': errors['服務申請約定條款'] }"
                   @click="checkAgreement"
                   rules="required"
@@ -165,9 +165,10 @@
             </div>
             <div class="terms">
                 <Field
+                  v-model="agreePersonalData"
                   id="agree1" name="信用卡基本資料使用同意"
                   type="checkbox"
-                  class="form-check-input checkimg position-absolute"
+                  class="checkimg position-absolute"
                   :class="{ 'is-invalid': errors['信用卡基本資料使用同意'] }"
                   @click="toggle"
                   value="agree"
@@ -1158,6 +1159,14 @@ export default {
             label.classList.add('text-checked')
           }
         }
+      }
+    },
+    toggle () {
+      const ck = document.querySelector('#agree1').checked
+      if (ck) {
+        this.agreePersonalData = true
+      } else {
+        this.agreePersonalData = false
       }
     },
     checkAgreement () {

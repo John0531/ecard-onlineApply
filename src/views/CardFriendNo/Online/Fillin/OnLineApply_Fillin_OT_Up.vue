@@ -9,107 +9,154 @@
   </div>
   <!-- 主要內容 -->
   <section class="mainArea">
-      <div class="container-xl">
-          <div class="row justify-content-md-center pt-1 pt-md-3">
-              <!------------------------步驟---------------------------------->
-              <div class="stepGroup">
-                  <ul class="step">
-                      <li class="completed">
-                          <div class="counter_step">1</div><span>申請人資料</span>
-                      </li>
-                      <li class="completed">
-                          <div class="counter_step">2</div><span>個人資料使用特別商議條款</span>
-                      </li>
-                      <li class="active">
-                          <div class="counter_step">3</div><span>檢附財力證明</span>
-                      </li>
-                  </ul>
-              </div>
-              <!------------------------//步驟---------------------------------->
-              <div class="col-lg-10">
-                  <div class="col-12">
-                      <h3 class="upload_title">檢附財力證明</h3>
-                  </div>
-                  <div class="row upload_group mb-4">
-                      <div class="form-check my-2">
-                          <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
-                          <label class="form-check-label text-md-center fw-bold" for="exampleRadios1">
-                              上傳財力資料
-                          </label>
-                          <div class="p-1 mb-1 red_text">※上傳格式限JPG及GIF檔，單一檔案上限為5MB。</div>
-                          <div class="d-flex p-1 mb-1 red_text">※財力證明：如存摺、薪資單、扣繳憑單、地價稅單和房屋稅單或建物權狀等。<a href="https://card.ubot.com.tw/eCard/activity/MyData/index.html">上傳範例說明</a></div>
-                      </div>
-                      <!--------------------------------------------->
-                      <div class="col-12 col-md-6 mb-4">
-                          <div class="upload_items text-center">
-                              <input type="file" name="upload3" id="upload3" accept="image/*" class="upload" data-sigil="file-input"><textarea name="TBupload3" id="TBupload3" style="display: none;"></textarea>
-                              <div class="upload_txt text-center mt-2">存款(含戶名、帳號)</div>
-                              <img src="@/assets/images/form/upload_photo.png" class="img-fluid" alt="">
+      <Form
+        v-slot="{errors}"
+        ref="myForm"
+      >
+        <div class="container-xl">
+            <div class="row justify-content-md-center pt-1 pt-md-3">
+                <!------------------------步驟---------------------------------->
+                <div class="stepGroup">
+                    <ul class="step">
+                        <li class="completed">
+                            <div class="counter_step">1</div><span>申請人資料</span>
+                        </li>
+                        <li class="completed">
+                            <div class="counter_step">2</div><span>個人資料使用特別商議條款</span>
+                        </li>
+                        <li class="active">
+                            <div class="counter_step">3</div><span>檢附財力證明</span>
+                        </li>
+                    </ul>
+                </div>
+                <!------------------------//步驟---------------------------------->
+                <div class="col-lg-10">
+                    <div class="col-12">
+                        <h3 class="upload_title">檢附財力證明</h3>
+                    </div>
+                    <div class="row upload_group mb-4">
+                        <div class="d-flex flex-column px-0">
+                          <div>
+                            <Field
+                            class="form-check-input Apply_input"
+                            :class="{ 'is-invalid': errors['財力證明'] }"
+                            type="radio"
+                            name="財力證明" id="exampleRadios1"
+                            value="option1"
+                            v-model="proofType"
+                            rules="required"
+                            />
+                            <label class="form-check-label text-md-center fw-bold" for="exampleRadios1">
+                                上傳財力資料
+                            </label>
                           </div>
-                          <div class="upload_group_title text-center">財力證明(1)</div>
-                      </div>
-                      <div class="col-12 col-md-6 mb-4">
-                          <div class="upload_items text-center">
-                              <div class="upload_txt text-center mt-2">存款(含帳號之內頁)</div>
-                              <img src="@/assets/images/form/upload_photo.png" class="img-fluid" alt="">
-                              <input type="file" name="upload4" id="upload4" accept="image/*" class="upload" data-sigil="file-input"><textarea name="TBupload4" id="TBupload4" style="display: none;"></textarea>
+                          <div class="d-flex text-center invalid-feedback my-1">
+                            <div>{{errors['財力證明']}}</div>
                           </div>
-                          <div class="upload_group_title text-center">財力證明(2)</div>
-                      </div>
-                      <div class="col-12 col-md-6 mb-4">
-                          <div class="upload_items text-center">
-                              <div class="upload_txt text-center mt-2">存款(含戶名、帳號)</div>
-                              <img src="@/assets/images/form/upload_photo.png" class="img-fluid" alt="">
-                              <input type="file" name="upload5" id="upload5" accept="image/*" class="upload" data-sigil="file-input"><textarea name="TBupload5" id="TBupload5" style="display: none;"></textarea>
+                        </div>
+                        <div class="form-check my-2">
+                            <div class="p-1 mb-1 red_text">※上傳格式限JPG及GIF檔，單一檔案上限為5MB。</div>
+                            <div class="d-flex p-1 mb-1 red_text">※財力證明：如存摺、薪資單、扣繳憑單、地價稅單和房屋稅單或建物權狀等。<a href="https://card.ubot.com.tw/eCard/activity/MyData/index.html" @click.prevent="showExample()">上傳範例說明</a></div>
+                        </div>
+                        <!--------------------------------------------->
+                        <div class="col-12 col-md-6 mb-4">
+                            <div class="upload_items text-center">
+                                <input type="file" name="upload3" id="upload3" accept="image/*" class="upload" data-sigil="file-input"><textarea name="TBupload3" id="TBupload3" style="display: none;"></textarea>
+                                <div class="upload_txt text-center mt-2">存款(含戶名、帳號)</div>
+                                <img src="@/assets/images/form/upload_photo.png" class="img-fluid" alt="">
+                            </div>
+                            <div class="upload_group_title text-center">財力證明(1)</div>
+                        </div>
+                        <div class="col-12 col-md-6 mb-4">
+                            <div class="upload_items text-center">
+                                <div class="upload_txt text-center mt-2">存款(含帳號之內頁)</div>
+                                <img src="@/assets/images/form/upload_photo.png" class="img-fluid" alt="">
+                                <input type="file" name="upload4" id="upload4" accept="image/*" class="upload" data-sigil="file-input"><textarea name="TBupload4" id="TBupload4" style="display: none;"></textarea>
+                            </div>
+                            <div class="upload_group_title text-center">財力證明(2)</div>
+                        </div>
+                        <div class="col-12 col-md-6 mb-4">
+                            <div class="upload_items text-center">
+                                <div class="upload_txt text-center mt-2">存款(含戶名、帳號)</div>
+                                <img src="@/assets/images/form/upload_photo.png" class="img-fluid" alt="">
+                                <input type="file" name="upload5" id="upload5" accept="image/*" class="upload" data-sigil="file-input"><textarea name="TBupload5" id="TBupload5" style="display: none;"></textarea>
+                            </div>
+                            <div class="upload_group_title text-center">財力證明(3)</div>
+                        </div>
+                        <div class="col-12 col-md-6 mb-4">
+                            <div class="upload_items text-center">
+                                <div class="upload_txt text-center mt-2">存款(含帳號之內頁)</div>
+                                <img src="@/assets/images/form/upload_photo.png" class="img-fluid" alt="">
+                                <input type="file" name="upload6" id="upload6" accept="image/*" class="upload" data-sigil="file-input"><textarea name="TBupload6" id="TBupload6" style="display: none;"></textarea>
+                            </div>
+                            <div class="upload_group_title text-center">財力證明(4)</div>
+                        </div>
+                        <!----------------------MyData----------------------->
+                        <div class="d-flex flex-column px-0">
+                          <div >
+                              <Field
+                              v-model="proofType"
+                              class="form-check-input Apply_input"
+                              :class="{ 'is-invalid': errors['財力證明'] }"
+                              type="radio" name="財力證明"
+                              id="exampleRadios1"
+                              value="option2"
+                              rules="required"
+                              />
+                              <label class="form-check-label fw-bold text-md-center" for="exampleRadios1">
+                                  MyData平臺服務<span class="d-block d-md-inline mt-1 mt-md-0">(使用MyData調閱個人資料)</span>
+                              </label>
                           </div>
-                          <div class="upload_group_title text-center">財力證明(3)</div>
-                      </div>
-                      <div class="col-12 col-md-6 mb-4">
-                          <div class="upload_items text-center">
-                              <div class="upload_txt text-center mt-2">存款(含帳號之內頁)</div>
-                              <img src="@/assets/images/form/upload_photo.png" class="img-fluid" alt="">
-                              <input type="file" name="upload6" id="upload6" accept="image/*" class="upload" data-sigil="file-input"><textarea name="TBupload6" id="TBupload6" style="display: none;"></textarea>
+                          <div class="d-flex text-center invalid-feedback my-1 px-0">
+                            <div>{{errors['財力證明']}}</div>
                           </div>
-                          <div class="upload_group_title text-center">財力證明(4)</div>
-                      </div>
-                      <!----------------------MyData----------------------->
-                      <div class="form-check my-2">
-                          <input class="form-check-input Apply_input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
-                          <label class="form-check-label fw-bold text-md-center" for="exampleRadios1">
-                              MyData平臺服務<span class="d-block d-md-inline mt-1 mt-md-0">(使用MyData調閱個人資料)</span>
-                          </label>
-                      </div>
-                      <div class="justify-content-center MyData_input_note">
-                          <span class="red_text">※勾選此項目需使用自然人憑證、行動自然人憑證或健保卡</span>
-                          <span>使用MyData調閱個人資料可於國發會個人化資料自主運用(MyData)平臺透過自然人憑證、行動自然人憑證或健保卡取得下列資訊，相關資訊將轉由聯邦銀行做為您申請信用卡相關業務之財力證明使用，<a href="https://card.ubot.com.tw/eCard/activity/MyData/index.html">使用說明</a>。更多關於
-                              <a href="https://mydata.nat.gov.tw/" target="_blank"><u>MyData平臺</u></a>。</span>
-                          <span>●勞工保險被保險人投保資料(明細)<br>●財產資料<br>●個人所得資料</span>
-                      </div>
-                      <!-------------------本人已詳閱---------------------->
-                      <div class="terms-group">
-                          <div class="terms">
-                              <input id="checkbox" name="checkbox" value="checkbox" class="checkimg position-absolute" type="checkbox" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="checkAgreement(document.getElementById('button_termsOpt_1'));" />
-                              <label for="agree">本人已詳閱並同意｢ <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>MyData服務授權條款</u></a>」</label>
-                          </div>
-                      </div>
-                      <!-------------------//本人已詳閱---------------------->
-                      <!--------------------------------------------->
-                      <div class="Apply_note_box">
-                          <span
-                              class="red_text"><strong>貼心提醒：<br>下載預覽申請書確認無誤後，需回本頁點選送出申請方可完成申辦流程。送出申請尚未完成前，請勿中途離開本網頁或做其它操作，以免上傳失敗。</strong></span>
-                      </div>
-                  </div>
-              </div>
-
-              <div class="text-center button_group">
-                  <button class="btn btn-primary btn-lg mx-1" type="" @click="showResult">送出申請</button>
-                  <button onclick="location.href='#'" class="btn btn-primary btn-lg mx-1" type="submit" value="">預覽申請書</button>
-              </div>
-          </div>
-      </div>
+                        </div>
+                        <div class="justify-content-center MyData_input_note my-2">
+                            <span class="red_text">※勾選此項目需使用自然人憑證、行動自然人憑證或健保卡</span>
+                            <span>使用MyData調閱個人資料可於國發會個人化資料自主運用(MyData)平臺透過自然人憑證、行動自然人憑證或健保卡取得下列資訊，相關資訊將轉由聯邦銀行做為您申請信用卡相關業務之財力證明使用，<a href="https://card.ubot.com.tw/eCard/activity/MyData/index.html">使用說明</a>。更多關於
+                                <a href="#" target="_blank"><u>MyData平臺</u></a>。</span>
+                            <span>●勞工保險被保險人投保資料(明細)<br>●財產資料<br>●個人所得資料</span>
+                        </div>
+                        <!-------------------本人已詳閱---------------------->
+                        <div class="terms-group">
+                            <div class="terms">
+                                <input
+                                v-model="doubleAgree"
+                                id="checkbox1"
+                                name="checkbox"
+                                value="checkbox"
+                                class="checkimg position-absolute"
+                                type="checkbox"
+                                @click="checkAgreement"
+                                :rules="checkdoubleAgree"
+                                />
+                                <label for="agree">本人已詳閱並同意｢ <a href="#" ><u>MyData服務授權條款</u></a>」</label>
+                            </div>
+                        </div>
+                        <!-------------------//本人已詳閱---------------------->
+                        <!--------------------------------------------->
+                        <div class="Apply_note_box">
+                            <span
+                                class="red_text"><strong>貼心提醒：<br>下載預覽申請書確認無誤後，需回本頁點選送出申請方可完成申辦流程。送出申請尚未完成前，請勿中途離開本網頁或做其它操作，以免上傳失敗。</strong></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center button_group">
+                    <button class="btn btn-primary btn-lg mx-1" type="" @click.prevent="showResult">送出申請</button>
+                    <button onclick="location.href='#'" class="btn btn-primary btn-lg mx-1" type="submit" value="">預覽申請書</button>
+                </div>
+            </div>
+        </div>
+      </Form>
   </section>
   <!---------------------上傳成功跳轉NNB--------------------------->
-  <div ref="NNBModal" class="modal fade" id="NNBModal" tabindex="-1" role="dialog" aria-labelledby="apply" aria-hidden="true" data-backdrop="static">
+  <div
+    ref="NNBModal"
+    class="modal fade"
+    id="NNBModal"
+    tabindex="-1"
+    data-bs-backdrop="static"
+  >
       <div class="modal-dialog modal-dialog-centered MyData_modal_dialog" role="document">
           <div class="modal-content MyData_modal">
               <div class="modal-header text-center">
@@ -127,7 +174,13 @@
   </div>
 
   <!---------------------跳轉MyData--------------------------->
-  <div ref="MyDataModal" class="modal fade" id="MsgModal" tabindex="-1" role="dialog" aria-labelledby="apply" aria-hidden="true" data-backdrop="static">
+  <div
+    ref="MyDataModal"
+    class="modal fade"
+    id="MsgModal"
+    tabindex="-1"
+    data-bs-backdrop="static"
+  >
       <div class="modal-dialog modal-dialog-centered MyData_modal_dialog" role="document">
           <div class="modal-content MyData_modal">
               <div class="modal-header text-center">
@@ -154,125 +207,126 @@
           </div>
       </div>
   </div>
+  <!---------------------MyDataAgreeModal--------------------------->
+  <div
+    ref="MyDataAgreeModal"
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    data-bs-backdrop="static"
+  >
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel-1">請向下滾動，仔細閱讀整份同意書所有內容<input id="myCheckCount" hidden></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img src="@/assets/images/form/close.png" border="0" alt="close" data-bs-dismiss="modal"></button>
+              </div>
+              <div class="modal-body">
+                  <!------------------1-------------------------------------------->
+                  <div ref="terms_box_1" id="terms_box_1" class="terms_box oneTerms">
+                      <!--uc1:wucMyData同意條款 runat="server" id="wucMyData同意條款" /-->
+                      <div class="txt">
+                          <h3>聯邦銀行使用申請人授權MyData個人資料之服務條款</h3>
+                          <div>為協助您了解本服務之功能與內容，以保障您個人之權益，請於使用本服務前詳閱本條款內容，當您開始使用本服務時，即視為您已充分閱讀、瞭解與同意接受本條款之所有內容。
+                          </div>
+                          <div class="cjk-ideographic">一、服務目的與內容<br>
+                              為簡化申請人辦理「信用卡申請服務」流程，聯邦銀行提供申請人於申辦金融服務文件上傳流程使用MyData服務，於前揭線上申請網頁輸入個人身分證統一編號，並完成MyData服務平臺、身分認證檢核及個人授權同意等程序後，本行即取得同意授權之資料。</div>
+                          <div class="cjk-ideographic">
+                              二、資料使用項目與範圍<br>
+                              為使用本服務，您同意提供本行下列個人資料 (詳見附錄： MyData平臺資料傳輸項目明細表)：
+                              <ol class="mb-0">
+                                  <li>財政部財政資訊中心：財產資料。</li>
+                                  <li>財政部財政資訊中心：個人所得資料。</li>
+                                  <li>勞動部勞保局：勞工保險被保險人投保資料(明細)。</li>
+                              </ol>
+                          </div>
+                          <div class="cjk-ideographic">
+                              三、資料儲存與使用方式
+                              <ol class="mb-0">
+                                  <li>您因使用本服務所提供並授權本行使用之個人資料，本行將儲存於本服務資料庫中，儲存期間為自您提供並同意授權個人資料之日起，至本行因應業務執行或工作需要所訂定保存年限之截止日止。</li>
+                                  <li>您因使用本服務所提供並授權本行使用之個人資料，僅限本行提供本服務內容使用。</li>
+                                  <li>前揭個人資料使用對象限本行於國內及國外所在地。</li>
+                                  <li>符合個人資料保護相關法令以自動化機器或其他非自動化之使用方式。</li>
+                              </ol>
+                          </div>
+                          <div class="cjk-ideographic">
+                              四、使用者相關權利：
+                              <ol class="mb-0">
+                                  <li>除法律另有特別規定，本行蒐集您的個人資料後，依個人資料保護法規定，您得向本行行使下列各項權利：<br>
+                                  (1) 查詢或請求閱覽您的個人資料。<br>
+                                  (2) 請求製給您的個人資料複製本。<br>
+                                  (3) 請求補充或更正您的個人資料。<br>
+                                  (4) 請求停止蒐集、處理或使用您的個人資料。<br>
+                                  (5) 請求刪除您的個人資料。</li>
+                                  <li>使用本服務所取得之個人資料，其權利仍歸屬於當事人，若需重新取得檔案，須重新進行授權作業。</li>
+                                  <li>您可使用24小時客服專線(02)2545-5168、(07)226-9393聯繫本行，或於本行官網「留言板」線上留言，本行將儘速依相關法令規定，處理與回覆您的請求。</li>
+                              </ol>
+                          </div>
+                          <div class="cjk-ideographic">
+                              五、服務條款修訂
+                              <ol class="mb-0">
+                                  <li>本行有權於任何時間修改、變更本服務條款之內容，修改或變更時，以本行公告之服務條款為準，若有其他未盡事宜，悉依本行相關規定或解釋辦理。</li>
+                                  <li>如您於本服務條款修改或變更後仍續使用本服務，則視為您已閱讀、瞭解與同意接受本服務條款修改或變更，若您不同意本服務條款之修改或變更，請通知本行，本行將停止使用您對本服務之授權內容。</li>
+                              </ol>
+                          </div>
+                          <div class="cjk-ideographic">
+                              六、注意事項
+                              <ol class="mb-0">
+                                  <li>您得自由選擇是否提供個人資料，惟您若拒絕提供相關個人資料，本行將無法進行必要之審核及處理相關作業，因此將無法受理您前揭權利之行使或提供您相關服務。</li>
+                                  <li>本行對於MyData平臺取得您個人之資料係由資料提供者提供，若對資料內容有疑問，請逕洽該所屬資料提供者。</li>
+                                  <li>本告知事項日後如有更新內容將於本行官網另行公告。</li>
+                              </ol>
+                          </div>
+                          <div>附錄、MyData平臺資料傳輸項目明細表<br>
+                              <table class="table table-bordered">
+                                  <thead>
+                                      <tr>
+                                          <th width="5%" bgcolor="#f6f6f6" class="text-center">項次</th>
+                                          <th width="12%" class="text-center" bgcolor="#f6f6f6">部會機關名稱</th>
+                                          <th width="10%" class="text-center" bgcolor="#f6f6f6">資料集名稱</th>
+                                          <th class="text-center" bgcolor="#f6f6f6">資料集欄位說明</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr>
+                                          <td align="center">1</td>
+                                          <td align="center">財政部財政資訊中心</td>
+                                          <td align="center">財產資料</td>
+                                          <td>身分證統一編號、姓名、財產稅籍編號、縣市別、房地面積、房地現值金額、持分比率(汽缸容量)、土地標示(車廠牌名稱)、地目(車年)、房屋座落。</td>
+                                      </tr>
+                                      <tr>
+                                          <td align="center">2</td>
+                                          <td align="center">財政部財政資訊中心</td>
+                                          <td align="center">個人所得資料</td>
+                                          <td>所得檔案編號、所得類別、所得人身分證統一編號、所得人姓名、給付總額、扣繳稅額、所得格式代號、所得註記、證號別、總收入、可扣抵稅額。</td>
+                                      </tr>
+                                      <tr>
+                                          <td align="center">3</td>
+                                          <td align="center">勞動部勞工保險局</td>
+                                          <td align="center">勞工保險被保險人投保資料(明細)</td>
+                                          <td>保險別、保險證號、出生日期、勞保被保險人識別碼、單位名稱、姓名、就保註記代碼、工作部門註記、年資(年)、年資(日)、年資起日、年資迄日、投保薪資、異動別代碼、異動日期。</td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
 
-  <!-- Modal-1 -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel-1">請向下滾動，仔細閱讀整份同意書所有內容<input id="myCheckCount" hidden></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img src="@/assets/images/form/close.png" border="0" alt="close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <!------------------1-------------------------------------------->
-                    <div id="terms_box_1" class="terms_box oneTerms">
-                        <!--uc1:wucMyData同意條款 runat="server" id="wucMyData同意條款" /-->
-                        <div class="txt">
-                            <h3>聯邦銀行使用申請人授權MyData個人資料之服務條款</h3>
-                            <div>為協助您了解本服務之功能與內容，以保障您個人之權益，請於使用本服務前詳閱本條款內容，當您開始使用本服務時，即視為您已充分閱讀、瞭解與同意接受本條款之所有內容。
-                            </div>
-                            <div class="cjk-ideographic">一、服務目的與內容<br>
-                                為簡化申請人辦理「信用卡申請服務」流程，聯邦銀行提供申請人於申辦金融服務文件上傳流程使用MyData服務，於前揭線上申請網頁輸入個人身分證統一編號，並完成MyData服務平臺、身分認證檢核及個人授權同意等程序後，本行即取得同意授權之資料。</div>
-                            <div class="cjk-ideographic">
-                                二、資料使用項目與範圍<br>
-                                為使用本服務，您同意提供本行下列個人資料 (詳見附錄： MyData平臺資料傳輸項目明細表)：
-                                <ol class="mb-0">
-                                    <li>財政部財政資訊中心：財產資料。</li>
-                                    <li>財政部財政資訊中心：個人所得資料。</li>
-                                    <li>勞動部勞保局：勞工保險被保險人投保資料(明細)。</li>
-                                </ol>
-                            </div>
-                            <div class="cjk-ideographic">
-                                三、資料儲存與使用方式
-                                <ol class="mb-0">
-                                    <li>您因使用本服務所提供並授權本行使用之個人資料，本行將儲存於本服務資料庫中，儲存期間為自您提供並同意授權個人資料之日起，至本行因應業務執行或工作需要所訂定保存年限之截止日止。</li>
-                                    <li>您因使用本服務所提供並授權本行使用之個人資料，僅限本行提供本服務內容使用。</li>
-                                    <li>前揭個人資料使用對象限本行於國內及國外所在地。</li>
-                                    <li>符合個人資料保護相關法令以自動化機器或其他非自動化之使用方式。</li>
-                                </ol>
-                            </div>
-                            <div class="cjk-ideographic">
-                                四、使用者相關權利：
-                                <ol class="mb-0">
-                                    <li>除法律另有特別規定，本行蒐集您的個人資料後，依個人資料保護法規定，您得向本行行使下列各項權利：<br>
-                                    (1) 查詢或請求閱覽您的個人資料。<br>
-                                    (2) 請求製給您的個人資料複製本。<br>
-                                    (3) 請求補充或更正您的個人資料。<br>
-                                    (4) 請求停止蒐集、處理或使用您的個人資料。<br>
-                                    (5) 請求刪除您的個人資料。</li>
-                                    <li>使用本服務所取得之個人資料，其權利仍歸屬於當事人，若需重新取得檔案，須重新進行授權作業。</li>
-                                    <li>您可使用24小時客服專線(02)2545-5168、(07)226-9393聯繫本行，或於本行官網「留言板」線上留言，本行將儘速依相關法令規定，處理與回覆您的請求。</li>
-                                </ol>
-                            </div>
-                            <div class="cjk-ideographic">
-                                五、服務條款修訂
-                                <ol class="mb-0">
-                                    <li>本行有權於任何時間修改、變更本服務條款之內容，修改或變更時，以本行公告之服務條款為準，若有其他未盡事宜，悉依本行相關規定或解釋辦理。</li>
-                                    <li>如您於本服務條款修改或變更後仍續使用本服務，則視為您已閱讀、瞭解與同意接受本服務條款修改或變更，若您不同意本服務條款之修改或變更，請通知本行，本行將停止使用您對本服務之授權內容。</li>
-                                </ol>
-                            </div>
-                            <div class="cjk-ideographic">
-                                六、注意事項
-                                <ol class="mb-0">
-                                    <li>您得自由選擇是否提供個人資料，惟您若拒絕提供相關個人資料，本行將無法進行必要之審核及處理相關作業，因此將無法受理您前揭權利之行使或提供您相關服務。</li>
-                                    <li>本行對於MyData平臺取得您個人之資料係由資料提供者提供，若對資料內容有疑問，請逕洽該所屬資料提供者。</li>
-                                    <li>本告知事項日後如有更新內容將於本行官網另行公告。</li>
-                                </ol>
-                            </div>
-                            <div>附錄、MyData平臺資料傳輸項目明細表<br>
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th width="5%" bgcolor="#f6f6f6" class="text-center">項次</th>
-                                            <th width="12%" class="text-center" bgcolor="#f6f6f6">部會機關名稱</th>
-                                            <th width="10%" class="text-center" bgcolor="#f6f6f6">資料集名稱</th>
-                                            <th class="text-center" bgcolor="#f6f6f6">資料集欄位說明</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td align="center">1</td>
-                                            <td align="center">財政部財政資訊中心</td>
-                                            <td align="center">財產資料</td>
-                                            <td>身分證統一編號、姓名、財產稅籍編號、縣市別、房地面積、房地現值金額、持分比率(汽缸容量)、土地標示(車廠牌名稱)、地目(車年)、房屋座落。</td>
-                                        </tr>
-                                        <tr>
-                                            <td align="center">2</td>
-                                            <td align="center">財政部財政資訊中心</td>
-                                            <td align="center">個人所得資料</td>
-                                            <td>所得檔案編號、所得類別、所得人身分證統一編號、所得人姓名、給付總額、扣繳稅額、所得格式代號、所得註記、證號別、總收入、可扣抵稅額。</td>
-                                        </tr>
-                                        <tr>
-                                            <td align="center">3</td>
-                                            <td align="center">勞動部勞工保險局</td>
-                                            <td align="center">勞工保險被保險人投保資料(明細)</td>
-                                            <td>保險別、保險證號、出生日期、勞保被保險人識別碼、單位名稱、姓名、就保註記代碼、工作部門註記、年資(年)、年資(日)、年資起日、年資迄日、投保薪資、異動別代碼、異動日期。</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="py-2">*資料傳輸項目依各部會機關實際提供者為準。</div>
-                        </div>
-                    </div>
-                    <div id="button_terms" class="button_terms">
-                        <input type="checkbox" id="button_termsOpt_1" onclick="javascript:checkAgreement(this);"
-                            disabled="" />
-                        <label id="read_1" for="button_termsOpt_1">我已詳細閱讀。(請勾選)</label>
-                    </div>
-                    <!----------------//1-------------------------------------------->
-                </div>
-
-                <div class="modal-footer">
-                    <div class="col-12 text-center">
-                        <button type="button" class="btn btn-primary btn-lg" onclick="javascript:checkTotal();">確定</button>
-                        <button id="btnTermClose" type="button" class="btn btn-primary btn-lg d-none"
-                            data-bs-dismiss="modal" aria-label="Close">確定</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                          <div class="py-2">*資料傳輸項目依各部會機關實際提供者為準。</div>
+                      </div>
+                  </div>
+                  <div id="button_terms" class="button_terms">
+                      <input
+                      v-model="this.agreement"
+                      type="checkbox"
+                      id="button_termsOpt_1"
+                      @click="checkTotal"
+                      />
+                      <label id="read_1" for="button_termsOpt_1">我已詳細閱讀。(請勾選)</label>
+                  </div>
+                  <!----------------//1-------------------------------------------->
+              </div>
+          </div>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -280,7 +334,13 @@ export default {
   data () {
     return {
       NNBModal: '', //* 上傳完成倒轉 NNB
-      MyDataModal: '' //* 倒轉 MyData
+      MyDataModal: '', //* 倒轉 MyData
+      MyDataAgreeModal: '', // * 同意MyData
+      EXModal: '', // * 財力證明
+      agreement: false, // *表單同意欄位
+      agreementAll: false, // *modal上同意欄位
+      proofType: '',
+      doubleAgree: false //* 若勾選myData，則為必填
     }
   },
   methods: {
@@ -288,19 +348,77 @@ export default {
       this.NNBModal.hide()
       this.$router.push('/dspApplicationNNB')
     },
-    showResult () {
+    async showResult () {
+      const collection = await this.$refs.myForm.validate()
+      collection.errors = await this.$refs.myForm.getErrors()
+      if (Object.keys(collection.errors).length === 0) {
+        // ? 檢查約定條款 未打勾
+        if (this.proofType === 'option1') {
+          // ? ===選擇自行上傳===
+          this.NNBModal.show()
+          return
+        }
+        if (this.proofType === 'option2') {
+          // ? ===選擇MyData上傳===
+          this.MyDataModal.show()
+        }
+      } else {
+        // ** ===錯誤訊息彙整===
+        this.$custom.validate.showErrors(collection.errors)
+      }
       //* 判斷要跳哪個 Modal(待處理)
-      this.NNBModal.show()
-    //   this.MyDataModal.show()
     },
     goToMyDataTerms () {
+      // ?路由反向解析
       const routeData = this.$router.resolve({ name: '非卡友- MyData服務授權條款' })
       window.open(routeData.href, '_blank')
+    },
+    scrollEvent () {
+      this.$refs.terms_box_1.onscroll = function () {
+        if (this.scrollHeight - this.scrollTop <= this.clientHeight + 50) {
+          const btn = document.querySelector('#button_termsOpt_1')
+          const label = document.querySelector('#read_1')
+          btn.removeAttribute('disabled')
+          label.classList.add('text-checked')
+        }
+      }
+    },
+    checkAgreement () {
+      this.MyDataAgreeModal.show()
+      const ck = document.querySelector('#checkbox')
+      if (!this.agreement) {
+        ck.checked = false
+        return
+      }
+      this.agreementAll = true
+      ck.checked = true
+    },
+    checkTotal () {
+      this.agreementAll = true
+      const ck = document.querySelector('#checkbox1')
+      ck.checked = true
+      this.MyDataAgreeModal.hide()
+    },
+    checkdoubleAgree () {
+      if (this.proofType === 'option2') {
+        if (this.doubleAgree) {
+          return true
+        } else {
+          return false
+        }
+      } else {
+        return true
+      }
     }
   },
   mounted () {
-    this.NNBModal = new this.$custom.bootstrap.Modal(this.$refs.NNBModal, { backdrop: 'static' })
-    this.MyDataModal = new this.$custom.bootstrap.Modal(this.$refs.MyDataModal, { backdrop: 'static' })
+    // this.EXModal = new this.$custom.bootstrap.Modal(this.$refs.nNBModal, { backdrop: 'static' })
+    this.NNBModal = new this.$custom.bootstrap.Modal(this.$refs.NNBModal)
+    this.MyDataModal = new this.$custom.bootstrap.Modal(this.$refs.MyDataModal)
+    this.MyDataAgreeModal = new this.$custom.bootstrap.Modal(this.$refs.MyDataAgreeModal)
+    this.scrollEvent()
+    // setTimeout(() => {
+    //   }, 3000)
   }
 }
 </script>

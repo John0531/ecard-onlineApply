@@ -176,7 +176,7 @@
                         v-model="agreementAll"
                         id="checkbox1" name="服務申請約定條款"
                         type="checkbox"
-                        class="form-check-input checkimg position-absolute"
+                        class=" checkimg position-absolute"
                         :class="{ 'is-invalid': errors['服務申請約定條款'] }"
                         @click="checkAgreement"
                         rules="required"
@@ -189,9 +189,10 @@
                     </div>
                     <div class="terms">
                         <Field
+                        v-model="agreePersonalData"
                         id="agree1" name="個資使用同意"
                         type="checkbox"
-                        class="form-check-input checkimg position-absolute"
+                        class=" checkimg position-absolute"
                         :class="{ 'is-invalid': errors['個資使用同意'] }"
                         @click="toggle"
                         value="agree"
@@ -1196,7 +1197,7 @@ export default {
           return
         }
         // ** ===全部通過前往下一頁===
-        this.$router.push('/OnLineApply_n1')
+        this.$router.push('/OnLineApply_Chk_OTP')
       } else {
         // ** ===錯誤訊息彙整===
         this.$custom.validate.showErrors(collection.errors)
