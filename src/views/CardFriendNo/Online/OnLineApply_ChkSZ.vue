@@ -189,7 +189,7 @@
                     </div>
                     <div class="terms">
                         <Field
-                        v-model="agreePersonalData"
+                        v-model="checkagree"
                         id="agree1" name="個資使用同意"
                         type="checkbox"
                         class=" checkimg position-absolute"
@@ -1071,7 +1071,7 @@ export default {
       agreeModal: '', // ?同意書modal
       agreement: [], // ? Modal上同意欄
       agreementAll: false, // ?已同意Modal上所有申請條款
-      agreePersonalData: false // ?同意個資聲明
+      checkagree: false // ?同意個資聲明
     }
   },
   methods: {
@@ -1114,9 +1114,9 @@ export default {
     toggle () {
       const ck = document.querySelector('#agree1').checked
       if (ck) {
-        this.agreePersonalData = true
+        this.checkagree = true
       } else {
-        this.agreePersonalData = false
+        this.checkagree = false
       }
     },
     getYearMonth () {
@@ -1185,7 +1185,7 @@ export default {
           })
           return
         }
-        if (!this.agreePersonalData) {
+        if (!this.checkagree) {
           this.$swal.fire({
             title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
             showConfirmButton: false,
@@ -1210,6 +1210,15 @@ export default {
         this.agreementAll = true
       } else {
         this.agreementAll = false
+      }
+    },
+    checkagree (n) {
+      if (n === 'agree') {
+        this.checkagree = true
+      } else if (n) {
+        this.checkagree = true
+      } else {
+        this.checkagree = false
       }
     }
   },

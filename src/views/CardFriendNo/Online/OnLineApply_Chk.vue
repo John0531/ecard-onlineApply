@@ -165,7 +165,7 @@
             </div>
             <div class="terms">
                 <Field
-                  v-model="agreePersonalData"
+                  v-model="checkagree"
                   id="agree1" name="信用卡基本資料使用同意"
                   type="checkbox"
                   class="checkimg position-absolute"
@@ -1022,7 +1022,7 @@ export default {
       agreeModal: '', // ? 同意Modal
       agreement: [], // ? Modal四項同意欄
       agreementAll: false, // ?已同意Modal上所有申請條款
-      agreePersonalData: false, // ?同意個資聲明
+      checkagree: false, // ?同意個資聲明
       cardNumber: {
         code1: '',
         code2: '',
@@ -1164,9 +1164,9 @@ export default {
     toggle () {
       const ck = document.querySelector('#agree1').checked
       if (ck) {
-        this.agreePersonalData = true
+        this.checkagree = true
       } else {
-        this.agreePersonalData = false
+        this.checkagree = false
       }
     },
     checkAgreement () {
@@ -1206,7 +1206,7 @@ export default {
       // ? 信用卡欄位
       if (Object.keys(collection.errors).length === 0) {
         // ? 檢查四項條款 或 個資使用同意 未打勾
-        if (!this.agreementAll || !this.agreePersonalData) {
+        if (!this.agreementAll || !this.checkagree) {
           this.$swal.fire({
             title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
             showConfirmButton: false,
@@ -1231,13 +1231,16 @@ export default {
       } else {
         this.agreementAll = false
       }
+    },
+    checkagree (n) {
+      if (n === 'agree') {
+        this.checkagree = true
+      } else if (n) {
+        this.checkagree = true
+      } else {
+        this.checkagree = false
+      }
     }
-    // 'cardNumber.code2' : function (n){
-    //     this.textHandler2()
-    // },
-    // 'cardNumber.code3' : function (n){
-    //     this.textHandler3()
-    // }
   },
   mounted () {
     this.scrollEvent()

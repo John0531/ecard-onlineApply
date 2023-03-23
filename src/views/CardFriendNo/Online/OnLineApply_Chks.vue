@@ -83,7 +83,7 @@
               </div>
               <div class="terms">
                   <Field
-                    v-model="agreePersonalData"
+                    v-model="checkagree"
                     id="agree1" name="信用卡基本資料使用同意"
                     type="checkbox"
                     class=" checkimg position-absolute"
@@ -947,7 +947,7 @@ export default {
       agreeModal: '', // ? 同意Modal
       agreement: [], // ? 四項同意欄
       agreementAll: false, // ?同意申請條款
-      agreePersonalData: false, // ?同意個資聲明
+      checkagree: false, // ?同意個資聲明
       mobileMsgCode: '', // *手機驗證碼
       count: 0, // *手機驗證碼倒數秒數
       timer: 0,
@@ -1091,7 +1091,7 @@ export default {
           return
         }
         // ? 檢查個資條款 未打勾
-        if (!this.agreePersonalData) {
+        if (!this.checkagree) {
           this.$swal.fire({
             title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
             showConfirmButton: false,
@@ -1115,6 +1115,15 @@ export default {
         this.agreementAll = true
       } else {
         this.agreementAll = false
+      }
+    },
+    checkagree (n) {
+      if (n === 'agree') {
+        this.checkagree = true
+      } else if (n) {
+        this.checkagree = true
+      } else {
+        this.checkagree = false
       }
     }
   },

@@ -44,7 +44,6 @@ export default {
     }
   },
   methods: {
-
     async makeModify () {
       try {
         const croppieE = this.$refs.myIdentifident

@@ -160,7 +160,7 @@
                 <div>{{errors['卡種']}}</div>
             </div>
             <!----------------首刷禮---------------->
-            <div class="card_gift_box">
+            <div class="card_gift_box d-none">
                 <h3><img src="images/form/card_gift_icon.gif" class="img-fluid" alt="" />首刷禮：<span>(新戶定義：核卡前六個月內未曾持有任何一聯邦信用卡者。)</span>
                 </h3>
                 <div class="col-12 card_gift_txt">
@@ -357,6 +357,7 @@
             <div class="terms">
                 <div>
                   <input
+                  v-model="checkagree"
                   id="agree1" name="個資使用"
                   type="checkbox"
                   class="checkimg position-absolute"
@@ -822,7 +823,7 @@ export default {
       agreement: false, // ? Modal上同意欄
       agreementAll: false, // ?已同意Modal上所有申請條款
       contractModal: '', // ?同意書modal
-      agreePersonalData: false // ?同意個資聲明
+      checkagree: false // ?同意個資聲明
     }
   },
   methods: {
@@ -863,9 +864,9 @@ export default {
     toggle () {
       const ck = document.querySelector('#agree1').checked
       if (ck) {
-        this.agreePersonalData = true
+        this.checkagree = true
       } else {
-        this.agreePersonalData = false
+        this.checkagree = false
       }
     },
     getYearMonth () {
@@ -934,7 +935,7 @@ export default {
           return
         }
         // // ? 檢查個資條款 未打勾(2023/3/15得知為選填)
-        // if (!this.agreePersonalData) {
+        // if (!this.checkagree) {
         //   this.$swal.fire({
         //     title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
         //     showConfirmButton: false,
@@ -959,6 +960,15 @@ export default {
         this.agreementAll = true
       } else {
         this.agreementAll = false
+      }
+    },
+    checkagree (n) {
+      if (n === 'agree') {
+        this.checkagree = true
+      } else if (n) {
+        this.checkagree = true
+      } else {
+        this.checkagree = false
       }
     }
     // 'applierInfo.Identification' (n) {
