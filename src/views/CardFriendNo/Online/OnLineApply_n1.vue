@@ -20,7 +20,7 @@
                     <div class="not_UBfriend">
                         <div class="item">
                             <h3>他行信用卡 <img src="@/assets/images/form/Apply_icon02.png" class="img-fluid" alt="" /></h3>
-                            <button onclick="location.href='OnLineApply_Chk.htm'" class="btn btn-primary btn-lg rounded-pill" type="submit" value="">立即辦卡 <i class="fa fa-arrow-circle-right"></i></button><br>
+                            <router-link to="/OnLineApply_Chk" class="btn btn-primary btn-lg rounded-pill" type="submit" value="">立即辦卡 <i class="fa fa-arrow-circle-right"></i></router-link><br>
                         </div>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                     <div class="not_UBfriend">
                         <div class="item">
                             <h3>他行存款帳戶 <img src="@/assets/images/form/Apply_icon03.png" class="img-fluid" alt="" /></h3>
-                            <button onclick="location.href='OnLineApply_ChkSZ.htm'" class="btn btn-primary btn-lg rounded-pill" type="submit" value="">立即辦卡 <i class="fa fa-arrow-circle-right"></i></button><br>
+                            <router-link to="/OnLineApply_ChkSZ" class="btn btn-primary btn-lg rounded-pill" type="submit" value="">立即辦卡 <i class="fa fa-arrow-circle-right"></i></router-link><br>
                             <h4>(純網銀或數存不適用)</h4>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                     <div class="not_UBfriend">
                         <div class="item">
                             <h3>書面申請 <img src="@/assets/images/form/Apply_icon01.png" class="img-fluid" alt="" /></h3>
-                            <button onclick="location.href='OnLineApply_Written.htm'" class="btn btn-primary btn-lg rounded-pill" type="submit" value="">立即辦卡 <i class="fa fa-arrow-circle-right"></i></button><br>
+                            <router-link to="/OnLineApply_OTP" class="btn btn-primary btn-lg rounded-pill" type="submit" value="">立即辦卡 <i class="fa fa-arrow-circle-right"></i></router-link><br>
                             <h4>(無其他銀行信用卡)</h4>
                         </div>
                     </div>
