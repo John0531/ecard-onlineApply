@@ -12,30 +12,32 @@
     <!-- 主要內容 -->
     <section class="mainArea">
         <div class="container-xl">
-            <div class="row justify-content-md-center">
-                <div class="col-md-4 col-lg-4 col-xl-3 text-center pt-4">
+            <div class="row justify-content-md-center pt-1 pt-md-3">
+                <div class="dataTitle">
+                    <h3><span>請選擇身分驗證方式</span></h3>
+                </div>
+                <div class="col-md-4 col-lg-4 col-xl-3 text-center">
                     <div class="not_UBfriend">
                         <div class="item">
-                            <h3>線上辦卡 <img src="images/form/Apply_icon02.png" class="img-fluid" alt="" /></h3>
-                            <router-link to="/OnLineApply_Chk" class="btn btn-primary btn-lg rounded-pill" >立即辦卡 <i class="fa fa-arrow-circle-right"></i></router-link><br>
-                            <h4>(已持有其他銀行信用卡)</h4>
+                            <h3>他行信用卡 <img src="@/assets/images/form/Apply_icon02.png" class="img-fluid" alt="" /></h3>
+                            <button onclick="location.href='OnLineApply_Chk.htm'" class="btn btn-primary btn-lg rounded-pill" type="submit" value="">立即辦卡 <i class="fa fa-arrow-circle-right"></i></button><br>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-lg-4 col-xl-3 text-center pt-4">
+                <div class="col-md-4 col-lg-4 col-xl-3 text-center">
                     <div class="not_UBfriend">
                         <div class="item">
-                            <h3>線上辦卡 <img src="images/form/Apply_icon03.png" class="img-fluid" alt="" /></h3>
-                            <router-link to="/OnLineApply_ChkSZ" class="btn btn-primary btn-lg rounded-pill" >立即辦卡 <i class="fa fa-arrow-circle-right"></i></router-link><br>
-                            <h4>(已持有其他銀行帳戶)</h4>
+                            <h3>他行存款帳戶 <img src="@/assets/images/form/Apply_icon03.png" class="img-fluid" alt="" /></h3>
+                            <button onclick="location.href='OnLineApply_ChkSZ.htm'" class="btn btn-primary btn-lg rounded-pill" type="submit" value="">立即辦卡 <i class="fa fa-arrow-circle-right"></i></button><br>
+                            <h4>(純網銀或數存不適用)</h4>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-lg-4 col-xl-3 text-center pt-4">
+                <div class="col-md-4 col-lg-4 col-xl-3 text-center">
                     <div class="not_UBfriend">
                         <div class="item">
-                            <h3>書面申請 <img src="images/form/Apply_icon01.png" class="img-fluid" alt="" /></h3>
-                            <router-link to="OnLineApply_Written" class="btn btn-primary btn-lg rounded-pill" >立即辦卡 <i class="fa fa-arrow-circle-right"></i></router-link><br>
+                            <h3>書面申請 <img src="@/assets/images/form/Apply_icon01.png" class="img-fluid" alt="" /></h3>
+                            <button onclick="location.href='OnLineApply_Written.htm'" class="btn btn-primary btn-lg rounded-pill" type="submit" value="">立即辦卡 <i class="fa fa-arrow-circle-right"></i></button><br>
                             <h4>(無其他銀行信用卡)</h4>
                         </div>
                     </div>

@@ -31,8 +31,9 @@
                 </div>
                 <!------------------------//步驟---------------------------------->
                 <div class="col-lg-10">
-                    <div class="col-12">
-                        <h3 class="upload_title">檢附財力證明</h3>
+                    <h3 class="upload_title">檢附財力證明</h3>
+                    <div class="mb-3">
+                        <h5 class="d-block text-primary">請留意！本網頁操作有效時間：9分40秒</h5>
                     </div>
                     <div class="row upload_group mb-4">
                         <div class="d-flex flex-column px-0">
@@ -55,8 +56,10 @@
                           </div>
                         </div>
                         <div class="form-check my-2">
-                            <div class="p-1 mb-1 red_text">※上傳格式限JPG及GIF檔，單一檔案上限為5MB。</div>
-                            <div class="d-flex p-1 mb-1 red_text">※財力證明：如存摺、薪資單、扣繳憑單、地價稅單和房屋稅單或建物權狀等。<a href="https://card.ubot.com.tw/eCard/activity/MyData/index.html" @click.prevent="showExample()">上傳範例說明</a></div>
+                          <div class="p-1 mb-3 red_text">※上傳格式限JPG及GIF檔，單一檔案上限為5MB。<br>
+                              ※財力證明：如存摺、薪資單、扣繳憑單、地價稅單和房屋稅單或建物權狀等。
+                              <a href="https://card.ubot.com.tw/eCard/activity/FinancialProof/index.htm" target="_blank"><u>上傳範例說明</u></a>
+                          </div>
                         </div>
                         <!--------------------------------------------->
                         <div class="col-12 col-md-6 mb-4">
@@ -113,7 +116,7 @@
                         </div>
                         <div class="justify-content-center MyData_input_note my-2">
                             <span class="red_text">※勾選此項目需使用自然人憑證、行動自然人憑證或健保卡</span>
-                            <span>使用MyData調閱個人資料可於國發會個人化資料自主運用(MyData)平臺透過自然人憑證、行動自然人憑證或健保卡取得下列資訊，相關資訊將轉由聯邦銀行做為您申請信用卡相關業務之財力證明使用，<a href="https://card.ubot.com.tw/eCard/activity/MyData/index.html">使用說明</a>。更多關於
+                            <span>使用MyData調閱個人資料可於國發會個人化資料自主運用(MyData)平臺透過自然人憑證、行動自然人憑證或健保卡取得下列資訊，相關資訊將轉由聯邦銀行做為您申請信用卡相關業務之<a href="https://card.ubot.com.tw/eCard/activity/MyData/index.htm" target="_blank"><u>財力證明使用</u></a>。更多關於
                                 <a href="#" target="_blank"><u>MyData平臺</u></a>。</span>
                             <span>●勞工保險被保險人投保資料(明細)<br>●財產資料<br>●個人所得資料</span>
                         </div>
@@ -149,6 +152,68 @@
         </div>
       </Form>
   </section>
+      <!---------------------modal-財力證明範例 (彈跳視窗) -------------->
+    <div ref="NoticeModal" class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title OnLineApply">財力證明範例</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img src="@/assets/images/form/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row mb-4">
+                            <div>
+                                ◆<strong>實體銀行存摺明細</strong><br>
+                                (檢附存摺封面及內頁，需包含帳號、戶名、近一個月交易明細)
+                            </div>
+                            <div class="col-12 text-center"><img src="@/assets/images/form/FinancialProof_01.jpg" class="img-fluid"></div>
+                        </div>
+                        <div class="row mb-4">
+                            <div>
+                                ◆<strong>數位銀行</strong><br>
+                                (檢附資料需包含帳號、戶名、近一個月交易明細)
+                            </div>
+                            <div class="col-12 text-center"><img src="@/assets/images/form/FinancialProof_02.jpg" class="img-fluid"></div>
+                        </div>
+                        <div class="row mb-4">
+                            <div>
+                                ◆<strong>薪資單</strong><br>
+                                (為現職公司需包含公司名稱、姓名、薪資月份、所得明細)
+                            </div>
+                            <div class="col-12 text-center"><img src="@/assets/images/form/FinancialProof_03.jpg" class="img-fluid"></div>
+                        </div>
+                        <div class="row mb-4">
+                            <div>
+                                ◆<strong>扣繳憑單</strong><br>
+                                (需檢附現職最近一年度完整扣繳憑單)
+                            </div>
+                            <div class="col-12 text-center"><img src="@/assets/images/form/FinancialProof_04.jpg" class="img-fluid"></div>
+                        </div>
+                        <div class="row mb-4">
+                            <div>
+                                ◆<strong>所得清單</strong><br>
+                                (需檢附現職最近一年度完整所得清單)
+                            </div>
+                            <div class="col-12 text-center"><img src="@/assets/images/form/FinancialProof_05.jpg" class="img-fluid"></div>
+                        </div>
+                        <div class="row mb-4">
+                            <div>
+                                ◆<strong>健保快易通</strong>
+                            </div>
+                            <div class="col-12 text-center"><img src="@/assets/images/form/FinancialProof_06.jpg" class="img-fluid"></div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="text-center mb-3">
+                        <div class="col-12 text-center">
+                            <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" aria-label="Close">關閉</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
   <!---------------------上傳成功跳轉NNB--------------------------->
   <div
     ref="NNBModal"
@@ -333,6 +398,7 @@
 export default {
   data () {
     return {
+      NoticeModal: '', //* 一進畫面財力證明格式提醒
       NNBModal: '', //* 上傳完成倒轉 NNB
       MyDataModal: '', //* 倒轉 MyData
       MyDataAgreeModal: '', // * 同意MyData
@@ -417,8 +483,9 @@ export default {
     this.MyDataModal = new this.$custom.bootstrap.Modal(this.$refs.MyDataModal)
     this.MyDataAgreeModal = new this.$custom.bootstrap.Modal(this.$refs.MyDataAgreeModal)
     this.scrollEvent()
-    // setTimeout(() => {
-    //   }, 3000)
+    // *進場先跳範例提醒
+    this.NoticeModal = new this.$custom.bootstrap.Modal(this.$refs.NoticeModal)
+    this.NoticeModal.show()
   }
 }
 </script>

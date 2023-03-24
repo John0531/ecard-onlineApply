@@ -14,92 +14,24 @@
       v-slot="{errors}"
       ref="myForm"
     >
-      <div class="row justify-content-md-center">
-
-            <div class="formGroup">
-                <ul class="formList formApply">
-                    <li class="col-12 align-items-start mb-0">
-                        <label for="">申請人身分證字號</label>
-                        <div class="d-flex flex-column mb-1">
-                            <Field
-                            v-model="applierInfo.Identification"
-                            name="身分證字號"
-                            type="text" maxlength="10"
-                            placeholder="限正卡持卡人"
-                            :class="{ 'is-invalid': errors['身分證字號'] }"
-                            class="formApply_form_control form-control "
-                            @blur="applierInfo.Identification = $custom.validate.watchToUpper(applierInfo.Identification)"
-                            rules="checkId"
-                            />
-                            <div class="d-flex text-center invalid-feedback my-1">
-                                {{errors['身分證字號']}}
-                            </div>
-                        </div>
-                    </li>
-                    <li class="col-12">
-                        <span class="red_text">(外籍人士請輸入居留簽證的統一證號)</span>
-                    </li>
-                    <li class="col-12 align-items-start">
-                        <label for="input1">西元出生年月日</label>
-                        <div class="d-flex flex-column mb-1">
-                            <div class="d-flex align-items-center">
-                                <!-- 辦卡人出生年 -->
-                                <div>
-                                    <Field
-                                    as="select" name="年"
-                                    rules="required"
-                                    class="form-select form-control"
-                                    :class="{ 'is-invalid': errors['年'] }"
-                                    :validateOnChange="true"
-                                    v-model="applierInfo.year"
-                                    >
-                                    <option value="" selected>--</option>
-                                    <option v-for="year in this.dateList.yearList" :value="year" :key="year+1">
-                                    {{year}}
-                                    </option>
-                                    </Field>
-                                </div>年
-                                <!-- 辦卡人出生月 -->
-                                <div>
-                                    <Field
-                                    as="select" name="月"
-                                    rules="required"
-                                    :class="{ 'is-invalid': errors['月'] }"
-                                    class="form-select form-control"
-                                    :validateOnChange="true"
-                                    v-model="applierInfo.month" @change="getDay">
-                                    <option value="" selected>--</option>
-                                    <option v-for="month in dateList.monthList" :value="month" :key="month+1">
-                                    {{month}}
-                                    </option>
-                                    </Field>
-                                </div>月
-                                <!-- 辦卡人出生日 -->
-                                <div>
-                                    <Field
-                                    as="select" name="日"
-                                    rules="required"
-                                    :class="{ 'is-invalid': errors['日'] }"
-                                    class="form-select form-control"
-                                    :validateOnChange="true"
-                                    v-model="applierInfo.day"
-                                    >
-                                    <option value="" selected>--</option>
-                                    <option v-for="date in dateList.dayList" :value="date" :key="date+1">
-                                    {{date}}
-                                    </option>
-                                    </Field>
-                                </div>日
-                            </div>
-                            <div class="d-flex text-center invalid-feedback my-1">
-                            <span v-if="errors['年'] || errors['月'] || errors['日']">
-                              出生年月日為必填
-                            </span>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+      <div class="row justify-content-md-center">                  <!--LINE Bank-->
+                <div class="formGroup">
+                    <ul class="formList formApply">
+                        <li class="col-12 mb-2">
+                            <label for="">申請人身分證字號</label>
+                            <div class="form-text">A12345****</div>
+                        </li>
+                        <li class="col-12">
+                            <label for=""></label>
+                            <span class="red_text">(外籍人士請輸入居留簽證的統一證號)</span>
+                        </li>
+                        <li class="col-12">
+                            <label for="input1">西元出生年月日</label>
+                            <div class="form-text">1977/06/28</div>
+                        </li>
+                    </ul>
+                </div>
+                <!--//LINE Bank-->
             <div class="col-12 d-flex flex-wrap">
                 <!-- 卡種1 -->
                 <div class="col-12 col-md-4 text-center">
@@ -232,22 +164,70 @@
             </div>
         <!--------------//首刷禮---------------->
         <!----------------yesgogogo---------------->
-        <div class="mt-3 mt-md-5">
-            <div class="yesgogogo_box">
-                <h3>yesgogogo即食購–在地美食，安心品質 (聯邦紅利指定折抵網站)</h3>
-                <div class="yesgogogo_txt">
-                    <h4>yesgogogo會員加碼禮<span> (新舊戶卡友皆適用)</span></h4>
-                    活動期間：111年1月1日~111年6月30日。<br>
-                    活動內容：活動期間至聯邦信用卡官網進行開卡並點選註冊成為yesgogogo會員，或經由yesgogogo即食購之聯邦卡友專屬註冊頁完成註冊者，即可獲贈加碼禮。
-                    <ul>
-                        <li>成為會員享1,000元折價券。(新舊會員皆適用)</li>
-                        <li>新會員首購單筆滿499元贈好禮+購物金點數回饋100%。</li>
-                        <li>週二聯邦日：週週享購物金點數回饋100%。</li>
-                    </ul>
-                    ※ 每會員限領乙份折價券，更多說明及限制詳參<a href="https://card.ubot.com.tw/eCard/activity/2022yesgogogo/index.htm"><u>活動官網</u>。</a>
-                </div>
-            </div>
-        </div>
+                <div class="fee_box mb-3 mt-3 mt-md-5">
+                    <h3><img src="images/form/fee_icon.gif" class="img-fluid" alt="" />年費定價說明：</h3>
+                    <table class="oddWhite">
+                      <tbody>
+                        <tr>
+                          <th colspan="3" nowrap="nowrap">微風VISA御璽卡/Mastercard鈦金卡/JCB晶緻卡</th>
+                        </tr>
+                        <tr>
+                          <td nowrap="nowrap">首年</td>
+                          <td nowrap="nowrap" colspan="2">免年費</td>
+                        </tr>
+                        <tr>
+                          <td rowspan="4" nowrap="nowrap">第二年起</td>
+                          <td colspan="2" class="text-left">依據每張卡片年費到期日往前推算一年，檢核同一身分證字號下之消費，若不符合標準則以單卡按以下標準計算收取年費(不分正、附卡)：</td>
+                        </tr>
+                        <tr>
+                          <td>年消費</td>
+                          <td>年費</td>
+                        </tr>
+                        <tr>
+                          <td>36,000元(含)以上</td>
+                          <td>免年費</td>
+                        </tr>
+                        <tr>
+                          <td>未達36,000元</td>
+                          <td>2,000元</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <table class="oddWhite">
+                      <tbody>
+                        <tr>
+                          <th colspan="3" nowrap="nowrap">微風VISA白金卡/Mastercard白金卡</th>
+                        </tr>
+                        <tr>
+                          <td nowrap="nowrap">首年</td>
+                          <td nowrap="nowrap" colspan="2">免年費</td>
+                        </tr>
+                        <tr>
+                          <td rowspan="5" nowrap="nowrap">第二年起</td>
+                          <td colspan="2" class="text-left">依據每張卡片年費到期日往前推算一年，檢核同一身分證字號下之消費，若不符合標準則以單卡按以下標準計算收取年費(不分正、附卡)：</td>
+                        </tr>
+                        <tr>
+                          <td>年消費</td>
+                          <td>年費</td>
+                        </tr>
+                        <tr>
+                          <td>1萬元(含)以上或消費10次(含)以上</td>
+                          <td>免年費</td>
+                        </tr>
+                        <tr>
+                          <td>5,000元(含)或5次(含)以上</td>
+                          <td>500元</td>
+                        </tr>
+                        <tr>
+                            <td>未達5,000元或5次</td>
+                            <td>1,000元</td>
+                          </tr>
+                      </tbody>
+                    </table>
+                    <div class="indentNote_OneText">
+                        <p>※每一卡別所提供之年費減免或折價優惠，每一持卡人僅得享有一次優惠，若於年費優惠期間截止前將卡片停用後又重新申請者，恕不再享有優惠。</p>
+                    </div>
+                  </div>
         <!----------------//yesgogogo ---------------->
         <div class="mt-3 mt-md-5">
             <div class="fee_box mb-3">
