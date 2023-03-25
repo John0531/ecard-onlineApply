@@ -125,7 +125,7 @@
                         </div>
                       </div>
                   </li>
-                  <li class="col-12 align-items-start">
+                  <!-- <li class="col-12 align-items-start">
                       <label for="" class="mt-1">行動電話</label>
                       <div class="d-flex flex-column">
                           <Field
@@ -143,7 +143,7 @@
                             {{errors['手機']}}
                           </div>
                       </div>
-                  </li>
+                  </li> -->
               </ul>
           </div>
         <div class="terms-group">

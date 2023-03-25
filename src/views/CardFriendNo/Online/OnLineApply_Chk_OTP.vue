@@ -51,7 +51,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-xl-9 note_text text-left  mb-3">
+                <div class="col-xl-11 col-xxl-9 note_text text-left  mb-3">
                     <strong>提醒您：</strong><br>按<span class="Green_text">「獲取簡訊驗證碼」</span>按鈕，系統將產生一組簡訊驗證碼至您行動電話，若10分鐘「內」未輸入簡訊驗證碼，本申請將自動取消。<br> 按
                     <span class="Green_text">「獲取簡訊驗證碼」</span>按鈕，可重送簡訊驗證碼，一天最多重送兩次，如有疑問，請洽(02)2545-5168、(07)226-9393與本行客服中心聯繫。
                 </div>
