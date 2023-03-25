@@ -14,17 +14,17 @@
             <div class="container-xl">
                 <div class="row justify-content-md-center pt-1 pt-md-3">
                     <!------------------------步驟---------------------------------->
-                    <div class="stepGroup">
+                    <div class="stepGroup" v-if="$route.fullPath === '/OnLineApply_Fillin_OT_1'">
                         <ul class="step">
                             <li class="completed">
                                 <div class="counter_step">1</div><span>申請人資料</span></li>
-                            <li class="completed">
-                                <div class="counter_step">2</div><span>職業資料</span></li>
                             <li class="active">
-                                <div class="counter_step">3</div><span>個人資料使用特別商議條款</span></li>
+                                <div class="counter_step">2</div><span>個人資料使用特別商議條款</span></li>
+                            <li>
+                                <div class="counter_step">3</div><span>檢附財力證明</span></li>
                         </ul>
                     </div>
-                      <!------------------------//步驟---------------------------------->
+                    <!------------------------//步驟---------------------------------->
                     <div class="mb-4"><strong>聯邦銀行個人資料使用同意條款</strong> <small class="red_text">*請務必勾選</small></div>
                     <div class="blue_box mb-4">
                         <div class="blue_box_bg">
@@ -199,7 +199,7 @@
                         </div>
                     </div>
                     <!-------------------本人已詳閱---------------------->
-                    <div class="terms-group">
+                    <div class="terms-group" v-if="$route.fullPath === '/OnLineApply_Fillin_OT_1'">
                         <div class="terms">
                             <input
                               v-model="allTerms"
@@ -1099,15 +1099,20 @@ export default {
       }
     },
     async submit () {
-      this.checkRadioAll()
+      if (this.$route.fullPath === '/OnLineApply_Fillin_OT_1') {
+        this.checkRadioAll()
+      }
       await this.$refs.form.validate()
       const errors = this.$refs.form.getErrors()
-      console.log(errors)
       if (Object.keys(errors).length !== 0) {
         this.$custom.validate.showErrors(this.$refs.form.getErrors(errors))
         return
       }
-      this.$router.push('/OnLineApply_Written_3')
+      if (this.$route.fullPath === '/OnLineApply_Fillin_OT_1') {
+        this.$router.push('/OnLineApply_Fillin_OT_2')
+      } else if (this.$route.fullPath === '/OnLineApply_Fillin_1') {
+        this.$router.push('/OnLineApply_Fillin_Download')
+      }
     }
   },
   mounted () {

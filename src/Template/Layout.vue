@@ -2,16 +2,19 @@
   <Header></Header>
   <router-view/>
   <Footer></Footer>
+  <ErrorModal></ErrorModal>
 </template>
 
 <script>
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+import ErrorModal from '@/components/ErrorModal.vue'
 
 export default {
   components: {
     Header,
-    Footer
+    Footer,
+    ErrorModal
   }
 }
 </script>
@@ -42,5 +45,8 @@ export default {
   }
   input.checkimg[type="checkbox"].is-invalid {
     border-color: #db0031 !important;
+  }
+  .form-text{
+    margin-top: 0;
   }
 </style>
