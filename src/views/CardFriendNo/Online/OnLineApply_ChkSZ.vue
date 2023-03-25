@@ -36,6 +36,7 @@
                           </div>
                       </div>
                   </li>
+
                   <li class="col-12 align-items-start">
                       <label for="input1">西元出生年月日</label>
                       <div class="d-flex flex-column mb-1">
@@ -45,7 +46,7 @@
                                   <Field
                                   as="select" name="年"
                                   rules="required"
-                                  class="form-select form-control"
+                                  class="form-text"
                                   :class="{ 'is-invalid': errors['年'] }"
                                   :validateOnChange="true"
                                   v-model="applierInfo.year"

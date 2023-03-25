@@ -43,4 +43,8 @@ export default {
   input.checkimg[type="checkbox"].is-invalid {
     border-color: #db0031 !important;
   }
+  .crop-width {
+    max-width: 400px !important;
+    max-height: 200px !important;
+  }
 </style>
