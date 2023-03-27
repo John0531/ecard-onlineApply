@@ -26,7 +26,11 @@
                         <h4 class="text-center my-4">~ 數位存款帳戶線上開戶方便又快速 ~</h4>
                     </div>
                     <div class="text-center">
-                        <router-link to='/dspApplicationNNB_Apply' class="btn new-new-bank-btn" >手刀開戶</router-link>
+                        <router-link to='/dspApplicationNNB_Apply'
+                        class="btn new-new-bank-btn text-white"
+                        >
+                        手刀開戶
+                        </router-link>
                         <button onclick="location.href='https://card.ubot.com.tw/eCard/'" class="btn new-new-bank-btn" type="" value="">下次再來</button>
                         <button onclick="location.href='https://web.ubot.com.tw/UB/new_bank_a/index.aspx'" class="btn new-new-bank-btn" type="" value="">更多優惠</button>
                     </div>

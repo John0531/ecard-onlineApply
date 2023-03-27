@@ -92,7 +92,7 @@
                 <div>{{errors['卡種']}}</div>
             </div>
             <!----------------首刷禮---------------->
-            <div class="card_gift_box d-none">
+            <!-- <div class="card_gift_box d-none">
                 <h3><img src="images/form/card_gift_icon.gif" class="img-fluid" alt="" />首刷禮：<span>(新戶定義：核卡前六個月內未曾持有任何一聯邦信用卡者。)</span>
                 </h3>
                 <div class="col-12 card_gift_txt">
@@ -161,7 +161,7 @@
                     </div>
             </div>
                 </div>
-            </div>
+            </div> -->
         <!--------------//首刷禮---------------->
         <!----------------yesgogogo---------------->
                 <div class="fee_box mb-3 mt-3 mt-md-5">
@@ -330,7 +330,7 @@
                   <label for="checkbox1" @click="checkAgreement">本人已詳閱並同意「<a href="#" @click.prevent="this.contractModal.show()"><u>聯邦銀行電子銀行服務申請約定條款</u></a>」內容。(請務必勾選)
                   </label>
                 </div>
-                <div class="d-flex text-center invalid-feedback my-1" >
+                <div class="d-flex justify-content-center invalid-feedback my-1" >
                   {{errors['服務申請約定條款']}}
                 </div>
             </div>
@@ -902,18 +902,18 @@ export default {
       collection.errors = await this.$refs.myForm.getErrors()
       if (Object.keys(collection.errors).length === 0) {
         // ? 檢查約定條款 未打勾
-        if (!this.agreement) {
-          this.$swal.fire({
-            title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-            showConfirmButton: false,
-            // timer: 2500
-            customClass: {
-              title: 'text-class'
-              //
-            }
-          })
-          return
-        }
+        // if (!this.agreement) {
+        //   this.$swal.fire({
+        //     title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+        //     showConfirmButton: false,
+        //     // timer: 2500
+        //     customClass: {
+        //       title: 'text-class'
+        //       //
+        //     }
+        //   })
+        //   return
+        // }
         // // ? 檢查個資條款 未打勾(2023/3/15得知為選填)
         // if (!this.checkagree) {
         //   this.$swal.fire({

@@ -9,6 +9,10 @@
   </div>
   <!-- 主要內容 -->
   <section class="mainArea">
+    <Form
+      v-slot="{errors}"
+      ref="myForm"
+    >
       <div class="container-xl">
           <div class="row justify-content-md-center">
               <div class="new-new-bank-title">
@@ -21,13 +25,34 @@
                   </div>
                   <div class="terms-group col-lg-9 mx-auto">
                       <div class="terms">
-                          <input type="checkbox" class="checkimg position-absolute" id="agree1">
+                          <Field
+                          v-model="iAmNative"
+                          type="checkbox"
+                          :class="{ 'is-invalid': errors['我不具美國公民身分'] }"
+                          class="checkimg position-absolute"
+                          id="agree1" name="我不具美國公民身分"
+                          value="agree"
+                          rules="required"
+                          />
                           <label for="agree1">我不具美國公民身分及其他國家稅務居民身分</label>
+                          <div class="d-flex text-center invalid-feedback my-1">
+                            <div>{{errors['我不具美國公民身分']}}</div>
+                          </div>
                       </div>
                       <div class="terms">
-                          <input type="checkbox" class="checkimg position-absolute" id="agree3">
-                          <label for="agree3">我已審慎 <a href="https://newnewbank.com.tw/OAO/generalAgreeView.action" target="_blank"><u>閱讀並同意數位存款相關約定與條款</u></a></label>
-
+                          <Field
+                          v-model="checkErules"
+                          type="checkbox"
+                          :class="{ 'is-invalid': errors['數位條款'] }"
+                          class="checkimg position-absolute"
+                          id="agree2" name="數位條款"
+                          value="agree"
+                          rules="required"
+                          />
+                          <label for="agree2">我已審慎 <a href="https://newnewbank.com.tw/OAO/generalAgreeView.action" target="_blank"><u>閱讀並同意數位存款相關約定與條款</u></a></label>
+                          <div class="d-flex text-center invalid-feedback my-1">
+                            <div>{{errors['數位條款']}}</div>
+                          </div>
                           <!--
                               <input id="checkbox" name="checkbox" value="checkbox" class="checkimg position-absolute" type="checkbox" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="checkAgreement(document.getElementById('button_termsOpt_1'));">
                               <label for="agree">我已審慎 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><u>閱讀並同意數位存款相關約定與條款</u></a>
@@ -35,29 +60,79 @@
                           -->
                       </div>
                       <div class="terms">
-                          <input type="checkbox" class="checkimg position-absolute" id="agree2">
-                          <label for="agree2">我是推廣加入用戶(非必填)</label>
+                          <Field
+                          v-model="isBePromoted"
+                          type="checkbox"
+                          class="checkimg position-absolute"
+                          id="agree3" name="我是推廣加入用戶"
+                          value="agree"
+                          />
+                          <label for="agree3">我是推廣加入用戶(非必填)</label>
+                          <!-- <div class="d-flex text-center invalid-feedback my-1">
+                            <div>{{errors['我是推廣加入用戶']}}</div>
+                          </div> -->
                           <ul class="formList">
-                              <li id="UiC" class="d-none align-self-start mb-3">推廣單位(3碼)
-                                  <input id="NNBUitcCode" name="NNBUitcCode" type="text" maxlength="3" placeholder="" class="p-number-box form-control">
+                              <li
+                              v-if="isBePromoted"
+                              id="UiC" class="align-self-start mb-0"
+                              >推廣單位(3碼)
+                                  <Field
+                                  v-model="promoteUnit"
+                                  id="NNBUitcCode" name="NNBUitcCode"
+                                  type="text" maxlength="3"
+                                  :class="{ 'is-invalid': errors['推廣單位'] }"
+                                  class="p-number-box form-control"
+                                  :validateOnChange="true"
+                                  @keyup="promoteUnit = $custom.validate.OnlyNumPress(promoteUnit)"
+                                  @change="checkCode3(promoteUnit, '推廣單位', this.$refs.myForm,'NNBUserCode')"
+                                  />
                               </li>
-                              <li id="UsC" class="d-none align-self-start mb-3">推廣員編(7碼)
-                                  <input id="NNBUserCode" name="NNBUserCode" type="text" maxlength="7" placeholder="" class="p-number-box form-control">
+                              <li class="text-start invalid-feedback justify-content-start mt-1 mb-3">
+                                <span>{{errors['推廣單位']}}</span>
                               </li>
-                              <!-- <li id="UiC" style="display: none;" class="align-self-start mb-3">推廣單位(3碼)
-                                  <input id="NNBUitcCode" name="NNBUitcCode" runat="server" type="text" maxlength="3" placeholder="" class="p-number-box form-control" onkeypress="javascript:return OnlyNumEngPress(event);" />
+                              <li
+                              v-if="isBePromoted"
+                              id="UsC" class="align-self-start mb-0"
+                              >推廣員編(7碼)
+                                  <Field
+                                  v-model="promoteEployeeCode"
+                                  id="NNBUserCode" name="NNBUserCode"
+                                  type="text" maxlength="7"
+                                  :class="{ 'is-invalid': errors['推廣員編'] }"
+                                  class="p-number-box form-control"
+                                  @keyup="promoteEployeeCode = $custom.validate.OnlyNumPress(promoteEployeeCode)"
+                                  @change="checkCode7(promoteEployeeCode, '推廣員編', this.$refs.myForm,'NNBProjCode')"
+                                  />
                               </li>
-                              <li id="UsC" style="display: none;" class="align-self-start mb-3">推廣員編(7碼)
-                                  <input id="NNBUserCode" name="NNBUserCode" runat="server" type="text" maxlength="7" placeholder="" class="p-number-box form-control" onkeypress="javascript:return OnlyNumEngPress(event);" />
-                              </li> -->
-                              <li class="align-self-start mb-3">專案代碼
-                                  <input id="NNBProjCode" name="NNBProjCode" type="text" maxlength="10" placeholder="" class="p-number-box form-control">
+                              <li class="text-center invalid-feedback justify-content-start  mt-1 mb-3">
+                                <span>{{errors['推廣員編']}}</span>
+                              </li>
+                              <li class="align-self-start mb-0">專案代碼
+                                  <Field
+                                  v-model="projectCode"
+                                  id="NNBProjCode" name="NNBProjCode"
+                                  :class="{ 'is-invalid': errors['專案代碼'] }"
+                                  type="text" maxlength="10"
+                                  placeholder=""
+                                  class="p-number-box form-control"
+                                  :validateOnChange="true"
+                                  @keyup="projectCode = $custom.validate.OnlyNumPress(projectCode)"
+                                  @change="checkProjectCode(projectCode, '專案代碼', this.$refs.myForm)"
+                                  />
+                              </li>
+                              <li class="text-center invalid-feedback justify-content-start mt-1 mb-3">
+                                <span>{{errors['專案代碼']}}</span>
                               </li>
                           </ul>
                       </div>
                   </div>
                   <div class="text-center">
-                      <button class="btn new-new-bank-btn" type="submit" @click="gotoNNBFinish">立即開戶</button>
+                      <button
+                      class="btn new-new-bank-btn"
+                      @click.prevent="submitNNB"
+                      >
+                      立即開戶
+                      </button>
                   </div>
                   <div class="col-lg-9 mx-auto note_text text-left mb-3">
                       <strong>注意事項：</strong>
@@ -73,14 +148,122 @@
               </div>
           </div>
       </div>
+    </Form>
   </section>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      iAmNative: false,
+      checkErules: false,
+      isBePromoted: false,
+      promoteUnit: '',
+      promoteEployeeCode: '',
+      projectCode: ''
+    }
+  },
   methods: {
-    gotoNNBFinish () {
-      this.$router.push('/dspApplicationNNB_finish')
+    async submitNNB () {
+      const collection = await this.$refs.myForm.validate()
+      if (this.isBePromoted) {
+        console.log(2)
+        // ? ===選填推廣單位代號===
+        const dom = this.$refs.myForm
+        if (!this.promoteUnit) {
+          this.checkCode3('', '推廣單位', dom)
+        }
+        if (!this.promoteEployeeCode) {
+          this.checkCode7('', '推廣員編', dom)
+        }
+        if (!this.projectCode) {
+          this.checkProjectCode('', '專案代碼', dom)
+        }
+        collection.errors = await this.$refs.myForm.getErrors()
+        if (Object.keys(collection.errors).length === 0) {
+          this.$router.push('/dspApplicationNNB_finish')
+        } else {
+          // ** ===錯誤訊息彙整===
+          this.$custom.validate.showErrors(collection.errors)
+        }
+      } else {
+        console.log(2)
+        collection.errors = await this.$refs.myForm.getErrors()
+        if (Object.keys(collection.errors).length === 0) {
+          this.$router.push('/dspApplicationNNB_finish')
+        } else {
+          // ** ===錯誤訊息彙整===
+          this.$custom.validate.showErrors(collection.errors)
+        }
+      }
+    },
+    checkCode3 (code, fieldName, dom, nextid) {
+      // ? 清空errors
+      dom.setFieldError(fieldName, '')
+      // ? 單位驗證
+      console.log(code, fieldName, dom, nextid)
+      const idRule = /^\d{3}$/
+      if (idRule.test(code)) {
+        document.getElementById(nextid).focus()
+      } else {
+        dom.setFieldError(fieldName, '請輸入3碼推廣單位代碼')
+      }
+    },
+    checkCode7 (code, fieldName, dom, nextid) {
+      // ? 清空errors
+      dom.setFieldError(fieldName, '')
+      // ? 員編驗證
+      console.log(code)
+      const idRule = /^\d{7}$/
+      if (idRule.test(code)) {
+        console.log(22)
+        document.getElementById(nextid).focus()
+      } else {
+        console.log(2222)
+        dom.setFieldError(fieldName, '請輸入7碼推廣員編代碼')
+        return false
+      }
+    },
+    checkProjectCode (code, fieldName, dom) {
+      // ? 清空errors
+      dom.setFieldError(fieldName, '')
+      // ? 專案代碼驗證
+      const idRule = /^\d{10}$/
+      if (idRule.test(code)) {
+        //
+      } else {
+        dom.setFieldError(fieldName, '請輸入10碼專案代碼')
+      }
+    }
+  },
+  watch: {
+    iAmNative (n) {
+      if (n === 'agree') {
+        this.iAmNative = true
+      } else if (n) {
+        this.iAmNative = true
+      } else {
+        this.iAmNative = false
+      }
+    },
+    checkErules (n) {
+      if (n === 'agree') {
+        this.checkErules = true
+      } else if (n) {
+        this.checkErules = true
+      } else {
+        this.checkErules = false
+      }
+    },
+    isBePromoted (n) {
+      if (n === 'agree') {
+        this.isBePromoted = true
+      } else if (n) {
+        this.isBePromoted = true
+      } else {
+        this.isBePromoted = false
+      }
     }
   }
 }
