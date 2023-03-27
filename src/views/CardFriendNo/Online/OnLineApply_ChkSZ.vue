@@ -1174,30 +1174,30 @@ export default {
       const collection = await this.$refs.myForm.validate()
       collection.errors = this.$refs.myForm.getErrors()
       if (Object.keys(collection.errors).length === 0) {
-      // ? 檢查約定條款 未打勾
-        if (!this.agreement) {
-          this.$swal.fire({
-            title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-            showConfirmButton: false,
-            // timer: 2500
-            customClass: {
-              title: 'text-class'
-              //
-            }
-          })
-          return
-        }
-        if (!this.checkagree) {
-          this.$swal.fire({
-            title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-            showConfirmButton: false,
-            customClass: {
-              title: 'text-class'
-            }
-            // timer: 2500
-          })
-          return
-        }
+      // // ? 檢查約定條款 未打勾
+      //   if (!this.agreement) {
+      //     this.$swal.fire({
+      //       title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+      //       showConfirmButton: false,
+      //       // timer: 2500
+      //       customClass: {
+      //         title: 'text-class'
+      //         //
+      //       }
+      //     })
+      //     return
+      //   }
+      //   if (!this.checkagree) {
+      //     this.$swal.fire({
+      //       title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+      //       showConfirmButton: false,
+      //       customClass: {
+      //         title: 'text-class'
+      //       }
+      //       // timer: 2500
+      //     })
+      //     return
+      //   }
         // ** ===全部通過前往下一頁===
         this.$router.push('/OnLineApply_Chk_OTP')
       } else {

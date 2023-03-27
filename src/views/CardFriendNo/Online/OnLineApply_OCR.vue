@@ -14,7 +14,7 @@
         <div class="d-flex flex-column">
           <div class="myIdentifident" ref="myIdentifident">
           </div>
-          <!-- <img ref="previewImg"> -->
+          <img ref="resultImg">
           <p ref="base64String"></p>
         </div>
       </div>
@@ -65,7 +65,7 @@ export default {
         // ?要呈現畫面的區域
         const croppieE = this.$refs.myIdentifident
         this.preViewImage = new this.$custom.Croppie(croppieE, {
-          viewport: { width: 100, height: 100 },
+          viewport: { width: 300, height: 300 },
           boundary: { width: 300, height: 300 },
           showZoomer: true,
           enableResize: true,
@@ -73,7 +73,7 @@ export default {
           mouseWheelZoom: 'ctrl'
         })
         await this.preViewImage.bind({
-          url: this.photos[num],
+          url: this.photos[0],
           orientation: 1
         })
       } catch (error) {
@@ -86,11 +86,14 @@ export default {
     rotateRight () {
       this.preViewImage.rotate(-90)
     },
-    result (num) {
+    result () {
       const resultImg = this.$refs.resultImg
       const base64String = this.$refs.base64String
-      base64String.innerHTML = this.photos[num]
-      resultImg.src = this.photos[num]
+      this.preViewImage.result('base64').then(function (base64) {
+        console.log(base64)
+        base64String.innerHTML = base64
+        resultImg.src = base64
+      })
     },
     destroy () {
       this.preViewImage.destroy()

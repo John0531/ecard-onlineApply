@@ -45,6 +45,7 @@
                             name="財力證明" id="exampleRadios1"
                             value="option1"
                             v-model="proofType"
+                            :validateOnInput="true"
                             rules="required"
                             />
                             <label class="form-check-label text-md-center fw-bold" for="exampleRadios1">
@@ -52,7 +53,7 @@
                             </label>
                           </div>
                           <div class="d-flex text-center invalid-feedback my-1">
-                            <div>{{errors['財力證明']}}</div>
+                            <div>{{errors['財力證明資料']}}</div>
                           </div>
                         </div>
                         <div class="form-check my-2">
@@ -62,16 +63,22 @@
                           </div>
                         </div>
                         <!--------------------------------------------->
-                        <div class="col-12 col-md-6 mb-4">
-                            <div class="upload_items text-center">
-                                <input
+                        <div class="col-12 col-md-6 ">
+                            <div
+                            class="upload_items text-center"
+                            :class="{ 'is-invalid': errors['財力證明資料'] }"
+                            >
+                                <Field
                                 type="file" name="upload3" id="upload3"
                                 accept="image/*,.heic,.heif" class="upload"
                                 data-sigil="file-input"
+                                :class="{ 'is-invalid': errors['財力證明資料'] }"
                                 @change.prevent="pickFiles"
                                 @blur="this.num = 1"
-                                >
-                                <textarea name="TBupload3" id="TBupload3" style="display: none;"></textarea>
+                                @keyup="checkIsPics"
+                                @mouseleave="checkIsPics"
+                                />
+                                <!-- <textarea name="TBupload3" id="TBupload3" style="display: none;"></textarea> -->
                                 <div class="upload_txt text-center mt-2">存款(含戶名、帳號)</div>
                                 <img
                                 ref="resultImg1"
@@ -80,17 +87,25 @@
                                 :class="{'crop-width':identitiyPack1.photo}"
                                 alt="">
                             </div>
-                            <div class="upload_group_title text-center">財力證明(1)</div>
+                            <div
+                            class="upload_group_title text-center"
+                            :class="{ 'is-invalid': errors['財力證明資料'] }"
+                            >財力證明(1)
+                            </div>
                         </div>
-                        <div class="col-12 col-md-6 mb-4">
-                            <div class="upload_items text-center">
-                                <input
+                        <div class="col-12 col-md-6 ">
+                            <div
+                            class="upload_items text-center"
+                            :class="{ 'is-invalid': errors['財力證明資料'] }"
+                            >
+                                <Field
                                 type="file" name="upload4" id="upload4"
                                 accept="image/*,.heic,.heif" class="upload"
                                 data-sigil="file-input"
                                 @change.prevent="pickFiles"
                                 @blur="this.num = 2"
-                                >
+                                @mouseleave="checkIsPics"
+                                />
                                 <!-- <textarea name="TBupload4" id="TBupload4" style="display: none;"></textarea> -->
                                 <div class="upload_txt text-center mt-2">存款(含帳號之內頁)</div>
                                 <img
@@ -100,17 +115,30 @@
                                 :class="{'crop-width':identitiyPack2.photo}"
                                 alt="">
                             </div>
-                            <div class="upload_group_title text-center">財力證明(2)</div>
+                            <div
+                            class="upload_group_title text-center"
+                            :class="{ 'is-invalid': errors['財力證明資料'] }"
+                            >
+                            財力證明(2)
+                            </div>
                         </div>
-                        <div class="col-12 col-md-6 mb-4">
-                            <div class="upload_items text-center">
-                                <input
+                        <div class="d-flex justify-content-center my-4 px-0 invalid-feedback">
+                            <div>{{errors['財力證明資料']}}</div>
+                        </div>
+                        <div class="col-12 col-md-6 ">
+                            <div
+                            class="upload_items text-center"
+                            :class="{ 'is-invalid': errors['財力證明資料'] }"
+                            >
+                                <Field
                                 type="file" name="upload5" id="upload5"
                                 accept="image/*,.heic,.heif" class="upload"
                                 data-sigil="file-input"
+                                :class="{ 'is-invalid': errors['財力證明資料'] }"
                                 @change.prevent="pickFiles"
                                 @blur="this.num = 3"
-                                >
+                                @mouseleave="checkIsPics"
+                                />
                                 <!-- <textarea name="TBupload5" id="TBupload5" style="display: none;"></textarea> -->
                                 <div class="upload_txt text-center mt-2">存款(含戶名、帳號)</div>
                                 <img
@@ -120,17 +148,25 @@
                                 :class="{'crop-width':identitiyPack3.photo}"
                                 alt="">
                             </div>
-                            <div class="upload_group_title text-center">財力證明(3)</div>
+                            <div
+                            class="upload_group_title text-center"
+                            :class="{ 'is-invalid': errors['財力證明資料'] }"
+                            >財力證明(3)</div>
                         </div>
-                        <div class="col-12 col-md-6 mb-4">
-                            <div class="upload_items text-center">
-                                <input
+                        <div class="col-12 col-md-6 ">
+                            <div
+                            class="upload_items text-center"
+                            :class="{ 'is-invalid': errors['財力證明資料'] }"
+                            >
+                                <Field
                                 type="file" name="upload6" id="upload6"
                                 accept="image/*,.heic,.heif" class="upload"
                                 data-sigil="file-input"
+                                :class="{ 'is-invalid': errors['財力證明資料'] }"
                                 @change.prevent="pickFiles"
                                 @blur="this.num = 4"
-                                >
+                                @mouseleave="checkIsPics"
+                                />
                                 <!-- <textarea name="TBupload6" id="TBupload6" style="display: none;"></textarea> -->
                                 <div class="upload_txt text-center mt-2">存款(含帳號之內頁)</div>
                                 <img
@@ -140,7 +176,12 @@
                                 :class="{'crop-width':identitiyPack4.photo}"
                                 alt="">
                             </div>
-                            <div class="upload_group_title text-center">財力證明(4)</div>
+                            <div
+                            class="upload_group_title text-center"
+                            :class="{ 'is-invalid': errors['財力證明資料'] }"
+                            >
+                            財力證明(4)
+                            </div>
                         </div>
                         <!----------------------MyData----------------------->
                         <div class="d-flex flex-column px-0">
@@ -174,14 +215,19 @@
                                 <input
                                 v-model="doubleAgree"
                                 id="checkbox1"
-                                name="checkbox"
+                                name="MyData服務授權條款"
                                 value="checkbox"
                                 class="checkimg position-absolute"
+                                :class="{ 'is-invalid': errors['MyData服務授權條款'] }"
                                 type="checkbox"
+                                :validateOnChange="true"
                                 @click="checkAgreement"
-                                :rules="checkdoubleAgree"
+                                @change="checkdoubleAgree"
                                 />
                                 <label for="agree">本人已詳閱並同意｢ <a href="#" ><u>MyData服務授權條款</u></a>」</label>
+                            </div>
+                            <div class="d-flex text-center invalid-feedback my-1 px-0">
+                              <div>{{errors['MyData服務授權條款']}}</div>
                             </div>
                         </div>
                         <!-------------------//本人已詳閱---------------------->
@@ -193,7 +239,13 @@
                     </div>
                 </div>
                 <div class="text-center button_group">
-                    <button class="btn btn-primary btn-lg mx-1" type="" @click.prevent="showResult">送出申請</button>
+                    <button
+                    class="btn btn-primary btn-lg mx-1"
+                    type=""
+                    @click.prevent="submitSuitCase"
+                    >
+                    送出申請
+                    </button>
                     <button onclick="location.href='#'" class="btn btn-primary btn-lg mx-1" type="submit" value="">預覽申請書</button>
                 </div>
             </div>
@@ -530,8 +582,6 @@ export default {
       // ?清空占存照片
       const num = this.num
       this[`identitiyPack1${num}`] = {}
-      console.log(e)
-      console.log(num)
       // ? 轉base64
       const reader = new FileReader()
       const file = await e.target.files[0]
@@ -540,7 +590,7 @@ export default {
         setTimeout(() => {
           this[`identitiyPack${num}`].photo = reader.result
           this.makeModify(num)
-        }, 800)
+        }, 300)
       }
     },
     async makeModify (num) {
@@ -550,8 +600,8 @@ export default {
         // ?要呈現畫面的區域(在modal上)
         const croppieE = this.$refs.myIdentifident
         this[`identitiyPack${num}`].preViewImage = new this.$custom.Croppie(croppieE, {
-          viewport: { width: 100, height: 100 },
-          boundary: { width: 300, height: 300 },
+          viewport: { width: 300, height: 300 },
+          boundary: { width: 400, height: 400 },
           showZoomer: true,
           enableResize: true,
           enableOrientation: true,
@@ -566,13 +616,12 @@ export default {
       }
     },
     result () {
-      // // ? 在modal上預呈現
-      // const previewImg = this.$refs.previewImg
-      // previewImg.src = this[`identitiyPack1${num}`].photo
       // ?在頁面上各欄位自呈現
       const num = this.num
       const resultImg = this.$refs[`resultImg${num}`]
-      resultImg.src = this[`identitiyPack${num}`].photo
+      this[`identitiyPack${num}`].preViewImage.result('base64').then(function (base64) {
+        resultImg.src = base64
+      })
       this.CroppieModal.hide()
       this[`identitiyPack${num}`].preViewImage.destroy()
     },
@@ -580,7 +629,9 @@ export default {
       this.NNBModal.hide()
       this.$router.push('/dspApplicationNNB')
     },
-    async showResult () {
+    async submitSuitCase () {
+      this.checkIsPics()
+      this.checkdoubleAgree()
       const collection = await this.$refs.myForm.validate()
       collection.errors = await this.$refs.myForm.getErrors()
       if (Object.keys(collection.errors).length === 0) {
@@ -598,7 +649,6 @@ export default {
         // ** ===錯誤訊息彙整===
         this.$custom.validate.showErrors(collection.errors)
       }
-      //* 判斷要跳哪個 Modal(待處理)
     },
     goToMyDataTerms () {
       // ?路由反向解析
@@ -632,10 +682,28 @@ export default {
       this.MyDataAgreeModal.hide()
     },
     checkdoubleAgree () {
+      const dom = this.$refs.myForm
+      dom.setFieldError('MyData服務授權條款', '')
       if (this.proofType === 'option2') {
         if (this.doubleAgree) {
           return true
         } else {
+          dom.setFieldError('MyData服務授權條款', '請勾選同意條款')
+          return false
+        }
+      } else {
+        return true
+      }
+    },
+    checkIsPics () {
+      console.log(1)
+      const dom = this.$refs.myForm
+      dom.setFieldError('財力證明資料', '')
+      if (this.proofType === 'option1') {
+        if (this.identitiyPack1.photo || this.identitiyPack2.photo || this.identitiyPack3.photo || this.identitiyPack4.photo) {
+          return true
+        } else {
+          dom.setFieldError('財力證明資料', '勾選上傳財力資料請上傳任一證明')
           return false
         }
       } else {
@@ -648,7 +716,6 @@ export default {
     this.NNBModal = new this.$custom.bootstrap.Modal(this.$refs.NNBModal)
     this.MyDataModal = new this.$custom.bootstrap.Modal(this.$refs.MyDataModal)
     this.MyDataAgreeModal = new this.$custom.bootstrap.Modal(this.$refs.MyDataAgreeModal)
-
     this.scrollEvent()
     // *進場先跳範例提醒
     this.NoticeModal = new this.$custom.bootstrap.Modal(this.$refs.NoticeModal)

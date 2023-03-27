@@ -1078,30 +1078,30 @@ export default {
       if (Object.keys(collection.errors).length === 0) {
         // ** ===全部通過前往下一頁===
         // ? 檢查約定條款 未打勾
-        if (!this.agreementAll) {
-          this.$swal.fire({
-            title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-            showConfirmButton: false,
-            // timer: 2500
-            customClass: {
-              title: 'text-class'
-              //
-            }
-          })
-          return
-        }
-        // ? 檢查個資條款 未打勾
-        if (!this.checkagree) {
-          this.$swal.fire({
-            title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-            showConfirmButton: false,
-            customClass: {
-              title: 'text-class'
-            }
-            // timer: 2500
-          })
-          return
-        }
+        // if (!this.agreementAll) {
+        //   this.$swal.fire({
+        //     title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+        //     showConfirmButton: false,
+        //     // timer: 2500
+        //     customClass: {
+        //       title: 'text-class'
+        //       //
+        //     }
+        //   })
+        //   return
+        // }
+        // // ? 檢查個資條款 未打勾
+        // if (!this.checkagree) {
+        //   this.$swal.fire({
+        //     title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
+        //     showConfirmButton: false,
+        //     customClass: {
+        //       title: 'text-class'
+        //     }
+        //     // timer: 2500
+        //   })
+        //   return
+        // }
         this.$router.push('/OnLineApply_Chk_OTP')
       } else {
         // ** ===錯誤訊息彙整===
