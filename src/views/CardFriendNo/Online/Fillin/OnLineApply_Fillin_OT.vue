@@ -50,7 +50,7 @@
                   />
                   <ErrorMessage
                     name="身分證字號"
-                    class="invalid-feedback ms-2"
+                    class="text-danger ms-2"
                   /> -->
                 </li>
                 <li class="col-12 col-md-6 d-none d-md-block"></li>
@@ -105,7 +105,7 @@
                   <p class="text-danger ms-2 mt-1">{{ errors['身分證發證日期'] }}</p>
                 </li>
                 <li class="col-12 col-md-6">
-                  <label for="">發證地點</label>
+                  <label for=""><span class="red_text">* </span>發證地點</label>
                   <div class="d-flex ID_date align-items-center">
                     <Field
                       v-model="Form.IdPlace.County"
@@ -121,19 +121,19 @@
                     <Field
                       v-model="Form.IdPlace.Type"
                       as="select"
-                      name="類型"
+                      rules="required"
+                      :class="{ 'is-invalid': errors['發證類型'] }"
+                      name="發證類型"
                       runat="server"
                       class="form-select form-control IDissue mx-1 mx-md-2"
                     >
+                      <option value="" selected>-----</option>
                       <option value="換發">換發</option>
                       <option value="補發">補發</option>
                       <option value="初發">初發</option>
                     </Field>
                   </div>
-                  <ErrorMessage
-                    name="發證地點"
-                    class="text-danger ms-2"
-                  />
+                  <p class="text-danger ms-2 mt-1">{{ errors['發證地點']?errors['發證地點']:errors['發證類型'] }}</p>
                 </li>
                 <li class="col-12 col-md-6">
                   <label for=""><span class="red_text">* </span>中文姓名</label>
@@ -149,7 +149,7 @@
                   />
                   <ErrorMessage
                     name="中文姓名"
-                    class="invalid-feedback ms-2"
+                    class="text-danger ms-2"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -223,20 +223,39 @@
                 </li>
                 <li class="col-12 col-md-6">
                   <label for=""><span class="red_text">* </span>出生地</label>
-                  <Field
-                    v-model="Form.BirthPlace"
-                    as="select"
-                    rules="required"
-                    :class="{ 'is-invalid': errors['出生地'] }"
-                    name="出生地"
-                    runat="server"
-                    class="form-select form-control"
-                  >
-                    <option v-for="item in selectJson.BIRTHPLACE" :key="item.SORT" :value="item.VALUE">{{item.SHOW}}</option>
-                  </Field>
+                  <div class="d-flex Birthplace align-items-center">
+                    <Field
+                      v-model="Form.BirthPlace.Place"
+                      as="select"
+                      rules="required"
+                      :class="{ 'is-invalid': errors['出生地'],'BirthCounty': Form.BirthPlace.Place==='其它'}"
+                      name="出生地"
+                      runat="server"
+                      class="form-select form-control"
+                      @change="Form.BirthPlace.Place!=='其它'?Form.BirthPlace.Other='':''"
+                    >
+                      <option v-for="item in selectJson.BIRTHPLACE" :key="item.SORT" :value="item.VALUE">{{item.SHOW}}</option>
+                    </Field>
+                    <Field
+                      v-if="Form.BirthPlace.Place==='其它'"
+                      v-model="Form.BirthPlace.Other"
+                      as="select"
+                      rules="required"
+                      :class="{ 'is-invalid': errors['出生地-其他'] }"
+                      name="出生地-其他"
+                      runat="server"
+                      class="form-select form-control"
+                    >
+                      <option v-for="item in selectJson.NATIONALITY.filter((item=>item.VALUE!=='TW'))" :key="item.SORT" :value="item.VALUE">{{item.SHOW}}</option>
+                    </Field>
+                  </div>
                   <ErrorMessage
                     name="出生地"
-                    class="invalid-feedback"
+                    class="text-danger ms-2 mt-1"
+                  />
+                  <ErrorMessage
+                    name="出生地-其他"
+                    class="text-danger ms-2 mt-1"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -254,7 +273,7 @@
                   </Field>
                   <ErrorMessage
                     name="國籍"
-                    class="invalid-feedback"
+                    class="text-danger"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -266,6 +285,7 @@
                     runat="server"
                     class="form-select form-control"
                   >
+                    <option value="">-----</option>
                     <option value="高中">高中</option>
                     <option value="大學">大學</option>
                     <option value="碩士">碩士</option>
@@ -303,7 +323,7 @@
                     />
                     <ErrorMessage
                       name="電子信箱"
-                      class="invalid-feedback ms-2"
+                      class="text-danger ms-2"
                     />
                   </template>
                   <Field
@@ -702,7 +722,7 @@
                   />
                   <ErrorMessage
                     name="行動電話"
-                    class="invalid-feedback ms-2"
+                    class="text-danger ms-2"
                   />
                 </li> -->
                 <li class="col-12 col-md-6">
@@ -853,7 +873,7 @@
                   />
                   <ErrorMessage
                     name="畢業國小名稱"
-                    class="invalid-feedback ms-2"
+                    class="text-danger ms-2"
                   />
                 </li>
                 <!-----新增學生欄位------->
@@ -915,7 +935,7 @@
                   />
                   <ErrorMessage
                     name="家長姓名"
-                    class="invalid-feedback ms-2"
+                    class="text-danger ms-2"
                   />
                 </li>
                 <li class="col-12 col-md-6" v-if="Form.IsStudent==='Y'">
@@ -931,7 +951,7 @@
                   />
                   <ErrorMessage
                     name="家長聯絡電話"
-                    class="invalid-feedback ms-2"
+                    class="text-danger ms-2"
                   />
                 </li>
                 <li class="col-12 col-md-12"  v-if="Form.IsStudent==='Y'">
@@ -1053,7 +1073,7 @@
                   />
                   <ErrorMessage
                     name="公司名稱"
-                    class="invalid-feedback ms-2"
+                    class="text-danger ms-2"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -1068,7 +1088,7 @@
                   />
                   <ErrorMessage
                     name="公司統一編號"
-                    class="invalid-feedback ms-2"
+                    class="text-danger ms-2"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -1215,7 +1235,7 @@
                   />
                   <ErrorMessage
                     name="職稱"
-                    class="invalid-feedback ms-2"
+                    class="text-danger ms-2"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -1273,7 +1293,7 @@
                 <li class="col-12 col-md-6">
                   <label for=""><span class="red_text">* </span>職級別</label>
                   <Field
-                    v-model="Form.JobLevel.Level"
+                    v-model="Form.JobLevel"
                     rules="required"
                     :class="{ 'is-invalid': errors['職級別'] }"
                     as="select"
@@ -1358,7 +1378,7 @@
                   />
                   <ErrorMessage
                     name="推廣單位代號"
-                    class="invalid-feedback ms-2"
+                    class="text-danger ms-2"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -1375,7 +1395,7 @@
                   />
                   <ErrorMessage
                     name="推廣人員編號"
-                    class="invalid-feedback ms-2"
+                    class="text-danger ms-2"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -1410,7 +1430,7 @@
 export default {
   data () {
     return {
-      Apply_N_Type: localStorage.getItem('Apply_N_Type'),
+      Apply_N_Type: sessionStorage.getItem('Apply_N_Type'),
       selectJson: JSON.parse(localStorage.getItem('SELECT_JSON')),
       Form: {
         Id: 'A12345****',
@@ -1421,7 +1441,7 @@ export default {
         },
         IdPlace: {
           County: '',
-          Type: '換發'
+          Type: ''
         },
         ChineseName: '',
         EnglishName: '',
@@ -1431,9 +1451,12 @@ export default {
           Month: '6',
           Day: '28'
         },
-        BirthPlace: '',
+        BirthPlace: {
+          Place: '',
+          Other: ''
+        },
         Country: '',
-        Education: '高中',
+        Education: '',
         Marriage: '已婚',
         HomeAddress: {
           County: '',
@@ -1511,10 +1534,7 @@ export default {
           Job: '',
           Other: ''
         },
-        JobLevel: {
-          Level: '',
-          Other: ''
-        },
+        JobLevel: '',
         IncomeSource: {
           Income: '',
           Other: ''
