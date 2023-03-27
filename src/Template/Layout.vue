@@ -2,16 +2,19 @@
   <Header></Header>
   <router-view/>
   <Footer></Footer>
+  <ErrorModal></ErrorModal>
 </template>
 
 <script>
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+import ErrorModal from '@/components/ErrorModal.vue'
 
 export default {
   components: {
     Header,
-    Footer
+    Footer,
+    ErrorModal
   }
 }
 </script>
@@ -50,5 +53,8 @@ export default {
   .crop-width {
     max-width: 400px !important;
     max-height: 200px !important;
+  }
+  .form-text{
+    margin-top: 0;
   }
 </style>

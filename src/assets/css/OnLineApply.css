@@ -340,7 +340,7 @@
 .card-header:after {
     content: " ▼ ";
     display: inline-block;
-    /* float: right; */
+    float: right;
     transform: rotate(0deg);
     transition: .15s;
 }

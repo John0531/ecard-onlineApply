@@ -1,4 +1,5 @@
 import AllRules from '@vee-validate/rules'
+import store from '../store'
 
 const validate = {
   ...AllRules,
@@ -168,7 +169,7 @@ const validate = {
   // TODO 可用在 input 加入屬性 maxlength
   // TODO 確認辦卡地址長度 縣市10 地區10 路10 巷弄號樓5 其他100
   // ?  Address: {
-  // ?   ZipCode: '',遞區號
+  // ?   County: '',縣市
   // ?   Dist: '',區
   // ?   Rd: '',路
   // ?   Ln: '',巷
@@ -188,7 +189,7 @@ const validate = {
     if (test.length < 1) {
       FormDom.setFieldError(fieldName, '地址格式有誤')
     }
-    if (!Address.ZipCode || !Address.Dist || !Address.Rd) {
+    if (!Address.County || !Address.Dist || !Address.Rd) {
       FormDom.setFieldError(fieldName, '地址格式有誤')
     }
     if (Address.Ln.length > 5 || Address.Aly.length > 5 || Address.No_1.length > 5 || Address.No_2.length > 5 || Address.Floor.length > 5 || Address.Other.length > 100) {
@@ -212,9 +213,10 @@ const validate = {
   showErrors (errors) {
     let errMsg = ''
     for (const [key, value] of Object.entries(errors)) {
-      errMsg += `【${key}】 : ${value}\n`
+      errMsg += `*【${key}】 : ${value}<br>`
     }
-    alert(errMsg)
+    store.commit('getErrorMsg', errMsg)
+    store.state.errorModal.show()
   },
   //* ==== 18. 檢查信用卡字數 ====
   checkCode (code) {
