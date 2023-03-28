@@ -61,10 +61,8 @@
           </div>
           <div class="text-center">
             <button
-              onclick="location.href='dspApplicationNNB_Apply.htm'"
-              class="btn new-new-bank-btn"
-              value=""
-            >
+              onclick="location.href='https://card.ubot.com.tw/eCard/'"
+              class="btn new-new-bank-btn">
               手刀開戶
             </button>
             <button
