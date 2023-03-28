@@ -38,6 +38,9 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 
+import '@fortawesome/fontawesome-free/css/all.css'
+import '@fortawesome/fontawesome-free/js/all.js'
+
 // ?加入validate驗證規則
 Object.keys(validate).forEach((rule) => {
   defineRule(rule, validate[rule])

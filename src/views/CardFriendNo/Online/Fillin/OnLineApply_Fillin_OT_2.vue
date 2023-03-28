@@ -509,32 +509,42 @@
             </div>
           </div>
         </div>
-        <div class="Apply_note_box mb-4">
+        <div class="Apply_note_box mb-4" v-if="Apply_N_Type==='Online'">
           <span class="blue_text"
             ><strong
               >＊申請書資料已確認完成請按下一步同意送出，並請繼續完成證件及財力上傳流程。</strong
             ></span
           >
         </div>
+        <div class="Apply_note_box mb-4 indentNote_star" v-if="Apply_N_Type==='Written'">
+          <p><span class="blue_text"><strong>＊申請書資料已確認完成請按下一步同意送出，並請繼續完成財力上傳流程。</strong></span></p>
+          <p><span class="blue_text"><strong>＊請務必填寫至最後步驟，並列印出「簽名欄位」及黏貼「身分證影本欄位」，完成後請依回郵資訊將紙本寄回本行。</strong></span></p>
+        </div>
         <div class="text-center button_group">
-          <button
-            onclick="location.href='OnLineApply_Fillin_OT.htm'"
+          <router-link
+            to="/OnLineApply_Fillin_OT"
             class="btn btn-primary btn-lg mx-1"
-            type="submit"
-            value=""
           >
             修改資料
-          </button>
-          <button
-            onclick="location.href='OnLineApply_Fillin_OT_Up.htm'"
+          </router-link>
+          <router-link
+            to="/OnLineApply_Fillin_OT_Up"
             class="btn btn-primary btn-lg mx-1"
-            type="submit"
-            value=""
           >
             下一步
-          </button>
+          </router-link>
         </div>
       </div>
     </div>
   </section>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      Apply_N_Type: sessionStorage.getItem('Apply_N_Type')
+    }
+  }
+}
+</script>

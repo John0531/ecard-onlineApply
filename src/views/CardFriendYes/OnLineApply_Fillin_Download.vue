@@ -3,7 +3,7 @@
   <!-- 主視覺 -->
   <div class="shortKv">
     <div class="fill-shortKv topimg-OnLineApply">
-      <div class="container-xlr shortKv-title-4">
+      <div class="container-xl shortKv-title-4">
         <h2>線上辦卡</h2>
       </div>
     </div>
@@ -20,7 +20,6 @@
                 ><img src="images/pdf.png" class="img-fluid" alt=""
               /></a>
               <button
-                onclick="location.href='#'"
                 class="Down_Apply_button mx-3"
                 type="submit"
                 value=""

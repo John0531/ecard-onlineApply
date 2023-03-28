@@ -52,15 +52,15 @@
 export default {
   methods: {
     toOnLineApply_Chk () {
-      localStorage.setItem('Apply_N_Type', 'Online')
+      sessionStorage.setItem('Apply_N_Type', 'Online')
       this.$router.push('/OnLineApply_Chk')
     },
     OnLineApply_ChkSZ () {
-      localStorage.setItem('Apply_N_Type', 'Online')
+      sessionStorage.setItem('Apply_N_Type', 'Online')
       this.$router.push('/OnLineApply_ChkSZ')
     },
     OnLineApply_OTP () {
-      localStorage.setItem('Apply_N_Type', 'Written')
+      sessionStorage.setItem('Apply_N_Type', 'Written')
       this.$router.push('/OnLineApply_OTP')
     }
   }
