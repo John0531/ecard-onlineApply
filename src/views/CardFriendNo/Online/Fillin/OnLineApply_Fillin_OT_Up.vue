@@ -69,13 +69,12 @@
                             :class="{ 'is-invalid': errors['財力證明資料'] }"
                             >
                                 <Field
-                                type="file" name="upload3" id="upload3"
+                                type="file" name="upload3" id="upload1"
                                 accept="image/*,.heic,.heif" class="upload"
                                 data-sigil="file-input"
                                 :class="{ 'is-invalid': errors['財力證明資料'] }"
                                 @change.prevent="pickFiles"
                                 @blur="this.num = 1"
-                                @keyup="checkIsPics"
                                 @mouseleave="checkIsPics"
                                 />
                                 <!-- <textarea name="TBupload3" id="TBupload3" style="display: none;"></textarea> -->
@@ -99,7 +98,7 @@
                             :class="{ 'is-invalid': errors['財力證明資料'] }"
                             >
                                 <Field
-                                type="file" name="upload4" id="upload4"
+                                type="file" name="upload4" id="upload2"
                                 accept="image/*,.heic,.heif" class="upload"
                                 data-sigil="file-input"
                                 @change.prevent="pickFiles"
@@ -131,7 +130,7 @@
                             :class="{ 'is-invalid': errors['財力證明資料'] }"
                             >
                                 <Field
-                                type="file" name="upload5" id="upload5"
+                                type="file" name="upload5" id="upload3"
                                 accept="image/*,.heic,.heif" class="upload"
                                 data-sigil="file-input"
                                 :class="{ 'is-invalid': errors['財力證明資料'] }"
@@ -159,7 +158,7 @@
                             :class="{ 'is-invalid': errors['財力證明資料'] }"
                             >
                                 <Field
-                                type="file" name="upload6" id="upload6"
+                                type="file" name="upload6" id="upload4"
                                 accept="image/*,.heic,.heif" class="upload"
                                 data-sigil="file-input"
                                 :class="{ 'is-invalid': errors['財力證明資料'] }"
@@ -320,7 +319,7 @@
           <div class="modal-content">
               <div class="modal-header">
                   <h5 class="modal-title OnLineApply">財力證明修改</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click.prevent="destroy(this.num)">
                     <img src="@/assets/images/form/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
                   </button>
               </div>
@@ -331,7 +330,7 @@
                               ◆<strong>原始圖片</strong><br>
                               (請框選可供辨識之大小範圍)
                           </div>
-                          <div class="myIdentifident" ref="myIdentifident">
+                          <div id="myIdentifident" class="myIdentifident" ref="myIdentifident">
                           </div>
                           <img ref="resultImg">
                       </div>
@@ -557,73 +556,108 @@ export default {
       identitiyPack1: {
         photo: '',
         preViewImg: '',
-        resultImg: ''
+        resultImg: '',
+        file: ''
       },
       identitiyPack2: {
         photo: '',
         preViewImg: '',
-        resultImg: ''
+        resultImg: '',
+        file: ''
       },
       identitiyPack3: {
         photo: '',
         preViewImg: '',
-        resultImg: ''
+        resultImg: '',
+        file: ''
       },
       identitiyPack4: {
         photo: '',
         preViewImg: '',
-        resultImg: ''
+        resultImg: '',
+        file: ''
       },
-      num: '' // *修改完成要呈現的照片序
+      num: '', // *修改完成要呈現的照片序
+      file: '' // *上傳的檔案
     }
   },
   methods: {
     async pickFiles (e) {
-      // ?清空占存照片
+      console.log('pickFiles')
       const num = this.num
-      this[`identitiyPack1${num}`] = {}
       // ? 轉base64
       const reader = new FileReader()
       const file = await e.target.files[0]
+      await reader.readAsDataURL(file)
       if (file) {
-        await reader.readAsDataURL(file)
         setTimeout(() => {
-          this[`identitiyPack${num}`].photo = reader.result
-          this.makeModify(num)
+          this[`identitiyPack${this.num}`].photo = reader.result
+          this.makeModify(this.num)
         }, 300)
       }
+      // ? 清空value
+      this.clearFiles(num)
     },
     async makeModify (num) {
       // ?呼叫modal準備呈現
+      console.log('makeModify')
       this.CroppieModal.show()
       try {
         // ?要呈現畫面的區域(在modal上)
         const croppieE = this.$refs.myIdentifident
-        this[`identitiyPack${num}`].preViewImage = new this.$custom.Croppie(croppieE, {
-          viewport: { width: 300, height: 300 },
-          boundary: { width: 400, height: 400 },
+        this[`identitiyPack${num}`].preViewImg = new this.$custom.Croppie(croppieE, {
+          viewport: { width: 420, height: 300 },
+          boundary: { width: 420, height: 300 },
           showZoomer: true,
           enableResize: true,
           enableOrientation: true,
+          enableZoom: true,
+          enforceBoundary: true,
           mouseWheelZoom: 'ctrl'
         })
-        await this[`identitiyPack${num}`].preViewImage.bind({
+        // const cropImage = document.querySelector('.cr-image')
+        // cropImage.classList.add('crop-test')
+        await this[`identitiyPack${num}`].preViewImg.bind({
           url: this[`identitiyPack${num}`].photo,
-          orientation: 1
+          orientation: 1,
+          setZoom: 0.2
         })
       } catch (error) {
         alert(error)
       }
     },
     result () {
+      console.log('result')
       // ?在頁面上各欄位自呈現
       const num = this.num
       const resultImg = this.$refs[`resultImg${num}`]
-      this[`identitiyPack${num}`].preViewImage.result('base64').then(function (base64) {
+      this[`identitiyPack${num}`].preViewImg.result('base64').then(function (base64) {
         resultImg.src = base64
       })
+      // ?編輯結束將相關物件資料銷毀
       this.CroppieModal.hide()
-      this[`identitiyPack${num}`].preViewImage.destroy()
+      this[`identitiyPack${num}`].preViewImg.destroy()
+      this.num = ''
+      resultImg.src = ''
+      document.getElementById('myIdentifident').innerHTML = ''
+      document.getElementById('myIdentifident').classList.remove('croppie-container')
+    },
+    destroy (num) {
+      console.log('destroy')
+      this[`identitiyPack${num}`].preViewImg.destroy()
+      // const resultImg = this.$refs[`resultImg${num}`]
+      // resultImg.src = ''
+      document.getElementById('myIdentifident').innerHTML = ''
+      document.getElementById('myIdentifident').classList.remove('croppie-container')
+      this.num = ''
+    },
+    clearFiles (num) {
+      console.log('clearFiles')
+      // ?清空暫存檔案
+      // this[`identitiyPack${num}`].photo = ''
+      // this[`identitiyPack${num}`].preViewImg = ''
+      this[`identitiyPack${num}`].file = ''
+      document.querySelector(`#upload${num}`).value = null
     },
     goToNNB () {
       this.NNBModal.hide()
@@ -696,7 +730,7 @@ export default {
       }
     },
     checkIsPics () {
-      console.log(1)
+      console.log('checkIsPics')
       const dom = this.$refs.myForm
       dom.setFieldError('財力證明資料', '')
       if (this.proofType === 'option1') {
@@ -704,7 +738,7 @@ export default {
           return true
         } else {
           dom.setFieldError('財力證明資料', '勾選上傳財力資料請上傳任一證明')
-          return false
+          // return false
         }
       } else {
         return true
@@ -720,6 +754,12 @@ export default {
     // *進場先跳範例提醒
     this.NoticeModal = new this.$custom.bootstrap.Modal(this.$refs.NoticeModal)
     this.NoticeModal.show()
+  },
+  watch: {
+    num (n) {
+      console.log('12')
+      document.getElementById('myIdentifident').classList.remove('croppie-container')
+    }
   }
 }
 </script>

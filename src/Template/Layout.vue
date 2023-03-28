@@ -53,6 +53,12 @@ export default {
   .crop-width {
     max-width: 400px !important;
     max-height: 200px !important;
+    height: auto;
+  }
+  .crop-test {
+    max-width: 420px !important;
+    max-height: 300px !important;
+    height: auto;
   }
   .form-text{
     margin-top: 0;
