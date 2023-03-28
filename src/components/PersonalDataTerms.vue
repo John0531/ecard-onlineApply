@@ -367,7 +367,7 @@
           <!-------------------本人已詳閱---------------------->
           <div
             class="terms-group"
-            v-if="$route.fullPath === '/OnLineApply_Fillin_OT_1'"
+            v-if="$route.fullPath === '/OnLineApply_Fillin_OT_1'&&Apply_N_Type==='Written'"
           >
             <div class="terms">
               <input
@@ -385,29 +385,16 @@
                 data-bs-target="#exampleModal"
               />
               <label for="agree"
-                >同意，本人對「<a
+                >同意，本人對
+                <span v-for="item in termsName" :key="item">
+                  「<a
                   href="#"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
-                  ><u>用卡須知及申請說明</u></a
-                >」「
-                <a
-                  href="#"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                  ><u>重要告知事項</u></a
-                >」「
-                <a
-                  href="#"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                  ><u>聯邦信用卡約定條款</u></a
-                >」「<a
-                  href="#"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                  ><u>電子化帳單服務約定條款</u></a
-                >」內容。(請務必勾選)
+                  ><u>{{item}}</u>
+                  </a>」
+                </span>
+                內容。(請務必勾選)
               </label>
               <p class="d-block text-danger ms-2">{{ errors["有關條款"] }}</p>
             </div>
@@ -503,6 +490,8 @@ import PublicService from '@/service/Public.Service.js'
 export default {
   data () {
     return {
+      Apply_N_Type: sessionStorage.getItem('Apply_N_Type'),
+      termsName: ['電子化帳單服務約定條款', '重要告知事項', '用卡須知及申請說明', 'MyData同意條款', 'wuc聯邦信用卡約定條款'],
       termsHtml: [],
       radioALL: false,
       Form: {
@@ -594,13 +583,7 @@ export default {
     this.termsModal = new this.$custom.bootstrap.Modal(this.$refs.termsModal, {
       backdrop: 'static'
     })
-    this.termsHtml = await PublicService.getTermsHtml([
-      'wucEBillterms',
-      'wucImportantList',
-      'wucInstructions',
-      'wucMyDataAgreement',
-      'wucUITCcardTerms'
-    ])
+    this.termsHtml = await PublicService.getTermsHtml(this.termsName)
   }
 }
 
