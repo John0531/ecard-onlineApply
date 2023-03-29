@@ -61,12 +61,26 @@ PublicService.getJson().then((result) => {
 
 const app = createApp(App)
 
+// ? 千分號
+function currency (num) {
+  if (num === null) {
+    return null
+  }
+  const n = parseInt(num, 10)
+  return `${n
+    .toFixed(0)
+    .replace(/./g, (c, i, a) =>
+      i && c !== '.' && (a.length - i) % 3 === 0
+        ? `, ${c}`.replace(/\s/g, '')
+        : c
+    )}`
+}
 // ?自訂全域屬性
 app.config.globalProperties.$custom = {
   validate,
   bootstrap,
-  Croppie
-  // currency
+  Croppie,
+  currency
 }
 
 app.use(router)

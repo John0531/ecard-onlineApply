@@ -49,7 +49,7 @@
                 <li>
                   <div class="label_confirm">身分證字號</div>
                   <div class="input-data_confirm">
-                    <p>F222388****</p>
+                    <p>{{FillinData.OT.Id}}</p>
                   </div>
                 </li>
                 <li>
@@ -57,7 +57,11 @@
                     <span class="red_text">* </span>身分證發證日期
                   </div>
                   <div class="input-data_confirm">
-                    <p>民國99年12月31日(北市)換發</p>
+                    <p>民國{{FillinData.OT.idx.idyear}}年{{FillinData.OT.idx.idMonth}}月{{FillinData.OT.idx.idDay}}日({{FillinData.OT.idCounty}})
+                      <span v-if="FillinData.OT.idissue===1">初發</span>
+                      <span v-if="FillinData.OT.idissue===2">補發</span>
+                      <span v-if="FillinData.OT.idissue===3">換發</span>
+                    </p>
                   </div>
                 </li>
                 <li>
@@ -65,7 +69,7 @@
                     <span class="red_text">* </span>中文姓名
                   </div>
                   <div class="input-data_confirm">
-                    <p>王大明</p>
+                    <p>{{FillinData.OT.cName}}</p>
                   </div>
                 </li>
                 <li>
@@ -73,13 +77,13 @@
                     <span class="red_text">* </span>英文姓名
                   </div>
                   <div class="input-data_confirm">
-                    <p>Wang Daming</p>
+                    <p>{{FillinData.OT.eName}}</p>
                   </div>
                 </li>
                 <li>
                   <div class="label_confirm">出生日期</div>
                   <div class="input-data_confirm">
-                    <p>1977/06/28</p>
+                    <p>{{FillinData.OT.BirthDay.Year}}/{{FillinData.OT.BirthDay.Month}}/{{FillinData.OT.BirthDay.Day}}</p>
                   </div>
                 </li>
                 <li>
@@ -87,7 +91,8 @@
                     <span class="red_text">* </span>出生地
                   </div>
                   <div class="input-data_confirm">
-                    <p>台北市</p>
+                    <p v-if="FillinData.OT.birth.birthplace!=='其它'">{{FillinData.OT.birth.birthplace}}</p>
+                    <p v-else>{{FillinData.OT.birth.birthplace}}-{{selectJson.NATIONALITY.filter(item=>item.VALUE===FillinData.OT.birth.birthOther)[0].SHOW}}</p>
                   </div>
                 </li>
                 <li>
@@ -95,25 +100,25 @@
                     <span class="red_text">* </span>國籍
                   </div>
                   <div class="input-data_confirm">
-                    <p>中華民國</p>
+                    <p>{{selectJson.NATIONALITY.filter(item=>item.VALUE===FillinData.OT.nationality)[0].SHOW}}</p>
                   </div>
                 </li>
                 <li>
                   <div class="label_confirm">教育程度</div>
                   <div class="input-data_confirm">
-                    <p>大學</p>
+                    <p>{{FillinData.OT.eduLevel}}</p>
                   </div>
                 </li>
                 <li>
                   <div class="label_confirm">行動電話</div>
                   <div class="input-data_confirm">
-                    <p>0999***888</p>
+                    <p>{{FillinData.OT.Cellphone}}</p>
                   </div>
                 </li>
                 <li>
                   <div class="label_confirm">電子信箱</div>
                   <div class="input-data_confirm">
-                    <p>Wang Daming@uitc.com.tw</p>
+                    <p>{{FillinData.OT.email}}</p>
                   </div>
                 </li>
                 <li>
@@ -137,7 +142,11 @@
                     <span class="red_text">* </span>帳單地址
                   </div>
                   <div class="input-data_confirm">
-                    <p>同戶籍地址</p>
+                    <p>
+                      <span v-if="FillinData.OT.billAddr===1">同戶籍地址</span>
+                      <span v-if="FillinData.OT.billAddr===2">同居住地址</span>
+                      <span v-if="FillinData.OT.billAddr===3">同公司地址</span>
+                    </p>
                   </div>
                 </li>
                 <li>
@@ -145,25 +154,29 @@
                     <span class="red_text">* </span>寄卡地址
                   </div>
                   <div class="input-data_confirm">
-                    <p>同戶籍地址</p>
+                    <p>
+                      <span v-if="FillinData.OT.sendCardAddr===1">同戶籍地址</span>
+                      <span v-if="FillinData.OT.sendCardAddr===2">同居住地址</span>
+                      <span v-if="FillinData.OT.sendCardAddr===3">同公司地址</span>
+                    </p>
                   </div>
                 </li>
                 <li>
                   <div class="label_confirm">戶籍電話</div>
                   <div class="input-data_confirm">
-                    <p>02-2250-2888</p>
+                    <p>{{FillinData.OT.home.homeAreaCode}}-{{FillinData.OT.home.homeTel}}</p>
                   </div>
                 </li>
                 <li>
                   <div class="label_confirm">居住電話</div>
                   <div class="input-data_confirm">
-                    <p>02-2250-2888</p>
+                    <p>{{FillinData.OT.live.liveAreaCode}}-{{FillinData.OT.live.liveTel}}</p>
                   </div>
                 </li>
                 <li>
                   <div class="label_confirm">住所狀態</div>
                   <div class="input-data_confirm">
-                    <p>租屋</p>
+                    <p>{{FillinData.OT.liveStatus}}</p>
                   </div>
                 </li>
                 <li>
@@ -171,7 +184,12 @@
                     <span class="red_text">* </span>帳單形式
                   </div>
                   <div class="input-data_confirm">
-                    <p>EMAIL帳單</p>
+                    <p>
+                      <span v-if="FillinData.OT.billType===1">EMAIL帳單</span>
+                      <span v-if="FillinData.OT.billType===2">行動帳單(簡訊)</span>
+                      <span v-if="FillinData.OT.billType===3">LINE帳單</span>
+                      <span v-if="FillinData.OT.billType===4">紙本帳單</span>
+                    </p>
                   </div>
                 </li>
                 <li v-if="Apply_N_Type==='Online'">
@@ -195,51 +213,53 @@
                     <span class="red_text">* </span>是否為學生
                   </div>
                   <div class="input-data_confirm">
-                    <p>是</p>
+                    <p>{{FillinData.OT.isStudent?'是':'否'}}</p>
                   </div>
                 </li>
-                <li>
-                  <div class="label_confirm">
-                    <span class="red_text">* </span>家長姓名
-                  </div>
-                  <div class="input-data_confirm">
-                    <p>王大大</p>
-                  </div>
-                </li>
-                <li>
-                  <div class="label_confirm">
-                    <span class="red_text">* </span>家長聯絡電話
-                  </div>
-                  <div class="input-data_confirm">
-                    <p>0999***888</p>
-                  </div>
-                </li>
-                <li>
-                  <div class="label_confirm">
-                    <span class="red_text">* </span>家長通訊地址
-                  </div>
-                  <div class="input-data_confirm">
-                    <p>台北市敦化南路二段63巷14號</p>
-                  </div>
-                </li>
+                <template v-if="FillinData.OT.isStudent">
+                  <li>
+                    <div class="label_confirm">
+                      <span class="red_text">* </span>家長姓名
+                    </div>
+                    <div class="input-data_confirm">
+                      <p>{{FillinData.OT.parentName}}</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="label_confirm">
+                      <span class="red_text">* </span>家長聯絡電話
+                    </div>
+                    <div class="input-data_confirm">
+                      <p>{{FillinData.OT.parentTel}}</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="label_confirm">
+                      <span class="red_text">* </span>家長通訊地址
+                    </div>
+                    <div class="input-data_confirm">
+                      <p>台北市敦化南路二段63巷14號</p>
+                    </div>
+                  </li>
+                </template>
                 <li>
                   <div class="label_confirm">
                     <span class="red_text">* </span>公司名稱
                   </div>
                   <div class="input-data_confirm">
-                    <p>聯邦網通</p>
+                    <p>{{FillinData.OT.compName}}</p>
                   </div>
                 </li>
                 <li>
                   <div class="label_confirm">公司統一編號</div>
                   <div class="input-data_confirm">
-                    <p>16614905</p>
+                    <p>{{FillinData.OT.uniformNum}}</p>
                   </div>
                 </li>
                 <li>
                   <div class="label_confirm">公司電話</div>
                   <div class="input-data_confirm">
-                    <p>02-6601-2888分機3855</p>
+                    <p>{{FillinData.OT.comp.compAreaCode}}-{{FillinData.OT.comp.compTel}}{{FillinData.OT.comp.compExt?`分機${FillinData.OT.comp.compExt}`:''}}</p>
                   </div>
                 </li>
                 <li>
@@ -251,13 +271,13 @@
                 <li>
                   <div class="label_confirm">職稱</div>
                   <div class="input-data_confirm">
-                    <p>辦事員</p>
+                    <p>{{FillinData.OT.jobTitle}}</p>
                   </div>
                 </li>
                 <li>
                   <div class="label_confirm">年資</div>
                   <div class="input-data_confirm">
-                    <p>5年</p>
+                    <p>{{FillinData.OT.jobTenure}}</p>
                   </div>
                 </li>
                 <li>
@@ -265,7 +285,10 @@
                     <span class="red_text">* </span>職業別
                   </div>
                   <div class="input-data_confirm">
-                    <p>天然能源業/武器製造販售業</p>
+                    <p>
+                      {{selectJson.JOBTYPE.filter(item=>item.VALUE===FillinData.OT.job.jobType)[0].SHOW}}
+                      {{FillinData.OT.job.jobType==='0'?`-${FillinData.OT.job.jobOther}`:''}}
+                    </p>
                   </div>
                 </li>
                 <li>
@@ -273,7 +296,7 @@
                     <span class="red_text">* </span>職級別
                   </div>
                   <div class="input-data_confirm">
-                    <p>職員</p>
+                    <p>{{selectJson.JOBLV.filter(item=>item.VALUE===FillinData.OT.jobLV)[0].SHOW}}</p>
                   </div>
                 </li>
                 <li>
@@ -281,7 +304,10 @@
                     <span class="red_text">* </span>主要所得及資金來源
                   </div>
                   <div class="input-data_confirm">
-                    <p>薪資所得</p>
+                    <p>
+                      {{selectJson.INCOME.filter(item=>item.VALUE===FillinData.OT.IncomeMain.income)[0].SHOW}}
+                      {{FillinData.OT.IncomeMain.income==='9'?`-${FillinData.OT.IncomeMain.incomeOther}`:''}}
+                    </p>
                   </div>
                 </li>
                 <li>
@@ -289,29 +315,29 @@
                     <span class="red_text">* </span>月收入
                   </div>
                   <div class="input-data_confirm">
-                    <p>40,000元</p>
+                    <p>{{$custom.currency(FillinData.OT.salary)}}元</p>
                   </div>
                 </li>
                 <li>
                   <div class="label_confirm">推廣單位代號</div>
                   <div class="input-data_confirm">
-                    <p>ETU</p>
+                    <p>{{FillinData.OT.unitCode}}</p>
                   </div>
                 </li>
                 <li>
                   <div class="label_confirm">推廣人員編號</div>
                   <div class="input-data_confirm">
-                    <p>00021</p>
+                    <p>{{FillinData.OT.userCode}}</p>
                   </div>
                 </li>
-                <li>
+                <!-- <li>
                   <div class="label_confirm">
                     <span class="red_text">* </span>安麗直銷商/會員編號
                   </div>
                   <div class="input-data_confirm">
-                    <p>SFGHJ</p>
+                    <p>{{FillinData.OT.amwayNo}}</p>
                   </div>
-                </li>
+                </li> -->
               </ul>
             </div>
           </div>
@@ -357,24 +383,21 @@
             <div class="col-12 dashed_line mb-3">
               <div class="mb-3">
                 <input
+                  v-model="FillinData.OT_1.parentType"
                   class="Apply_input"
-                  name=""
-                  id=""
                   runat="server"
                   type="radio"
-                  value="Y"
-                  checked
+                  :value="true"
                   disabled
                 />
                 <label class="form-check-label red_text me-3" for="redWord"
                   >同意</label
                 ><input
+                  v-model="FillinData.OT_1.parentType"
                   class="Apply_input"
-                  name=""
-                  id=""
                   runat="server"
                   type="radio"
-                  value="Y"
+                  :value="false"
                   disabled
                 />
                 <label class="form-check-label red_text" for="redWord"
@@ -400,23 +423,21 @@
             <div class="col-12 dashed_line mb-3">
               <div class="mb-3">
                 <input
+                  v-model="FillinData.OT_1.sharedType"
                   type="radio"
                   class="Apply_input"
-                  id=""
-                  value="Y"
+                  :value="true"
                   runat="server"
-                  checked
                   disabled
                 />
                 <label class="form-check-label red_text me-3" for="redWord"
                   >同意</label
                 ><input
+                  v-model="FillinData.OT_1.sharedType"
                   class="Apply_input"
-                  name="exampleRadios"
-                  id=""
                   runat="server"
                   type="radio"
-                  value="Y"
+                  :value="false"
                   disabled
                 />
                 <label class="form-check-label red_text" for="redWord"
@@ -456,24 +477,21 @@
             <div class="col-12 dashed_line mb-3">
               <div class="mb-3">
                 <input
-                  name="exampleRadios"
+                  v-model="FillinData.OT_1.linePNPType"
                   type="radio"
                   class="Apply_input"
-                  id=""
-                  value="Y"
+                  :value="true"
                   runat="server"
-                  checked
                   disabled
                 />
                 <label class="form-check-label red_text me-3" for="redWord"
                   >同意</label
                 ><input
+                  v-model="FillinData.OT_1.linePNPType"
                   class="Apply_input"
-                  name="exampleRadios"
-                  id=""
                   runat="server"
                   type="radio"
-                  value="Y"
+                  :value="false"
                   disabled
                 />
                 <label class="form-check-label red_text" for="redWord"
@@ -494,12 +512,11 @@
             <div class="col-12 mb-3">
               <div class="my-3">
                 <input
+                  v-model="FillinData.OT_1.autoBonus"
                   class="Apply_input"
-                  name=""
-                  id=""
                   runat="server"
                   type="checkbox"
-                  value="Y"
+                  :value="true"
                   disabled
                 />
                 <label class="form-check-label me-3" for="redWord"
@@ -543,7 +560,13 @@
 export default {
   data () {
     return {
+      selectJson: JSON.parse(localStorage.getItem('SELECT_JSON')),
       Apply_N_Type: sessionStorage.getItem('Apply_N_Type')
+    }
+  },
+  computed: {
+    FillinData () {
+      return JSON.parse(sessionStorage.getItem('FillinData'))
     }
   }
 }

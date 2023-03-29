@@ -47,7 +47,7 @@
                 id="radioALL"
                 runat="server"
                 type="radio"
-                value="Y"
+                :value="true"
               />
               <label class="form-check-label fw-bold" for="radioALL"
                 >全部同意</label
@@ -117,8 +117,8 @@
                   <div class="col-12">
                     <div class="mb-3">
                       <Field
-                        v-model="Form.ThreePromote"
-                        rules="required"
+                        v-model="Form.parentType"
+                        rules="radioRequired"
                         :class="{
                           'is-invalid': errors['第三人行銷'],
                           'form-check-input': errors['第三人行銷'],
@@ -128,7 +128,7 @@
                         id="three_promote_Y"
                         runat="server"
                         type="radio"
-                        value="Y"
+                        :value="true"
                         :validateOnInput="true"
                       />
                       <label
@@ -137,8 +137,8 @@
                         >同意</label
                       >
                       <Field
-                        v-model="Form.ThreePromote"
-                        rules="required"
+                        v-model="Form.parentType"
+                        rules="radioRequired"
                         :class="{
                           'is-invalid': errors['第三人行銷'],
                           'form-check-input': errors['第三人行銷'],
@@ -148,7 +148,7 @@
                         id="three_promote_N"
                         runat="server"
                         type="radio"
-                        value="N"
+                        :value="false"
                         :validateOnInput="true"
                       />
                       <label
@@ -194,8 +194,8 @@
                   </div>
                   <div class="col-12 mb-3">
                     <Field
-                      v-model="Form.CommonPromote"
-                      rules="required"
+                      v-model="Form.sharedType"
+                      rules="radioRequired"
                       :class="{
                         'is-invalid': errors['聯名集團共同行銷'],
                         'form-check-input': errors['聯名集團共同行銷'],
@@ -205,7 +205,7 @@
                       id="Common_Promote_Y"
                       runat="server"
                       type="radio"
-                      value="Y"
+                      :value="true"
                       :validateOnInput="true"
                     />
                     <label
@@ -214,8 +214,8 @@
                       >同意</label
                     >
                     <Field
-                      v-model="Form.CommonPromote"
-                      rules="required"
+                      v-model="Form.sharedType"
+                      rules="radioRequired"
                       :class="{
                         'is-invalid': errors['聯名集團共同行銷'],
                         'form-check-input': errors['聯名集團共同行銷'],
@@ -225,7 +225,7 @@
                       id="Common_Promote_N"
                       runat="server"
                       type="radio"
-                      value="N"
+                      :value="false"
                       :validateOnInput="true"
                     />
                     <label
@@ -284,8 +284,8 @@
                   </div>
                   <div class="col-12 mb-3">
                     <Field
-                      v-model="Form.LineService"
-                      rules="required"
+                      v-model="Form.linePNPType"
+                      rules="radioRequired"
                       :class="{
                         'is-invalid': errors['聯邦銀行LINE官方綁定個人化服務'],
                         'form-check-input':
@@ -296,7 +296,7 @@
                       id="Line_Service_Y"
                       runat="server"
                       type="radio"
-                      value="Y"
+                      :value="true"
                       :validateOnInput="true"
                     />
                     <label
@@ -305,8 +305,8 @@
                       >同意</label
                     >
                     <Field
-                      v-model="Form.LineService"
-                      rules="required"
+                      v-model="Form.linePNPType"
+                      rules="radioRequired"
                       :class="{
                         'is-invalid': errors['聯邦銀行LINE官方綁定個人化服務'],
                         'form-check-input':
@@ -317,7 +317,7 @@
                       id="Line_Service_N"
                       runat="server"
                       type="radio"
-                      value="N"
+                      :value="false"
                       :validateOnInput="true"
                     />
                     <label
@@ -347,16 +347,15 @@
                   </div>
                   <div class="col-12 mb-3">
                     <input
-                      v-model="Form.EasyCardDisable"
+                      v-model="Form.autoBonus"
                       class="Apply_input"
-                      name=""
-                      id="EasyCardDisable"
+                      id="autoBonus"
                       runat="server"
                       type="checkbox"
                     />
                     <label
                       class="form-check-label fw-bold me-3"
-                      for="EasyCardDisable"
+                      for="autoBonus"
                       >不同意開啟</label
                     >
                   </div>
@@ -371,7 +370,7 @@
           >
             <div class="terms">
               <input
-                v-model="allTerms"
+                v-model="Form.allTerms"
                 @click.prevent
                 id="checkbox"
                 name="allTerms"
@@ -495,30 +494,30 @@ export default {
       termsHtml: [],
       radioALL: false,
       Form: {
-        ThreePromote: '',
-        CommonPromote: '',
-        LineService: '',
-        EasyCardDisable: ''
+        parentType: '',
+        sharedType: '',
+        linePNPType: '',
+        autoBonus: false,
+        allTerms: false
       },
       termsModal: '',
-      checkTerms: [],
-      allTerms: false
+      checkTerms: []
     }
   },
   watch: {
     radioALL (n, o) {
       if (n) {
-        this.Form.ThreePromote = 'Y'
-        this.Form.CommonPromote = 'Y'
-        this.Form.LineService = 'Y'
+        this.Form.parentType = true
+        this.Form.sharedType = true
+        this.Form.linePNPType = true
       }
     },
     Form: {
       handler (n, o) {
         if (
-          n.ThreePromote === 'N' ||
-          n.CommonPromote === 'N' ||
-          n.LineService === 'N'
+          n.parentType === false ||
+          n.sharedType === false ||
+          n.linePNPType === false
         ) {
           this.radioALL = false
         }
@@ -527,9 +526,9 @@ export default {
     },
     checkTerms (n, o) {
       if (n.length >= this.termsHtml.length) {
-        this.allTerms = true
+        this.Form.allTerms = true
       } else {
-        this.allTerms = false
+        this.Form.allTerms = false
       }
       this.checkRadioAll()
     }
@@ -555,7 +554,7 @@ export default {
     },
     checkRadioAll () {
       this.$refs.form.setFieldError('有關條款', '')
-      if (!this.allTerms) {
+      if (!this.Form.allTerms) {
         this.$refs.form.setFieldError(
           '有關條款',
           '您尚未勾選詳細閱讀並同意有關條款'
@@ -573,6 +572,11 @@ export default {
         return
       }
       if (this.$route.fullPath === '/OnLineApply_Fillin_OT_1') {
+        const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
+        FillinData.OT_1 = {
+          ...this.Form
+        }
+        sessionStorage.setItem('FillinData', JSON.stringify(FillinData))
         this.$router.push('/OnLineApply_Fillin_OT_2')
       } else if (this.$route.fullPath === '/OnLineApply_Fillin_1') {
         this.$router.push('/OnLineApply_Fillin_Download')
@@ -584,6 +588,13 @@ export default {
       backdrop: 'static'
     })
     this.termsHtml = await PublicService.getTermsHtml(this.termsName)
+    const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
+    if (FillinData?.OT_1) {
+      this.Form = FillinData.OT_1
+    }
+    if (this.Form.parentType === true && this.Form.sharedType === true && this.Form.linePNPType === true) {
+      this.radioALL = true
+    }
   }
 }
 

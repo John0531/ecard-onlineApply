@@ -279,10 +279,13 @@ const router = createRouter({
 
 router.beforeEach((to) => {
   const sessionPages = ['/OnLineApply_Fillin_OT', '/OnLineApply_Fillin_OT_1', '/OnLineApply_Fillin_OT_2']
-  if (sessionPages.includes(to.path)) {
-    if (!sessionStorage.getItem('Apply_N_Type')) {
-      router.push('/OnLineApply_n1')
-    }
+  if (sessionPages.includes(to.path) && !sessionStorage.getItem('Apply_N_Type')) {
+    router.push('/OnLineApply_n1')
+    return
+  }
+  const fillinDataPages = ['/OnLineApply_Fillin_OT_1', '/OnLineApply_Fillin_OT_2']
+  if (fillinDataPages.includes(to.path) && !sessionStorage.getItem('FillinData')) {
+    router.push('/OnLineApply_Fillin_OT')
   }
 })
 
