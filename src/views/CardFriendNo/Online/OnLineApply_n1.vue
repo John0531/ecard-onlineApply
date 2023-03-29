@@ -61,7 +61,7 @@ export default {
     },
     OnLineApply_OTP () {
       sessionStorage.setItem('Apply_N_Type', 'Written')
-      this.$router.push('/OnLineApply_OTP')
+      this.$router.push('/OnLineApply_Written_OTP')
     }
   }
 }

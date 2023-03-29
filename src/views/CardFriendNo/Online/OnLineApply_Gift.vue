@@ -88,7 +88,13 @@
                   </div>
                   <!--------------//首刷禮---------------->
                   <div class="text-center button_group">
-                      <button onclick="location.href='OnLineApply_n1.htm'" class="btn btn-primary btn-lg mx-1" type="submit" value="">下一步</button>
+                    <button
+                      class="btn btn-primary btn-lg mx-1"
+                      type="submit"
+                      @click.prevent="applySubmit"
+                      >
+                      下一步
+                    </button>
                   </div>
               </div>
             </Form>
@@ -118,6 +124,7 @@ export default ({
       collection.errors = await this.$refs.myForm.getErrors()
       if (Object.keys(collection.errors).length === 0) {
         // ? 檢查約定條款 未打勾
+        this.$store.commit('keepPersonalData', this.applierInfo)
         // ** ===全部通過前往下一頁===
         this.$router.push('/OnLineApply_n1')
       } else {
