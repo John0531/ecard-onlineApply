@@ -51,7 +51,7 @@
         display: inline-block;
         margin-top: 5px;
         border-radius: 0px;
-    }    
+    }
     .btn.btn-primary:hover,
     .btn.btn-primary:active,
     .btn.btn-primary:focus {
@@ -88,7 +88,7 @@
             font-size: 16px;
         }
     }
-    
+
     /* 版面配置 Start */
     .header {
         height: 20px;
@@ -189,7 +189,7 @@
     .mainArea {
         padding: 50px 10px 30px;
     }
-    .mainArea p{   
+    .mainArea p{
         margin-bottom: 0px;
     }
     /*--//主要內容 mainArea--*/
@@ -232,8 +232,8 @@
     /* @media screen and (min-width: 1400px) {
         ...
     } */
-    /*----------------------------主視覺----------------------------------*/    
-    /*--------------------------查詢結果+謝謝您---------------------------------*/      
+    /*----------------------------主視覺----------------------------------*/
+    /*--------------------------查詢結果+謝謝您---------------------------------*/
     .result_message {
         padding: 15px 50px 30px;
         font-size: 16px;
@@ -258,10 +258,10 @@
             padding: 0px 0px;
         }
     }
-    /*--------------------------//查詢結果+謝謝您---------------------------------*/    
+    /*--------------------------//查詢結果+謝謝您---------------------------------*/
     /*------------------------------登入表單------------------------------------*/
-    .formList {    
-        display: flex;     
+    .formList {
+        display: flex;
         flex-direction: column;
         align-items: center;
         padding-left: 0px;
@@ -308,14 +308,14 @@
     .formList .form-group > .form-control {
         min-width: 18.3rem;
     }
-  
+
     .formList .label {
         min-width: 12rem; /*--訂單編號／申請序號--*/
     }
-   
+
     .formList .PositiveCardNo_label {
         min-width: 13rem; /*--正卡持卡人信用卡卡號--*/
-    } 
+    }
 
    .formList .ValidCardNo_label {
     min-width: 14rem; /*--本行信用卡任一有效卡號--*/
@@ -360,9 +360,9 @@
     /*--//圖形驗證碼--*/
 
     /*--表單年月日--*/
-    .formList .inDate {        
-        display: flex;      
-        justify-content: flex-start;       
+    .formList .inDate {
+        display: flex;
+        justify-content: flex-start;
         align-items: center;
         min-width: 18.3rem;
     }
@@ -389,7 +389,7 @@
     }
     /*--信用卡 效期--*/
 /*----------------------------//登入表單----------------------------------*/
-/*-------------------------opt簡訊驗證碼----------------------------------*/    
+/*-------------------------opt簡訊驗證碼----------------------------------*/
 .formList .inOpt .form-control {
     width: 9rem;
 }
@@ -416,24 +416,24 @@
     background-color: #145686;
 }
 .formList .inOpt .countdown {
-    font-size: 15px;
+    font-size: 14px;
     color: #4C4C4C;
     font-weight: 400;
 }
 @media screen and (max-width: 576px) {
     /* .formList .inOpt label {
         width: 100%;
-    } */         
+    } */
 }
 /*-------------------------//opt簡訊驗證碼--------------------------------*/
 /*----------------------------雙排表單------------------------------------*/
-    .formList-even {        
+    .formList-even {
         display: flex;
         flex-wrap: wrap;
         padding-left: 0;
     }
 
-    .formList-even li {       
+    .formList-even li {
         display: flex;
         margin-bottom: 2rem;
         flex-direction: column;
@@ -478,7 +478,7 @@
         min-width: 5rem;
         max-width: 9rem;
     }
-    
+
     .formList-even .inOpt button {
         display: inline-block;
         text-align: center;
@@ -492,11 +492,11 @@
         color: #ffffff;
         border: 0px;
     }
-    
+
     .formList-even .inOpt button:focus {
         outline: 0px
     }
-    
+
     .formList-even .inOpt button:hover {
         background-color: #145686;
     }
@@ -531,11 +531,11 @@
         .formList-even .label {
             text-align: left;
             width: 100%;
-        }      
+        }
     }
-/*-------------------------//雙排表單-------------------------------------*/    
-/*---------------------------確認申請資料---------------------------------*/    
-.container_Confirm {    
+/*-------------------------//雙排表單-------------------------------------*/
+/*---------------------------確認申請資料---------------------------------*/
+.container_Confirm {
     background-color: #f3f3f3;
     padding-top: 45px;
     margin-top: -83px;
@@ -582,7 +582,7 @@
 }
 
 @media screen and (max-width: 767px) {
-    .container_Confirm {       
+    .container_Confirm {
         margin-top: -63px;
     }
     .container_Confirm .label_confirm {
@@ -595,10 +595,10 @@
 }
 @media screen and (max-width: 576px) {
     .container_Confirm .label_confirm {
-        margin-left: .25rem;  
-    }    
+        margin-left: .25rem;
+    }
 }
- /*--親屬關係--*/    
+ /*--親屬關係--*/
  .form-group.label_family {
     align-items: flex-start;
 }
@@ -631,7 +631,7 @@
 /*--//親屬關係--*/
 /*---------------------------//確認申請資料---------------------------------*/
 /*--input下的說明文字--*/
-    
+
 .notice-text {
     display: inline-block;
     color: #097171;
@@ -639,7 +639,7 @@
     bottom: 20px;
     font-size: 14px;
     line-height: 3;
-}    
+}
 @media screen and (max-width: 768px) {
     .notice-text {
         left: 20px;
@@ -649,7 +649,7 @@
         }
     }
 /*--//input下的說明文字--*/
-/*--表單中按鈕--*/    
+/*--表單中按鈕--*/
 .blue_button {
     display: inline-block;
     margin: 0 0 0 10px;
@@ -694,7 +694,7 @@
         text-indent: -5em;
     }
     .rwdTable tbody td::before {
-        content: attr(data-title)'：';     
+        content: attr(data-title)'：';
         padding-right: 6px;
         width: 5em;
         display: inline-block;
@@ -716,7 +716,7 @@
     }
     .rwdTable tbody td:last-child {
         margin-bottom: 0.25rem;
-    }  
+    }
 }
 /*--//rwd-table--*/
 /*--------------------------------縮排------------------------------------*/

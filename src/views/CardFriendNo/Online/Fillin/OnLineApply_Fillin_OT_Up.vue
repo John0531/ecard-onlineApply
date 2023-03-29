@@ -654,9 +654,6 @@ export default {
     clearFiles (num) {
       console.log('clearFiles')
       // ?清空暫存檔案
-      // this[`identitiyPack${num}`].photo = ''
-      // this[`identitiyPack${num}`].preViewImg = ''
-      this[`identitiyPack${num}`].file = ''
       document.querySelector(`#upload${num}`).value = null
     },
     goToNNB () {

@@ -1109,7 +1109,7 @@ export default {
         case '信用卡背後末三碼': {
           if (this.$custom.validate.checkLast3Code(code) === true) {
             if (nextid) {
-              document.getElementById(nextid).focus()
+              break
             } else {
               break
             }
@@ -1226,7 +1226,7 @@ export default {
   },
   watch: {
     agreement (n) {
-      if (this.agreement) {
+      if (n.length === 4) {
         this.agreementAll = true
       } else {
         this.agreementAll = false
@@ -1240,11 +1240,49 @@ export default {
       } else {
         this.checkagree = false
       }
+    },
+    'cardNumber.code1': {
+      handler (n, o) {
+        if (n.length === 4) {
+          document.querySelector('#cardCode2').focus()
+        }
+      },
+      immediate: true
+    },
+    'cardNumber.code2': {
+      handler (n, o) {
+        if (n.length === 4) {
+          document.querySelector('#cardCode3').focus()
+        }
+      },
+      immediate: true
+    },
+    'cardNumber.code3': {
+      handler (n, o) {
+        if (n.length === 4) {
+          document.querySelector('#cardCode4').focus()
+        }
+      },
+      immediate: true
+    },
+    'cardNumber.code4': {
+      handler (n, o) {
+        if (n.length === 4) {
+          document.querySelector('#validThru').focus()
+        }
+      },
+      immediate: true
+    },
+    validThru (n) {
+      if (n.length === 4) {
+        document.querySelector('#CSC').focus()
+      }
     }
   },
   mounted () {
     this.scrollEvent()
     this.agreeModal = new this.$custom.bootstrap.Modal(this.$refs.agreeModal, { backdrop: 'static' })
+    // this.watchKeyup()
   }
 }
 </script>

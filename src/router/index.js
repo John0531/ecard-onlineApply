@@ -72,6 +72,14 @@ const routes = [
       },
       // ? 非卡友
       {
+        path: '/OnLineApply_Gift',
+        name: '非卡友首刷禮',
+        component: () => import('../views/CardFriendNo/Online/OnLineApply_Gift.vue'),
+        meta: {
+          title: '非卡友首刷禮'
+        }
+      },
+      {
         path: '/OnLineApply_n',
         name: '我不是聯邦卡友',
         component: () => import('../views/CardFriendNo/Online/OnLineApply_n.vue'),
@@ -159,20 +167,30 @@ const routes = [
       // ? 非卡友-線上-共用
       {
         path: '/OnLineApply_Chk_OTP',
-        name: '手機OTP驗證',
+        name: '手機OTP驗證(他行信用卡)',
         component: () => import('../views/CardFriendNo/Online/OnLineApply_Chk_OTP.vue'),
         meta: {
-          title: '手機OTP驗證'
+          title: '手機OTP驗證(他行信用卡)'
         }
       },
-      // {
-      //  path: '/OnLineApply_ChkSZ_OTP',
-      //  name: '手機OTP驗證(他行帳戶)',
-      //  component: () => import('../views/CardFriendNo/Online/OnLineApply_ChkSZ_OTP.vue'),
-      //  meta: {
-      //    title: '手機OTP驗證'
-      //  }
-      // },
+      {
+        path: '/OnLineApply_SZ_OTP',
+        name: '手機OTP驗證(他行帳戶)',
+        component: () => import('../views/CardFriendNo/Online/OnLineApply_ChkSZ_OTP.vue'),
+        meta: {
+          title: '手機OTP驗證(他行帳戶)'
+        }
+      },
+      // ? 非卡友-線上-書面
+      {
+        path: '/OnLineApply_Written_OTP',
+        name: '手機OTP驗證(書面)',
+        component: () => import('../views/CardFriendNo/Online/OnLineApply_Written_OTP.vue'),
+        meta: {
+          title: '手機OTP驗證(書面)'
+        }
+      },
+
       {
         path: '/OnLineApply_Fillin_OT',
         name: '非卡友-申請書資料填寫',

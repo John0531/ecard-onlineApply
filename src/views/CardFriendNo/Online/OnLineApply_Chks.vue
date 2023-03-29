@@ -1102,6 +1102,8 @@ export default {
         //   })
         //   return
         // }
+        // ?存戶不經過n1要設session
+        sessionStorage.setItem('Apply_N_Type', 'Online')
         this.$router.push('/OnLineApply_Chk_OTP')
       } else {
         // ** ===錯誤訊息彙整===
