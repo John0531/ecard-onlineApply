@@ -1,10 +1,35 @@
 [
-  {"MyData同意條款": "wucMyDataAgreement"},
-  {"用卡須知及申請說明": "wucInstructions"},
-  {"重要告知事項":"wucImportantList"},
-  {"電子化帳單服務約定條款":"wucEBillterms"},
-  {"wuc聯邦信用卡約定條款":"wucUITCcardTerms"},
-  {"wuc聯邦銀行電子銀行服務申請約定條款":"wucUITCeBankTerms"},
-  {"未來卡":"wucFeatureCard"},
-  {"悠遊卡":"wucEasyCard"}
+  {
+    "name":"MyData同意條款",
+    "fileName": "wucMyDataAgreement"
+  },
+  {
+    "name":"用卡須知及申請說明",
+    "fileName": "wucInstructions"
+  },
+  {
+    "name":"重要告知事項",
+    "fileName": "wucImportantList"
+  },
+  {
+    "name":"電子化帳單服務約定條款",
+    "fileName": "wucEBillterms"
+  },
+  {
+    "name":"wuc聯邦信用卡約定條款",
+    "fileName": "wucUITCcardTerms"
+  },
+  {
+    "name":"wuc聯邦銀行電子銀行服務申請約定條款",
+    "fileName": "wucUITCeBankTerms"
+  },
+  {
+    "name":"未來卡",
+    "fileName": "wucFeatureCard"
+  },
+  {
+    "name":"悠遊卡",
+    "fileName": "wucEasyCard"
+  }
 ]
+

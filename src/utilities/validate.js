@@ -170,13 +170,13 @@ const validate = {
   // TODO 確認辦卡地址長度 縣市10 地區10 路10 巷弄號樓5 其他100
   // ?  Address: {
   // ?   County: '',縣市
-  // ?   Dist: '',區
-  // ?   Rd: '',路
-  // ?   Ln: '',巷
+  // ?   Area: '',區
+  // ?   Road: '',路
+  // ?   Lane: '',巷
   // ?   Aly: '',弄
-  // ?   No_1: '',號1
-  // ?   No_2: '',號2
-  // ?   Floor: '',樓
+  // ?   Num: '',號1
+  // ?   Of: '',號2
+  // ?   Flr: '',樓
   // ?   Other: '' 其他
   // ? },
   // * 參數說明:
@@ -185,14 +185,14 @@ const validate = {
   // * fieldName(字串): 驗證欄位的名稱，用於設定套件錯誤訊息
   CheckAddressAll (Address, FormDom, fieldName) {
     FormDom.setFieldError(fieldName, '')
-    const test = Address.Ln + Address.Aly + Address.No_1 + Address.No_2 + Address.Floor + Address.Other
+    const test = Address.Lane + Address.Aly + Address.Num + Address.Of + Address.Flr + Address.Other
     if (test.length < 1) {
       FormDom.setFieldError(fieldName, '地址格式有誤')
     }
-    if (!Address.County || !Address.Dist || !Address.Rd) {
+    if (!Address.County || !Address.Area || !Address.Road) {
       FormDom.setFieldError(fieldName, '地址格式有誤')
     }
-    if (Address.Ln.length > 5 || Address.Aly.length > 5 || Address.No_1.length > 5 || Address.No_2.length > 5 || Address.Floor.length > 5 || Address.Other.length > 100) {
+    if (Address.Lane.length > 5 || Address.Aly.length > 5 || Address.Num.length > 5 || Address.Of.length > 5 || Address.Flr.length > 5 || Address.Other.length > 100) {
       FormDom.setFieldError(fieldName, '地址格式有誤')
     }
   },

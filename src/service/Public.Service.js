@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { hash } from '@/utilities/hash.js'
+import termsJson from '@/assets/terms.json'
 
 const service = {
   async getJson () {
@@ -11,11 +12,19 @@ const service = {
       alert(err)
     }
   },
-  async getTermsHtml (termsArr) {
+  async getTermsHtml (termsName) {
     try {
+      const termsArr = []
+      termsName.forEach(item1 => {
+        termsJson.forEach((item2) => {
+          if (item1 === item2.name) {
+            termsArr.push(item2)
+          }
+        })
+      })
       const termsHtml = []
       for (let i = 0; i < termsArr.length; i++) {
-        const url = `https://ecard.yesgogogo.com/ecard_source/${termsArr[i]}.html?${hash(8)}`
+        const url = `https://ecard.yesgogogo.com/ecard_source/${termsArr[i].fileName}.html?${hash(8)}`
         const res = await axios.get(url)
         const element = document.createElement('html')
         element.innerHTML = res.data

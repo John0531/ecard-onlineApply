@@ -278,9 +278,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  console.log(to.path)
   const sessionPages = ['/OnLineApply_Fillin_OT', '/OnLineApply_Fillin_OT_1', '/OnLineApply_Fillin_OT_2']
-  console.log(sessionPages.includes(to.path))
   if (sessionPages.includes(to.path)) {
     if (!sessionStorage.getItem('Apply_N_Type')) {
       router.push('/OnLineApply_n1')
