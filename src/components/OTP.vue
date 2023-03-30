@@ -7,7 +7,7 @@
       </div>
     </div>
     <!-- CHK -->
-    <section v-if="$route.path === '/OnLineApply_Chk_OTP'"  class="mainArea">
+    <section v-if="$route.name === '手機OTP驗證(他行信用卡)'"  class="mainArea">
       <div class="container-xl">
           <Form
             v-slot="{errors}"
@@ -67,7 +67,7 @@
       </div>
     </section>
     <!-- Chksz -->
-    <section v-if="$route.path === '/OnLineApply_SZ_OTP'"  class="mainArea">
+    <section v-if="$route.name === '手機OTP驗證(他行帳戶)'"  class="mainArea">
       <div class="container-xl">
           <Form
             v-slot="{errors}"
@@ -123,7 +123,7 @@
       </div>
     </section>
     <!-- Written -->
-    <section v-if="$route.path === '/OnLineApply_Written_OTP'" class="mainArea">
+    <section v-if="$route.name === '手機OTP驗證(書面)'" class="mainArea">
       <div class="container-xl">
           <Form
             v-slot="{errors}"
@@ -187,7 +187,7 @@
       </div>
     </section>
     <!-- 卡友 -->
-    <section v-if="$route.path === '/OnLineApply_OTP'" class="mainArea">
+    <section v-if="$route.name === '卡友-手機OTP驗證'" class="mainArea">
       <div class="container-xl">
         <div class="row justify-content-md-center pt-1 pt-md-3">
           <div class="mb-4 text-md-center DarkRed_text">
@@ -242,6 +242,26 @@
         </div>
       </div>
     </section>
+    <!-- 簡訊寄出modal -->
+    <div ref="msgModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <span  style="font-size:1rem">驗證碼已發送！！</span>
+            </div>
+            <div class="modal-footer" >
+                <div class="text-center" >
+                <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" style="border-radius: 0.3rem;">關閉</button>
+            </div>
+            </div>
+        </div>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -259,7 +279,8 @@ export default ({
       N_Chk: '', // *路由-chk非卡友[他行卡]判斷值
       N_Chksz: '', // *路由-chksz非卡友[他行帳戶]判斷值
       N_Written: '', // *路由-Written非卡友[書面申請]判斷值
-      Y: ''// *路由-卡友判斷值
+      Y: '', // *路由-卡友判斷值
+      MsgModal: '' // *簡訊寄出modal
     }
   },
   methods: {
@@ -282,7 +303,7 @@ export default ({
       // alert(`${res.data.rtnMsg}`)
       //      } else {
       //        //* 有成功打入API才算
-      alert('驗證碼已發送！！')
+      this.MsgModal.show()
       //* 驗證碼倒數計時
       this.count = 30
       this.show = false
@@ -304,10 +325,8 @@ export default ({
         // ?路由判斷導頁 卡友或非卡友
         console.log(this.$route.path)
         if (this.$route.path === '/OnLineApply_OTP') {
-          console.log('12')
           this.$router.push('/OnLineApply_Fillin')
         } else {
-          console.log('123')
           this.$router.push('/OnLineApply_Fillin_OT')
         }
       } else {
@@ -317,9 +336,40 @@ export default ({
     }
   },
   mounted () {
-    // this.getMobileMsgCode()
-    // ?路由判斷
+    this.MsgModal = new this.$custom.bootstrap.Modal(this.$refs.msgModal, { backdrop: 'static' })
+    this.getMobileMsgCode()
     console.log(this.$route)
+    // ?路由判斷
   }
 })
 </script>
+
+<style scoped>
+  .modal-header .close{
+    padding: 1rem 1rem;
+    margin: -1rem -1rem -1rem auto;
+  }
+  button.close{
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  .close{
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+  }
+  .close:hover {
+    opacity: .75;
+  }
+  .btn.btn-primary:hover{
+    background-color:#707070!important;
+  }
+</style>

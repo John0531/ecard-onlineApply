@@ -123,8 +123,9 @@ export default ({
       const collection = await this.$refs.myForm.validate()
       collection.errors = await this.$refs.myForm.getErrors()
       if (Object.keys(collection.errors).length === 0) {
-        // ? 檢查約定條款 未打勾
-        this.$store.commit('keepPersonalData', this.applierInfo)
+        // ? 檢查約定條款 未打勾返回
+        // ?keep user資料
+        sessionStorage.setItem('keepPersonalData', JSON.stringify(this.applierInfo))
         // ** ===全部通過前往下一頁===
         this.$router.push('/OnLineApply_n1')
       } else {
