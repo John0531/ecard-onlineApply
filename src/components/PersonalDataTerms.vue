@@ -16,7 +16,7 @@
           <!------------------------步驟---------------------------------->
           <div
             class="stepGroup"
-            v-if="$route.fullPath === '/OnLineApply_Fillin_OT_1'"
+            v-if="$route.name === '非卡友-個資使用條款'"
           >
             <ul class="step">
               <li class="completed">
@@ -186,11 +186,13 @@
                     aria-expanded="false"
                     aria-controls="collapseThree"
                   >
-                    <div>
+                    <div v-if="!flgTravel">
                       <span class="red_text">*</span
                       ><strong>聯名集團共同行銷：</strong>
                     </div>
-                    <div><strong>票證功能及帳單形式同意條款：</strong></div>
+                    <div v-if="flgTravel">
+                      <strong>票證功能及帳單形式同意條款：</strong>
+                    </div>
                   </div>
                   <div class="col-12 mb-3">
                     <Field
@@ -243,7 +245,7 @@
                     aria-labelledby="headingThree"
                     data-parent="#accordionExample"
                   >
-                    <div class="card-body">
+                    <div v-if="!flgTravel" class="card-body">
                       <span class="red_text"
                         >提供個人資料予貴行聯名/認同集團包含連加網路商業股份有限公司、台灣連線股份有限公司(LINE帳單)及個人選擇或附加電票功能之悠遊卡股份有限公司或一卡通票證股份有限公司等；申請聯名/認同卡所屬之該聯名/認同集團，包含但不限於全國加油站股份有限公司、萊爾富股份有限公司、微風廣場實業股份有限公司及其相關企業與合作廠商</span
                       >，聯名/認同集團有權於行銷、提供各項產品、服務、權益及各項優惠資訊之目的範圍內使用本人之個人資料，如不同意將無法核發所申請之聯名/認同卡或電子化帳單，並同意貴行得轉發其他信用卡或其他帳單形式(另配合個人資料保護法實施，悠遊卡公司、一卡通公司已將應告知事項載於官網www.easycard.com.tw、www.i-pass.com.tw，若有任何疑義，歡迎您撥打悠遊卡客服專線412-8880及一卡通客服專線(07)791-2000)<br />
@@ -251,7 +253,7 @@
                         >本人確認業經合理期間詳細審閱並完全同意上述條款係經個別商議所訂定，並完成系統驗證，提醒您如未勾選視為不同意，恐無法取得相關服務與優惠，另您亦得隨時來電客服中心辦理同意事項變更為不同意。(拒絕接受行銷專線0800-066678)</span
                       >
                     </div>
-                    <div class="card-body" id="ShareNote_Travel">
+                    <div v-if="flgTravel" class="card-body" id="ShareNote_Travel">
                       <span class="red_text"
                         >提供個人資料予申請人所選擇之附加電子票證功能(悠遊卡股份有限公司或一卡通票證股份有限公司)或台灣連線股份有限公司(LINE帳單)，作為提供票證聯名卡記名或LINE帳單服務依據，</span
                       >如不同意將無法核發所申請之信用卡或提供LINE帳單服務；<span
@@ -267,7 +269,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="dashed_line mb-3">
+                <div class="dashed_line mb-3" v-if="flgLine">
                   <div
                     class="card-header collapsed"
                     id="headingFour"
@@ -366,7 +368,7 @@
           <!-------------------本人已詳閱---------------------->
           <div
             class="terms-group"
-            v-if="$route.fullPath === '/OnLineApply_Fillin_OT_1'&&Apply_N_Type==='Written'"
+            v-if="$route.name === '非卡友-個資使用條款'&&Apply_N_Type==='Written'"
           >
             <div class="terms">
               <input
@@ -490,6 +492,8 @@ export default {
   data () {
     return {
       Apply_N_Type: sessionStorage.getItem('Apply_N_Type'),
+      flgLine: JSON.parse(sessionStorage.getItem('FillinData')).OT.flgLine,
+      flgTravel: JSON.parse(sessionStorage.getItem('FillinData')).OT.flgTravel,
       termsName: ['電子化帳單服務約定條款', '重要告知事項', '用卡須知及申請說明', 'MyData同意條款', 'wuc聯邦信用卡約定條款'],
       termsHtml: [],
       radioALL: false,
@@ -562,7 +566,8 @@ export default {
       }
     },
     async submit () {
-      if (this.$route.fullPath === '/OnLineApply_Fillin_OT_1') {
+      // ? 驗證檢查
+      if (this.$route.name === '非卡友-個資使用條款' && this.Apply_N_Type === 'Written') {
         this.checkRadioAll()
       }
       await this.$refs.form.validate()
@@ -571,14 +576,15 @@ export default {
         this.$custom.validate.showErrors(this.$refs.form.getErrors(errors))
         return
       }
-      if (this.$route.fullPath === '/OnLineApply_Fillin_OT_1') {
+      // ? 驗證檢查 end
+      if (this.$route.name === '非卡友-個資使用條款') {
         const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
         FillinData.OT_1 = {
           ...this.Form
         }
         sessionStorage.setItem('FillinData', JSON.stringify(FillinData))
         this.$router.push('/OnLineApply_Fillin_OT_2')
-      } else if (this.$route.fullPath === '/OnLineApply_Fillin_1') {
+      } else if (this.$route.name === '卡友-個資使用條款') {
         this.$router.push('/OnLineApply_Fillin_Download')
       }
     }
