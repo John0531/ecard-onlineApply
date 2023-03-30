@@ -58,6 +58,7 @@
                             type="password" maxlength="4"
                             class="cardNumber form-control"
                             :class="{ 'is-invalid': errors['卡號'] }"
+                            @input="textHandler2()"
                             @keyup="cardNumber.code2 = $custom.validate.OnlyNumPress(cardNumber.code2)"
                             @change="checkValue($refs.myForm,cardNumber,'卡號','cardCode3')"
                             />
@@ -69,6 +70,7 @@
                             type="password" maxlength="4"
                             class="cardNumber form-control"
                             :class="{ 'is-invalid': errors['卡號'] }"
+                            @input="textHandler3()"
                             @keyup="cardNumber.code3 = $custom.validate.OnlyNumPress(cardNumber.code3)"
                             @change="checkValue($refs.myForm,cardNumber,'卡號','cardCode4')"
                             />
@@ -1062,7 +1064,7 @@ export default {
                 document.getElementById(nextid).focus()
               }
             }
-            this.textHandler2()
+            // this.textHandler2()
           }
           if (code.code3) {
             if (!idRule.test(code.code3)) {
@@ -1074,7 +1076,7 @@ export default {
                 document.getElementById(nextid).focus()
               }
             }
-            this.textHandler3()
+            // this.textHandler3()
           }
           if (code.code4) {
             if (!idRule.test(code.code4)) {

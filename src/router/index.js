@@ -283,7 +283,7 @@ router.beforeEach((to) => {
   const gift = JSON.parse(sessionStorage.getItem('keepPersonalData'))
   if (sessionPages.includes(to.name) && gift) {
     if (!gift.firstGift) {
-      router.push('/OnLineApply_n1')
+      router.push('/OnLineApply_Gift')
       return
     }
   }
