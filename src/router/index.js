@@ -143,7 +143,7 @@ const routes = [
         name: '線上辦卡(已持有聯邦存戶)',
         component: () => import('../views/CardFriendNo/Online/OnLineApply_Chks.vue'),
         meta: {
-          title: '線上辦卡'
+          title: '線上辦卡(已持有聯邦存戶)'
         }
       },
       // ? 非卡友-線上-他行信用卡驗證
@@ -152,7 +152,7 @@ const routes = [
         name: '線上辦卡(已持有其他銀行信用卡)',
         component: () => import('../views/CardFriendNo/Online/OnLineApply_Chk.vue'),
         meta: {
-          title: '線上辦卡'
+          title: '線上辦卡(已持有其他銀行信用卡)'
         }
       },
       // ? 非卡友-線上-他行銀行帳戶驗證
@@ -161,7 +161,7 @@ const routes = [
         name: '線上辦卡(已持有其他銀行帳戶)',
         component: () => import('../views/CardFriendNo/Online/OnLineApply_ChkSZ.vue'),
         meta: {
-          title: '線上辦卡'
+          title: '線上辦卡(已持有其他銀行帳戶)'
         }
       },
       // ? 非卡友-線上-共用
@@ -174,7 +174,7 @@ const routes = [
         }
       },
       {
-        path: '/OnLineApply_SZ_OTP',
+        path: 'OnLineApply_ChkSZ_OTP',
         name: '手機OTP驗證(他行帳戶)',
         component: () => import('../views/CardFriendNo/Online/OnLineApply_ChkSZ_OTP.vue'),
         meta: {
@@ -196,7 +196,7 @@ const routes = [
         name: '非卡友-申請書資料填寫',
         component: () => import('../views/CardFriendNo/Online/Fillin/OnLineApply_Fillin_OT.vue'),
         meta: {
-          title: '申請書資料填寫'
+          title: '非卡友-申請書資料填寫'
         }
       },
       {
@@ -204,7 +204,7 @@ const routes = [
         name: '非卡友-個資使用條款',
         component: () => import('../views/CardFriendNo/Online/Fillin/OnLineApply_Fillin_OT_1.vue'),
         meta: {
-          title: '申請書資料填寫'
+          title: '非卡友-個資使用條款'
         }
       },
       {
@@ -212,7 +212,7 @@ const routes = [
         name: '非卡友-確認填寫資料',
         component: () => import('../views/CardFriendNo/Online/Fillin/OnLineApply_Fillin_OT_2.vue'),
         meta: {
-          title: '申請書資料填寫'
+          title: '非卡友-確認填寫資料'
         }
       },
       {
@@ -220,7 +220,7 @@ const routes = [
         name: '非卡友-檢附財力證明',
         component: () => import('../views/CardFriendNo/Online/Fillin/OnLineApply_Fillin_OT_Up.vue'),
         meta: {
-          title: '檢附財力證明'
+          title: '非卡友-檢附財力證明'
         }
       },
       {
@@ -228,7 +228,7 @@ const routes = [
         name: '非卡友- MyData服務授權條款',
         component: () => import('../views/CardFriendNo/Online/Fillin/OnLineApply_Fillin_OT_MyDataTerms.vue'),
         meta: {
-          title: 'MyData服務授權條款'
+          title: '非卡友- MyData服務授權條款'
         }
       },
       {
@@ -236,7 +236,7 @@ const routes = [
         name: '非卡友-MyData申請完成',
         component: () => import('../views/CardFriendNo/Online/Fillin/OnLineApply_Fillin_OT_MyDataFinish.vue'),
         meta: {
-          title: 'MyData申請完成'
+          title: '非卡友-MyData申請完成'
         }
       },
       {
@@ -244,7 +244,7 @@ const routes = [
         name: '非卡友-NewNewBank',
         component: () => import('../views/dspApplicationNNB.vue'),
         meta: {
-          title: 'NewNewBank'
+          title: '非卡友-NewNewBank'
         }
       },
       {
@@ -252,7 +252,7 @@ const routes = [
         name: '非卡友-NewNewBank申請',
         component: () => import('../views/dspApplicationNNB_Apply.vue'),
         meta: {
-          title: 'NewNewBank申請'
+          title: '非卡友-NewNewBank申請'
         }
       },
       {
@@ -260,7 +260,7 @@ const routes = [
         name: '非卡友-NewNewBank申請完成',
         component: () => import('../views/dspApplicationNNB_finish.vue'),
         meta: {
-          title: 'NewNewBank申請完成'
+          title: '非卡友-NewNewBank申請完成'
         }
       }
     ]
@@ -278,13 +278,22 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  const sessionPages = ['/OnLineApply_Fillin_OT', '/OnLineApply_Fillin_OT_1', '/OnLineApply_Fillin_OT_2']
-  if (sessionPages.includes(to.path) && !sessionStorage.getItem('Apply_N_Type')) {
+  const sessionPages = ['非卡友-申請書資料填寫', '非卡友-個資使用條款', '非卡友-確認填寫資料', '線上辦卡(已持有其他銀行信用卡)', '線上辦卡(已持有其他銀行帳戶)', '手機OTP驗證(他行信用卡)', '手機OTP驗證(他行帳戶)', '手機OTP驗證(書面)']
+  // ?踢退沒有選首刷禮的user
+  const gift = JSON.parse(sessionStorage.getItem('keepPersonalData'))
+  if (sessionPages.includes(to.name) && gift) {
+    if (!gift.firstGift) {
+      router.push('/OnLineApply_n1')
+      return
+    }
+  }
+  // ?踢退直接輸入路由，沒有走正常流程的user
+  if (sessionPages.includes(to.name) && !sessionStorage.getItem('Apply_N_Type')) {
     router.push('/OnLineApply_n1')
     return
   }
-  const fillinDataPages = ['/OnLineApply_Fillin_OT_1', '/OnLineApply_Fillin_OT_2']
-  if (fillinDataPages.includes(to.path) && !sessionStorage.getItem('FillinData')) {
+  const fillinDataPages = ['非卡友-個資使用條款', '非卡友-確認填寫資料']
+  if (fillinDataPages.includes(to.name) && !sessionStorage.getItem('FillinData')) {
     router.push('/OnLineApply_Fillin_OT')
   }
 })
