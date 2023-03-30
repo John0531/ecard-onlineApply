@@ -137,7 +137,8 @@
                 </li>
                 <li class="col-12 col-md-6">
                   <label for=""><span class="red_text">* </span>中文姓名</label>
-                  <Field
+                  <div class="form-text">{{Form.cName}}</div>
+                  <!-- <Field
                     v-model="Form.cName"
                     maxlength="20"
                     rules="required|checkChinese"
@@ -150,11 +151,12 @@
                   <ErrorMessage
                     name="中文姓名"
                     class="text-danger ms-2"
-                  />
+                  /> -->
                 </li>
                 <li class="col-12 col-md-6">
                   <label for=""><span class="red_text">* </span>英文姓名</label>
-                  <div class="d-block d-md-flex align-items-center">
+                  <div class="form-text">{{Form.eName}}</div>
+                  <!-- <div class="d-block d-md-flex align-items-center">
                     <Field
                       v-model="Form.eName"
                       maxlength="30"
@@ -170,11 +172,11 @@
                   <ErrorMessage
                     name="英文姓名"
                     class="text-danger ms-2 mt-1"
-                  />
+                  /> -->
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">出生日期</label>
-                  <div class="form-text">{{Form.BirthDay.Year}}/{{Form.BirthDay.Month}}/{{Form.BirthDay.Day}}</div>
+                  <div class="form-text">{{Form.brthDt}}</div>
                   <!-- <div class="d-flex align-items-center">
                     <Field
                       v-model="Form.BirthDay.Year"
@@ -285,7 +287,8 @@
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">電子信箱</label>
-                  <template v-if="Form.billType===1">
+                  <div class="form-text">{{Form.email}}</div>
+                  <!-- <template v-if="Form.billType===1">
                     <Field
                       v-model="Form.email"
                       rules="required|email"
@@ -305,7 +308,7 @@
                     name="電子信箱"
                     type="text"
                     class="form-control"
-                  />
+                  /> -->
                 </li>
                 <li class="col-12">
                   <span class="red_text">* 為響應環保及維護個人隱私，將依您以上留存之「電子信箱」寄送信用卡活動及權益通知。</span>
@@ -630,7 +633,7 @@
                   />
                 </li>
                 <li class="col-12 col-md-6">
-                  <label for=""><span class="red_text">* </span>戶籍電話</label>
+                  <label for="">戶籍電話</label>
                   <div class="d-flex office_tel align-items-center">
                     <Field
                       v-model="Form.home.homeAreaCode"
@@ -639,7 +642,7 @@
                       class="form-control AreaCode me-1"
                       :class="{ 'is-invalid': errors['戶籍電話區碼'] }"
                       maxlength="4"
-                      @change="$custom.validate.chkKeyValueLength(Form.home.homeAreaCode,$refs.form,'戶籍電話區碼',2,4)"
+                      @change="Form.home.homeAreaCode?$custom.validate.chkKeyValueLength(Form.home.homeAreaCode,$refs.form,'戶籍電話區碼',2,4):''"
                       @keyup="Form.home.homeAreaCode = $custom.validate.OnlyNumPress(Form.home.homeAreaCode)"
                     />-
                     <Field
@@ -649,14 +652,14 @@
                       class="form-control ms-1"
                       :class="{ 'is-invalid': errors['戶籍電話號碼'] }"
                       maxlength="8"
-                      @change="$custom.validate.chkKeyValueLength(Form.home.homeTel,formDom,'戶籍電話號碼',6,8)"
+                      @change="Form.home.homeTel?$custom.validate.chkKeyValueLength(Form.home.homeTel,formDom,'戶籍電話號碼',6,8):''"
                       @keyup="Form.home.homeTel = $custom.validate.OnlyNumPress(Form.home.homeTel)"
                     />
                   </div>
                   <p class="text-danger ms-2 mt-1">{{ errors['戶籍電話區碼']?errors['戶籍電話區碼']:errors['戶籍電話號碼'] }}</p>
                 </li>
                 <li class="col-12 col-md-6">
-                  <label for=""><span class="red_text">* </span>居住電話</label>
+                  <label for="">居住電話</label>
                   <div class="d-flex office_tel align-items-center">
                     <Field
                       v-model="Form.live.liveAreaCode"
@@ -665,7 +668,7 @@
                       class="form-control AreaCode me-1"
                       :class="{ 'is-invalid': errors['居住電話區碼'] }"
                       maxlength="4"
-                      @change="$custom.validate.chkKeyValueLength(Form.live.liveAreaCode,formDom,'居住電話區碼',2,4)"
+                      @change="Form.live.liveAreaCode?$custom.validate.chkKeyValueLength(Form.live.liveAreaCode,formDom,'居住電話區碼',2,4):''"
                       @keyup="Form.live.liveAreaCode = $custom.validate.OnlyNumPress(Form.live.liveAreaCode)"
                     />-
                     <Field
@@ -675,7 +678,7 @@
                       class="form-control ms-1"
                       :class="{ 'is-invalid': errors['居住電話號碼'] }"
                       maxlength="8"
-                      @change="$custom.validate.chkKeyValueLength(Form.live.liveTel,formDom,'居住電話號碼',6,8)"
+                      @change="Form.live.liveTel?$custom.validate.chkKeyValueLength(Form.live.liveTel,formDom,'居住電話號碼',6,8):''"
                       @keyup="Form.live.liveTel = $custom.validate.OnlyNumPress(Form.live.liveTel)"
                     />
                   </div>
@@ -756,7 +759,7 @@
                       ※帳單接收型式將依本次選擇做為日後帳單寄送依據，如未點選E-mail認證信則依原帳單型式或紙本寄送。</span>
                   </div>
                 </li>
-                <li class="col-12 col-md-12 mb-0" v-if="Apply_N_Type==='Online'">
+                <li class="col-12 col-md-12 mb-0" v-if="Apply_N_Type==='Online'&&pageLoad.flgDigi">
                   <label for=""
                     ><span class="red_text">* </span>申請數位卡</label
                   >
@@ -818,52 +821,54 @@
                   />
                 </li>
                 <!-----新增學生欄位------->
-                <li class="col-12 col-md-12 mb-0">
-                  <label for=""><span class="red_text">* </span>是否為學生
-                  </label>
-                  <div class="d-flex flex-wrap flex-column flex-md-row">
-                    <div class="form-check me-4">
-                      <Field
-                        rules="radioRequired"
-                        :class="{ 'is-invalid': errors['是否為學生'] }"
-                        v-model="Form.isStudent"
-                        class="form-check-input mt-2 position-absolute"
-                        type="radio"
-                        name="是否為學生"
-                        :value="true"
-                        :validateOnInput="true"
-                      />
-                      <div class="form_Apply_txt">
-                        是
+                <template v-if="pageLoad.flgStudent">
+                  <li class="col-12 col-md-12 mb-0">
+                    <label for=""><span class="red_text">* </span>是否為學生
+                    </label>
+                    <div class="d-flex flex-wrap flex-column flex-md-row">
+                      <div class="form-check me-4">
+                        <Field
+                          rules="radioRequired"
+                          :class="{ 'is-invalid': errors['是否為學生'] }"
+                          v-model="Form.isStudent"
+                          class="form-check-input mt-2 position-absolute"
+                          type="radio"
+                          name="是否為學生"
+                          :value="true"
+                          :validateOnInput="true"
+                        />
+                        <div class="form_Apply_txt">
+                          是
+                        </div>
+                      </div>
+                      <div class="form-check me-4">
+                        <Field
+                          rules="radioRequired"
+                          :class="{ 'is-invalid': errors['是否為學生'] }"
+                          v-model="Form.isStudent"
+                          class="form-check-input mt-2 position-absolute"
+                          type="radio"
+                          name="是否為學生"
+                          :value="false"
+                          :validateOnInput="true"
+                        />
+                        <div class="form_Apply_txt">
+                          否
+                        </div>
                       </div>
                     </div>
-                    <div class="form-check me-4">
-                      <Field
-                        rules="radioRequired"
-                        :class="{ 'is-invalid': errors['是否為學生'] }"
-                        v-model="Form.isStudent"
-                        class="form-check-input mt-2 position-absolute"
-                        type="radio"
-                        name="是否為學生"
-                        :value="false"
-                        :validateOnInput="true"
-                      />
-                      <div class="form_Apply_txt">
-                        否
-                      </div>
+                    <ErrorMessage
+                      name="是否為學生"
+                      class="text-danger ms-2"
+                    />
+                  </li>
+                  <li class="col-12 col-md-12 mb-2">
+                    <div>
+                      <span>※貼心提醒：學生辦卡依金融法令規範發卡行應將發卡情事通知父母或法定代理人，請您提供1.家長姓名(直系血親尊親屬)、2.家長手機、3.通知書寄送地址以利後續通知事宜。
+                      </span>
                     </div>
-                  </div>
-                  <ErrorMessage
-                    name="是否為學生"
-                    class="text-danger ms-2"
-                  />
-                </li>
-                <li class="col-12 col-md-12 mb-2">
-                  <div>
-                    <span>※貼心提醒：學生辦卡依金融法令規範發卡行應將發卡情事通知父母或法定代理人，請您提供1.家長姓名(直系血親尊親屬)、2.家長手機、3.通知書寄送地址以利後續通知事宜。
-                    </span>
-                  </div>
-                </li>
+                  </li>
+                </template>
                 <template v-if="Form.isStudent">
                   <li class="col-12 col-md-6">
                     <label for=""><span class="red_text">* </span>家長姓名</label>
@@ -1064,7 +1069,7 @@
                   </div>
                 </li>
                 <li class="col-12 col-md-12">
-                  <label for=""><span class="red_text">* </span>公司地址</label>
+                  <label for="">公司地址</label>
                   <div
                     class="d-flex flex-wrap flex-md-nowrap apply_address align-items-center"
                   >
@@ -1072,7 +1077,7 @@
                       as="select"
                       name="compAddr_County"
                       v-model="Form.compAddr.County"
-                      @blur="$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址')"
+                      @blur="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       runat="server"
                       class="form-select form-control ZIP mb-2"
                       :class="{ 'is-invalid': errors['公司地址'] }"
@@ -1082,7 +1087,7 @@
                     <Field
                       as="select"
                       name="compAddr_Area"
-                      @blur="$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址')"
+                      @blur="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       v-model="Form.compAddr.Area"
                       runat="server"
                       class="form-select form-control Area mx-1 mx-md-2 mb-2"
@@ -1095,7 +1100,7 @@
                     <Field
                       as="select"
                       name="compAddr_Road"
-                      @blur="$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址')"
+                      @blur="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       v-model="Form.compAddr.Road"
                       runat="server"
                       class="form-select form-control Road mb-2"
@@ -1111,7 +1116,7 @@
                       name="compAddr_Lane"
                       type="text"
                       v-model="Form.compAddr.Lane"
-                      @change="$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址')"
+                      @change="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Lane = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Lane)"
                       maxlength="5"
                       class="form-control me-1"
@@ -1121,7 +1126,7 @@
                       name="compAddr_Aly"
                       type="text"
                       v-model="Form.compAddr.Aly"
-                      @change="$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址')"
+                      @change="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Aly = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Aly)"
                       maxlength="5"
                       class="form-control mx-1"
@@ -1131,7 +1136,7 @@
                       name="compAddr_Num"
                       type="text"
                       v-model="Form.compAddr.Num"
-                      @change="$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址')"
+                      @change="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Num)"
                       maxlength="5"
                       class="form-control mx-1"
@@ -1141,7 +1146,7 @@
                       name="compAddr_Of"
                       type="text"
                       v-model="Form.compAddr.Of"
-                      @change="$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址')"
+                      @change="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Of = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Of)"
                       maxlength="5"
                       class="form-control mx-1"
@@ -1151,7 +1156,7 @@
                       name="compAddr_Flr"
                       type="text"
                       v-model="Form.compAddr.Flr"
-                      @change="$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址')"
+                      @change="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Flr = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Flr)"
                       maxlength="5"
                       class="form-control mx-1"
@@ -1161,7 +1166,7 @@
                       name="compAddr_Other"
                       type="text"
                       v-model="Form.compAddr.Other"
-                      @change="$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址')"
+                      @change="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       maxlength="100"
                       class="form-control ms-1"
                       :class="{ 'is-invalid': errors['公司地址'] }"
@@ -1344,7 +1349,7 @@
                     class="text-danger ms-2"
                   />
                 </li>
-                <!-- <li class="col-12 col-md-6">
+                <li class="col-12 col-md-6" v-if="pageLoad.flgAmwayNo">
                     <label for=""><span class="red_text">* </span>安麗直銷商/會員編號</label>
                     <Field
                       v-model="Form.amwayNo"
@@ -1358,7 +1363,7 @@
                       name="安麗直銷商/會員編號"
                       class="text-danger ms-2"
                     />
-                </li> -->
+                </li>
               </ul>
             </div>
           </div>
@@ -1383,6 +1388,8 @@
 </template>
 
 <script>
+import service from '@/service/CardFriend_N.Service.js'
+
 class Address {
   constructor (address) {
     this.County = address?.County || ''
@@ -1400,11 +1407,12 @@ class Address {
 export default {
   data () {
     return {
+      pageLoad: {},
       Apply_N_Type: sessionStorage.getItem('Apply_N_Type'),
       selectJson: JSON.parse(localStorage.getItem('SELECT_JSON')),
       Form: {
         paperApply: sessionStorage.getItem('Apply_N_Type') === 'Written',
-        Id: 'A12345****',
+        Id: '',
         idx: {
           Year: '',
           Month: '',
@@ -1414,11 +1422,7 @@ export default {
         idissue: '',
         cName: '',
         eName: '',
-        BirthDay: {
-          Year: '1977',
-          Month: '6',
-          Day: '28'
-        },
+        brthDt: '',
         birth: {
           birthplace: '',
           birthOther: ''
@@ -1439,7 +1443,7 @@ export default {
         },
         liveStatus: '',
         billType: '',
-        Cellphone: '0999***888',
+        Cellphone: '',
         email: '',
         DigitalCard: '',
         GraduateSchool: '',
@@ -1477,28 +1481,70 @@ export default {
     idxList () {
       return this.$custom.validate.getDateSelect(this.Form.idx, '民國')
     },
-    BirthDateList () {
+    /* BirthDateList () {
       return this.$custom.validate.getDateSelect(this.Form.BirthDay, '民國')
-    },
+    }, */
     formDom () {
       return this.$refs.form
     }
   },
+  watch: {
+    Form: {
+      handler (n, o) {
+        if (n.billAddr !== 3 && n.sendCardAddr !== 3) {
+          this.$refs.form.setFieldError('公司地址', '')
+        }
+        if (!n.home.homeAreaCode && !n.home.homeTel) {
+          this.$refs.form.setFieldError('戶籍電話區碼', '')
+          this.$refs.form.setFieldError('戶籍電話號碼', '')
+        }
+        if (!n.live.liveAreaCode && !n.live.liveTel) {
+          this.$refs.form.setFieldError('居住電話號碼', '')
+          this.$refs.form.setFieldError('居住電話號碼', '')
+        }
+      },
+      deep: true
+    }
+  },
   methods: {
+    async getPageData () {
+      // ? 取得 sessionStorage 資料
+      const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
+      if (FillinData?.OT) {
+        this.Form = FillinData.OT
+      }
+      // ? 取得 PageLoad API 資料
+      const result = await service.fillin_OT_PageLoad()
+      this.pageLoad = result
+      this.Form.Id = this.pageLoad.id
+      this.Form.cName = this.pageLoad.cName
+      this.Form.eName = this.pageLoad.eName
+      this.Form.brthDt = this.pageLoad.brthDt
+      this.Form.Cellphone = this.pageLoad.mbleTelNbr
+      this.Form.email = this.pageLoad.email
+      this.Form.unitCode = this.pageLoad.unitCode
+      this.Form.userCode = this.pageLoad.userCode
+    },
     async submit () {
       this.$refs.form.setErrors({}) // ? 先清楚所有上次驗證的錯誤再驗證
       // ? 驗證所有規則
       this.$custom.validate.checkDate(this.Form.idx, this.$refs.form, '身分證發證日期')
       this.$custom.validate.CheckAddressAll(this.Form.homeAddr, this.$refs.form, '戶籍地址')
       this.$custom.validate.CheckAddressAll(this.Form.liveAddr, this.$refs.form, '居住地址')
-      this.$custom.validate.chkKeyValueLength(this.Form.home.homeAreaCode, this.$refs.form, '戶籍電話區碼', 2, 4)
-      this.$custom.validate.chkKeyValueLength(this.Form.home.homeTel, this.$refs.form, '戶籍電話號碼', 6, 8)
-      this.$custom.validate.chkKeyValueLength(this.Form.live.liveAreaCode, this.$refs.form, '居住電話區碼', 2, 4)
-      this.$custom.validate.chkKeyValueLength(this.Form.live.liveTel, this.$refs.form, '居住電話號碼', 6, 8)
+      if (this.Form.home.homeAreaCode || this.Form.home.homeTel) {
+        this.$custom.validate.chkKeyValueLength(this.Form.home.homeAreaCode, this.$refs.form, '戶籍電話區碼', 2, 4)
+        this.$custom.validate.chkKeyValueLength(this.Form.home.homeTel, this.$refs.form, '戶籍電話號碼', 6, 8)
+      }
+      if (this.Form.live.liveAreaCode || this.Form.live.liveTel) {
+        this.$custom.validate.chkKeyValueLength(this.Form.live.liveAreaCode, this.$refs.form, '居住電話區碼', 2, 4)
+        this.$custom.validate.chkKeyValueLength(this.Form.live.liveTel, this.$refs.form, '居住電話號碼', 6, 8)
+      }
       if (this.Form.isStudent) {
         this.$custom.validate.CheckAddressAll(this.Form.parentAddr, this.$refs.form, '家長通訊地址')
       }
-      this.$custom.validate.CheckAddressAll(this.Form.compAddr, this.$refs.form, '公司地址')
+      if (this.Form.billAddr === 3 || this.Form.sendCardAddr === 3) {
+        this.$custom.validate.CheckAddressAll(this.Form.compAddr, this.$refs.form, '公司地址')
+      }
       await this.$refs.form.validate()
       // ? 驗證所有規則 end
       const errors = this.$refs.form.getErrors()
@@ -1516,6 +1562,9 @@ export default {
           idMonth: this.Form.idx.Month,
           idDay: this.Form.idx.Day
         }
+        postData.flgLine = this.pageLoad.flgLine
+        postData.flgTravel = this.pageLoad.flgTravel
+        postData.flgAmwayNo = this.pageLoad.flgAmwayNo
         const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
         if (FillinData?.OT) {
           FillinData.OT = postData
@@ -1530,10 +1579,7 @@ export default {
     }
   },
   mounted () {
-    const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
-    if (FillinData?.OT) {
-      this.Form = FillinData.OT
-    }
+    this.getPageData()
   }
 }
 </script>

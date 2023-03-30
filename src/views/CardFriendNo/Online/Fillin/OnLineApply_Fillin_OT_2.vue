@@ -83,7 +83,7 @@
                 <li>
                   <div class="label_confirm">出生日期</div>
                   <div class="input-data_confirm">
-                    <p>{{FillinData.OT.BirthDay.Year}}/{{FillinData.OT.BirthDay.Month}}/{{FillinData.OT.BirthDay.Day}}</p>
+                    <p>{{FillinData.OT.brthDt}}</p>
                   </div>
                 </li>
                 <li>
@@ -259,7 +259,7 @@
                 <li>
                   <div class="label_confirm">公司電話</div>
                   <div class="input-data_confirm">
-                    <p>{{FillinData.OT.comp.compAreaCode}}-{{FillinData.OT.comp.compTel}}{{FillinData.OT.comp.compExt?`分機${FillinData.OT.comp.compExt}`:''}}</p>
+                    <p>{{FillinData.OT.comp.compAreaCode}}<span v-if="FillinData.OT.comp.compAreaCode">-</span>{{FillinData.OT.comp.compTel}}{{FillinData.OT.comp.compExt?`分機${FillinData.OT.comp.compExt}`:''}}</p>
                   </div>
                 </li>
                 <li>
@@ -306,7 +306,7 @@
                   <div class="input-data_confirm">
                     <p>
                       {{selectJson.INCOME.filter(item=>item.VALUE===FillinData.OT.IncomeMain.income)[0].SHOW}}
-                      {{FillinData.OT.IncomeMain.income==='9'?`-${FillinData.OT.IncomeMain.incomeOther}`:''}}
+                      {{FillinData.OT.IncomeMain.income==='9'?`- ${FillinData.OT.IncomeMain.incomeOther}`:''}}
                     </p>
                   </div>
                 </li>
@@ -330,14 +330,14 @@
                     <p>{{FillinData.OT.userCode}}</p>
                   </div>
                 </li>
-                <!-- <li>
+                <li v-if="FillinData.OT.flgAmwayNo">
                   <div class="label_confirm">
                     <span class="red_text">* </span>安麗直銷商/會員編號
                   </div>
                   <div class="input-data_confirm">
                     <p>{{FillinData.OT.amwayNo}}</p>
                   </div>
-                </li> -->
+                </li>
               </ul>
             </div>
           </div>
@@ -414,8 +414,8 @@
             </div>
           </div>
         </div>
-        <div class="mb-4 text-left"><strong>聯名集團共同行銷</strong></div>
-        <div class="mb-4 text-left">
+        <div class="mb-4 text-left" v-if="!FillinData.OT.flgTravel"><strong>聯名集團共同行銷</strong></div>
+        <div v-if="FillinData.OT.flgTravel" class="mb-4 text-left">
           <strong>票證功能及帳單形式同意條款：</strong>
         </div>
         <div class="blue_box mb-4">
@@ -445,7 +445,7 @@
                 >
               </div>
             </div>
-            <div class="card-body">
+            <div v-if="!FillinData.OT.flgTravel" class="card-body">
               <span class="red_text"
                 >提供個人資料予貴行聯名/認同集團包含連加網路商業股份有限公司、台灣連線股份有限公司(LINE帳單)及個人選擇或附加電票功能之悠遊卡股份有限公司或一卡通票證股份有限公司等；申請聯名/認同卡所屬之該聯名/認同集團，包含但不限於全國加油站股份有限公司、萊爾富股份有限公司、微風廣場實業股份有限公司及其相關企業與合作廠商</span
               >，聯名/認同集團有權於行銷、提供各項產品、服務、權益及各項優惠資訊之目的範圍內使用本人之個人資料，如不同意將無法核發所申請之聯名/認同卡或電子化帳單，並同意貴行得轉發其他信用卡或其他帳單形式(另配合個人資料保護法實施，悠遊卡公司、一卡通公司已將應告知事項載於官網www.easycard.com.tw、www.i-pass.com.tw，若有任何疑義，歡迎您撥打悠遊卡客服專線412-8880及一卡通客服專線(07)791-2000)<br />
@@ -453,7 +453,7 @@
                 >本人確認業經合理期間詳細審閱並完全同意上述條款係經個別商議所訂定，並完成系統驗證，提醒您如未勾選視為不同意，恐無法取得相關服務與優惠，另您亦得隨時來電客服中心辦理同意事項變更為不同意。(拒絕接受行銷專線0800-066678)</span
               >
             </div>
-            <div class="card-body" id="ShareNote_Travel">
+            <div v-if="FillinData.OT.flgTravel" class="card-body" id="ShareNote_Travel">
               <span class="red_text"
                 >提供個人資料予申請人所選擇之附加電子票證功能(悠遊卡股份有限公司或一卡通票證股份有限公司)或台灣連線股份有限公司(LINE帳單)，作為提供票證聯名卡記名或LINE帳單服務依據，</span
               >如不同意將無法核發所申請之信用卡或提供LINE帳單服務；<span
@@ -469,41 +469,43 @@
             </div>
           </div>
         </div>
-        <div class="mb-4 text-left">
-          <strong>聯邦銀行LINE官方綁定個人化服務：</strong>
-        </div>
-        <div class="blue_box mb-4">
-          <div class="blue_box_bg">
-            <div class="col-12 dashed_line mb-3">
-              <div class="mb-3">
-                <input
-                  v-model="FillinData.OT_1.linePNPType"
-                  type="radio"
-                  class="Apply_input"
-                  :value="true"
-                  runat="server"
-                  disabled
-                />
-                <label class="form-check-label red_text me-3" for="redWord"
-                  >同意</label
-                ><input
-                  v-model="FillinData.OT_1.linePNPType"
-                  class="Apply_input"
-                  runat="server"
-                  type="radio"
-                  :value="false"
-                  disabled
-                />
-                <label class="form-check-label red_text" for="redWord"
-                  >不同意</label
-                >
+        <template v-if="FillinData.OT.flgLine">
+          <div class="mb-4 text-left">
+            <strong>聯邦銀行LINE官方綁定個人化服務：</strong>
+          </div>
+          <div class="blue_box mb-4">
+            <div class="blue_box_bg">
+              <div class="col-12 dashed_line mb-3">
+                <div class="mb-3">
+                  <input
+                    v-model="FillinData.OT_1.linePNPType"
+                    type="radio"
+                    class="Apply_input"
+                    :value="true"
+                    runat="server"
+                    disabled
+                  />
+                  <label class="form-check-label red_text me-3" for="redWord"
+                    >同意</label
+                  ><input
+                    v-model="FillinData.OT_1.linePNPType"
+                    class="Apply_input"
+                    runat="server"
+                    type="radio"
+                    :value="false"
+                    disabled
+                  />
+                  <label class="form-check-label red_text" for="redWord"
+                    >不同意</label
+                  >
+                </div>
+              </div>
+              <div class="card-body">
+                為提供信用卡通知服務之目的範圍，得將本人之手機號碼由貴行提供予台灣連線股份有限公司(LINE)，得為蒐集、處理、國際傳輸及利用。貴行與台灣連線股份有限公司應對該等個人資料依法保密。
               </div>
             </div>
-            <div class="card-body">
-              為提供信用卡通知服務之目的範圍，得將本人之手機號碼由貴行提供予台灣連線股份有限公司(LINE)，得為蒐集、處理、國際傳輸及利用。貴行與台灣連線股份有限公司應對該等個人資料依法保密。
-            </div>
           </div>
-        </div>
+        </template>
         <div class="mb-4 text-left">
           <strong>申請悠遊聯名卡者同意卡片已開啟自動加值功能</strong>
         </div>

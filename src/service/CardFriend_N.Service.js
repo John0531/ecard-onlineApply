@@ -1,11 +1,12 @@
 import axios from 'axios'
 
 const service = {
-  async getJson () {
+  async fillin_OT_PageLoad () {
     try {
-      const url = 'https://yesgoimages.s3.ap-northeast-1.amazonaws.com/ecard/Uitlity.json'
+      const url = 'https://mocki.io/v1/e781d8c7-2ccf-4ee2-9ed6-f231feab9e12'
       const res = await axios.get(url)
-      return res.data
+      console.log(res)
+      return res.data.result
     } catch (err) {
       alert(err)
     }
