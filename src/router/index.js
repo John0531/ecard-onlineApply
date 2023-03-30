@@ -281,11 +281,9 @@ router.beforeEach((to) => {
   const sessionPages = ['非卡友-申請書資料填寫', '非卡友-個資使用條款', '非卡友-確認填寫資料', '線上辦卡(已持有其他銀行信用卡)', '線上辦卡(已持有其他銀行帳戶)', '手機OTP驗證(他行信用卡)', '手機OTP驗證(他行帳戶)', '手機OTP驗證(書面)']
   // ?踢退沒有選首刷禮的user
   const gift = JSON.parse(sessionStorage.getItem('keepPersonalData'))
-  if (sessionPages.includes(to.name) && gift) {
-    if (!gift.firstGift) {
-      router.push('/OnLineApply_Gift')
-      return
-    }
+  if (sessionPages.includes(to.name) && !gift?.firstGift) {
+    router.push('/OnLineApply_Gift')
+    return
   }
   // ?踢退直接輸入路由，沒有走正常流程的user
   if (sessionPages.includes(to.name) && !sessionStorage.getItem('Apply_N_Type')) {
