@@ -39,16 +39,16 @@
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">3.出生地</label>
-                  <div class="d-flex flex-wrap flex-md-nowrap align-items-center" :class="{ 'is-invalid':  errors['職業別的其他']}">
+                  <div class="d-flex flex-wrap flex-md-nowrap align-items-center Birthplace">
                   <Field
                     name="出生地"
                     as="select"
                     runat="server"
-                    id=""
                     type="select"
-                    :class="{ 'is-invalid': errors['出生地'], 'BirthCounty': onLineApply_Fillin_Card.birthPlace === '其它'} "
+                    :class="{ 'is-invalid': errors['出生地'], 'BirthCounty': onLineApply_Fillin_Card.birthPlace.place === '其它'} "
                     class="form-select form-control"
-                    v-model="onLineApply_Fillin_Card.birthPlace"
+                    v-model="onLineApply_Fillin_Card.birthPlace.place"
+                    :validateOnChange="true"
                   >
                     <option
                       v-for="birthArea in option.birthPlace"
@@ -58,19 +58,21 @@
                       {{ birthArea.SHOW }}
                     </option>
                   </Field>
-                  <div class="d-flex align-items-center" v-if="this.onLineApply_Fillin_Card.birthPlace === '其它'">
-                      <span class="text-nowrap">其他</span>
-                      <Field
-                        name="出生地的其他"
-                        type="text"
-                        placeholder=" "
-                        class="form-control-birth other_input ms-1 my-2 my-md-0"
-                        :class="{ 'is-invalid':  errors['出生地的其他'], 'form-control':true}"
-                        :validateOnChange="true"
-                        :validateOnMount="true"
-                      />
-                    </div>
+                  <Field
+                    name="出生地的其他"
+                    as="select"
+                    type="select"
+                    class="form-control other_input ms-1 my-2 my-md-0 form-select"
+                    :class="{ 'is-invalid':  errors['出生地的其他'], 'form-control':true}"
+                    v-if="this.onLineApply_Fillin_Card.birthPlace.place === '其它'"
+                    v-model="onLineApply_Fillin_Card.birthPlace.other"
+                    runat="server"
+                    :validateOnChange="true"
+                  >
+                  <option v-for="national in option.citizenShip.filter((item=>item.VALUE!=='TW'))" :key="national.SORT" :value="national.VALUE">{{national.SHOW}}</option>
+                  </Field>
                   </div>
+                  <span style="color: #db0031;font-size: 1em !important;">{{ errors['出生地'] }}</span>
                   <span style="color: #db0031;font-size: 1em !important;">{{ errors['出生地的其他'] }}</span>
                 </li>
                 <li class="col-12 col-md-6">
@@ -79,7 +81,6 @@
                     name="國籍"
                     as="select"
                     runat="server"
-                    id=""
                     class="form-select form-control"
                     v-model="onLineApply_Fillin_Card.citizenShip"
                   >
@@ -94,16 +95,16 @@
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">5.職業別</label>
-                  <div class="d-flex flex-wrap flex-md-nowrap align-items-center" :class="{ 'is-invalid':  errors['職業別的其他']}">
+                  <div class="d-flex flex-wrap flex-md-nowrap align-items-center">
                     <Field
                       name="職業別"
                       runat="server"
-                      id=""
                       as="select"
                       class="form-select form-control me-1"
-                      v-model="onLineApply_Fillin_Card.jobSort"
+                      v-model="onLineApply_Fillin_Card.jobSort.sort"
                       value="jobSort"
                       :class="{ 'is-invalid': errors['職業別']}"
+                      :validateOnChange="true"
                     >
                       <option
                         v-for="jobType in option.jobSort"
@@ -113,19 +114,20 @@
                         {{ jobType.SHOW }}
                       </option>
                     </Field>
-                    <div class="d-flex align-items-center" v-if="this.onLineApply_Fillin_Card.jobSort === '0'">
+                    <div class="d-flex align-items-center" v-if="this.onLineApply_Fillin_Card.jobSort.sort === '0'">
                       <span class="text-nowrap">其他</span>
                       <Field
                         name="職業別的其他"
                         type="text"
                         placeholder=" "
-                        class="form-control other_input ms-1 my-2 my-md-0 "
+                        class="form-control other_input ms-1 my-2 my-md-0"
                         :class="{ 'is-invalid':  errors['職業別的其他'], 'form-control':true}"
+                        v-model="onLineApply_Fillin_Card.jobSort.other"
                         :validateOnChange="true"
-                        :validateOnMount="true"
                       />
                     </div>
                   </div>
+                  <span style="color: #db0031;font-size: 1em !important;">{{ errors['職業別'] }}</span>
                   <span style="color: #db0031;font-size: 1em !important;">{{ errors['職業別的其他'] }}</span>
                 </li>
                 <li class="col-12 col-md-6">
@@ -149,9 +151,10 @@
                       name="主要所得及資金來源"
                       as="select"
                       runat="server"
-                      id=""
                       class="form-select form-control me-1"
-                      v-model="onLineApply_Fillin_Card.incomeOptions"
+                      v-model="onLineApply_Fillin_Card.incomeOptions.income"
+                      :class="{ 'is-invalid': errors['主要所得及資金來源']}"
+                      :validateOnChange="true"
                     >
                       <option
                         v-for="incomes in option.incomeOptions"
@@ -161,18 +164,19 @@
                         {{ incomes.SHOW }}
                       </option>
                     </Field>
-                    <div class="d-flex align-items-center" v-if="this.onLineApply_Fillin_Card.incomeOptions === '9'">
+                    <div class="d-flex align-items-center" v-if="this.onLineApply_Fillin_Card.incomeOptions.income === '9'">
                       <span class="text-nowrap">其他</span>
                       <Field
                         name="主要所得及資金來源的其他"
                         type="text"
                         :class="{ 'is-invalid':  errors['主要所得及資金來源的其他'], 'form-control':true}"
                         class="form-control other_input ms-1 my-2 my-md-0"
+                        v-model="onLineApply_Fillin_Card.incomeOptions.other"
                         :validateOnChange="true"
-                        :validateOnMount="true"
                       />
                     </div>
                   </div>
+                  <span style="color: #db0031;font-size: 1em !important;">{{ errors['主要所得及資金來源'] }}</span>
                   <span style="color: #db0031;font-size: 1em !important;">{{ errors['主要所得及資金來源的其他'] }}</span>
                 </li>
               </ul>
@@ -260,18 +264,37 @@ export default {
       noticeModal: '',
       schema: {},
       onLineApply_Fillin_Card: {
-        birthPlace: '', //* 出生地
-        incomeOptions: '', //* 主要所得及資金來源
-        citizenShip: '', //* 國籍
-        jobSort: '', //* 職業別
-        jobLevel: '' //* 職業級
+        //* 出生地
+        birthPlace: {
+          place: '',
+          other: ''
+        },
+        //* 主要所得及資金來源
+        incomeOptions: {
+          income: '',
+          other: ''
+        },
+        //* 國籍
+        citizenShip: '',
+        //* 職業別
+        jobSort: {
+          sort: '',
+          other: ''
+        },
+        //* 職業級
+        jobLevel: ''
       },
       option: {
-        birthPlace: [], //* 出生地
-        incomeOptions: [], //* 主要所得及資金來源的其他
-        citizenShip: [], //* 國籍
-        jobSort: [], //* 職業別
-        jobLevel: [] //* 職業級
+        //* 出生地
+        birthPlace: [],
+        //* 主要所得及資金來源的其他
+        incomeOptions: [],
+        //* 國籍
+        citizenShip: [],
+        //* 職業別
+        jobSort: [],
+        //* 職業級
+        jobLevel: []
       }
     }
   },
@@ -291,24 +314,50 @@ export default {
     customSchema () {
       const schema = { ...this.schema }
       // ?出生地選擇其他，其他要為必填
-      if (this.onLineApply_Fillin_Card.birthPlace === '其它') {
+      if (this.onLineApply_Fillin_Card.birthPlace.place === '其它') {
         schema.出生地的其他 = 'required'
       } else {
         schema.出生地的其他 = ''
       }
       // ?職業別選擇其他，其他要為必填
-      if (this.onLineApply_Fillin_Card.jobSort === '0') {
+      if (this.onLineApply_Fillin_Card.jobSort.sort === '0') {
         schema.職業別的其他 = 'required'
       } else {
         schema.職業別的其他 = ''
       }
       // ?主要所得及資金來源選擇其他，其他要為必填
-      if (this.onLineApply_Fillin_Card.incomeOptions === '9') {
+      if (this.onLineApply_Fillin_Card.incomeOptions.income === '9') {
         schema.主要所得及資金來源的其他 = 'required'
       } else {
         schema.主要所得及資金來源的其他 = ''
       }
       return schema
+    }
+  },
+  watch: {
+    'onLineApply_Fillin_Card.birthPlace.place': {
+      handler (n, o) {
+        if (n !== '其它') {
+          this.onLineApply_Fillin_Card.birthPlace.other = ''
+        }
+      },
+      deep: true
+    },
+    'onLineApply_Fillin_Card.jobSort.sort': {
+      handler (n, o) {
+        if (n !== '0') {
+          this.onLineApply_Fillin_Card.jobSort.other = ''
+        }
+      },
+      deep: true
+    },
+    'onLineApply_Fillin_Card.incomeOptions.income': {
+      handler (n, o) {
+        if (n !== '9') {
+          this.onLineApply_Fillin_Card.incomeOptions.other = ''
+        }
+      },
+      deep: true
     }
   },
   methods: {
@@ -339,23 +388,11 @@ export default {
       backdrop: 'static'
     })
     this.noticeModal.show()
-    this.onLineApply_Fillin_Card.birthPlace = '臺北市'
-    this.onLineApply_Fillin_Card.incomeOptions = '6'
+    this.onLineApply_Fillin_Card.birthPlace.place = '臺北市'
+    this.onLineApply_Fillin_Card.incomeOptions.income = '6'
     this.onLineApply_Fillin_Card.citizenShip = 'BH'
-    this.onLineApply_Fillin_Card.jobSort = '5'
+    this.onLineApply_Fillin_Card.jobSort.sort = '5'
     this.onLineApply_Fillin_Card.jobLevel = '3'
   }
 }
 </script>
-
-<style>
-.BirthCounty {
-  width: 130px !important;
-  margin-right: 0.5rem;
-}
-
-.formList-even .form-control-birth {
-  padding: .37rem 4rem !important;
-  width: 100% !important;
-}
-</style>

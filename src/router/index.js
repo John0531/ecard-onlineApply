@@ -15,14 +15,6 @@ const routes = [
       },
       // ? 卡友
       {
-        path: '/OnLineApply_y',
-        name: '我是聯邦卡友/存戶',
-        component: () => import('../views/CardFriendYes/OnLineApply_y.vue'),
-        meta: {
-          title: '我是聯邦卡友/存戶'
-        }
-      },
-      {
         path: '/OnLineApply_OTP',
         name: '卡友-手機OTP驗證',
         component: () => import('../views/CardFriendYes/OnLineApply_OTP.vue'),
@@ -77,14 +69,6 @@ const routes = [
         component: () => import('../views/CardFriendNo/Online/OnLineApply_Gift.vue'),
         meta: {
           title: '非卡友首刷禮'
-        }
-      },
-      {
-        path: '/OnLineApply_n',
-        name: '我不是聯邦卡友',
-        component: () => import('../views/CardFriendNo/Online/OnLineApply_n.vue'),
-        meta: {
-          title: '我不是聯邦卡友'
         }
       },
       {
