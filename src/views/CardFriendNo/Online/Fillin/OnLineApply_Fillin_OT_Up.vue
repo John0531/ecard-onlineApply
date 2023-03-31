@@ -586,24 +586,25 @@ export default {
   },
   methods: {
     async pickFiles (e) {
-      const num = this.num
       // ? 轉base64
       const reader = new FileReader()
       const file = await e.target.files[0]
       this.imgTemplateUrl = URL.createObjectURL(file)
-      await reader.readAsDataURL(file)
-      if (file) {
-        setTimeout(() => {
-          this[`identitiyPack${this.num}`].photo = reader.result
-          this.makeModify(this.num)
-        }, 300)
+      reader.readAsDataURL(file)
+      reader.onload = () => {
+        this[`identitiyPack${this.num}`].photo = reader.result
+        this.makeModify(this.num)
       }
       // ? 清空value
-      this.clearFiles(num)
+      // this.clearFiles(this.num)
     },
     async makeModify (num) {
       // ?呼叫modal準備呈現
       this.CroppieModal.show()
+      // this.$refs.CroppieModal.addEventListener('shown.bs.modal', async () => {
+      //   console.log(document.getElementById('imgTemplate').clientWidth)
+      // })
+      // console.log(document.getElementById('imgTemplate').clientWidth)
       setTimeout(async () => {
         const imgTemplate = document.getElementById('imgTemplate')
         this.imgTemplateInfo = {
