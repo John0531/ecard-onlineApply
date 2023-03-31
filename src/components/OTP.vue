@@ -37,11 +37,13 @@
                                     class="ResendOpt"
                                     type="button"
                                     value=""
+                                    id="countBtn"
+                                    @click.prevent="getMobileMsgCode"
                                     >
-                                    <div v-show="show" @click.prevent="getMobileMsgCode">獲取驗證碼</div>
-                                    <div v-show="!show" class="countdown text-white">{{this.count}}秒後可重新發送</div>
+                                    <div>重發簡訊驗證碼</div>
                                     </button>
                                 </div>
+                                <div v-show="!show" class="countdown">({{this.count}}秒後可重新發送)</div>
                                 <div class="d-flex justify-content-start invalid-feedback my-1">
                                   <span>{{errors['驗證碼']}}</span>
                                 </div>
@@ -76,6 +78,10 @@
             <div class="row justify-content-md-center pt-1 pt-md-3">
                 <div class="formGroup">
                     <ul class="formList">
+                        <li class="form-group">
+                            <label class="label" for="">行動電話</label>
+                            <div class="form-text">0999***888</div>
+                        </li>
                         <li class="inOpt align-items-start">
                           <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
                           <div class="d-flex flex-column">
@@ -93,11 +99,13 @@
                                 class="ResendOpt"
                                 type="button"
                                 value=""
+                                id="countBtn"
+                                @click.prevent="getMobileMsgCode"
                                 >
-                                <div v-show="show" @click.prevent="getMobileMsgCode">獲取驗證碼</div>
-                                <div v-show="!show" class="countdown text-white">{{this.count}}秒後可重新發送</div>
+                                <div>重發簡訊驗證碼</div>
                               </button>
-                                        </div>
+                            </div>
+                            <div v-show="!show" class="countdown">({{this.count}}秒後可重新發送)</div>
                             <div class="d-flex justify-content-start invalid-feedback my-1">
                               <span>{{errors['驗證碼']}}</span>
                             </div>
@@ -157,11 +165,13 @@
                                     class="ResendOpt"
                                     type="button"
                                     value=""
+                                    id="countBtn"
+                                    @click.prevent="getMobileMsgCode"
                                     >
-                                    <div v-show="show" @click.prevent="getMobileMsgCode">獲取驗證碼</div>
-                                    <div v-show="!show" class="countdown text-white">{{this.count}}秒後可重新發送</div>
+                                    <div>重發簡訊驗證碼</div>
                                     </button>
                                 </div>
+                                <div v-show="!show" class="countdown">({{this.count}}秒後可重新發送)</div>
                                 <div class="d-flex justify-content-start invalid-feedback my-1">
                                   <span>{{errors['驗證碼']}}</span>
                                 </div>
@@ -189,57 +199,63 @@
     <!-- 卡友 -->
     <section v-if="$route.name === '卡友-手機OTP驗證'" class="mainArea">
       <div class="container-xl">
-        <div class="row justify-content-md-center pt-1 pt-md-3">
-          <div class="mb-4 text-md-center DarkRed_text">
-            按下「獲取簡訊驗證碼」，系統將發送至您留存本行信用卡資料之手機號碼，驗證碼於10分鐘內有效。
-          </div>
           <Form
-            v-slot="{ errors }"
+            v-slot="{errors}"
             ref="myForm"
           >
-            <div class="formGroup">
-              <ul class="formList">
-                <li class="inOpt align-items-start">
-                  <label class="label mt-0 mt-md-3">請輸入簡訊驗證碼</label>
-                  <div class="d-flex flex-column">
-                    <div class="d-flex align-items-center">
-                      <Field
-                        v-model="mobileMsgCode"
-                        name="驗證碼" type="text" maxlength="4"
-                        placeholder="請輸入驗證碼" class="form-control"
-                        :class="{ 'is-invalid': errors['驗證碼']}"
-                        @focus="this.mobileMsgCode=''"
-                        @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
-                        rules="checkOTP"
-                      />
-                      <button
-                      class="ResendOpt"
-                      type="submit"
-                      value=""
-                      >
-                      <div v-show="show" @click.prevent="getMobileMsgCode">獲取驗證碼</div>
-                      <div v-show="!show" class="countdown text-white">{{this.count}}秒後可重新發送</div>
-                      <!-- <span v-show="!show">{{ count }}秒後重新發送</span> -->
-                      </button>
-                    </div>
-                    <div class="d-flex justify-content-start invalid-feedback my-1">
-                      <span>{{errors['驗證碼']}}</span>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="text-center button_group">
-              <button
-              class="btn btn-primary btn-lg mx-1"
-              type="submit"
-              @click.prevent="applySubmit()"
-              >
-              下一步
-              </button>
+            <div class="row justify-content-md-center pt-1 pt-md-3">
+                <div class="formGroup">
+                    <ul class="formList">
+                        <li class="form-group">
+                            <label class="label" for="">行動電話</label>
+                            <div class="form-text">0999***888</div>
+                        </li>
+                        <li class="inOpt align-items-start">
+                          <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
+                          <div class="d-flex flex-column">
+                            <div class="d-flex align-items-center">
+                              <Field
+                                v-model="mobileMsgCode"
+                                name="驗證碼" type="text" maxlength="4"
+                                placeholder="請輸入驗證碼" class="form-control"
+                                :class="{ 'is-invalid': errors['驗證碼'] }"
+                                @focus="this.mobileMsgCode=''"
+                                @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
+                                rules="checkOTP"
+                              />
+                              <button
+                                class="ResendOpt"
+                                type="button"
+                                value=""
+                                id="countBtn"
+                                @click.prevent="getMobileMsgCode"
+                                >
+                                <div>重發簡訊驗證碼</div>
+                              </button>
+                            </div>
+                            <div v-show="!show" class="countdown">({{this.count}}秒後可重新發送)</div>
+                            <div class="d-flex justify-content-start invalid-feedback my-1">
+                              <span>{{errors['驗證碼']}}</span>
+                            </div>
+                          </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-10 note_text text-left mb-3">
+                    <strong>提醒您：</strong><br>按<span class="Green_text">「獲取簡訊驗證碼」</span>按鈕，系統將產生一組簡訊驗證碼至您行動電話，若10分鐘「內」未輸入簡訊驗證碼，本申請將自動取消。<br> 按
+                    <span class="Green_text">「獲取簡訊驗證碼」</span>按鈕，可重送簡訊驗證碼，一天最多重送兩次，如有疑問，請洽(02)2545-5168、(07)226-9393與本行客服中心聯繫。
+                </div>
+                <div class="text-center button_group">
+                    <button
+                    @click.prevent="applySubmit()"
+                    class="btn btn-primary btn-lg mx-1"
+                    type=""
+                    >
+                    下一步
+                    </button>
+                </div>
             </div>
           </Form>
-        </div>
       </div>
     </section>
     <!-- 簡訊寄出modal -->
@@ -307,6 +323,8 @@ export default ({
       //* 驗證碼倒數計時
       this.count = 30
       this.show = false
+      const btn = document.querySelector('#countBtn')
+      btn.setAttribute('disabled', '')
       this.timer = setInterval(() => {
         if (this.count > 0 && this.count <= 30) {
           this.count--
