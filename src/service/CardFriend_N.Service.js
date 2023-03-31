@@ -1,4 +1,6 @@
 import axios from 'axios'
+// import { hash } from '@/utilities/hash.js'
+// import termsJson from '@/assets/terms.json'
 
 const service = {
   async fillin_OT_PageLoad () {
