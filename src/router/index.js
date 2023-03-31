@@ -148,6 +148,15 @@ const routes = [
           title: '線上辦卡(已持有其他銀行帳戶)'
         }
       },
+      // ? 非卡友-書面驗證
+      {
+        path: '/OnLineApply_Chkw',
+        name: '非卡友-書面驗證',
+        component: () => import('../views/CardFriendNo/Online/OnLineApply_Chkw.vue'),
+        meta: {
+          title: '非卡友-書面驗證'
+        }
+      },
       // ? 非卡友-線上-共用
       {
         path: '/OnLineApply_Chk_OTP',
@@ -262,7 +271,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  const sessionPages = ['非卡友-申請書資料填寫', '非卡友-個資使用條款', '非卡友-確認填寫資料', '線上辦卡(已持有其他銀行信用卡)', '線上辦卡(已持有其他銀行帳戶)', '手機OTP驗證(他行信用卡)', '手機OTP驗證(他行帳戶)', '手機OTP驗證(書面)']
+  const sessionPages = ['非卡友-申請書資料填寫', '非卡友-個資使用條款', '非卡友-確認填寫資料', '非卡友-書面驗證', '線上辦卡(已持有其他銀行信用卡)', '線上辦卡(已持有其他銀行帳戶)', '手機OTP驗證(他行信用卡)', '手機OTP驗證(他行帳戶)', '手機OTP驗證(書面)']
   // ?踢退沒有選首刷禮的user
   const gift = JSON.parse(sessionStorage.getItem('keepPersonalData'))
   if (sessionPages.includes(to.name) && !gift?.firstGift) {

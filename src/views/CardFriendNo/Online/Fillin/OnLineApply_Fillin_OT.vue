@@ -1326,6 +1326,7 @@
                     type="text"
                     class="form-control"
                     @change="Form.unitCode=$custom.validate.watchToUpper(Form.unitCode)"
+                    :disabled="pageLoad.unitCode"
                   />
                   <ErrorMessage
                     name="推廣單位代號"
@@ -1343,6 +1344,7 @@
                     type="text"
                     class="form-control"
                     @change="Form.userCode=$custom.validate.watchToUpper(Form.userCode)"
+                    :disabled="pageLoad.userCode"
                   />
                   <ErrorMessage
                     name="推廣人員編號"
@@ -1411,7 +1413,6 @@ export default {
       Apply_N_Type: sessionStorage.getItem('Apply_N_Type'),
       selectJson: JSON.parse(localStorage.getItem('SELECT_JSON')),
       Form: {
-        paperApply: sessionStorage.getItem('Apply_N_Type') === 'Written',
         Id: '',
         idx: {
           Year: '',
@@ -1515,7 +1516,7 @@ export default {
       }
       // ? 取得 PageLoad API 資料
       const result = await service.fillin_OT_PageLoad()
-      this.pageLoad = result
+      this.pageLoad = result // ? Api response 資料
       this.Form.Id = this.pageLoad.id
       this.Form.cName = this.pageLoad.cName
       this.Form.eName = this.pageLoad.eName
@@ -1526,7 +1527,7 @@ export default {
       this.Form.userCode = this.pageLoad.userCode
     },
     async submit () {
-      this.$refs.form.setErrors({}) // ? 先清楚所有上次驗證的錯誤再驗證
+      this.$refs.form.setErrors({}) // ? 先清除所有上次驗證的錯誤再驗證
       // ? 驗證所有規則
       this.$custom.validate.checkDate(this.Form.idx, this.$refs.form, '身分證發證日期')
       this.$custom.validate.CheckAddressAll(this.Form.homeAddr, this.$refs.form, '戶籍地址')
@@ -1549,7 +1550,6 @@ export default {
       // ? 驗證所有規則 end
       const errors = this.$refs.form.getErrors()
       if (Object.keys(errors).length === 0) {
-        sessionStorage.getItem('Apply_N_Type') === 'Written' ? this.Form.paperApply = true : this.Form.paperApply = false
         if (!this.Form.isStudent) {
           this.Form.parentName = ''
           this.Form.parentTel = ''
@@ -1574,7 +1574,7 @@ export default {
         }
         this.$router.push('/OnLineApply_Fillin_OT_1')
       } else {
-        this.$custom.validate.showErrors(this.$refs.form.getErrors(errors))
+        this.$custom.validate.showErrors(errors)
       }
     }
   },

@@ -329,6 +329,7 @@
                           <div>
                               ◆<strong>原始圖片</strong><br>
                               (請框選可供辨識之大小範圍)
+                              <img id="imgTemplate" :src="imgTemplateUrl" alt="" class="img-fluid">
                           </div>
                           <div id="myIdentifident" class="myIdentifident" ref="myIdentifident">
                           </div>
@@ -544,9 +545,8 @@
 export default {
   data () {
     return {
-      imgInfo: '',
-      imgWidth: '',
-      imgHeight: '',
+      imgTemplateUrl: '',
+      imgTemplateInfo: '',
       NoticeModal: '', //* 一進畫面財力證明格式提醒
       NNBModal: '', //* 上傳完成倒轉 NNB
       MyDataModal: '', //* 倒轉 MyData
@@ -590,12 +590,7 @@ export default {
       // ? 轉base64
       const reader = new FileReader()
       const file = await e.target.files[0]
-      this.imgInfo = await new Promise((resolve, reject) => {
-        const img = new Image()
-        img.onload = () => resolve({ width: img.width, height: img.height })
-        img.onerror = reject
-        img.src = URL.createObjectURL(file)
-      })
+      this.imgTemplateUrl = URL.createObjectURL(file)
       await reader.readAsDataURL(file)
       if (file) {
         setTimeout(() => {
@@ -609,29 +604,35 @@ export default {
     async makeModify (num) {
       // ?呼叫modal準備呈現
       this.CroppieModal.show()
-      try {
+      setTimeout(async () => {
+        const imgTemplate = document.getElementById('imgTemplate')
+        this.imgTemplateInfo = {
+          width: imgTemplate.clientWidth,
+          height: imgTemplate.clientHeight
+        }
+        this.imgTemplateUrl = ''
+        try {
         // ?要呈現畫面的區域(在modal上)
-        const croppieE = this.$refs.myIdentifident
-        this[`identitiyPack${num}`].preViewImg = new this.$custom.Croppie(croppieE, {
-          viewport: { width: this.imgInfo.width, height: this.imgInfo.height },
-          boundary: { width: this.imgInfo.width, height: this.imgInfo.height },
-          showZoomer: true,
-          enableResize: true,
-          enableOrientation: true,
-          enableZoom: true,
-          enforceBoundary: true,
-          mouseWheelZoom: 'ctrl'
-        })
-        // const cropImage = document.querySelector('.cr-image')
-        // cropImage.classList.add('crop-test')
-        await this[`identitiyPack${num}`].preViewImg.bind({
-          url: this[`identitiyPack${num}`].photo
-          // orientation: 1,
-          // setZoom: 0.2
-        })
-      } catch (error) {
-        alert(error)
-      }
+          const croppieE = this.$refs.myIdentifident
+          this[`identitiyPack${num}`].preViewImg = new this.$custom.Croppie(croppieE, {
+            viewport: { width: this.imgTemplateInfo.width, height: this.imgTemplateInfo.height },
+            boundary: { width: this.imgTemplateInfo.width + 20, height: this.imgTemplateInfo.height + 20 },
+            showZoomer: true,
+            enableResize: true,
+            enableOrientation: true,
+            enableZoom: true,
+            enforceBoundary: true,
+            mouseWheelZoom: 'ctrl'
+          })
+          // const cropImage = document.querySelector('.cr-image')
+          // cropImage.classList.add('crop-test')
+          await this[`identitiyPack${num}`].preViewImg.bind({
+            url: this[`identitiyPack${num}`].photo
+          })
+        } catch (error) {
+          alert(error)
+        }
+      }, 100)
     },
     result () {
       // ?在頁面上各欄位自呈現

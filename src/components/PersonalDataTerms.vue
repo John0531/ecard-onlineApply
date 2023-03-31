@@ -365,42 +365,6 @@
               </div>
             </div>
           </div>
-          <!-------------------本人已詳閱---------------------->
-          <div
-            class="terms-group"
-            v-if="$route.name === '非卡友-個資使用條款'&&Apply_N_Type==='Written'"
-          >
-            <div class="terms">
-              <input
-                v-model="Form.allTerms"
-                @click.prevent
-                id="checkbox"
-                name="allTerms"
-                :class="{
-                  'is-invalid': errors['有關條款'],
-                  'form-check-input': errors['有關條款'],
-                }"
-                class="checkimg position-absolute"
-                type="checkbox"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-              />
-              <label for="agree"
-                >同意，本人對
-                <span v-for="item in termsName" :key="item">
-                  「<a
-                  href="#"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                  ><u>{{item}}</u>
-                  </a>」
-                </span>
-                內容。(請務必勾選)
-              </label>
-              <p class="d-block text-danger ms-2">{{ errors["有關條款"] }}</p>
-            </div>
-          </div>
-          <!-------------------//本人已詳閱---------------------->
           <div class="text-center button_group">
             <button @click.prevent="submit" class="btn btn-primary btn-lg mx-1">
               預覽申請書
@@ -410,102 +374,21 @@
       </div>
     </section>
   </Form>
-  <!-- 主要內容 END -->
-  <!-- Modal-1 -->
-  <div
-    ref="termsModal"
-    class="modal fade"
-    id="exampleModal"
-    tabindex="-1"
-    aria-labelledby="exampleModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel-1">
-            請向下滾動，仔細閱讀整份同意書所有內容<input
-              id="myCheckCount"
-              hidden
-            />
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          >
-            <img
-              src="@/assets/images/close.png"
-              border="0"
-              alt="close"
-              data-bs-dismiss="modal"
-            />
-          </button>
-        </div>
-        <div class="modal-body">
-          <template v-for="(item, index) in termsHtml" :key="item">
-            <div
-              @scroll="checkTermsScroll($event, index + 1)"
-              :id="`terms_box_${index + 1}`"
-              class="terms_box"
-            >
-              <div v-html="item"></div>
-            </div>
-            <div :id="`button_terms_${index + 1}`" class="button_terms">
-              <input
-                type="checkbox"
-                :id="`button_termsOpt_${index + 1}`"
-                v-model="checkTerms"
-                :value="index + 1"
-                disabled
-              />
-              <label
-                :id="`read_${index + 1}`"
-                :for="`button_termsOpt_${index + 1}`"
-                >我已詳細閱讀。(請勾選)</label
-              >
-            </div>
-          </template>
-        </div>
-
-        <div class="modal-footer">
-          <div class="col-12 text-center">
-            <button
-              @click.prevent="checkAllTerms"
-              class="btn btn-primary btn-lg"
-            >
-              確定
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Modal-1 end -->
 </template>
 
 <script>
-import PublicService from '@/service/Public.Service.js'
-
 export default {
   data () {
     return {
-      Apply_N_Type: sessionStorage.getItem('Apply_N_Type'),
       flgLine: JSON.parse(sessionStorage.getItem('FillinData')).OT.flgLine,
       flgTravel: JSON.parse(sessionStorage.getItem('FillinData')).OT.flgTravel,
-      termsName: ['電子化帳單服務約定條款', '重要告知事項', '用卡須知及申請說明', 'MyData同意條款', 'wuc聯邦信用卡約定條款'],
-      termsHtml: [],
       radioALL: false,
       Form: {
         parentType: '',
         sharedType: '',
         linePNPType: '',
-        autoBonus: false,
-        allTerms: false
-      },
-      termsModal: '',
-      checkTerms: []
+        autoBonus: false
+      }
     }
   },
   watch: {
@@ -527,53 +410,15 @@ export default {
         }
       },
       deep: true
-    },
-    checkTerms (n, o) {
-      if (n.length >= this.termsHtml.length) {
-        this.Form.allTerms = true
-      } else {
-        this.Form.allTerms = false
-      }
-      this.checkRadioAll()
     }
   },
   methods: {
-    checkTermsScroll (event, num) {
-      if (
-        event.target.scrollTop >=
-        event.target.scrollHeight - event.target.offsetHeight - 50
-      ) {
-        document
-          .querySelector(`#button_termsOpt_${num}`)
-          .removeAttribute('disabled')
-        document.querySelector(`#read_${num}`).classList.add('text-checked')
-      }
-    },
-    checkAllTerms () {
-      if (this.checkTerms.length < this.termsHtml.length) {
-        alert('您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！')
-      } else {
-        this.termsModal.hide()
-      }
-    },
-    checkRadioAll () {
-      this.$refs.form.setFieldError('有關條款', '')
-      if (!this.Form.allTerms) {
-        this.$refs.form.setFieldError(
-          '有關條款',
-          '您尚未勾選詳細閱讀並同意有關條款'
-        )
-      }
-    },
     async submit () {
       // ? 驗證檢查
-      if (this.$route.name === '非卡友-個資使用條款' && this.Apply_N_Type === 'Written') {
-        this.checkRadioAll()
-      }
       await this.$refs.form.validate()
       const errors = this.$refs.form.getErrors()
       if (Object.keys(errors).length !== 0) {
-        this.$custom.validate.showErrors(this.$refs.form.getErrors(errors))
+        this.$custom.validate.showErrors(errors)
         return
       }
       // ? 驗證檢查 end
@@ -590,10 +435,6 @@ export default {
     }
   },
   async mounted () {
-    this.termsModal = new this.$custom.bootstrap.Modal(this.$refs.termsModal, {
-      backdrop: 'static'
-    })
-    this.termsHtml = await PublicService.getTermsHtml(this.termsName)
     const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
     if (FillinData?.OT_1) {
       this.Form = FillinData.OT_1
