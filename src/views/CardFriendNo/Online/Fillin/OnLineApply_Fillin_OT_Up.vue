@@ -544,6 +544,9 @@
 export default {
   data () {
     return {
+      imgInfo: '',
+      imgWidth: '',
+      imgHeight: '',
       NoticeModal: '', //* 一進畫面財力證明格式提醒
       NNBModal: '', //* 上傳完成倒轉 NNB
       MyDataModal: '', //* 倒轉 MyData
@@ -583,11 +586,16 @@ export default {
   },
   methods: {
     async pickFiles (e) {
-      console.log('pickFiles')
       const num = this.num
       // ? 轉base64
       const reader = new FileReader()
       const file = await e.target.files[0]
+      this.imgInfo = await new Promise((resolve, reject) => {
+        const img = new Image()
+        img.onload = () => resolve({ width: img.width, height: img.height })
+        img.onerror = reject
+        img.src = URL.createObjectURL(file)
+      })
       await reader.readAsDataURL(file)
       if (file) {
         setTimeout(() => {
@@ -600,14 +608,13 @@ export default {
     },
     async makeModify (num) {
       // ?呼叫modal準備呈現
-      console.log('makeModify')
       this.CroppieModal.show()
       try {
         // ?要呈現畫面的區域(在modal上)
         const croppieE = this.$refs.myIdentifident
         this[`identitiyPack${num}`].preViewImg = new this.$custom.Croppie(croppieE, {
-          viewport: { width: 420, height: 300 },
-          boundary: { width: 420, height: 300 },
+          viewport: { width: this.imgInfo.width, height: this.imgInfo.height },
+          boundary: { width: this.imgInfo.width, height: this.imgInfo.height },
           showZoomer: true,
           enableResize: true,
           enableOrientation: true,
@@ -618,16 +625,15 @@ export default {
         // const cropImage = document.querySelector('.cr-image')
         // cropImage.classList.add('crop-test')
         await this[`identitiyPack${num}`].preViewImg.bind({
-          url: this[`identitiyPack${num}`].photo,
-          orientation: 1,
-          setZoom: 0.2
+          url: this[`identitiyPack${num}`].photo
+          // orientation: 1,
+          // setZoom: 0.2
         })
       } catch (error) {
         alert(error)
       }
     },
     result () {
-      console.log('result')
       // ?在頁面上各欄位自呈現
       const num = this.num
       const resultImg = this.$refs[`resultImg${num}`]
@@ -643,7 +649,6 @@ export default {
       document.getElementById('myIdentifident').classList.remove('croppie-container')
     },
     destroy (num) {
-      console.log('destroy')
       this[`identitiyPack${num}`].preViewImg.destroy()
       // const resultImg = this.$refs[`resultImg${num}`]
       // resultImg.src = ''
@@ -652,7 +657,6 @@ export default {
       this.num = ''
     },
     clearFiles (num) {
-      console.log('clearFiles')
       // ?清空暫存檔案
       document.querySelector(`#upload${num}`).value = null
     },
@@ -727,7 +731,6 @@ export default {
       }
     },
     checkIsPics () {
-      console.log('checkIsPics')
       const dom = this.$refs.myForm
       dom.setFieldError('財力證明資料', '')
       if (this.proofType === 'option1') {
@@ -754,7 +757,6 @@ export default {
   },
   watch: {
     num (n) {
-      console.log('12')
       document.getElementById('myIdentifident').classList.remove('croppie-container')
     }
   }
