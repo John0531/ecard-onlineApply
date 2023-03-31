@@ -15,6 +15,90 @@
       ref="myForm"
     >
       <div class="row justify-content-md-center">                  <!--LINE Bank-->
+              <div class="formGroup">
+                <ul class="formList formApply">
+                    <li class="col-12 align-items-start mb-0">
+                        <label for="">申請人身分證字號</label>
+                        <div class="d-flex flex-column mb-1">
+                            <Field
+                            v-model="applierInfo.Identification"
+                            name="身分證字號"
+                            type="text" maxlength="10"
+                            placeholder="限正卡持卡人"
+                            :class="{ 'is-invalid': errors['身分證字號'] }"
+                            class="formApply_form_control form-control "
+                            @blur="applierInfo.Identification = $custom.validate.watchToUpper(applierInfo.Identification)"
+                            rules="checkId"
+                            />
+                            <div class="d-flex text-center invalid-feedback my-1">
+                                {{errors['身分證字號']}}
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col-12">
+                        <span class="red_text">(外籍人士請輸入居留簽證的統一證號)</span>
+                    </li>
+                    <li class="col-12 align-items-start">
+                        <label for="input1">西元出生年月日</label>
+                        <div class="d-flex flex-column mb-1">
+                            <div class="d-flex align-items-center">
+                                <!-- 辦卡人出生年 -->
+                                <div>
+                                    <Field
+                                    as="select" name="年"
+                                    rules="required"
+                                    class="form-select form-control"
+                                    :class="{ 'is-invalid': errors['年'] }"
+                                    :validateOnChange="true"
+                                    v-model="applierInfo.year"
+                                    >
+                                    <option value="" selected>--</option>
+                                    <option v-for="year in this.dateList.yearList" :value="year" :key="year+1">
+                                    {{year}}
+                                    </option>
+                                    </Field>
+                                </div>年
+                                <!-- 辦卡人出生月 -->
+                                <div>
+                                    <Field
+                                    as="select" name="月"
+                                    rules="required"
+                                    :class="{ 'is-invalid': errors['月'] }"
+                                    class="form-select form-control"
+                                    :validateOnChange="true"
+                                    v-model="applierInfo.month" @change="getDay">
+                                    <option value="" selected>--</option>
+                                    <option v-for="month in dateList.monthList" :value="month" :key="month+1">
+                                    {{month}}
+                                    </option>
+                                    </Field>
+                                </div>月
+                                <!-- 辦卡人出生日 -->
+                                <div>
+                                    <Field
+                                    as="select" name="日"
+                                    rules="required"
+                                    :class="{ 'is-invalid': errors['日'] }"
+                                    class="form-select form-control"
+                                    :validateOnChange="true"
+                                    v-model="applierInfo.day"
+                                    >
+                                    <option value="" selected>--</option>
+                                    <option v-for="date in dateList.dayList" :value="date" :key="date+1">
+                                    {{date}}
+                                    </option>
+                                    </Field>
+                                </div>日
+                            </div>
+                            <div class="d-flex text-center invalid-feedback my-1">
+                            <span v-if="errors['年'] || errors['月'] || errors['日']">
+                              出生年月日為必填
+                            </span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
                 <div class="formGroup">
                     <ul class="formList formApply">
                         <li class="col-12 mb-2">
