@@ -380,8 +380,8 @@
 export default {
   data () {
     return {
-      flgLine: JSON.parse(sessionStorage.getItem('FillinData')).OT.flgLine,
-      flgTravel: JSON.parse(sessionStorage.getItem('FillinData')).OT.flgTravel,
+      flgLine: JSON.parse(sessionStorage.getItem('FillinData'))?.OT.flgLine,
+      flgTravel: JSON.parse(sessionStorage.getItem('FillinData'))?.OT.flgTravel,
       radioALL: false,
       Form: {
         parentType: '',

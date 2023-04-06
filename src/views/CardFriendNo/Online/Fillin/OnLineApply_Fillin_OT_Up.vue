@@ -601,10 +601,14 @@ export default {
     async makeModify (num) {
       // ?呼叫modal準備呈現
       this.CroppieModal.show()
-      // this.$refs.CroppieModal.addEventListener('shown.bs.modal', async () => {
+      // await this.$refs.CroppieModal.addEventListener('shown.bs.modal', () => {
       //   console.log(document.getElementById('imgTemplate').clientWidth)
+      //   return 123
       // })
-      // console.log(document.getElementById('imgTemplate').clientWidth)
+      const imgTemplate = document.getElementById('imgTemplate')
+      imgTemplate.onload = function () {
+        console.log(document.getElementById('imgTemplate').clientWidth)
+      }
       setTimeout(async () => {
         const imgTemplate = document.getElementById('imgTemplate')
         this.imgTemplateInfo = {
@@ -633,7 +637,7 @@ export default {
         } catch (error) {
           alert(error)
         }
-      }, 100)
+      }, 500)
     },
     result () {
       // ?在頁面上各欄位自呈現
