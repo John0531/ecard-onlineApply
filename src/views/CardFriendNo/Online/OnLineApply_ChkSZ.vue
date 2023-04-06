@@ -1091,7 +1091,7 @@ export default {
     },
     checkAgreement () {
       this.agreeModal.show()
-      const ck = document.querySelector('#checkbox')
+      const ck = document.querySelector('#checkbox1')
       if (this.agreement.length !== 4) {
         ck.checked = false
         return

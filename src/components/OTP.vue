@@ -358,6 +358,13 @@ export default ({
     this.getMobileMsgCode()
     console.log(this.$route)
     // ?路由判斷
+    const session = 'https://61.219.193.150/CardApply/api/Testing?UserRolesa=2'
+    fetch(session)
+      .then((response) => {
+        console.log(response)
+      }).catch((err) => {
+        console.log(err)
+      })
   }
 })
 </script>
