@@ -52,6 +52,46 @@ const service = {
     } catch (err) {
       alert(err)
     }
+  },
+  async otherCardholderPageLoad () {
+    try {
+      const url = `${process.env.VUE_APP_BASE_API}/OtherCardholderVerification/PageLoad`
+      const res = await axios.get(url)
+      console.log(res)
+      return res.data.result
+    } catch (err) {
+      alert(err)
+    }
+  },
+  async otherCardholderVerification (data) {
+    try {
+      const url = `${process.env.VUE_APP_BASE_API}/OtherCardholderVerification/Verification`
+      const res = await axios.post(url, data)
+      console.log(res)
+      return res.data.result
+    } catch (err) {
+      alert(err)
+    }
+  },
+  async otherDepositorPageLoad () {
+    try {
+      const url = `${process.env.VUE_APP_BASE_API}/OtherCardholderVerification/PageLoad`
+      const res = await axios.get(url)
+      console.log(res)
+      return res.data.result
+    } catch (err) {
+      alert(err)
+    }
+  },
+  async cardSendApply () {
+    try {
+      const url = `${process.env.VUE_APP_BASE_API}/CardSendApply/CardSendApply`
+      const res = await axios.get(url)
+      console.log(res)
+      return res.data.result
+    } catch (err) {
+      alert(err)
+    }
   }
 }
 
