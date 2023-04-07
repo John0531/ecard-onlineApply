@@ -37,7 +37,7 @@ const service = {
   },
   async otherCardholderPageLoad () {
     try {
-      const url = 'https://61.219.193.150/CardApply/api/OtherCardholderVerification/PageLoad'
+      const url = `${process.env.VUE_APP_BASE_API}/OtherCardholderVerification/PageLoad`
       const res = await axios.get(url)
       console.log(res)
       return res.data.result
@@ -47,7 +47,7 @@ const service = {
   },
   async otherCardholderVerification (data) {
     try {
-      const url = 'https://61.219.193.150/CardApply/api/OtherCardholderVerification/Verification'
+      const url = `${process.env.VUE_APP_BASE_API}/OtherCardholderVerification/Verification`
       const res = await axios.post(url, data)
       console.log(res)
       return res.data.result
@@ -57,7 +57,7 @@ const service = {
   },
   async otherDepositorPageLoad () {
     try {
-      const url = 'https://61.219.193.150/CardApply/api/OtherCardholderVerification/PageLoad'
+      const url = `${process.env.VUE_APP_BASE_API}/OtherCardholderVerification/PageLoad`
       const res = await axios.get(url)
       console.log(res)
       return res.data.result
@@ -65,9 +65,9 @@ const service = {
       alert(err)
     }
   },
-  async cardSendApply() {
+  async cardSendApply () {
     try {
-      const url = 'https://61.219.193.150/eCardAPI_FeatureCard_SIT/FeatureCardApply/Chk'
+      const url = `${process.env.VUE_APP_BASE_API}/CardSendApply/CardSendApply`
       const res = await axios.get(url)
       console.log(res)
       return res.data.result

@@ -12,7 +12,7 @@ const service = {
       alert(err)
     }
   },
-  async getTermsHtml(termsName) {
+  async getTermsHtml (termsName) {
     try {
       const termsArr = []
       termsName.forEach(item1 => {
@@ -35,14 +35,17 @@ const service = {
       console.log(err)
     }
   },
-  async otpGet() {
+  async otpGet () {
     try {
       const url = 'https://61.219.193.150/CardApply/api/Otp/Send'
+      const res = await axios.get(url)
+      console.log(res)
+      return res.data.result
     } catch (err) {
       alert(err)
     }
   },
-  async terms_Submit() {
+  async terms_Submit () {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/CardFormFillin/PageLoad`
       // const url = 'https://mocki.io/v1/e781d8c7-2ccf-4ee2-9ed6-f231feab9e12'
@@ -53,7 +56,7 @@ const service = {
       alert(err)
     }
   },
-  async otpSend(rtn) {
+  async otpSend (rtn) {
     try {
       const url = 'https://61.219.193.150/CardApply/api/Otp/Check'
       const res = await axios.post(url, rtn)
