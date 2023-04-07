@@ -100,7 +100,7 @@
                     <span class="red_text">* </span>國籍
                   </div>
                   <div class="input-data_confirm">
-                    <p>{{selectJson.NATIONALITY.filter(item=>item.VALUE===FillinData.OT.nationality)[0].SHOW}}</p>
+                    <p>{{selectJson.NATIONALITY.filter(item=>item.VALUE===FillinData.OT.nationalityKey)[0].SHOW}}</p>
                   </div>
                 </li>
                 <li>
@@ -286,7 +286,7 @@
                   </div>
                   <div class="input-data_confirm">
                     <p>
-                      {{selectJson.JOBTYPE.filter(item=>item.VALUE===FillinData.OT.job.jobType)[0].SHOW}}
+                      {{selectJson.JOBTYPE.filter(item=>item.VALUE===FillinData.OT.job.jobTypeKey)[0].SHOW}}
                       {{FillinData.OT.job.jobType==='0'?`-${FillinData.OT.job.jobOther}`:''}}
                     </p>
                   </div>
@@ -296,7 +296,7 @@
                     <span class="red_text">* </span>職級別
                   </div>
                   <div class="input-data_confirm">
-                    <p>{{selectJson.JOBLV.filter(item=>item.VALUE===FillinData.OT.jobLV)[0].SHOW}}</p>
+                    <p>{{selectJson.JOBLV.filter(item=>item.VALUE===FillinData.OT.jobLVKey)[0].SHOW}}</p>
                   </div>
                 </li>
                 <li>
@@ -305,7 +305,7 @@
                   </div>
                   <div class="input-data_confirm">
                     <p>
-                      {{selectJson.INCOME.filter(item=>item.VALUE===FillinData.OT.IncomeMain.income)[0].SHOW}}
+                      {{selectJson.INCOME.filter(item=>item.VALUE===FillinData.OT.IncomeMain.incomeKey)[0].SHOW}}
                       {{FillinData.OT.IncomeMain.income==='9'?`- ${FillinData.OT.IncomeMain.incomeOther}`:''}}
                     </p>
                   </div>

@@ -271,18 +271,24 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  const sessionPages = ['非卡友-申請書資料填寫', '非卡友-個資使用條款', '非卡友-確認填寫資料', '非卡友-書面驗證', '線上辦卡(已持有其他銀行信用卡)', '線上辦卡(已持有其他銀行帳戶)', '手機OTP驗證(他行信用卡)', '手機OTP驗證(他行帳戶)', '手機OTP驗證(書面)']
+  const sessionPages = ['非卡友-申請書資料填寫', '非卡友-個資使用條款', '非卡友-確認填寫資料', '非卡友-書面驗證', '線上辦卡(已持有其他銀行信用卡)', '線上辦卡(已持有其他銀行帳戶)', '手機OTP驗證(他行信用卡)', '手機OTP驗證(他行帳戶)', '手機OTP驗證(書面)', '非卡友線上申請']
   // ?踢退沒有選首刷禮的user
   const gift = JSON.parse(sessionStorage.getItem('keepPersonalData'))
   if (sessionPages.includes(to.name) && !gift?.firstGift) {
     router.push('/OnLineApply_Gift')
     return
   }
-  // ?踢退直接輸入路由，沒有走正常流程的user
+  // ?踢退沒有填寫 OCR 資料的 user
   if (sessionPages.includes(to.name) && !sessionStorage.getItem('Apply_N_Type')) {
+    router.push('/OnLineApply_OCR')
+    return
+  }
+  // ?踢退沒有選擇線上/書面驗證的 user
+  if (to.name !== '非卡友線上申請' && sessionPages.includes(to.name) && !sessionStorage.getItem('Apply_N_Type')) {
     router.push('/OnLineApply_n1')
     return
   }
+  // ?踢退沒有填寫資料的 user
   const fillinDataPages = ['非卡友-個資使用條款', '非卡友-確認填寫資料']
   if (fillinDataPages.includes(to.name) && !sessionStorage.getItem('FillinData')) {
     router.push('/OnLineApply_Fillin_OT')

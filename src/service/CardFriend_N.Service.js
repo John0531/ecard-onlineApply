@@ -25,7 +25,8 @@ const service = {
   },
   async fillin_OT_PageLoad () {
     try {
-      const res = await axios.get(`${process.env.VUE_APP_BASE_API}/CardFormFillin/PageLoad`)
+      const url = `${process.env.VUE_APP_BASE_API}/CardFormFillin/PageLoad`
+      const res = await axios.get(url)
       console.log(res)
       return res.data.result
     } catch (err) {
@@ -44,8 +45,7 @@ const service = {
   },
   async fillin_OT2_PageLoad () {
     try {
-      const url = `${process.env.VUE_APP_BASE_API}/CardFormFillin/PageLoad`
-      // const url = 'https://mocki.io/v1/e781d8c7-2ccf-4ee2-9ed6-f231feab9e12'
+      const url = `${process.env.VUE_APP_BASE_API}/CardFormPreview/Preview`
       const res = await axios.get(url)
       console.log(res)
       return res.data.result

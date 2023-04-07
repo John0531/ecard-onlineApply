@@ -137,8 +137,7 @@
                 </li>
                 <li class="col-12 col-md-6">
                   <label for=""><span class="red_text">* </span>中文姓名</label>
-                  <div class="form-text">{{Form.cName}}</div>
-                  <!-- <Field
+                  <Field
                     v-model="Form.cName"
                     maxlength="20"
                     rules="required|checkChinese"
@@ -151,12 +150,11 @@
                   <ErrorMessage
                     name="中文姓名"
                     class="text-danger ms-2"
-                  /> -->
+                  />
                 </li>
                 <li class="col-12 col-md-6">
                   <label for=""><span class="red_text">* </span>英文姓名</label>
-                  <div class="form-text">{{Form.eName}}</div>
-                  <!-- <div class="d-block d-md-flex align-items-center">
+                  <div class="d-block d-md-flex align-items-center">
                     <Field
                       v-model="Form.eName"
                       maxlength="30"
@@ -172,7 +170,7 @@
                   <ErrorMessage
                     name="英文姓名"
                     class="text-danger ms-2 mt-1"
-                  /> -->
+                  />
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">出生日期</label>
@@ -268,17 +266,14 @@
                 <li class="col-12 col-md-6">
                   <label for="">教育程度</label>
                   <Field
-                    v-model="Form.eduLevel"
+                    v-model="Form.eduLevelKey"
                     as="select"
                     name="教育程度"
                     runat="server"
                     class="form-select form-control"
                   >
                     <option value="">-----</option>
-                    <option value="高中">高中</option>
-                    <option value="大學">大學</option>
-                    <option value="碩士">碩士</option>
-                    <option value="博士">博士</option>
+                    <option v-for="item in eduLevelList" :key="item.value" :value="item.value">{{item.name}}</option>
                   </Field>
                 </li>
                 <li class="col-12 col-md-6">
@@ -287,8 +282,7 @@
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">電子信箱</label>
-                  <div class="form-text">{{Form.email}}</div>
-                  <!-- <template v-if="Form.billType===1">
+                  <template v-if="Form.billType===1">
                     <Field
                       v-model="Form.email"
                       rules="required|email"
@@ -308,7 +302,7 @@
                     name="電子信箱"
                     type="text"
                     class="form-control"
-                  /> -->
+                  />
                 </li>
                 <li class="col-12">
                   <span class="red_text">* 為響應環保及維護個人隱私，將依您以上留存之「電子信箱」寄送信用卡活動及權益通知。</span>
@@ -547,7 +541,7 @@
                         class="form-check-input mt-2 position-absolute"
                         type="radio"
                         name="帳單地址"
-                        :value="1"
+                        value="1"
                         :validateOnInput="true"
                       />
                       <div class="form_Apply_txt">同戶籍地址</div>
@@ -560,7 +554,7 @@
                         class="form-check-input mt-2 position-absolute"
                         type="radio"
                         name="帳單地址"
-                        :value="2"
+                        value="2"
                         :validateOnInput="true"
                       />
                       <div class="form_Apply_txt">同居住地址</div>
@@ -573,7 +567,7 @@
                         class="form-check-input mt-2 position-absolute"
                         type="radio"
                         name="帳單地址"
-                        :value="3"
+                        value="3"
                         :validateOnInput="true"
                       />
                       <div class="form_Apply_txt">同公司地址</div>
@@ -595,7 +589,7 @@
                         class="form-check-input mt-2 position-absolute"
                         type="radio"
                         name="寄卡地址"
-                        :value="1"
+                        value="1"
                         :validateOnInput="true"
                       />
                       <div class="form_Apply_txt">同戶籍地址</div>
@@ -608,7 +602,7 @@
                         class="form-check-input mt-2 position-absolute"
                         type="radio"
                         name="寄卡地址"
-                        :value="2"
+                        value="2"
                         :validateOnInput="true"
                       />
                       <div class="form_Apply_txt">同居住地址</div>
@@ -621,7 +615,7 @@
                         class="form-check-input mt-2 position-absolute"
                         type="radio"
                         name="寄卡地址"
-                        :value="3"
+                        value="3"
                         :validateOnInput="true"
                       />
                       <div class="form_Apply_txt">同公司地址</div>
@@ -1412,6 +1406,7 @@ export default {
       pageLoad: {},
       Apply_N_Type: sessionStorage.getItem('Apply_N_Type'),
       selectJson: JSON.parse(localStorage.getItem('SELECT_JSON')),
+      eduLevelList: [{ name: '博士', value: 1 }, { name: '碩士', value: 2 }, { name: '大學', value: 3 }, { name: '專科', value: 4 }, { name: '高中高職', value: 5 }, { name: '其他', value: 6 }],
       Form: {
         Id: '',
         idx: {
@@ -1430,6 +1425,7 @@ export default {
         },
         nationalityKey: '',
         nationality: '',
+        eduLevelKey: '',
         eduLevel: '',
         homeAddr: new Address(),
         liveAddr: new Address(),
@@ -1513,6 +1509,12 @@ export default {
         } else {
           n.nationality = ''
         }
+        // ? 教育程度
+        if (n.eduLevelKey) {
+          n.eduLevel = this.eduLevelList.find(item => item.value === n.eduLevelKey).name
+        } else {
+          n.eduLevelKey = ''
+        }
         // ? 主要收入來源
         if (n.IncomeMain.incomeKey) {
           n.IncomeMain.income = this.selectJson.INCOME.find(item => item.VALUE === n.IncomeMain.incomeKey).SHOW
@@ -1538,20 +1540,29 @@ export default {
   methods: {
     async getPageData () {
       // ? 取得 sessionStorage 資料
+      // * OCR 身分證資料
+      const OCRData = JSON.parse(sessionStorage.getItem('OCR_Data'))
+      this.Form.cName = OCRData.cName
+      this.Form.homeAddr = OCRData.homeAddr
+      this.Form.idCounty = OCRData.idCounty
+      this.Form.idissue = OCRData.idissue
+      this.Form.idx = OCRData.idx
+      // * 以填寫資料暫存
       const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
-      if (FillinData?.OT) {
-        this.Form = FillinData.OT
-      }
       // ? 取得 PageLoad API 資料
       this.pageLoad = await service.fillin_OT_PageLoad()
-      this.Form.Id = this.pageLoad.id
-      this.Form.cName = this.pageLoad.cName
-      this.Form.eName = this.pageLoad.eName
-      this.Form.brthDt = this.pageLoad.brthDt
-      this.Form.Cellphone = this.pageLoad.mbleTelNbr
-      this.Form.email = this.pageLoad.email
-      this.Form.unitCode = this.pageLoad.unitCode
-      this.Form.userCode = this.pageLoad.userCode
+      if (FillinData?.OT) {
+        this.Form = FillinData.OT
+      } else {
+        this.Form.Id = this.pageLoad.id
+        // this.Form.cName = this.pageLoad.cName
+        this.Form.eName = this.pageLoad.eName
+        this.Form.brthDt = this.pageLoad.brthDt
+        this.Form.Cellphone = this.pageLoad.mbleTelNbr
+        this.Form.email = this.pageLoad.email
+        this.Form.unitCode = this.pageLoad.unitCode
+        this.Form.userCode = this.pageLoad.userCode
+      }
     },
     async submit () {
       this.$refs.form.setErrors({}) // ? 先清除所有上次驗證的錯誤再驗證

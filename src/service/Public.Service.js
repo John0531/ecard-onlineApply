@@ -12,6 +12,16 @@ const service = {
       alert(err)
     }
   },
+  async getAddress (postData) {
+    try {
+      const url = `${process.env.VUE_APP_BASE}/MW`
+      const res = await axios.post(url, postData)
+      console.log(res)
+      return res.data
+    } catch (err) {
+      alert(err)
+    }
+  },
   async getTermsHtml (termsName) {
     try {
       const termsArr = []
@@ -45,13 +55,12 @@ const service = {
       alert(err)
     }
   },
-  async terms_Submit () {
+  async terms_Submit (postData) {
     try {
-      const url = `${process.env.VUE_APP_BASE_API}/CardFormFillin/PageLoad`
-      // const url = 'https://mocki.io/v1/e781d8c7-2ccf-4ee2-9ed6-f231feab9e12'
-      const res = await axios.get(url)
+      const url = `${process.env.VUE_APP_BASE_API}/CardFormTerms/Terms`
+      const res = await axios.post(url, postData)
       console.log(res)
-      return res.data.result
+      return res.data
     } catch (err) {
       alert(err)
     }

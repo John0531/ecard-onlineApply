@@ -29,6 +29,7 @@
                         @keyup="form.mbleTelNbr = $custom.validate.OnlyNumPress(form.mbleTelNbr)"
                         rules="checkPhone"
                         />
+                        <span class="not_text">請填寫信用卡申請時之行動電話，以利資訊驗證</span>
                         <div class="d-flex text-center invalid-feedback my-1" >
                           {{errors['行動電話']}}
                         </div>

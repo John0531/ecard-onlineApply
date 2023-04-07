@@ -377,6 +377,8 @@
 </template>
 
 <script>
+import PublicService from '@/service/Public.Service.js'
+
 export default {
   data () {
     return {
@@ -422,15 +424,18 @@ export default {
         return
       }
       // ? 驗證檢查 end
-      if (this.$route.name === '非卡友-個資使用條款') {
-        const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
-        FillinData.OT_1 = {
-          ...this.Form
+      const result = await PublicService.terms_Submit(this.Form)
+      if (result.status === '00500') {
+        if (this.$route.name === '非卡友-個資使用條款') {
+          const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
+          FillinData.OT_1 = {
+            ...this.Form
+          }
+          sessionStorage.setItem('FillinData', JSON.stringify(FillinData))
+          this.$router.push('/OnLineApply_Fillin_OT_2')
+        } else if (this.$route.name === '卡友-個資使用條款') {
+          this.$router.push('/OnLineApply_Fillin_Download')
         }
-        sessionStorage.setItem('FillinData', JSON.stringify(FillinData))
-        this.$router.push('/OnLineApply_Fillin_OT_2')
-      } else if (this.$route.name === '卡友-個資使用條款') {
-        this.$router.push('/OnLineApply_Fillin_Download')
       }
     }
   },
