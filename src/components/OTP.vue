@@ -353,11 +353,24 @@ export default ({
       }
     }
   },
-  mounted () {
+  async mounted () {
     this.MsgModal = new this.$custom.bootstrap.Modal(this.$refs.msgModal, { backdrop: 'static' })
     this.getMobileMsgCode()
-    console.log(this.$route)
     // ?路由判斷
+    const session = 'https://61.219.193.150/CardApply/api/Testing?UserRolesa=2'
+    await fetch(session)
+      .then((response) => {
+        console.log(response)
+      }).catch((err) => {
+        console.log(err)
+      })
+    // const url = 'https://61.219.193.150/CardApply/api/FirstGift'
+    // await fetch(url)
+    //   .then((response) => {
+    //     console.log(response)
+    //   }).catch((err) => {
+    //     console.log(err)
+    //   })
   }
 })
 </script>
