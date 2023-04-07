@@ -41,6 +41,12 @@ import router from './router'
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
 
+import './axios.setting.js'
+
+// ?設定cross跨域 並設定訪問許可權 允許跨域攜帶cookie資訊
+// axios.defaults.withCredentials = true
+axios.get('ecardApi/Testing?UserRolesa=2', { withCredentials: true })
+
 // ?加入validate驗證規則
 Object.keys(validate).forEach((rule) => {
   defineRule(rule, validate[rule])

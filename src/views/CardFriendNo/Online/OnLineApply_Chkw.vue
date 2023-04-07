@@ -21,12 +21,12 @@
                       <label for="" class="mt-1">行動電話</label>
                       <div class="d-flex flex-column">
                         <Field
-                        v-model="phone"
-                        id="phone" name="行動電話"
+                        v-model="form.mbleTelNbr"
+                        id="mbleTelNbr" name="行動電話"
                         type="text" maxlength="10"
                         class="form-control"
                         :class="{ 'is-invalid': errors['行動電話'] }"
-                        @keyup="phone = $custom.validate.OnlyNumPress(phone)"
+                        @keyup="form.mbleTelNbr = $custom.validate.OnlyNumPress(form.mbleTelNbr)"
                         rules="checkPhone"
                         />
                         <div class="d-flex text-center invalid-feedback my-1" >
@@ -42,10 +42,10 @@
           >
             <div class="terms">
               <input
-                v-model="allTerms"
+                v-model="form.agreeTerms"
                 @click.prevent
                 id="checkbox"
-                name="allTerms"
+                name="agreeTerms"
                 :class="{
                   'is-invalid': errors['有關條款'],
                   'form-check-input': errors['有關條款'],
@@ -161,24 +161,28 @@
 
 <script>
 import PublicService from '@/service/Public.Service.js'
+import CardFriendNService from '@/service/CardFriend_N.Service.js'
 
 export default {
   data () {
     return {
-      phone: '',
       termsName: ['電子化帳單服務約定條款', '重要告知事項', '用卡須知及申請說明', 'MyData同意條款', 'wuc聯邦信用卡約定條款'],
       termsHtml: [],
       termsModal: '',
       checkTerms: [],
-      allTerms: false
+      form: {
+        mbleTelNbr: '',
+        agreeTerms: false,
+        personalDataAuthorized: false
+      }
     }
   },
   watch: {
     checkTerms (n, o) {
       if (n.length >= this.termsHtml.length) {
-        this.allTerms = true
+        this.form.agreeTerms = true
       } else {
-        this.allTerms = false
+        this.form.agreeTerms = false
       }
       this.checkRadioAll()
     }
@@ -199,7 +203,7 @@ export default {
     },
     checkRadioAll () {
       this.$refs.form.setFieldError('有關條款', '')
-      if (!this.allTerms) {
+      if (!this.form.agreeTerms) {
         this.$refs.form.setFieldError(
           '有關條款',
           '您尚未勾選詳細閱讀並同意有關條款'
@@ -220,6 +224,7 @@ export default {
     }
   },
   async mounted () {
+    await CardFriendNService.Chkw_PageLoad()
     this.termsModal = new this.$custom.bootstrap.Modal(this.$refs.termsModal, {
       backdrop: 'static'
     })

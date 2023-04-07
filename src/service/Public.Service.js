@@ -34,6 +34,17 @@ const service = {
     } catch (err) {
       console.log(err)
     }
+  },
+  async terms_Submit () {
+    try {
+      const url = `${process.env.VUE_APP_BASE_API}/CardFormFillin/PageLoad`
+      // const url = 'https://mocki.io/v1/e781d8c7-2ccf-4ee2-9ed6-f231feab9e12'
+      const res = await axios.get(url)
+      console.log(res)
+      return res.data.result
+    } catch (err) {
+      alert(err)
+    }
   }
 }
 
