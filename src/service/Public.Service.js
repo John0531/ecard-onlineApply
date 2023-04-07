@@ -6,7 +6,7 @@ const service = {
   async getJson () {
     try {
       const url = 'https://yesgoimages.s3.ap-northeast-1.amazonaws.com/ecard/Uitlity.json'
-      const res = await axios.get(url)
+      const res = await axios.get(url, { withCredentials: false })
       return res.data
     } catch (err) {
       alert(err)
@@ -25,7 +25,7 @@ const service = {
       const termsHtml = []
       for (let i = 0; i < termsArr.length; i++) {
         const url = `https://ecard.yesgogogo.com/ecard_source/${termsArr[i].fileName}.html?${hash(8)}`
-        const res = await axios.get(url)
+        const res = await axios.get(url, { withCredentials: false })
         const element = document.createElement('html')
         element.innerHTML = res.data
         termsHtml.push(element.querySelector('body').innerHTML)
@@ -35,15 +35,23 @@ const service = {
       console.log(err)
     }
   },
+<<<<<<< HEAD
   async otpGet () {
     try {
       const url = 'https://61.219.193.150/CardApply/api/Otp/Send'
+=======
+  async terms_Submit () {
+    try {
+      const url = `${process.env.VUE_APP_BASE_API}/CardFormFillin/PageLoad`
+      // const url = 'https://mocki.io/v1/e781d8c7-2ccf-4ee2-9ed6-f231feab9e12'
+>>>>>>> 56af98bc8f67660b7c6f6c34a4c172b0eb47b6b0
       const res = await axios.get(url)
       console.log(res)
       return res.data.result
     } catch (err) {
       alert(err)
     }
+<<<<<<< HEAD
   },
   async otpSend (rtn) {
     try {
@@ -54,6 +62,8 @@ const service = {
     } catch (err) {
       alert(err)
     }
+=======
+>>>>>>> 56af98bc8f67660b7c6f6c34a4c172b0eb47b6b0
   }
 }
 
