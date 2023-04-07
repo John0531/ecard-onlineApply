@@ -57,7 +57,7 @@
               />
               <label for="agree"
                 >同意，本人對
-                <span v-for="item in termsName" :key="item">
+                <span v-for="item in pageLoad.terms" :key="item">
                   「<a
                   href="#"
                   data-bs-toggle="modal"
@@ -166,7 +166,7 @@ import CardFriendNService from '@/service/CardFriend_N.Service.js'
 export default {
   data () {
     return {
-      termsName: ['電子化帳單服務約定條款', '重要告知事項', '用卡須知及申請說明', 'MyData同意條款', 'wuc聯邦信用卡約定條款'],
+      pageLoad: {},
       termsHtml: [],
       termsModal: '',
       checkTerms: [],
@@ -211,7 +211,7 @@ export default {
       }
     },
     async applySubmit () {
-      // ? 驗證檢查
+      // ? 前端驗證檢查
       await this.$refs.form.validate()
       this.checkRadioAll()
       const errors = this.$refs.form.getErrors()
@@ -219,16 +219,23 @@ export default {
         this.$custom.validate.showErrors(errors)
         return
       }
-      // ? 驗證檢查 end
-      this.$router.push('/OnLineApply_Written_OTP')
+      // ? 前端驗證檢查 end
+      const result = await CardFriendNService.Chkw_Submit(this.form)
+      if (result) {
+        this.$router.push('/OnLineApply_Written_OTP')
+      }
     }
   },
   async mounted () {
-    await CardFriendNService.Chkw_PageLoad()
+    this.pageLoad = await CardFriendNService.Chkw_PageLoad()
+    if (this.pageLoad.mbleTelNbr === null) {
+      this.pageLoad.mbleTelNbr = ''
+    }
+    this.form.mbleTelNbr = this.pageLoad.mbleTelNbr
     this.termsModal = new this.$custom.bootstrap.Modal(this.$refs.termsModal, {
       backdrop: 'static'
     })
-    this.termsHtml = await PublicService.getTermsHtml(this.termsName)
+    this.termsHtml = await PublicService.getTermsHtml(this.pageLoad.terms)
   }
 }
 </script>

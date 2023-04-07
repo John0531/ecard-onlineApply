@@ -250,7 +250,7 @@
                 <li class="col-12 col-md-6">
                   <label for=""><span class="red_text">* </span>國籍</label>
                   <Field
-                    v-model="Form.nationality"
+                    v-model="Form.nationalityKey"
                     as="select"
                     rules="required"
                     :class="{ 'is-invalid': errors['國籍'] }"
@@ -710,7 +710,7 @@
                       />
                       <div class="form_Apply_txt">EMAIL帳單</div>
                     </div>
-                    <div class="form-check me-4" v-if="pageLoad.flgbillType?.includes('sms ')">
+                    <div class="form-check me-4" v-if="pageLoad.flgbillType?.includes('sms')">
                       <Field
                         rules="required"
                         :class="{ 'is-invalid': errors['帳單形式'] }"
@@ -768,7 +768,7 @@
                       <Field
                         rules="radioRequired"
                         :class="{ 'is-invalid': errors['申請數位卡'] }"
-                        v-model="Form.DigitalCard"
+                        v-model="Form.digiFlag"
                         class="form-check-input mt-2 position-absolute"
                         type="radio"
                         name="申請數位卡"
@@ -782,7 +782,7 @@
                       <Field
                         rules="radioRequired"
                         :class="{ 'is-invalid': errors['申請數位卡'] }"
-                        v-model="Form.DigitalCard"
+                        v-model="Form.digiFlag"
                         class="form-check-input mt-2 position-absolute"
                         type="radio"
                         name="申請數位卡"
@@ -1208,7 +1208,7 @@
                   <label for=""><span class="red_text">* </span>職業別</label>
                   <div class="d-flex flex-wrap flex-md-nowrap align-items-center">
                     <Field
-                      v-model="Form.job.jobType"
+                      v-model="Form.job.jobTypeKey"
                       rules="required"
                       :class="{ 'is-invalid': errors['職業別'] }"
                       as="select"
@@ -1216,11 +1216,11 @@
                       runat="server"
                       id="SelM"
                       class="form-select form-control me-1"
-                      @change="Form.job.jobType!=='0'?Form.job.jobOther='':''"
+                      @change="Form.job.jobTypeKey!=='0'?Form.job.jobOther='':''"
                     >
                       <option v-for="item in selectJson.JOBTYPE" :key="item.VALUE" :value="item.VALUE">{{item.SHOW}}</option>
                     </Field>
-                    <div class="d-flex align-items-center" v-if="Form.job.jobType==='0'">
+                    <div class="d-flex align-items-center" v-if="Form.job.jobTypeKey==='0'">
                       <span class="text-nowrap">其他</span>
                       <Field
                         v-model="Form.job.jobOther"
@@ -1244,7 +1244,7 @@
                 <li class="col-12 col-md-6">
                   <label for=""><span class="red_text">* </span>職級別</label>
                   <Field
-                    v-model="Form.jobLV"
+                    v-model="Form.jobLVKey"
                     rules="required"
                     :class="{ 'is-invalid': errors['職級別'] }"
                     as="select"
@@ -1266,7 +1266,7 @@
                   >
                   <div class="d-flex flex-wrap flex-md-nowrap align-items-center">
                     <Field
-                      v-model="Form.IncomeMain.income"
+                      v-model="Form.IncomeMain.incomeKey"
                       rules="required"
                       :class="{ 'is-invalid': errors['主要所得及資金來源'] }"
                       as="select"
@@ -1274,11 +1274,11 @@
                       runat="server"
                       id="SelM"
                       class="form-select form-control me-1"
-                      @change="Form.IncomeMain.income!=='9'?Form.IncomeMain.incomeOther='':''"
+                      @change="Form.IncomeMain.incomeKey!=='9'?Form.IncomeMain.incomeOther='':''"
                     >
                       <option v-for="item in selectJson.INCOME" :key="item.VALUE" :value="item.VALUE">{{item.SHOW}}</option>
                     </Field>
-                    <div class="d-flex align-items-center" v-if="Form.IncomeMain.income==='9'">
+                    <div class="d-flex align-items-center" v-if="Form.IncomeMain.incomeKey==='9'">
                       <span class="text-nowrap">其他</span>
                       <Field
                         v-model="Form.IncomeMain.incomeOther"
@@ -1428,6 +1428,7 @@ export default {
           birthplace: '',
           birthOther: ''
         },
+        nationalityKey: '',
         nationality: '',
         eduLevel: '',
         homeAddr: new Address(),
@@ -1446,7 +1447,7 @@ export default {
         billType: '',
         Cellphone: '',
         email: '',
-        DigitalCard: '',
+        digiFlag: '',
         primarySchool: '',
         isStudent: '',
         parentName: '',
@@ -1463,11 +1464,14 @@ export default {
         jobTitle: '',
         jobTenure: '',
         job: {
+          jobTypeKey: '',
           jobType: '',
           jobOther: ''
         },
+        jobLVKey: '',
         jobLV: '',
         IncomeMain: {
+          incomeKey: '',
           income: '',
           incomeOther: ''
         },
@@ -1503,6 +1507,30 @@ export default {
           this.$refs.form.setFieldError('居住電話號碼', '')
           this.$refs.form.setFieldError('居住電話號碼', '')
         }
+        // ? 國籍
+        if (n.nationalityKey) {
+          n.nationality = this.selectJson.NATIONALITY.find(item => item.VALUE === n.nationalityKey).SHOW
+        } else {
+          n.nationality = ''
+        }
+        // ? 主要收入來源
+        if (n.IncomeMain.incomeKey) {
+          n.IncomeMain.income = this.selectJson.INCOME.find(item => item.VALUE === n.IncomeMain.incomeKey).SHOW
+        } else {
+          n.IncomeMain.income = ''
+        }
+        // ? 職業別
+        if (n.job.jobTypeKey) {
+          n.job.jobType = this.selectJson.JOBTYPE.find(item => item.VALUE === n.job.jobTypeKey).SHOW
+        } else {
+          n.job.jobType = ''
+        }
+        // ? 職級別
+        if (n.jobLVKey) {
+          n.jobLV = this.selectJson.JOBLV.find(item => item.VALUE === n.jobLVKey).SHOW
+        } else {
+          n.jobLV = ''
+        }
       },
       deep: true
     }
@@ -1515,8 +1543,7 @@ export default {
         this.Form = FillinData.OT
       }
       // ? 取得 PageLoad API 資料
-      const result = await service.fillin_OT_PageLoad()
-      this.pageLoad = result // ? Api response 資料
+      this.pageLoad = await service.fillin_OT_PageLoad()
       this.Form.Id = this.pageLoad.id
       this.Form.cName = this.pageLoad.cName
       this.Form.eName = this.pageLoad.eName
@@ -1572,7 +1599,10 @@ export default {
         } else {
           sessionStorage.setItem('FillinData', JSON.stringify({ OT: postData }))
         }
-        this.$router.push('/OnLineApply_Fillin_OT_1')
+        const result = await service.fillin_OT_Submit(this.Form)
+        if (result) {
+          this.$router.push('/OnLineApply_Fillin_OT_1')
+        }
       } else {
         this.$custom.validate.showErrors(errors)
       }
