@@ -34,6 +34,26 @@ const service = {
     } catch (err) {
       console.log(err)
     }
+  },
+  async otpGet () {
+    try {
+      const url = 'https://61.219.193.150/CardApply/api/Otp/Send'
+      const res = await axios.get(url)
+      console.log(res)
+      return res.data.result
+    } catch (err) {
+      alert(err)
+    }
+  },
+  async otpSend (rtn) {
+    try {
+      const url = 'https://61.219.193.150/CardApply/api/Otp/Check'
+      const res = await axios.post(url, rtn)
+      console.log(res)
+      return res.data.result
+    } catch (err) {
+      alert(err)
+    }
   }
 }
 

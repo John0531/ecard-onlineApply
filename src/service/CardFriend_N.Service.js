@@ -12,6 +12,46 @@ const service = {
     } catch (err) {
       alert(err)
     }
+  },
+  async otherCardholderPageLoad () {
+    try {
+      const url = 'https://61.219.193.150/CardApply/api/OtherCardholderVerification/PageLoad'
+      const res = await axios.get(url)
+      console.log(res)
+      return res.data.result
+    } catch (err) {
+      alert(err)
+    }
+  },
+  async otherCardholderVerification (data) {
+    try {
+      const url = 'https://61.219.193.150/CardApply/api/OtherCardholderVerification/Verification'
+      const res = await axios.post(url, data)
+      console.log(res)
+      return res.data.result
+    } catch (err) {
+      alert(err)
+    }
+  },
+  async otherDepositorPageLoad () {
+    try {
+      const url = 'https://61.219.193.150/CardApply/api/OtherCardholderVerification/PageLoad'
+      const res = await axios.get(url)
+      console.log(res)
+      return res.data.result
+    } catch (err) {
+      alert(err)
+    }
+  },
+  async cardSendApply() {
+    try {
+      const url = 'https://61.219.193.150/eCardAPI_FeatureCard_SIT/FeatureCardApply/Chk'
+      const res = await axios.get(url)
+      console.log(res)
+      return res.data.result
+    } catch (err) {
+      alert(err)
+    }
   }
 }
 
