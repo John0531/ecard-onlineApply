@@ -358,19 +358,24 @@ export default ({
     this.getMobileMsgCode()
     // ?路由判斷
     const session = 'https://61.219.193.150/CardApply/api/Testing?UserRolesa=2'
+    var myHeaders = new Headers()
     await fetch(session)
       .then((response) => {
         console.log(response)
       }).catch((err) => {
         console.log(err)
       })
-    // const url = 'https://61.219.193.150/CardApply/api/FirstGift'
-    // await fetch(url)
-    //   .then((response) => {
-    //     console.log(response)
-    //   }).catch((err) => {
-    //     console.log(err)
-    //   })
+    const url = 'https://61.219.193.150/CardApply/api/FirstGift'
+    await fetch(url, {
+      method: 'GET',
+      headers: myHeaders,
+      credentials: 'include'
+    })
+      .then((response) => {
+        console.log(response)
+      }).catch((err) => {
+        console.log(err)
+      })
   }
 })
 </script>

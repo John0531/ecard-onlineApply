@@ -697,7 +697,7 @@
                 <li class="col-12 col-md-12">
                   <label for=""><span class="red_text">* </span>帳單形式</label>
                   <div class="d-flex flex-wrap flex-column flex-md-row">
-                    <div class="form-check me-4">
+                    <div class="form-check me-4" v-if="pageLoad.flgbillType?.includes('mail')">
                       <Field
                         rules="required"
                         :class="{ 'is-invalid': errors['帳單形式'] }"
@@ -710,7 +710,7 @@
                       />
                       <div class="form_Apply_txt">EMAIL帳單</div>
                     </div>
-                    <div class="form-check me-4">
+                    <div class="form-check me-4" v-if="pageLoad.flgbillType?.includes('sms ')">
                       <Field
                         rules="required"
                         :class="{ 'is-invalid': errors['帳單形式'] }"
@@ -723,7 +723,7 @@
                       />
                       <div class="form_Apply_txt">行動帳單(簡訊)</div>
                     </div>
-                    <div class="form-check me-4">
+                    <div class="form-check me-4" v-if="pageLoad.flgbillType?.includes('line')">
                       <Field
                         rules="required"
                         :class="{ 'is-invalid': errors['帳單形式'] }"
@@ -736,7 +736,7 @@
                       />
                       <div class="form_Apply_txt">LINE帳單</div>
                     </div>
-                    <div class="form-check">
+                    <div class="form-check" v-if="pageLoad.flgbillType?.includes('paper')">
                       <Field
                         rules="required"
                         :class="{ 'is-invalid': errors['帳單形式'] }"
@@ -808,7 +808,7 @@
                     ><span class="red_text">* </span>畢業國小名稱</label
                   >
                   <Field
-                    v-model="Form.GraduateSchool"
+                    v-model="Form.primarySchool"
                     rules="required|chkKeyValue"
                     :class="{'is-invalid':errors['畢業國小名稱']}"
                     name="畢業國小名稱"
@@ -1447,7 +1447,7 @@ export default {
         Cellphone: '',
         email: '',
         DigitalCard: '',
-        GraduateSchool: '',
+        primarySchool: '',
         isStudent: '',
         parentName: '',
         parentTel: '',

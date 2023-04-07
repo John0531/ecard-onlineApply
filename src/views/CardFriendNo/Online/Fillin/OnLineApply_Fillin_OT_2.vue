@@ -205,7 +205,7 @@
                     <span class="red_text">* </span>畢業國小名稱
                   </div>
                   <div class="input-data_confirm">
-                    <p>中山國小</p>
+                    <p>{{FillinData.OT.primarySchool}}</p>
                   </div>
                 </li>
                 <li>

@@ -4,5 +4,16 @@ module.exports = {
     : '/',
   transpileDependencies: [
     'vue-meta'
-  ]
+  ],
+  devServer: {
+    /* proxy: {
+      '/ecardApi/': {
+        target: process.env.VUE_APP_BASE_API,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/ecardApi/': ''
+        }
+      }
+    } */
+  }
 }
