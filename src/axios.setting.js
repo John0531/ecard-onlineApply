@@ -2,6 +2,8 @@ import axios from 'axios'
 // import router from './router'
 // import store from './store'
 // import Swal from 'sweetalert2/dist/sweetalert2.js'
+// ?設定cross跨域 並設定訪問許可權 允許跨域攜帶cookie資訊
+axios.defaults.withCredentials = true
 
 axios.interceptors.request.use(
   config => {

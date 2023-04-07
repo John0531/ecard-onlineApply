@@ -5,7 +5,7 @@ import axios from 'axios'
 const service = {
   async Chkw_PageLoad () {
     try {
-      const url = 'ecardApi/CardPapper/PageLoad'
+      const url = `${process.env.VUE_APP_BASE_API}/CardPapper/PageLoad`
       // const url = 'https://mocki.io/v1/e781d8c7-2ccf-4ee2-9ed6-f231feab9e12'
       const res = await axios.get(url, { withCredentials: true })
       console.log(res)

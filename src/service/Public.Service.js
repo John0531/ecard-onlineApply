@@ -6,7 +6,7 @@ const service = {
   async getJson () {
     try {
       const url = 'https://yesgoimages.s3.ap-northeast-1.amazonaws.com/ecard/Uitlity.json'
-      const res = await axios.get(url)
+      const res = await axios.get(url, { withCredentials: false })
       return res.data
     } catch (err) {
       alert(err)
@@ -25,7 +25,7 @@ const service = {
       const termsHtml = []
       for (let i = 0; i < termsArr.length; i++) {
         const url = `https://ecard.yesgogogo.com/ecard_source/${termsArr[i].fileName}.html?${hash(8)}`
-        const res = await axios.get(url)
+        const res = await axios.get(url, { withCredentials: false })
         const element = document.createElement('html')
         element.innerHTML = res.data
         termsHtml.push(element.querySelector('body').innerHTML)
