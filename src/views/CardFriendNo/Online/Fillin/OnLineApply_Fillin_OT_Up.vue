@@ -69,7 +69,7 @@
                             :class="{ 'is-invalid': errors['財力證明資料'] }"
                             >
                                 <Field
-                                type="file" name="upload3" id="upload1"
+                                type="file" name="upload1" id="upload1"
                                 accept="image/*,.heic,.heif" class="upload"
                                 data-sigil="file-input"
                                 :class="{ 'is-invalid': errors['財力證明資料'] }"
@@ -98,7 +98,7 @@
                             :class="{ 'is-invalid': errors['財力證明資料'] }"
                             >
                                 <Field
-                                type="file" name="upload4" id="upload2"
+                                type="file" name="upload2" id="upload2"
                                 accept="image/*,.heic,.heif" class="upload"
                                 data-sigil="file-input"
                                 @change.prevent="pickFiles"
@@ -130,7 +130,7 @@
                             :class="{ 'is-invalid': errors['財力證明資料'] }"
                             >
                                 <Field
-                                type="file" name="upload5" id="upload3"
+                                type="file" name="upload3" id="upload3"
                                 accept="image/*,.heic,.heif" class="upload"
                                 data-sigil="file-input"
                                 :class="{ 'is-invalid': errors['財力證明資料'] }"
@@ -158,7 +158,7 @@
                             :class="{ 'is-invalid': errors['財力證明資料'] }"
                             >
                                 <Field
-                                type="file" name="upload6" id="upload4"
+                                type="file" name="upload4" id="upload4"
                                 accept="image/*,.heic,.heif" class="upload"
                                 data-sigil="file-input"
                                 :class="{ 'is-invalid': errors['財力證明資料'] }"
@@ -314,7 +314,7 @@
       </div>
   </div>
         <!---------------------modal-財力圖片修改操作 -------------->
-  <div ref="CroppieModal" class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true">
+  <div ref="CroppieModal" class="modal fade" id="CroppieModal" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true">
       <div class="modal-dialog modal-xl modal-dialog-scrollable">
           <div class="modal-content">
               <div class="modal-header">
@@ -539,6 +539,28 @@
           </div>
       </div>
   </div>
+    <!-- modal-提醒上傳檔案限制提醒  -->
+  <div ref="ImageLimit" class="modal fade" id="noticeModal_2" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title"><input id="myCheckCount" hidden></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <img src="@/assets/images/form/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <div class="text-center py-3">上傳格式限JPG，單一檔案上限為3MB。</div>
+                  <hr>
+                  <div class="text-center mb-3">
+                      <div class="col-12 text-center">
+                          <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" aria-label="Close">關閉</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -581,7 +603,7 @@ export default {
         file: ''
       },
       num: '', // *修改完成要呈現的照片序
-      file: '' // *上傳的檔案
+      ImageLimit: '' //* 提醒上傳檔案限制提醒
     }
   },
   methods: {
@@ -589,11 +611,15 @@ export default {
       // ? 轉base64
       const reader = new FileReader()
       const file = await e.target.files[0]
-      this.imgTemplateUrl = URL.createObjectURL(file)
-      reader.readAsDataURL(file)
-      reader.onload = () => {
-        this[`identitiyPack${this.num}`].photo = reader.result
-        this.makeModify(this.num)
+      if (file.size > 3145728 || file.type !== 'image/jpeg') {
+        this.ImageLimit.show()
+      } else {
+        this.imgTemplateUrl = URL.createObjectURL(file)
+        reader.readAsDataURL(file)
+        reader.onload = () => {
+          this[`identitiyPack${this.num}`].photo = reader.result
+          this.makeModify(this.num)
+        }
       }
       // ? 清空value
       // this.clearFiles(this.num)
@@ -756,6 +782,7 @@ export default {
     this.NNBModal = new this.$custom.bootstrap.Modal(this.$refs.NNBModal)
     this.MyDataModal = new this.$custom.bootstrap.Modal(this.$refs.MyDataModal)
     this.MyDataAgreeModal = new this.$custom.bootstrap.Modal(this.$refs.MyDataAgreeModal)
+    this.ImageLimit = new this.$custom.bootstrap.Modal(this.$refs.ImageLimit)
     this.scrollEvent()
     // *進場先跳範例提醒
     this.NoticeModal = new this.$custom.bootstrap.Modal(this.$refs.NoticeModal)

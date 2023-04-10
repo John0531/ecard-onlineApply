@@ -1551,6 +1551,7 @@ export default {
       const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
       // ? 取得 PageLoad API 資料
       this.pageLoad = await service.fillin_OT_PageLoad()
+      console.log(this.pageLoad)
       if (FillinData?.OT) {
         this.Form = FillinData.OT
       } else {
@@ -1611,6 +1612,7 @@ export default {
           sessionStorage.setItem('FillinData', JSON.stringify({ OT: postData }))
         }
         const result = await service.fillin_OT_Submit(this.Form)
+        console.log(result)
         if (result) {
           this.$router.push('/OnLineApply_Fillin_OT_1')
         }

@@ -92,6 +92,23 @@ const service = {
     } catch (err) {
       alert(err)
     }
+  },
+  async uploadImage (file) {
+    try {
+      const data = JSON.stringify(file)
+      console.log(data)
+      const url = `${process.env.VUE_APP_BASE_API}/OCR/UploadImage`
+      const res = await axios({
+        method: 'post',
+        url: url,
+        'Content-Type': 'application/json',
+        body: data
+      })
+      console.log(res)
+      return res.data.result
+    } catch (err) {
+      alert(err)
+    }
   }
 }
 

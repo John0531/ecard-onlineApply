@@ -278,11 +278,11 @@ router.beforeEach((to) => {
     router.push('/OnLineApply_Gift')
     return
   }
-  // ?踢退沒有填寫 OCR 資料的 user
-  if (sessionPages.includes(to.name) && !sessionStorage.getItem('Apply_N_Type')) {
-    router.push('/OnLineApply_OCR')
-    return
-  }
+  // // ?踢退沒有填寫 OCR 資料的 user
+  // if (sessionPages.includes(to.name) && !sessionStorage.getItem('Apply_N_Type')) {
+  //   router.push('/OnLineApply_OCR')
+  //   return
+  // }
   // ?踢退沒有選擇線上/書面驗證的 user
   if (to.name !== '非卡友線上申請' && sessionPages.includes(to.name) && !sessionStorage.getItem('Apply_N_Type')) {
     router.push('/OnLineApply_n1')
