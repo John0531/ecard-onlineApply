@@ -706,7 +706,9 @@ export default {
         this.Form.idx.Day = front.發證日期.日
         const back = res.data.result.Back.住址
         this.Form.homeAddr.County = back.縣市
+        await this.getAddress('1')
         this.Form.homeAddr.Area = back.鄉鎮區
+        await this.getAddress('2')
         this.Form.homeAddr.Road = back.路
         this.Form.homeAddr.Lane = back.巷
         this.Form.homeAddr.Aly = back.弄
@@ -714,8 +716,6 @@ export default {
         // this.Form.homeAddr.Of = back.之號
         this.Form.homeAddr.Flr = back.樓
         this.Form.homeAddr.Other = back.室
-        await this.getAddress('1')
-        await this.getAddress('2')
       } else {
         this.APIModal.show()
       }
