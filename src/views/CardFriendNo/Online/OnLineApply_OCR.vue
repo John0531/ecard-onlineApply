@@ -35,7 +35,7 @@
                     :class="{ 'is-invalid': errors['身分證正面'] }"
                     @change.prevent="pickFiles"
                     @blur="this.num = 1"
-                    @mouseleave="checkIsPics"
+                    @mouseup="checkIsPics"
                   />
                   <!-- <textarea name="TBupload1" id="TBupload1"style="display: none"></textarea> -->
                   <img
@@ -60,7 +60,7 @@
                     data-sigil="file-input"
                     @change.prevent="pickFiles"
                     @blur="this.num = 2"
-                    @mouseleave="checkIsPics"
+                    @mouseup="checkIsPics"
                   />
                   <!-- <textarea name="TBupload2" id="TBupload2" style="display: none"></textarea> -->
                   <img
@@ -486,6 +486,26 @@
             </div>
         </div>
     </div>
+        <!-- API情境彈窗 -->
+    <div ref="APIModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <span  style="font-size:1rem" v-html="message"></span>
+            </div>
+            <div class="modal-footer">
+                <div class="text-center" >
+                <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" style="border-radius: 0.3rem;">關閉</button>
+            </div>
+            </div>
+        </div>
+      </div>
+    </div>
 </template>
 
 <script>
@@ -494,18 +514,9 @@ import ServiceN from '@/service/CardFriend_N.Service.js'
 export default {
   data () {
     return {
-      applierInfo: {
-        // ?使用者輸入的出生年月日
-        Identification: 'A111111111',
-        year: '1955',
-        month: '01',
-        day: '01'
-      },
-      photos: [],
       preViewImage: '',
       times: -1,
       resultImg: '',
-      base64String: '',
       selectJson: JSON.parse(localStorage.getItem('SELECT_JSON')), // ? 下拉
       // ? 身分證資訊表單
       Form: {
@@ -557,7 +568,9 @@ export default {
         front: '', // *身分證正面
         back: '' // *身分證背面
       },
-      uploaded: false // *base64解析成功開啟判斷
+      uploaded: false, // *base64解析成功開啟判斷
+      message: '',
+      APIModal: '' // API提醒Modal
     }
   },
   computed: {
@@ -617,7 +630,6 @@ export default {
           // const cropImage = document.querySelector('.cr-image')
           // cropImage.classList.add('crop-test')
           // ?bind在此時將jpg轉為png
-          console.log(this[`identitiyPack${num}`].preViewImg)
           await this[`identitiyPack${num}`].preViewImg.bind({
             url: this[`identitiyPack${num}`].photo
           })
@@ -678,8 +690,9 @@ export default {
         dom.setFieldError('身份證', '身分證正反面為必填')
       }
       // ?整理檔案
-      this.file.front = this.identitiyPack1.file
-      this.file.back = this.identitiyPack2.file
+      this.file.front = this.identitiyPack1.file.split(',')[1]
+      this.file.back = this.identitiyPack2.file.split(',')[1]
+      console.log(this.file)
       const result = await ServiceN.uploadImage(this.file)
       this.uploaded = true
       if (result) {
@@ -724,6 +737,7 @@ export default {
     this.NoticeModal = new this.$custom.bootstrap.Modal(this.$refs.NoticeModal)
     this.NoticeModal2 = new this.$custom.bootstrap.Modal(this.$refs.NoticeModa2)
     this.ImageLimit = new this.$custom.bootstrap.Modal(this.$refs.ImageLimit)
+    this.APIModal =  new bootstrap.Modal(this.$refs.apiModal, { backdrop: 'static' })
     this.NoticeModal.show()
   },
   watch: {

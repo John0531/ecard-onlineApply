@@ -127,7 +127,7 @@ export default ({
         // ?keep user資料
         sessionStorage.setItem('keepPersonalData', JSON.stringify(this.applierInfo))
         // ** ===全部通過前往下一頁===
-        this.$router.push('/OnLineApply_n1')
+        this.$router.push('/OnLineApply_OCR')
       } else {
         // ** ===錯誤訊息彙整===
         this.$custom.validate.showErrors(collection.errors)
