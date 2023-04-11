@@ -18,15 +18,12 @@
             @invalid-submit="invalidCard"
             :validation-schema="schema"
           >
+          <div v-if="isLineBank">
             <div class="formGroup">
               <ul class="formList formApply">
-                <li class="col-12 mb-2" v-if="isLineBank">
+                <li class="col-12 mb-2">
                   <label for="">申請人身份證號</label>
-                  <div class="form-text">A12345****</div>
-                </li>
-                <li class="col-12 mb-2" v-else>
-                  <label for="">申請人身份證號</label>
-                  <div class="form-text">A12345****</div>
+                  <div class="form-text">{{OnlineApply_y_Data.id}}</div>
                 </li>
                 <li class="col-12">
                   <label for=""></label>
@@ -34,7 +31,7 @@
                 </li>
                 <li class="col-12">
                   <label for="input1">西元出生年月日</label>
-                  <div class="form-text">1977/06/28</div>
+                  <div class="form-text">{{OnlineApply_y_Data.brthyy}}/{{OnlineApply_y_Data.brthMM}}/{{OnlineApply_y_Data.brthdd}}</div>
                 </li>
               </ul>
             </div>
@@ -45,10 +42,10 @@
                   <Field
                     class="form-check-input Apply_input"
                     type="radio"
-                    name="信用卡"
+                    name="申請的信用卡"
                     value="MasterCard"
-                    v-model="OnlineApply_y_Data.card"
-                    :class="{ 'is-invalid': errors['信用卡'] }"
+                    v-model="OnlineApply_y_Data.cardNo"
+                    :class="{ 'is-invalid': errors['申請的信用卡'] }"
                     :validateOnInput="true"
                   />
                   <label
@@ -66,10 +63,10 @@
                   <Field
                     class="form-check-input Apply_input"
                     type="radio"
-                    name="信用卡"
+                    name="申請的信用卡"
                     value="JCB"
-                    v-model="OnlineApply_y_Data.card"
-                    :class="{ 'is-invalid': errors['信用卡'] }"
+                    v-model="OnlineApply_y_Data.cardNo"
+                    :class="{ 'is-invalid': errors['申請的信用卡'] }"
                     :validateOnInput="true"
                   />
                   <label
@@ -87,10 +84,10 @@
                   <Field
                     class="form-check-input Apply_input"
                     type="radio"
-                    name="信用卡"
+                    name="申請的信用卡"
                     value="VISA"
-                    v-model="OnlineApply_y_Data.card"
-                    :class="{ 'is-invalid': errors['信用卡'] }"
+                    v-model="OnlineApply_y_Data.cardNo"
+                    :class="{ 'is-invalid': errors['申請的信用卡'] }"
                     :validateOnInput="true"
                   />
                   <label
@@ -102,7 +99,7 @@
                   </label>
                 </div>
               </div>
-              <span class="red_text position-relative m-auto">{{errors['信用卡']}}</span>
+              <span class="red_text position-relative m-auto">{{errors['申請的信用卡']}}</span>
             </div>
             <!----------------fee ---------------->
             <div class="mt-3 mt-md-5">
@@ -163,21 +160,245 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div v-else>
+            <div class="formGroup">
+              <ul class="formList formApply">
+                <li class="col-12 mb-2">
+                  <label for="">申請人身份證號</label>
+                  <div>
+                    <Field v-model="OnlineApply_y_Data.id" name="申請人身份證號" maxlength="10" type="text" class="form-control" :class="{ 'is-invalid': errors['申請人身份證號'] }" :validateOnInput="true" @blur="OnlineApply_y_Data.id = $custom.validate.watchToUpper(OnlineApply_y_Data.id)"
+                    />
+                    <span style="color: #db0031;font-size: 1em !important;">{{ errors["申請人身份證號"] }}</span>
+                  </div>
+                </li>
+                <li class="col-12">
+                  <label for=""></label>
+                  <span class="red_text">(外籍人士請輸入居留簽證的統一證號)</span>
+                </li>
+                <li class="col-12 align-items-start">
+                  <label for="input1">西元出生年月日</label>
+                  <div class="d-flex flex-column mb-1">
+                    <div class="d-flex align-items-center">
+                      <div>
+                        <Field
+                        as="select" name="年"
+                        rules="required"
+                        class="form-select form-control"
+                        :class="{ 'is-invalid': errors['年'] || errors['月'] || errors['日']}"
+                        :validateOnChange="true"
+                        v-model="OnlineApply_y_Data.brthyy"
+                        >
+                        <option value="" selected>--</option>
+                        <option v-for="item in taiwanYearOptions" :key="item.value" :value="item.value">
+                          {{item.label}}
+                        </option>
+                        </Field>
+                      </div>年
+                      <!-- 辦卡人出生月 -->
+                      <div>
+                        <Field
+                        as="select" name="月"
+                        rules="required"
+                        :class="{ 'is-invalid': errors['年'] || errors['月'] || errors['日'] }"
+                        class="form-select form-control"
+                        :validateOnChange="true"
+                        v-model="OnlineApply_y_Data.brthMM" @change="getDay">
+                        <option value="" selected>--</option>
+                        <option v-for="item in monthOptions" :key="item.value" :value="item.value">{{ item.label }}</option>
+                        </Field>
+                      </div>月
+                      <!-- 辦卡人出生日 -->
+                      <div>
+                        <Field
+                        as="select" name="日"
+                        rules="required"
+                        :class="{ 'is-invalid': errors['年'] || errors['月'] || errors['日'] }"
+                        class="form-select form-control"
+                        :validateOnChange="true"
+                        v-model="OnlineApply_y_Data.brthdd"
+                        >
+                        <option value="" selected>--</option>
+                        <option v-for="item in dayOptions" :key="item.value" :value="item.value">{{ item.label }}</option>
+                        </Field>
+                      </div>日
+                    </div>
+                    <div class="d-flex text-center invalid-feedback my-1">
+                      <span v-if="errors['年'] || errors['月'] || errors['日']">
+                        {{ customAddressMes(errors) }}
+                      </span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="col-xl-12 d-flex flex-wrap">
+              <div class="col-12 col-md-4 text-center">
+                <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="微風悠遊聯名卡MasterCard悠遊鈦金卡" />
+                <div class="form-check my-2 position-relative">
+                  <Field
+                    class="form-check-input Apply_input"
+                    type="radio"
+                    name="申請的信用卡"
+                    value="MasterCard"
+                    v-model="OnlineApply_y_Data.cardNo"
+                    :class="{ 'is-invalid': errors['申請的信用卡'] }"
+                    :validateOnInput="true"
+                  />
+                  <label
+                    class="form-check-label text-start text-md-center fw-bold"
+                    for="creditCardTick"
+                    style="color: black;"
+                  >
+                    微風悠遊聯名卡MasterCard悠遊鈦金卡
+                  </label>
+                </div>
+              </div>
+              <div class="col-12 col-md-4 text-center">
+                <img src="@/assets/images/form/card_b4bs.jpg" class="img-fluid" alt="微風悠遊聯名卡JCB悠遊晶緻卡" />
+                <div class="form-check my-2">
+                  <Field
+                    class="form-check-input Apply_input"
+                    type="radio"
+                    name="申請的信用卡"
+                    value="JCB"
+                    v-model="OnlineApply_y_Data.cardNo"
+                    :class="{ 'is-invalid': errors['申請的信用卡'] }"
+                    :validateOnInput="true"
+                  />
+                  <label
+                    class="form-check-label text-start text-md-center fw-bold"
+                    for="creditCardTick"
+                    style="color: black;"
+                  >
+                    微風悠遊聯名卡JCB悠遊晶緻卡
+                  </label>
+                </div>
+              </div>
+              <div class="col-12 col-md-4 text-center">
+                <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="微風悠遊聯名卡VISA悠遊御璽卡" />
+                <div class="form-check my-2">
+                  <Field
+                    class="form-check-input Apply_input"
+                    type="radio"
+                    name="申請的信用卡"
+                    value="VISA"
+                    v-model="OnlineApply_y_Data.cardNo"
+                    :class="{ 'is-invalid': errors['申請的信用卡'] }"
+                    :validateOnInput="true"
+                  />
+                  <label
+                    class="form-check-label text-start text-md-center fw-bold"
+                    for="creditCardTick"
+                    style="color: black;"
+                  >
+                    微風悠遊聯名卡VISA悠遊御璽卡
+                  </label>
+                </div>
+              </div>
+              <span class="red_text position-relative m-auto">{{errors['申請的信用卡']}}</span>
+            </div>
+            <!----------------//yesgogogo ---------------->
+        <div class="mt-3 mt-md-5">
+            <div class="fee_box mb-3">
+                <h3><img src="images/form/fee_icon.gif" class="img-fluid" alt="" />年費定價說明：</h3>
+                <div class="fee_content">
+                    <table class="fee_table">
+                        <thead>
+                            <tr>
+                                <th width="20%">卡別</th>
+                                <th width="10%">首年</th>
+                                <th>第二年度起</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fee_cardname"><strong>微風悠遊聯名卡<br>VISA<br>悠遊御璽卡</strong></td>
+                                <td class="redWord text-center" rowspan="3">免年費</td>
+                                <td rowspan="3">
+                                    <p class="text-left">第二年起統計正、附卡年度合併消費未達36,000元，收取全額年費。</p>
+                                    <table width="100%">
+                                        <thead class="fee_thead">
+                                            <tr>
+                                                <th class="text-center">年消費</th>
+                                                <th class="text-center">年費</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center">36,000元(含)以上</td>
+                                                <td class="redWord text-center">免年費</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">未達36,000 元</td>
+                                                <td class="text-center">2,000元</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fee_cardname"><strong>微風悠遊聯名卡<br>MasterCard<br>悠遊鈦金卡</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="fee_cardname"><strong>微風悠遊聯名卡<br>JCB<br>悠遊晶緻卡</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="fee_cardname"><strong>微風悠遊聯名卡<br>VISA<br>悠遊白金卡</strong></td>
+                                <td class="redWord text-center" rowspan="2">免年費</td>
+                                <td rowspan="2">
+                                    <p class="text-left">
+                                        依據每張卡片年費到期日往前推算一年，檢核同一身分證字號下之消費，若不符合標準則以單卡按以下標準計算收取年費(不分正、附卡)：</p>
+                                    <table width="100%">
+                                        <thead class="fee_thead">
+                                            <tr>
+                                                <th class="text-center">年消費</th>
+                                                <th class="text-center">年費</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center">1萬元(含)以上或消費10次(含)以上</td>
+                                                <td class="redWord text-center">免年費</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">5,000元(含)或5次(含)以上</td>
+                                                <td class="text-center">500元</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">未達5,000元或5次</td>
+                                                <td class="text-center">1,000元</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fee_cardname"><strong>微風悠遊聯名卡<br>MasterCard<br>悠遊白金卡</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="indentNote_OneText">
+                        <p>※每一卡別所提供之年費減免或折價優惠，每一持卡人僅得享有一次優惠，若於年費優惠期間截止前將卡片停用後又重新申請者，恕不再享有優惠。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+          </div>
             <!----------------//fee ---------------->
             <!-------------------本人已詳閱---------------------->
             <div class="terms-group">
               <div class="terms pb-0">
                 <!-- :value="true"回傳布林, 不是字串 -->
                 <Field
-                  id="checkbox"
-                  name="合約書"
+                  name="有關條款"
                   class="checkimg position-absolute"
                   type="checkbox"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
-                  v-model="agreementAll"
+                  v-model="OnlineApply_y_Data.agreeTerms"
                   @click="checkAgreement"
-                  :class="{ 'is-invalid-important': errors['合約書'] }"
+                  :class="{ 'is-invalid-important': errors['有關條款'] }"
                   :value="true"
                 />
                 <label for="agree"
@@ -189,9 +410,9 @@
                   >」內容。(請務必勾選)</label
                 >
               </div>
-              <span style="color: #db0031;font-size: 1em !important;">{{ errors["合約書"] }}</span>
+              <span style="color: #db0031;font-size: 1em !important;">{{ errors["有關條款"] }}</span>
               <div class="terms">
-                <Field type="checkbox" class="checkimg position-absolute" id="agree1" v-model="terms" name="合約書非必填" @click="checkTerm"/>
+                <input type="checkbox" class="checkimg position-absolute" id="agree1" v-model="OnlineApply_y_Data.userDataBK" @click="checkTerm"/>
                 <label for="agree1"
                   >本人同意申辦貴行業務時，因中途退出或雖未完成所有申請步驟所留存之相關個人資料，貴行得用以提供後續聯繫及服務時使用。</label
                 >
@@ -796,36 +1017,123 @@
 
 <script>
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
+import serviceY from '../service/CardFriend_Y.Service'
+import { defineRule } from 'vee-validate'
 
 export default {
   data () {
     return {
       contractModal: '',
       agreement: false,
-      agreementAll: false,
       terms: false,
       // *判斷radio是否有勾選
       schema: {},
+      dateList: {
+        // ?日期選單
+        yearList: [],
+        monthList: [],
+        dayList: []
+      },
       OnlineApply_y_Data: {
-        card: ''
+        id: '',
+        brthyy: '',
+        brthMM: '',
+        brthdd: '',
+        gID: '',
+        iDE: '',
+        projNum: '',
+        cardNo: '',
+        agreeTerms: false,
+        userDataBK: false,
+        cardFriend: true,
+        depositor: true,
+        uTC: '',
+        uSC: ''
       },
       isLineBank: false
     }
   },
   created () {
-    // ?預設規則
-    this.schema = {
-      信用卡: 'required',
-      合約書: 'required'
+  },
+  computed: {
+    taiwanYearOptions () {
+      const options = []
+      const currentYear = new Date().getFullYear() - 18 //* 驗證已滿18歲才可以
+      for (let i = currentYear; i >= Math.abs(100 - currentYear); i--) {
+        options.push({ label: `${i}`, value: i })
+      }
+      return options
+    },
+    monthOptions () {
+      const options = []
+      for (let i = 1; i <= 12; i++) {
+        options.push({ label: `${i}`, value: i })
+      }
+      return options
+    },
+    dayOptions () {
+      const options = []
+      const maxDays = new Date(this.OnlineApply_y_Data.brthyy, this.OnlineApply_y_Data.brthMM, 0).getDate() // 取得當月最大日期
+      for (let i = 1; i <= maxDays; i++) {
+        options.push({ label: `${i}`, value: i })
+      }
+      return options
     }
   },
+
   watch: {
     // ?監聽是否有勾選我已詳細閱讀
     agreement (n) {
-      this.agreementAll = n === true
+      // console.log('agreement', n)
+      this.OnlineApply_y_Data.agreeTerms = n === true
     }
   },
   methods: {
+    getYearMonth () {
+      // ? 產生生日"年"、"月"選單
+      const year = new Date()
+      for (let i = 1930; i < year.getFullYear() + 1; i++) {
+        this.dateList.yearList.push(i)
+      }
+      for (let i = 1; i < 13; i++) {
+        if (i < 10) {
+          this.dateList.monthList.push('0' + i)
+        } else {
+          this.dateList.monthList.push(i)
+        }
+      }
+      this.getDay()
+    },
+    getDay () {
+      // ? 產生生日"日"選單
+      this.dateList.dayList = []
+      // ?清空西元年，月日一併清空
+      if (!this.OnlineApply_y_Data.brthyy) {
+        this.OnlineApply_y_Data.brthMM = ''
+        this.OnlineApply_y_Data.brthdd = ''
+        return
+      }
+      // ?清空月，日一併清空
+      if (!this.OnlineApply_y_Data.brthMM) {
+        this.OnlineApply_y_Data.brthdd = ''
+        return
+      }
+      const days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+      if (this.OnlineApply_y_Data.brthyy % 4 === 0) {
+        days[1] = 29
+      }
+      for (let i = 1; i < days[parseInt(this.OnlineApply_y_Data.brthMM) - 1] + 1; i++) {
+        if (i < 10) {
+          this.dateList.dayList.push('0' + i)
+        } else {
+          this.dateList.dayList.push(i)
+        }
+      }
+      // ?月對應的天數如比前一個天數少，清空日
+      if (this.dateList.dayList.length < this.OnlineApply_y_Data.brthdd) {
+        this.OnlineApply_y_Data.brthdd = ''
+      }
+    },
     // ?我已詳細閱讀條款
     scrollEvent () {
       this.$refs.termBox1.onscroll = function () {
@@ -848,10 +1156,10 @@ export default {
     // ?如果有勾選我已詳細閱讀，頁面上的checkbox就要被勾選
     checkAgreement ($event) {
       if (this.agreement === true) {
-        this.agreementAll = true
+        this.OnlineApply_y_Data.agreeTerms = true
         $event.target.checked = true
       } else {
-        this.agreementAll = false
+        this.OnlineApply_y_Data.agreeTerms = false
         $event.target.checked = false
       }
     },
@@ -864,21 +1172,142 @@ export default {
       }
     },
     // ?送出表單
-    onSubmit (values) {
+    async onSubmit (values) {
       console.log(JSON.stringify(this.OnlineApply_y_Data))
-      this.$router.push('OnLineApply_OTP')
+      let identity = null
+      if (this.isLineBank) {
+        const { parm } = this.$route.query
+        identity = await serviceY.IdentityVerification(this.OnlineApply_y_Data, `token=${parm}`)
+      } else {
+        identity = await serviceY.IdentityVerification(this.OnlineApply_y_Data)
+      }
+      const { status, message } = identity
+      // console.log(identity)
+      switch (status) {
+        // ?卡友驗證成功
+        case '00101' :
+          alert(message)
+          this.$router.push('/OnLineApply_OTP')
+          break
+        // ?非卡友-存戶
+        case '00102' :
+          alert(message)
+          this.$router.push('/OnLineApply_Gift')
+          break
+        // ?非卡友-非存戶(改他行驗證流程)
+        case '00103' :
+          alert(message)
+          this.$router.push('/OnLineApply_Gift')
+          // await serviceY.Testing()
+          break
+        // ?驗證失敗(直接顯示錯誤訊息。)
+        case '00199' :
+          alert(message)
+          break
+        default:
+          alert('超出預期錯誤')
+          break
+      }
+      // console.log(identity)
+    },
+    customAddressMes (errors) {
+      const addressKeys = ['年', '月', '日']
+      const addressErrMsg = []
+      for (const key of addressKeys) {
+        if (Object.prototype.hasOwnProperty.call(errors, key)) {
+          addressErrMsg.push(errors[key])
+        }
+      }
+      const distinctArr = Array.from(new Set(addressErrMsg))
+      return distinctArr.join('、')
     },
     // ?驗證表單
     invalidCard ({ values, errors, results }) {
+      const addressKeys = ['年', '月', '日']
+      let isHaveAddressKey = false
+      for (const key of addressKeys) {
+        if (Object.prototype.hasOwnProperty.call(errors, key)) {
+          isHaveAddressKey = true
+          break
+        }
+      }
+      if (isHaveAddressKey) {
+        errors['出生年月日'] = this.customAddressMes(errors)
+      }
+      for (const key of addressKeys) {
+        delete errors[key]
+      }
       this.$custom.validate.showErrors(errors)
     }
   },
   async mounted () {
     this.scrollEvent()
+    this.getYearMonth()
+    this.getDay()
+    this.checkLink()
+    // ?預設規則
+    if (this.isLineBank) {
+      this.schema = {
+        申請的信用卡: 'required',
+        有關條款: 'required'
+      }
+    } else {
+      this.schema = {
+        申請人身份證號: 'required|checkIdandLive',
+        年: 'customBirthVaild',
+        月: 'customBirthVaild',
+        日: 'customBirthVaild',
+        申請的信用卡: 'required',
+        有關條款: 'required'
+      }
+    }
+    defineRule('customBirthVaild', value => {
+      if (this.OnlineApply_y_Data.brthyy === '' || this.OnlineApply_y_Data.brthMM === '' || this.OnlineApply_y_Data.brthdd === '') {
+        return '出生年月日為必填'
+      }
+      return true
+    })
     this.contractModal = new bootstrap.Modal(this.$refs.contractModal, {
       backdrop: 'static'
     })
-    this.checkLink()
+    const { parm, GID, IDE } = this.$route.query
+    if (this.isLineBank) {
+      const linkCard = await serviceY.cardApplyLoad_PageLoad_LB(GID, IDE, parm)
+      const { status, result, message } = linkCard
+      const { id, brthDt } = result
+      switch (status) {
+        case '00700' :
+          this.OnlineApply_y_Data.id = id
+          this.OnlineApply_y_Data.brthyy = Number(brthDt.substring(0, 4))
+          this.OnlineApply_y_Data.brthMM = Number(brthDt.substring(4, 6))
+          this.OnlineApply_y_Data.brthdd = Number(brthDt.substring(6, 8))
+          this.OnlineApply_y_Data.gID = GID
+          this.OnlineApply_y_Data.iDE = IDE
+          break
+        case '00799' :
+          alert(message)
+          break
+        default:
+          alert('超出預期錯誤')
+          break
+      }
+    } else {
+      const linkCard = await serviceY.cardApplyLoad_PageLoad(GID, IDE)
+      const { status, message } = linkCard
+      console.log(linkCard)
+      switch (status) {
+        case '00700' :
+          this.OnlineApply_y_Data.gID = GID
+          this.OnlineApply_y_Data.iDE = IDE
+          break
+        case '00799' :
+          alert(message)
+          break
+        default:
+          alert('超出預期錯誤')
+          break
+      }
+    }
   }
 }
 </script>
