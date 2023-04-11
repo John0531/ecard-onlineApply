@@ -542,7 +542,7 @@ export default {
         front: '', // *身分證正面
         back: '' // *身分證背面
       },
-      uploaded: true, // *base64解析成功開啟判斷
+      uploaded: false, // *base64解析成功開啟判斷
       message: '',
       APIModal: '', // API提醒Modal
       // TODO sheng

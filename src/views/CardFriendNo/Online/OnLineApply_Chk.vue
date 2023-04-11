@@ -524,7 +524,8 @@ export default {
   async mounted () {
     this.agreeModal = await new this.$custom.bootstrap.Modal(this.$refs.agreeModal, { backdrop: 'static' })
     this.termsHtml = await PublicService.getTermsHtml(this.termsFile)
-    const res = await ServiceN.uploadImage(this.file)
+    const res = await ServiceN.otherCardholderPageLoad()
+    console.log(res)
   }
 }
 </script>
