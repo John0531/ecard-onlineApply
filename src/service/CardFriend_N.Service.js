@@ -8,7 +8,7 @@ const service = {
       const url = `${process.env.VUE_APP_BASE_API}/CardPapper/PageLoad`
       const res = await axios.get(url)
       console.log(res)
-      return res.data.result
+      return res
     } catch (err) {
       alert(err)
     }
@@ -58,7 +58,7 @@ const service = {
       const url = `${process.env.VUE_APP_BASE_API}/OtherCardholderVerification/PageLoad`
       const res = await axios.get(url)
       console.log(res)
-      return res.data.result
+      return res
     } catch (err) {
       alert(err)
     }
@@ -68,7 +68,7 @@ const service = {
       const url = `${process.env.VUE_APP_BASE_API}/OtherCardholderVerification/Verification`
       const res = await axios.post(url, data)
       console.log(res)
-      return res.data.result
+      return res
     } catch (err) {
       alert(err)
     }
@@ -78,7 +78,7 @@ const service = {
       const url = `${process.env.VUE_APP_BASE_API}/OtherCardholderVerification/PageLoad`
       const res = await axios.get(url)
       console.log(res)
-      return res.data.result
+      return res
     } catch (err) {
       alert(err)
     }
@@ -88,7 +88,7 @@ const service = {
       const url = `${process.env.VUE_APP_BASE_API}/CardSendApply/CardSendApply`
       const res = await axios.get(url)
       console.log(res)
-      return res.data.result
+      return res
     } catch (err) {
       alert(err)
     }
@@ -96,16 +96,15 @@ const service = {
   async uploadImage (file) {
     try {
       const data = JSON.stringify(file)
-      console.log(data)
       const url = `${process.env.VUE_APP_BASE_API}/OCR/UploadImage`
       const options = {
         headers: { 'content-type': 'application/json' }
       }
       const res = await axios.post(url, data, options)
-      console.log(res)
-      return res.data.result
+      // console.log(res)
+      return res
     } catch (err) {
-      alert(err)
+      return err
     }
   }
 }
