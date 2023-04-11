@@ -570,7 +570,6 @@ export default {
       },
       message: '',
       APIModal: '' // API提醒Modal
-      }
     }
   },
   computed: {
@@ -748,7 +747,7 @@ export default {
     this.NoticeModal = new this.$custom.bootstrap.Modal(this.$refs.NoticeModal)
     this.NoticeModal2 = new this.$custom.bootstrap.Modal(this.$refs.NoticeModa2)
     this.ImageLimit = new this.$custom.bootstrap.Modal(this.$refs.ImageLimit)
-    this.APIModal =  new bootstrap.Modal(this.$refs.apiModal, { backdrop: 'static' })
+    this.APIModal = new this.$custom.bootstrap.Modal(this.$refs.apiModal, { backdrop: 'static' })
     this.NoticeModal.show()
   },
   watch: {
