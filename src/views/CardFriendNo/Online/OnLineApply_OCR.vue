@@ -154,19 +154,13 @@
                         id="SelD"
                         class="form-select form-control mx-1 mx-md-2"
                         :class="{ 'is-invalid': errors['身分證發證日期'] }"
-                        @blur="
-                          $custom.validate.checkDate(
-                            Form.idx,
-                            $refs.form,
-                            '身分證發證日期'
-                          )
-                        "
+                        @blur="$custom.validate.checkDate(Form.idx,$refs.form,'身分證發證日期')"
                       >
                         <option value="" selected>---</option>
                         <option v-for="n in idxList.day" :key="n" :value="n">
                           {{ n }}
-                        </option> </Field
-                      >日
+                        </option>
+                        </Field>日
                     </div>
                     <p class="text-danger ms-2 mt-1">
                       {{ errors["身分證發證日期"] }}

@@ -280,41 +280,41 @@ const validate = {
   getDateSelect (selectedDate, dateType) {
     const dateList = {
       year: [],
-      month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      month: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
       day: []
     }
     // ? 判斷為"民國"或"西元"
     if (dateType === '西元') {
       for (let i = new Date().getFullYear() - 100; i <= new Date().getFullYear(); i++) {
-        dateList.year.unshift(i)
+        dateList.year.unshift(i.toString())
       }
     } else if (dateType === '民國') {
       for (let i = new Date().getFullYear() - 100 - 1911; i <= new Date().getFullYear() - 1911; i++) {
-        dateList.year.unshift(i)
+        dateList.year.unshift(i.toString())
       }
     }
     // ? 判斷為大月/小月/2月
-    const BigMonth = [1, 3, 5, 7, 8, 10, 12]
-    const SmallMonth = [4, 6, 9, 11]
+    const BigMonth = ['1', '3', '5', '7', '8', '10', '12']
+    const SmallMonth = ['4', '6', '9', '11']
     if (BigMonth.includes(selectedDate.Month)) {
       for (let i = 1; i <= 31; i++) {
-        dateList.day.push(i)
+        dateList.day.push(i.toString())
       }
     } else if (SmallMonth.includes(selectedDate.Month)) {
       for (let i = 1; i <= 30; i++) {
-        dateList.day.push(i)
+        dateList.day.push(i.toString())
       }
     } else if (selectedDate.Month === 2) {
       // ? 判斷是否為閏年
       const year = selectedDate.Year > 1000 ? selectedDate.Year : selectedDate.Year + 1911
       if (year % 4 === 0) {
         for (let i = 1; i <= 29; i++) {
-          dateList.day.push(i)
+          dateList.day.push(i.toString())
         }
       }
       if (year % 4 !== 0) {
         for (let i = 1; i <= 28; i++) {
-          dateList.day.push(i)
+          dateList.day.push(i.toString())
         }
       }
     }
