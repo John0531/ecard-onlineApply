@@ -550,7 +550,7 @@
                   </button>
               </div>
               <div class="modal-body">
-                  <div class="text-center py-3">上傳格式限JPG，單一檔案上限為3MB。</div>
+                  <div class="text-center py-3">上傳格式限JPG，單一檔案上限為5MB。</div>
                   <hr>
                   <div class="text-center mb-3">
                       <div class="col-12 text-center">
@@ -611,7 +611,8 @@ export default {
       // ? 轉base64
       const reader = new FileReader()
       const file = await e.target.files[0]
-      if (file.size > 3145728 || file.type !== 'image/jpeg') {
+      const maxAllowedSize = 5 * 1024 * 1024
+      if (file.size > maxAllowedSize || file.type !== 'image/jpeg') {
         this.ImageLimit.show()
       } else {
         this.imgTemplateUrl = URL.createObjectURL(file)
