@@ -260,7 +260,7 @@
 
 <script>
 import PublicService from '@/service/Public.Service.js'
-import ServiceN from '@/service/CardFriend_N.Service.js'
+// import ServiceN from '@/service/CardFriend_N.Service.js'
 
 export default {
   data () {

@@ -267,7 +267,7 @@
                       @change="getAddress('2')"
                     >
                       <option value="">-----</option>
-                      <option v-for="item in homeAddrList.county" :key="item.varArea" :value="item.varArea">{{item.varArea}}</option>
+                      <option v-for="item in homeAddrList.area" :key="item.varArea" :value="item.varArea">{{item.varArea}}</option>
                     </Field>
                     <Field
                       as="select"
@@ -279,7 +279,7 @@
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     >
                       <option value="">-----</option>
-                      <option v-for="item in homeAddrList.area" :key="item.varRoad" :value="item.varRoad">{{item.varRoad}}</option>
+                      <option v-for="item in homeAddrList.road" :key="item.varRoad" :value="item.varRoad">{{item.varRoad}}</option>
                     </Field>
                   </div>
                   <div class="d-flex apply_address align-items-center">
@@ -570,8 +570,8 @@ export default {
         }
       },
       homeAddrList: {
-        county: [],
-        area: []
+        area: [],
+        road: []
       }
       // TODO sheng end
     }
@@ -734,7 +734,7 @@ export default {
         // return false
       }
     },
-    async getAddress (UseType) {
+    async getAddress (UseType, CallType) {
       const postData = {
         spName: 'AddressMapping',
         info: {
@@ -746,12 +746,17 @@ export default {
       }
       const result = await PublicService.getAddress(postData)
       if (UseType === '1') {
-        this.homeAddrList.county = []
-        this.homeAddrList.area = []
-        this.homeAddrList.county = result.Table
-      } else if (UseType === '2') {
-        this.homeAddrList.area = []
+        if (CallType !== 'session') {
+          this.Form.homeAddr.Area = ''// ? 清除表單原始值
+          this.Form.homeAddr.Road = ''// ? 清除表單原始值
+        }
+        this.homeAddrList.road = []
         this.homeAddrList.area = result.Table
+      } else if (UseType === '2') {
+        if (CallType !== 'session') {
+          this.Form.homeAddr.Road = ''// ? 清除表單原始值
+        }
+        this.homeAddrList.road = result.Table
       }
     },
     async submit () {
@@ -773,8 +778,8 @@ export default {
   async mounted () {
     if (sessionStorage.getItem('OCR_Data')) {
       this.Form = JSON.parse(sessionStorage.getItem('OCR_Data'))
-      await this.getAddress('1')
-      await this.getAddress('2')
+      await this.getAddress('1', 'session')
+      await this.getAddress('2', 'session')
     }
     // this.makeModify()
     this.CroppieModal = new this.$custom.bootstrap.Modal(this.$refs.CroppieModal)

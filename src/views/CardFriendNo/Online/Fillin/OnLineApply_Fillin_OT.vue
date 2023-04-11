@@ -335,7 +335,7 @@
                       @change="getAddress('2','homeAddr')"
                     >
                       <option value="">-----</option>
-                      <option v-for="item in addrList.homeAddr.county" :key="item.varArea" :value="item.varArea">{{item.varArea}}</option>
+                      <option v-for="item in addrList.homeAddr.area" :key="item.varArea" :value="item.varArea">{{item.varArea}}</option>
                     </Field>
                     <Field
                       as="select"
@@ -347,7 +347,7 @@
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     >
                       <option value="">-----</option>
-                      <option v-for="item in addrList.homeAddr.area" :key="item.varRoad" :value="item.varRoad">{{item.varRoad}}</option>
+                      <option v-for="item in addrList.homeAddr.road" :key="item.varRoad" :value="item.varRoad">{{item.varRoad}}</option>
                     </Field>
                   </div>
                   <div class="d-flex apply_address align-items-center">
@@ -426,6 +426,7 @@
                       runat="server"
                       class="form-select form-control ZIP mb-2"
                       :class="{ 'is-invalid': errors['居住地址'] }"
+                      @change="getAddress('1','liveAddr')"
                     >
                       <option v-for="item in selectJson.County" :key="item.SORT" :value="item.VALUE">{{item.SHOW}}</option>
                     </Field>
@@ -437,8 +438,10 @@
                       runat="server"
                       class="form-select form-control Area mx-1 mx-md-2 mb-2"
                       :class="{ 'is-invalid': errors['居住地址'] }"
+                      @change="getAddress('2','liveAddr')"
                     >
                       <option value="">-----</option>
+                      <option v-for="item in addrList.liveAddr.area" :key="item.varArea" :value="item.varArea">{{item.varArea}}</option>
                     </Field>
                     <Field
                       as="select"
@@ -450,6 +453,7 @@
                       :class="{ 'is-invalid': errors['居住地址'] }"
                     >
                       <option value="">-----</option>
+                      <option v-for="item in addrList.liveAddr.road" :key="item.varRoad" :value="item.varRoad">{{item.varRoad}}</option>
                     </Field>
                   </div>
                   <div class="d-flex apply_address align-items-center">
@@ -515,7 +519,7 @@
                   </div>
                   <div class="form-check">
                     <input
-                      @click="Form.liveAddr = {...Form.homeAddr};$custom.validate.CheckAddressAll(Form.liveAddr,$refs.form,'居住地址')"
+                      @click="sameHomeAddr"
                       class="form-check-input mt-2 position-absolute"
                       type="radio"
                       name="exampleRadios"
@@ -904,6 +908,7 @@
                         runat="server"
                         class="form-select form-control ZIP mb-2"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
+                        @change="getAddress('1','parentAddr')"
                       >
                         <option v-for="item in selectJson.County" :key="item.SORT" :value="item.VALUE">{{item.SHOW}}</option>
                       </Field>
@@ -915,8 +920,10 @@
                         runat="server"
                         class="form-select form-control Area mx-1 mx-md-2 mb-2"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
+                        @change="getAddress('2','parentAddr')"
                       >
                         <option value="">-----</option>
+                        <option v-for="item in addrList.parentAddr.area" :key="item.varArea" :value="item.varArea">{{item.varArea}}</option>
                       </Field>
                       <Field
                         as="select"
@@ -928,6 +935,7 @@
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
                       >
                         <option value="">-----</option>
+                        <option v-for="item in addrList.parentAddr.road" :key="item.varRoad" :value="item.varRoad">{{item.varRoad}}</option>
                       </Field>
                     </div>
                     <div class="d-flex apply_address align-items-center">
@@ -1067,6 +1075,7 @@
                       runat="server"
                       class="form-select form-control ZIP mb-2"
                       :class="{ 'is-invalid': errors['公司地址'] }"
+                      @change="getAddress('1','compAddr')"
                     >
                       <option v-for="item in selectJson.County" :key="item.SORT" :value="item.VALUE">{{item.SHOW}}</option>
                     </Field>
@@ -1078,8 +1087,10 @@
                       runat="server"
                       class="form-select form-control Area mx-1 mx-md-2 mb-2"
                       :class="{ 'is-invalid': errors['公司地址'] }"
+                      @change="getAddress('2','compAddr')"
                     >
                       <option value="">-----</option>
+                      <option v-for="item in addrList.compAddr.area" :key="item.varArea" :value="item.varArea">{{item.varArea}}</option>
                     </Field>
                     <Field
                       as="select"
@@ -1091,6 +1102,7 @@
                       :class="{ 'is-invalid': errors['公司地址'] }"
                     >
                       <option value="">-----</option>
+                      <option v-for="item in addrList.compAddr.road" :key="item.varRoad" :value="item.varRoad">{{item.varRoad}}</option>
                     </Field>
                   </div>
                   <div class="d-flex apply_address align-items-center">
@@ -1467,20 +1479,20 @@ export default {
       },
       addrList: {
         homeAddr: {
-          county: [],
-          area: []
+          area: [],
+          road: []
         },
         liveAddr: {
-          county: [],
-          area: []
+          area: [],
+          road: []
         },
         parentAddr: {
-          county: [],
-          area: []
+          area: [],
+          road: []
         },
         compAddr: {
-          county: [],
-          area: []
+          area: [],
+          road: []
         }
       }
     }
@@ -1554,11 +1566,12 @@ export default {
       this.Form.idCounty = OCRData.idCounty
       this.Form.idissue = OCRData.idissue
       this.Form.idx = OCRData.idx
+      await this.getAddress('1', 'homeAddr', 'session')
+      await this.getAddress('2', 'homeAddr', 'session')
       // * 以填寫資料暫存
       const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
       // ? 取得 PageLoad API 資料
       this.pageLoad = await service.fillin_OT_PageLoad()
-      console.log(this.pageLoad)
       if (FillinData?.OT) {
         this.Form = FillinData.OT
       } else {
@@ -1572,7 +1585,7 @@ export default {
         this.Form.userCode = this.pageLoad.userCode
       }
     },
-    async getAddress (UseType, AddrType) {
+    async getAddress (UseType, AddrType, CallType) {
       const postData = {
         spName: 'AddressMapping',
         info: {
@@ -1584,13 +1597,24 @@ export default {
       }
       const result = await PublicService.getAddress(postData)
       if (UseType === '1') {
-        this.addrList[AddrType].county = []
-        this.addrList[AddrType].area = []
-        this.addrList[AddrType].county = result.Table
-      } else if (UseType === '2') {
-        this.addrList[AddrType].area = []
+        if (CallType !== 'session') {
+          this.Form[AddrType].Area = ''// ? 清除表單原始值
+          this.Form[AddrType].Road = ''// ? 清除表單原始值
+        }
+        this.addrList[AddrType].road = []
         this.addrList[AddrType].area = result.Table
+      } else if (UseType === '2') {
+        if (CallType !== 'session') {
+          this.Form[AddrType].Road = ''// ? 清除表單原始值
+        }
+        this.addrList[AddrType].road = result.Table
       }
+    },
+    async sameHomeAddr () {
+      this.Form.liveAddr = { ...this.Form.homeAddr }
+      await this.getAddress('1', 'liveAddr', 'session')
+      await this.getAddress('2', 'liveAddr', 'session')
+      this.$custom.validate.CheckAddressAll(this.Form.liveAddr, this.$refs.form, '居住地址')
     },
     async submit () {
       this.$refs.form.setErrors({}) // ? 先清除所有上次驗證的錯誤再驗證
