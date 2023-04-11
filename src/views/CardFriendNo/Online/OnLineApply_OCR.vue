@@ -30,12 +30,12 @@
                 <div class="upload_items text-center">
                   <Field
                     type="file" name="upload1" id="upload1"
-                    accept="image/.jpg,.heic,.heif" class="upload"
+                    accept="image/*,.heic,.heif" class="upload"
                     data-sigil="file-input"
                     :class="{ 'is-invalid': errors['身分證正面'] }"
                     @change.prevent="pickFiles"
                     @blur="this.num = 1"
-                    @mouseup="checkIsPics"
+                    @mouseup.prevent="checkIsPics"
                   />
                   <!-- <textarea name="TBupload1" id="TBupload1"style="display: none"></textarea> -->
                   <img
@@ -56,11 +56,11 @@
                 >
                   <Field
                     type="file" name="upload2" id="upload2"
-                    accept="image/.jpg,.heic,.heif" class="upload"
+                    accept="image/*,.heic,.heif" class="upload"
                     data-sigil="file-input"
                     @change.prevent="pickFiles"
                     @blur="this.num = 2"
-                    @mouseup="checkIsPics"
+                    @mouseup.prevent="checkIsPics"
                   />
                   <!-- <textarea name="TBupload2" id="TBupload2" style="display: none"></textarea> -->
                   <img
@@ -486,24 +486,26 @@
         </div>
     </div>
         <!-- API情境彈窗 -->
-    <div ref="APIModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <span  style="font-size:1rem" v-html="message"></span>
-            </div>
-            <div class="modal-footer">
-                <div class="text-center" >
-                <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" style="border-radius: 0.3rem;">關閉</button>
-            </div>
+    <div ref="APIModal" class="modal fade" id="noticeModal_2" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><input id="myCheckCount" hidden></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                      <img src="@/assets/images/form/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center py-3" v-html="message"></div>
+                    <hr>
+                    <div class="text-center mb-3">
+                        <div class="col-12 text-center">
+                            <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" aria-label="Close">關閉</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-      </div>
     </div>
 </template>
 
@@ -584,7 +586,8 @@ export default {
       // ? 轉base64
       const reader = new FileReader()
       const file = await e.target.files[0]
-      if (file?.size > 3145728 || file?.type !== 'image/jpeg') {
+      const maxAllowedSize = 3 * 1024 * 1024
+      if (file?.size > maxAllowedSize || file?.type !== 'image/jpeg') {
         this.ImageLimit.show()
       } else {
         this.imgTemplateUrl = URL.createObjectURL(file)
@@ -653,16 +656,10 @@ export default {
       }, 1000)
       // ?編輯結束將相關物件資料銷毀
       this.CroppieModal.hide()
-      this[`identitiyPack${num}`].preViewImg.destroy()
-      this.num = ''
-      resultImg.src = ''
-      document.getElementById('myIdentifident').innerHTML = ''
-      document.getElementById('myIdentifident').classList.remove('croppie-container')
+      this.destroy(this.num)
     },
     destroy (num) {
       this[`identitiyPack${num}`].preViewImg.destroy()
-      // const resultImg = this.$refs[`resultImg${num}`]
-      // resultImg.src = ''
       document.getElementById('myIdentifident').innerHTML = ''
       document.getElementById('myIdentifident').classList.remove('croppie-container')
       this.num = ''
@@ -670,6 +667,58 @@ export default {
     clearFiles (num) {
       // ?清空暫存檔案
       document.querySelector(`#upload${num}`).value = null
+    },
+    async sendIdentity () {
+      const dom = this.$refs.myForm
+      if (!this.identitiyPack1.file || !this.identitiyPack2.file) {
+        dom.setFieldError('身份證', '身分證正反面為必填')
+      }
+      // ?整理檔案
+      this.file.front = this.identitiyPack1.file.split(',')[1]
+      this.file.back = this.identitiyPack2.file.split(',')[1]
+      // ?將身分證傳到後端
+      this.message = '資料驗證中'
+      this.APIModal.show()
+      setTimeout(() => {
+        this.APIModal.hide()
+      }, 5000)
+      const res = await ServiceN.uploadImage(this.file)
+      console.log(res)
+      this.message = res.data.message
+      console.log(res.status)
+      if (res.status === 200) {
+        this.APIModal.show()
+        this.uploaded = true
+        const front = res.data.result.Front
+        this.Form.idCounty = front.發證地點
+        if (front.領補換類別 === '初發') {
+          this.Form.idissue = 1
+        }
+        if (front.領補換類別 === '補發') {
+          this.Form.idissue = 2
+        }
+        if (front.領補換類別 === '換發') {
+          this.Form.idissue = 3
+        }
+        this.Form.cName = front.姓名
+        this.Form.idx.Year = front.發證日期.年
+        this.Form.idx.Month = front.發證日期.月
+        this.Form.idx.Day = front.發證日期.日
+        const back = res.data.result.Back.住址
+        this.Form.homeAddr.County = back.縣市
+        this.Form.homeAddr.Area = back.鄉鎮區
+        this.Form.homeAddr.Road = back.路
+        this.Form.homeAddr.Lane = back.巷
+        this.Form.homeAddr.Aly = back.弄
+        this.Form.homeAddr.Num = back.號
+        // this.Form.homeAddr.Of = back.之號
+        this.Form.homeAddr.Flr = back.樓
+        this.Form.homeAddr.Other = back.室
+        await this.getAddress('1')
+        await this.getAddress('2')
+      } else {
+        this.APIModal.show()
+      }
     },
     checkIsPics () {
       const dom = this.$refs.myForm
@@ -683,21 +732,6 @@ export default {
           dom.setFieldError('身份證', '身分證正反面為必填')
         }
         // return false
-      }
-    },
-    async sendIdentity () {
-      const dom = this.$refs.myForm
-      if (!this.identitiyPack1.file || !this.identitiyPack2.file) {
-        dom.setFieldError('身份證', '身分證正反面為必填')
-      }
-      // ?整理檔案
-      this.file.front = this.identitiyPack1.file.split(',')[1]
-      this.file.back = this.identitiyPack2.file.split(',')[1]
-      console.log(this.file)
-      const result = await ServiceN.uploadImage(this.file)
-      this.uploaded = true
-      if (result) {
-        this.uploaded = true
       }
     },
     async getAddress (UseType, CallType) {
@@ -760,9 +794,6 @@ export default {
     num (n) {
       document.getElementById('myIdentifident').classList.remove('croppie-container')
     }
-  },
-  unmounted () {
-    this.destroy()
   }
 }
 </script>

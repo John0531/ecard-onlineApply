@@ -260,6 +260,7 @@
 
 <script>
 import PublicService from '@/service/Public.Service.js'
+// import ServiceN from '@/service/CardFriend_N.Service.js'
 
 export default {
   data () {
@@ -523,7 +524,7 @@ export default {
   async mounted () {
     this.agreeModal = await new this.$custom.bootstrap.Modal(this.$refs.agreeModal, { backdrop: 'static' })
     this.termsHtml = await PublicService.getTermsHtml(this.termsFile)
-    // await this.scrollEvent()
+    // const res = await ServiceN.uploadImage(this.file)
   }
 }
 </script>
