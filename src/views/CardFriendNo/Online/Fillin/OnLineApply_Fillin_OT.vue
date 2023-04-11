@@ -332,9 +332,7 @@
                       class="form-select form-control Area mx-1 mx-md-2 mb-2"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     >
-                      <option value="" selected>-----</option>
-                      <option value="松山區">松山區</option>
-                      <option value="內湖區">內湖區</option>
+                      <option value="">-----</option>
                     </Field>
                     <Field
                       as="select"
@@ -345,9 +343,7 @@
                       class="form-select form-control Road mb-2"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     >
-                      <option value="" selected>-----</option>
-                      <option value="忠孝東路五段">忠孝東路五段</option>
-                      <option value="忠孝東路五段">忠孝東路五段</option>
+                      <option value="">-----</option>
                     </Field>
                   </div>
                   <div class="d-flex apply_address align-items-center">
@@ -438,9 +434,7 @@
                       class="form-select form-control Area mx-1 mx-md-2 mb-2"
                       :class="{ 'is-invalid': errors['居住地址'] }"
                     >
-                      <option value="" selected>-----</option>
-                      <option value="松山區">松山區</option>
-                      <option value="內湖區">內湖區</option>
+                      <option value="">-----</option>
                     </Field>
                     <Field
                       as="select"
@@ -451,9 +445,7 @@
                       class="form-select form-control Road mb-2"
                       :class="{ 'is-invalid': errors['居住地址'] }"
                     >
-                      <option value="" selected>-----</option>
-                      <option value="忠孝東路五段">忠孝東路五段</option>
-                      <option value="忠孝東路五段">忠孝東路五段</option>
+                      <option value="">-----</option>
                     </Field>
                   </div>
                   <div class="d-flex apply_address align-items-center">
@@ -920,9 +912,7 @@
                         class="form-select form-control Area mx-1 mx-md-2 mb-2"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
                       >
-                        <option value="" selected>-----</option>
-                        <option value="松山區">松山區</option>
-                        <option value="內湖區">內湖區</option>
+                        <option value="">-----</option>
                       </Field>
                       <Field
                         as="select"
@@ -933,9 +923,7 @@
                         class="form-select form-control Road mb-2"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
                       >
-                        <option value="" selected>-----</option>
-                        <option value="忠孝東路五段">忠孝東路五段</option>
-                        <option value="忠孝東路五段">忠孝東路五段</option>
+                        <option value="">-----</option>
                       </Field>
                     </div>
                     <div class="d-flex apply_address align-items-center">
@@ -1087,9 +1075,7 @@
                       class="form-select form-control Area mx-1 mx-md-2 mb-2"
                       :class="{ 'is-invalid': errors['公司地址'] }"
                     >
-                      <option value="" selected>-----</option>
-                      <option value="松山區">松山區</option>
-                      <option value="內湖區">內湖區</option>
+                      <option value="">-----</option>
                     </Field>
                     <Field
                       as="select"
@@ -1100,9 +1086,7 @@
                       class="form-select form-control Road mb-2"
                       :class="{ 'is-invalid': errors['公司地址'] }"
                     >
-                      <option value="" selected>-----</option>
-                      <option value="忠孝東路五段">忠孝東路五段</option>
-                      <option value="忠孝東路五段">忠孝東路五段</option>
+                      <option value="">-----</option>
                     </Field>
                   </div>
                   <div class="d-flex apply_address align-items-center">

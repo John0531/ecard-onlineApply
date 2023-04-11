@@ -6,7 +6,7 @@ const service = {
   async Chkw_PageLoad () {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/CardPapper/PageLoad`
-      const res = await axios.get(url, { withCredentials: true })
+      const res = await axios.get(url)
       console.log(res)
       return res.data.result
     } catch (err) {
