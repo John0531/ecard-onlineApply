@@ -570,7 +570,7 @@ export default {
       // ? 轉base64
       const reader = new FileReader()
       const file = await e.target.files[0]
-      if (file.size > 3145728 || file.type !== 'image/jpeg') {
+      if (file?.size > 3145728 || file?.type !== 'image/jpeg') {
         this.ImageLimit.show()
       } else {
         this.imgTemplateUrl = URL.createObjectURL(file)
@@ -616,6 +616,8 @@ export default {
           })
           // const cropImage = document.querySelector('.cr-image')
           // cropImage.classList.add('crop-test')
+          // ?bind在此時將jpg轉為png
+          console.log(this[`identitiyPack${num}`].preViewImg)
           await this[`identitiyPack${num}`].preViewImg.bind({
             url: this[`identitiyPack${num}`].photo
           })
@@ -633,6 +635,7 @@ export default {
       })
       setTimeout(() => {
         // ?將編輯完成的base64準備起來打API
+        // this[`identitiyPack${num}`].file = this.jpeg2png(this.$refs[`resultImg${num}`].src)
         this[`identitiyPack${num}`].file = this.$refs[`resultImg${num}`].src
       }, 1000)
       // ?編輯結束將相關物件資料銷毀
@@ -656,14 +659,13 @@ export default {
       document.querySelector(`#upload${num}`).value = null
     },
     checkIsPics () {
-      console.log(1)
       const dom = this.$refs.myForm
       dom.setFieldError('身份證', '')
       if (this.identitiyPack1.file && this.identitiyPack2.file) {
         return true
       }
       if (!this.identitiyPack1.file || !this.identitiyPack2.file) {
-        if (!this.identitiyPack1.preViewImg && !this.identitiyPack.preViewImg) {
+        if (this.identitiyPack1.preViewImg && this.identitiyPack2.preViewImg) {
           // ?一進來不驗證
           dom.setFieldError('身份證', '身分證正反面為必填')
         }

@@ -40,7 +40,7 @@
                                       :class="{ 'is-invalid': errors['驗證碼'] }"
                                       @focus="this.mobileMsgCode=''"
                                       @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
-                                      rules="checkCode"
+                                      rules="checkOTP"
                                     />
                                     <button
                                       @click="getMobileMsgCode()"

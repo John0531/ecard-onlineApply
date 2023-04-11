@@ -98,12 +98,10 @@ const service = {
       const data = JSON.stringify(file)
       console.log(data)
       const url = `${process.env.VUE_APP_BASE_API}/OCR/UploadImage`
-      const res = await axios({
-        method: 'post',
-        url: url,
-        'Content-Type': 'application/json',
-        body: data
-      })
+      const options = {
+        headers: { 'content-type': 'application/json' }
+      }
+      const res = await axios.post(url, data, options)
       console.log(res)
       return res.data.result
     } catch (err) {
