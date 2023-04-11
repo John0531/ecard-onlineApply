@@ -30,12 +30,12 @@
                 <div class="upload_items text-center">
                   <Field
                     type="file" name="upload1" id="upload1"
-                    accept="image/.jpg,.heic,.heif" class="upload"
+                    accept="image/*,.heic,.heif" class="upload"
                     data-sigil="file-input"
                     :class="{ 'is-invalid': errors['身分證正面'] }"
                     @change.prevent="pickFiles"
                     @blur="this.num = 1"
-                    @mouseup="checkIsPics"
+                    @mouseup.prevent="checkIsPics"
                   />
                   <!-- <textarea name="TBupload1" id="TBupload1"style="display: none"></textarea> -->
                   <img
@@ -56,11 +56,11 @@
                 >
                   <Field
                     type="file" name="upload2" id="upload2"
-                    accept="image/.jpg,.heic,.heif" class="upload"
+                    accept="image/*,.heic,.heif" class="upload"
                     data-sigil="file-input"
                     @change.prevent="pickFiles"
                     @blur="this.num = 2"
-                    @mouseup="checkIsPics"
+                    @mouseup.prevent="checkIsPics"
                   />
                   <!-- <textarea name="TBupload2" id="TBupload2" style="display: none"></textarea> -->
                   <img
@@ -670,6 +670,24 @@ export default {
       // ?清空暫存檔案
       document.querySelector(`#upload${num}`).value = null
     },
+    async sendIdentity () {
+      const dom = this.$refs.myForm
+      if (!this.identitiyPack1.file || !this.identitiyPack2.file) {
+        dom.setFieldError('身份證', '身分證正反面為必填')
+      }
+      // ?整理檔案
+      this.file.front = this.identitiyPack1.file.split(',')[1]
+      this.file.back = this.identitiyPack2.file.split(',')[1]
+      console.log(this.file)
+      // ?將身分證傳到後端
+      const result = await ServiceN.uploadImage(this.file)
+      console.log(result.message)
+      this.message = result.message
+      if (result) {
+        this.APIModal.show()
+        this.uploaded = true
+      }
+    },
     checkIsPics () {
       const dom = this.$refs.myForm
       dom.setFieldError('身份證', '')
@@ -682,21 +700,6 @@ export default {
           dom.setFieldError('身份證', '身分證正反面為必填')
         }
         // return false
-      }
-    },
-    async sendIdentity () {
-      const dom = this.$refs.myForm
-      if (!this.identitiyPack1.file || !this.identitiyPack2.file) {
-        dom.setFieldError('身份證', '身分證正反面為必填')
-      }
-      // ?整理檔案
-      this.file.front = this.identitiyPack1.file.split(',')[1]
-      this.file.back = this.identitiyPack2.file.split(',')[1]
-      console.log(this.file)
-      const result = await ServiceN.uploadImage(this.file)
-      this.uploaded = true
-      if (result) {
-        this.uploaded = true
       }
     },
     async getAddress (UseType) {
@@ -737,7 +740,7 @@ export default {
     this.NoticeModal = new this.$custom.bootstrap.Modal(this.$refs.NoticeModal)
     this.NoticeModal2 = new this.$custom.bootstrap.Modal(this.$refs.NoticeModa2)
     this.ImageLimit = new this.$custom.bootstrap.Modal(this.$refs.ImageLimit)
-    this.APIModal =  new bootstrap.Modal(this.$refs.apiModal, { backdrop: 'static' })
+    this.APIModal = new this.$custom.bootstrap.Modal(this.$refs.APIModal, { backdrop: 'static' })
     this.NoticeModal.show()
   },
   watch: {
