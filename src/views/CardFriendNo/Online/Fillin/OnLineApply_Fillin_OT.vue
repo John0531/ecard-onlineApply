@@ -320,6 +320,7 @@
                       runat="server"
                       class="form-select form-control ZIP mb-2"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
+                      @change="getAddress('1','homeAddr')"
                     >
                       <option v-for="item in selectJson.County" :key="item.SORT" :value="item.VALUE">{{item.SHOW}}</option>
                     </Field>
@@ -331,10 +332,10 @@
                       runat="server"
                       class="form-select form-control Area mx-1 mx-md-2 mb-2"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
+                      @change="getAddress('2','homeAddr')"
                     >
-                      <option value="" selected>-----</option>
-                      <option value="松山區">松山區</option>
-                      <option value="內湖區">內湖區</option>
+                      <option value="">-----</option>
+                      <option v-for="item in addrList.homeAddr.county" :key="item.varArea" :value="item.varArea">{{item.varArea}}</option>
                     </Field>
                     <Field
                       as="select"
@@ -345,9 +346,8 @@
                       class="form-select form-control Road mb-2"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     >
-                      <option value="" selected>-----</option>
-                      <option value="忠孝東路五段">忠孝東路五段</option>
-                      <option value="忠孝東路五段">忠孝東路五段</option>
+                      <option value="">-----</option>
+                      <option v-for="item in addrList.homeAddr.area" :key="item.varRoad" :value="item.varRoad">{{item.varRoad}}</option>
                     </Field>
                   </div>
                   <div class="d-flex apply_address align-items-center">
@@ -438,9 +438,7 @@
                       class="form-select form-control Area mx-1 mx-md-2 mb-2"
                       :class="{ 'is-invalid': errors['居住地址'] }"
                     >
-                      <option value="" selected>-----</option>
-                      <option value="松山區">松山區</option>
-                      <option value="內湖區">內湖區</option>
+                      <option value="">-----</option>
                     </Field>
                     <Field
                       as="select"
@@ -451,9 +449,7 @@
                       class="form-select form-control Road mb-2"
                       :class="{ 'is-invalid': errors['居住地址'] }"
                     >
-                      <option value="" selected>-----</option>
-                      <option value="忠孝東路五段">忠孝東路五段</option>
-                      <option value="忠孝東路五段">忠孝東路五段</option>
+                      <option value="">-----</option>
                     </Field>
                   </div>
                   <div class="d-flex apply_address align-items-center">
@@ -920,9 +916,7 @@
                         class="form-select form-control Area mx-1 mx-md-2 mb-2"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
                       >
-                        <option value="" selected>-----</option>
-                        <option value="松山區">松山區</option>
-                        <option value="內湖區">內湖區</option>
+                        <option value="">-----</option>
                       </Field>
                       <Field
                         as="select"
@@ -933,9 +927,7 @@
                         class="form-select form-control Road mb-2"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
                       >
-                        <option value="" selected>-----</option>
-                        <option value="忠孝東路五段">忠孝東路五段</option>
-                        <option value="忠孝東路五段">忠孝東路五段</option>
+                        <option value="">-----</option>
                       </Field>
                     </div>
                     <div class="d-flex apply_address align-items-center">
@@ -1087,9 +1079,7 @@
                       class="form-select form-control Area mx-1 mx-md-2 mb-2"
                       :class="{ 'is-invalid': errors['公司地址'] }"
                     >
-                      <option value="" selected>-----</option>
-                      <option value="松山區">松山區</option>
-                      <option value="內湖區">內湖區</option>
+                      <option value="">-----</option>
                     </Field>
                     <Field
                       as="select"
@@ -1100,9 +1090,7 @@
                       class="form-select form-control Road mb-2"
                       :class="{ 'is-invalid': errors['公司地址'] }"
                     >
-                      <option value="" selected>-----</option>
-                      <option value="忠孝東路五段">忠孝東路五段</option>
-                      <option value="忠孝東路五段">忠孝東路五段</option>
+                      <option value="">-----</option>
                     </Field>
                   </div>
                   <div class="d-flex apply_address align-items-center">
@@ -1384,6 +1372,7 @@
 </template>
 
 <script>
+import PublicService from '@/service/Public.Service.js'
 import service from '@/service/CardFriend_N.Service.js'
 
 class Address {
@@ -1475,6 +1464,24 @@ export default {
         unitCode: '',
         userCode: '',
         amwayNo: ''
+      },
+      addrList: {
+        homeAddr: {
+          county: [],
+          area: []
+        },
+        liveAddr: {
+          county: [],
+          area: []
+        },
+        parentAddr: {
+          county: [],
+          area: []
+        },
+        compAddr: {
+          county: [],
+          area: []
+        }
       }
     }
   },
@@ -1563,6 +1570,26 @@ export default {
         this.Form.email = this.pageLoad.email
         this.Form.unitCode = this.pageLoad.unitCode
         this.Form.userCode = this.pageLoad.userCode
+      }
+    },
+    async getAddress (UseType, AddrType) {
+      const postData = {
+        spName: 'AddressMapping',
+        info: {
+          UseType: UseType,
+          varCity: this.Form[AddrType].County,
+          varArea: this.Form[AddrType].Area,
+          rtncode: ''
+        }
+      }
+      const result = await PublicService.getAddress(postData)
+      if (UseType === '1') {
+        this.addrList[AddrType].county = []
+        this.addrList[AddrType].area = []
+        this.addrList[AddrType].county = result.Table
+      } else if (UseType === '2') {
+        this.addrList[AddrType].area = []
+        this.addrList[AddrType].area = result.Table
       }
     },
     async submit () {

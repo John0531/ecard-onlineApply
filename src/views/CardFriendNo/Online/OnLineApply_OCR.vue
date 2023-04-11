@@ -264,10 +264,10 @@
                       runat="server"
                       class="form-select form-control Area mx-1 mx-md-2 mb-2"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
+                      @change="getAddress('2')"
                     >
-                      <option value="" selected>-----</option>
-                      <option value="松山區">松山區</option>
-                      <option value="內湖區">內湖區</option>
+                      <option value="">-----</option>
+                      <option v-for="item in homeAddrList.county" :key="item.varArea" :value="item.varArea">{{item.varArea}}</option>
                     </Field>
                     <Field
                       as="select"
@@ -278,9 +278,8 @@
                       class="form-select form-control Road mb-2"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     >
-                      <option value="" selected>-----</option>
-                      <option value="忠孝東路五段">忠孝東路五段</option>
-                      <option value="忠孝東路五段">忠孝東路五段</option>
+                      <option value="">-----</option>
+                      <option v-for="item in homeAddrList.area" :key="item.varRoad" :value="item.varRoad">{{item.varRoad}}</option>
                     </Field>
                   </div>
                   <div class="d-flex apply_address align-items-center">
@@ -517,6 +516,34 @@ export default {
       preViewImage: '',
       times: -1,
       resultImg: '',
+      Uploaded: false,
+      num: '', // *修改完成要呈現的照片序
+      identitiyPack1: {
+        photo: '',
+        preViewImg: '',
+        resultImg: '',
+        file: ''
+      },
+      identitiyPack2: {
+        photo: '',
+        preViewImg: '',
+        resultImg: '',
+        file: ''
+      },
+      imgTemplateUrl: '',
+      imgTemplateInfo: '',
+      NoticeModal: '', //* 一進畫面範例說明
+      NoticeModal2: '', //* 如身分證無法辨識/模糊，跳出提醒
+      ImageLimit: '', //* 提醒上傳檔案限制提醒
+      CroppieModal: '', // * 財力證明圖片修改
+      file: { // *上傳的檔案
+        front: '', // *身分證正面
+        back: '' // *身分證背面
+      },
+      uploaded: true, // *base64解析成功開啟判斷
+      message: '',
+      APIModal: '', // API提醒Modal
+      // TODO sheng
       selectJson: JSON.parse(localStorage.getItem('SELECT_JSON')), // ? 下拉
       // ? 身分證資訊表單
       Form: {
@@ -543,34 +570,8 @@ export default {
       homeAddrList: {
         county: [],
         area: []
-      },
-      Uploaded: false,
-      num: '', // *修改完成要呈現的照片序
-      identitiyPack1: {
-        photo: '',
-        preViewImg: '',
-        resultImg: '',
-        file: ''
-      },
-      identitiyPack2: {
-        photo: '',
-        preViewImg: '',
-        resultImg: '',
-        file: ''
-      },
-      imgTemplateUrl: '',
-      imgTemplateInfo: '',
-      NoticeModal: '', //* 一進畫面範例說明
-      NoticeModal2: '', //* 如身分證無法辨識/模糊，跳出提醒
-      ImageLimit: '', //* 提醒上傳檔案限制提醒
-      CroppieModal: '', // * 財力證明圖片修改
-      file: { // *上傳的檔案
-        front: '', // *身分證正面
-        back: '' // *身分證背面
-      },
-      uploaded: false, // *base64解析成功開啟判斷
-      message: '',
-      APIModal: '' // API提醒Modal
+      }
+      // TODO sheng end
     }
   },
   computed: {
@@ -712,7 +713,15 @@ export default {
           rtncode: ''
         }
       }
-      await PublicService.getAddress(postData)
+      const result = await PublicService.getAddress(postData)
+      if (UseType === '1') {
+        this.homeAddrList.county = []
+        this.homeAddrList.area = []
+        this.homeAddrList.county = result.Table
+      } else if (UseType === '2') {
+        this.homeAddrList.area = []
+        this.homeAddrList.area = result.Table
+      }
     },
     async submit () {
       this.$refs.form.setErrors({}) // ? 先清除所有上次驗證的錯誤再驗證
@@ -730,9 +739,11 @@ export default {
       }
     }
   },
-  mounted () {
+  async mounted () {
     if (sessionStorage.getItem('OCR_Data')) {
       this.Form = JSON.parse(sessionStorage.getItem('OCR_Data'))
+      await this.getAddress('1')
+      await this.getAddress('2')
     }
     // this.makeModify()
     this.CroppieModal = new this.$custom.bootstrap.Modal(this.$refs.CroppieModal)
@@ -740,7 +751,7 @@ export default {
     this.NoticeModal = new this.$custom.bootstrap.Modal(this.$refs.NoticeModal)
     this.NoticeModal2 = new this.$custom.bootstrap.Modal(this.$refs.NoticeModa2)
     this.ImageLimit = new this.$custom.bootstrap.Modal(this.$refs.ImageLimit)
-    this.APIModal = new this.$custom.bootstrap.Modal(this.$refs.APIModal, { backdrop: 'static' })
+    this.APIModal = new this.$custom.bootstrap.Modal(this.$refs.APIModal)
     this.NoticeModal.show()
   },
   watch: {
