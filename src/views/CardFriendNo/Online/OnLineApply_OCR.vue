@@ -541,6 +541,9 @@ export default {
         back: '' // *身分證背面
       },
       uploaded: true, // *base64解析成功開啟判斷
+      message: '',
+      APIModal: '', // API提醒Modal
+      // TODO sheng
       selectJson: JSON.parse(localStorage.getItem('SELECT_JSON')), // ? 下拉
       // ? 身分證資訊表單
       Form: {
@@ -567,9 +570,8 @@ export default {
       homeAddrList: {
         county: [],
         area: []
-      },
-      message: '',
-      APIModal: '' // API提醒Modal
+      }
+      // TODO sheng end
     }
   },
   computed: {
@@ -717,7 +719,6 @@ export default {
         this.homeAddrList.area = []
         this.homeAddrList.area = result.Table
       }
-      console.log(result)
     },
     async submit () {
       this.$refs.form.setErrors({}) // ? 先清除所有上次驗證的錯誤再驗證
@@ -747,7 +748,7 @@ export default {
     this.NoticeModal = new this.$custom.bootstrap.Modal(this.$refs.NoticeModal)
     this.NoticeModal2 = new this.$custom.bootstrap.Modal(this.$refs.NoticeModa2)
     this.ImageLimit = new this.$custom.bootstrap.Modal(this.$refs.ImageLimit)
-    this.APIModal = new this.$custom.bootstrap.Modal(this.$refs.apiModal, { backdrop: 'static' })
+    this.APIModal = new this.$custom.bootstrap.Modal(this.$refs.APIModal)
     this.NoticeModal.show()
   },
   watch: {
