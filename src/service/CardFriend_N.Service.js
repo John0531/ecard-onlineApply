@@ -7,8 +7,7 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/CardPapper/PageLoad`
       const res = await axios.get(url)
-      console.log(res)
-      return res
+      return res.data.result
     } catch (err) {
       alert(err)
     }
@@ -18,7 +17,9 @@ const service = {
       const url = `${process.env.VUE_APP_BASE_API}/CardPapper/Papper`
       const res = await axios.post(url, postData)
       console.log(res)
-      return res.data.result
+      if (res.data.status === '01300') {
+        return true
+      }
     } catch (err) {
       alert(err)
     }
@@ -37,8 +38,9 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/CardFormFillin/PersonalInfo`
       const res = await axios.post(url, postData)
-      console.log(res)
-      return res.data.result
+      if (res.data.status === '00400') {
+        return true
+      }
     } catch (err) {
       alert(err)
     }
@@ -105,6 +107,30 @@ const service = {
       return res
     } catch (err) {
       return err
+    }
+  },
+  async ocrCheckInfo (postData) {
+    try {
+      const url = `${process.env.VUE_APP_BASE_API}/OCR/OCRChkInfo`
+      const res = await axios.post(url, postData)
+      console.log(res)
+      if (res.data.status === '00102') {
+        return {
+          isSuccess: true,
+          isDepositor: true
+        }
+      } else if (res.data.status === '00103') {
+        return {
+          isSuccess: true,
+          isDepositor: false
+        }
+      } else {
+        return {
+          isSuccess: false
+        }
+      }
+    } catch (err) {
+      alert(err)
     }
   }
 }

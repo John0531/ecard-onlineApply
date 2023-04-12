@@ -679,7 +679,6 @@ export default {
       const res = await ServiceN.uploadImage(this.file)
       console.log(res)
       this.message = res.data.message
-      console.log(res.status)
       if (res.status === 200) {
         this.APIModal.show()
         this.uploaded = true
@@ -763,7 +762,11 @@ export default {
       const errors = this.$refs.form.getErrors()
       if (Object.keys(errors).length === 0) {
         sessionStorage.setItem('OCR_Data', JSON.stringify(this.Form))
-        this.$router.push('/OnLineApply_n1')
+        const result = await ServiceN.ocrCheckInfo(this.Form)
+        console.log(result)
+        if (result.isSuccess) {
+          result.isDepositor ? this.$router.push('/OnLineApply_Chks') : this.$router.push('/OnLineApply_n1')
+        }
       } else {
         this.$custom.validate.showErrors(errors)
       }

@@ -1444,9 +1444,9 @@ export default {
         billType: '',
         Cellphone: '',
         email: '',
-        digiFlag: '',
+        digiFlag: false,
         primarySchool: '',
-        isStudent: '',
+        isStudent: false,
         parentName: '',
         parentTel: '',
         parentAddr: new Address(),
@@ -1566,8 +1566,6 @@ export default {
       this.Form.idCounty = OCRData.idCounty
       this.Form.idissue = OCRData.idissue
       this.Form.idx = OCRData.idx
-      await this.getAddress('1', 'homeAddr', 'session')
-      await this.getAddress('2', 'homeAddr', 'session')
       // * 以填寫資料暫存
       const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
       // ? 取得 PageLoad API 資料
@@ -1583,6 +1581,22 @@ export default {
         this.Form.email = this.pageLoad.email
         this.Form.unitCode = this.pageLoad.unitCode
         this.Form.userCode = this.pageLoad.userCode
+      }
+      if (this.Form.homeAddr.County) {
+        await this.getAddress('1', 'homeAddr', 'session')
+        await this.getAddress('2', 'homeAddr', 'session')
+      }
+      if (this.Form.liveAddr.County) {
+        await this.getAddress('1', 'liveAddr', 'session')
+        await this.getAddress('2', 'liveAddr', 'session')
+      }
+      if (this.Form.parentAddr.County) {
+        await this.getAddress('1', 'parentAddr', 'session')
+        await this.getAddress('2', 'parentAddr', 'session')
+      }
+      if (this.Form.compAddr.County) {
+        await this.getAddress('1', 'compAddr', 'session')
+        await this.getAddress('2', 'compAddr', 'session')
       }
     },
     async getAddress (UseType, AddrType, CallType) {
@@ -1662,8 +1676,7 @@ export default {
         } else {
           sessionStorage.setItem('FillinData', JSON.stringify({ OT: postData }))
         }
-        const result = await service.fillin_OT_Submit(this.Form)
-        console.log(result)
+        const result = await service.fillin_OT_Submit(postData)
         if (result) {
           this.$router.push('/OnLineApply_Fillin_OT_1')
         }

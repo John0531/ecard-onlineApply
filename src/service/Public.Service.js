@@ -16,7 +16,6 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_BASE}/MW3/DB/PROC`
       const res = await axios.post(url, postData, { withCredentials: false })
-      console.log(res)
       return res.data.info
     } catch (err) {
       alert(err)
