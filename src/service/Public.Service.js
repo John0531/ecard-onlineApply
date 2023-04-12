@@ -58,8 +58,9 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/CardFormTerms/Terms`
       const res = await axios.post(url, postData)
-      console.log(res)
-      return res.data
+      if (res.data.status === '00500') {
+        return true
+      }
     } catch (err) {
       alert(err)
     }

@@ -424,8 +424,10 @@ export default {
         return
       }
       // ? 驗證檢查 end
-      const result = await PublicService.terms_Submit(this.Form)
-      if (result.status === '00500') {
+      const postData = JSON.parse(JSON.stringify(this.Form))
+      postData.autoBonus = !postData.autoBonus
+      const result = await PublicService.terms_Submit(postData)
+      if (result) {
         if (this.$route.name === '非卡友-個資使用條款') {
           const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
           FillinData.OT_1 = {

@@ -111,53 +111,53 @@
                     <div class="d-flex align-items-center">
                       <span class="text-nowrap">民國</span>
                       <Field
-                        v-model="Form.idx.Year"
+                        v-model="Form.iddate.Year"
                         as="select"
-                        name="idx_Year"
+                        name="iddate_Year"
                         runat="server"
                         class="form-select form-control mx-1 mx-md-2"
                         :class="{ 'is-invalid': errors['身分證發證日期'] }"
-                        @blur="$custom.validate.checkDate(Form.idx,$refs.form,'身分證發證日期')
+                        @blur="$custom.validate.checkDate(Form.iddate,$refs.form,'身分證發證日期')
                         "
                       >
                         <option value="" selected>---</option>
-                        <option v-for="n in idxList.year" :key="n" :value="n">
+                        <option v-for="n in iddateList.year" :key="n" :value="n">
                           {{ n }}
                         </option> </Field
                       >年
                       <Field
-                        v-model="Form.idx.Month"
+                        v-model="Form.iddate.Month"
                         as="select"
-                        name="idx_Month"
+                        name="iddate_Month"
                         runat="server"
                         id="SelM"
                         class="form-select form-control mx-1 mx-md-2"
                         :class="{ 'is-invalid': errors['身分證發證日期'] }"
                         @blur="
                           $custom.validate.checkDate(
-                            Form.idx,
+                            Form.iddate,
                             $refs.form,
                             '身分證發證日期'
                           )
                         "
                       >
                         <option value="" selected>---</option>
-                        <option v-for="n in idxList.month" :key="n" :value="n">
+                        <option v-for="n in iddateList.month" :key="n" :value="n">
                           {{ n }}
                         </option> </Field
                       >月
                       <Field
-                        v-model="Form.idx.Day"
+                        v-model="Form.iddate.Day"
                         as="select"
-                        name="idx_Day"
+                        name="iddate_Day"
                         runat="server"
                         id="SelD"
                         class="form-select form-control mx-1 mx-md-2"
                         :class="{ 'is-invalid': errors['身分證發證日期'] }"
-                        @blur="$custom.validate.checkDate(Form.idx,$refs.form,'身分證發證日期')"
+                        @blur="$custom.validate.checkDate(Form.iddate,$refs.form,'身分證發證日期')"
                       >
                         <option value="" selected>---</option>
-                        <option v-for="n in idxList.day" :key="n" :value="n">
+                        <option v-for="n in iddateList.day" :key="n" :value="n">
                           {{ n }}
                         </option>
                         </Field>日
@@ -198,9 +198,9 @@
                         class="form-select form-control IDissue mx-1 mx-md-2"
                       >
                         <option value="" selected>-----</option>
-                        <option :value="1">初發</option>
-                        <option :value="2">補發</option>
-                        <option :value="3">換發</option>
+                        <option value="1">初發</option>
+                        <option value="2">補發</option>
+                        <option value="3">換發</option>
                       </Field>
                     </div>
                     <p class="text-danger ms-2 mt-1">
@@ -543,7 +543,7 @@ export default {
       selectJson: JSON.parse(localStorage.getItem('SELECT_JSON')), // ? 下拉
       // ? 身分證資訊表單
       Form: {
-        idx: {
+        iddate: {
           Year: '',
           Month: '',
           Day: ''
@@ -571,8 +571,8 @@ export default {
     }
   },
   computed: {
-    idxList () {
-      return this.$custom.validate.getDateSelect(this.Form.idx, '民國')
+    iddateList () {
+      return this.$custom.validate.getDateSelect(this.Form.iddate, '民國')
     }
   },
   methods: {
@@ -685,18 +685,18 @@ export default {
         const front = res.data.result.Front
         this.Form.idCounty = front.發證地點
         if (front.領補換類別 === '初發') {
-          this.Form.idissue = 1
+          this.Form.idissue = '1'
         }
         if (front.領補換類別 === '補發') {
-          this.Form.idissue = 2
+          this.Form.idissue = '2'
         }
         if (front.領補換類別 === '換發') {
-          this.Form.idissue = 3
+          this.Form.idissue = '3'
         }
         this.Form.cName = front.姓名
-        this.Form.idx.Year = front.發證日期.年
-        this.Form.idx.Month = front.發證日期.月
-        this.Form.idx.Day = front.發證日期.日
+        this.Form.iddate.Year = front.發證日期.年
+        this.Form.iddate.Month = front.發證日期.月
+        this.Form.iddate.Day = front.發證日期.日
         const back = res.data.result.Back.住址
         this.Form.homeAddr.County = back.縣市
         await this.getAddress('1')
@@ -755,15 +755,21 @@ export default {
     async submit () {
       this.$refs.form.setErrors({}) // ? 先清除所有上次驗證的錯誤再驗證
       // ? 驗證所有規則
-      this.$custom.validate.checkDate(this.Form.idx, this.$refs.form, '身分證發證日期')
+      this.$custom.validate.checkDate(this.Form.iddate, this.$refs.form, '身分證發證日期')
       this.$custom.validate.CheckAddressAll(this.Form.homeAddr, this.$refs.form, '戶籍地址')
       await this.$refs.form.validate()
       // ? 驗證所有規則 end
       const errors = this.$refs.form.getErrors()
       if (Object.keys(errors).length === 0) {
-        sessionStorage.setItem('OCR_Data', JSON.stringify(this.Form))
-        const result = await ServiceN.ocrCheckInfo(this.Form)
-        console.log(result)
+        const postData = JSON.parse(JSON.stringify(this.Form))
+        postData.iddate = {
+          ...this.Form.iddate,
+          idyear: this.Form.iddate.Year,
+          idMonth: this.Form.iddate.Month,
+          idDay: this.Form.iddate.Day
+        }
+        sessionStorage.setItem('OCR_Data', JSON.stringify(postData))
+        const result = await ServiceN.ocrCheckInfo(postData)
         if (result.isSuccess) {
           result.isDepositor ? this.$router.push('/OnLineApply_Chks') : this.$router.push('/OnLineApply_n1')
         }

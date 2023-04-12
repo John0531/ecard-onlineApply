@@ -61,44 +61,44 @@
                   <div class="d-flex align-items-center">
                     <span class="text-nowrap">民國</span>
                     <Field
-                      v-model="Form.idx.Year"
+                      v-model="Form.iddate.Year"
                       as="select"
-                      name="idx_Year"
+                      name="iddate_Year"
                       runat="server"
                       class="form-select form-control mx-1 mx-md-2"
                       :class="{ 'is-invalid': errors['身分證發證日期'] }"
-                      @blur="$custom.validate.checkDate(Form.idx,$refs.form,'身分證發證日期')"
+                      @blur="$custom.validate.checkDate(Form.iddate,$refs.form,'身分證發證日期')"
                     >
                       <option value="" selected>---</option>
-                      <option v-for="n in idxList.year" :key="n" :value="n">{{n}}</option>
+                      <option v-for="n in iddateList.year" :key="n" :value="n">{{n}}</option>
                     </Field
                     >年
                     <Field
-                      v-model="Form.idx.Month"
+                      v-model="Form.iddate.Month"
                       as="select"
-                      name="idx_Month"
+                      name="iddate_Month"
                       runat="server"
                       id="SelM"
                       class="form-select form-control mx-1 mx-md-2"
                       :class="{ 'is-invalid': errors['身分證發證日期'] }"
-                      @blur="$custom.validate.checkDate(Form.idx,$refs.form,'身分證發證日期')"
+                      @blur="$custom.validate.checkDate(Form.iddate,$refs.form,'身分證發證日期')"
                     >
                       <option value="" selected>---</option>
-                      <option v-for="n in idxList.month" :key="n" :value="n">{{n}}</option>
+                      <option v-for="n in iddateList.month" :key="n" :value="n">{{n}}</option>
                     </Field
                     >月
                     <Field
-                      v-model="Form.idx.Day"
+                      v-model="Form.iddate.Day"
                       as="select"
-                      name="idx_Day"
+                      name="iddate_Day"
                       runat="server"
                       id="SelD"
                       class="form-select form-control mx-1 mx-md-2"
                       :class="{ 'is-invalid': errors['身分證發證日期'] }"
-                      @blur="$custom.validate.checkDate(Form.idx,$refs.form,'身分證發證日期')"
+                      @blur="$custom.validate.checkDate(Form.iddate,$refs.form,'身分證發證日期')"
                     >
                       <option value="" selected>---</option>
-                      <option v-for="n in idxList.day" :key="n" :value="n">{{n}}</option>
+                      <option v-for="n in iddateList.day" :key="n" :value="n">{{n}}</option>
                     </Field
                     >日
                   </div>
@@ -128,9 +128,9 @@
                       class="form-select form-control IDissue mx-1 mx-md-2"
                     >
                       <option value="" selected>-----</option>
-                      <option :value="1">初發</option>
-                      <option :value="2">補發</option>
-                      <option :value="3">換發</option>
+                      <option value="1">初發</option>
+                      <option value="2">補發</option>
+                      <option value="3">換發</option>
                     </Field>
                   </div>
                   <p class="text-danger ms-2 mt-1">{{ errors['發證地點']?errors['發證地點']:errors['發證類型'] }}</p>
@@ -1071,7 +1071,7 @@
                       as="select"
                       name="compAddr_County"
                       v-model="Form.compAddr.County"
-                      @blur="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @blur="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       runat="server"
                       class="form-select form-control ZIP mb-2"
                       :class="{ 'is-invalid': errors['公司地址'] }"
@@ -1082,7 +1082,7 @@
                     <Field
                       as="select"
                       name="compAddr_Area"
-                      @blur="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @blur="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       v-model="Form.compAddr.Area"
                       runat="server"
                       class="form-select form-control Area mx-1 mx-md-2 mb-2"
@@ -1095,7 +1095,7 @@
                     <Field
                       as="select"
                       name="compAddr_Road"
-                      @blur="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @blur="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       v-model="Form.compAddr.Road"
                       runat="server"
                       class="form-select form-control Road mb-2"
@@ -1110,7 +1110,7 @@
                       name="compAddr_Lane"
                       type="text"
                       v-model="Form.compAddr.Lane"
-                      @change="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Lane = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Lane)"
                       maxlength="5"
                       class="form-control me-1"
@@ -1120,7 +1120,7 @@
                       name="compAddr_Aly"
                       type="text"
                       v-model="Form.compAddr.Aly"
-                      @change="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Aly = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Aly)"
                       maxlength="5"
                       class="form-control mx-1"
@@ -1130,7 +1130,7 @@
                       name="compAddr_Num"
                       type="text"
                       v-model="Form.compAddr.Num"
-                      @change="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Num)"
                       maxlength="5"
                       class="form-control mx-1"
@@ -1140,7 +1140,7 @@
                       name="compAddr_Of"
                       type="text"
                       v-model="Form.compAddr.Of"
-                      @change="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Of = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Of)"
                       maxlength="5"
                       class="form-control mx-1"
@@ -1150,7 +1150,7 @@
                       name="compAddr_Flr"
                       type="text"
                       v-model="Form.compAddr.Flr"
-                      @change="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Flr = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Flr)"
                       maxlength="5"
                       class="form-control mx-1"
@@ -1160,7 +1160,7 @@
                       name="compAddr_Other"
                       type="text"
                       v-model="Form.compAddr.Other"
-                      @change="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       maxlength="100"
                       class="form-control ms-1"
                       :class="{ 'is-invalid': errors['公司地址'] }"
@@ -1410,7 +1410,7 @@ export default {
       eduLevelList: [{ name: '博士', value: 1 }, { name: '碩士', value: 2 }, { name: '大學', value: 3 }, { name: '專科', value: 4 }, { name: '高中高職', value: 5 }, { name: '其他', value: 6 }],
       Form: {
         Id: '',
-        idx: {
+        iddate: {
           Year: '',
           Month: '',
           Day: ''
@@ -1498,8 +1498,8 @@ export default {
     }
   },
   computed: {
-    idxList () {
-      return this.$custom.validate.getDateSelect(this.Form.idx, '民國')
+    iddateList () {
+      return this.$custom.validate.getDateSelect(this.Form.iddate, '民國')
     },
     /* BirthDateList () {
       return this.$custom.validate.getDateSelect(this.Form.BirthDay, '民國')
@@ -1511,7 +1511,7 @@ export default {
   watch: {
     Form: {
       handler (n, o) {
-        if (n.billAddr !== 3 && n.sendCardAddr !== 3) {
+        if (n.billAddr !== '3' && n.sendCardAddr !== '3') {
           this.$refs.form.setFieldError('公司地址', '')
         }
         if (!n.home.homeAreaCode && !n.home.homeTel) {
@@ -1565,7 +1565,7 @@ export default {
       this.Form.homeAddr = OCRData.homeAddr
       this.Form.idCounty = OCRData.idCounty
       this.Form.idissue = OCRData.idissue
-      this.Form.idx = OCRData.idx
+      this.Form.iddate = OCRData.iddate
       // * 以填寫資料暫存
       const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
       // ? 取得 PageLoad API 資料
@@ -1633,7 +1633,7 @@ export default {
     async submit () {
       this.$refs.form.setErrors({}) // ? 先清除所有上次驗證的錯誤再驗證
       // ? 驗證所有規則
-      this.$custom.validate.checkDate(this.Form.idx, this.$refs.form, '身分證發證日期')
+      this.$custom.validate.checkDate(this.Form.iddate, this.$refs.form, '身分證發證日期')
       this.$custom.validate.CheckAddressAll(this.Form.homeAddr, this.$refs.form, '戶籍地址')
       this.$custom.validate.CheckAddressAll(this.Form.liveAddr, this.$refs.form, '居住地址')
       if (this.Form.home.homeAreaCode || this.Form.home.homeTel) {
@@ -1647,7 +1647,7 @@ export default {
       if (this.Form.isStudent) {
         this.$custom.validate.CheckAddressAll(this.Form.parentAddr, this.$refs.form, '家長通訊地址')
       }
-      if (this.Form.billAddr === 3 || this.Form.sendCardAddr === 3) {
+      if (this.Form.billAddr === '3' || this.Form.sendCardAddr === '3') {
         this.$custom.validate.CheckAddressAll(this.Form.compAddr, this.$refs.form, '公司地址')
       }
       await this.$refs.form.validate()
@@ -1660,11 +1660,11 @@ export default {
           this.Form.parentAddr = new Address()
         }
         const postData = JSON.parse(JSON.stringify(this.Form))
-        postData.idx = {
-          ...this.Form.idx,
-          idyear: this.Form.idx.Year,
-          idMonth: this.Form.idx.Month,
-          idDay: this.Form.idx.Day
+        postData.iddate = {
+          ...this.Form.iddate,
+          idyear: this.Form.iddate.Year,
+          idMonth: this.Form.iddate.Month,
+          idDay: this.Form.iddate.Day
         }
         postData.flgLine = this.pageLoad.flgLine
         postData.flgTravel = this.pageLoad.flgTravel
