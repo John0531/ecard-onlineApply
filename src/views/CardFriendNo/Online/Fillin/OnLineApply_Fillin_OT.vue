@@ -37,7 +37,7 @@
               <ul class="formList-even">
                 <li class="col-12 col-md-6">
                   <label for="">身分證字號</label>
-                  <div class="form-text">{{Form.Id}}</div>
+                  <div class="form-text">{{Form.id}}</div>
                   <!-- <Field
                     v-model="Form.Id"
                     maxlength="10"
@@ -61,44 +61,44 @@
                   <div class="d-flex align-items-center">
                     <span class="text-nowrap">民國</span>
                     <Field
-                      v-model="Form.idx.Year"
+                      v-model="Form.iddate.Year"
                       as="select"
-                      name="idx_Year"
+                      name="iddate_Year"
                       runat="server"
                       class="form-select form-control mx-1 mx-md-2"
                       :class="{ 'is-invalid': errors['身分證發證日期'] }"
-                      @blur="$custom.validate.checkDate(Form.idx,$refs.form,'身分證發證日期')"
+                      @blur="$custom.validate.checkDate(Form.iddate,$refs.form,'身分證發證日期')"
                     >
                       <option value="" selected>---</option>
-                      <option v-for="n in idxList.year" :key="n" :value="n">{{n}}</option>
+                      <option v-for="n in iddateList.year" :key="n" :value="n">{{n}}</option>
                     </Field
                     >年
                     <Field
-                      v-model="Form.idx.Month"
+                      v-model="Form.iddate.Month"
                       as="select"
-                      name="idx_Month"
+                      name="iddate_Month"
                       runat="server"
                       id="SelM"
                       class="form-select form-control mx-1 mx-md-2"
                       :class="{ 'is-invalid': errors['身分證發證日期'] }"
-                      @blur="$custom.validate.checkDate(Form.idx,$refs.form,'身分證發證日期')"
+                      @blur="$custom.validate.checkDate(Form.iddate,$refs.form,'身分證發證日期')"
                     >
                       <option value="" selected>---</option>
-                      <option v-for="n in idxList.month" :key="n" :value="n">{{n}}</option>
+                      <option v-for="n in iddateList.month" :key="n" :value="n">{{n}}</option>
                     </Field
                     >月
                     <Field
-                      v-model="Form.idx.Day"
+                      v-model="Form.iddate.Day"
                       as="select"
-                      name="idx_Day"
+                      name="iddate_Day"
                       runat="server"
                       id="SelD"
                       class="form-select form-control mx-1 mx-md-2"
                       :class="{ 'is-invalid': errors['身分證發證日期'] }"
-                      @blur="$custom.validate.checkDate(Form.idx,$refs.form,'身分證發證日期')"
+                      @blur="$custom.validate.checkDate(Form.iddate,$refs.form,'身分證發證日期')"
                     >
                       <option value="" selected>---</option>
-                      <option v-for="n in idxList.day" :key="n" :value="n">{{n}}</option>
+                      <option v-for="n in iddateList.day" :key="n" :value="n">{{n}}</option>
                     </Field
                     >日
                   </div>
@@ -128,9 +128,9 @@
                       class="form-select form-control IDissue mx-1 mx-md-2"
                     >
                       <option value="" selected>-----</option>
-                      <option :value="1">初發</option>
-                      <option :value="2">補發</option>
-                      <option :value="3">換發</option>
+                      <option value="1">初發</option>
+                      <option value="2">補發</option>
+                      <option value="3">換發</option>
                     </Field>
                   </div>
                   <p class="text-danger ms-2 mt-1">{{ errors['發證地點']?errors['發證地點']:errors['發證類型'] }}</p>
@@ -278,7 +278,7 @@
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">行動電話</label>
-                  <div class="form-text">{{Form.Cellphone}}</div>
+                  <div class="form-text">{{Form.mbleTelNbr}}</div>
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">電子信箱</label>
@@ -681,17 +681,16 @@
                 <li class="col-12 col-md-6">
                   <label for="">住所狀態</label>
                   <select
-                    v-model="Form.liveStatus"
+                    v-model="Form.liveStatusKey"
                     class="form-select form-control"
                   >
-                    <option>自有</option>
-                    <option></option>
+                    <option v-for="item in selectJson.DOMICILE" :key="item.VALUE" :value="item.VALUE">{{item.SHOW}}</option>
                   </select>
                 </li>
                 <li class="col-12 col-md-12">
                   <label for=""><span class="red_text">* </span>帳單形式</label>
                   <div class="d-flex flex-wrap flex-column flex-md-row">
-                    <div class="form-check me-4" v-if="pageLoad.flgbillType?.includes('mail')">
+                    <div class="form-check me-4" v-if="pageLoad.billType?.includes('mail')">
                       <Field
                         rules="required"
                         :class="{ 'is-invalid': errors['帳單形式'] }"
@@ -704,7 +703,7 @@
                       />
                       <div class="form_Apply_txt">EMAIL帳單</div>
                     </div>
-                    <div class="form-check me-4" v-if="pageLoad.flgbillType?.includes('sms')">
+                    <div class="form-check me-4" v-if="pageLoad.billType?.includes('sms')">
                       <Field
                         rules="required"
                         :class="{ 'is-invalid': errors['帳單形式'] }"
@@ -717,7 +716,7 @@
                       />
                       <div class="form_Apply_txt">行動帳單(簡訊)</div>
                     </div>
-                    <div class="form-check me-4" v-if="pageLoad.flgbillType?.includes('line')">
+                    <div class="form-check me-4" v-if="pageLoad.billType?.includes('line')">
                       <Field
                         rules="required"
                         :class="{ 'is-invalid': errors['帳單形式'] }"
@@ -730,7 +729,7 @@
                       />
                       <div class="form_Apply_txt">LINE帳單</div>
                     </div>
-                    <div class="form-check" v-if="pageLoad.flgbillType?.includes('paper')">
+                    <div class="form-check" v-if="pageLoad.billType?.includes('paper')">
                       <Field
                         rules="required"
                         :class="{ 'is-invalid': errors['帳單形式'] }"
@@ -1071,7 +1070,7 @@
                       as="select"
                       name="compAddr_County"
                       v-model="Form.compAddr.County"
-                      @blur="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @blur="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       runat="server"
                       class="form-select form-control ZIP mb-2"
                       :class="{ 'is-invalid': errors['公司地址'] }"
@@ -1082,7 +1081,7 @@
                     <Field
                       as="select"
                       name="compAddr_Area"
-                      @blur="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @blur="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       v-model="Form.compAddr.Area"
                       runat="server"
                       class="form-select form-control Area mx-1 mx-md-2 mb-2"
@@ -1095,7 +1094,7 @@
                     <Field
                       as="select"
                       name="compAddr_Road"
-                      @blur="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @blur="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       v-model="Form.compAddr.Road"
                       runat="server"
                       class="form-select form-control Road mb-2"
@@ -1110,7 +1109,7 @@
                       name="compAddr_Lane"
                       type="text"
                       v-model="Form.compAddr.Lane"
-                      @change="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Lane = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Lane)"
                       maxlength="5"
                       class="form-control me-1"
@@ -1120,7 +1119,7 @@
                       name="compAddr_Aly"
                       type="text"
                       v-model="Form.compAddr.Aly"
-                      @change="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Aly = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Aly)"
                       maxlength="5"
                       class="form-control mx-1"
@@ -1130,7 +1129,7 @@
                       name="compAddr_Num"
                       type="text"
                       v-model="Form.compAddr.Num"
-                      @change="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Num)"
                       maxlength="5"
                       class="form-control mx-1"
@@ -1140,7 +1139,7 @@
                       name="compAddr_Of"
                       type="text"
                       v-model="Form.compAddr.Of"
-                      @change="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Of = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Of)"
                       maxlength="5"
                       class="form-control mx-1"
@@ -1150,7 +1149,7 @@
                       name="compAddr_Flr"
                       type="text"
                       v-model="Form.compAddr.Flr"
-                      @change="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Flr = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Flr)"
                       maxlength="5"
                       class="form-control mx-1"
@@ -1160,7 +1159,7 @@
                       name="compAddr_Other"
                       type="text"
                       v-model="Form.compAddr.Other"
-                      @change="(Form.billAddr===3||Form.sendCardAddr===3)?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       maxlength="100"
                       class="form-control ms-1"
                       :class="{ 'is-invalid': errors['公司地址'] }"
@@ -1409,8 +1408,8 @@ export default {
       selectJson: JSON.parse(localStorage.getItem('SELECT_JSON')),
       eduLevelList: [{ name: '博士', value: 1 }, { name: '碩士', value: 2 }, { name: '大學', value: 3 }, { name: '專科', value: 4 }, { name: '高中高職', value: 5 }, { name: '其他', value: 6 }],
       Form: {
-        Id: '',
-        idx: {
+        id: '',
+        iddate: {
           Year: '',
           Month: '',
           Day: ''
@@ -1440,13 +1439,14 @@ export default {
           liveAreaCode: '',
           liveTel: ''
         },
+        liveStatusKey: '',
         liveStatus: '',
         billType: '',
-        Cellphone: '',
+        mbleTelNbr: '',
         email: '',
-        digiFlag: false,
+        digiFlag: '',
         primarySchool: '',
-        isStudent: false,
+        isStudent: '',
         parentName: '',
         parentTel: '',
         parentAddr: new Address(),
@@ -1498,8 +1498,8 @@ export default {
     }
   },
   computed: {
-    idxList () {
-      return this.$custom.validate.getDateSelect(this.Form.idx, '民國')
+    iddateList () {
+      return this.$custom.validate.getDateSelect(this.Form.iddate, '民國')
     },
     /* BirthDateList () {
       return this.$custom.validate.getDateSelect(this.Form.BirthDay, '民國')
@@ -1511,7 +1511,7 @@ export default {
   watch: {
     Form: {
       handler (n, o) {
-        if (n.billAddr !== 3 && n.sendCardAddr !== 3) {
+        if (n.billAddr !== '3' && n.sendCardAddr !== '3') {
           this.$refs.form.setFieldError('公司地址', '')
         }
         if (!n.home.homeAreaCode && !n.home.homeTel) {
@@ -1532,7 +1532,13 @@ export default {
         if (n.eduLevelKey) {
           n.eduLevel = this.eduLevelList.find(item => item.value === n.eduLevelKey).name
         } else {
-          n.eduLevelKey = ''
+          n.eduLevel = ''
+        }
+        // ? 住所狀態
+        if (n.liveStatusKey) {
+          n.liveStatus = this.selectJson.DOMICILE.find(item => item.VALUE === n.liveStatusKey).SHOW
+        } else {
+          n.liveStatus = ''
         }
         // ? 主要收入來源
         if (n.IncomeMain.incomeKey) {
@@ -1565,22 +1571,35 @@ export default {
       this.Form.homeAddr = OCRData.homeAddr
       this.Form.idCounty = OCRData.idCounty
       this.Form.idissue = OCRData.idissue
-      this.Form.idx = OCRData.idx
+      this.Form.iddate = OCRData.iddate
       // * 以填寫資料暫存
       const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
       // ? 取得 PageLoad API 資料
       this.pageLoad = await service.fillin_OT_PageLoad()
       if (FillinData?.OT) {
+        if (FillinData.OT.liveStatusKey === 0) {
+          FillinData.OT.liveStatusKey = ''
+        }
+        FillinData.OT.liveStatusKey = FillinData.OT.liveStatusKey.toString()
+        FillinData.OT.IncomeMain.incomeKey = FillinData.OT.IncomeMain.incomeKey.toString()
+        FillinData.OT.job.jobTypeKey = FillinData.OT.job.jobTypeKey.toString()
+        FillinData.OT.jobLVKey = FillinData.OT.jobLVKey.toString()
         this.Form = FillinData.OT
       } else {
-        this.Form.Id = this.pageLoad.id
+        this.Form.id = this.pageLoad.id
         // this.Form.cName = this.pageLoad.cName
         this.Form.eName = this.pageLoad.eName
         this.Form.brthDt = this.pageLoad.brthDt
-        this.Form.Cellphone = this.pageLoad.mbleTelNbr
+        this.Form.mbleTelNbr = this.pageLoad.mbleTelNbr
         this.Form.email = this.pageLoad.email
         this.Form.unitCode = this.pageLoad.unitCode
         this.Form.userCode = this.pageLoad.userCode
+      }
+      if (!this.Form.digiFlag) {
+        this.pageLoad.flgDigi ? this.Form.digiFlag = '' : this.Form.digiFlag = false
+      }
+      if (!this.Form.isStudent) {
+        this.pageLoad.flgStudent ? this.Form.isStudent = '' : this.Form.isStudent = false
       }
       if (this.Form.homeAddr.County) {
         await this.getAddress('1', 'homeAddr', 'session')
@@ -1632,8 +1651,8 @@ export default {
     },
     async submit () {
       this.$refs.form.setErrors({}) // ? 先清除所有上次驗證的錯誤再驗證
-      // ? 驗證所有規則
-      this.$custom.validate.checkDate(this.Form.idx, this.$refs.form, '身分證發證日期')
+      // ? 前端驗證所有規則
+      this.$custom.validate.checkDate(this.Form.iddate, this.$refs.form, '身分證發證日期')
       this.$custom.validate.CheckAddressAll(this.Form.homeAddr, this.$refs.form, '戶籍地址')
       this.$custom.validate.CheckAddressAll(this.Form.liveAddr, this.$refs.form, '居住地址')
       if (this.Form.home.homeAreaCode || this.Form.home.homeTel) {
@@ -1647,41 +1666,42 @@ export default {
       if (this.Form.isStudent) {
         this.$custom.validate.CheckAddressAll(this.Form.parentAddr, this.$refs.form, '家長通訊地址')
       }
-      if (this.Form.billAddr === 3 || this.Form.sendCardAddr === 3) {
+      if (this.Form.billAddr === '3' || this.Form.sendCardAddr === '3') {
         this.$custom.validate.CheckAddressAll(this.Form.compAddr, this.$refs.form, '公司地址')
       }
       await this.$refs.form.validate()
-      // ? 驗證所有規則 end
       const errors = this.$refs.form.getErrors()
-      if (Object.keys(errors).length === 0) {
-        if (!this.Form.isStudent) {
-          this.Form.parentName = ''
-          this.Form.parentTel = ''
-          this.Form.parentAddr = new Address()
-        }
-        const postData = JSON.parse(JSON.stringify(this.Form))
-        postData.idx = {
-          ...this.Form.idx,
-          idyear: this.Form.idx.Year,
-          idMonth: this.Form.idx.Month,
-          idDay: this.Form.idx.Day
-        }
-        postData.flgLine = this.pageLoad.flgLine
-        postData.flgTravel = this.pageLoad.flgTravel
-        postData.flgAmwayNo = this.pageLoad.flgAmwayNo
-        const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
-        if (FillinData?.OT) {
-          FillinData.OT = postData
-          sessionStorage.setItem('FillinData', JSON.stringify(FillinData))
-        } else {
-          sessionStorage.setItem('FillinData', JSON.stringify({ OT: postData }))
-        }
-        const result = await service.fillin_OT_Submit(postData)
-        if (result) {
-          this.$router.push('/OnLineApply_Fillin_OT_1')
-        }
-      } else {
+      if (Object.keys(errors).length !== 0) {
         this.$custom.validate.showErrors(errors)
+        return
+      }
+      // ? 前端驗證所有規則 end
+      if (!this.Form.isStudent) {
+        this.Form.parentName = ''
+        this.Form.parentTel = ''
+        this.Form.parentAddr = new Address()
+      }
+      if (this.Form.liveStatusKey === '') {
+        this.Form.liveStatusKey = 0
+      }
+      const postData = JSON.parse(JSON.stringify(this.Form))
+      postData.iddate = {
+        ...this.Form.iddate,
+        idyear: this.Form.iddate.Year,
+        idMonth: this.Form.iddate.Month,
+        idDay: this.Form.iddate.Day
+      }
+      postData.flgAmwayNo = this.pageLoad.flgAmwayNo
+      const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
+      if (FillinData?.OT) {
+        FillinData.OT = postData
+        sessionStorage.setItem('FillinData', JSON.stringify(FillinData))
+      } else {
+        sessionStorage.setItem('FillinData', JSON.stringify({ OT: postData }))
+      }
+      const result = await service.fillin_OT_Submit(postData)
+      if (result) {
+        this.$router.push('/OnLineApply_Fillin_OT_1')
       }
     }
   },

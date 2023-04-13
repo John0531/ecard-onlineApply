@@ -55,12 +55,19 @@ const service = {
       alert(err)
     }
   },
+  async terms_pageLoad () {
+    const url = 'https://mocki.io/v1/a25b524e-6f2e-4b5e-9cbd-2a3da9d5744e'
+    const res = await axios.get(url, { withCredentials: false })
+    console.log(res)
+    return res.data.result
+  },
   async terms_Submit (postData) {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/CardFormTerms/Terms`
       const res = await axios.post(url, postData)
-      console.log(res)
-      return res.data
+      if (res.data.status === '00500') {
+        return true
+      }
     } catch (err) {
       alert(err)
     }

@@ -415,6 +415,11 @@ export default {
     }
   },
   methods: {
+    async pageLoad () {
+      const result = await PublicService.terms_pageLoad()
+      this.flgLine = result.flgLine
+      this.flgTravel = result.flgTravel
+    },
     async submit () {
       // ? 驗證檢查
       await this.$refs.form.validate()
@@ -424,12 +429,18 @@ export default {
         return
       }
       // ? 驗證檢查 end
-      const result = await PublicService.terms_Submit(this.Form)
-      if (result.status === '00500') {
+      const postData = JSON.parse(JSON.stringify(this.Form))
+      postData.autoBonus = !postData.autoBonus
+      const result = await PublicService.terms_Submit(postData)
+      if (result) {
         if (this.$route.name === '非卡友-個資使用條款') {
           const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
           FillinData.OT_1 = {
             ...this.Form
+          }
+          FillinData.OT_1_Flag = {
+            flgLine: this.flgLine,
+            flgTravel: this.flgTravel
           }
           sessionStorage.setItem('FillinData', JSON.stringify(FillinData))
           this.$router.push('/OnLineApply_Fillin_OT_2')
@@ -439,7 +450,7 @@ export default {
       }
     }
   },
-  async mounted () {
+  mounted () {
     const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
     if (FillinData?.OT_1) {
       this.Form = FillinData.OT_1
@@ -447,6 +458,7 @@ export default {
     if (this.Form.parentType === true && this.Form.sharedType === true && this.Form.linePNPType === true) {
       this.radioALL = true
     }
+    this.pageLoad()
   }
 }
 
