@@ -9,7 +9,7 @@ const service = {
       const res = await axios.get(url, { withCredentials: false })
       return res.data
     } catch (err) {
-      alert(err)
+
     }
   },
   async getAddress (postData) {
@@ -18,7 +18,7 @@ const service = {
       const res = await axios.post(url, postData, { withCredentials: false })
       return res.data.info
     } catch (err) {
-      alert(err)
+
     }
   },
   async getTermsHtml (termsName) {
@@ -68,7 +68,7 @@ const service = {
         return true
       }
     } catch (err) {
-      alert(err)
+
     }
   },
   async otpSend (rtn) {
