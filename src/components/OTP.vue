@@ -26,7 +26,7 @@
                                 <div class="d-flex align-items-center">
                                     <Field
                                       v-model="mobileMsgCode"
-                                      name="驗證碼" type="text" maxlength="4"
+                                      name="驗證碼" type="text" maxlength="6"
                                       placeholder="請輸入驗證碼" class="form-control"
                                       :class="{ 'is-invalid': errors['驗證碼'] }"
                                       @focus="this.mobileMsgCode=''"
@@ -180,8 +180,9 @@
                     </ul>
                 </div>
                 <div class="col-xl-11 col-xxl-9 note_text text-left mb-3">
-                    <strong>提醒您：</strong><br>按<span class="Green_text">「獲取簡訊驗證碼」</span>按鈕，系統將產生一組簡訊驗證碼至您行動電話，若10分鐘「內」未輸入簡訊驗證碼，本申請將自動取消。<br> 按
-                    <span class="Green_text">「獲取簡訊驗證碼」</span>按鈕，可重送簡訊驗證碼，一天最多重送兩次，如有疑問，請洽(02)2545-5168、(07)226-9393與本行客服中心聯繫。
+                    <strong>提醒您：</strong><br>按<span class="Green_text">「獲取簡訊驗證碼」</span>，系統將產生一組簡訊驗證碼至您行動電話(如您為本行信用卡卡友，將發送至您留存本行信用卡資料之行動電話)，<br>若10分鐘「內」未輸入簡訊驗證碼，本申請將自動取消；
+                    按<span class="Green_text">「重發簡訊驗證碼」</span>，可重送簡訊驗證碼，一天最多重送兩次。<br>
+                    如有疑問，請電洽聯邦銀行信用卡客戶服務專線：(02)2545-5168或(07)226-9393或使用<a href="https://card.ubot.com.tw/eCard/activity/quickSearch/index.htm?nt01=1" target="_blank"><u>線上客服</u></a>詢問。
                 </div>
                 <div class="text-center button_group">
                     <button
@@ -308,17 +309,8 @@ export default ({
       //* 一天的時間(86400)
       time.setTime(getTimer + 1000 * (86400 - 100))
       //* 確認手機是否有填寫
-      // const url = `/api/Otp/Send`
-      // this.axios
-      //  .get(url, {
-      //    // get params用法
-      //    params: this.mobileMsgCode
-      //  })
-      //  .then(res => {
-      //      if (res.data.rtnCode !== 0) {
-      // alert(`${res.data.rtnMsg}`)
-      //      } else {
-      //        //* 有成功打入API才算
+
+      //* 有成功打入API才算
       this.MsgModal.show()
       //* 驗證碼倒數計時
       this.count = 30

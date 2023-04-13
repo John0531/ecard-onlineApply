@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { hash } from '@/utilities/hash.js'
 import termsJson from '@/assets/terms.json'
+import store from '@/store'
 
 const service = {
   async getJson () {
@@ -46,10 +47,10 @@ const service = {
   },
   async otpGet () {
     try {
-      const url = 'https://61.219.193.150/CardApply/api/Otp/Send'
+      const url = `${process.env.VUE_APP_BASE_API}/Otp/Send`
       const res = await axios.get(url)
       console.log(res)
-      return res.data.result
+      return res
     } catch (err) {
       alert(err)
     }
@@ -71,12 +72,15 @@ const service = {
 
     }
   },
-  async otpSend (rtn) {
+  async otpSend (code) {
     try {
-      const url = 'https://61.219.193.150/CardApply/api/Otp/Check'
-      const res = await axios.post(url, rtn)
+      const url = `${process.env.VUE_APP_BASE_API}/Otp/Check`
+      const options = {
+        headers: { 'content-type': 'application/json' }
+      }
+      const res = await axios.post(url, code, options)
       console.log(res)
-      return res.data.result
+      return res
     } catch (err) {
       alert(err)
     }
@@ -92,7 +96,7 @@ const service = {
       return null
     }
   },
-  //* 非卡友測試session
+  //* 非卡友-存戶測試session
   async getSession2 () {
     try {
       const url = '/Testing?UserRolesa=2'
@@ -102,6 +106,23 @@ const service = {
       console.log(err.response.data)
       return null
     }
+  },
+  //* 非卡友-非存戶(改他行驗證流程)測試session
+  async getSession3 () {
+    try {
+      const url = '/Testing?UserRolesa=3'
+      const res = await axios.get(url)
+      return res.data
+    } catch (err) {
+      console.log(err.response.data)
+      return null
+    }
+  },
+  async showAPIMsg (Msg) {
+    let APIMsg = ''
+    APIMsg = Msg
+    store.commit('setAPIMsg', APIMsg)
+    store.state.apiModal.show()
   }
 }
 

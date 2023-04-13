@@ -1018,6 +1018,7 @@
 <script>
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 import serviceY from '../service/CardFriend_Y.Service'
+import service from '../service/Public.Service'
 import { defineRule } from 'vee-validate'
 
 export default {
@@ -1045,12 +1046,15 @@ export default {
         cardNo: '',
         agreeTerms: false,
         userDataBK: false,
-        cardFriend: true,
-        depositor: true,
         uTC: '',
         uSC: ''
       },
-      isLineBank: false
+      isLineBank: false,
+      tempOnlineApply: {
+        OnlineApply_y_Data: '',
+        onLineApply_Fillin_Data: '',
+        onLineApply_Fillin_Card: ''
+      }
     }
   },
   created () {
@@ -1182,23 +1186,30 @@ export default {
         identity = await serviceY.IdentityVerification(this.OnlineApply_y_Data)
       }
       const { status, message } = identity
-      // console.log(identity)
+      if (status !== '00199') {
+        this.tempOnlineApply.OnlineApply_y_Data = JSON.stringify(this.$data)
+        sessionStorage.setItem('tempOnlineApply', JSON.stringify(this.tempOnlineApply))
+      }
+
+      console.log(identity)
       switch (status) {
         // ?卡友驗證成功
         case '00101' :
           alert(message)
+          await service.getSession1()
           this.$router.push('/OnLineApply_OTP')
           break
         // ?非卡友-存戶
         case '00102' :
           alert(message)
+          await service.getSession2()
           this.$router.push('/OnLineApply_Gift')
           break
         // ?非卡友-非存戶(改他行驗證流程)
         case '00103' :
           alert(message)
+          await service.getSession3()
           this.$router.push('/OnLineApply_Gift')
-          // await serviceY.Testing()
           break
         // ?驗證失敗(直接顯示錯誤訊息。)
         case '00199' :
@@ -1208,7 +1219,6 @@ export default {
           alert('超出預期錯誤')
           break
       }
-      // console.log(identity)
     },
     customAddressMes (errors) {
       const addressKeys = ['年', '月', '日']
@@ -1238,6 +1248,58 @@ export default {
         delete errors[key]
       }
       this.$custom.validate.showErrors(errors)
+    },
+    isOver18 (year, month, day) {
+      var today = new Date()
+      var birthDate = new Date(year, month - 1, day)
+      var age = today.getFullYear() - birthDate.getFullYear()
+      var m = today.getMonth() - birthDate.getMonth()
+
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--
+      }
+
+      return age >= 18
+    },
+    async init () {
+      const { parm, GID, IDE } = this.$route.query
+      if (this.isLineBank) {
+        const linkCard = await serviceY.cardApplyLoad_PageLoad_LB(GID, IDE, parm)
+        const { status, result, message } = linkCard
+        const { id, brthDt } = result
+        switch (status) {
+          case '00700' :
+            this.OnlineApply_y_Data.id = id
+            this.OnlineApply_y_Data.brthyy = Number(brthDt.substring(0, 4))
+            this.OnlineApply_y_Data.brthMM = Number(brthDt.substring(4, 6))
+            this.OnlineApply_y_Data.brthdd = Number(brthDt.substring(6, 8))
+            this.OnlineApply_y_Data.gID = GID
+            this.OnlineApply_y_Data.iDE = IDE
+            break
+          case '00799' :
+            alert(message)
+            break
+          default:
+            alert('超出預期錯誤')
+            break
+        }
+      } else {
+        const linkCard = await serviceY.cardApplyLoad_PageLoad(GID, IDE)
+        const { status, message } = linkCard
+        console.log(linkCard)
+        switch (status) {
+          case '00700' :
+            this.OnlineApply_y_Data.gID = GID
+            this.OnlineApply_y_Data.iDE = IDE
+            break
+          case '00799' :
+            alert(message)
+            break
+          default:
+            alert('超出預期錯誤')
+            break
+        }
+      }
     }
   },
   async mounted () {
@@ -1245,7 +1307,7 @@ export default {
     this.getYearMonth()
     this.getDay()
     this.checkLink()
-    // ?預設規則
+    // ?schema預設規則
     if (this.isLineBank) {
       this.schema = {
         申請的信用卡: 'required',
@@ -1264,48 +1326,36 @@ export default {
     defineRule('customBirthVaild', value => {
       if (this.OnlineApply_y_Data.brthyy === '' || this.OnlineApply_y_Data.brthMM === '' || this.OnlineApply_y_Data.brthdd === '') {
         return '出生年月日為必填'
+      } else if (!this.isOver18(this.OnlineApply_y_Data.brthyy, this.OnlineApply_y_Data.brthMM, this.OnlineApply_y_Data.brthdd)) {
+        return ''
       }
       return true
     })
     this.contractModal = new bootstrap.Modal(this.$refs.contractModal, {
       backdrop: 'static'
     })
-    const { parm, GID, IDE } = this.$route.query
-    if (this.isLineBank) {
-      const linkCard = await serviceY.cardApplyLoad_PageLoad_LB(GID, IDE, parm)
-      const { status, result, message } = linkCard
-      const { id, brthDt } = result
-      switch (status) {
-        case '00700' :
-          this.OnlineApply_y_Data.id = id
-          this.OnlineApply_y_Data.brthyy = Number(brthDt.substring(0, 4))
-          this.OnlineApply_y_Data.brthMM = Number(brthDt.substring(4, 6))
-          this.OnlineApply_y_Data.brthdd = Number(brthDt.substring(6, 8))
-          this.OnlineApply_y_Data.gID = GID
-          this.OnlineApply_y_Data.iDE = IDE
-          break
-        case '00799' :
-          alert(message)
-          break
-        default:
-          alert('超出預期錯誤')
-          break
-      }
+    const session = JSON.parse(sessionStorage.getItem('tempOnlineApply'))
+
+    if (session?.OnlineApply_y_Data) {
+      const temp = JSON.parse(session.OnlineApply_y_Data)
+      Object.keys(temp).forEach(key => {
+        this.$data[key] = temp[key]
+      })
     } else {
-      const linkCard = await serviceY.cardApplyLoad_PageLoad(GID, IDE)
-      const { status, message } = linkCard
-      console.log(linkCard)
-      switch (status) {
-        case '00700' :
-          this.OnlineApply_y_Data.gID = GID
-          this.OnlineApply_y_Data.iDE = IDE
-          break
-        case '00799' :
-          alert(message)
-          break
-        default:
-          alert('超出預期錯誤')
-          break
+      await this.init()
+    }
+
+    if (session) {
+      this.tempOnlineApply = { ...session }
+    }
+
+    if (process.env.NODE_ENV !== 'production') {
+      const { cardFriend, depositor } = this.$route.query
+      if (cardFriend) {
+        this.OnlineApply_y_Data.cardFriend = String(cardFriend).toLowerCase() === 'true'
+      }
+      if (depositor) {
+        this.OnlineApply_y_Data.depositor = String(depositor).toLowerCase() === 'true'
       }
     }
   }

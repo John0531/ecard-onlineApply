@@ -6,18 +6,21 @@
   <router-view/>
   <Footer></Footer>
   <ErrorModal></ErrorModal>
+  <APIModal></APIModal>
 </template>
 
 <script>
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
 import ErrorModal from '@/components/ErrorModal.vue'
+import APIModal from '@/components/APIModal.vue'
 
 export default {
   components: {
     Header,
     Footer,
-    ErrorModal
+    ErrorModal,
+    APIModal
   }
 }
 </script>

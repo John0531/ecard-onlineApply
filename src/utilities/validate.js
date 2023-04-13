@@ -338,7 +338,7 @@ const validate = {
   },
   //* ==== 27.簡訊驗證碼驗證 ====
   checkOTP (code) {
-    const idRule = /^\d{4}$/
+    const idRule = /^\d{6}$/
     if (idRule.test(code)) {
       return true
     }

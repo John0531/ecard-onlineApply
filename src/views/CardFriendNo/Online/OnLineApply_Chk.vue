@@ -16,11 +16,11 @@
             <ul class="formList">
                 <li class="form-group">
                     <label class="label" for="">申請人身份證號</label>
-                    <div class="form-text">A12345****</div>
+                    <div class="form-text" v-html="brthDt"></div>
                 </li>
                 <li class="form-group">
                     <label class="label" for="">西元出生年月日</label>
-                    <div class="form-text">1977/06/28</div>
+                    <div class="form-text" v-html="oid"></div>
                 </li>
             </ul>
         </div>
@@ -127,7 +127,7 @@
                         </div>
                       </div>
                   </li>
-                  <!-- <li class="col-12 align-items-start">
+                  <li class="col-12 align-items-start">
                       <label for="" class="mt-1">行動電話</label>
                       <div class="d-flex flex-column">
                           <Field
@@ -145,7 +145,7 @@
                             {{errors['手機']}}
                           </div>
                       </div>
-                  </li> -->
+                  </li>
               </ul>
           </div>
         <div class="terms-group">
@@ -269,17 +269,31 @@ export default {
       agreement: [], // ? Modal四項同意欄
       agreementAll: false, // ?已同意Modal上所有申請條款
       checkagree: false, // ?同意個資聲明
+      // *接值欄位
       cardNumber: {
         code1: '',
         code2: '',
         code3: '',
-        code4: ''
+        code4: '',
+        codeAll: '3567030082389103'
       },
       validThru: '',
       CSC: '',
       phoneNumber: '',
-      termsFile: ['用卡須知及申請說明', '重要告知事項', '聯邦信用卡約定條款', '電子化帳單服務約定條款'],
-      termsHtml: []
+      termsFile: [],
+      termsHtml: [],
+      brthDt: '',
+      oid: '',
+      // *post欄位
+      chkData:
+      {
+        obCardNo: '',
+        oExpDay: '',
+        oCvv: '',
+        omobilePhone: '',
+        agreeTerms: null,
+        personalDataAuthorized: null
+      }
     }
   },
   methods: {
@@ -447,19 +461,19 @@ export default {
       // *   ====送單判斷====
       // ? 信用卡欄位
       if (Object.keys(collection.errors).length === 0) {
-        // ? 檢查四項條款 或 個資使用同意 未打勾
-        if (!this.agreementAll || !this.checkagree) {
-          this.$swal.fire({
-            title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-            showConfirmButton: false,
-            customClass: {
-              title: 'text-class'
-            }
-          })
-          return
-        }
         // ** ===全部檢查通過前往下一頁===
-        this.$router.push('/OnLineApply_Chk_OTP')
+        // ** ===資料整理===
+        this.chkData.obCardNo = this.cardNumber.codeAll
+        this.chkData.oExpDay = this.validThru
+        this.chkData.oCvv = this.CSC
+        this.chkData.omobilePhone = this.phoneNumber
+        this.chkData.agreeTerms = this.agreementAll
+        this.chkData.personalDataAuthorized = this.checkagree
+        const res = await ServiceN.otherCardholderVerification(this.chkData)
+        console.log(res)
+        if (res.status === 200) {
+          this.$router.push('/OnLineApply_Chk_OTP')
+        }
       } else {
         // ** ===錯誤訊息彙整===
         this.$custom.validate.showErrors(collection.errors)
@@ -519,13 +533,24 @@ export default {
       if (n.length === 4) {
         document.querySelector('#CSC').focus()
       }
+    },
+    phoneNumber (n) {
+      if (n.length === 10) {
+        document.querySelector('#CSC').focus()
+      }
     }
   },
   async mounted () {
-    this.agreeModal = await new this.$custom.bootstrap.Modal(this.$refs.agreeModal, { backdrop: 'static' })
-    this.termsHtml = await PublicService.getTermsHtml(this.termsFile)
     const res = await ServiceN.otherCardholderPageLoad()
-    console.log(res)
+    const data = res.data.result
+    console.log(data)
+    this.termsFile = data.termsList
+    // ?載入預帶資料鎖死
+    this.brthDt = data.brthDt
+    this.oid = data.oid
+    this.agreeModal = await new this.$custom.bootstrap.Modal(this.$refs.agreeModal, { backdrop: 'static' })
+    // ?載入條款
+    this.termsHtml = await PublicService.getTermsHtml(this.termsFile)
   }
 }
 </script>
