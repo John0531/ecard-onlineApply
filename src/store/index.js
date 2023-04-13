@@ -2,6 +2,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
+    isLoading: false,
     errorModal: null,
     errorMsg: '',
     applierInfo: {
@@ -15,6 +16,9 @@ export default createStore({
     }
   },
   mutations: {
+    changeLoading (state, payload) {
+      state.isLoading = payload
+    },
     getErrorModal (state, payload) {
       state.errorModal = payload
     },
