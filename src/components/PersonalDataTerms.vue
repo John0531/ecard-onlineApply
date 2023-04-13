@@ -415,6 +415,11 @@ export default {
     }
   },
   methods: {
+    async pageLoad () {
+      const result = await PublicService.terms_pageLoad()
+      this.flgLine = result.flgLine
+      this.flgTravel = result.flgTravel
+    },
     async submit () {
       // ? 驗證檢查
       await this.$refs.form.validate()
@@ -433,6 +438,10 @@ export default {
           FillinData.OT_1 = {
             ...this.Form
           }
+          FillinData.OT_1_Flag = {
+            flgLine: this.flgLine,
+            flgTravel: this.flgTravel
+          }
           sessionStorage.setItem('FillinData', JSON.stringify(FillinData))
           this.$router.push('/OnLineApply_Fillin_OT_2')
         } else if (this.$route.name === '卡友-個資使用條款') {
@@ -441,7 +450,7 @@ export default {
       }
     }
   },
-  async mounted () {
+  mounted () {
     const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
     if (FillinData?.OT_1) {
       this.Form = FillinData.OT_1
@@ -449,6 +458,7 @@ export default {
     if (this.Form.parentType === true && this.Form.sharedType === true && this.Form.linePNPType === true) {
       this.radioALL = true
     }
+    this.pageLoad()
   }
 }
 

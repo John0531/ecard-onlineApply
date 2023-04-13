@@ -37,7 +37,7 @@
               <ul class="formList-even">
                 <li class="col-12 col-md-6">
                   <label for="">身分證字號</label>
-                  <div class="form-text">{{Form.Id}}</div>
+                  <div class="form-text">{{Form.id}}</div>
                   <!-- <Field
                     v-model="Form.Id"
                     maxlength="10"
@@ -278,7 +278,7 @@
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">行動電話</label>
-                  <div class="form-text">{{Form.Cellphone}}</div>
+                  <div class="form-text">{{Form.mbleTelNbr}}</div>
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">電子信箱</label>
@@ -681,17 +681,16 @@
                 <li class="col-12 col-md-6">
                   <label for="">住所狀態</label>
                   <select
-                    v-model="Form.liveStatus"
+                    v-model="Form.liveStatusKey"
                     class="form-select form-control"
                   >
-                    <option>自有</option>
-                    <option></option>
+                    <option v-for="item in selectJson.DOMICILE" :key="item.VALUE" :value="item.VALUE">{{item.SHOW}}</option>
                   </select>
                 </li>
                 <li class="col-12 col-md-12">
                   <label for=""><span class="red_text">* </span>帳單形式</label>
                   <div class="d-flex flex-wrap flex-column flex-md-row">
-                    <div class="form-check me-4" v-if="pageLoad.flgbillType?.includes('mail')">
+                    <div class="form-check me-4" v-if="pageLoad.billType?.includes('mail')">
                       <Field
                         rules="required"
                         :class="{ 'is-invalid': errors['帳單形式'] }"
@@ -704,7 +703,7 @@
                       />
                       <div class="form_Apply_txt">EMAIL帳單</div>
                     </div>
-                    <div class="form-check me-4" v-if="pageLoad.flgbillType?.includes('sms')">
+                    <div class="form-check me-4" v-if="pageLoad.billType?.includes('sms')">
                       <Field
                         rules="required"
                         :class="{ 'is-invalid': errors['帳單形式'] }"
@@ -717,7 +716,7 @@
                       />
                       <div class="form_Apply_txt">行動帳單(簡訊)</div>
                     </div>
-                    <div class="form-check me-4" v-if="pageLoad.flgbillType?.includes('line')">
+                    <div class="form-check me-4" v-if="pageLoad.billType?.includes('line')">
                       <Field
                         rules="required"
                         :class="{ 'is-invalid': errors['帳單形式'] }"
@@ -730,7 +729,7 @@
                       />
                       <div class="form_Apply_txt">LINE帳單</div>
                     </div>
-                    <div class="form-check" v-if="pageLoad.flgbillType?.includes('paper')">
+                    <div class="form-check" v-if="pageLoad.billType?.includes('paper')">
                       <Field
                         rules="required"
                         :class="{ 'is-invalid': errors['帳單形式'] }"
@@ -1409,7 +1408,7 @@ export default {
       selectJson: JSON.parse(localStorage.getItem('SELECT_JSON')),
       eduLevelList: [{ name: '博士', value: 1 }, { name: '碩士', value: 2 }, { name: '大學', value: 3 }, { name: '專科', value: 4 }, { name: '高中高職', value: 5 }, { name: '其他', value: 6 }],
       Form: {
-        Id: '',
+        id: '',
         iddate: {
           Year: '',
           Month: '',
@@ -1440,13 +1439,14 @@ export default {
           liveAreaCode: '',
           liveTel: ''
         },
+        liveStatusKey: '',
         liveStatus: '',
         billType: '',
-        Cellphone: '',
+        mbleTelNbr: '',
         email: '',
-        digiFlag: false,
+        digiFlag: '',
         primarySchool: '',
-        isStudent: false,
+        isStudent: '',
         parentName: '',
         parentTel: '',
         parentAddr: new Address(),
@@ -1532,7 +1532,13 @@ export default {
         if (n.eduLevelKey) {
           n.eduLevel = this.eduLevelList.find(item => item.value === n.eduLevelKey).name
         } else {
-          n.eduLevelKey = ''
+          n.eduLevel = ''
+        }
+        // ? 住所狀態
+        if (n.liveStatusKey) {
+          n.liveStatus = this.selectJson.DOMICILE.find(item => item.VALUE === n.liveStatusKey).SHOW
+        } else {
+          n.liveStatus = ''
         }
         // ? 主要收入來源
         if (n.IncomeMain.incomeKey) {
@@ -1571,16 +1577,29 @@ export default {
       // ? 取得 PageLoad API 資料
       this.pageLoad = await service.fillin_OT_PageLoad()
       if (FillinData?.OT) {
+        if (FillinData.OT.liveStatusKey === 0) {
+          FillinData.OT.liveStatusKey = ''
+        }
+        FillinData.OT.liveStatusKey = FillinData.OT.liveStatusKey.toString()
+        FillinData.OT.IncomeMain.incomeKey = FillinData.OT.IncomeMain.incomeKey.toString()
+        FillinData.OT.job.jobTypeKey = FillinData.OT.job.jobTypeKey.toString()
+        FillinData.OT.jobLVKey = FillinData.OT.jobLVKey.toString()
         this.Form = FillinData.OT
       } else {
-        this.Form.Id = this.pageLoad.id
+        this.Form.id = this.pageLoad.id
         // this.Form.cName = this.pageLoad.cName
         this.Form.eName = this.pageLoad.eName
         this.Form.brthDt = this.pageLoad.brthDt
-        this.Form.Cellphone = this.pageLoad.mbleTelNbr
+        this.Form.mbleTelNbr = this.pageLoad.mbleTelNbr
         this.Form.email = this.pageLoad.email
         this.Form.unitCode = this.pageLoad.unitCode
         this.Form.userCode = this.pageLoad.userCode
+      }
+      if (!this.Form.digiFlag) {
+        this.pageLoad.flgDigi ? this.Form.digiFlag = '' : this.Form.digiFlag = false
+      }
+      if (!this.Form.isStudent) {
+        this.pageLoad.flgStudent ? this.Form.isStudent = '' : this.Form.isStudent = false
       }
       if (this.Form.homeAddr.County) {
         await this.getAddress('1', 'homeAddr', 'session')
@@ -1632,7 +1651,7 @@ export default {
     },
     async submit () {
       this.$refs.form.setErrors({}) // ? 先清除所有上次驗證的錯誤再驗證
-      // ? 驗證所有規則
+      // ? 前端驗證所有規則
       this.$custom.validate.checkDate(this.Form.iddate, this.$refs.form, '身分證發證日期')
       this.$custom.validate.CheckAddressAll(this.Form.homeAddr, this.$refs.form, '戶籍地址')
       this.$custom.validate.CheckAddressAll(this.Form.liveAddr, this.$refs.form, '居住地址')
@@ -1651,37 +1670,38 @@ export default {
         this.$custom.validate.CheckAddressAll(this.Form.compAddr, this.$refs.form, '公司地址')
       }
       await this.$refs.form.validate()
-      // ? 驗證所有規則 end
       const errors = this.$refs.form.getErrors()
-      if (Object.keys(errors).length === 0) {
-        if (!this.Form.isStudent) {
-          this.Form.parentName = ''
-          this.Form.parentTel = ''
-          this.Form.parentAddr = new Address()
-        }
-        const postData = JSON.parse(JSON.stringify(this.Form))
-        postData.iddate = {
-          ...this.Form.iddate,
-          idyear: this.Form.iddate.Year,
-          idMonth: this.Form.iddate.Month,
-          idDay: this.Form.iddate.Day
-        }
-        postData.flgLine = this.pageLoad.flgLine
-        postData.flgTravel = this.pageLoad.flgTravel
-        postData.flgAmwayNo = this.pageLoad.flgAmwayNo
-        const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
-        if (FillinData?.OT) {
-          FillinData.OT = postData
-          sessionStorage.setItem('FillinData', JSON.stringify(FillinData))
-        } else {
-          sessionStorage.setItem('FillinData', JSON.stringify({ OT: postData }))
-        }
-        const result = await service.fillin_OT_Submit(postData)
-        if (result) {
-          this.$router.push('/OnLineApply_Fillin_OT_1')
-        }
-      } else {
+      if (Object.keys(errors).length !== 0) {
         this.$custom.validate.showErrors(errors)
+        return
+      }
+      // ? 前端驗證所有規則 end
+      if (!this.Form.isStudent) {
+        this.Form.parentName = ''
+        this.Form.parentTel = ''
+        this.Form.parentAddr = new Address()
+      }
+      if (this.Form.liveStatusKey === '') {
+        this.Form.liveStatusKey = 0
+      }
+      const postData = JSON.parse(JSON.stringify(this.Form))
+      postData.iddate = {
+        ...this.Form.iddate,
+        idyear: this.Form.iddate.Year,
+        idMonth: this.Form.iddate.Month,
+        idDay: this.Form.iddate.Day
+      }
+      postData.flgAmwayNo = this.pageLoad.flgAmwayNo
+      const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
+      if (FillinData?.OT) {
+        FillinData.OT = postData
+        sessionStorage.setItem('FillinData', JSON.stringify(FillinData))
+      } else {
+        sessionStorage.setItem('FillinData', JSON.stringify({ OT: postData }))
+      }
+      const result = await service.fillin_OT_Submit(postData)
+      if (result) {
+        this.$router.push('/OnLineApply_Fillin_OT_1')
       }
     }
   },
