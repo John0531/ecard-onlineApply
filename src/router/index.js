@@ -26,6 +26,16 @@ const routes = [
         path: '/OnLineApply_Fillin',
         name: '卡友-資料確認，詳閱各項條款',
         component: () => import('../views/CardFriendYes/OnLineApply_Fillin.vue'),
+        beforeEnter: (to, from, next) => {
+          const isAuthenticated = JSON.parse(sessionStorage.getItem('tempOnlineApply'))
+          if (!isAuthenticated) {
+            // 如果未驗證通過，則跳轉至登入頁面
+            next('/')
+          } else {
+            // 允許用戶進入該頁面
+            next()
+          }
+        },
         meta: {
           title: '卡友-資料確認，詳閱各項條款'
         }
@@ -34,6 +44,16 @@ const routes = [
         path: '/OnLineApply_Fillin_Card',
         name: '卡友-KYC資料確認',
         component: () => import('../views/CardFriendYes/OnLineApply_Fillin_Card.vue'),
+        beforeEnter: (to, from, next) => {
+          const isAuthenticated = JSON.parse(sessionStorage.getItem('tempOnlineApply'))
+          if (!isAuthenticated?.OnlineApply_y_Data || !isAuthenticated?.onLineApply_Fillin_Data) {
+            // 如果未驗證通過，則跳轉至登入頁面
+            next('/')
+          } else {
+            // 允許用戶進入該頁面
+            next()
+          }
+        },
         meta: {
           title: '卡友-KYC資料確認'
         }
@@ -42,6 +62,16 @@ const routes = [
         path: '/OnLineApply_Fillin_1',
         name: '卡友-個資使用條款',
         component: () => import('../views/CardFriendYes/OnLineApply_Fillin_1.vue'),
+        beforeEnter: (to, from, next) => {
+          const isAuthenticated = JSON.parse(sessionStorage.getItem('tempOnlineApply'))
+          if (!isAuthenticated?.OnlineApply_y_Data || !isAuthenticated?.onLineApply_Fillin_Data || !isAuthenticated?.onLineApply_Fillin_Card) {
+            // 如果未驗證通過，則跳轉至登入頁面
+            next('/')
+          } else {
+            // 允許用戶進入該頁面
+            next()
+          }
+        },
         meta: {
           title: '卡友-個資使用條款'
         }
