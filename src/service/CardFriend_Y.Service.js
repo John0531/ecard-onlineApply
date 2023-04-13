@@ -4,16 +4,6 @@ axios.defaults.baseURL = process.env.VUE_APP_BASE_API
 axios.defaults.withCredentials = true
 
 const service = {
-  async getSession () {
-    try {
-      const url = '/Testing?UserRolesa=1'
-      const res = await axios.get(url)
-      return res.data
-    } catch (err) {
-      console.log(err.response.data)
-      return null
-    }
-  },
   async IdentityVerification (data, queryString = '') {
     try {
       const url = `/IdentityVerification/Confirm?${queryString}`
@@ -62,6 +52,24 @@ const service = {
     } catch (err) {
       console.log(err.response.data)
       return null
+    }
+  },
+  async cardApplyLoad_PageLoad_LB (GID, IDE, token) {
+    try {
+      const url = `${process.env.VUE_APP_BASE_API}/CardApplyLoad/PageLoad_LB?GID=${GID}&IDE=${IDE}&token_LB=${token}`
+      const res = await axios.get(url)
+      return res.data
+    } catch (err) {
+      console.log(err.response.data)
+      return null
+    }
+  },
+  async cardApplyLoad_PageLoad (GID, IDE) {
+    try {
+      const url = `${process.env.VUE_APP_BASE_API}/CardApplyLoad/PageLoad?GID=${GID}&IDE=${IDE}`
+      const res = await axios.get(url)
+      return res.data
+    } catch (err) {
     }
   }
 }
