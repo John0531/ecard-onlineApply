@@ -19,15 +19,15 @@
                   <ul class="formList">
                       <li class="form-group">
                           <label class="label" for="">申請人身份證號</label>
-                          <div class="form-text">A12345****</div>
+                          <div class="form-text">{{chksData.oid}}</div>
                       </li>
                       <li class="form-group">
                           <label class="label" for="">西元出生年月日</label>
-                          <div class="form-text">1977/06/28</div>
+                          <div class="form-text">{{chksData.brthDt}}</div>
                       </li>
                       <li class="form-group">
                           <label class="label" for="">行動電話(存戶)</label>
-                          <div class="form-text">0999***888</div>
+                          <div class="form-text">{{chksData.mbleTelNbr}}</div>
                       </li>
                       <li class="inOpt align-items-start">
                           <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
@@ -35,7 +35,7 @@
                                 <div class="d-flex align-items-center">
                                     <Field
                                       v-model="mobileMsgCode"
-                                      name="驗證碼" type="text" maxlength="4"
+                                      name="驗證碼" type="text" maxlength="6"
                                       placeholder="請輸入驗證碼" class="form-control"
                                       :class="{ 'is-invalid': errors['驗證碼'] }"
                                       @focus="this.mobileMsgCode=''"
@@ -47,6 +47,7 @@
                                       class="ResendOpt"
                                       :disabled="!show"
                                       type="button"
+                                      id="countBtn"
                                     >
                                       <div v-show="show">獲取驗證碼</div>
                                       <div v-show="!show" class="countdown text-white">{{this.count}}秒後可重新發送</div>
@@ -124,7 +125,7 @@
         </Form>
       </div>
   </section>
-  <!-- Modal-1 -->
+  <!-- agreeModal -->
   <div ref="agreeModal" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -165,9 +166,7 @@
                 </div>
               </template>
                   <!----------------//4-------------------------------------------->
-
               </div>
-
               <div class="modal-footer">
                   <div class="col-12 text-center">
                       <button type="button" class="btn btn-primary btn-lg" @click="checkTotal">確定</button>
@@ -176,10 +175,31 @@
           </div>
       </div>
   </div>
+  <!-- 簡訊寄出modal -->
+  <!-- <div ref="msgModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <span  style="font-size:1rem">驗證碼已發送！！</span>
+          </div>
+          <div class="modal-footer" >
+              <div class="text-center" >
+              <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" style="border-radius: 0.3rem;">關閉</button>
+          </div>
+          </div>
+      </div>
+    </div>
+  </div> -->
 </template>
 
 <script>
 import PublicService from '@/service/Public.Service.js'
+import ServiceN from '@/service/CardFriend_N.Service.js'
 
 export default {
   data () {
@@ -192,8 +212,17 @@ export default {
       count: 0, // *手機驗證碼倒數秒數
       timer: 0,
       show: true,
-      termsFile: ['用卡須知及申請說明', '重要告知事項', '聯邦信用卡約定條款', '電子化帳單服務約定條款'],
-      termsHtml: []
+      termsFile: [],
+      termsHtml: [],
+      chksData:
+      {
+        brthDt: '',
+        oid: '',
+        mbleTelNbr: ''
+        // agreeTerms: true,
+        // personalDataAuthorized: true
+      },
+      MsgModal: null
     }
   },
   methods: {
@@ -228,119 +257,46 @@ export default {
       ck.checked = true
       this.agreeModal.hide()
     },
-    //* 手機驗證碼
-    getMobileMsgCode () {
+    //  ? 手機驗證碼
+    async getMobileMsgCode () {
       // this.isLoading = true
       const time = new Date()
       const getTimer = time.getTime()
       //* 一天的時間(86400)
       time.setTime(getTimer + 1000 * (86400 - 100))
-      //* 確認手機是否有填寫
-      // const url = `api${this.mobileMsgCode}`
-      // this.axios
-      //  .get(url, {
-      //    // get params用法
-      //    params: this.mobileMsgCode
-      //  })
-      //  .then(res => {
-      //      if (res.data.rtnCode !== 0) {
-      //        // this.isLoading = false
-      //        this.$swal.fire({
-      //          title: `${res.data.rtnMsg}`,
-      //          allowOutsideClick: true,
-      //          confirmButtonColor: '#003894',
-      //          confirmButtonText: '確認',
-      //          width: 400,
-      //          customClass: {
-      //            title: 'text-class',
-      //            confirmButton: 'confirm-btn-class'
-      //          }
-      //        })
-      //      } else {
-      //        //* 有成功打入API才算
-      //        // this.isLoading = false
-      //        this.$swal.fire({
-      //          title: '驗證碼已發送！！',
-      //          allowOutsideClick: true,
-      //          confirmButtonColor: '#003894',
-      //          confirmButtonText: '確認',
-      //          width: 400,
-      //          customClass: {
-      //            title: 'text-class',
-      //            confirmButton: 'confirm-btn-class'
-      //          }
-      //        })
-      //        //* 驗證碼倒數計時
-      //        this.count = 30
-      //        // this.show = false
-      //        this.timer = setInterval(() => {
-      //          if (this.count > 0 && this.count <= 30) {
-      //            this.count--
-      //          } else {
-      //            // this.show = true
-      //            clearInterval(this.timer)
-      //            this.timer = null
-      //          }
-      //        }, 1000)
-      //      }
-      //    })
-      this.$swal.fire({
-        title: '驗證碼已發送！！',
-        allowOutsideClick: true,
-        confirmButtonColor: '#003894',
-        confirmButtonText: '確認',
-        width: 400,
-        customClass: {
-          title: 'text-class',
-          confirmButton: 'confirm-btn-class'
-        }
-      })
-      //* 驗證碼倒數計時
-      this.count = 30
-      this.show = false
-      this.timer = setInterval(() => {
-        if (this.count > 0 && this.count <= 30) {
-          this.count--
-        } else {
-          // this.show = true
-          clearInterval(this.timer)
-          this.timer = null
-        }
-      }, 1000)
+      //* 有成功打入API才算
+      const res = await PublicService.otpGet()
+      if (res.status === 200) {
+        PublicService.showAPIMsg(res.data.message)
+        //* 驗證碼倒數計時
+        this.count = 30
+        this.show = false
+        //* 鎖發送
+        const btn = document.querySelector('#countBtn')
+        btn.setAttribute('disabled', '')
+        //* 計時
+        this.timer = setInterval(() => {
+          if (this.count > 0 && this.count <= 30) {
+            this.count--
+          } else {
+            this.show = true
+            clearInterval(this.timer)
+            this.timer = null
+          }
+        }, 1000)
+      }
     },
+    // ? 檢核驗證碼
     async applySubmit () {
       const collection = await this.$refs.myForm.validate()
       collection.errors = await this.$refs.myForm.getErrors()
       if (Object.keys(collection.errors).length === 0) {
         // ** ===全部通過前往下一頁===
         // ? 檢查約定條款 未打勾
-        // if (!this.agreementAll) {
-        //   this.$swal.fire({
-        //     title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-        //     showConfirmButton: false,
-        //     // timer: 2500
-        //     customClass: {
-        //       title: 'text-class'
-        //       //
-        //     }
-        //   })
-        //   return
-        // }
-        // // ? 檢查個資條款 未打勾
-        // if (!this.checkagree) {
-        //   this.$swal.fire({
-        //     title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-        //     showConfirmButton: false,
-        //     customClass: {
-        //       title: 'text-class'
-        //     }
-        //     // timer: 2500
-        //   })
-        //   return
-        // }
-        // ?存戶不經過n1要設session
+        // const res = await ServiceN.otherDepositorVerification(this.chkszData)
+        // **存戶不經過n1要設session
         sessionStorage.setItem('Apply_N_Type', 'Online')
-        this.$router.push('/OnLineApply_Chk_OTP')
+        this.$router.push('/OnLineApply_Fillin_OT')
       } else {
         // ** ===錯誤訊息彙整===
         this.$custom.validate.showErrors(collection.errors)
@@ -366,6 +322,22 @@ export default {
     }
   },
   async mounted () {
+    // this.MsgModal = new this.$custom.bootstrap.Modal(this.$refs.msgModal, { backdrop: 'static' })
+    //* pageLoad接值
+    const res = await ServiceN.depositorVerification()
+    if (res.status === 200) {
+      const data = res.data.result
+      //* 資料處理
+      this.chksData.brthDt = data.brthDt
+      this.chksData.oid = data.oid
+      this.chksData.mbleTelNbr = data.mbleTelNbr
+      this.termsFile = data.termsList
+      //* 確認手機是否有值?若有發送簡訊碼
+      if (this.chksData.brthDt) {
+        this.getMobileMsgCode()
+      }
+    }
+    //* 資料處理2
     this.agreeModal = new this.$custom.bootstrap.Modal(this.$refs.agreeModal, { backdrop: 'static' })
     this.termsHtml = await PublicService.getTermsHtml(this.termsFile)
   }

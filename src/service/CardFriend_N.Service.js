@@ -67,8 +67,12 @@ const service = {
   },
   async otherCardholderVerification (data) {
     try {
+      const form = JSON.stringify(data)
       const url = `${process.env.VUE_APP_BASE_API}/OtherCardholderVerification/Verification`
-      const res = await axios.post(url, data)
+      const options = {
+        headers: { 'content-type': 'application/json' }
+      }
+      const res = await axios.post(url, form, options)
       console.log(res)
       return res
     } catch (err) {
@@ -77,7 +81,31 @@ const service = {
   },
   async otherDepositorPageLoad () {
     try {
-      const url = `${process.env.VUE_APP_BASE_API}/OtherCardholderVerification/PageLoad`
+      const url = `${process.env.VUE_APP_BASE_API}/OtherDepositorVerification/PageLoad`
+      const res = await axios.get(url)
+      console.log(res)
+      return res
+    } catch (err) {
+      alert(err)
+    }
+  },
+  async otherDepositorVerification (data) {
+    try {
+      const form = JSON.stringify(data)
+      const url = `${process.env.VUE_APP_BASE_API}/OtherDepositorVerification/Verification`
+      const options = {
+        headers: { 'content-type': 'application/json' }
+      }
+      const res = await axios.post(url, form, options)
+      console.log(res)
+      return res
+    } catch (err) {
+      alert(err)
+    }
+  },
+  async depositorVerification () {
+    try {
+      const url = `${process.env.VUE_APP_BASE_API}/DepositorVerification`
       const res = await axios.get(url)
       console.log(res)
       return res
@@ -103,7 +131,6 @@ const service = {
         headers: { 'content-type': 'application/json' }
       }
       const res = await axios.post(url, data, options)
-      // console.log(res)
       return res
     } catch (err) {
       return err

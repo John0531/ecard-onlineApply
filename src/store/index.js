@@ -4,15 +4,8 @@ export default createStore({
   state: {
     errorModal: null,
     errorMsg: '',
-    applierInfo: {
-      // ?使用者輸入的出生年月日
-      Identification: '',
-      year: '',
-      month: '',
-      day: '',
-      cardPicked: '',
-      firstGift: ''
-    }
+    apiModal: null,
+    apiMsg: ''
   },
   mutations: {
     getErrorModal (state, payload) {
@@ -20,6 +13,12 @@ export default createStore({
     },
     getErrorMsg (state, payload) {
       state.errorMsg = payload
+    },
+    callAPIModal (state, payload) {
+      state.apiModal = payload
+    },
+    setAPIMsg (state, payload) {
+      state.apiMsg = payload
     }
   },
   actions: {

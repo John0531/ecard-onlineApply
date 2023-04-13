@@ -17,7 +17,15 @@
             <div class="row justify-content-md-center pt-1 pt-md-3">
               <div class="formGroup">
                 <ul class="formList formApply">
-                  <li class="col-12 align-items-start mb-0">
+                    <li class="form-group">
+                        <label class="label" for="">申請人身份證號</label>
+                        <div class="form-text">{{oid}}</div>
+                    </li>
+                    <li class="form-group">
+                        <label class="label" for="">西元出生年月日</label>
+                        <div class="form-text">{{brthDt}}</div>
+                    </li>
+                  <!-- <li class="col-12 align-items-start mb-0">
                       <label for="">申請人身分證字號</label>
                       <div class="d-flex flex-column mb-1">
                           <Field
@@ -36,12 +44,10 @@
                           </div>
                       </div>
                   </li>
-
                   <li class="col-12 align-items-start">
                       <label for="input1">西元出生年月日</label>
                       <div class="d-flex flex-column mb-1">
                           <div class="d-flex align-items-center">
-                              <!-- 辦卡人出生年 -->
                               <div>
                                   <Field
                                   as="select" name="年"
@@ -58,7 +64,6 @@
                                   </option>
                                   </Field>
                               </div>年
-                              <!-- 辦卡人出生月 -->
                               <div>
                                   <Field
                                   as="select" name="月"
@@ -67,14 +72,12 @@
                                   class="form-select form-control"
                                   :validateOnChange="true"
                                   v-model="applierInfo.month" @change="getDay"
-                                  disabled
                                   >
                                   <option v-for="month in dateList.monthList" :value="month" :key="month+1">
                                   {{month}}
                                   </option>
                                   </Field>
                               </div>月
-                              <!-- 辦卡人出生日 -->
                               <div>
                                   <Field
                                   as="select" name="日"
@@ -83,7 +86,6 @@
                                   class="form-select form-control"
                                   :validateOnChange="true"
                                   v-model="applierInfo.day"
-                                  disabled
                                   >
                                   <option v-for="date in dateList.dayList" :value="date" :key="date+1">
                                   {{date}}
@@ -97,7 +99,7 @@
                             </span>
                           </div>
                       </div>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
                 <div class="Apply_Chk mb-5">
@@ -113,7 +115,7 @@
                             <label for="">銀行代號</label>
                             <div class="d-flex flex-column">
                               <Field
-                              v-model="bankCode"
+                              v-model="chkszData.obakCode"
                               as="select" name="銀行代號"
                               class="form-select form-control"
                               :class="{ 'is-invalid': errors['銀行代號'] }"
@@ -134,15 +136,15 @@
                             <label for="" class="mt-1">銀行帳號</label>
                             <div class="d-flex flex-column">
                                 <Field
-                                v-model="account"
+                                v-model="chkszData.oacctNo"
                                 id="account" name="account"
                                 type="text" maxlength="14"
                                 class="form-control"
                                 :class="{ 'is-invalid': errors['銀行帳號'] }"
                                 :validateOnChange="true"
-                                @keyup="account = $custom.validate.OnlyNumPress(account)"
-                                @focus="account=''"
-                                @change="$custom.validate.chkKeyValueLength(account,$refs.myForm,'銀行帳號','10','14')"
+                                @keyup="chkszData.oacctNo = $custom.validate.OnlyNumPress(chkszData.oacctNo)"
+                                @focus="chkszData.oacctNo = '' "
+                                @change="$custom.validate.chkKeyValueLength(chkszData.oacctNo,$refs.myForm,'銀行帳號','10','14')"
                                 />
                                 <span class="not_text">請填寫臨櫃開立之存款帳戶(不含數位存款帳戶)</span>
                                 <div class="d-flex text-center invalid-feedback my-1" >
@@ -154,13 +156,13 @@
                             <label for="" class="mt-1">行動電話</label>
                             <div class="d-flex flex-column">
                                 <Field
-                                v-model="phone"
+                                v-model="chkszData.omobilePhone"
                                 id="phone" name="行動電話"
                                 type="text" maxlength="10"
                                 class="form-control"
                                 :class="{ 'is-invalid': errors['行動電話'] }"
-                                @keyup="phone = $custom.validate.OnlyNumPress(phone)"
-                                @focus="phone=''"
+                                @keyup="chkszData.omobilePhone = $custom.validate.OnlyNumPress(chkszData.omobilePhone)"
+                                @focus="chkszData.omobilePhone=''"
                                 rules="checkPhone"
                                 />
                                 <span class="not_text">請填寫帳戶申請時之行動電話，以利資訊驗證</span>
@@ -284,6 +286,7 @@
 
 <script>
 import PublicService from '@/service/Public.Service.js'
+import ServiceN from '@/service/CardFriend_N.Service.js'
 
 export default {
   data () {
@@ -303,6 +306,8 @@ export default {
       },
       bankCodes: {
       },
+      brthDt: '',
+      oid: '',
       bankCode: '', // ? 銀行代號
       account: '', // ?銀行帳戶
       phone: '',
@@ -310,8 +315,16 @@ export default {
       agreement: [], // ? Modal上同意欄
       agreementAll: false, // ?已同意Modal上所有申請條款
       checkagree: false, // ?同意個資聲明
-      termsFile: ['用卡須知及申請說明', '重要告知事項', '聯邦信用卡約定條款', '電子化帳單服務約定條款'],
-      termsHtml: []
+      termsFile: [],
+      termsHtml: [],
+      chkszData:
+      {
+        obakCode: '',
+        oacctNo: '',
+        omobilePhone: '',
+        agreeTerms: true,
+        personalDataAuthorized: true
+      }
     }
   },
   methods: {
@@ -402,36 +415,19 @@ export default {
       }
     },
     async applySubmit () {
-      this.$custom.validate.chkKeyValueLength(this.account, this.$refs.myForm, '銀行帳號', '10', '14')
+      this.$custom.validate.chkKeyValueLength(this.chkszData.oacctNo, this.$refs.myForm, '銀行帳號', '10', '14')
       const collection = await this.$refs.myForm.validate()
       collection.errors = this.$refs.myForm.getErrors()
       if (Object.keys(collection.errors).length === 0) {
-      // // ? 檢查約定條款 未打勾
-      //   if (!this.agreement) {
-      //     this.$swal.fire({
-      //       title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-      //       showConfirmButton: false,
-      //       // timer: 2500
-      //       customClass: {
-      //         title: 'text-class'
-      //         //
-      //       }
-      //     })
-      //     return
-      //   }
-      //   if (!this.checkagree) {
-      //     this.$swal.fire({
-      //       title: '您尚有個資條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
-      //       showConfirmButton: false,
-      //       customClass: {
-      //         title: 'text-class'
-      //       }
-      //       // timer: 2500
-      //     })
-      //     return
-      //   }
         // ** ===全部通過前往下一頁===
-        this.$router.push('/OnLineApply_Chk_OTP')
+        // ** ===資料整理===
+        this.chkszData.personalDataAuthorized = this.checkagree
+        this.chkszData.agreeTerms = this.agreementAll
+        const res = await ServiceN.otherDepositorVerification(this.chkszData)
+        console.log(res)
+        if (res.status === 200) {
+          this.$router.push('/OnLineApply_Chk_OTP')
+        }
       } else {
         // ** ===錯誤訊息彙整===
         this.$custom.validate.showErrors(collection.errors)
@@ -457,8 +453,13 @@ export default {
     }
   },
   async mounted () {
+    const res = await ServiceN.otherDepositorPageLoad()
+    const data = res.data.result
+    console.log(data)
+    this.brthDt = data.brthDt
+    this.oid = data.oid
+    this.termsFile = data.termsList
     this.agreeModal = await new this.$custom.bootstrap.Modal(this.$refs.agreeModal, { backdrop: 'static' })
-    // this.getYearMonth()
     const bank = JSON.parse(localStorage.getItem('SELECT_JSON'))
     this.bankCodes = bank.BANK
     this.termsHtml = await PublicService.getTermsHtml(this.termsFile)

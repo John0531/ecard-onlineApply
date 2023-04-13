@@ -26,7 +26,7 @@
                                 <div class="d-flex align-items-center">
                                     <Field
                                       v-model="mobileMsgCode"
-                                      name="驗證碼" type="text" maxlength="4"
+                                      name="驗證碼" type="text" maxlength="6"
                                       placeholder="請輸入驗證碼" class="form-control"
                                       :class="{ 'is-invalid': errors['驗證碼'] }"
                                       @focus="this.mobileMsgCode=''"
@@ -308,17 +308,8 @@ export default ({
       //* 一天的時間(86400)
       time.setTime(getTimer + 1000 * (86400 - 100))
       //* 確認手機是否有填寫
-      // const url = `/api/Otp/Send`
-      // this.axios
-      //  .get(url, {
-      //    // get params用法
-      //    params: this.mobileMsgCode
-      //  })
-      //  .then(res => {
-      //      if (res.data.rtnCode !== 0) {
-      // alert(`${res.data.rtnMsg}`)
-      //      } else {
-      //        //* 有成功打入API才算
+
+      //* 有成功打入API才算
       this.MsgModal.show()
       //* 驗證碼倒數計時
       this.count = 30

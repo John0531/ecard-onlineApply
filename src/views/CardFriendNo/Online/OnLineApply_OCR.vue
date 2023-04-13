@@ -91,6 +91,7 @@
                 class="btn btn-primary btn-lg mx-1"
                 type=""
                 @click.prevent="sendIdentity"
+                :disabled="this.message !== ''"
               >
                 下一步
               </button>
@@ -528,17 +529,17 @@ export default {
       },
       imgTemplateUrl: '',
       imgTemplateInfo: '',
-      NoticeModal: '', //* 一進畫面範例說明
-      NoticeModal2: '', //* 如身分證無法辨識/模糊，跳出提醒
-      ImageLimit: '', //* 提醒上傳檔案限制提醒
-      CroppieModal: '', // * 財力證明圖片修改
+      NoticeModal: null, //* 一進畫面範例說明
+      NoticeModal2: null, //* 如身分證無法辨識/模糊，跳出提醒
+      ImageLimit: null, //* 提醒上傳檔案限制提醒
+      CroppieModal: null, // * 財力證明圖片修改
       file: { // *上傳的檔案
         front: '', // *身分證正面
         back: '' // *身分證背面
       },
       uploaded: false, // *base64解析成功開啟判斷
       message: '',
-      APIModal: '', // API提醒Modal
+      APIModal: null, // API提醒Modal
       // TODO sheng
       selectJson: JSON.parse(localStorage.getItem('SELECT_JSON')), // ? 下拉
       // ? 身分證資訊表單
@@ -647,7 +648,7 @@ export default {
         // ?將編輯完成的base64準備起來打API
         // this[`identitiyPack${num}`].file = this.jpeg2png(this.$refs[`resultImg${num}`].src)
         this[`identitiyPack${num}`].file = this.$refs[`resultImg${num}`].src
-      }, 1000)
+      }, 100)
       // ?編輯結束將相關物件資料銷毀
       this.CroppieModal.hide()
       this.destroy(this.num)
@@ -678,6 +679,7 @@ export default {
       }, 5000)
       const res = await ServiceN.uploadImage(this.file)
       console.log(res)
+      console.log(res.data.message)
       this.message = res.data.message
       if (res.status === 200) {
         this.APIModal.show()
@@ -774,6 +776,7 @@ export default {
   },
   async mounted () {
     if (sessionStorage.getItem('OCR_Data')) {
+      this.uploaded = true
       this.Form = JSON.parse(sessionStorage.getItem('OCR_Data'))
       await this.getAddress('1', 'session')
       await this.getAddress('2', 'session')
