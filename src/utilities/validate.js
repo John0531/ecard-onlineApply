@@ -343,6 +343,17 @@ const validate = {
       return true
     }
     return '請輸入正確簡訊驗證碼'
+  },
+  //* ==== 28. 檢查身分證與居留證格式 ====
+  checkIdandLive (id) {
+    // ? 身分證與居留證驗證
+    if (/^[A-Z]{1}[1-2]{1}[0-9]{8}$/.test(id) || /^[A-Z]{2}[0-9]{8}$/.test(id)) {
+      return true // 符合身份證字號格式
+    } else if (/^[A-Z]{1}[0-9]{9}$/.test(id)) {
+      return true // 符合居留簽證統一證號格式
+    } else {
+      return '請輸入正確格式身份證與居留證' // 不符合任何格式
+    }
   }
 }
 
