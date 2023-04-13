@@ -96,10 +96,21 @@ const service = {
       return null
     }
   },
-  //* 非卡友測試session
+  //* 非卡友-存戶測試session
   async getSession2 () {
     try {
       const url = '/Testing?UserRolesa=2'
+      const res = await axios.get(url)
+      return res.data
+    } catch (err) {
+      console.log(err.response.data)
+      return null
+    }
+  },
+  //* 非卡友-非存戶(改他行驗證流程)測試session
+  async getSession3 () {
+    try {
+      const url = '/Testing?UserRolesa=3'
       const res = await axios.get(url)
       return res.data
     } catch (err) {

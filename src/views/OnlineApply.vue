@@ -1208,7 +1208,7 @@ export default {
         // ?非卡友-非存戶(改他行驗證流程)
         case '00103' :
           alert(message)
-          await service.getSession2()
+          await service.getSession3()
           this.$router.push('/OnLineApply_Gift')
           break
         // ?驗證失敗(直接顯示錯誤訊息。)
