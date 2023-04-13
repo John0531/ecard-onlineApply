@@ -1,4 +1,7 @@
 <template>
+  <div class="position-fixed w-100 h-100 d-flex justify-content-center align-items-center" style="background:rgba(60,60,60,0.8);z-index:1000" v-if="$store.state.isLoading">
+    <img src="@/assets/images/ajaxDog.gif" alt="">
+  </div>
   <Header></Header>
   <router-view/>
   <Footer></Footer>

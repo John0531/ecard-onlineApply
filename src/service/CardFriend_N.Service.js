@@ -9,7 +9,7 @@ const service = {
       const res = await axios.get(url)
       return res.data.result
     } catch (err) {
-      alert(err)
+
     }
   },
   async Chkw_Submit (postData) {
@@ -21,7 +21,7 @@ const service = {
         return true
       }
     } catch (err) {
-      alert(err)
+
     }
   },
   async fillin_OT_PageLoad () {
@@ -31,7 +31,7 @@ const service = {
       console.log(res)
       return res.data.result
     } catch (err) {
-      alert(err)
+
     }
   },
   async fillin_OT_Submit (postData) {
@@ -42,7 +42,7 @@ const service = {
         return true
       }
     } catch (err) {
-      alert(err)
+
     }
   },
   async fillin_OT2_PageLoad () {
@@ -52,7 +52,6 @@ const service = {
       console.log(res)
       return res.data.result
     } catch (err) {
-      alert(err)
     }
   },
   async otherCardholderPageLoad () {
@@ -157,7 +156,7 @@ const service = {
         }
       }
     } catch (err) {
-      alert(err)
+
     }
   }
 }
