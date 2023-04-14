@@ -132,7 +132,7 @@
                       <div class="d-flex flex-column">
                           <Field
                           v-model="phoneNumber"
-                          id="phone" name="phone" ref="phone"
+                          id="phone" name="手機" ref="phone"
                           type="text" maxlength="10"
                           class="Apply_Chk_form_control form-control"
                           :class="{ 'is-invalid': errors['手機'] }"
@@ -454,6 +454,7 @@ export default {
       this.checkValue(this.$refs.myForm, this.cardNumber, '卡號', '')
       this.checkValue(this.$refs.myForm, this.validThru, '信用卡有效期限', '')
       this.checkValue(this.$refs.myForm, this.CSC, '信用卡背後末三碼', '')
+      // this.checkValue(this.$refs.myForm, this.phoneNumber, '手機', '')
       // ?先取得套件rules的errors
       const collection = await dom.validate()
       // ?再整合取得自訂驗證的errors

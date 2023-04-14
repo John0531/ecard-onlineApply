@@ -245,7 +245,13 @@
                     >
                     送出申請
                     </button>
-                    <button onclick="location.href='#'" class="btn btn-primary btn-lg mx-1" type="submit" value="">預覽申請書</button>
+                    <button
+                    class="btn btn-primary btn-lg mx-1"
+                    type=""
+                    @click.prevent="preview"
+                    >
+                      預覽申請書
+                    </button>
                 </div>
             </div>
         </div>
@@ -564,6 +570,8 @@
 </template>
 
 <script>
+import PublicService from '@/service/Public.Service.js'
+
 export default {
   data () {
     return {
@@ -666,11 +674,11 @@ export default {
         }
       }, 500)
     },
-    result () {
+    async result () {
       // ?在頁面上各欄位自呈現
       const num = this.num
       const resultImg = this.$refs[`resultImg${num}`]
-      this[`identitiyPack${num}`].preViewImg.result('base64').then(function (base64) {
+      await this[`identitiyPack${num}`].preViewImg.result('base64').then(function (base64) {
         resultImg.src = base64
       })
       // ?編輯結束將相關物件資料銷毀
@@ -682,7 +690,7 @@ export default {
       document.getElementById('myIdentifident').classList.remove('croppie-container')
     },
     destroy (num) {
-      this[`identitiyPack${num}`].preViewImg.destroy()
+      // this[`identitiyPack${num}`].preViewImg.destroy()
       // const resultImg = this.$refs[`resultImg${num}`]
       // resultImg.src = ''
       document.getElementById('myIdentifident').innerHTML = ''
@@ -693,8 +701,8 @@ export default {
       // ?清空暫存檔案
       document.querySelector(`#upload${num}`).value = null
     },
-    goToNNB () {
-      this.NNBModal.hide()
+    async goToNNB () {
+      await this.NNBModal.hide()
       this.$router.push('/dspApplicationNNB')
     },
     async submitSuitCase () {
@@ -703,7 +711,9 @@ export default {
       const collection = await this.$refs.myForm.validate()
       collection.errors = await this.$refs.myForm.getErrors()
       if (Object.keys(collection.errors).length === 0) {
-        // ? 檢查約定條款 未打勾
+        // ** ===全部通過打API才前往下一頁===
+        // ** ===整理資料===
+        PublicService.CardSendApply()
         if (this.proofType === 'option1') {
           // ? ===選擇自行上傳===
           this.NNBModal.show()
@@ -776,6 +786,10 @@ export default {
       } else {
         return true
       }
+    },
+    preview () {
+      const res = PublicService.PreviewPDF()
+      console.log(res)
     }
   },
   mounted () {

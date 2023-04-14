@@ -119,6 +119,28 @@ const service = {
     APIMsg = Msg
     store.commit('setAPIMsg', APIMsg)
     store.state.apiModal.show()
+  },
+  async PreviewPDF () {
+    try {
+      const url = `${process.env.VUE_APP_BASE_API}/CardFromPDF/PreviewPDF`
+      const res = await axios.get(url)
+      console.log(res)
+      return res
+    } catch {
+    }
+  },
+  async CardSendApply (approvals) {
+    try {
+      const data = JSON.stringify(approvals)
+      const url = `${process.env.VUE_APP_BASE_API}/CardSendApply/CardSendApply`
+      const options = {
+        headers: { 'content-type': 'application/json' }
+      }
+      const res = await axios.post(url, data, options)
+      console.log(res)
+      return res
+    } catch {
+    }
   }
 }
 

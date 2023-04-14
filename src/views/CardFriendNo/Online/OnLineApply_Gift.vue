@@ -104,7 +104,7 @@
 
 <script>
 import ServiceN from '@/service/CardFriend_N.Service.js'
-import PublicService from '@/service/Public.Service.js'
+// import PublicService from '@/service/Public.Service.js'
 
 export default ({
   data () {
@@ -128,11 +128,11 @@ export default ({
         console.log(res)
         if (res.status === 200) {
           if (res.data.message) {
-            PublicService.showAPIMsg(res.data.message)
+            // PublicService.showAPIMsg(res.data.message)
+            setTimeout(() => {
+              this.$router.push('/OnLineApply_OCR')
+            }, 800)
           }
-          setTimeout(() => {
-            this.$router.push('/OnLineApply_OCR')
-          }, 1000)
         }
       } else {
         // ** ===錯誤訊息彙整===

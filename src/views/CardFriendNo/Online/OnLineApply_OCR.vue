@@ -91,7 +91,6 @@
                 class="btn btn-primary btn-lg mx-1"
                 type=""
                 @click.prevent="sendIdentity"
-                :disabled="this.message !== ''"
               >
                 下一步
               </button>
@@ -672,14 +671,12 @@ export default {
       this.file.front = this.identitiyPack1.file.split(',')[1]
       this.file.back = this.identitiyPack2.file.split(',')[1]
       // ?將身分證傳到後端
-      this.message = '資料驗證中'
-      this.APIModal.show()
-      setTimeout(() => {
-        this.APIModal.hide()
-      }, 5000)
+      // this.message = '資料驗證中'
+      // this.APIModal.show()
+      // setTimeout(() => {
+      //   this.APIModal.hide()
+      // }, 5000)
       const res = await ServiceN.uploadImage(this.file)
-      console.log(res)
-      console.log(res.data.message)
       this.message = res.data.message
       if (res.status === 200) {
         this.APIModal.show()
