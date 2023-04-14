@@ -36,8 +36,8 @@
               </ul>
             </div>
             <div class="col-xl-12 d-flex flex-wrap">
-              <div class="col-12 col-md-4 text-center">
-                <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="微風悠遊聯名卡MasterCard悠遊鈦金卡" />
+              <div class="col-12 col-md-4 text-center m-auto">
+                <img class="img-fluid" alt="申請卡片圖片" src="@/assets/images/form/card_b4bs.jpg"/>
                 <div class="form-check my-2 position-relative">
                   <Field
                     class="form-check-input Apply_input"
@@ -53,53 +53,11 @@
                     for="creditCardTick"
                     style="color: black;"
                   >
-                    微風悠遊聯名卡MasterCard悠遊鈦金卡
+                  {{cardName}}
                   </label>
                 </div>
+                <span class="red_text position-relative m-auto">{{errors['申請的信用卡']}}</span>
               </div>
-              <div class="col-12 col-md-4 text-center">
-                <img src="@/assets/images/form/card_b4bs.jpg" class="img-fluid" alt="微風悠遊聯名卡JCB悠遊晶緻卡" />
-                <div class="form-check my-2">
-                  <Field
-                    class="form-check-input Apply_input"
-                    type="radio"
-                    name="申請的信用卡"
-                    value="JCB"
-                    v-model="OnlineApply_y_Data.cardNo"
-                    :class="{ 'is-invalid': errors['申請的信用卡'] }"
-                    :validateOnInput="true"
-                  />
-                  <label
-                    class="form-check-label text-start text-md-center fw-bold"
-                    for="creditCardTick"
-                    style="color: black;"
-                  >
-                    微風悠遊聯名卡JCB悠遊晶緻卡
-                  </label>
-                </div>
-              </div>
-              <div class="col-12 col-md-4 text-center">
-                <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="微風悠遊聯名卡VISA悠遊御璽卡" />
-                <div class="form-check my-2">
-                  <Field
-                    class="form-check-input Apply_input"
-                    type="radio"
-                    name="申請的信用卡"
-                    value="VISA"
-                    v-model="OnlineApply_y_Data.cardNo"
-                    :class="{ 'is-invalid': errors['申請的信用卡'] }"
-                    :validateOnInput="true"
-                  />
-                  <label
-                    class="form-check-label text-start text-md-center fw-bold"
-                    for="creditCardTick"
-                    style="color: black;"
-                  >
-                    微風悠遊聯名卡VISA悠遊御璽卡
-                  </label>
-                </div>
-              </div>
-              <span class="red_text position-relative m-auto">{{errors['申請的信用卡']}}</span>
             </div>
             <!----------------fee ---------------->
             <div class="mt-3 mt-md-5">
@@ -233,8 +191,8 @@
               </ul>
             </div>
             <div class="col-xl-12 d-flex flex-wrap">
-              <div class="col-12 col-md-4 text-center">
-                <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="微風悠遊聯名卡MasterCard悠遊鈦金卡" />
+              <div class="col-12 col-md-4 text-center m-auto">
+                <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="申請卡片圖片" />
                 <div class="form-check my-2 position-relative">
                   <Field
                     class="form-check-input Apply_input"
@@ -250,140 +208,98 @@
                     for="creditCardTick"
                     style="color: black;"
                   >
-                    微風悠遊聯名卡MasterCard悠遊鈦金卡
+                  {{cardName}}
                   </label>
                 </div>
+                <span class="red_text position-relative m-auto">{{errors['申請的信用卡']}}</span>
               </div>
-              <div class="col-12 col-md-4 text-center">
-                <img src="@/assets/images/form/card_b4bs.jpg" class="img-fluid" alt="微風悠遊聯名卡JCB悠遊晶緻卡" />
-                <div class="form-check my-2">
-                  <Field
-                    class="form-check-input Apply_input"
-                    type="radio"
-                    name="申請的信用卡"
-                    value="JCB"
-                    v-model="OnlineApply_y_Data.cardNo"
-                    :class="{ 'is-invalid': errors['申請的信用卡'] }"
-                    :validateOnInput="true"
-                  />
-                  <label
-                    class="form-check-label text-start text-md-center fw-bold"
-                    for="creditCardTick"
-                    style="color: black;"
-                  >
-                    微風悠遊聯名卡JCB悠遊晶緻卡
-                  </label>
-                </div>
-              </div>
-              <div class="col-12 col-md-4 text-center">
-                <img src="@/assets/images/form/card_b4as.jpg" class="img-fluid" alt="微風悠遊聯名卡VISA悠遊御璽卡" />
-                <div class="form-check my-2">
-                  <Field
-                    class="form-check-input Apply_input"
-                    type="radio"
-                    name="申請的信用卡"
-                    value="VISA"
-                    v-model="OnlineApply_y_Data.cardNo"
-                    :class="{ 'is-invalid': errors['申請的信用卡'] }"
-                    :validateOnInput="true"
-                  />
-                  <label
-                    class="form-check-label text-start text-md-center fw-bold"
-                    for="creditCardTick"
-                    style="color: black;"
-                  >
-                    微風悠遊聯名卡VISA悠遊御璽卡
-                  </label>
-                </div>
-              </div>
-              <span class="red_text position-relative m-auto">{{errors['申請的信用卡']}}</span>
             </div>
             <!----------------//yesgogogo ---------------->
-        <div class="mt-3 mt-md-5">
-            <div class="fee_box mb-3">
-                <h3><img src="images/form/fee_icon.gif" class="img-fluid" alt="" />年費定價說明：</h3>
-                <div class="fee_content">
-                    <table class="fee_table">
-                        <thead>
-                            <tr>
-                                <th width="20%">卡別</th>
-                                <th width="10%">首年</th>
-                                <th>第二年度起</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="fee_cardname"><strong>微風悠遊聯名卡<br>VISA<br>悠遊御璽卡</strong></td>
-                                <td class="redWord text-center" rowspan="3">免年費</td>
-                                <td rowspan="3">
-                                    <p class="text-left">第二年起統計正、附卡年度合併消費未達36,000元，收取全額年費。</p>
-                                    <table width="100%">
-                                        <thead class="fee_thead">
-                                            <tr>
-                                                <th class="text-center">年消費</th>
-                                                <th class="text-center">年費</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="text-center">36,000元(含)以上</td>
-                                                <td class="redWord text-center">免年費</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">未達36,000 元</td>
-                                                <td class="text-center">2,000元</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="fee_cardname"><strong>微風悠遊聯名卡<br>MasterCard<br>悠遊鈦金卡</strong></td>
-                            </tr>
-                            <tr>
-                                <td class="fee_cardname"><strong>微風悠遊聯名卡<br>JCB<br>悠遊晶緻卡</strong></td>
-                            </tr>
-                            <tr>
-                                <td class="fee_cardname"><strong>微風悠遊聯名卡<br>VISA<br>悠遊白金卡</strong></td>
-                                <td class="redWord text-center" rowspan="2">免年費</td>
-                                <td rowspan="2">
-                                    <p class="text-left">
-                                        依據每張卡片年費到期日往前推算一年，檢核同一身分證字號下之消費，若不符合標準則以單卡按以下標準計算收取年費(不分正、附卡)：</p>
-                                    <table width="100%">
-                                        <thead class="fee_thead">
-                                            <tr>
-                                                <th class="text-center">年消費</th>
-                                                <th class="text-center">年費</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="text-center">1萬元(含)以上或消費10次(含)以上</td>
-                                                <td class="redWord text-center">免年費</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">5,000元(含)或5次(含)以上</td>
-                                                <td class="text-center">500元</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">未達5,000元或5次</td>
-                                                <td class="text-center">1,000元</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="fee_cardname"><strong>微風悠遊聯名卡<br>MasterCard<br>悠遊白金卡</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="indentNote_OneText">
-                        <p>※每一卡別所提供之年費減免或折價優惠，每一持卡人僅得享有一次優惠，若於年費優惠期間截止前將卡片停用後又重新申請者，恕不再享有優惠。</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+          <div class="mt-3 mt-md-5">
+              <div class="fee_box mb-3">
+                  <h3><img src="images/form/fee_icon.gif" class="img-fluid" alt="" />年費定價說明：</h3>
+                  <div class="fee_content">
+                      <table class="fee_table">
+                          <thead>
+                              <tr>
+                                  <th width="20%">卡別</th>
+                                  <th width="10%">首年</th>
+                                  <th>第二年度起</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td class="fee_cardname"><strong>微風悠遊聯名卡<br>VISA<br>悠遊御璽卡</strong></td>
+                                  <td class="redWord text-center" rowspan="3">免年費</td>
+                                  <td rowspan="3">
+                                      <p class="text-left">第二年起統計正、附卡年度合併消費未達36,000元，收取全額年費。</p>
+                                      <table width="100%">
+                                          <thead class="fee_thead">
+                                              <tr>
+                                                  <th class="text-center">年消費</th>
+                                                  <th class="text-center">年費</th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                              <tr>
+                                                  <td class="text-center">36,000元(含)以上</td>
+                                                  <td class="redWord text-center">免年費</td>
+                                              </tr>
+                                              <tr>
+                                                  <td class="text-center">未達36,000 元</td>
+                                                  <td class="text-center">2,000元</td>
+                                              </tr>
+                                          </tbody>
+                                      </table>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td class="fee_cardname"><strong>微風悠遊聯名卡<br>MasterCard<br>悠遊鈦金卡</strong></td>
+                              </tr>
+                              <tr>
+                                  <td class="fee_cardname"><strong>微風悠遊聯名卡<br>JCB<br>悠遊晶緻卡</strong></td>
+                              </tr>
+                              <tr>
+                                  <td class="fee_cardname"><strong>微風悠遊聯名卡<br>VISA<br>悠遊白金卡</strong></td>
+                                  <td class="redWord text-center" rowspan="2">免年費</td>
+                                  <td rowspan="2">
+                                      <p class="text-left">
+                                          依據每張卡片年費到期日往前推算一年，檢核同一身分證字號下之消費，若不符合標準則以單卡按以下標準計算收取年費(不分正、附卡)：</p>
+                                      <table width="100%">
+                                          <thead class="fee_thead">
+                                              <tr>
+                                                  <th class="text-center">年消費</th>
+                                                  <th class="text-center">年費</th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                              <tr>
+                                                  <td class="text-center">1萬元(含)以上或消費10次(含)以上</td>
+                                                  <td class="redWord text-center">免年費</td>
+                                              </tr>
+                                              <tr>
+                                                  <td class="text-center">5,000元(含)或5次(含)以上</td>
+                                                  <td class="text-center">500元</td>
+                                              </tr>
+                                              <tr>
+                                                  <td class="text-center">未達5,000元或5次</td>
+                                                  <td class="text-center">1,000元</td>
+                                              </tr>
+                                          </tbody>
+                                      </table>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td class="fee_cardname"><strong>微風悠遊聯名卡<br>MasterCard<br>悠遊白金卡</strong></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                      <div class="indentNote_OneText">
+                          <p>※每一卡別所提供之年費減免或折價優惠，每一持卡人僅得享有一次優惠，若於年費優惠期間截止前將卡片停用後又重新申請者，恕不再享有優惠。</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
           </div>
             <!----------------//fee ---------------->
             <!-------------------本人已詳閱---------------------->
@@ -1018,7 +934,6 @@
 <script>
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 import serviceY from '../service/CardFriend_Y.Service'
-import service from '../service/Public.Service'
 import { defineRule } from 'vee-validate'
 
 export default {
@@ -1054,7 +969,9 @@ export default {
         OnlineApply_y_Data: '',
         onLineApply_Fillin_Data: '',
         onLineApply_Fillin_Card: ''
-      }
+      },
+      cardName: '',
+      cardPic: ''
     }
   },
   created () {
@@ -1195,20 +1112,14 @@ export default {
       switch (status) {
         // ?卡友驗證成功
         case '00101' :
-          alert(message)
-          await service.getSession1()
           this.$router.push('/OnLineApply_OTP')
           break
         // ?非卡友-存戶
         case '00102' :
-          alert(message)
-          await service.getSession2()
           this.$router.push('/OnLineApply_Gift')
           break
         // ?非卡友-非存戶(改他行驗證流程)
         case '00103' :
-          alert(message)
-          await service.getSession3()
           this.$router.push('/OnLineApply_Gift')
           break
         // ?驗證失敗(直接顯示錯誤訊息。)
@@ -1266,13 +1177,17 @@ export default {
       if (this.isLineBank) {
         const linkCard = await serviceY.cardApplyLoad_PageLoad_LB(GID, IDE, parm)
         const { status, result, message } = linkCard
-        const { id, brthDt } = result
+        const { id, brthDt, cardInfoList } = result
         switch (status) {
           case '00700' :
             this.OnlineApply_y_Data.id = id
             this.OnlineApply_y_Data.brthyy = Number(brthDt.substring(0, 4))
             this.OnlineApply_y_Data.brthMM = Number(brthDt.substring(4, 6))
             this.OnlineApply_y_Data.brthdd = Number(brthDt.substring(6, 8))
+            this.OnlineApply_y_Data.cardNo = cardInfoList[0].cardNo
+            this.cardName = cardInfoList[0].cardName
+            this.cardPic = cardInfoList[0].cardPic
+            console.log(cardInfoList[0].cardNo)
             this.OnlineApply_y_Data.gID = GID
             this.OnlineApply_y_Data.iDE = IDE
             break
@@ -1285,10 +1200,14 @@ export default {
         }
       } else {
         const linkCard = await serviceY.cardApplyLoad_PageLoad(GID, IDE)
-        const { status, message } = linkCard
+        const { status, message, result } = linkCard
+        const { cardInfoList } = result
         console.log(linkCard)
         switch (status) {
           case '00700' :
+            this.OnlineApply_y_Data.cardNo = cardInfoList[0].cardNo
+            this.cardName = cardInfoList[0].cardName
+            this.cardPic = cardInfoList[0].cardPic
             this.OnlineApply_y_Data.gID = GID
             this.OnlineApply_y_Data.iDE = IDE
             break
