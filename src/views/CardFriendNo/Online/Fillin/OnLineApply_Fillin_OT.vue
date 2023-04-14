@@ -225,7 +225,7 @@
                     </Field>
                     <Field
                       v-if="Form.birth.birthplace==='其它'"
-                      v-model="Form.birth.birthOther"
+                      v-model="Form.birth.birthOtherKey"
                       as="select"
                       rules="required"
                       :class="{ 'is-invalid': errors['出生地-其他'] }"
@@ -754,34 +754,30 @@
                 </li>
                 <li class="col-12 col-md-12 mb-0" v-if="Apply_N_Type==='Online'&&pageLoad.flgDigi">
                   <label for=""
-                    ><span class="red_text">* </span>申請數位卡</label
+                    >申請數位卡</label
                   >
                   <div class="d-flex flex-wrap flex-column flex-md-row">
                     <div class="form-check me-4">
                       <Field
-                        rules="radioRequired"
                         :class="{ 'is-invalid': errors['申請數位卡'] }"
                         v-model="Form.digiFlag"
                         class="form-check-input mt-2 position-absolute"
                         type="radio"
                         name="申請數位卡"
                         id="exampleRadios1"
-                        :value="true"
-                        :validateOnInput="true"
+                        value="true"
                       />
                       <div class="form_Apply_txt">是</div>
                     </div>
                     <div class="form-check">
                       <Field
-                        rules="radioRequired"
                         :class="{ 'is-invalid': errors['申請數位卡'] }"
                         v-model="Form.digiFlag"
                         class="form-check-input mt-2 position-absolute"
                         type="radio"
                         name="申請數位卡"
                         id="exampleRadios3"
-                        :value="false"
-                        :validateOnInput="true"
+                        value="false"
                       />
                       <div class="form_Apply_txt">否</div>
                     </div>
@@ -821,13 +817,13 @@
                     <div class="d-flex flex-wrap flex-column flex-md-row">
                       <div class="form-check me-4">
                         <Field
-                          rules="radioRequired"
+                          rules="required"
                           :class="{ 'is-invalid': errors['是否為學生'] }"
                           v-model="Form.isStudent"
                           class="form-check-input mt-2 position-absolute"
                           type="radio"
                           name="是否為學生"
-                          :value="true"
+                          value="true"
                           :validateOnInput="true"
                         />
                         <div class="form_Apply_txt">
@@ -836,13 +832,13 @@
                       </div>
                       <div class="form-check me-4">
                         <Field
-                          rules="radioRequired"
+                          rules="required"
                           :class="{ 'is-invalid': errors['是否為學生'] }"
                           v-model="Form.isStudent"
                           class="form-check-input mt-2 position-absolute"
                           type="radio"
                           name="是否為學生"
-                          :value="false"
+                          value="false"
                           :validateOnInput="true"
                         />
                         <div class="form_Apply_txt">
@@ -1421,7 +1417,8 @@ export default {
         brthDt: '',
         birth: {
           birthplace: '',
-          birthOther: ''
+          birthOther: '',
+          birthOtherKey: ''
         },
         nationalityKey: '',
         nationality: '',
@@ -1522,6 +1519,12 @@ export default {
           this.$refs.form.setFieldError('居住電話號碼', '')
           this.$refs.form.setFieldError('居住電話號碼', '')
         }
+        // ? 出生地
+        if (n.birth.birthOtherKey) {
+          n.birth.birthOther = this.selectJson.NATIONALITY.find(item => item.VALUE === n.birth.birthOtherKey).SHOW
+        } else {
+          n.birth.birthOther = ''
+        }
         // ? 國籍
         if (n.nationalityKey) {
           n.nationality = this.selectJson.NATIONALITY.find(item => item.VALUE === n.nationalityKey).SHOW
@@ -1594,12 +1597,6 @@ export default {
         this.Form.email = this.pageLoad.email
         this.Form.unitCode = this.pageLoad.unitCode
         this.Form.userCode = this.pageLoad.userCode
-      }
-      if (!this.Form.digiFlag) {
-        this.pageLoad.flgDigi ? this.Form.digiFlag = '' : this.Form.digiFlag = false
-      }
-      if (!this.Form.isStudent) {
-        this.pageLoad.flgStudent ? this.Form.isStudent = '' : this.Form.isStudent = false
       }
       if (this.Form.homeAddr.County) {
         await this.getAddress('1', 'homeAddr', 'session')

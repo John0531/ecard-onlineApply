@@ -30,6 +30,7 @@ export default {
   methods: {
     closeModal () {
       if (this.$store.state.errorMsg.includes('440')) {
+        sessionStorage.clear()
         window.location = 'https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014'
       }
       this.$store.state.errorModal.hide()
