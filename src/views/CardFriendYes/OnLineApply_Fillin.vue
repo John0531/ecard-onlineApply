@@ -147,20 +147,16 @@
 																<li style="padding-left: 0px;" class="mt-3Address.L mt-3" >
 																		<div class="d-flex flex-wrap flex-md-nowrap apply_address align-items-center">
 																				<!-- 下拉選單型別Field => select -->
-																				<Field v-model="onLineApply_Fillin_Data.sendCardAddr.County" as="select"  name="郵遞區號" class="form-control me-1 form-select" type="select" :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}">
-																						<option v-for="cardAddress in option.cardAddress" :key="cardAddress.SORT" :value="cardAddress.VALUE">{{ cardAddress.SHOW }}</option>
+																				<Field v-model="onLineApply_Fillin_Data.sendCardAddr.County" as="select"  name="郵遞區號" class="form-control me-1 form-select" type="select" :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}" @change="getAddress('1')">
+																						<option v-for="cardAddress in selectJson.County" :key="cardAddress.SORT" :value="cardAddress.VALUE">{{ cardAddress.SHOW }}</option>
 																				</Field>
-																				<Field v-model="onLineApply_Fillin_Data.sendCardAddr.Area"  as="select" name="市區" class="form-control me-1 form-select" type="select" :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}">
+																				<Field v-model="onLineApply_Fillin_Data.sendCardAddr.Area"  as="select" name="市區" class="form-control me-1 form-select" type="select" :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}" @change="getAddress('2')">
 																						<option value="">-----</option>
-																						<option value="南港區">南港區</option>
-																						<option value="松山區">松山區</option>
-																						<option value="內湖區">內湖區</option>
+                                            <option v-for="cardAddress in homeAddrList.area" :key="cardAddress.varArea" :value="cardAddress.varArea">{{ cardAddress.varArea }}</option>
 																				</Field>
 																				<Field v-model="onLineApply_Fillin_Data.sendCardAddr.Road" as="select" name="路段" class="form-control me-1 form-select" type="select" :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}">
 																						<option value="">-----</option>
-																						<option value="忠孝東路四段">忠孝東路四段</option>
-																						<option value="忠孝東路五段">忠孝東路五段</option>
-																						<option value="忠孝東路六段">忠孝東路六段</option>
+                                            <option v-for="cardAddress in homeAddrList.road" :key="cardAddress.varRoad" :value="cardAddress.varRoad">{{ cardAddress.varRoad }}</option>
 																				</Field>
 																		</div>
 																		<div class="d-flex apply_address align-items-center mt-3">
@@ -183,7 +179,7 @@
 																</li>
 														</div>
 												</li>
-												<li class="col-12 col-md-12">
+												<li class="col-12 col-md-12" v-if="digiFlag === 'Y'? true: false">
 														<label for="">申請數位卡</label>
 														<div class="d-flex flex-wrap flex-column flex-md-row">
 																<div class="form-check me-4">
@@ -354,7 +350,7 @@ export default {
       disableBillType: [
         'paper'
       ],
-      digiFlag: false,
+      digiFlag: '',
       termsList: [],
       // post
       onLineApply_Fillin_Data: {
@@ -378,8 +374,18 @@ export default {
         amwayNo: '',
         digiFlag: false
       },
+      homeAddrList: {
+        area: [],
+        road: []
+      },
+      selectJson: JSON.parse(localStorage.getItem('SELECT_JSON')), // ? 下拉
       option: {
         cardAddress: []
+      },
+      tempOnlineApply: {
+        OnlineApply_y_Data: '',
+        onLineApply_Fillin_Data: '',
+        onLineApply_Fillin_Card: ''
       },
       contract: false
     }
@@ -435,8 +441,10 @@ export default {
         return ''
       } else if (selected === '2') {
         return this.compAddr
-      } else {
+      } else if (selected === '1') {
         return this.billAddr
+      } else {
+        return ''
       }
     },
     // ? 客製化驗證郵遞區號schema 電子信箱與寄件地址
@@ -482,19 +490,9 @@ export default {
         this.allTerms = false
       }
     },
+    // ? 寄卡地址類型
     'onLineApply_Fillin_Data.sendCardType': {
       handler (newVal, oldVal) {
-        this.onLineApply_Fillin_Data.sendCardAddr.County = ''
-        this.onLineApply_Fillin_Data.sendCardAddr.Area = ''
-        this.onLineApply_Fillin_Data.sendCardAddr.Road = ''
-        this.onLineApply_Fillin_Data.sendCardAddr.Lane = ''
-        this.onLineApply_Fillin_Data.sendCardAddr.Aly = ''
-        this.onLineApply_Fillin_Data.sendCardAddr.Num = ''
-        this.onLineApply_Fillin_Data.sendCardAddr.Of = ''
-        this.onLineApply_Fillin_Data.sendCardAddr.Flr = ''
-        this.onLineApply_Fillin_Data.sendCardAddr.Other = ''
-        this.onLineApply_Fillin_Data.billAddress = '' // 同帳單地址的值
-        this.onLineApply_Fillin_Data.companyAddress = '' // 同公司地址的值
         if (newVal === '1') {
           this.onLineApply_Fillin_Data.billAddress = this.billAddr
         } else if (newVal === '2') {
@@ -505,9 +503,30 @@ export default {
     }
   },
   methods: {
-    getUtilities () {
-      const res = JSON.parse(localStorage.getItem('SELECT_JSON'))
-      this.option.cardAddress = res.County
+    async getAddress (UseType, CallType) {
+      const postData = {
+        spName: 'AddressMapping',
+        info: {
+          UseType: UseType,
+          varCity: this.onLineApply_Fillin_Data.sendCardAddr.County,
+          varArea: this.onLineApply_Fillin_Data.sendCardAddr.Area,
+          rtncode: ''
+        }
+      }
+      const result = await service.getAddress(postData)
+      if (UseType === '1') {
+        if (CallType !== 'session') {
+          this.onLineApply_Fillin_Data.sendCardAddr.Area = ''// ? 清除表單原始值
+          this.onLineApply_Fillin_Data.sendCardAddr.Road = ''// ? 清除表單原始值
+        }
+        this.homeAddrList.road = []
+        this.homeAddrList.area = result.Table
+      } else if (UseType === '2') {
+        if (CallType !== 'session') {
+          this.onLineApply_Fillin_Data.sendCardAddr.Road = ''// ? 清除表單原始值
+        }
+        this.homeAddrList.road = result.Table
+      }
     },
     // ? 客製化地址錯誤訊息(頁面上顯示)
     addressErrMsg (errors) {
@@ -544,20 +563,52 @@ export default {
     },
     // ?送出表單
     async onSubmit (values) {
-      console.log(JSON.stringify(this.onLineApply_Fillin_Data))
-      let postResult = null
-      postResult = await serviceY.postDWInformation(this.onLineApply_Fillin_Data)
+      // ?如果選擇其他的類型就會清空
+      const { sendCardType } = this.onLineApply_Fillin_Data
+      if (sendCardType === '3') {
+        this.onLineApply_Fillin_Data.billAddress = '' // 同帳單地址的值
+        this.onLineApply_Fillin_Data.companyAddress = '' // 同公司地址的值
+      } else if (sendCardType === '2') {
+        this.onLineApply_Fillin_Data.sendCardlast4no = ''
+        this.onLineApply_Fillin_Data.sendCardAddr.County = ''
+        this.onLineApply_Fillin_Data.sendCardAddr.Area = ''
+        this.onLineApply_Fillin_Data.sendCardAddr.Road = ''
+        this.onLineApply_Fillin_Data.sendCardAddr.Lane = ''
+        this.onLineApply_Fillin_Data.sendCardAddr.Aly = ''
+        this.onLineApply_Fillin_Data.sendCardAddr.Num = ''
+        this.onLineApply_Fillin_Data.sendCardAddr.Of = ''
+        this.onLineApply_Fillin_Data.sendCardAddr.Flr = ''
+        this.onLineApply_Fillin_Data.sendCardAddr.Other = ''
+        this.onLineApply_Fillin_Data.billAddress = ''
+      } else if (sendCardType === '1') {
+        this.onLineApply_Fillin_Data.sendCardlast4no = ''
+        this.onLineApply_Fillin_Data.sendCardAddr.County = ''
+        this.onLineApply_Fillin_Data.sendCardAddr.Area = ''
+        this.onLineApply_Fillin_Data.sendCardAddr.Road = ''
+        this.onLineApply_Fillin_Data.sendCardAddr.Lane = ''
+        this.onLineApply_Fillin_Data.sendCardAddr.Aly = ''
+        this.onLineApply_Fillin_Data.sendCardAddr.Num = ''
+        this.onLineApply_Fillin_Data.sendCardAddr.Of = ''
+        this.onLineApply_Fillin_Data.sendCardAddr.Flr = ''
+        this.onLineApply_Fillin_Data.sendCardAddr.Other = ''
+        this.onLineApply_Fillin_Data.companyAddress = ''
+      }
+
+      const postResult = await serviceY.postDWInformation(this.onLineApply_Fillin_Data)
       const { status, message } = postResult
+      if (status === '00200') {
+        this.tempOnlineApply.onLineApply_Fillin_Data = JSON.stringify(this.$data)
+        sessionStorage.setItem('tempOnlineApply', JSON.stringify(this.tempOnlineApply))
+      }
       switch (status) {
         case '00200' :
           alert(message)
+          this.$router.push('/OnLineApply_Fillin_Card')
           break
         default:
           alert('超出預期錯誤')
           break
       }
-      console.log(postResult)
-      this.$router.push('/OnLineApply_Fillin_Card')
     },
     // ?驗證表單
     onInvalidSubmit ({ values, errors, results }) {
@@ -604,39 +655,57 @@ export default {
     },
     // ?帳單形式不顯示紙本
     isDisableBillType (type) {
+      // 陣列迴圈方法
       const result = this.disableBillType.find(x => x === type)
       if (result) {
         return true
       } else {
         return false
       }
+    },
+    async init () {
+      const getInformation = await serviceY.getDWInformation()
+      const { status, result, message } = getInformation
+      switch (status) {
+        case '00200':
+          this.id = result.id
+          this.name = result.name
+          this.phone = result.phone
+          this.onLineApply_Fillin_Data.email = result.email
+          this.billAddr = result.billAddr
+          this.compAddr = result.compAddr
+          this.unitCode = result.unitCode
+          this.userCode = result.userCode
+          this.digiFlag = result.digiFlag
+          this.amwayNo = result.amwayNo
+          break
+        default:
+          alert(message)
+          break
+      }
     }
   },
   async mounted () {
-    this.getUtilities()
     this.termsModal = new this.$custom.bootstrap.Modal(this.$refs.termsModal, { backdrop: 'static' })
-    this.onLineApply_Fillin_Data.sendCardAddr.County = ''
-    this.onLineApply_Fillin_Data.sendCardAddr.Area = ''
-    this.onLineApply_Fillin_Data.sendCardAddr.Road = ''
+    // this.onLineApply_Fillin_Data.sendCardAddr.County = ''
+    // this.onLineApply_Fillin_Data.sendCardAddr.Area = ''
+    // this.onLineApply_Fillin_Data.sendCardAddr.Road = ''
     this.termsHtml = await service.getTermsHtml(this.termsName)
-    const getInformation = await serviceY.getDWInformation()
-    const { status, result, message } = getInformation
-    switch (status) {
-      case '00200':
-        this.id = result.id
-        this.name = result.name
-        this.phone = result.phone
-        this.onLineApply_Fillin_Data.email = result.email
-        this.billAddr = result.billAddr
-        this.compAddr = result.compAddr
-        this.unitCode = result.unitCode
-        this.userCode = result.userCode
-        this.digiFlag = result.digiFlag
-        this.amwayNo = result.amwayNo
-        break
-      default:
-        alert(message)
-        break
+
+    const session = JSON.parse(sessionStorage.getItem('tempOnlineApply'))
+    await this.getAddress('1', 'session')
+    await this.getAddress('2', 'session')
+    if (session?.onLineApply_Fillin_Data) {
+      const temp = JSON.parse(session.onLineApply_Fillin_Data)
+      Object.keys(temp).forEach(key => {
+        this.$data[key] = temp[key]
+      })
+    } else {
+      await this.init()
+    }
+
+    if (session) {
+      this.tempOnlineApply = { ...session }
     }
   }
 }

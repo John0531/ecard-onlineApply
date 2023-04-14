@@ -42,7 +42,7 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
 
 import './axios.setting.js'
-axios.get(`${process.env.VUE_APP_BASE_API}/Testing?UserRolesa=2`)
+// axios.get(`${process.env.VUE_APP_BASE_API}/Testing?UserRolesa=2`)
 // ?加入validate驗證規則
 Object.keys(validate).forEach((rule) => {
   defineRule(rule, validate[rule])

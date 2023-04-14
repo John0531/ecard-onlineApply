@@ -134,7 +134,6 @@ export default ({
             this.$router.push('/OnLineApply_OCR')
           }, 1000)
         }
-        // this.$router.push('/OnLineApply_OCR')
       } else {
         // ** ===錯誤訊息彙整===
         this.$custom.validate.showErrors(collection.errors)
