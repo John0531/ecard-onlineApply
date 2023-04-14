@@ -225,7 +225,7 @@
                     </Field>
                     <Field
                       v-if="Form.birth.birthplace==='其它'"
-                      v-model="Form.birth.birthOther"
+                      v-model="Form.birth.birthOtherKey"
                       as="select"
                       rules="required"
                       :class="{ 'is-invalid': errors['出生地-其他'] }"
@@ -1421,7 +1421,8 @@ export default {
         brthDt: '',
         birth: {
           birthplace: '',
-          birthOther: ''
+          birthOther: '',
+          birthOtherKey: ''
         },
         nationalityKey: '',
         nationality: '',
@@ -1521,6 +1522,12 @@ export default {
         if (!n.live.liveAreaCode && !n.live.liveTel) {
           this.$refs.form.setFieldError('居住電話號碼', '')
           this.$refs.form.setFieldError('居住電話號碼', '')
+        }
+        // ? 出生地
+        if (n.birth.birthOtherKey) {
+          n.birth.birthOther = this.selectJson.NATIONALITY.find(item => item.VALUE === n.birth.birthOtherKey).SHOW
+        } else {
+          n.birth.birthOther = ''
         }
         // ? 國籍
         if (n.nationalityKey) {

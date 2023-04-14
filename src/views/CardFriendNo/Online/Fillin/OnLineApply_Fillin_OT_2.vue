@@ -311,6 +311,7 @@
                   <div class="input-data_confirm">
                     <p>
                       {{FillinData.form.job?.jobType}}
+                      <span v-if="FillinData.form.job?.jobOther">-{{FillinData.form.job?.jobOther}}</span>
                     </p>
                   </div>
                 </li>
@@ -331,6 +332,7 @@
                   <div class="input-data_confirm">
                     <p>
                       {{FillinData.form.IncomeMain?.income}}
+                      <span v-if="FillinData.form.IncomeMain?.incomeOther">{{FillinData.form.IncomeMain?.incomeOther}}</span>
                     </p>
                   </div>
                 </li>

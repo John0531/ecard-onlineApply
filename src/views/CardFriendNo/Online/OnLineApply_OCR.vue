@@ -771,6 +771,16 @@ export default {
           idDay: this.Form.iddate.Day
         }
         sessionStorage.setItem('OCR_Data', JSON.stringify(postData))
+        // ? 回塞 FillinData
+        const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
+        if (FillinData?.OT) {
+          FillinData.OT.iddate = this.Form.iddate
+          FillinData.OT.idCounty = this.Form.idCounty
+          FillinData.OT.idissue = this.Form.idissue
+          FillinData.OT.cName = this.Form.cName
+          FillinData.OT.homeAddr = this.Form.homeAddr
+          sessionStorage.setItem('FillinData', JSON.stringify(FillinData))
+        }
         const result = await ServiceN.ocrCheckInfo(postData)
         if (result.isSuccess) {
           result.isDepositor ? this.$router.push('/OnLineApply_Chks') : this.$router.push('/OnLineApply_n1')
@@ -784,6 +794,14 @@ export default {
     if (sessionStorage.getItem('OCR_Data')) {
       this.uploaded = true
       this.Form = JSON.parse(sessionStorage.getItem('OCR_Data'))
+      const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
+      if (FillinData?.OT) {
+        this.Form.iddate = FillinData.OT.iddate
+        this.Form.idCounty = FillinData.OT.idCounty
+        this.Form.idissue = FillinData.OT.idissue
+        this.Form.cName = FillinData.OT.cName
+        this.Form.homeAddr = FillinData.OT.homeAddr
+      }
       await this.getAddress('1', 'session')
       await this.getAddress('2', 'session')
     }

@@ -316,7 +316,7 @@ router.beforeEach((to) => {
     router.push('/OnLineApply_Gift')
     return
   }
-  // // ?踢退沒有填寫 OCR 資料的 user
+  // ?踢退沒有填寫 OCR 資料的 user
   // if (sessionPages.includes(to.name) && !sessionStorage.getItem('Apply_N_Type')) {
   //   router.push('/OnLineApply_OCR')
   //   return
