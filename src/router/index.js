@@ -48,7 +48,7 @@ const routes = [
           const isAuthenticated = JSON.parse(sessionStorage.getItem('tempOnlineApply'))
           if (!isAuthenticated?.OnlineApply_y_Data || !isAuthenticated?.onLineApply_Fillin_Data) {
             // 如果未驗證通過，則跳轉至登入頁面
-            next('/')
+            next('/OnLineApply_Fillin')
           } else {
             // 允許用戶進入該頁面
             next()
@@ -66,7 +66,7 @@ const routes = [
           const isAuthenticated = JSON.parse(sessionStorage.getItem('tempOnlineApply'))
           if (!isAuthenticated?.OnlineApply_y_Data || !isAuthenticated?.onLineApply_Fillin_Data || !isAuthenticated?.onLineApply_Fillin_Card) {
             // 如果未驗證通過，則跳轉至登入頁面
-            next('/')
+            next('/OnLineApply_Fillin_Card')
           } else {
             // 允許用戶進入該頁面
             next()
@@ -330,6 +330,16 @@ router.beforeEach((to) => {
   const fillinDataPages = ['非卡友-個資使用條款', '非卡友-確認填寫資料']
   if (fillinDataPages.includes(to.name) && !sessionStorage.getItem('FillinData')) {
     router.push('/OnLineApply_Fillin_OT')
+  }
+
+  // ?AWS到第0頁，預設querystring寫好
+  if (process.env.NODE_ENV === 'development') {
+    if (to.path === '/1') {
+      // 設置預設的query參數
+      router.push({ path: '/', query: { parm: 'LB23041218270380023452', GID: '81', IDE: 'A' } })
+    } else if (to.path === '/2') {
+      router.push({ path: '/', query: { GID: '99', IDE: 'A' } })
+    }
   }
 })
 
