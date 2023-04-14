@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <button @click.prevent="closeModal" type="button" class="close" aria-label="Close">
               <span aria-hidden="true">×</span>
             </button>
           </div>
@@ -12,7 +12,7 @@
           </div>
           <div class="modal-footer" >
               <div class="text-center" >
-              <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" style="border-radius: 0.3rem;">關閉</button>
+              <button @click.prevent="closeModal" type="button" class="btn btn-primary btn-lg" style="border-radius: 0.3rem;">關閉</button>
           </div>
           </div>
       </div>
@@ -25,6 +25,14 @@ export default {
   data () {
     return {
       errors: ''
+    }
+  },
+  methods: {
+    closeModal () {
+      if (this.$store.state.errorMsg.includes('440')) {
+        window.location = 'https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014'
+      }
+      this.$store.state.errorModal.hide()
     }
   },
   mounted () {
