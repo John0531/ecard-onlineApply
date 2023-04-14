@@ -64,8 +64,8 @@
                     type="select"
                     class="form-control other_input ms-1 my-2 my-md-0 form-select"
                     :class="{ 'is-invalid':  errors['出生地的其他'], 'form-control':true}"
-                    v-if="this.onLineApply_Fillin_Card.birthplaceKey === '其它'"
-                    v-model="onLineApply_Fillin_Card.birthplaceKey"
+                    v-if="onLineApply_Fillin_Card.birthplaceKey === '其它'"
+                    v-model="onLineApply_Fillin_Card.birthOtherKey"
                     runat="server"
                     :validateOnChange="true"
                   >
@@ -125,7 +125,7 @@
                         placeholder=" "
                         class="form-control other_input ms-1 my-2 my-md-0"
                         :class="{ 'is-invalid':  errors['職業別的其他'], 'form-control':true}"
-                        v-model="onLineApply_Fillin_Card.jobTypeKey"
+                        v-model="onLineApply_Fillin_Card.jobOther"
                         :validateOnChange="true"
                       />
                     </div>
@@ -170,14 +170,14 @@
                         {{ incomes.SHOW }}
                       </option>
                     </Field>
-                    <div class="d-flex align-items-center" v-if="this.onLineApply_Fillin_Card.incomeKey === '9'">
+                    <div class="d-flex align-items-center" v-if="onLineApply_Fillin_Card.incomeKey === '9'">
                       <span class="text-nowrap">其他</span>
                       <Field
                         name="主要所得及資金來源的其他"
                         type="text"
                         :class="{ 'is-invalid':  errors['主要所得及資金來源的其他'], 'form-control':true}"
                         class="form-control other_input ms-1 my-2 my-md-0"
-                        v-model="onLineApply_Fillin_Card.incomeOptions.other"
+                        v-model="onLineApply_Fillin_Card.incomeOther"
                         :validateOnChange="true"
                       />
                     </div>
@@ -199,8 +199,6 @@
             <div class="text-center button_group">
               <button
                 class="btn btn-primary btn-lg mx-1"
-                type="submit"
-                value=""
               >
                 下一步
               </button>
@@ -275,26 +273,30 @@ export default {
       brth: '',
       cName: '',
       homeAddr: '',
-      birthplace: '',
       birthOther: '',
-      nationality: '',
-      jobType: '',
       jobOther: '',
-      jobLV: '',
-      income: '',
       incomeOther: '',
       // post
       onLineApply_Fillin_Card: {
         birthplaceKey: '',
         birthplace: '',
+        birthOtherKey: '',
+        birthOther: '',
         nationalityKey: '',
         nationality: '',
         jobTypeKey: '',
         jobType: '',
+        jobOther: '',
         jobLVKey: '',
         jobLV: '',
         incomeKey: '',
-        income: ''
+        income: '',
+        incomeOther: ''
+      },
+      tempOnlineApply: {
+        OnlineApply_y_Data: '',
+        onLineApply_Fillin_Data: '',
+        onLineApply_Fillin_Card: ''
       },
       option: {
         //* 出生地
@@ -326,7 +328,7 @@ export default {
     customSchema () {
       const schema = { ...this.schema }
       // ?出生地選擇其他，其他要為必填
-      if (this.onLineApply_Fillin_Card.birthplaceKey === '其它') {
+      if (this.onLineApply_Fillin_Card.birthOtherKey === '其它') {
         schema.出生地的其他 = 'required'
       } else {
         schema.出生地的其他 = ''
@@ -347,29 +349,27 @@ export default {
     }
   },
   watch: {
-    'onLineApply_Fillin_Card.birthPlace.birthplaceKey': {
-      handler (n, o) {
-        if (n !== '其它') {
-          this.onLineApply_Fillin_Card.birthplaceKey = ''
-        }
-      },
-      deep: true
-    },
     'onLineApply_Fillin_Card.jobTypeKey': {
       handler (n, o) {
         if (n !== '0') {
-          this.onLineApply_Fillin_Card.jobTypeKey = ''
+          this.onLineApply_Fillin_Card.jobOther = ''
         }
-      },
-      deep: true
+      }
     },
     'onLineApply_Fillin_Card.incomeKey': {
       handler (n, o) {
         if (n !== '9') {
-          this.onLineApply_Fillin_Card.incomeKey = ''
+          this.onLineApply_Fillin_Card.incomeOther = ''
         }
-      },
-      deep: true
+      }
+    },
+    'onLineApply_Fillin_Card.birthplaceKey': {
+      handler (n, o) {
+        if (n !== '其他') {
+          this.onLineApply_Fillin_Card.birthOtherKey = ''
+          this.onLineApply_Fillin_Card.birthOther = ''
+        }
+      }
     }
   },
   methods: {
@@ -382,23 +382,38 @@ export default {
       this.option.jobLevel = res.JOBLV
     },
     async onSubmit (values) {
-      console.log(JSON.stringify(this.onLineApply_Fillin_Card))
-      this.onLineApply_Fillin_Card.birthPlace = this.option.birthPlace.find(
+      this.onLineApply_Fillin_Card.birthplace = this.option.birthPlace.find(
         (item) => item.VALUE === this.onLineApply_Fillin_Card.birthplaceKey
       ).SHOW
-
-      this.onLineApply_Fillin_Card.income = this.option.income.find(
+      // *出生地的其他選項
+      this.onLineApply_Fillin_Card.birthOther = this.option.citizenShip.find(
+        (item) => item.VALUE === this.onLineApply_Fillin_Card.birthOtherKey
+      ).SHOW
+      this.onLineApply_Fillin_Card.nationality = this.option.citizenShip.find(
+        (item) => item.VALUE === this.onLineApply_Fillin_Card.nationalityKey
+      ).SHOW
+      this.onLineApply_Fillin_Card.jobType = this.option.jobSort.find(
+        (item) => item.VALUE === this.onLineApply_Fillin_Card.jobTypeKey
+      ).SHOW
+      this.onLineApply_Fillin_Card.jobLV = this.option.jobLevel.find(
+        (item) => item.VALUE === this.onLineApply_Fillin_Card.jobLVKey
+      ).SHOW
+      this.onLineApply_Fillin_Card.income = this.option.incomeOptions.find(
         (item) => item.VALUE === this.onLineApply_Fillin_Card.incomeKey
       ).SHOW
+
       const response = await serviceY.postKYC(this.onLineApply_Fillin_Card)
       console.log(response)
       const { status } = response
+      if (status === '01100') {
+        this.tempOnlineApply.onLineApply_Fillin_Card = JSON.stringify(this.$data)
+        sessionStorage.setItem('tempOnlineApply', JSON.stringify(this.tempOnlineApply))
+      }
       switch (status) {
         case '01100':
           this.$router.push('/OnLineApply_Fillin_1')
           break
       }
-      this.$router.push('/OnLineApply_Fillin_1')
     },
     // ?驗證表單
     onInvalidSubmit ({ values, errors, results }) {
@@ -406,35 +421,59 @@ export default {
       console.log(values) // current form values
       console.log(errors) // a map of field names and their first error message
       console.log(results) // a detailed map of field names and their validation results
+    },
+    async init () {
+      const kycInformation = await serviceY.getKYC()
+      const { status, result, message } = kycInformation
+      switch (status) {
+        case '01100':
+          this.id = result.id
+          this.brth = result.brth
+          this.cName = result.cName
+          this.homeAddr = result.homeAddr
+          this.onLineApply_Fillin_Card.birthplaceKey = result.birthplace
+          if (result.birthplace === '其它') {
+            this.onLineApply_Fillin_Card.birthOther = result.birthOther
+          }
+          this.onLineApply_Fillin_Card.nationalityKey = result.nationality
+          this.onLineApply_Fillin_Card.jobTypeKey = result.jobType
+          if (result.jobType === '5') {
+            this.onLineApply_Fillin_Card.jobOther = result.jobOther
+          }
+          this.onLineApply_Fillin_Card.jobLVKey = result.jobLV
+          this.onLineApply_Fillin_Card.incomeKey = result.income
+          if (result.income === '9') {
+            this.onLineApply_Fillin_Card.incomeOther = result.incomeOther
+          }
+          break
+        default:
+          alert(message)
+          break
+      }
     }
   },
   async mounted () {
+    console.log(this.$data)
     this.getUtilities()
     this.noticeModal = new bootstrap.Modal(this.$refs.noticeModal, {
       keyboard: false,
       backdrop: 'static'
     })
     this.noticeModal.show()
-    const kycInformation = await serviceY.getKYC()
-    const { status, result, message } = kycInformation
-    switch (status) {
-      case '01100':
-        this.id = result.id
-        this.brth = result.brth
-        this.cName = result.cName
-        this.homeAddr = result.homeAddr
-        this.birthplace = result.birthplace
-        this.birthOther = result.birthOther
-        this.nationality = result.nationality
-        this.jobType = result.jobType
-        this.jobOther = result.jobOther
-        this.jobLV = result.jobLV
-        this.income = result.income
-        this.incomeOther = result.incomeOther
-        break
-      default:
-        alert(message)
-        break
+
+    const session = JSON.parse(sessionStorage.getItem('tempOnlineApply'))
+
+    if (session?.onLineApply_Fillin_Card) {
+      const temp = JSON.parse(session.onLineApply_Fillin_Card)
+      Object.keys(temp).forEach(key => {
+        this.$data[key] = temp[key]
+      })
+    } else {
+      await this.init()
+    }
+
+    if (session) {
+      this.tempOnlineApply = { ...session }
     }
   }
 }
