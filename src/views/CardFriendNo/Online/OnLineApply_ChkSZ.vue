@@ -233,7 +233,7 @@
           </Form>
       </div>
   </section>
-  <!-- Modal-1 -->
+  <!-- agreeModal -->
   <div ref="agreeModal" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -426,7 +426,12 @@ export default {
         const res = await ServiceN.otherDepositorVerification(this.chkszData)
         console.log(res)
         if (res.status === 200) {
-          this.$router.push('/OnLineApply_Chk_OTP')
+          if (res.data.message) {
+            PublicService.showAPIMsg(res.data.message)
+          }
+          setTimeout(() => {
+            this.$router.push('/OnLineApply_ChkSZ_OTP')
+          }, 1000)
         }
       } else {
         // ** ===錯誤訊息彙整===

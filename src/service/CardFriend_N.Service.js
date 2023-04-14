@@ -9,7 +9,6 @@ const service = {
       const res = await axios.get(url)
       return res.data.result
     } catch (err) {
-
     }
   },
   async Chkw_Submit (postData) {
@@ -21,7 +20,6 @@ const service = {
         return true
       }
     } catch (err) {
-
     }
   },
   async fillin_OT_PageLoad () {
@@ -31,7 +29,6 @@ const service = {
       console.log(res)
       return res.data.result
     } catch (err) {
-
     }
   },
   async fillin_OT_Submit (postData) {
@@ -42,7 +39,6 @@ const service = {
         return true
       }
     } catch (err) {
-
     }
   },
   async fillin_OT2_PageLoad () {
@@ -61,7 +57,6 @@ const service = {
       console.log(res)
       return res
     } catch (err) {
-      alert(err)
     }
   },
   async otherCardholderVerification (data) {
@@ -75,7 +70,6 @@ const service = {
       console.log(res)
       return res
     } catch (err) {
-      alert(err)
     }
   },
   async otherDepositorPageLoad () {
@@ -85,7 +79,6 @@ const service = {
       console.log(res)
       return res
     } catch (err) {
-      alert(err)
     }
   },
   async otherDepositorVerification (data) {
@@ -99,7 +92,6 @@ const service = {
       console.log(res)
       return res
     } catch (err) {
-      alert(err)
     }
   },
   async depositorVerification () {
@@ -109,7 +101,6 @@ const service = {
       console.log(res)
       return res
     } catch (err) {
-      alert(err)
     }
   },
   async cardSendApply () {
@@ -119,7 +110,6 @@ const service = {
       console.log(res)
       return res
     } catch (err) {
-      alert(err)
     }
   },
   async uploadImage (file) {
@@ -156,9 +146,30 @@ const service = {
         }
       }
     } catch (err) {
-
+    }
+  },
+  async getFirstGift () {
+    try {
+      const url = `${process.env.VUE_APP_BASE_API}/FirstGift`
+      const res = await axios.get(url)
+      console.log(res)
+      return res
+    } catch {
+    }
+  },
+  async postFirstGift (gift) {
+    try {
+      // const gift = JSON.stringify(data)
+      const url = `${process.env.VUE_APP_BASE_API}/FirstGift`
+      const options = {
+        params: { firstGift: gift }
+      }
+      const res = await axios.post(url, null, options)
+      return res
+    } catch {
     }
   }
+
 }
 
 export default service

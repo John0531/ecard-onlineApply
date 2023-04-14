@@ -132,7 +132,7 @@
                       <div class="d-flex flex-column">
                           <Field
                           v-model="phoneNumber"
-                          id="手機" name="手機" ref="手機"
+                          id="phone" name="phone" ref="phone"
                           type="text" maxlength="10"
                           class="Apply_Chk_form_control form-control"
                           :class="{ 'is-invalid': errors['手機'] }"
@@ -208,7 +208,7 @@
         <!-------------------本人已詳閱---------------------->
     </div>
   </div>
-  <!-- Modal-1 -->
+  <!-- agreeModal -->
   <div ref="agreeModal" class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -472,7 +472,12 @@ export default {
         const res = await ServiceN.otherCardholderVerification(this.chkData)
         console.log(res)
         if (res.status === 200) {
-          this.$router.push('/OnLineApply_Chk_OTP')
+          if (res.data.message) {
+            PublicService.showAPIMsg(res.data.message)
+          }
+          setTimeout(() => {
+            this.$router.push('/OnLineApply_Chk_OTP')
+          }, 1000)
         }
       } else {
         // ** ===錯誤訊息彙整===
@@ -534,16 +539,15 @@ export default {
         document.querySelector('#CSC').focus()
       }
     },
-    phoneNumber (n) {
-      if (n.length === 10) {
-        document.querySelector('#CSC').focus()
+    CSC (n) {
+      if (n.length === 3) {
+        document.querySelector('#phone').focus()
       }
     }
   },
   async mounted () {
     const res = await ServiceN.otherCardholderPageLoad()
     const data = res.data.result
-    console.log(data)
     this.termsFile = data.termsList
     // ?載入預帶資料鎖死
     this.brthDt = data.brthDt

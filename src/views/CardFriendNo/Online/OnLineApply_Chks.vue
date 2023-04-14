@@ -29,7 +29,7 @@
                           <label class="label" for="">行動電話(存戶)</label>
                           <div class="form-text">{{chksData.mbleTelNbr}}</div>
                       </li>
-                      <li class="inOpt align-items-start">
+                      <!-- <li class="inOpt align-items-start">
                           <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
                             <div class="d-flex flex-column">
                                 <div class="d-flex align-items-center">
@@ -57,7 +57,7 @@
                                   <span>{{errors['驗證碼']}}</span>
                                 </div>
                             </div>
-                      </li>
+                      </li> -->
                   </ul>
               </div>
               <div class="col-xxl-9 Apply_note mb-5">
@@ -257,35 +257,35 @@ export default {
       ck.checked = true
       this.agreeModal.hide()
     },
-    //  ? 手機驗證碼
-    async getMobileMsgCode () {
-      // this.isLoading = true
-      const time = new Date()
-      const getTimer = time.getTime()
-      //* 一天的時間(86400)
-      time.setTime(getTimer + 1000 * (86400 - 100))
-      //* 有成功打入API才算
-      const res = await PublicService.otpGet()
-      if (res.status === 200) {
-        PublicService.showAPIMsg(res.data.message)
-        //* 驗證碼倒數計時
-        this.count = 30
-        this.show = false
-        //* 鎖發送
-        const btn = document.querySelector('#countBtn')
-        btn.setAttribute('disabled', '')
-        //* 計時
-        this.timer = setInterval(() => {
-          if (this.count > 0 && this.count <= 30) {
-            this.count--
-          } else {
-            this.show = true
-            clearInterval(this.timer)
-            this.timer = null
-          }
-        }, 1000)
-      }
-    },
+    // //  ? 手機驗證碼
+    // async getMobileMsgCode () {
+    //   // this.isLoading = true
+    //   const time = new Date()
+    //   const getTimer = time.getTime()
+    //   //* 一天的時間(86400)
+    //   time.setTime(getTimer + 1000 * (86400 - 100))
+    //   //* 有成功打入API才算
+    //   const res = await PublicService.otpGet()
+    //   if (res.status === 200) {
+    //     PublicService.showAPIMsg(res.data.message)
+    //     //* 驗證碼倒數計時
+    //     this.count = 30
+    //     this.show = false
+    //     //* 鎖發送
+    //     const btn = document.querySelector('#countBtn')
+    //     btn.setAttribute('disabled', '')
+    //     //* 計時
+    //     this.timer = setInterval(() => {
+    //       if (this.count > 0 && this.count <= 30) {
+    //         this.count--
+    //       } else {
+    //         this.show = true
+    //         clearInterval(this.timer)
+    //         this.timer = null
+    //       }
+    //     }, 1000)
+    //   }
+    // },
     // ? 檢核驗證碼
     async applySubmit () {
       const collection = await this.$refs.myForm.validate()
@@ -296,7 +296,7 @@ export default {
         // const res = await ServiceN.otherDepositorVerification(this.chkszData)
         // **存戶不經過n1要設session
         sessionStorage.setItem('Apply_N_Type', 'Online')
-        this.$router.push('/OnLineApply_Fillin_OT')
+        this.$router.push('/OnLineApply_Chks_OTP')
       } else {
         // ** ===錯誤訊息彙整===
         this.$custom.validate.showErrors(collection.errors)
@@ -332,10 +332,10 @@ export default {
       this.chksData.oid = data.oid
       this.chksData.mbleTelNbr = data.mbleTelNbr
       this.termsFile = data.termsList
-      //* 確認手機是否有值?若有發送簡訊碼
-      if (this.chksData.brthDt) {
-        this.getMobileMsgCode()
-      }
+      // * 確認手機是否有值?若有發送簡訊碼
+      // if (this.chksData.brthDt) {
+      //   this.getMobileMsgCode()
+      // }
     }
     //* 資料處理2
     this.agreeModal = new this.$custom.bootstrap.Modal(this.$refs.agreeModal, { backdrop: 'static' })

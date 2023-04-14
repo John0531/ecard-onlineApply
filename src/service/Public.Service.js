@@ -10,7 +10,6 @@ const service = {
       const res = await axios.get(url, { withCredentials: false })
       return res.data
     } catch (err) {
-      alert(err)
     }
   },
   async getAddress (postData) {
@@ -19,7 +18,6 @@ const service = {
       const res = await axios.post(url, postData, { withCredentials: false })
       return res.data.info
     } catch (err) {
-      alert(err)
     }
   },
   async getTermsHtml (termsName) {
@@ -52,7 +50,6 @@ const service = {
       console.log(res)
       return res
     } catch (err) {
-      alert(err)
     }
   },
   async terms_pageLoad () {
@@ -69,20 +66,19 @@ const service = {
         return true
       }
     } catch (err) {
-      alert(err)
     }
   },
   async otpSend (code) {
     try {
+      const msgCode = JSON.stringify(code)
       const url = `${process.env.VUE_APP_BASE_API}/Otp/Check`
       const options = {
         headers: { 'content-type': 'application/json' }
       }
-      const res = await axios.post(url, code, options)
+      const res = await axios.post(url, msgCode, options)
       console.log(res)
       return res
     } catch (err) {
-      alert(err)
     }
   },
   //* 卡友測試session

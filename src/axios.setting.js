@@ -25,18 +25,18 @@ axios.interceptors.response.use(
       store.state.errorModal.show()
       return Promise.reject(err)
     }
-    if (err.response && err.response.status.toString().charAt(0) === '4') {
-      if (err.response.status === 440) {
-        store.commit('getErrorMsg', `頁面逾時(${err.response.status})`)
-        store.state.errorModal.show()
-        window.location = 'https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014'
-        return Promise.reject(err)
-      } else {
-        store.commit('getErrorMsg', `輸入資料有誤，請重新輸入或洽聯邦線上客服(${err.response.status})`)
-        store.state.errorModal.show()
-        return Promise.reject(err)
-      }
-    }
+    // if (err.response && err.response.status.toString().charAt(0) === '4') {
+    //   if (err.response.status === 440) {
+    //     store.commit('getErrorMsg', `頁面逾時(${err.response.status})`)
+    //     store.state.errorModal.show()
+    //     window.location = 'https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014'
+    //     return Promise.reject(err)
+    //   } else {
+    //     store.commit('getErrorMsg', `輸入資料有誤，請重新輸入或洽聯邦線上客服(${err.response.status})`)
+    //     store.state.errorModal.show()
+    //     return Promise.reject(err)
+    //   }
+    // }
     return Promise.reject(err)
   }
 )

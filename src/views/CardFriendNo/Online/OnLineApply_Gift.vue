@@ -23,7 +23,7 @@
                           <p>◆活動期間：111年01月01日至111年06月30日</p>
                           <p>◆活動內容：新戶核卡後30日內，消費累積滿1,288元(含)以上，且不限地點首次自動加值，即可享首刷好禮多選一；如符合首刷禮條件並有使用本行任一行動支付新增不限金額之一般消費，即可升級獲贈「無線行動電源」。
                           </p>
-                          <div class="form-check mt-2 ms-3">
+                          <div class="form-check mt-2 ms-3" v-for="gift in  giftList" :key="gift+1">
                             <Field
                               v-model="applierInfo.firstGift"
                               class="form-check-input Apply_input"
@@ -31,13 +31,13 @@
                               name="首刷禮" id="firstGift1" type="radio"
                               :validateOnInput="true"
                               rules="required"
-                              value="option1"
+                              :value="gift.giftCode"
                               />
                               <label class="form-check-label text-black fw-bold" for="exampleRadios4">
-                                  好禮一：智能垃圾桶（代碼5）
+                                  {{gift.giftItem}}
                               </label>
                           </div>
-                          <div class="form-check mt-2 ms-3">
+                          <!-- <div class="form-check mt-2 ms-3">
                               <Field
                                 v-model="applierInfo.firstGift"
                                 class="form-check-input Apply_input"
@@ -78,7 +78,7 @@
                                 <label class="form-check-label text-black fw-bold" for="exampleRadios7">
                                     好禮四：無線行動電源（代碼2）
                                 </label>
-                          </div>
+                          </div> -->
                           <div class="d-flex justify-content-start invalid-feedback my-1 ms-3">
                             <div>
                                 {{errors['首刷禮']}}
@@ -103,18 +103,15 @@
 </template>
 
 <script>
+import ServiceN from '@/service/CardFriend_N.Service.js'
+import PublicService from '@/service/Public.Service.js'
 
 export default ({
   data () {
     return {
+      giftList: [],
       applierInfo: {
-        // ?使用者輸入的出生年月日
-        Identification: '',
-        year: '',
-        month: '',
-        day: '',
-        cardPicked: '',
-        firstGift: ''
+        firstGift: null
       }
     }
   },
@@ -127,12 +124,26 @@ export default ({
         // ?keep user資料
         sessionStorage.setItem('keepPersonalData', JSON.stringify(this.applierInfo))
         // ** ===全部通過前往下一頁===
+        const res = await ServiceN.postFirstGift(this.applierInfo.firstGift)
+        console.log(res)
+        if (res.status === 200) {
+          if (res.data.message) {
+            PublicService.showAPIMsg(res.data.message)
+          }
+          setTimeout(() => {
+            this.$router.push('/OnLineApply_ChkSZ_OTP')
+          }, 1000)
+        }
         this.$router.push('/OnLineApply_OCR')
       } else {
         // ** ===錯誤訊息彙整===
         this.$custom.validate.showErrors(collection.errors)
       }
     }
+  },
+  async mounted () {
+    const res = await ServiceN.getFirstGift()
+    this.giftList = res.data
   }
 })
 </script>
