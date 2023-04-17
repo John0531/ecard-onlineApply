@@ -339,6 +339,8 @@ router.beforeEach((to) => {
       router.push({ path: '/', query: { parm: 'LB23041218270380023452', GID: '81', IDE: 'A' } })
     } else if (to.path === '/2') {
       router.push({ path: '/', query: { GID: '99', IDE: 'A' } })
+    } else if (to.path === '/3') {
+      router.push({ path: '/', query: { GID: '99', IDE: 'A' } })
     }
   }
 })
