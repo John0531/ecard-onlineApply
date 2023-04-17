@@ -752,7 +752,7 @@
                       ※帳單接收型式將依本次選擇做為日後帳單寄送依據，如未點選E-mail認證信則依原帳單型式或紙本寄送。</span>
                   </div>
                 </li>
-                <li class="col-12 col-md-12 mb-0" v-if="Apply_N_Type==='Online'&&pageLoad.flgDigi">
+                <li class="col-12 col-md-12 mb-0" v-if="Apply_N_Type==='Online'&&pageLoad.flgDigi!=='N'">
                   <label for=""
                     >申請數位卡</label
                   >
@@ -766,6 +766,7 @@
                         name="申請數位卡"
                         id="exampleRadios1"
                         value="true"
+                        :disabled="pageLoad.flgDigi==='M'"
                       />
                       <div class="form_Apply_txt">是</div>
                     </div>
@@ -778,6 +779,7 @@
                         name="申請數位卡"
                         id="exampleRadios3"
                         value="false"
+                        :disabled="pageLoad.flgDigi==='M'"
                       />
                       <div class="form_Apply_txt">否</div>
                     </div>
@@ -810,7 +812,7 @@
                   />
                 </li>
                 <!-----新增學生欄位------->
-                <template v-if="pageLoad.flgStudent">
+                <template v-if="pageLoad.flgStudent==='Y'">
                   <li class="col-12 col-md-12 mb-0">
                     <label for=""><span class="red_text">* </span>是否為學生
                     </label>
@@ -1315,7 +1317,7 @@
                     type="text"
                     class="form-control"
                     @change="Form.unitCode=$custom.validate.watchToUpper(Form.unitCode)"
-                    :disabled="pageLoad.unitCode"
+                    :disabled="pageLoad.unitCode!==''"
                   />
                   <ErrorMessage
                     name="推廣單位代號"
@@ -1333,14 +1335,14 @@
                     type="text"
                     class="form-control"
                     @change="Form.userCode=$custom.validate.watchToUpper(Form.userCode)"
-                    :disabled="pageLoad.userCode"
+                    :disabled="pageLoad.userCode!==''"
                   />
                   <ErrorMessage
                     name="推廣人員編號"
                     class="text-danger ms-2"
                   />
                 </li>
-                <li class="col-12 col-md-6" v-if="pageLoad.flgAmwayNo">
+                <li class="col-12 col-md-6" v-if="pageLoad.flgAmwayNo==='Y'">
                     <label for=""><span class="red_text">* </span>安麗直銷商/會員編號</label>
                     <Field
                       v-model="Form.amwayNo"
@@ -1519,7 +1521,7 @@ export default {
           this.$refs.form.setFieldError('居住電話號碼', '')
           this.$refs.form.setFieldError('居住電話號碼', '')
         }
-        // ? 出生地
+        // ? 出生地-其他
         if (n.birth.birthOtherKey) {
           n.birth.birthOther = this.selectJson.NATIONALITY.find(item => item.VALUE === n.birth.birthOtherKey).SHOW
         } else {
@@ -1579,6 +1581,9 @@ export default {
       const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
       // ? 取得 PageLoad API 資料
       this.pageLoad = await service.fillin_OT_PageLoad()
+      if (this.pageLoad.flgDigi === 'M') {
+        this.Form.digiFlag = 'true'
+      }
       if (FillinData?.OT) {
         if (FillinData.OT.liveStatusKey === 0) {
           FillinData.OT.liveStatusKey = ''

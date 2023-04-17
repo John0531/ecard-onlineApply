@@ -44,7 +44,6 @@
             <div class="terms">
               <input
                 v-model="form.agreeTerms"
-                @click.prevent
                 id="checkbox"
                 name="agreeTerms"
                 :class="{
@@ -53,8 +52,6 @@
                 }"
                 class="checkimg position-absolute"
                 type="checkbox"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
               />
               <label for="agree"
                 >同意，本人對
@@ -186,6 +183,18 @@ export default {
         this.form.agreeTerms = false
       }
       this.checkRadioAll()
+    },
+    'form.agreeTerms': {
+      handler (n, o) {
+        if (n) {
+          this.termsHtml.forEach((item, index) => {
+            this.checkTerms.push(index + 1)
+          })
+        } else {
+          this.checkTerms = []
+        }
+        this.checkRadioAll()
+      }
     }
   },
   methods: {
@@ -207,7 +216,7 @@ export default {
       if (!this.form.agreeTerms) {
         this.$refs.form.setFieldError(
           '有關條款',
-          '您尚未勾選詳細閱讀並同意有關條款'
+          '您尚未勾選詳細閱讀並同意有關內容。'
         )
       }
     },
@@ -216,6 +225,7 @@ export default {
       await this.$refs.form.validate()
       this.checkRadioAll()
       const errors = this.$refs.form.getErrors()
+      console.log(errors)
       if (Object.keys(errors).length !== 0) {
         this.$custom.validate.showErrors(errors)
         return

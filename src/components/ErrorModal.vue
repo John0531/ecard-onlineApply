@@ -27,6 +27,16 @@ export default {
       errors: ''
     }
   },
+  watch: {
+    '$store.state.errorMsg': {
+      handler (n) {
+        const errorMsg = JSON.parse(JSON.stringify(n))
+        if (errorMsg.includes('有關條款')) {
+          this.$store.commit('getErrorMsg', errorMsg.replace('*【有關條款】 : ', '*'))
+        }
+      }
+    }
+  },
   methods: {
     closeModal () {
       if (this.$store.state.errorMsg.includes('440')) {

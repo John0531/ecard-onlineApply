@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { hash } from '@/utilities/hash.js'
-import termsJson from '@/assets/terms.json'
+// import termsJson from '@/assets/terms.json'
 import store from '@/store'
 
 const service = {
@@ -23,6 +23,17 @@ const service = {
   async getTermsHtml (termsName) {
     try {
       const termsArr = []
+      // ? 取得比對 json
+      const url = 'https://ecard.yesgogogo.com/ecard_source/terms.json'
+      const res = await axios.get(url, { withCredentials: false })
+      console.log(res)
+      if (typeof res.data === 'string') {
+        store.commit('getErrorMsg', '檔案讀取有誤，請重新輸入或洽聯邦信用卡客服專線，02-25455168、07-2269393')
+        store.state.errorModal.show()
+        return
+      }
+      const termsJson = res.data
+      // ? 取得比對 json end
       termsName.forEach(item1 => {
         termsJson.forEach((item2) => {
           if (item1 === item2.name) {
