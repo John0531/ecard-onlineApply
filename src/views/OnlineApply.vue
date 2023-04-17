@@ -62,60 +62,41 @@
             <!----------------fee ---------------->
             <div class="mt-3 mt-md-5">
               <div class="fee_box mb-3">
-                <h3>
-                  <img
-                    src="images/form/fee_icon.gif"
-                    class="img-fluid"
-                    alt=""
-                  />年費定價說明：
-                </h3>
-                <div class="fee_content">
-                  <table class="fee_table w-100">
-                    <thead>
-                      <tr>
-                        <th width="20%">卡別</th>
-                        <th width="10%">首年</th>
-                        <th>第二年度起</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td class="fee_cardname">
-                          <strong>LINE Bank悠遊聯名卡<br />VISA<br />悠遊御璽卡</strong>
+                <h3><img src="images/form/fee_icon.gif" class="img-fluid" alt="" />年費定價說明：</h3>
+                    <table class="oddWhite">
+                      <tbody>
+                        <tr>
+                          <th colspan="3" nowrap="nowrap">LINE Bank VISA御璽卡</th>
+                        </tr>
+                        <tr>
+                          <td colspan="3" nowrap="nowrap"><span class="Green_text">使用電子化帳單（電子帳單、行動帳單、LINE帳單）成功且有效期間內享免年費</span></td>
+                        </tr>
+                        <tr>
+                          <td nowrap="nowrap">首年</td>
+                          <td nowrap="nowrap" colspan="2">免年費</td>
+                        </tr>
+                        <tr>
+                          <td rowspan="4" nowrap="nowrap">第二年起</td>
+                          <td colspan="2" class="text-left">依據每張卡片年費到期日往前推算一年，檢核同一身分證字號下之消費，若不符合標準則以單卡按以下標準計算收取年費(不分正、附卡)：</td>
+                        </tr>
+                        <tr>
+                          <td>年消費</td>
+                          <td>年費</td>
+                        </tr>
+                        <tr>
+                          <td>60,000元(含)以上</td>
+                          <td>免年費</td>
+                        </tr>
+                        <tr>
+                          <td>未達60,000元</td>
+                          <td>正卡1,000元、附卡1,000元
                         </td>
-                        <td class="redWord text-center" rowspan="3">免年費</td>
-                        <td rowspan="3">
-                          <p class="text-left">
-                            第二年起統計正、附卡年度合併消費未達60,000元，收取全額年費。
-                          </p>
-                          <table width="100%">
-                            <thead class="fee_thead">
-                              <tr>
-                                <th class="text-center">年消費</th>
-                                <th class="text-center">年費</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td class="text-center">60,000元(含)以上</td>
-                                <td class="redWord text-center">免年費</td>
-                              </tr>
-                              <tr>
-                                <td class="text-center">未達60,000 元</td>
-                                <td class="text-center">1,000元</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <div class="indentNote_OneText">
-                    <p>
-                      ※每一卡別所提供之年費減免或折價優惠，每一持卡人僅得享有一次優惠，若於年費優惠期間截止前將卡片停用後又重新申請者，恕不再享有優惠。
-                    </p>
-                  </div>
-                </div>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="indentNote_OneText">
+                        <p>※每一卡別所提供之年費減免或折價優惠，每一持卡人僅得享有一次優惠，若於年費優惠期間截止前將卡片停用後又重新申請者，恕不再享有優惠。</p>
+                    </div>
               </div>
             </div>
           </div>
@@ -192,7 +173,7 @@
             </div>
             <div class="col-xl-12 d-flex flex-wrap">
               <div class="col-12 col-md-4 text-center m-auto" v-for="card in cardInfoList" :key="card.cardNo">
-                <img class="img-fluid" alt="申請卡片圖片" :src="card.cardPic"/>
+                <img class="img-fluid" alt="申請卡片圖片" src="@/assets/images/form/card_b4bs.jpg"/>
                 <div class="form-check my-2 position-relative">
                   <Field
                     class="form-check-input Apply_input"
@@ -216,89 +197,43 @@
             </div>
             <!----------------//yesgogogo ---------------->
           <div class="mt-3 mt-md-5">
-              <div class="fee_box mb-3">
-                  <h3><img src="images/form/fee_icon.gif" class="img-fluid" alt="" />年費定價說明：</h3>
-                  <div class="fee_content">
-                      <table class="fee_table">
-                          <thead>
-                              <tr>
-                                  <th width="20%">卡別</th>
-                                  <th width="10%">首年</th>
-                                  <th>第二年度起</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <tr>
-                                  <td class="fee_cardname"><strong>微風悠遊聯名卡<br>VISA<br>悠遊御璽卡</strong></td>
-                                  <td class="redWord text-center" rowspan="3">免年費</td>
-                                  <td rowspan="3">
-                                      <p class="text-left">第二年起統計正、附卡年度合併消費未達36,000元，收取全額年費。</p>
-                                      <table width="100%">
-                                          <thead class="fee_thead">
-                                              <tr>
-                                                  <th class="text-center">年消費</th>
-                                                  <th class="text-center">年費</th>
-                                              </tr>
-                                          </thead>
-                                          <tbody>
-                                              <tr>
-                                                  <td class="text-center">36,000元(含)以上</td>
-                                                  <td class="redWord text-center">免年費</td>
-                                              </tr>
-                                              <tr>
-                                                  <td class="text-center">未達36,000 元</td>
-                                                  <td class="text-center">2,000元</td>
-                                              </tr>
-                                          </tbody>
-                                      </table>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td class="fee_cardname"><strong>微風悠遊聯名卡<br>MasterCard<br>悠遊鈦金卡</strong></td>
-                              </tr>
-                              <tr>
-                                  <td class="fee_cardname"><strong>微風悠遊聯名卡<br>JCB<br>悠遊晶緻卡</strong></td>
-                              </tr>
-                              <tr>
-                                  <td class="fee_cardname"><strong>微風悠遊聯名卡<br>VISA<br>悠遊白金卡</strong></td>
-                                  <td class="redWord text-center" rowspan="2">免年費</td>
-                                  <td rowspan="2">
-                                      <p class="text-left">
-                                          依據每張卡片年費到期日往前推算一年，檢核同一身分證字號下之消費，若不符合標準則以單卡按以下標準計算收取年費(不分正、附卡)：</p>
-                                      <table width="100%">
-                                          <thead class="fee_thead">
-                                              <tr>
-                                                  <th class="text-center">年消費</th>
-                                                  <th class="text-center">年費</th>
-                                              </tr>
-                                          </thead>
-                                          <tbody>
-                                              <tr>
-                                                  <td class="text-center">1萬元(含)以上或消費10次(含)以上</td>
-                                                  <td class="redWord text-center">免年費</td>
-                                              </tr>
-                                              <tr>
-                                                  <td class="text-center">5,000元(含)或5次(含)以上</td>
-                                                  <td class="text-center">500元</td>
-                                              </tr>
-                                              <tr>
-                                                  <td class="text-center">未達5,000元或5次</td>
-                                                  <td class="text-center">1,000元</td>
-                                              </tr>
-                                          </tbody>
-                                      </table>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td class="fee_cardname"><strong>微風悠遊聯名卡<br>MasterCard<br>悠遊白金卡</strong></td>
-                              </tr>
-                          </tbody>
-                      </table>
-                      <div class="indentNote_OneText">
-                          <p>※每一卡別所提供之年費減免或折價優惠，每一持卡人僅得享有一次優惠，若於年費優惠期間截止前將卡片停用後又重新申請者，恕不再享有優惠。</p>
-                      </div>
-                  </div>
-              </div>
+          </div>
+          <div class="fee_box mb-3 mt-3 mt-md-5">
+            <h3><img src="images/form/fee_icon.gif" class="img-fluid" alt="" />年費定價說明：</h3>
+            <table class="oddWhite">
+              <tbody>
+                <tr>
+                  <th colspan="3" nowrap="nowrap">LINE Bank VISA御璽卡</th>
+                </tr>
+                <tr>
+                    <td colspan="3" nowrap="nowrap"><span class="Green_text">使用電子化帳單（電子帳單、行動帳單、LINE帳單）成功且有效期間內享免年費</span></td>
+                </tr>
+                <tr>
+                  <td nowrap="nowrap">首年</td>
+                  <td nowrap="nowrap" colspan="2">免年費</td>
+                </tr>
+                <tr>
+                  <td rowspan="4" nowrap="nowrap">第二年起</td>
+                  <td colspan="2" class="text-left">依據每張卡片年費到期日往前推算一年，檢核同一身分證字號下之消費，若不符合標準則以單卡按以下標準計算收取年費(不分正、附卡)：</td>
+                </tr>
+                <tr>
+                  <td>年消費</td>
+                  <td>年費</td>
+                </tr>
+                <tr>
+                  <td>60,000元(含)以上</td>
+                  <td>免年費</td>
+                </tr>
+                <tr>
+                  <td>未達60,000元</td>
+                  <td>正卡1,000元、附卡1,000元
+                </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="indentNote_OneText">
+                <p>※每一卡別所提供之年費減免或折價優惠，每一持卡人僅得享有一次優惠，若於年費優惠期間截止前將卡片停用後又重新申請者，恕不再享有優惠。</p>
+            </div>
           </div>
           </div>
             <!----------------//fee ---------------->
