@@ -20,9 +20,7 @@
                       <h3><img src="images/form/card_gift_icon.gif" class="img-fluid" alt="" />首刷禮：<span>(新戶定義：核卡前六個月內未曾持有任何一聯邦信用卡者。)</span>
                       </h3>
                       <div class="col-12 card_gift_txt">
-                          <p>◆活動期間：111年01月01日至111年06月30日</p>
-                          <p>◆活動內容：新戶核卡後30日內，消費累積滿1,288元(含)以上，且不限地點首次自動加值，即可享首刷好禮多選一；如符合首刷禮條件並有使用本行任一行動支付新增不限金額之一般消費，即可升級獲贈「無線行動電源」。
-                          </p>
+                          <p v-html="giftNote"></p>
                           <div class="form-check mt-2 ms-3" v-for="gift in  giftList" :key="gift+1">
                             <Field
                               v-model="applierInfo.firstGift"
@@ -109,6 +107,7 @@ import ServiceN from '@/service/CardFriend_N.Service.js'
 export default ({
   data () {
     return {
+      giftNote: '',
       giftList: [],
       applierInfo: {
         firstGift: null
@@ -142,7 +141,9 @@ export default ({
   },
   async mounted () {
     const res = await ServiceN.getFirstGift()
-    this.giftList = res.data
+    console.log(res)
+    this.giftNote = res.data.giftNote
+    this.giftList = res.data.giftInfoList
   }
 })
 </script>
