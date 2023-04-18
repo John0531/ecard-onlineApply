@@ -99,13 +99,14 @@ const service = {
     store.commit('setAPIMsg', APIMsg)
     store.state.apiModal.show()
   },
-  async PreviewPDF () {
+  async previewPdf () {
     try {
-      const url = `${process.env.VUE_APP_BASE_API}/CardFromPDF/PreviewPDF`
-      const res = await axios.get(url)
-      console.log(res)
-      return res
-    } catch {
+      const url = '/CardFromPDF/PreviewPDF'
+      const res = await axios.get(url, { responseType: 'blob' })
+      return res.data
+    } catch (err) {
+      console.log(err.response.data)
+      return null
     }
   },
   async CardSendApply (approvals) {

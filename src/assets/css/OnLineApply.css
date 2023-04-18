@@ -57,67 +57,6 @@
     
 /*----------------------------//頁面主標題----------------------------------*/
     
-/*--------------------------------yesgogogo------------------------------------*/
-.yesgogogo_box {
-    border: 1px solid #d8d8d8;
-}
-.yesgogogo_box h3 {
-    color: #ffffff;
-    font-size: 16pt;
-    line-height: 1.5em;
-    font-weight: 600;
-    background-color: #009999;
-    text-align: center;
-    padding: 10px;
-    border-bottom: 1px solid #d8d8d8;
-}
-.yesgogogo_txt {
-    color: #7e7e7e;
-    padding: 10px 20px 30px;
-}
-.yesgogogo_txt h4 {
-    color: #115b83;
-    font-size: 15pt;
-    line-height: 1.5em;
-    font-weight: 600;
-}
-.yesgogogo_txt h4 span {
-    color: #7e7e82;
-    font-size: 17px;
-    line-height: 1.5em;
-    font-weight: 400;
-}
-
-/*--修改bootstrap手風琴--*/
-.yesgogogo_box .accordion {
-    padding: 10px;
-}
-.yesgogogo_box .accordion-item {
-    border: 0;
-}
-.yesgogogo_box .accordion-button {
-    color: #115b83;
-    background-color: #E0F8F8;
-    border: 0;
-    padding: 10px;
-    cursor: pointer;
-}
-.yesgogogo_box .accordion-button:not(.collapsed) {
-    color: #115b83;
-    background-color: #E0F8F8;
-    box-shadow: none;
-}
-.yesgogogo_box .accordion-button:focus {
-    box-shadow: none;
-}
-.yesgogogo_box .card-main {
-    font-size: 15px;
-    color: #7e7e7e;
-    padding: 10px;
-    background-color: #fbfbfb
-}
-/*--//修改bootstrap手風琴--*/
-/*--------------------------------//yesgogogo------------------------------------*/
 /*-----------------------------------線上辦卡-----------------------------------*/
 .formList.formApply label {    
     min-width: 11.5rem;
@@ -131,7 +70,7 @@
     letter-spacing: 2px;
     background-color: #eeeeee;
     padding: 0.2rem 0.5rem;
-    width: 18.4rem;
+    width: 18.3rem;
     border: 1px solid #a9a9a9;
 }
 .formList-even .form-text {
@@ -718,7 +657,10 @@
     text-indent: -0.6em;
 }
 /*--//首刷禮--*/
-/*--年費fee--*/    
+/*--年費fee--*/  
+.fee_box {
+    font-size: 15px; 
+}  
 .fee_box h3 {
     color: #115b83;
     font-size: 15pt;
@@ -729,64 +671,30 @@
 .fee_box h3 img {
     vertical-align: baseline;
 }
-
-.fee_box table {
-    width: 100%;
-    border: 1px solid #D9D9D9;
-    padding: 10px;
-    margin-top: 15px;
-    font-size: 15px;
-    line-height: 1.8;
-    color: #323232;
-}
-.fee_box th {
-    color: #fff;
-    background-color: #1BBBBB;
-    border: 1px solid #D9D9D9;
-    word-wrap: break-word;
-    padding: 10px 0px;
-    text-align: center;
-    vertical-align: middle;
-}
-.fee_box td {
-    border: 1px solid #D9D9D9;
-    padding: 10px;
-    vertical-align: top;
-    text-align: center;
-    vertical-align: middle;
-}
-.fee_box .oddWhite tr:nth-child(odd) {
-    background: #FFFFFF;
-}
-.fee_box .oddWhite tr:nth-child(even) {
-    background: #F2F2F2;
-    }    
-
 /*--//fee--*/
 /*--非卡友--*/ 
 .not_UBfriend .item {
     background: #ffffff;
     border: 2px solid #c6c6c6;
     border-radius: 20px;
-    padding: 2.5rem  0rem 1.5rem 0rem;
+    padding: 2.2rem  0rem 1.5rem 0rem;
     margin-bottom: .75rem;    
     transform: translateY(0);    
     transition: all .5s;
-    height: 141px;
-    height: 210px;
+    height: 220px;
 }
 
 .not_UBfriend .item h3 {
-    font-size: 24px;
-    color: #707070;
+    font-size: 26px;
+    color: #009999;
     font-weight: 800;
     line-height: 45px;
 }
 
 .not_UBfriend .item h4 {
     display: inline-block;
-    font-size: 14px;
-    color: #707070;
+    font-size: 15px;
+    color: #4c4c4c;
     line-height: 20px;
     text-indent: -1em;
     padding-left: 1em;
@@ -811,8 +719,18 @@
     box-shadow: 5px 5px 0 0 rgba(200, 200, 200, 0.8);
 }
 @media screen and (max-width: 992px) {
+    .not_UBfriend .item h3 {
+        font-size: 24px;
+        letter-spacing: -2px;
+    }
     .not_UBfriend .item .btn {
         font-size: 20px;   
+    }
+}
+@media screen and (max-width:768px) {
+    .not_UBfriend .item h3 {
+        font-size: 26px;
+        letter-spacing: 0px;
     }
 }
 @media screen and (max-width: 576px) {
@@ -979,3 +897,16 @@
     margin-bottom: 0px;
 }
 /*--//縮排星號--*/
+/*------------------------線上申請opt簡訊驗證碼----------------------------------*/  
+.formList .inOpt.OnLineApplyOpt .input-group-text {
+    width: 3rem;
+    border-radius: 0;
+    border: 1px solid #a9a9a9;
+    padding-top: 0.57rem;
+    padding-bottom: 0.57rem;
+    border-right: 0px;
+}
+.formList .inOpt.OnLineApplyOpt .form-control {
+    width: 5.9rem;
+    border-left: 0px;
+}

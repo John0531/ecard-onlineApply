@@ -20,14 +20,15 @@
                             <label class="label" for="">行動電話</label>
                             <div class="form-text">0999***888</div>
                         </li>
-                        <li class="inOpt align-items-start">
+                        <li class="inOpt OnLineApplyOpt align-items-start">
                             <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
                             <div class="d-flex flex-column">
                                 <div class="d-flex align-items-center">
+                                    <span class="input-group-text">{{tag}}-</span>
                                     <Field
                                       v-model="mobileMsgCode"
                                       name="驗證碼" type="text" maxlength="6"
-                                      placeholder="請輸入驗證碼" class="form-control"
+                                      placeholder="" class="form-control"
                                       :class="{ 'is-invalid': errors['驗證碼'] }"
                                       @focus="this.mobileMsgCode=''"
                                       @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
@@ -84,10 +85,11 @@
                             <label class="label" for="">行動電話</label>
                             <div class="form-text">0999***888</div>
                         </li>
-                        <li class="inOpt align-items-start">
+                        <li class="inOpt OnLineApplyOpt align-items-start">
                           <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
                           <div class="d-flex flex-column">
                             <div class="d-flex align-items-center">
+                              <span class="input-group-text">{{tag}}-</span>
                               <Field
                                 v-model="mobileMsgCode"
                                 name="驗證碼" type="text" maxlength="6"
@@ -151,14 +153,15 @@
                             <label class="label" for="">行動電話</label>
                             <input required="" name="login[id]" type="text" maxlength="10" placeholder="" class="formApply_form_control form-control">
                         </li> -->
-                        <li class="inOpt align-items-start">
+                        <li class="inOpt OnLineApplyOpt align-items-start">
                             <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
                             <div class="d-flex flex-column">
                                 <div class="d-flex align-items-center">
+                                    <span class="input-group-text">{{tag}}-</span>
                                     <Field
                                       v-model="mobileMsgCode"
                                       name="驗證碼" type="text" maxlength="6"
-                                      placeholder="請輸入驗證碼" class="form-control"
+                                      placeholder="" class="form-control"
                                       :class="{ 'is-invalid': errors['驗證碼'] }"
                                       @focus="this.mobileMsgCode=''"
                                       @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
@@ -214,14 +217,15 @@
                             <label class="label" for="">行動電話</label>
                             <div class="form-text">0999***888</div>
                         </li>
-                        <li class="inOpt align-items-start">
+                        <li class="inOpt OnLineApplyOpt align-items-start">
                           <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
                           <div class="d-flex flex-column">
                             <div class="d-flex align-items-center">
+                              <span class="input-group-text">{{tag}}-</span>
                               <Field
                                 v-model="mobileMsgCode"
                                 name="驗證碼" type="text" maxlength="6"
-                                placeholder="請輸入驗證碼" class="form-control"
+                                placeholder="" class="form-control"
                                 :class="{ 'is-invalid': errors['驗證碼'] }"
                                 @focus="this.mobileMsgCode=''"
                                 @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
@@ -276,14 +280,15 @@
                             <label class="label" for="">行動電話</label>
                             <div class="form-text">0999***888</div>
                         </li>
-                        <li class="inOpt align-items-start">
+                        <li class="inOpt OnLineApplyOpt align-items-start">
                           <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
                           <div class="d-flex flex-column">
                             <div class="d-flex align-items-center">
+                              <div class="input-group-text">{{tag}}-</div>
                               <Field
                                 v-model="mobileMsgCode"
                                 name="驗證碼" type="text" maxlength="6"
-                                placeholder="請輸入驗證碼" class="form-control"
+                                placeholder="" class="form-control"
                                 :class="{ 'is-invalid': errors['驗證碼'] }"
                                 @focus="this.mobileMsgCode=''"
                                 @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
@@ -365,7 +370,8 @@ export default ({
       N_Chksz: '', // *路由-chksz非卡友[他行帳戶]判斷值
       N_Written: '', // *路由-Written非卡友[書面申請]判斷值
       Y: '', // *路由-卡友判斷值
-      MsgModal: '' // *簡訊寄出modal
+      MsgModal: '', // *簡訊寄出modal
+      tag: '' //* otp識別碼
     }
   },
   methods: {
@@ -406,13 +412,17 @@ export default ({
         // ** ===全部通過打API才前往下一頁===
         const res = await PublicService.otpSend(this.mobileMsgCode)
         if (res.status === 200) {
-          // ?路由判斷導頁 卡友或非卡友
-          console.log(this.$route.path)
-          if (this.$route.path === '/OnLineApply_OTP') {
-            this.$router.push('/OnLineApply_Fillin')
-          } else {
-            this.$router.push('/OnLineApply_Fillin_OT')
+          if (res.data.status === '40198') {
+            PublicService.showAPIMsg(res.data.message)
           }
+          if (res.data.status === '00000') {
+            if (this.$route.path === '/OnLineApply_OTP') {
+              this.$router.push('/OnLineApply_Fillin')
+            } else {
+              this.$router.push('/OnLineApply_Fillin_OT')
+            }
+          }
+          // ?路由判斷導頁 卡友或非卡友
         }
       } else {
         // ** ===錯誤訊息彙整===
@@ -423,6 +433,8 @@ export default ({
   async mounted () {
     //* pageLoad接值
     const res = await PublicService.otpGet()
+    this.tag = res.data.result.tag
+    console.log(res)
     if (res.status === 200) {
       //* 資料處理
       //* 確認手機是否有值?若有發送簡訊碼

@@ -418,8 +418,8 @@
               </p>
 
               <div class="text-center">
-                  <button type="button" class="btn btn-lg MyData-modal-btn" data-dismiss="modal" onclick="location.replace(location.href);">取消回上一頁</button>
-                  <button type="button" class="btn btn-lg MyData-modal-btn-y" data-dismiss="modal" onclick="location.href='https://mydata.nat.gov.tw/';">同意並前往MyData</button>
+                  <button type="button" class="btn btn-lg MyData-modal-btn" data-dismiss="modal" @click="location.replace(location.href);">取消回上一頁</button>
+                  <button type="button" class="btn btn-lg MyData-modal-btn-y" data-dismiss="modal" @click="location.href='url'">同意並前往MyData</button>
               </div>
               <br/>
           </div>
@@ -611,7 +611,15 @@ export default {
         file: ''
       },
       num: '', // *修改完成要呈現的照片序
-      ImageLimit: '' //* 提醒上傳檔案限制提醒
+      ImageLimit: '', //* 提醒上傳檔案限制提醒
+      form: {
+        upload1: '',
+        upload2: '',
+        upload3: '',
+        upload4: '',
+        isMydata: null
+      },
+      url: ''
     }
   },
   methods: {
@@ -681,18 +689,18 @@ export default {
       await this[`identitiyPack${num}`].preViewImg.result('base64').then(function (base64) {
         resultImg.src = base64
       })
+      // ?
+      setTimeout(() => {
+        // ?將編輯完成的base64準備起來打API
+        // this[`identitiyPack${num}`].file = this.jpeg2png(this.$refs[`resultImg${num}`].src)
+        this[`identitiyPack${num}`].file = this.$refs[`resultImg${num}`].src
+      }, 100)
       // ?編輯結束將相關物件資料銷毀
       this.CroppieModal.hide()
-      this[`identitiyPack${num}`].preViewImg.destroy()
-      this.num = ''
-      resultImg.src = ''
-      document.getElementById('myIdentifident').innerHTML = ''
-      document.getElementById('myIdentifident').classList.remove('croppie-container')
+      this.destroy(this.num)
     },
     destroy (num) {
-      // this[`identitiyPack${num}`].preViewImg.destroy()
-      // const resultImg = this.$refs[`resultImg${num}`]
-      // resultImg.src = ''
+      this[`identitiyPack${num}`].preViewImg.destroy()
       document.getElementById('myIdentifident').innerHTML = ''
       document.getElementById('myIdentifident').classList.remove('croppie-container')
       this.num = ''
@@ -713,16 +721,27 @@ export default {
       if (Object.keys(collection.errors).length === 0) {
         // ** ===全部通過打API才前往下一頁===
         // ** ===整理資料===
-        PublicService.CardSendApply()
-        if (this.proofType === 'option1') {
-          // ? ===選擇自行上傳===
-          this.NNBModal.show()
-          return
-        }
+        this.form.upload1 = this.identitiyPack1.file
+        this.form.upload2 = this.identitiyPack2.file
+        this.form.upload3 = this.identitiyPack3.file
+        this.form.upload4 = this.identitiyPack4.file
         if (this.proofType === 'option2') {
-          // ? ===選擇MyData上傳===
-          this.MyDataModal.show()
+          this.form.isMydata = true
         }
+        if (this.proofType === 'option1') {
+          this.form.isMydata = false
+        }
+        const res = await PublicService.CardSendApply(this.form)
+        console.log(res)
+        // if (res.status === '00801') {
+        //   // 顯示NNB畫面
+        // }
+        // if (res.status === '00802') {
+        //   this.url = res.result.MyDataUrl
+        //   this.MyDataModal.show()
+        // }
+        // ? ===選擇自行上傳===
+        // ? ===選擇MyData上傳===
       } else {
         // ** ===錯誤訊息彙整===
         this.$custom.validate.showErrors(collection.errors)
@@ -787,7 +806,16 @@ export default {
         return true
       }
     },
-    preview () {
+    async downloadFile () {
+      const response = await PublicService.PreviewPDF()
+      console.log(response)
+      const blob = new Blob([response.data], { type: 'application/pdf' })
+      const link = document.createElement('a')
+      link.href = window.URL.createObjectURL(blob)
+      link.download = 'test.pdf'
+      link.click()
+    },
+    async preview () {
       const res = PublicService.PreviewPDF()
       console.log(res)
     }
