@@ -84,7 +84,7 @@ const service = {
   async otherDepositorVerification (data) {
     try {
       const form = JSON.stringify(data)
-      const url = `${process.env.VUE_APP_BASE_API}/OtherDepositorVerification/Verification`
+      const url = `${process.env.VUE_APP_BASE_API}DepositorVerification/CheckTerms`
       const options = {
         headers: { 'content-type': 'application/json' }
       }
@@ -94,10 +94,23 @@ const service = {
     } catch (err) {
     }
   },
-  async depositorVerification () {
+  async DepositorPageLoad () {
     try {
-      const url = `${process.env.VUE_APP_BASE_API}/DepositorVerification`
+      const url = `${process.env.VUE_APP_BASE_API}/DepositorVerification/PageLoad`
       const res = await axios.get(url)
+      console.log(res)
+      return res
+    } catch (err) {
+    }
+  },
+  async DepositorCheckTerms (data) {
+    try {
+      const form = JSON.stringify(data)
+      const url = `${process.env.VUE_APP_BASE_API}DepositorVerification/CheckTerms`
+      const options = {
+        headers: { 'content-type': 'application/json' }
+      }
+      const res = await axios.post(url, form, options)
       console.log(res)
       return res
     } catch (err) {

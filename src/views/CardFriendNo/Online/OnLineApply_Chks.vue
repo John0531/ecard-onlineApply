@@ -219,8 +219,11 @@ export default {
         brthDt: '',
         oid: '',
         mbleTelNbr: ''
-        // agreeTerms: true,
-        // personalDataAuthorized: true
+      },
+      chksForm:
+      {
+        agreeTerms: null,
+        personalDataAuthorized: null
       },
       MsgModal: null
     }
@@ -292,8 +295,14 @@ export default {
       collection.errors = await this.$refs.myForm.getErrors()
       if (Object.keys(collection.errors).length === 0) {
         // ** ===全部通過前往下一頁===
-        // ? 檢查約定條款 未打勾
-        // const res = await ServiceN.otherDepositorVerification(this.chkszData)
+        // ** 資料整理
+        this.chksForm.agreeTerms = this.agreementAll
+        this.chksForm.personalDataAuthorized = this.checkagree
+        const res = await ServiceN.DepositorCheckTerms(this.chksForm)
+        console.log(res)
+        // if (res.) {
+
+        // }
         // **存戶不經過n1要設session
         sessionStorage.setItem('Apply_N_Type', 'Online')
         this.$router.push('/OnLineApply_Chks_OTP')
@@ -324,8 +333,9 @@ export default {
   async mounted () {
     // this.MsgModal = new this.$custom.bootstrap.Modal(this.$refs.msgModal, { backdrop: 'static' })
     //* pageLoad接值
-    const res = await ServiceN.depositorVerification()
+    const res = await ServiceN.DepositorPageLoad()
     if (res.status === 200) {
+      console.log(res)
       const data = res.data.result
       //* 資料處理
       this.chksData.brthDt = data.brthDt
@@ -333,9 +343,6 @@ export default {
       this.chksData.mbleTelNbr = data.mbleTelNbr
       this.termsFile = data.termsList
       // * 確認手機是否有值?若有發送簡訊碼
-      // if (this.chksData.brthDt) {
-      //   this.getMobileMsgCode()
-      // }
     }
     //* 資料處理2
     this.agreeModal = new this.$custom.bootstrap.Modal(this.$refs.agreeModal, { backdrop: 'static' })
