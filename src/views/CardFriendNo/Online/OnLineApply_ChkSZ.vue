@@ -143,7 +143,6 @@
                                 :class="{ 'is-invalid': errors['銀行帳號'] }"
                                 :validateOnChange="true"
                                 @keyup="chkszData.oacctNo = $custom.validate.OnlyNumPress(chkszData.oacctNo)"
-                                @focus="chkszData.oacctNo = '' "
                                 @change="$custom.validate.chkKeyValueLength(chkszData.oacctNo,$refs.myForm,'銀行帳號','10','14')"
                                 />
                                 <span class="not_text">請填寫臨櫃開立之存款帳戶(不含數位存款帳戶)</span>
@@ -429,9 +428,11 @@ export default {
           if (res.data.message) {
             PublicService.showAPIMsg(res.data.message)
           }
-          setTimeout(() => {
-            this.$router.push('/OnLineApply_ChkSZ_OTP')
-          }, 1000)
+          if (res.data.status === '00000') {
+            setTimeout(() => {
+              this.$router.push('/OnLineApply_ChkSZ_OTP')
+            }, 1000)
+          }
         }
       } else {
         // ** ===錯誤訊息彙整===

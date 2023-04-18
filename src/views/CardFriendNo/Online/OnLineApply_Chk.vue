@@ -476,9 +476,11 @@ export default {
           if (res.data.message) {
             PublicService.showAPIMsg(res.data.message)
           }
-          setTimeout(() => {
-            this.$router.push('/OnLineApply_Chk_OTP')
-          }, 1000)
+          if (res.data.status === '00000') {
+            setTimeout(() => {
+              this.$router.push('/OnLineApply_Chk_OTP')
+            }, 1000)
+          }
         }
       } else {
         // ** ===錯誤訊息彙整===

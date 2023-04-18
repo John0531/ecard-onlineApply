@@ -300,14 +300,16 @@ export default {
         this.chksForm.personalDataAuthorized = this.checkagree
         const res = await ServiceN.DepositorCheckTerms(this.chksForm)
         console.log(res)
-        if (res.status === '200') {
-          if (res.data.status === '') {
-            //
+        if (res.status === 200) {
+          if (res.data.message) {
+            PublicService.showAPIMsg(res.data.message)
+          }
+          if (res.data.status === '00000') {
+            // **存戶不經過n1要設session
+            sessionStorage.setItem('Apply_N_Type', 'Online')
+            this.$router.push('/OnLineApply_Chks_OTP')
           }
         }
-        // **存戶不經過n1要設session
-        sessionStorage.setItem('Apply_N_Type', 'Online')
-        this.$router.push('/OnLineApply_Chks_OTP')
       } else {
         // ** ===錯誤訊息彙整===
         this.$custom.validate.showErrors(collection.errors)
