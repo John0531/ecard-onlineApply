@@ -158,7 +158,7 @@
                     <Field
                       v-model="Form.eName"
                       maxlength="30"
-                      rules="required|chkKeyValueNumEng|chkKeyValue"
+                      rules="required|chkKeyValueEng|chkKeyValue"
                       :class="{ 'is-invalid': errors['英文姓名'] }"
                       name="英文姓名"
                       type="text"
@@ -212,19 +212,19 @@
                   <label for=""><span class="red_text">* </span>出生地</label>
                   <div class="d-flex Birthplace align-items-center">
                     <Field
-                      v-model="Form.birth.birthplace"
+                      v-model="Form.birth.birthplaceKey"
                       as="select"
                       rules="required"
-                      :class="{ 'is-invalid': errors['出生地'],'BirthCounty': Form.birth.birthplace==='其它'}"
+                      :class="{ 'is-invalid': errors['出生地'],'BirthCounty': Form.birth.birthplaceKey==='其它'}"
                       name="出生地"
                       runat="server"
                       class="form-select form-control"
-                      @change="Form.birth.birthplace!=='其它'?Form.birth.birthOther='':''"
+                      @change="Form.birth.birthplaceKey!=='其它'?Form.birth.birthOther='':''"
                     >
                       <option v-for="item in selectJson.BIRTHPLACE" :key="item.SORT" :value="item.VALUE">{{item.SHOW}}</option>
                     </Field>
                     <Field
-                      v-if="Form.birth.birthplace==='其它'"
+                      v-if="Form.birth.birthplaceKey==='其它'"
                       v-model="Form.birth.birthOtherKey"
                       as="select"
                       rules="required"
@@ -272,7 +272,7 @@
                     runat="server"
                     class="form-select form-control"
                   >
-                    <option value="">-----</option>
+                    <option :value="0">-----</option>
                     <option v-for="item in eduLevelList" :key="item.value" :value="item.value">{{item.name}}</option>
                   </Field>
                 </li>
@@ -860,7 +860,7 @@
                     </div>
                   </li>
                 </template>
-                <template v-if="Form.isStudent">
+                <template v-if="Form.isStudent==='true'">
                   <li class="col-12 col-md-6">
                     <label for=""><span class="red_text">* </span>家長姓名</label>
                     <Field
@@ -1418,13 +1418,14 @@ export default {
         eName: '',
         brthDt: '',
         birth: {
+          birthplaceKey: '',
           birthplace: '',
           birthOther: '',
           birthOtherKey: ''
         },
         nationalityKey: '',
         nationality: '',
-        eduLevelKey: '',
+        eduLevelKey: 0,
         eduLevel: '',
         homeAddr: new Address(),
         liveAddr: new Address(),
@@ -1443,9 +1444,9 @@ export default {
         billType: '',
         mbleTelNbr: '',
         email: '',
-        digiFlag: false,
+        digiFlag: '',
         primarySchool: '',
-        isStudent: false,
+        isStudent: '',
         parentName: '',
         parentTel: '',
         parentAddr: new Address(),
@@ -1521,6 +1522,12 @@ export default {
           this.$refs.form.setFieldError('居住電話號碼', '')
           this.$refs.form.setFieldError('居住電話號碼', '')
         }
+        // ? 出生地
+        if (n.birth.birthplaceKey) {
+          n.birth.birthplace = n.birth.birthplaceKey
+        } else {
+          n.birth.birthplace = ''
+        }
         // ? 出生地-其他
         if (n.birth.birthOtherKey) {
           n.birth.birthOther = this.selectJson.NATIONALITY.find(item => item.VALUE === n.birth.birthOtherKey).SHOW
@@ -1592,14 +1599,27 @@ export default {
         FillinData.OT.IncomeMain.incomeKey = FillinData.OT.IncomeMain.incomeKey.toString()
         FillinData.OT.job.jobTypeKey = FillinData.OT.job.jobTypeKey.toString()
         FillinData.OT.jobLVKey = FillinData.OT.jobLVKey.toString()
+        if (FillinData.OT.compAddr === null) {
+          FillinData.OT.compAddr = {
+            County: '',
+            Area: '',
+            Road: '',
+            Lane: '',
+            Aly: '',
+            Num: '',
+            Of: '',
+            Flr: '',
+            Other: ''
+          }
+        }
         this.Form = FillinData.OT
       } else {
         this.Form.id = this.pageLoad.id
         // this.Form.cName = this.pageLoad.cName
-        this.Form.eName = this.pageLoad.eName
+        this.Form.eName = this.pageLoad.eName === null ? '' : this.pageLoad.eName
         this.Form.brthDt = this.pageLoad.brthDt
         this.Form.mbleTelNbr = this.pageLoad.mbleTelNbr
-        this.Form.email = this.pageLoad.email
+        this.Form.email = this.pageLoad.email === null ? '' : this.pageLoad.email
         this.Form.unitCode = this.pageLoad.unitCode
         this.Form.userCode = this.pageLoad.userCode
       }
@@ -1665,7 +1685,7 @@ export default {
         this.$custom.validate.chkKeyValueLength(this.Form.live.liveAreaCode, this.$refs.form, '居住電話區碼', 2, 4)
         this.$custom.validate.chkKeyValueLength(this.Form.live.liveTel, this.$refs.form, '居住電話號碼', 6, 8)
       }
-      if (this.Form.isStudent) {
+      if (this.Form.isStudent === 'true') {
         this.$custom.validate.CheckAddressAll(this.Form.parentAddr, this.$refs.form, '家長通訊地址')
       }
       if (this.Form.billAddr === '3' || this.Form.sendCardAddr === '3') {
@@ -1678,10 +1698,20 @@ export default {
         return
       }
       // ? 前端驗證所有規則 end
-      if (!this.Form.isStudent) {
+      if (this.Form.isStudent === 'false') {
         this.Form.parentName = ''
         this.Form.parentTel = ''
-        this.Form.parentAddr = new Address()
+        this.Form.parentAddr = {
+          County: '',
+          Area: '',
+          Road: '',
+          Lane: '',
+          Aly: '',
+          Num: '',
+          Of: '',
+          Flr: '',
+          Other: ''
+        }
       }
       if (this.Form.liveStatusKey === '') {
         this.Form.liveStatusKey = 0
@@ -1693,7 +1723,6 @@ export default {
         idMonth: this.Form.iddate.Month,
         idDay: this.Form.iddate.Day
       }
-      postData.flgAmwayNo = this.pageLoad.flgAmwayNo
       const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
       if (FillinData?.OT) {
         FillinData.OT = postData
@@ -1701,6 +1730,11 @@ export default {
       } else {
         sessionStorage.setItem('FillinData', JSON.stringify({ OT: postData }))
       }
+      sessionStorage.setItem('FillinDataFlag', JSON.stringify({
+        flgDigi: this.pageLoad.flgDigi,
+        flgStudent: this.pageLoad.flgStudent,
+        flgAmwayNo: this.pageLoad.flgAmwayNo
+      }))
       const result = await service.fillin_OT_Submit(postData)
       if (result) {
         this.$router.push('/OnLineApply_Fillin_OT_1')

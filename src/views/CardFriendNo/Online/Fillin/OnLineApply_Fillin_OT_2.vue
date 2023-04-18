@@ -202,7 +202,7 @@
                     </p>
                   </div>
                 </li>
-                <li v-if="Apply_N_Type==='Online'">
+                <li v-if="Apply_N_Type==='Online'&&FillinDataFlag.flgDigi!=='N'">
                   <div class="label_confirm">
                     <span class="red_text">* </span>申請數位卡
                   </div>
@@ -219,7 +219,7 @@
                     <p>{{FillinData.primarySchool}}</p>
                   </div>
                 </li>
-                <li>
+                <li v-if="FillinDataFlag.flgStudent==='Y'">
                   <div class="label_confirm">
                     <span class="red_text">* </span>是否為學生
                   </div>
@@ -358,7 +358,7 @@
                     <p>{{FillinData.form.userCode}}</p>
                   </div>
                 </li>
-                <li v-if="FillinData.form.flgAmwayNo">
+                <li v-if="FillinDataFlag.flgAmwayNo==='Y'">
                   <div class="label_confirm">
                     <span class="red_text">* </span>安麗直銷商/會員編號
                   </div>
@@ -377,11 +377,14 @@
           <div class="blue_box_bg">
             <div class="card-body">
               <!-- API 回傳 -->
-              <span class="red_text">※申請一卡通聯名卡者同意卡片已開啟自動加值功能。(AUTOLOAD)<br>
+              <!-- <span class="red_text">※申請一卡通聯名卡者同意卡片已開啟自動加值功能。(AUTOLOAD)<br>
                   ※申請聯邦微風聯名卡包括成為Breeze Rewards微風積點禮遇會員，並同意Breeze Rewards微風積點禮遇會員同意及注意事項。<br>
                   ※申請聯邦全國加油聯名卡包括成為全國大利點會員，同享全國大利點會員優惠。<br>
                   ※若不符聯邦全國加油聯名卡片申請資格，將同意由全國加油站改發現金大利會員卡一張(限每人一卡)。<br>
                   ※全國加油站為行銷、提供各項產品、服務、權益及各式優惠資訊(包含特定商店、商品、保險等)之目的範圍內，得將本人之中英文姓名、身分證字號、生日、電話、地址、電子郵件、全國加油站會員資料、大利點及消費屬性等個人基本資料，提供予貴行，並基於特定目的範圍內，得為蒐集、處理、國際傳輸及利用。貴行應對該等個人資料依法保密。
+              </span> -->
+              <span class="red_text" style="white-space:pre-line;">
+                {{consent}}
               </span>
               <!-- API 回傳 -->
             </div>
@@ -461,12 +464,15 @@
             </div>
             <div class="card-body py-0">
               <!-- API 回傳 -->
-              <span class="red_text">
+              <!-- <span class="red_text">
                 票證功能同意條款：<br>
                 包含：<br>
                 悠遊卡股份有限公司、一卡通票證股份有限公司<br>
                 悠遊卡公司官網www.easycard.com.tw，客服專線412-8880<br>
                 一卡通公司官網www.i-pass.com.tw，客服專線(07)791-2000
+              </span> -->
+              <span class="red_text" style="white-space:pre-line;">
+                {{ticketInfo}}
               </span>
               <!-- API 回傳 -->
             </div>
@@ -477,7 +483,7 @@
             </div>
           </div>
         </div>
-        <template v-if="FillinData.form.flgLine">
+        <template v-if="flgLine==='Y'">
           <div class="mb-4 text-left">
             <strong>聯邦銀行LINE官方綁定個人化服務：</strong>
           </div>
@@ -577,18 +583,28 @@ export default {
       FillinData: {
         form: {},
         term: {}
-      }
+      },
+      FillinDataFlag: JSON.parse(sessionStorage.getItem('FillinDataFlag')),
+      consent: JSON.parse(sessionStorage.getItem('FillinData')).OT_1_TermsContent.consent,
+      ticketInfo: JSON.parse(sessionStorage.getItem('FillinData')).OT_1_TermsContent.ticketInfo,
+      flgLine: JSON.parse(sessionStorage.getItem('FillinData')).OT_1_Flag.flgLine
     }
   },
   methods: {
     async pageLoad () {
       this.FillinData = await service.fillin_OT2_PageLoad()
+      for (const i in this.FillinData.term) {
+        if (this.FillinData.term[i] === 'true') {
+          this.FillinData.term[i] = true
+        } else if (this.FillinData.term[i] === 'false') {
+          this.FillinData.term[i] = false
+        }
+      }
       this.FillinData.term.autoBonus = !this.FillinData.term.autoBonus
       // ? 回塞 sessionStorage
       const sessionData = JSON.parse(sessionStorage.getItem('FillinData'))
       const fillinData = JSON.parse(JSON.stringify(this.FillinData))
       sessionData.OT = {
-        flgLine: JSON.parse(sessionStorage.getItem('FillinData')).OT.flgLine,
         brthDt: fillinData.brthDt,
         digiFlag: fillinData.digiFlag,
         id: fillinData.id,

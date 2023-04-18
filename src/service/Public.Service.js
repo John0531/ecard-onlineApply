@@ -26,7 +26,6 @@ const service = {
       // ? 取得比對 json
       const url = 'https://ecard.yesgogogo.com/ecard_source/terms.json'
       const res = await axios.get(url, { withCredentials: false })
-      console.log(res)
       if (typeof res.data === 'string') {
         store.commit('getErrorMsg', '檔案讀取有誤，請重新輸入或洽聯邦信用卡客服專線，02-25455168、07-2269393')
         store.state.errorModal.show()
@@ -64,9 +63,8 @@ const service = {
     }
   },
   async terms_pageLoad () {
-    const url = 'https://mocki.io/v1/a25b524e-6f2e-4b5e-9cbd-2a3da9d5744e'
-    const res = await axios.get(url, { withCredentials: false })
-    console.log(res)
+    const url = `${process.env.VUE_APP_BASE_API}/CardFormTerms/GetTermsInfo`
+    const res = await axios.get(url)
     return res.data.result
   },
   async terms_Submit (postData) {
@@ -75,6 +73,9 @@ const service = {
       const res = await axios.post(url, postData)
       if (res.data.status === '00500') {
         return true
+      } else {
+        store.commit('getErrorMsg', `${res.data.message}(${res.data.status})`)
+        store.state.errorModal.show()
       }
     } catch (err) {
     }

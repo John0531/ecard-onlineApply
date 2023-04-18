@@ -3,6 +3,17 @@ import store from '../store'
 
 const validate = {
   ...AllRules,
+  chkKeyValueEng (input) {
+    const Rule = /^[A-Za-z]+$/
+    if (Rule.test(input)) {
+      return true
+    }
+    if (input === '') {
+      return true
+    }
+    return '只可輸入英文，請重新輸入。'
+  },
+
   //* ==== 2. 檢核只可為英數字 ====
   //* 來源： Utility.js
   chkKeyValueNumEng (input) {

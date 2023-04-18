@@ -72,11 +72,14 @@
                   >
                     <div class="card-body">
                       <!-- API 回傳 -->
-                      <span class="red_text">※申請一卡通聯名卡者同意卡片已開啟自動加值功能。(AUTOLOAD)<br>
+                      <!-- <span class="red_text">※申請一卡通聯名卡者同意卡片已開啟自動加值功能。(AUTOLOAD)<br>
                           ※申請聯邦微風聯名卡包括成為Breeze Rewards微風積點禮遇會員，並同意Breeze Rewards微風積點禮遇會員同意及注意事項。<br>
                           ※申請聯邦全國加油聯名卡包括成為全國大利點會員，同享全國大利點會員優惠。<br>
                           ※若不符聯邦全國加油聯名卡片申請資格，將同意由全國加油站改發現金大利會員卡一張(限每人一卡)。<br>
                           ※全國加油站為行銷、提供各項產品、服務、權益及各式優惠資訊(包含特定商店、商品、保險等)之目的範圍內，得將本人之中英文姓名、身分證字號、生日、電話、地址、電子郵件、全國加油站會員資料、大利點及消費屬性等個人基本資料，提供予貴行，並基於特定目的範圍內，得為蒐集、處理、國際傳輸及利用。貴行應對該等個人資料依法保密。
+                      </span> -->
+                      <span class="red_text" style="white-space:pre-line;">
+                        {{consent}}
                       </span>
                       <!-- API 回傳 -->
                     </div>
@@ -228,12 +231,15 @@
                     </div>
                     <div class="card-body py-0">
                         <!-- API 回傳 -->
-                        <span class="red_text">
+                        <!-- <span class="red_text">
                           票證功能同意條款：<br>
                           包含：<br>
                           悠遊卡股份有限公司、一卡通票證股份有限公司<br>
                           悠遊卡公司官網www.easycard.com.tw，客服專線412-8880<br>
                           一卡通公司官網www.i-pass.com.tw，客服專線(07)791-2000
+                        </span> -->
+                        <span class="red_text" style="white-space:pre-line;">
+                          {{ticketInfo}}
                         </span>
                         <!-- API 回傳 -->
                     </div>
@@ -244,7 +250,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="dashed_line mb-3" v-if="flgLine">
+                <div class="dashed_line mb-3" v-if="flgLine==='Y'">
                   <div class="card-header_blue">
                     <strong>*聯邦銀行LINE官方綁定個人化服務：</strong>
                   </div>
@@ -336,7 +342,10 @@ import PublicService from '@/service/Public.Service.js'
 export default {
   data () {
     return {
-      flgLine: JSON.parse(sessionStorage.getItem('FillinData'))?.OT.flgLine,
+      flgLine: '',
+      // flgTravel: '',
+      consent: '',
+      ticketInfo: '',
       radioALL: false,
       Form: {
         parentType: '',
@@ -371,6 +380,9 @@ export default {
     async pageLoad () {
       const result = await PublicService.terms_pageLoad()
       this.flgLine = result.flgLine
+      // this.flgTravel = result.flgTravel
+      this.consent = result.consent
+      this.ticketInfo = result.ticketInfo
     },
     async submit () {
       // ? 驗證檢查
@@ -383,6 +395,9 @@ export default {
       // ? 驗證檢查 end
       const postData = JSON.parse(JSON.stringify(this.Form))
       postData.autoBonus = !postData.autoBonus
+      for (const i in postData) {
+        postData[i] = postData[i].toString()
+      }
       const result = await PublicService.terms_Submit(postData)
       if (result) {
         if (this.$route.name === '非卡友-個資使用條款') {
@@ -390,8 +405,13 @@ export default {
           FillinData.OT_1 = {
             ...this.Form
           }
+          console.log(FillinData.OT_1)
           FillinData.OT_1_Flag = {
             flgLine: this.flgLine
+          }
+          FillinData.OT_1_TermsContent = {
+            consent: this.consent,
+            ticketInfo: this.ticketInfo
           }
           sessionStorage.setItem('FillinData', JSON.stringify(FillinData))
           this.$router.push('/OnLineApply_Fillin_OT_2')
@@ -404,6 +424,13 @@ export default {
   mounted () {
     const FillinData = JSON.parse(sessionStorage.getItem('FillinData'))
     if (FillinData?.OT_1) {
+      for (const i in FillinData.OT_1) {
+        if (FillinData.OT_1[i] === 'true') {
+          FillinData.OT_1[i] = true
+        } else if (FillinData.OT_1[i] === 'false') {
+          FillinData.OT_1[i] = false
+        }
+      }
       this.Form = FillinData.OT_1
     }
     if (this.Form.parentType === true && this.Form.sharedType === true && this.Form.linePNPType === true) {
