@@ -312,23 +312,11 @@ export default {
       }
     }
   },
-  created () {
-    this.schema = {
-      出生地: 'required',
-      出生地的其他: '',
-      國籍: 'required',
-      職業別: 'required',
-      職業別的其他: '',
-      職級別: 'required',
-      主要所得及資金來源: 'required',
-      主要所得及資金來源的其他: ''
-    }
-  },
   computed: {
     customSchema () {
       const schema = { ...this.schema }
       // ?出生地選擇其他，其他要為必填
-      if (this.onLineApply_Fillin_Card.birthOtherKey === '其它') {
+      if (this.onLineApply_Fillin_Card.birthplaceKey === '其它') {
         schema.出生地的其他 = 'required'
       } else {
         schema.出生地的其他 = ''
@@ -403,10 +391,14 @@ export default {
       ).SHOW
 
       const response = await serviceY.postKYC(this.onLineApply_Fillin_Card)
-      console.log(response)
       const { status } = response
       if (status === '01100') {
-        this.tempOnlineApply.onLineApply_Fillin_Card = JSON.stringify(this.$data)
+        const attrs = ['noticeModal', 'schema']
+        const temp$data = { ...this.$data }
+        attrs.forEach(attr => {
+          temp$data[attr] = null
+        })
+        this.tempOnlineApply.onLineApply_Fillin_Card = JSON.stringify(temp$data)
         sessionStorage.setItem('tempOnlineApply', JSON.stringify(this.tempOnlineApply))
       }
       switch (status) {
@@ -418,14 +410,16 @@ export default {
     // ?驗證表單
     onInvalidSubmit ({ values, errors, results }) {
       this.$custom.validate.showErrors(errors)
-      console.log(values) // current form values
-      console.log(errors) // a map of field names and their first error message
-      console.log(results) // a detailed map of field names and their validation results
     },
     async init () {
       const kycInformation = await serviceY.getKYC()
       const { status, result, message } = kycInformation
       switch (status) {
+        case '01101' :
+          this.id = result.id
+          this.brth = result.brth
+          this.cName = result.cName
+          break
         case '01100':
           this.id = result.id
           this.brth = result.brth
@@ -453,14 +447,6 @@ export default {
     }
   },
   async mounted () {
-    console.log(this.$data)
-    this.getUtilities()
-    this.noticeModal = new bootstrap.Modal(this.$refs.noticeModal, {
-      keyboard: false,
-      backdrop: 'static'
-    })
-    this.noticeModal.show()
-
     const session = JSON.parse(sessionStorage.getItem('tempOnlineApply'))
 
     if (session?.onLineApply_Fillin_Card) {
@@ -475,6 +461,25 @@ export default {
     if (session) {
       this.tempOnlineApply = { ...session }
     }
+    console.log('before', this.option)
+    this.getUtilities()
+    console.log('after', this.option)
+    this.schema = {
+      出生地: 'required',
+      出生地的其他: '',
+      國籍: 'required',
+      職業別: 'required',
+      職業別的其他: '',
+      職級別: 'required',
+      主要所得及資金來源: 'required',
+      主要所得及資金來源的其他: ''
+    }
+
+    this.noticeModal = new bootstrap.Modal(this.$refs.noticeModal, {
+      keyboard: false,
+      backdrop: 'static'
+    })
+    this.noticeModal.show()
   }
 }
 </script>
