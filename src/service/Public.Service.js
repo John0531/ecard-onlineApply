@@ -44,9 +44,10 @@ const service = {
       for (let i = 0; i < termsArr.length; i++) {
         const url = `https://ecard.yesgogogo.com/ecard_source/${termsArr[i].fileName}.html?${hash(8)}`
         const res = await axios.get(url, { withCredentials: false })
-        const element = document.createElement('html')
-        element.innerHTML = res.data
-        termsHtml.push(element.querySelector('body').innerHTML)
+        const safeHtml = res.data.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
+        const parser = new DOMParser()
+        const doc = parser.parseFromString(safeHtml.split('&lt;/head&gt;')[1], 'text/html')
+        termsHtml.push(doc.body.innerText)
       }
       return termsHtml
     } catch (err) {
