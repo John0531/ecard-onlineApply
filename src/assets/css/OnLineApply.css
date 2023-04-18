@@ -750,7 +750,7 @@
 /*--------------------------------//線上辦卡------------------------------------*/
 
 /*------上傳附件-------*/    
-.upload_title {
+.mainArea .upload_title {
     color: #FFFFFF;
     font-size: 19pt;
     background-color: #009999;
@@ -760,6 +760,7 @@
     margin: 0 auto 30px;
     line-height: 28pt;
     text-align: center;
+    font-weight: 400;
 }
 
 .upload_note_indent {

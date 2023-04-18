@@ -248,7 +248,7 @@
                     <button
                     class="btn btn-primary btn-lg mx-1"
                     type=""
-                    @click.prevent="preview"
+                    @click.prevent="downloadFile"
                     >
                       預覽申請書
                     </button>
@@ -733,13 +733,23 @@ export default {
         }
         const res = await PublicService.CardSendApply(this.form)
         console.log(res)
-        // if (res.status === '00801') {
-        //   // 顯示NNB畫面
-        // }
-        // if (res.status === '00802') {
-        //   this.url = res.result.MyDataUrl
-        //   this.MyDataModal.show()
-        // }
+        PublicService.showAPIMsg(res.data.message)
+        if (res.status === 200) {
+          if (res.data.status === '00800') {
+            setTimeout(() => {
+              this.$router.push('/dspApplicationNNB')
+            }, 1000)
+          }
+          if (res.data.status === '00801') {
+            this.MyDataModal.show()
+          }
+          if (res.data.status === '00802') {
+            this.url = res.result.MyDataUrl
+            setTimeout(() => {
+              window.open(this.url, '_blank')
+            }, 1000)
+          }
+        }
         // ? ===選擇自行上傳===
         // ? ===選擇MyData上傳===
       } else {
@@ -807,17 +817,13 @@ export default {
       }
     },
     async downloadFile () {
-      const response = await PublicService.PreviewPDF()
+      const response = await PublicService.previewPdf()
       console.log(response)
-      const blob = new Blob([response.data], { type: 'application/pdf' })
+      const blob = new Blob([response], { type: 'application/pdf' })
       const link = document.createElement('a')
       link.href = window.URL.createObjectURL(blob)
       link.download = 'test.pdf'
       link.click()
-    },
-    async preview () {
-      const res = PublicService.PreviewPDF()
-      console.log(res)
     }
   },
   mounted () {

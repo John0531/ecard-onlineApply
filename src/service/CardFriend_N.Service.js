@@ -84,7 +84,7 @@ const service = {
   async otherDepositorVerification (data) {
     try {
       const form = JSON.stringify(data)
-      const url = `${process.env.VUE_APP_BASE_API}DepositorVerification/CheckTerms`
+      const url = `${process.env.VUE_APP_BASE_API}/OtherDepositorVerification/Verification`
       const options = {
         headers: { 'content-type': 'application/json' }
       }
