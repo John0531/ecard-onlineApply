@@ -37,7 +37,7 @@
             </div>
             <div class="col-xl-12 d-flex flex-wrap">
               <div class="col-12 col-md-4 text-center m-auto" v-for="card in cardInfoList" :key="card.cardNo">
-                <img class="img-fluid" alt="申請卡片圖片" src="@/assets/images/form/card_b4bs.jpg"/>
+                <img class="img-fluid" alt="申請卡片圖片" :src="card.cardPic" @error="handleImageError"/>
                 <div class="form-check my-2 position-relative">
                   <Field
                     class="form-check-input Apply_input"
@@ -57,9 +57,25 @@
                   </label>
                 </div>
               </div>
-              <span class="red_text position-relative m-auto">{{errors['申請的信用卡']}}</span>
+              <span class="col-12 text-center red_text position-relative m-auto">{{errors['申請的信用卡']}}</span>
             </div>
             <!----------------fee ---------------->
+            <!----------------yesgogogo ---------------->
+            <div class="mt-3 mt-md-5">
+                <div class="yesgogogo_box">
+                    <h3>yesgogogo即食購–在地美食，安心品質 (聯邦紅利指定折抵網站)</h3>
+                    <div class="yesgogogo_txt">
+                        <h4>yesgogogo會員加碼禮<span> (新舊戶卡友皆適用)</span></h4>
+                        活動期間：111年1月1日~111年6月30日。<br> 活動內容：活動期間至聯邦信用卡官網進行開卡並點選註冊成為yesgogogo會員，或經由yesgogogo即食購之聯邦卡友專屬註冊頁完成註冊者，即可獲贈加碼禮。
+                        <ul>
+                            <li>成為會員享1,000元折價券。(新舊會員皆適用)</li>
+                            <li>新會員首購單筆滿499元贈好禮+購物金點數回饋100%。</li>
+                            <li>週二聯邦日：週週享購物金點數回饋100%。</li>
+                        </ul>
+                        ※ 每會員限領乙份折價券，更多說明及限制詳參<a href="https://card.ubot.com.tw/eCard/activity/2022yesgogogo/index.htm"><u>活動官網</u>。</a>
+                    </div>
+                </div>
+            </div>
             <div class="mt-3 mt-md-5">
               <div class="fee_box mb-3">
                 <h3><img src="images/form/fee_icon.gif" class="img-fluid" alt="" />年費定價說明：</h3>
@@ -173,7 +189,7 @@
             </div>
             <div class="col-xl-12 d-flex flex-wrap">
               <div class="col-12 col-md-4 text-center m-auto" v-for="card in cardInfoList" :key="card.cardNo">
-                <img class="img-fluid" alt="申請卡片圖片" src="@/assets/images/form/card_b4bs.jpg"/>
+                <img class="img-fluid" alt="申請卡片圖片" :src="card.cardPic" @error="handleImageError"/>
                 <div class="form-check my-2 position-relative">
                   <Field
                     class="form-check-input Apply_input"
@@ -602,9 +618,9 @@ export default {
       return age >= 18
     },
     async init () {
-      const { parm, GID, IDE } = this.$route.query
+      const { parm, GID, IDE, PJN, UTC, USC } = this.$route.query
       if (this.isLineBank) {
-        const linkCard = await serviceY.cardApplyLoad_PageLoad_LB(GID, IDE, parm)
+        const linkCard = await serviceY.cardApplyLoad_PageLoad_LB(GID, IDE, parm, PJN)
         const { status, result, message } = linkCard
         const { id, brthDt, cardInfoList } = result
         switch (status) {
@@ -616,6 +632,9 @@ export default {
             this.cardInfoList = [...cardInfoList]
             this.OnlineApply_y_Data.gID = GID
             this.OnlineApply_y_Data.iDE = IDE
+            if (PJN) this.OnlineApply_y_Data.projNum = result.PJN
+            if (UTC) this.OnlineApply_y_Data.uTC = result.UTC
+            if (USC) this.OnlineApply_y_Data.uSC = result.USC
             break
           case '00799' :
             alert(message)
@@ -625,7 +644,7 @@ export default {
             break
         }
       } else {
-        const linkCard = await serviceY.cardApplyLoad_PageLoad(GID, IDE)
+        const linkCard = await serviceY.cardApplyLoad_PageLoad(GID, IDE, PJN)
         const { status, message, result } = linkCard
         const { cardInfoList } = result
         console.log(linkCard)
@@ -634,6 +653,9 @@ export default {
             this.cardInfoList = [...cardInfoList]
             this.OnlineApply_y_Data.gID = GID
             this.OnlineApply_y_Data.iDE = IDE
+            if (PJN) this.OnlineApply_y_Data.projNum = PJN
+            if (UTC) this.OnlineApply_y_Data.uTC = UTC
+            if (USC) this.OnlineApply_y_Data.uSC = USC
             break
           case '00799' :
             alert(message)
@@ -643,6 +665,9 @@ export default {
             break
         }
       }
+    },
+    handleImageError ($event) {
+      $event.target.src = require('../assets/images/UBOT_logo_180x26.png')
     }
   },
   async mounted () {
@@ -676,7 +701,7 @@ export default {
     if (this.isLineBank) {
       this.schema = {
         申請的信用卡: 'required',
-        有關條款: 'required'
+        有關條款: 'customAgreeTerms'
       }
     } else {
       this.schema = {
@@ -685,7 +710,7 @@ export default {
         月: 'customBirthVaild',
         日: 'customBirthVaild',
         申請的信用卡: 'required',
-        有關條款: 'required'
+        有關條款: 'customAgreeTerms'
       }
     }
     defineRule('customBirthVaild', value => {
@@ -693,6 +718,13 @@ export default {
         return '出生年月日為必填'
       } else if (!this.isOver18(this.OnlineApply_y_Data.brthyy, this.OnlineApply_y_Data.brthMM, this.OnlineApply_y_Data.brthdd)) {
         return ''
+      }
+      return true
+    })
+
+    defineRule('customAgreeTerms', value => {
+      if (!value) {
+        return '您尚未勾選詳細閱讀並同意服務約定書。'
       }
       return true
     })

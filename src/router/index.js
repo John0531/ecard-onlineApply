@@ -9,6 +9,17 @@ const routes = [
         path: '/',
         name: '線上辦卡',
         component: () => import('../views/OnlineApply.vue'),
+        beforeEnter: (to, from, next) => {
+          const { GID, IDE } = to.query
+          if (GID && IDE) {
+            // 回到第一頁就是給我重來
+            sessionStorage.clear()
+            next()
+          } else {
+            alert('不合法參數值傳遞')
+            window.location.href = 'https://www.google.com/?hl=zh_tw'
+          }
+        },
         meta: {
           title: '線上辦卡'
         }
@@ -341,6 +352,10 @@ router.beforeEach((to) => {
       router.push({ path: '/', query: { GID: '99', IDE: 'A' } })
     } else if (to.path === '/3') {
       router.push({ path: '/', query: { GID: '99', IDE: 'A' } })
+    } else if (to.path === '/4') {
+      router.push({ path: '/', query: { parm: 'LB23041218270380023452', GID: '81', IDE: 'A', PJN: 'BBB', UTC: '123', USC: '456' } })
+    } else if (to.path === '/5') {
+      router.push({ path: '/', query: { GID: '99', IDE: 'A', PJN: 'BBB', UTC: '123', USC: '456' } })
     }
   }
 })

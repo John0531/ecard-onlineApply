@@ -110,14 +110,14 @@
                       <li class="col-12 col-md-12">
                           <label for="">*寄卡地址</label>
                           <div class="d-flex flex-wrap flex-column flex-md-row">
-                              <div class="form-check me-4">
+                              <div class="form-check me-4" v-if="billAddr">
                                       <Field class="form-check-input mt-2 position-absolute" type="radio" name="寄卡地址" value="1"
                                       v-model="onLineApply_Fillin_Data.sendCardType" :class="{ 'is-invalid': errors['寄卡地址']}" :validateOnChange="true"/>
                                       <div class="form_Apply_txt">
                                               同帳單地址
                                       </div>
                               </div>
-                              <div class="form-check me-4">
+                              <div class="form-check me-4" v-if="compAddr">
                                       <Field class="form-check-input mt-2 position-absolute" type="radio" name="寄卡地址" value="2"
                                       v-model="onLineApply_Fillin_Data.sendCardType" :class="{ 'is-invalid': errors['寄卡地址']}" :validateOnChange="true"/>
                                       <div class="form_Apply_txt">
@@ -681,7 +681,7 @@ export default {
       樓: '',
       其他: '',
       申請數位卡: '',
-      有關條款: 'required'
+      有關條款: 'customAgreeTerms'
     }
     defineRule('customAddressVaild', value => {
       const tempAddress = this.onLineApply_Fillin_Data.sendCardAddr.Lane + this.onLineApply_Fillin_Data.sendCardAddr.Aly + this.onLineApply_Fillin_Data.sendCardAddr.Num + this.onLineApply_Fillin_Data.sendCardAddr.Of +
@@ -689,6 +689,13 @@ export default {
       if (tempAddress.length < 1 || !this.onLineApply_Fillin_Data.sendCardAddr.County ||
               !this.onLineApply_Fillin_Data.sendCardAddr.Area || !this.onLineApply_Fillin_Data.sendCardAddr.Road) {
         return '地址格式有誤'
+      }
+      return true
+    })
+
+    defineRule('customAgreeTerms', value => {
+      if (!value) {
+        return '您尚未勾選詳細閱讀並同意服務約定書。'
       }
       return true
     })
