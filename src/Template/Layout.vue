@@ -32,7 +32,8 @@ export default {
   @import "~@/assets/css/OnLineApply.css";
   @import "~@/assets/css/NNB.css";
   @import "https://card-beta.uitc.com.tw/eCard_source/includeBlock/yesgogogo.css";
-  @import "https://card-beta.uitc.com.tw/eCard_source/terms//css/terms.css";
+  /* @import "https://card-beta.uitc.com.tw/eCard_source/terms/css/terms.css"; */
+  @import "~@/assets/css/terms.css";
   @import "~@/assets/css/alert.css";
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button{
