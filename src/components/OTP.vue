@@ -284,7 +284,7 @@
                           <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
                           <div class="d-flex flex-column">
                             <div class="d-flex align-items-center">
-                              <div>{{tag}}-</div>
+                              <div class="input-group-text">{{tag}}-</div>
                               <Field
                                 v-model="mobileMsgCode"
                                 name="驗證碼" type="text" maxlength="6"

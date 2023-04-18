@@ -319,10 +319,10 @@ input.checkimg[type="checkbox"] {
     appearance: none;
     -webkit-appearance: none;
     border:1px solid #bfbfbf;
-    cursor: default; 
+    cursor: default;
   }
-  input.checkimg[type="checkbox"]:hover { 
-    border:1px solid #afafaf; 
+  input.checkimg[type="checkbox"]:hover {
+    border:1px solid #afafaf;
   }
   input.checkimg:checked[type="checkbox"]::before {
     content: '';
@@ -330,10 +330,10 @@ input.checkimg[type="checkbox"] {
     width: 23px;
     height: 23px;
     border-radius: 4px;
-    top:0; 
+    top:0;
     left: 0;
     background-image:url(../images/form/checkimg.png);
-    background-size: contain;  
+    background-size: contain;
   }
   input.checkimg[type="checkbox"]:disabled {
     position: relative;
@@ -343,13 +343,13 @@ input.checkimg[type="checkbox"] {
     appearance: none;
     border:1px solid #ddddde;
     border-color: rgba(118, 118, 118, 0.3);
-    cursor: default; 
+    cursor: default;
   }
   input.checkimg[type="checkbox"]:checked {
     width: 25px;
     height: 25px;
     border-radius: 4px;
     background-image:url(../images/form/checkimg.png);
-    background-size: contain;  
+    background-size: contain;
   }
 /*------input-----*/

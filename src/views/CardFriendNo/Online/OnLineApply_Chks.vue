@@ -300,9 +300,11 @@ export default {
         this.chksForm.personalDataAuthorized = this.checkagree
         const res = await ServiceN.DepositorCheckTerms(this.chksForm)
         console.log(res)
-        // if (res.) {
-
-        // }
+        if (res.status === '200') {
+          if (res.data.status === '') {
+            //
+          }
+        }
         // **存戶不經過n1要設session
         sessionStorage.setItem('Apply_N_Type', 'Online')
         this.$router.push('/OnLineApply_Chks_OTP')
