@@ -849,6 +849,7 @@ export default {
   watch: {
     num (n) {
       document.getElementById('myIdentifident').classList.remove('croppie-container')
+      //
     }
   }
 }
