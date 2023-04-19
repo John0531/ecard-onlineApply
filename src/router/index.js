@@ -12,7 +12,7 @@ const routes = [
         component: () => import('../views/OnlineApply.vue'),
         beforeEnter: (to, from, next) => {
           const { GID, IDE, parm } = to.query
-          if (parm === 'LB23041218270380023452') {
+          if (parm === 'LB23041913284222922902') {
             if (GID !== '81' || IDE !== 'A') {
               Swal.fire(
                 '不合法參數',
@@ -27,7 +27,10 @@ const routes = [
             sessionStorage.clear()
             next()
           } else {
-            window.location.href = 'https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014'
+            next()
+            if (process.env.NODE_ENV === 'production') {
+              window.location.href = 'https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014'
+            }
           }
         },
         meta: {
