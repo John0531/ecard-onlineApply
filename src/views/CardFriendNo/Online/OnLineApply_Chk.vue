@@ -551,6 +551,7 @@ export default {
   async mounted () {
     const res = await ServiceN.otherCardholderPageLoad()
     const data = res.data.result
+    sessionStorage.setItem('Apply_N_Type', 'Online')
     this.termsFile = data.termsList
     // ?載入預帶資料鎖死
     this.brthDt = data.brthDt

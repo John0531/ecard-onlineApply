@@ -238,6 +238,7 @@ export default {
     }
   },
   async mounted () {
+    sessionStorage.setItem('Apply_N_Type', 'Written')
     this.pageLoad = await CardFriendNService.Chkw_PageLoad()
     if (this.pageLoad.mbleTelNbr === null) {
       this.pageLoad.mbleTelNbr = ''
