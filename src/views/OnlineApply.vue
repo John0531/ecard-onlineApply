@@ -572,10 +572,14 @@ export default {
             break
             // ?非卡友-存戶
           case '00102' :
-            this.$router.push('/OnLineApply_Gift')
+            this.$router.push('/OnLineApply_OCR')
             break
             // ?非卡友-非存戶(改他行驗證流程)
           case '00103' :
+            this.$router.push('/OnLineApply_OCR')
+            break
+            // ?首刷禮
+          case '00104' :
             this.$router.push('/OnLineApply_Gift')
             break
             // ?驗證失敗(直接顯示錯誤訊息。)

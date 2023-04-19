@@ -61,6 +61,7 @@
                       <Field
                           name="推廣單位代號"
                           type="text"
+                          maxlength="6"
                           :class="{ 'is-invalid': errors['推廣單位代號'],'form-control':true}"
                           v-model="onLineApply_Fillin_Data.unitCode"
                           :validateOnInput="true"
@@ -69,7 +70,7 @@
                       </li>
                       <li class="col-12 col-md-6">
                           <label for="">推廣人員編號</label>
-                          <Field name="推廣人員編號" type="text" class="form-control" :class="{ 'is-invalid': errors['推廣人員編號']}"
+                          <Field name="推廣人員編號" maxlength="11" type="text" class="form-control" :class="{ 'is-invalid': errors['推廣人員編號']}"
                           v-model="onLineApply_Fillin_Data.userCode" :validateOnInput="true"></Field>
                           <span class="invalid-feedback">{{errors['推廣人員編號']}}</span>
                       </li>
