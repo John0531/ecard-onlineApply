@@ -84,7 +84,7 @@ export default {
         switch (status) {
           case '00800' :
             sessionStorage.clear()
-            this.$router.push('/dspApplicationNNB')
+            this.$router.push('/OnLineApply_Fillin_Finish')
             break
           case '00801' :
             sessionStorage.clear()
