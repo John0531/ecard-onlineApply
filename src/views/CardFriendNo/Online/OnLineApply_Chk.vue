@@ -46,9 +46,9 @@
                             id="cardCode1" ref="cardCode1"
                             type="text" maxlength="4"
                             class="cardNumber form-control"
-                            :class="{ 'is-invalid': errors['卡號'] }"
+                            :class="{ 'is-invalid': errors['信用卡卡號'] }"
                             @keyup="cardNumber.code1 = $custom.validate.OnlyNumPress(cardNumber.code1)"
-                            @change="checkValue($refs.myForm,cardNumber,'卡號','cardCode2')"
+                            @change="checkValue($refs.myForm,cardNumber,'信用卡卡號','cardCode2')"
                             />
                             <div class="cardDash text-center mx-1"></div>
                             <Field
@@ -57,10 +57,10 @@
                             id="cardCode2" ref="cardCode2"
                             type="password" maxlength="4"
                             class="cardNumber form-control"
-                            :class="{ 'is-invalid': errors['卡號'] }"
+                            :class="{ 'is-invalid': errors['信用卡卡號'] }"
                             @input="textHandler2()"
                             @keyup="cardNumber.code2 = $custom.validate.OnlyNumPress(cardNumber.code2)"
-                            @change="checkValue($refs.myForm,cardNumber,'卡號','cardCode3')"
+                            @change="checkValue($refs.myForm,cardNumber,'信用卡卡號','cardCode3')"
                             />
                             <div class="cardDash text-center mx-1"></div>
                             <Field
@@ -69,10 +69,10 @@
                             id="cardCode3" ref="cardCode3"
                             type="password" maxlength="4"
                             class="cardNumber form-control"
-                            :class="{ 'is-invalid': errors['卡號'] }"
+                            :class="{ 'is-invalid': errors['信用卡卡號'] }"
                             @input="textHandler3()"
                             @keyup="cardNumber.code3 = $custom.validate.OnlyNumPress(cardNumber.code3)"
-                            @change="checkValue($refs.myForm,cardNumber,'卡號','cardCode4')"
+                            @change="checkValue($refs.myForm,cardNumber,'信用卡卡號','cardCode4')"
                             />
                             <div class="cardDash text-center mx-1"></div>
                             <Field
@@ -81,13 +81,13 @@
                             id="cardCode4" ref="cardCode4"
                             type="text" maxlength="4"
                             class="cardNumber form-control"
-														:class="{ 'is-invalid': errors['卡號'] }"
+														:class="{ 'is-invalid': errors['信用卡卡號'] }"
                             @keyup="cardNumber.code4 = $custom.validate.OnlyNumPress(cardNumber.code4)"
-														@change="checkValue($refs.myForm,cardNumber,'卡號','validThru')"
+														@change="checkValue($refs.myForm,cardNumber,'信用卡卡號','validThru')"
                             />
                         </div>
                         <div class="d-flex text-center invalid-feedback my-1" >
-                          {{errors['卡號']}}
+                          {{errors['信用卡卡號']}}
                         </div>
                       </div>
                   </li>
@@ -132,17 +132,17 @@
                       <div class="d-flex flex-column">
                           <Field
                           v-model="phoneNumber"
-                          id="phone" name="手機" ref="phone"
+                          id="phone" name="行動電話" ref="phone"
                           type="text" maxlength="10"
                           class="Apply_Chk_form_control form-control"
-                          :class="{ 'is-invalid': errors['手機'] }"
+                          :class="{ 'is-invalid': errors['行動電話'] }"
                           @keyup="phoneNumber = $custom.validate.OnlyNumPress(phoneNumber)"
                           @focus="phoneNumber=''"
                           rules="checkPhone"
                           />
                           <span class="not_text">請填寫信用卡申請時之行動電話，以利資訊驗證</span>
                           <div class="d-flex text-center invalid-feedback my-1" >
-                            {{errors['手機']}}
+                            {{errors['行動電話']}}
                           </div>
                       </div>
                   </li>
@@ -301,7 +301,7 @@ export default {
       // ? 清空errors
       dom.setFieldError(name, '')
       switch (name) {
-        case '卡號': {
+        case '信用卡卡號': {
           const idRule = /^\d{4}$/
           if (code.code1) {
             if (!idRule.test(code.code1)) {
@@ -363,7 +363,7 @@ export default {
               break
             }
           } else {
-            const error = this.$custom.validate.checkCode(code)
+            const error = this.$custom.validate.validThru(code)
             dom.setFieldError(name, error)
           }
           break
@@ -451,7 +451,7 @@ export default {
       this.agreeModal.hide()
     },
     async applySubmit (dom) {
-      this.checkValue(this.$refs.myForm, this.cardNumber, '卡號', '')
+      this.checkValue(this.$refs.myForm, this.cardNumber, '信用卡卡號', '')
       this.checkValue(this.$refs.myForm, this.validThru, '信用卡有效期限', '')
       this.checkValue(this.$refs.myForm, this.CSC, '信用卡背後末三碼', '')
       // this.checkValue(this.$refs.myForm, this.phoneNumber, '手機', '')

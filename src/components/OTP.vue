@@ -18,7 +18,7 @@
                     <ul class="formList">
                         <li class="form-group">
                             <label class="label" for="">行動電話</label>
-                            <div class="form-text">0999***888</div>
+                            <div class="form-text">{{mbleTelNbr}}</div>
                         </li>
                         <li class="inOpt OnLineApplyOpt align-items-start">
                             <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
@@ -27,10 +27,9 @@
                                     <span class="input-group-text">{{tag}}-</span>
                                     <Field
                                       v-model="mobileMsgCode"
-                                      name="驗證碼" type="text" maxlength="6"
+                                      name="驗簡訊驗證碼" type="text" maxlength="6"
                                       placeholder="" class="form-control"
-                                      :class="{ 'is-invalid': errors['驗證碼'] }"
-                                      @focus="this.mobileMsgCode=''"
+                                      :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
                                       @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
                                       rules="checkOTP"
                                     />
@@ -47,7 +46,7 @@
                                 </div>
                                 <div v-show="!show" class="countdown">({{this.count}}秒後可重新發送)</div>
                                 <div class="d-flex justify-content-start invalid-feedback my-1">
-                                  <span>{{errors['驗證碼']}}</span>
+                                  <span>{{errors['簡訊驗證碼']}}</span>
                                 </div>
                             </div>
                         </li>
@@ -83,7 +82,7 @@
                     <ul class="formList">
                         <li class="form-group">
                             <label class="label" for="">行動電話</label>
-                            <div class="form-text">0999***888</div>
+                            <div class="form-text">{{mbleTelNbr}}</div>
                         </li>
                         <li class="inOpt OnLineApplyOpt align-items-start">
                           <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
@@ -92,10 +91,9 @@
                               <span class="input-group-text">{{tag}}-</span>
                               <Field
                                 v-model="mobileMsgCode"
-                                name="驗證碼" type="text" maxlength="6"
-                                placeholder="請輸入驗證碼" class="form-control"
-                                :class="{ 'is-invalid': errors['驗證碼'] }"
-                                @focus="this.mobileMsgCode=''"
+                                name="簡訊驗證碼" type="text" maxlength="6"
+                                placeholder="" class="form-control"
+                                :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
                                 @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
                                 rules="checkOTP"
                               />
@@ -111,7 +109,7 @@
                             </div>
                             <div v-show="!show" class="countdown">({{this.count}}秒後可重新發送)</div>
                             <div class="d-flex justify-content-start invalid-feedback my-1">
-                              <span>{{errors['驗證碼']}}</span>
+                              <span>{{errors['簡訊驗證碼']}}</span>
                             </div>
                           </div>
                         </li>
@@ -147,7 +145,7 @@
                     <ul class="formList">
                         <li class="form-group">
                             <label class="label" for="">行動電話</label>
-                            <div class="form-text">0999***888</div>
+                            <div class="form-text">{{mbleTelNbr}}</div>
                         </li>
                         <!-- <li class="form-group">
                             <label class="label" for="">行動電話</label>
@@ -162,8 +160,7 @@
                                       v-model="mobileMsgCode"
                                       name="驗證碼" type="text" maxlength="6"
                                       placeholder="" class="form-control"
-                                      :class="{ 'is-invalid': errors['驗證碼'] }"
-                                      @focus="this.mobileMsgCode=''"
+                                      :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
                                       @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
                                       rules="checkOTP"
                                     />
@@ -179,7 +176,7 @@
                                 </div>
                                 <div v-show="!show" class="countdown">({{this.count}}秒後可重新發送)</div>
                                 <div class="d-flex justify-content-start invalid-feedback my-1">
-                                  <span>{{errors['驗證碼']}}</span>
+                                  <span>{{errors['簡訊驗證碼']}}</span>
                                 </div>
                             </div>
                         </li>
@@ -215,7 +212,7 @@
                     <ul class="formList">
                         <li class="form-group">
                             <label class="label" for="">行動電話</label>
-                            <div class="form-text">0999***888</div>
+                            <div class="form-text">{{mbleTelNbr}}</div>
                         </li>
                         <li class="inOpt OnLineApplyOpt align-items-start">
                           <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
@@ -226,8 +223,7 @@
                                 v-model="mobileMsgCode"
                                 name="驗證碼" type="text" maxlength="6"
                                 placeholder="" class="form-control"
-                                :class="{ 'is-invalid': errors['驗證碼'] }"
-                                @focus="this.mobileMsgCode=''"
+                                :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
                                 @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
                                 rules="checkOTP"
                               />
@@ -243,7 +239,7 @@
                             </div>
                             <div v-show="!show" class="countdown">({{this.count}}秒後可重新發送)</div>
                             <div class="d-flex justify-content-start invalid-feedback my-1">
-                              <span>{{errors['驗證碼']}}</span>
+                              <span>{{errors['簡訊驗證碼']}}</span>
                             </div>
                           </div>
                         </li>
@@ -278,7 +274,7 @@
                     <ul class="formList">
                         <li class="form-group">
                             <label class="label" for="">行動電話</label>
-                            <div class="form-text">0999***888</div>
+                            <div class="form-text">{{mbleTelNbr}}</div>
                         </li>
                         <li class="inOpt OnLineApplyOpt align-items-start">
                           <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
@@ -289,8 +285,7 @@
                                 v-model="mobileMsgCode"
                                 name="驗證碼" type="text" maxlength="6"
                                 placeholder="" class="form-control"
-                                :class="{ 'is-invalid': errors['驗證碼'] }"
-                                @focus="this.mobileMsgCode=''"
+                                :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
                                 @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
                                 rules="checkOTP"
                               />
@@ -306,7 +301,7 @@
                             </div>
                             <div v-show="!show" class="countdown">({{this.count}}秒後可重新發送)</div>
                             <div class="d-flex justify-content-start invalid-feedback my-1">
-                              <span>{{errors['驗證碼']}}</span>
+                              <span>{{errors['簡訊驗證碼']}}</span>
                             </div>
                           </div>
                         </li>
@@ -371,7 +366,8 @@ export default ({
       N_Written: '', // *路由-Written非卡友[書面申請]判斷值
       Y: '', // *路由-卡友判斷值
       MsgModal: '', // *簡訊寄出modal
-      tag: '' //* otp識別碼
+      tag: '', //* otp識別碼
+      mbleTelNbr: ''
     }
   },
   methods: {
@@ -385,6 +381,8 @@ export default ({
       //* 有成功打入API才算
       const res = await PublicService.otpGet()
       if (res.status === 200) {
+        //* 更新tag
+        this.tag = res.data.result.tag
         PublicService.showAPIMsg(res.data.message)
         //* 驗證碼倒數計時
         this.count = 30
@@ -433,6 +431,7 @@ export default ({
   async mounted () {
     //* pageLoad接值
     const res = await PublicService.otpGet()
+    this.mbleTelNbr = res.data.result.mbleTelNbr
     this.tag = res.data.result.tag
     console.log(res)
     if (res.status === 200) {
