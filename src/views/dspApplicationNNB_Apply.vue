@@ -201,6 +201,8 @@ export default {
           this.form.checkAgree = this.checkErules
           const res = await ServiceN.newNewBankApply
           if (res.status === 200) {
+            // ?localStorage 的token全部清掉
+            localStorage.clear()
             if (res.data.message) {
               PublicService.showAPIMsg(res.data.message)
             }

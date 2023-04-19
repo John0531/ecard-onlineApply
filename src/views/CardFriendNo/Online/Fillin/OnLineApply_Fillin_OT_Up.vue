@@ -735,23 +735,32 @@ export default {
         console.log(res)
         PublicService.showAPIMsg(res.data.message)
         if (res.status === 200) {
+          // ?session全部清掉
+          sessionStorage.clear()
           if (res.data.status === '00800') {
+            // ? ===選擇自行上傳===
+            // ?未來卡成功
+            // ?localStorage 的token全部清掉
+            localStorage.clear()
+          }
+          if (res.data.status === '00801') {
+            // ? ===選擇自行上傳===
+            // ?顯示NNB畫面
             setTimeout(() => {
               this.$router.push('/dspApplicationNNB')
             }, 1000)
           }
-          if (res.data.status === '00801') {
-            this.MyDataModal.show()
-          }
           if (res.data.status === '00802') {
+            // ? ===選擇MyData上傳===
+            // ?讀取result內的URL轉導MyData上傳財力
+            // ?localStorage 的token全部清掉
+            localStorage.clear()
             this.url = res.result.MyDataUrl
             setTimeout(() => {
               window.open(this.url, '_blank')
             }, 1000)
           }
         }
-        // ? ===選擇自行上傳===
-        // ? ===選擇MyData上傳===
       } else {
         // ** ===錯誤訊息彙整===
         this.$custom.validate.showErrors(collection.errors)

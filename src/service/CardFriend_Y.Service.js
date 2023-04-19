@@ -8,8 +8,12 @@ const service = {
     try {
       const url = `/IdentityVerification/Confirm?${queryString}`
       const res = await axios.post(url, data)
+      // ?session全部清掉
+      sessionStorage.clear()
       return res.data
     } catch (err) {
+      // ?session全部清掉
+      sessionStorage.clear()
       console.log(err.response.data)
       return null
     }

@@ -677,7 +677,8 @@ export default {
       //   this.APIModal.hide()
       // }, 5000)
       const res = await ServiceN.uploadImage(this.file)
-      this.message = res.data.message
+      // this.message = res.data.message
+      this.message = res.data.message === '作業成功' ? '身分證辨識成功' : res.data.message
       if (res.status === 200) {
         this.APIModal.show()
         this.uploaded = true
