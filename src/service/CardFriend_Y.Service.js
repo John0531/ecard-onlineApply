@@ -10,7 +10,6 @@ const service = {
       const res = await axios.post(url, data)
       return res.data
     } catch (err) {
-      // ?session全部清掉
       return null
     }
   },

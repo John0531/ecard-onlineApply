@@ -461,6 +461,7 @@ export default {
   async mounted () {
     const res = await ServiceN.otherDepositorPageLoad()
     const data = res.data.result
+    sessionStorage.setItem('Apply_N_Type', 'Online')
     console.log(data)
     this.brthDt = data.brthDt
     this.oid = data.oid
