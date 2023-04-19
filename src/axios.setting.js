@@ -8,6 +8,10 @@ axios.defaults.withCredentials = true
 
 axios.interceptors.request.use(
   config => {
+    const token = localStorage.getItem('accessTK')
+    if (token && !config.url.includes('terms.json') && !config.url.includes('.html')) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
     store.commit('changeLoading', true)
     return config
   }
@@ -16,6 +20,9 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   config => {
     store.commit('changeLoading', false)
+    if (config.headers.authorization) {
+      localStorage.setItem('accessTK', config.headers.authorization)
+    }
     return config
   },
   async err => {

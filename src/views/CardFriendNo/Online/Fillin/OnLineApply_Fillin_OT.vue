@@ -1044,7 +1044,7 @@
                     <Field
                       v-model="Form.comp.compTel"
                       name="compTel"
-                      maxlength="7"
+                      maxlength="8"
                       @keyup="Form.comp.compTel = $custom.validate.OnlyNumPress(Form.comp.compTel)"
                       type="text"
                       class="form-control mx-1"
@@ -1698,6 +1698,15 @@ export default {
         return
       }
       // ? 前端驗證所有規則 end
+      if (this.pageLoad.flgDigi === 'N') {
+        this.Form.digiFlag = ''
+      }
+      if (this.pageLoad.flgStudent === 'N') {
+        this.Form.isStudent = ''
+      }
+      if (this.pageLoad.flgAmwayNo === 'N') {
+        this.Form.amwayNo = ''
+      }
       if (this.Form.isStudent === 'false') {
         this.Form.parentName = ''
         this.Form.parentTel = ''
