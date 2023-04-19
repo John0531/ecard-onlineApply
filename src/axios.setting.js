@@ -9,7 +9,7 @@ axios.defaults.withCredentials = true
 axios.interceptors.request.use(
   config => {
     const token = localStorage.getItem('accessTK')
-    if (token && !config.url.includes('terms.json') && !config.url.includes('.html')) {
+    if (token && !config.url.includes('terms.json') && !config.url.includes('.html') && !config.url.includes('Utility.json')) {
       config.headers.Authorization = `Bearer ${token}`
     }
     store.commit('changeLoading', true)
