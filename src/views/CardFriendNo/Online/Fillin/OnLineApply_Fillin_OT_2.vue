@@ -204,7 +204,7 @@
                 </li>
                 <li v-if="Apply_N_Type==='Online'&&FillinDataFlag.flgDigi!=='N'">
                   <div class="label_confirm">
-                    <span class="red_text">* </span>申請數位卡
+                    申請數位卡
                   </div>
                   <div class="input-data_confirm">
                     <p v-if="FillinData.form.digiFlag==='true'">是</p>
