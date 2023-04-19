@@ -104,6 +104,8 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/CardFromPDF/PreviewPDF`
       const res = await axios.get(url, { responseType: 'blob' })
+      console.log(res.data)
+
       return res.data
     } catch (err) {
       console.log(err.response.data)

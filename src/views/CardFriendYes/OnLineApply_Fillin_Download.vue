@@ -21,8 +21,8 @@
               /></a>
               <button
                 class="Down_Apply_button mx-3"
-                type="submit"
                 value=""
+                @click="downloadPdf()"
               >
                 點選下載預覽申請書
               </button>
@@ -39,10 +39,9 @@
         </div>
         <div class="text-center button_group">
           <button
-            onclick="location.href='OnLineApply_Fillin_finish'"
             class="btn btn-primary btn-lg mx-1"
-            type="submit"
             value=""
+            @click="onSubmit(this.request)"
           >
             確認無誤，送出申請
           </button>
@@ -52,3 +51,57 @@
   </section>
   <!-- 主要內容 END -->
 </template>
+
+<script>
+import service from '../../service/Public.Service'
+export default {
+  data () {
+    return {
+      sendOnlineApply: '',
+      request: {
+        upload1: '',
+        upload2: '',
+        upload3: '',
+        upload4: '',
+        isMydata: false
+      }
+    }
+  },
+  methods: {
+    async downloadPdf () {
+      const response = await service.previewPdf()
+      console.log(response)
+      const blob = new Blob([response], { type: 'application/pdf' })
+      const link = document.createElement('a')
+      link.href = window.URL.createObjectURL(blob)
+      link.download = 'test.pdf'
+      link.click()
+    },
+    async onSubmit () {
+      try {
+        const response = await service.CardSendApply(this.request)
+        const { status, message, result } = response.data
+        switch (status) {
+          case '00800' :
+            sessionStorage.clear()
+            this.$router.push('/dspApplicationNNB')
+            break
+          case '00801' :
+            sessionStorage.clear()
+            alert(message)
+            break
+          case '00802' :
+            sessionStorage.clear()
+            window.open(result.MyDataUrl, '_blank')
+            break
+          default:
+            alert('超出預期錯誤')
+            break
+        }
+      } catch (error) {
+        console.error('onSubmit error', error)
+      }
+    }
+  }
+}
+</script>
