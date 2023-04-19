@@ -153,6 +153,9 @@
 </template>
 
 <script>
+import ServiceN from '@/service/CardFriend_N.Service.js'
+import PublicService from '@/service/Public.Service.js'
+
 export default {
   data () {
     return {
@@ -161,14 +164,21 @@ export default {
       isBePromoted: false,
       promoteUnit: '',
       promoteEployeeCode: '',
-      projectCode: ''
+      projectCode: '',
+      form: {
+        nnbPromoteUnit: '',
+        nnbPromoterCode: '',
+        nnbProjCode: '',
+        checkUSA: true,
+        checkAgree: false
+      },
+      url: ''
     }
   },
   methods: {
     async submitNNB () {
       const collection = await this.$refs.myForm.validate()
       if (this.isBePromoted) {
-        console.log(2)
         // ? ===選填推廣單位代號===
         const dom = this.$refs.myForm
         if (!this.promoteUnit) {
@@ -182,13 +192,31 @@ export default {
         }
         collection.errors = await this.$refs.myForm.getErrors()
         if (Object.keys(collection.errors).length === 0) {
+          // ** ===全部檢查通過前往下一頁===
+          // ** ===資料整理===
+          this.form.nnbPromoteUnit = this.nnbPromoteUnit
+          this.form.nnbPromoterCode = this.promoteEployeeCode
+          this.form.nnbProjCode = this.projectCode
+          this.form.checkUSA = this.iAmNative
+          this.form.checkAgree = this.checkErules
+          const res = await ServiceN.newNewBankApply
+          if (res.status === 200) {
+            if (res.data.message) {
+              PublicService.showAPIMsg(res.data.message)
+            }
+            if (res.data.status === '01000') {
+              this.url = res.result.transUrl
+              setTimeout(() => {
+                window.open(this.url)
+              }, 1000)
+            }
+          }
           this.$router.push('/dspApplicationNNB_finish')
         } else {
           // ** ===錯誤訊息彙整===
           this.$custom.validate.showErrors(collection.errors)
         }
       } else {
-        console.log(2)
         collection.errors = await this.$refs.myForm.getErrors()
         if (Object.keys(collection.errors).length === 0) {
           this.$router.push('/dspApplicationNNB_finish')
@@ -202,7 +230,6 @@ export default {
       // ? 清空errors
       dom.setFieldError(fieldName, '')
       // ? 單位驗證
-      console.log(code, fieldName, dom, nextid)
       const idRule = /^\d{3}$/
       if (idRule.test(code)) {
         document.getElementById(nextid).focus()
@@ -214,13 +241,10 @@ export default {
       // ? 清空errors
       dom.setFieldError(fieldName, '')
       // ? 員編驗證
-      console.log(code)
       const idRule = /^\d{7}$/
       if (idRule.test(code)) {
-        console.log(22)
         document.getElementById(nextid).focus()
       } else {
-        console.log(2222)
         dom.setFieldError(fieldName, '請輸入7碼推廣員編代碼')
         return false
       }
