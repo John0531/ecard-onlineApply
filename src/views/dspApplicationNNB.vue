@@ -26,11 +26,11 @@
                         <h4 class="text-center my-4">~ 數位存款帳戶線上開戶方便又快速 ~</h4>
                     </div>
                     <div class="text-center">
-                        <router-link to='/dspApplicationNNB_Apply'
+                        <button @click='newNewBankChk()'
                         class="btn new-new-bank-btn text-white"
                         >
                         手刀開戶
-                        </router-link>
+                        </button>
                         <button onclick="location.href='https://card.ubot.com.tw/eCard/'" class="btn new-new-bank-btn" type="" value="">下次再來</button>
                         <button onclick="location.href='https://web.ubot.com.tw/UB/new_bank_a/index.aspx'" class="btn new-new-bank-btn" type="" value="">更多優惠</button>
                     </div>
@@ -40,3 +40,63 @@
         </div>
     </section>
 </template>
+
+<script>
+import ServiceN from '@/service/CardFriend_N.Service.js'
+import PublicService from '@/service/Public.Service.js'
+
+export default {
+  data () {
+    return {
+      agreeModal: '', // ? 同意Modal
+      agreement: [], // ? Modal四項同意欄
+      agreementAll: false, // ?已同意Modal上所有申請條款
+      checkagree: false, // ?同意個資聲明
+      // *接值欄位
+      cardNumber: {
+        code1: '',
+        code2: '',
+        code3: '',
+        code4: '',
+        codeAll: '3567030082389103'
+      },
+      validThru: '',
+      CSC: '',
+      phoneNumber: '',
+      termsFile: [],
+      termsHtml: [],
+      brthDt: '',
+      oid: '',
+      // *post欄位
+      chkData:
+      {
+        obCardNo: '',
+        oExpDay: '',
+        oCvv: '',
+        omobilePhone: '',
+        agreeTerms: null,
+        personalDataAuthorized: null
+      }
+    }
+  },
+  methods: {
+    async newNewBankChk () {
+      const res = await ServiceN.newNewBankChk()
+      if (res.status === 200) {
+        console.log(res)
+        if (res.data.message) {
+          PublicService.showAPIMsg(res.data.message)
+        }
+        if (res.data.status === '00900') {
+          setTimeout(() => {
+            this.$router.push('/dspApplicationNNB_Apply')
+          }, 1000)
+        }
+      }
+    }
+  },
+  mounted () {
+    //
+  }
+}
+</script>

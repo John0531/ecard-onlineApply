@@ -181,6 +181,33 @@ const service = {
       return res
     } catch {
     }
+  },
+  async newNewBankChk () {
+    try {
+      const file = {}
+      const data = JSON.stringify(file)
+      const url = `${process.env.VUE_APP_BASE_API}/NewNewBank/Chk`
+      const options = {
+        headers: { 'content-type': 'application/json' }
+      }
+      const res = await axios.post(url, data, options)
+      return res
+    } catch (err) {
+      return err
+    }
+  },
+  async newNewBankApply (form) {
+    try {
+      const data = JSON.stringify(form)
+      const url = `${process.env.VUE_APP_BASE_API}/NewNewBank/Apply`
+      const options = {
+        headers: { 'content-type': 'application/json' }
+      }
+      const res = await axios.post(url, data, options)
+      return res
+    } catch (err) {
+      return err
+    }
   }
 
 }
