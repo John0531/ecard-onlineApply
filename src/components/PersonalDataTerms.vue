@@ -385,14 +385,17 @@ export default {
       this.ticketInfo = result.ticketInfo
     },
     async submit () {
-      // ? 驗證檢查
+      // ? 前端驗證所有規則
       await this.$refs.form.validate()
       const errors = this.$refs.form.getErrors()
       if (Object.keys(errors).length !== 0) {
         this.$custom.validate.showErrors(errors)
         return
       }
-      // ? 驗證檢查 end
+      // ? 前端驗證所有規則 end
+      if (this.flgLine === 'N') {
+        this.Form.linePNPType = ''
+      }
       const postData = JSON.parse(JSON.stringify(this.Form))
       postData.autoBonus = !postData.autoBonus
       for (const i in postData) {

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 const routes = [
   {
@@ -10,14 +11,23 @@ const routes = [
         name: '線上辦卡',
         component: () => import('../views/OnlineApply.vue'),
         beforeEnter: (to, from, next) => {
-          const { GID, IDE } = to.query
+          const { GID, IDE, parm } = to.query
+          if (parm === 'LB23041218270380023452') {
+            if (GID !== '81' || IDE !== 'A') {
+              Swal.fire(
+                '不合法參數',
+                '',
+                'warning'
+              )
+              window.location.href = 'https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014'
+            }
+          }
           if (GID && IDE) {
             // 回到第一頁就是給我重來
             sessionStorage.clear()
             next()
           } else {
-            alert('不合法參數值傳遞')
-            window.location.href = 'https://www.google.com/?hl=zh_tw'
+            window.location.href = 'https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014'
           }
         },
         meta: {
