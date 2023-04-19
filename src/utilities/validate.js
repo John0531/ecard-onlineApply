@@ -236,7 +236,7 @@ const validate = {
     if (idRule.test(code)) {
       return true
     }
-    return '請輸入正確的信用卡格式'
+    return '請輸入正確的信用卡卡號'
   },
   //* ==== 19. 輸入值強制轉大寫英文 ====
   watchToUpper (data) {
@@ -249,7 +249,7 @@ const validate = {
     if (Rule.test(value)) {
       return true
     }
-    return '請輸入正確的手機格式'
+    return '請輸入正確的行動電話'
   },
   //* ==== 21. 中文字檢核 ====
   checkChinese (value) {
@@ -279,7 +279,7 @@ const validate = {
     if (idRule2.test(code)) {
       return true
     }
-    return '請輸入正確的信用卡安全碼格式'
+    return '請輸入正確的信用卡背後末三碼'
   },
   //* ==== 25. 取得下拉選單日期 ====
   // ? 帶入參數為 v-model 綁定之物件，回傳為下拉年/月/日之物件包陣列
@@ -365,6 +365,15 @@ const validate = {
     } else {
       return '請輸入正確格式身份證與居留證' // 不符合任何格式
     }
+  },
+  //* ==== 29. 檢查信用卡有效期限 ====
+  validThru (code) {
+    // ? 信用卡有效期限驗證
+    const idRule = /^\d{4}$/
+    if (idRule.test(code)) {
+      return true
+    }
+    return '請輸入正確的信用卡有效期限'
   }
 }
 
