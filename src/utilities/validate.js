@@ -4,7 +4,7 @@ import store from '../store'
 const validate = {
   ...AllRules,
   chkKeyValueEng (input) {
-    const Rule = /^[A-Za-z]+$/
+    const Rule = /^[A-Za-z ]+$/
     if (Rule.test(input)) {
       return true
     }
