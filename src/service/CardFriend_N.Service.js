@@ -49,7 +49,6 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/CardFormPreview/Preview`
       const res = await axios.get(url)
-      console.log(res)
       return res.data.result
     } catch (err) {
     }

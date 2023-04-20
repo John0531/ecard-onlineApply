@@ -560,12 +560,12 @@
           >
             修改資料
           </router-link>
-          <router-link
-            to="/OnLineApply_Fillin_OT_Up"
+          <button
+            @click.prevent="nextPage"
             class="btn btn-primary btn-lg mx-1"
           >
             下一步
-          </router-link>
+          </button>
         </div>
       </div>
     </div>
@@ -574,6 +574,7 @@
 
 <script>
 import service from '@/service/CardFriend_N.Service.js'
+import PublicService from '@/service/Public.Service.js'
 
 export default {
   data () {
@@ -634,6 +635,12 @@ export default {
       }
       sessionStorage.setItem('FillinData', JSON.stringify(sessionData))
       // ? 回塞 sessionStorage end
+    },
+    async nextPage () {
+      const result = await PublicService.createPdf()
+      if (result) {
+        this.$router.push('/OnLineApply_Fillin_OT_Up')
+      }
     }
   },
   mounted () {

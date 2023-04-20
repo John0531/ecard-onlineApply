@@ -1385,6 +1385,7 @@
 <script>
 import PublicService from '@/service/Public.Service.js'
 import service from '@/service/CardFriend_N.Service.js'
+import sortJson from '@/assets/json/Fillin_OT_sort.json'
 
 class Address {
   constructor (address) {
@@ -1403,6 +1404,7 @@ class Address {
 export default {
   data () {
     return {
+      // sortJson: sortJson,
       pageLoad: {},
       Apply_N_Type: sessionStorage.getItem('Apply_N_Type'),
       selectJson: JSON.parse(localStorage.getItem('SELECT_JSON')),
@@ -1677,23 +1679,9 @@ export default {
       this.$refs.form.setErrors({}) // ? 先清除所有上次驗證的錯誤再驗證
       // ? 前端驗證所有規則
       this.$custom.validate.checkDate(this.Form.iddate, this.$refs.form, '身分證發證日期')
-      // await this.$refs.form.validate()
-      await this.$refs.form.validateField('發證地點')
-      await this.$refs.form.validateField('發證類型')
-      await this.$refs.form.validateField('中文姓名')
-      await this.$refs.form.validateField('英文姓名')
-      await this.$refs.form.validateField('出生地')
-      if (this.Form.birth.birthplaceKey === '其它') {
-        await this.$refs.form.validateField('出生地-其他')
-      }
-      await this.$refs.form.validateField('國籍')
-      if (this.Form.billType === 1) {
-        await this.$refs.form.validateField('電子信箱')
-      }
+      await this.$refs.form.validate()
       this.$custom.validate.CheckAddressAll(this.Form.homeAddr, this.$refs.form, '戶籍地址')
       this.$custom.validate.CheckAddressAll(this.Form.liveAddr, this.$refs.form, '居住地址')
-      await this.$refs.form.validateField('帳單地址')
-      await this.$refs.form.validateField('寄卡地址')
       if (this.Form.home.homeAreaCode || this.Form.home.homeTel) {
         this.$custom.validate.chkKeyValueLength(this.Form.home.homeAreaCode, this.$refs.form, '戶籍電話區碼', 2, 4)
         this.$custom.validate.chkKeyValueLength(this.Form.home.homeTel, this.$refs.form, '戶籍電話號碼', 6, 8)
@@ -1702,44 +1690,15 @@ export default {
         this.$custom.validate.chkKeyValueLength(this.Form.live.liveAreaCode, this.$refs.form, '居住電話區碼', 2, 4)
         this.$custom.validate.chkKeyValueLength(this.Form.live.liveTel, this.$refs.form, '居住電話號碼', 6, 8)
       }
-      await this.$refs.form.validateField('帳單形式')
-      if (this.Apply_N_Type === 'Online' && this.pageLoad.flgDigi !== 'N') {
-        await this.$refs.form.validateField('申請數位卡')
-      }
-      await this.$refs.form.validateField('畢業國小名稱')
-      if (this.pageLoad.flgStudent === 'Y') {
-        await this.$refs.form.validateField('是否為學生')
-      }
       if (this.Form.isStudent === 'true') {
-        await this.$refs.form.validateField('家長姓名')
-        await this.$refs.form.validateField('家長聯絡電話')
         this.$custom.validate.CheckAddressAll(this.Form.parentAddr, this.$refs.form, '家長通訊地址')
       }
-      await this.$refs.form.validateField('公司名稱')
-      await this.$refs.form.validateField('公司統一編號')
       if (this.Form.billAddr === '3' || this.Form.sendCardAddr === '3') {
         this.$custom.validate.CheckAddressAll(this.Form.compAddr, this.$refs.form, '公司地址')
       }
-      await this.$refs.form.validateField('職稱')
-      await this.$refs.form.validateField('年資')
-      await this.$refs.form.validateField('職業別')
-      if (this.Form.job.jobTypeKey === '0') {
-        await this.$refs.form.validateField('職業別-其他')
-      }
-      await this.$refs.form.validateField('職級別')
-      await this.$refs.form.validateField('主要所得及資金來源')
-      if (this.Form.IncomeMain.incomeKey === '9') {
-        await this.$refs.form.validateField('主要所得及資金來源-其他')
-      }
-      await this.$refs.form.validateField('月收入')
-      await this.$refs.form.validateField('推廣單位代號')
-      await this.$refs.form.validateField('推廣人員編號')
-      if (this.pageLoad.flgAmwayNo === 'Y') {
-        await this.$refs.form.validateField('安麗直銷商/會員編號')
-      }
       const errors = this.$refs.form.getErrors()
       if (Object.keys(errors).length !== 0) {
-        this.$custom.validate.showErrors(errors)
+        this.$custom.validate.showErrors(errors, sortJson)
         return
       }
       // ? 前端驗證所有規則 end

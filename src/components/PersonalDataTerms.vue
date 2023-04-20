@@ -419,7 +419,10 @@ export default {
           sessionStorage.setItem('FillinData', JSON.stringify(FillinData))
           this.$router.push('/OnLineApply_Fillin_OT_2')
         } else if (this.$route.name === '卡友-個資使用條款') {
-          this.$router.push('/OnLineApply_Fillin_Download')
+          const result = await PublicService.createPdf()
+          if (result) {
+            this.$router.push('/OnLineApply_Fillin_Download')
+          }
         }
       }
     }

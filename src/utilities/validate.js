@@ -221,11 +221,31 @@ const validate = {
   //* ==== 17. 顯示錯誤訊息 ====
   // ? 參數說明:
   // ? errors: 使用套件函式取得的錯誤資訊
-  showErrors (errors) {
+  // ? sortTable: 錯誤訊息排序表
+  showErrors (errors, sortTable) {
     let errMsg = ''
+    let errorArray = []
     for (const [key, value] of Object.entries(errors)) {
-      errMsg += `*【${key}】 : ${value}<br>`
+      errorArray.push({
+        field: key,
+        error: value
+      })
     }
+    if (sortTable) {
+      errorArray.forEach((item1) => {
+        sortTable.forEach((item2) => {
+          if (item1.field === item2.field) {
+            item1.sort = item2.sort
+          }
+        })
+      })
+      errorArray = errorArray.sort((a, b) => {
+        return a.sort - b.sort
+      })
+    }
+    errorArray.forEach((item) => {
+      errMsg += `*【${item.field}】 : ${item.error}<br>`
+    })
     store.commit('getErrorMsg', errMsg)
     store.state.errorModal.show()
   },
