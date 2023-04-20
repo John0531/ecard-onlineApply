@@ -1,4 +1,5 @@
 import axios from 'axios'
+import store from '@/store'
 // import { hash } from '@/utilities/hash.js'
 // import termsJson from '@/assets/terms.json'
 
@@ -37,6 +38,9 @@ const service = {
       const res = await axios.post(url, postData)
       if (res.data.status === '00400') {
         return true
+      } else {
+        store.commit('getErrorMsg', `${res.data.message}(${res.data.status})`)
+        store.state.errorModal.show()
       }
     } catch (err) {
     }
