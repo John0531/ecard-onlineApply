@@ -721,6 +721,7 @@ export default {
       if (Object.keys(collection.errors).length === 0) {
         // ** ===全部通過打API才前往下一頁===
         // ** ===整理資料===
+        console.log(this.identitiyPack1.file.split(',')[1])
         this.form.upload1 = this.identitiyPack1.file.split(',')[1]
         this.form.upload2 = this.identitiyPack2.file.split(',')[1]
         this.form.upload3 = this.identitiyPack3.file.split(',')[1]
