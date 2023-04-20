@@ -637,8 +637,6 @@ export default {
     },
     async init () {
       const { parm, GID, IDE, PJN, UTC, USC } = this.$route.query
-      const linkCard = await serviceY.cardApplyLoad_PageLoad_LB(GID, IDE, parm, PJN)
-      console.log(linkCard)
       if (this.isLineBank) {
         const linkCard = await serviceY.cardApplyLoad_PageLoad_LB(GID, IDE, parm, PJN)
         console.log(linkCard)

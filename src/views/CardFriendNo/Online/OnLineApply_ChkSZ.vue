@@ -336,7 +336,7 @@ export default {
     checkAgreement () {
       this.agreeModal.show()
       const ck = document.querySelector('#checkbox1')
-      if (this.agreement.length !== 4) {
+      if (this.agreement.length !== this.termsFile.length) {
         ck.checked = false
         return
       }
@@ -344,7 +344,7 @@ export default {
       ck.checked = true
     },
     checkTotal () {
-      if (this.agreement.length !== 4) {
+      if (this.agreement.length !== this.termsFile.length) {
         this.$swal.fire({
           title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
           showConfirmButton: false,
@@ -442,7 +442,7 @@ export default {
   },
   watch: {
     agreement (n) {
-      if (n.length === 4) {
+      if (n.length === this.termsFile.length) {
         this.agreementAll = true
       } else {
         this.agreementAll = false
