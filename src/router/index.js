@@ -324,6 +324,7 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
+  mode: 'hash',
   scrollBehavior (to, from) {
     return {
       top: 0
