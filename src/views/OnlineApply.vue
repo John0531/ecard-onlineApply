@@ -587,7 +587,7 @@ export default {
             alert(message)
             break
           default:
-            alert('超出預期錯誤')
+            alert('作業失敗，請重新輸入或洽聯邦信用卡客服專線，02-25455168、07-2269393。')
             break
         }
       } catch (error) {
@@ -639,9 +639,9 @@ export default {
       const { parm, GID, IDE, PJN, UTC, USC } = this.$route.query
       if (this.isLineBank) {
         const linkCard = await serviceY.cardApplyLoad_PageLoad_LB(GID, IDE, parm, PJN)
+        console.log(linkCard)
         const { status, result, message } = linkCard
         // const { id, brthDt, cardInfoList, flgYesgo } = result
-
         console.log(status)
         switch (status) {
           case '00700' :
@@ -670,7 +670,7 @@ export default {
             window.location.href = 'https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014'
             break
           default:
-            alert('超出預期錯誤')
+            alert('作業失敗，請重新輸入或洽聯邦信用卡客服專線，02-25455168、07-2269393。')
             break
         }
       } else {
@@ -697,7 +697,7 @@ export default {
             window.location.href = 'https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014'
             break
           default:
-            alert('超出預期錯誤')
+            alert('作業失敗，請重新輸入或洽聯邦信用卡客服專線，02-25455168、07-2269393。')
             break
         }
       }

@@ -80,15 +80,15 @@ export default {
     async onSubmit () {
       try {
         const response = await service.CardSendApply(this.request)
-        const { status, message, result } = response.data
+        const { status, result } = response.data
         switch (status) {
           case '00800' :
             sessionStorage.clear()
-            this.$router.push('/dspApplicationNNB')
+            this.$router.push('/OnLineApply_Fillin_Finish')
             break
           case '00801' :
             sessionStorage.clear()
-            alert(message)
+            this.$router.push('/OnLineApply_Fillin_Finish')
             break
           case '00802' :
             sessionStorage.clear()

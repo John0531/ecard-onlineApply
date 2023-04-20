@@ -428,7 +428,7 @@ export default {
     checkAgreement () {
       this.agreeModal.show()
       const ck = document.querySelector('#checkbox1')
-      if (this.agreement.length !== 4) {
+      if (this.agreement.length !== this.termsFile.length) {
         ck.checked = false
         return
       }
@@ -437,7 +437,7 @@ export default {
     },
     // ?modal上四欄位確認
     checkTotal () {
-      if (this.agreement.length < 4) {
+      if (this.agreement.length < this.termsFile.length) {
         this.$swal.fire({
           title: '您尚有部份條款未勾選，請詳閱並同意全部條款，以確保自身權益！',
           showConfirmButton: false,

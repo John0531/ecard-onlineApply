@@ -33,12 +33,12 @@
           <a href="Foreigner.htm">外籍人士專區 Foreigner Area</a>
           <a href="Map.htm">網站導覽</a>
           <a href="https://www.facebook.com/unionbankoftaiwan" target="_blank"
-            ><i class="fab fa-facebook-square"></i>聯邦粉絲團</a
+            >&#160;<i class="fab fa-facebook-square"></i>聯邦粉絲團</a
           >
           <a
             href="https://liff.line.me/1645278921-kWRPP32q?accountId=ubot"
             target="_blank"
-            ><i class="fab fa-line"></i>LINE官方帳號</a
+            >&#160;<i class="fab fa-line"></i>LINE官方帳號</a
           >
         </div>
       </div>

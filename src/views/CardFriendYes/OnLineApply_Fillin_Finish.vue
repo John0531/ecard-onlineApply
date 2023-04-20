@@ -10,82 +10,62 @@
   </div>
   <!-- 主要內容 -->
   <section class="mainArea">
-    <div class="container-xl">
-      <div class="row justify-content-md-center">
-        <div class="blue_box mb-4">
-          <div class="blue_box_bg">
-            <div class="my-4 text-center">感謝您的申請，本案將進入後續審核程序。</div>
-          </div>
-        </div>
-        <div class="text-center button_group">
-          <button
-            onclick="location.href='#'"
-            class="btn btn-primary btn-lg mx-1"
-            type="submit"
-            value=""
-          >
-            回首頁
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="container-xl">
-      <div class="row justify-content-md-center pt-1 pt-md-3">
-        <div class="new-new-bank-title">
-          <img
-            id="NewNewBank_img"
-            src="@/assets/images/form/NewNewBank_banner.gif"
-            class="img-fluid d-none d-lg-block mx-auto"
-            alt=""
-          />
-          <img
-            id="NewNewBank_img_s"
-            src="@/assets/images/form/NewNewBank_banner_s.gif"
-            class="img-fluid d-lg-none"
-            alt=""
-          />
-        </div>
-        <div id="NNB_Intro" class="new-new-bank">
-          <div class="new-new-bank-txt">
-            <div class="new-new-bank-title-blue text-center mb-3">
-              還沒有聯邦帳戶嗎?<br />快來體驗【New New Bank】
+        <div class="container-xl">
+            <div class="row justify-content-md-center pt-1 pt-md-3">
+                <div class="dataTitle">
+                    <h3><span>申辦訊息</span></h3>
+                </div>
+                <div class="col-lg-10">
+                    <div class="result_message mb-4">
+                        <div class="py-2 py-md-3">
+                          <p class="text-center"><span class="red_text">感謝您申辦聯邦銀行信用卡！</span><br>
+                            我們會儘速為您處理，祝您 順心如意。
+                          </p>
+                        </div>
+                        <div class="d-flex flex-wrap my-2 my-md-3">
+                            <div class="col-12 col-md-4 Apply_OT">
+                                <div class="Apply_OT_pic">
+                                    <a href="https://lin.ee/15Gfbt4" target="_blank"><img src="../../assets/images/form/OT_icon01.png" alt="聯邦LINE官方好友" title="聯邦LINE官方好友" /></a>
+                                </div>
+                                <div class="Apply_OT_txt pt-3">
+                                    <h3>聯邦LINE官方好友</h3>
+                                    <h4>享筆筆消費通知不漏接</h4>
+                                </div>
+                                <div class="text-center mb-3">
+                                    <button onclick="window.open('https://lin.ee/15Gfbt4')" class="btn btn-primary btn-md mx-1" type="submit" value="">立即綁定</button>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4 Apply_OT">
+                              <div class="Apply_OT_pic">
+                                  <a href="https://web.ubot.com.tw/reload/transferUbotAPP.htm" target="_blank"><img src="../../assets/images/form/OT_icon02.png" alt="聯邦行動銀行" title="聯邦行動銀行" /></a>
+                              </div>
+                              <div class="Apply_OT_txt pt-3">
+                                  <h3>聯邦行動銀行</h3>
+                                  <h4>各項服務隨時掌握</h4>
+                              </div>
+                              <div class="text-center mb-3">
+                                  <button onclick="window.open('https://web.ubot.com.tw/reload/transferUbotAPP.htm')" class="btn btn-primary btn-md mx-1" type="submit" value="">立即下載</button>
+                              </div>
+                            </div>
+                            <div class="col-12 col-md-4 Apply_OT">
+                                <div class="Apply_OT_pic">
+                                    <a href="https://card.ubot.com.tw/eCard/CardApply/inquiry.aspx" target="_blank"><img src="../../assets/images/form/OT_icon03.png" alt="信用卡進度查詢" title="信用卡進度查詢" /></a>
+                                </div>
+                                <div class="Apply_OT_txt pt-3">
+                                    <h3>信用卡進度查詢</h3>
+                                    <h4>信用卡申辦狀況</h4>
+                                </div>
+                                <div class="text-center mb-3">
+                                    <button onclick="window.open('https://card.ubot.com.tw/eCard/CardApply/inquiry.aspx')" class="btn btn-primary btn-md mx-1" type="submit" value="">立即查詢</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tks_message_end">敬祝您 順心 如意！！如您仍有其他疑問，請電洽聯邦銀行信用卡客戶服務專線：<br>(02)2545-5168或(07)226-9393或使用<a href="https://card.ubot.com.tw/eCard/activity/quickSearch/index.htm?nt01=1" target="_blank"><u>線上客服</u></a>詢問。
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div
-              class="new-new-bank-title-red text-left col-10 col-sm-5 col-lg-4 mx-auto mb-3 ps-lg-4"
-            >
-              ☑ 優利活期儲蓄存款<br />
-              ☑ 每月跨行提款/轉帳優惠<br />
-              ☑ 線上外幣結匯優惠<br />
-            </div>
-            <h4 class="text-center my-4">~ 數位存款帳戶線上開戶方便又快速 ~</h4>
-          </div>
-          <div class="text-center">
-            <button
-              onclick="location.href='https://card.ubot.com.tw/eCard/'"
-              class="btn new-new-bank-btn">
-              手刀開戶
-            </button>
-            <button
-              onclick="location.href='https://card.ubot.com.tw/eCard/'"
-              class="btn new-new-bank-btn"
-              value=""
-            >
-              下次再來
-            </button>
-            <button
-              onclick="location.href='https://web.ubot.com.tw/UB/new_bank_a/index.aspx'"
-              class="btn new-new-bank-btn"
-              value=""
-            >
-              更多優惠
-            </button>
-          </div>
-          <div class="new-new-bank-txt text-left text-md-center">
-            ＊ 如您已有本行帳戶則無法申請數位帳戶，如有任何問題請與我們聯絡02-25451788。
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
   <!-- 主要內容 END -->
 </template>
