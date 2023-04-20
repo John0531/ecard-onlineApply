@@ -100,6 +100,20 @@ const service = {
     store.commit('setAPIMsg', APIMsg)
     store.state.apiModal.show()
   },
+  async createPdf () {
+    try {
+      const url = `${process.env.VUE_APP_BASE_API}/CardFromPDF/CreatePDF`
+      const res = await axios.get(url)
+      if (res.data.status === '00600') {
+        return true
+      } else {
+        store.commit('getErrorMsg', `${res.data.message}(${res.data.status})`)
+        store.state.errorModal.show()
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  },
   async previewPdf () {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/CardFromPDF/PreviewPDF`
