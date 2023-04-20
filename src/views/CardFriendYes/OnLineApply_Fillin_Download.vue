@@ -71,10 +71,11 @@ export default {
     async downloadPdf () {
       const response = await service.previewPdf()
       console.log(response)
-      const blob = new Blob([response], { type: 'application/pdf' })
+      const blob = new Blob([response.data], { type: 'application/pdf' })
       const link = document.createElement('a')
       link.href = window.URL.createObjectURL(blob)
-      link.download = 'test.pdf'
+      // ?取檔名
+      link.download = response.headers['content-disposition'].split(';')[1].split('=')[1]
       link.click()
     },
     async onSubmit () {
