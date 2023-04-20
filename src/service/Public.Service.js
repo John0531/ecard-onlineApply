@@ -102,11 +102,11 @@ const service = {
   },
   async previewPdf () {
     try {
-      const url = `${process.env.VUE_APP_BASE_API}/CardFromPDF/PreviewPDF`
+      const url = `${process.env.VUE_APP_BASE_API}/CardFromPDF/DownloadPDF`
       const res = await axios.get(url, { responseType: 'blob' })
       console.log(res)
-      console.log(res.headers)
-      // return { res, fileName }
+      console.log(res.headers['Content-Disposition'])
+      return res
     } catch (err) {
       console.log(err)
       return null
