@@ -827,11 +827,11 @@ export default {
     },
     async downloadFile () {
       const response = await PublicService.previewPdf()
-      const blob = new Blob([response], { type: 'application/pdf' })
+      const blob = new Blob([response.data], { type: 'application/pdf' })
       const link = document.createElement('a')
       link.href = window.URL.createObjectURL(blob)
-      // ?取檔名
       link.download = response.headers['content-disposition'].split(';')[1].split('=')[1]
+      // link.download = `test.pdf`
       link.click()
     }
   },
