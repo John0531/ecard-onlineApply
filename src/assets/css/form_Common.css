@@ -98,6 +98,14 @@
     .mainArea p{   
         margin-bottom: 0px;
     }
+    .mainArea li {
+        margin-left: 0px;
+      }
+    @media all and (min-width:768px) {
+        .mainArea {
+            padding: 50px 10px 30px;
+        }
+      }
     /*--//主要內容 mainArea--*/
 
     /*--------------表單頁短的主視覺(主視覺，英文為key vision)--------------*/
@@ -168,6 +176,7 @@
         align-items: center;
         padding-left: 0px;
     }
+
     .formList li {
         display: flex;
         justify-content: center;

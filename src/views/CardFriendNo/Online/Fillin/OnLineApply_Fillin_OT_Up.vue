@@ -721,10 +721,10 @@ export default {
       if (Object.keys(collection.errors).length === 0) {
         // ** ===全部通過打API才前往下一頁===
         // ** ===整理資料===
-        this.form.upload1 = this.identitiyPack1.file
-        this.form.upload2 = this.identitiyPack2.file
-        this.form.upload3 = this.identitiyPack3.file
-        this.form.upload4 = this.identitiyPack4.file
+        this.form.upload1 = this.identitiyPack1.file.split(',')[1]
+        this.form.upload2 = this.identitiyPack2.file.split(',')[1]
+        this.form.upload3 = this.identitiyPack3.file.split(',')[1]
+        this.form.upload4 = this.identitiyPack4.file.split(',')[1]
         if (this.proofType === 'option2') {
           this.form.isMydata = true
         }
@@ -742,6 +742,9 @@ export default {
             // ?未來卡成功
             // ?localStorage 的token全部清掉
             localStorage.clear()
+            setTimeout(() => {
+              this.$router.push('/OnLineApply_Fillin_OT_finish')
+            }, 1000)
           }
           if (res.data.status === '00801') {
             // ? ===選擇自行上傳===
@@ -827,12 +830,18 @@ export default {
     },
     async downloadFile () {
       const response = await PublicService.previewPdf()
-      const blob = new Blob([response.data], { type: 'application/pdf' })
-      const link = document.createElement('a')
-      link.href = window.URL.createObjectURL(blob)
-      link.download = response.headers['content-disposition'].split(';')[1].split('=')[1]
-      // link.download = `test.pdf`
-      link.click()
+      if (response.status === '01799') {
+        PublicService.showAPIMsg(response.message)
+        return
+      }
+      if (response.status === 200) {
+        const blob = new Blob([response.data], { type: 'application/pdf' })
+        const link = document.createElement('a')
+        link.href = window.URL.createObjectURL(blob)
+        link.download = response.headers['content-disposition'].split(';')[1].split('=')[1]
+        // link.download = `test.pdf`
+        link.click()
+      }
     }
   },
   mounted () {

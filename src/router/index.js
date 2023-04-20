@@ -317,6 +317,14 @@ const routes = [
         meta: {
           title: '非卡友-NewNewBank申請完成'
         }
+      },
+      {
+        path: '/OnLineApply_Fillin_OT_finish',
+        name: '非卡友-申請完成',
+        component: () => import('../views/CardFriendNo/Online/Fillin/OnLineApply_Fillin_OT_finish.vue'),
+        meta: {
+          title: '非卡友-申請完成'
+        }
       }
     ]
   }
