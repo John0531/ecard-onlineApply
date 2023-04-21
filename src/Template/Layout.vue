@@ -21,6 +21,23 @@ export default {
     Footer,
     ErrorModal,
     APIModal
+  },
+  mounted () {
+    /* const cssLink = document.createElement('link')
+    cssLink.setAttribute('rel', 'stylesheet')
+    cssLink.setAttribute('type', 'text/css')
+    cssLink.setAttribute('href', 'https://card-beta.uitc.com.tw/eCard_source/css/style_B5.css')
+    document.body.appendChild(cssLink)
+    const cssLink1 = document.createElement('link')
+    cssLink1.setAttribute('rel', 'stylesheet')
+    cssLink1.setAttribute('type', 'text/css')
+    cssLink1.setAttribute('href', 'https://card-beta.uitc.com.tw/eCard_source/includeBlock/yesgogogo.css')
+    document.body.appendChild(cssLink1)
+    const cssLink2 = document.createElement('link')
+    cssLink2.setAttribute('rel', 'stylesheet')
+    cssLink2.setAttribute('type', 'text/css')
+    cssLink2.setAttribute('href', 'https://card-beta.uitc.com.tw/eCard_source/terms/css/terms.css')
+    document.body.appendChild(cssLink2) */
   }
 }
 </script>
@@ -33,7 +50,6 @@ export default {
   @import "~@/assets/css/NNB.css";
   @import "https://card-beta.uitc.com.tw/eCard_source/includeBlock/yesgogogo.css";
   @import "https://card-beta.uitc.com.tw/eCard_source/terms/css/terms.css";
-  /* @import "~@/assets/css/terms.css"; */
   @import "~@/assets/css/alert.css";
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button{
