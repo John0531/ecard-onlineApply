@@ -8,9 +8,9 @@ axios.defaults.withCredentials = true
 
 axios.interceptors.request.use(
   config => {
-    const token = sessionStorage.getItem('accessTK').substring(8)
-    if (token && !config.url.includes('terms.json') && !config.url.includes('.html') && !config.url.includes('Utility.json')) {
-      config.headers.Authorization = `Bearer ${token}`
+    const TK = sessionStorage.getItem('accessTK').substring(8)
+    if (TK && !config.url.includes('terms.json') && !config.url.includes('.html') && !config.url.includes('Utility.json')) {
+      config.headers.Authorization = `Bearer ${TK}`
     }
     store.commit('changeLoading', true)
     return config
@@ -20,9 +20,9 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   config => {
     store.commit('changeLoading', false)
-    const token = `${hash(8)}${config.headers.authorization}`
-    if (token) {
-      sessionStorage.setItem('accessTK', token)
+    if (config.headers.authorization) {
+      const TK = `${hash(8)}${config.headers.authorization}`
+      sessionStorage.setItem('accessTK', TK)
     }
     return config
   },
