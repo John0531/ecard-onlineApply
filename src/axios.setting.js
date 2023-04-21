@@ -20,8 +20,9 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   config => {
     store.commit('changeLoading', false)
-    if (config.headers.authorization) {
-      sessionStorage.setItem('accessTK', config.headers.authorization)
+    const token = config.headers.authorization
+    if (token) {
+      sessionStorage.setItem('accessTK', token)
     }
     return config
   },
