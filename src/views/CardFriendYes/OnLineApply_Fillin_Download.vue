@@ -70,13 +70,18 @@ export default {
   methods: {
     async downloadPdf () {
       const response = await service.previewPdf()
-      console.log(response)
-      const blob = new Blob([response.data], { type: 'application/pdf' })
-      const link = document.createElement('a')
-      link.href = window.URL.createObjectURL(blob)
-      // ?取檔名
-      link.download = response.headers['content-disposition'].split(';')[1].split('=')[1]
-      link.click()
+      if (response.status === '01799') {
+        service.showAPIMsg(response.message)
+        return
+      }
+      if (response.status === 200) {
+        const blob = new Blob([response.data], { type: 'application/pdf' })
+        const link = document.createElement('a')
+        link.href = window.URL.createObjectURL(blob)
+        // ?取檔名
+        link.download = response.headers['content-disposition'].split(';')[1].split('=')[1]
+        link.click()
+      }
     },
     async onSubmit () {
       try {
