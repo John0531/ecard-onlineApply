@@ -19,10 +19,10 @@
             :validation-schema="schema"
           >
           <div v-if="isLineBank">
-            <div class="formGroup">
+            <div class="formGroup d-flex justify-content-center">
               <ul class="formList formApply">
-                <li class="col-12 mb-2">
-                  <label for="">申請人身份證號</label>
+                <li class="col-12 mb-2 formId">
+                  <label for="">申請人身份證字號</label>
                   <div class="form-text">{{OnlineApply_y_Data.id}}</div>
                 </li>
                 <li class="col-12">
@@ -78,51 +78,88 @@
             </div>
             <div class="mt-3 mt-md-5">
               <div class="fee_box mb-3">
-                <h3><img src="images/form/fee_icon.gif" class="img-fluid" alt="" />年費定價說明：</h3>
-                    <table class="oddWhite">
-                      <tbody>
-                        <tr>
-                          <th colspan="3" nowrap="nowrap">LINE Bank VISA御璽卡</th>
-                        </tr>
-                        <tr>
-                          <td colspan="3" nowrap="nowrap"><span class="Green_text">使用電子化帳單（電子帳單、行動帳單、LINE帳單）成功且有效期間內享免年費</span></td>
-                        </tr>
-                        <tr>
-                          <td nowrap="nowrap">首年</td>
-                          <td nowrap="nowrap" colspan="2">免年費</td>
-                        </tr>
-                        <tr>
-                          <td rowspan="4" nowrap="nowrap">第二年起</td>
-                          <td colspan="2" class="text-left">依據每張卡片年費到期日往前推算一年，檢核同一身分證字號下之消費，若不符合標準則以單卡按以下標準計算收取年費(不分正、附卡)：</td>
-                        </tr>
-                        <tr>
-                          <td>年消費</td>
-                          <td>年費</td>
-                        </tr>
-                        <tr>
-                          <td>60,000元(含)以上</td>
-                          <td>免年費</td>
-                        </tr>
-                        <tr>
-                          <td>未達60,000元</td>
-                          <td>正卡1,000元、附卡1,000元
-                        </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div class="indentNote_OneText">
-                        <p>※每一卡別所提供之年費減免或折價優惠，每一持卡人僅得享有一次優惠，若於年費優惠期間截止前將卡片停用後又重新申請者，恕不再享有優惠。</p>
-                    </div>
+                <h3><img src="images/form/fee_icon.gif" class="img-fluid" alt="" />年費政策</h3>
+              <div v-html="feeDetail"></div>
+              <div class="cardDetail_fee">
+                <table class="oddWhite">
+                  <tbody>
+                    <tr>
+                      <th colspan="3" nowrap="nowrap">LINE Bank VISA御璽卡</th>
+                    </tr>
+                    <tr>
+                      <td colspan="3"><span class="text-fee-green">使用電子化帳單（電子帳單、行動帳單、LINE帳單）成功且有效期間內享免年費</span></td>
+                    </tr>
+                    <tr>
+                      <td nowrap="nowrap">首年</td>
+                      <td nowrap="nowrap" colspan="2">免年費</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="4" nowrap="nowrap">第二年起</td>
+                      <td colspan="2" class="text-left">依據每張卡片年費到期日往前推算一年，檢核同一身分證字號下之消費，若不符合標準則以單卡按以下標準計算收取年費(不分正、附卡)：</td>
+                    </tr>
+                    <tr>
+                      <td>年消費</td>
+                      <td>年費</td>
+                    </tr>
+                    <tr>
+                      <td>60,000元(含)以上</td>
+                      <td>免年費</td>
+                    </tr>
+                    <tr>
+                      <td>未達60,000元</td>
+                      <td>正卡1,000元、附卡1,000元
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="indentNote_OneText">
+                  <p>※每一卡別所提供之年費減免或折價優惠，每一持卡人僅得享有一次優惠，若於年費優惠期間截止前將卡片停用後又重新申請者，恕不再享有優惠。</p>
+                </div>
+              </div>
+                <!-- <table class="oddWhite">
+                  <tbody>
+                    <tr>
+                      <th colspan="3" nowrap="nowrap">LINE Bank VISA御璽卡</th>
+                    </tr>
+                    <tr>
+                      <td colspan="3" nowrap="nowrap"><span class="Green_text">使用電子化帳單（電子帳單、行動帳單、LINE帳單）成功且有效期間內享免年費</span></td>
+                    </tr>
+                    <tr>
+                      <td nowrap="nowrap">首年</td>
+                      <td nowrap="nowrap" colspan="2">免年費</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="4" nowrap="nowrap">第二年起</td>
+                      <td colspan="2" class="text-left">依據每張卡片年費到期日往前推算一年，檢核同一身分證字號下之消費，若不符合標準則以單卡按以下標準計算收取年費(不分正、附卡)：</td>
+                    </tr>
+                    <tr>
+                      <td>年消費</td>
+                      <td>年費</td>
+                    </tr>
+                    <tr>
+                      <td>60,000元(含)以上</td>
+                      <td>免年費</td>
+                    </tr>
+                    <tr>
+                      <td>未達60,000元</td>
+                      <td>正卡1,000元、附卡1,000元
+                    </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="indentNote_OneText">
+                    <p>※每一卡別所提供之年費減免或折價優惠，每一持卡人僅得享有一次優惠，若於年費優惠期間截止前將卡片停用後又重新申請者，恕不再享有優惠。</p>
+                </div> -->
               </div>
             </div>
           </div>
           <div v-else>
-            <div class="formGroup">
+            <div class="formGroup d-flex justify-content-center">
               <ul class="formList formApply">
-                <li class="col-12 mb-2">
-                  <label for="">申請人身份證號</label>
+                <li class="col-12 mb-2 formId">
+                  <label for="">申請人身份證字號</label>
                   <div>
-                    <Field v-model="OnlineApply_y_Data.id" name="申請人身份證號" maxlength="10" type="text" class="form-control" :class="{ 'is-invalid': errors['申請人身份證號'] }" :validateOnInput="true" @blur="OnlineApply_y_Data.id = $custom.validate.watchToUpper(OnlineApply_y_Data.id)"
+                    <Field v-model="OnlineApply_y_Data.id" name="申請人身份證號" maxlength="10" type="text" class="formApply_form_control form-control" :class="{ 'is-invalid': errors['申請人身份證號'] }" :validateOnInput="true" @blur="OnlineApply_y_Data.id = $custom.validate.watchToUpper(OnlineApply_y_Data.id)"
                     />
                     <span style="color: #db0031;font-size: 1em !important;">{{ errors["申請人身份證號"] }}</span>
                   </div>
@@ -227,43 +264,49 @@
                     </div>
                 </div>
             </div>
-          <div class="fee_box mb-3 mt-3 mt-md-5">
-            <h3><img src="images/form/fee_icon.gif" class="img-fluid" alt="" />年費定價說明：</h3>
-            <table class="oddWhite">
-              <tbody>
-                <tr>
-                  <th colspan="3" nowrap="nowrap">LINE Bank VISA御璽卡</th>
-                </tr>
-                <tr>
-                    <td colspan="3" nowrap="nowrap"><span class="Green_text">使用電子化帳單（電子帳單、行動帳單、LINE帳單）成功且有效期間內享免年費</span></td>
-                </tr>
-                <tr>
-                  <td nowrap="nowrap">首年</td>
-                  <td nowrap="nowrap" colspan="2">免年費</td>
-                </tr>
-                <tr>
-                  <td rowspan="4" nowrap="nowrap">第二年起</td>
-                  <td colspan="2" class="text-left">依據每張卡片年費到期日往前推算一年，檢核同一身分證字號下之消費，若不符合標準則以單卡按以下標準計算收取年費(不分正、附卡)：</td>
-                </tr>
-                <tr>
-                  <td>年消費</td>
-                  <td>年費</td>
-                </tr>
-                <tr>
-                  <td>60,000元(含)以上</td>
-                  <td>免年費</td>
-                </tr>
-                <tr>
-                  <td>未達60,000元</td>
-                  <td>正卡1,000元、附卡1,000元
-                </td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="indentNote_OneText">
-                <p>※每一卡別所提供之年費減免或折價優惠，每一持卡人僅得享有一次優惠，若於年費優惠期間截止前將卡片停用後又重新申請者，恕不再享有優惠。</p>
+            <div class="fee_box mb-3 mt-3 mt-md-5">
+              <h3><img src="images/form/fee_icon.gif" class="img-fluid" alt="" />年費政策</h3>
+              <div class="cardDetail_fee">
+                <table class="oddWhite">
+                  <tbody>
+                    <tr>
+                      <th colspan="3" nowrap="nowrap">LINE Bank VISA御璽卡</th>
+                    </tr>
+                    <tr>
+                      <td colspan="3"><span class="text-fee-green">使用電子化帳單（電子帳單、行動帳單、LINE帳單）成功且有效期間內享免年費</span></td>
+                    </tr>
+                    <tr>
+                      <td nowrap="nowrap">首年</td>
+                      <td nowrap="nowrap" colspan="2">免年費</td>
+                    </tr>
+                    <tr>
+                      <td rowspan="4" nowrap="nowrap">第二年起</td>
+                      <td colspan="2" class="text-left">依據每張卡片年費到期日往前推算一年，檢核同一身分證字號下之消費，若不符合標準則以單卡按以下標準計算收取年費(不分正、附卡)：</td>
+                    </tr>
+                    <tr>
+                      <td>年消費</td>
+                      <td>年費</td>
+                    </tr>
+                    <tr>
+                      <td>60,000元(含)以上</td>
+                      <td>免年費</td>
+                    </tr>
+                    <tr>
+                      <td>未達60,000元</td>
+                      <td>正卡1,000元、附卡1,000元
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="indentNote_OneText">
+                  <p>※每一卡別所提供之年費減免或折價優惠，每一持卡人僅得享有一次優惠，若於年費優惠期間截止前將卡片停用後又重新申請者，恕不再享有優惠。</p>
+                </div>
+              </div>
             </div>
-          </div>
+            <!-- <div class="fee_box mb-3 mt-3 mt-md-5">
+              <h3><img src="images/form/fee_icon.gif" class="img-fluid" alt="" />年費政策123</h3>
+              <div v-html="feeDetail"></div>
+            </div> -->
           </div>
             <!----------------//fee ---------------->
             <!-------------------本人已詳閱---------------------->
@@ -423,7 +466,8 @@ export default {
         onLineApply_Fillin_Data: '',
         onLineApply_Fillin_Card: ''
       },
-      wucUITCeBankTerms: null
+      wucUITCeBankTerms: null,
+      feeDetail: null
     }
   },
   computed: {
@@ -729,6 +773,8 @@ export default {
     const termsName = ['聯邦銀行電子銀行服務申請約定條款', '']
     const termsHtml = await servicePublic.getTermsHtml(termsName)
     this.wucUITCeBankTerms = termsHtml[0]
+    // const feeHtml = await servicePublic.getYearFee()
+    // this.feeDetail = feeHtml
     this.contractModal = new bootstrap.Modal(this.$refs.contractModal, {
       backdrop: 'static'
     })
@@ -781,5 +827,27 @@ export default {
 <style scoped>
 .is-invalid-important {
 border-color: #dc3545 !important;
+}
+
+.formId {
+  justify-content: center !important;
+}
+
+.formList li {
+  display: flex;
+  justify-content: start !important;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.formList select:first-of-type {
+  min-width: 85px;
+  max-width: 192px;
+}
+
+.formList select {
+  margin-left: 5px;
+  margin-right: 5px;
+  min-width: 60px;
 }
 </style>
