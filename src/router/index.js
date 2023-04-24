@@ -331,7 +331,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('card_apply'),
   scrollBehavior (to, from) {
     return {
       top: 0

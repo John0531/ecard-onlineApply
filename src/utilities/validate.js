@@ -353,6 +353,7 @@ const validate = {
     if (!dateList.day.includes(selectedDate.Day)) {
       selectedDate.Day = ''
     }
+    console.log(dateList)
     return dateList
   },
   //* ==== 26. 檢查下拉日期格式 ====

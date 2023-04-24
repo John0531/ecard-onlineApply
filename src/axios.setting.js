@@ -1,14 +1,14 @@
 import axios from 'axios'
 // import router from './router'
 import store from './store'
-import { hash } from '@/utilities/hash.js'
+// import { hash } from '@/utilities/hash.js'
 
 // ?設定cross跨域 並設定訪問許可權 允許跨域攜帶cookie資訊
 axios.defaults.withCredentials = true
 
 axios.interceptors.request.use(
   config => {
-    const TK = sessionStorage.getItem('accessTK').substring(8)
+    const TK = sessionStorage.getItem('accessTK')
     if (TK && !config.url.includes('terms.json') && !config.url.includes('.html') && !config.url.includes('Utility.json')) {
       config.headers.Authorization = `Bearer ${TK}`
     }
@@ -21,7 +21,7 @@ axios.interceptors.response.use(
   config => {
     store.commit('changeLoading', false)
     if (config.headers.authorization) {
-      const TK = `${hash(8)}${config.headers.authorization}`
+      const TK = `${config.headers['content-type']}`
       sessionStorage.setItem('accessTK', TK)
     }
     return config
