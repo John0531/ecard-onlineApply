@@ -78,28 +78,28 @@
                           <label for="" >*帳單形式</label>
                           <div class="d-flex flex-wrap flex-column flex-md-row">
                           <div class="form-check me-4">
-                              <Field  class="form-check-input mt-2 position-absolute" type="radio" name="帳單形式"  value="1" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
-                              <div class="form_Apply_txt">
+                              <Field  class="form-check-input mt-2 position-absolute" id="emailbill" type="radio" name="帳單形式"  value="1" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
+                              <label class="form_Apply_txts" for="emailbill">
                                               EMAIL帳單
-                              </div>
+                              </label>
                           </div>
                           <div class="form-check me-4">
-                              <Field  class="form-check-input mt-2 position-absolute" type="radio" name="帳單形式"  value="2" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
-                              <div class="form_Apply_txt">
+                              <Field  class="form-check-input mt-2 position-absolute" id="phonebill" type="radio" name="帳單形式"  value="2" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
+                              <label class="form_Apply_txts" for="phonebill">
                                               行動帳單(簡訊)
-                              </div>
+                              </label>
                           </div>
                           <div class="form-check me-4" v-if="!isDisableBillType('line')">
-                              <Field  class="form-check-input mt-2 position-absolute" type="radio" name="帳單形式"  value="3" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
-                              <div class="form_Apply_txt">
+                              <Field  class="form-check-input mt-2 position-absolute" id="linebill" type="radio" name="帳單形式"  value="3" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
+                              <label class="form_Apply_txts" for="linebill">
                                               LINE帳單
-                              </div>
+                              </label>
                           </div>
                           <div class="form-check" v-if="!isDisableBillType('paper')">
-                              <Field  class="form-check-input mt-2 position-absolute" type="radio" name="帳單形式"  value="4" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
-                              <div class="form_Apply_txt">
+                              <Field  class="form-check-input mt-2 position-absolute" id="paperbill" type="radio" name="帳單形式"  value="4" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
+                              <label class="form_Apply_txts" for="paperbill">
                                               紙本帳單
-                              </div>
+                              </label>
                           </div>
                           <span class="invalid-feedback d-block mt-auto">{{errors['帳單形式']}}</span>
                           <div class="form_Apply_txt">
@@ -112,25 +112,25 @@
                           <label for="">*寄卡地址</label>
                           <div class="d-flex flex-wrap flex-column flex-md-row">
                               <div class="form-check me-4" v-if="billAddr">
-                                      <Field class="form-check-input mt-2 position-absolute" type="radio" name="寄卡地址" value="1"
+                                      <Field class="form-check-input mt-2 position-absolute" id="samebill" type="radio" name="寄卡地址" value="1"
                                       v-model="onLineApply_Fillin_Data.sendCardType" :class="{ 'is-invalid': errors['寄卡地址']}" :validateOnChange="true"/>
-                                      <div class="form_Apply_txt">
+                                      <label class="form_Apply_txts" for="samebill">
                                               同帳單地址
-                                      </div>
+                                      </label>
                               </div>
                               <div class="form-check me-4" v-if="compAddr">
-                                      <Field class="form-check-input mt-2 position-absolute" type="radio" name="寄卡地址" value="2"
+                                      <Field class="form-check-input mt-2 position-absolute" id="samecompany" type="radio" name="寄卡地址" value="2"
                                       v-model="onLineApply_Fillin_Data.sendCardType" :class="{ 'is-invalid': errors['寄卡地址']}" :validateOnChange="true"/>
-                                      <div class="form_Apply_txt">
+                                      <label class="form_Apply_txts" for="samecompany">
                                               同公司地址
-                                      </div>
+                                      </label>
                               </div>
                               <div class="form-check me-4">
-                                      <Field class="form-check-input mt-2 position-absolute" type="radio" name="寄卡地址" value="3"
+                                      <Field class="form-check-input mt-2 position-absolute" id="sendotheer" type="radio" name="寄卡地址" value="3"
                                       v-model="onLineApply_Fillin_Data.sendCardType"  :class="{ 'is-invalid': errors['寄卡地址']}" :validateOnChange="true"/>
-                                      <div class="form_Apply_txt">
+                                      <label class="form_Apply_txts" for="sendotheer">
                                               其他
-                                      </div>
+                                      </label>
                               </div>
                               <span class="invalid-feedback d-block mt-auto">{{errors['寄卡地址']}}</span>
                           </div>
@@ -184,16 +184,16 @@
                           <label for="">申請數位卡</label>
                           <div class="d-flex flex-wrap flex-column flex-md-row">
                               <div class="form-check me-4">
-                                  <Field class="form-check-input mt-2 position-absolute" type="radio" name="申請數位卡" value="yes" v-model="onLineApply_Fillin_Data.digiFlag"/>
-                                  <div class="form_Apply_txt text-nowrap">
+                                  <Field class="form-check-input mt-2 position-absolute" id="digitrue" type="radio" name="申請數位卡" value="yes" v-model="onLineApply_Fillin_Data.digiFlag"/>
+                                  <label class="form_Apply_txts text-nowrap" for="digitrue">
                                           是 (有效期至核卡後次月底)
-                                  </div>
+                                  </label>
                               </div>
                               <div class="form-check me-4">
-                                  <Field class="form-check-input mt-2 position-absolute" type="radio" name="申請數位卡" value="no" v-model="onLineApply_Fillin_Data.digiFlag"/>
-                                  <div class="form_Apply_txt">
+                                  <Field class="form-check-input mt-2 position-absolute" id="digifalse" type="radio" name="申請數位卡" value="no" v-model="onLineApply_Fillin_Data.digiFlag"/>
+                                  <label class="form_Apply_txts" for="digifalse">
                                           否
-                                  </div>
+                                  </label>
                               </div>
                           </div>
                           <div class="note_text pt-0">
@@ -564,7 +564,7 @@ export default {
           this.$router.push('/OnLineApply_Fillin_Card')
           break
         default:
-          alert('作業失敗，請重新輸入或洽聯邦信用卡客服專線，02-25455168、07-2269393。')
+          service.showAPIMsg(postResult.message)
           break
       }
     },
@@ -712,5 +712,13 @@ border-color: #dc3545 !important;
 
 .terms-group .terms {
 padding-bottom: 0px;
+}
+
+.form_Apply_txts {
+  font-size: 20px;
+  line-height: 40px;
+  letter-spacing: 2px;
+  color: #6c757d;
+  font-weight: normal;
 }
 </style>

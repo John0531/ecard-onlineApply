@@ -1,7 +1,6 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production'
-    ? '/'
-    : '/',
+  publicPath: '/card_apply/',
+  // publicPath: process.env.NODE_ENV === 'production' ? '/card_apply/' : '/',
   transpileDependencies: [
     'vue-meta'
   ],

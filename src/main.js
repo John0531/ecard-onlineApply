@@ -43,7 +43,9 @@ import '@fortawesome/fontawesome-free/js/all.js'
 
 import './axios.setting.js'
 
-// axios.get(`${process.env.VUE_APP_BASE_API}/Testing?UserRolesa=2`)
+// ?css外部引入
+// import './cssImport.js'
+
 // ?加入validate驗證規則
 Object.keys(validate).forEach((rule) => {
   defineRule(rule, validate[rule])
@@ -78,6 +80,7 @@ function currency (num) {
         : c
     )}`
 }
+
 // ?自訂全域屬性
 app.config.globalProperties.$custom = {
   validate,

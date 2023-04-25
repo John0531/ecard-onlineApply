@@ -1,18 +1,21 @@
 import axios from 'axios'
 // import router from './router'
 import store from './store'
-// import Swal from 'sweetalert2/dist/sweetalert2.js'
+// import { hash } from '@/utilities/hash.js'
 
 // ?設定cross跨域 並設定訪問許可權 允許跨域攜帶cookie資訊
 axios.defaults.withCredentials = true
 
 axios.interceptors.request.use(
   config => {
-    const token = sessionStorage.getItem('accessTK')
-    if (token && !config.url.includes('terms.json') && !config.url.includes('.html') && !config.url.includes('Utility.json')) {
-      config.headers.Authorization = `Bearer ${token}`
+    const TK = sessionStorage.getItem('accessTK')
+    if (TK && !config.url.includes('terms.json') && !config.url.includes('.html') && !config.url.includes('Utility.json')) {
+      config.headers.Authorization = `Bearer ${TK}`
     }
-    store.commit('changeLoading', true)
+    // ? 地址 api 不顯示 Loading 動畫
+    if (!config.url.includes('MW3')) {
+      store.commit('changeLoading', true)
+    }
     return config
   }
 )
@@ -21,7 +24,8 @@ axios.interceptors.response.use(
   config => {
     store.commit('changeLoading', false)
     if (config.headers.authorization) {
-      sessionStorage.setItem('accessTK', config.headers.authorization)
+      const TK = `${config.headers.authorization}`
+      sessionStorage.setItem('accessTK', TK)
     }
     return config
   },

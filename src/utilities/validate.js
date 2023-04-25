@@ -335,9 +335,9 @@ const validate = {
       for (let i = 1; i <= 30; i++) {
         dateList.day.push(i.toString())
       }
-    } else if (selectedDate.Month === 2) {
+    } else if (selectedDate.Month === '2') {
       // ? 判斷是否為閏年
-      const year = selectedDate.Year > 1000 ? selectedDate.Year : selectedDate.Year + 1911
+      const year = parseInt(selectedDate.Year) > 1000 ? parseInt(selectedDate.Year) : parseInt(selectedDate.Year) + 1911
       if (year % 4 === 0) {
         for (let i = 1; i <= 29; i++) {
           dateList.day.push(i.toString())

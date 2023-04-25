@@ -42,7 +42,6 @@
                   ref="resultImg1"
                   src="@/assets/images/form/ID_photo.png"
                   class="img-fluid"
-                  :class="{'crop-width':identitiyPack1.photo}"
                   alt="" />
                 </div>
               </div>
@@ -67,7 +66,6 @@
                     ref="resultImg2"
                     src="@/assets/images/form/ID_photo_b.png"
                     class="img-fluid"
-                    :class="{'crop-width':identitiyPack2.photo}"
                     alt=""
                   />
                 </div>
@@ -362,7 +360,7 @@
           <div class="modal-content">
               <div class="modal-header">
                   <h5 class="modal-title OnLineApply">財力證明修改</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click.prevent="destroy(this.num)">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click.prevent="closeCroppieModal">
                     <img src="@/assets/images/form/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
                   </button>
               </div>
@@ -376,7 +374,6 @@
                           </div>
                           <div id="myIdentifident" class="myIdentifident" ref="myIdentifident">
                           </div>
-                          <img ref="resultImg">
                       </div>
                       <!-- <div class="row mb-4">
                           <div>
@@ -509,25 +506,22 @@ import ServiceN from '@/service/CardFriend_N.Service.js'
 export default {
   data () {
     return {
+      clientHeight: '',
       preViewImage: '',
       times: -1,
-      resultImg: '',
       Uploaded: false,
       num: '', // *修改完成要呈現的照片序
       identitiyPack1: {
-        photo: '',
         preViewImg: '',
         resultImg: '',
         file: ''
       },
       identitiyPack2: {
-        photo: '',
         preViewImg: '',
         resultImg: '',
         file: ''
       },
       imgTemplateUrl: '',
-      imgTemplateInfo: '',
       NoticeModal: null, //* 一進畫面範例說明
       NoticeModal2: null, //* 如身分證無法辨識/模糊，跳出提醒
       ImageLimit: null, //* 提醒上傳檔案限制提醒
@@ -578,18 +572,13 @@ export default {
   methods: {
     async pickFiles (e) {
       // ? 轉base64
-      const reader = new FileReader()
       const file = await e.target.files[0]
       const maxAllowedSize = 3 * 1024 * 1024
       if (file?.size > maxAllowedSize || file?.type !== 'image/jpeg') {
         this.ImageLimit.show()
       } else {
         this.imgTemplateUrl = URL.createObjectURL(file)
-        reader.readAsDataURL(file)
-        reader.onload = () => {
-          this[`identitiyPack${this.num}`].photo = reader.result
-          this.makeModify(this.num)
-        }
+        this.makeModify(this.num)
       }
       // ? 清空value
       // this.clearFiles(this.num)
@@ -597,27 +586,20 @@ export default {
     async makeModify (num) {
       // ?呼叫modal準備呈現
       this.CroppieModal.show()
-      // await this.$refs.CroppieModal.addEventListener('shown.bs.modal', () => {
-      //   console.log(document.getElementById('imgTemplate').clientWidth)
-      //   return 123
-      // })
-      const imgTemplate = document.getElementById('imgTemplate')
-      imgTemplate.onload = function () {
-        console.log(document.getElementById('imgTemplate').clientWidth)
-      }
       setTimeout(async () => {
         const imgTemplate = document.getElementById('imgTemplate')
-        this.imgTemplateInfo = {
-          width: imgTemplate.clientWidth,
-          height: imgTemplate.clientHeight
-        }
-        this.imgTemplateUrl = ''
         try {
         // ?要呈現畫面的區域(在modal上)
           const croppieE = this.$refs.myIdentifident
           this[`identitiyPack${num}`].preViewImg = new this.$custom.Croppie(croppieE, {
-            viewport: { width: this.imgTemplateInfo.width, height: this.imgTemplateInfo.height },
-            boundary: { width: this.imgTemplateInfo.width + 20, height: this.imgTemplateInfo.height + 20 },
+            viewport: {
+              width: imgTemplate.clientWidth,
+              height: imgTemplate.clientHeight
+            },
+            boundary: {
+              width: imgTemplate.clientWidth + 20,
+              height: imgTemplate.clientHeight + 20
+            },
             showZoomer: true,
             enableResize: true,
             enableOrientation: true,
@@ -625,37 +607,37 @@ export default {
             enforceBoundary: true,
             mouseWheelZoom: 'ctrl'
           })
-          // const cropImage = document.querySelector('.cr-image')
-          // cropImage.classList.add('crop-test')
           // ?bind在此時將jpg轉為png
           await this[`identitiyPack${num}`].preViewImg.bind({
-            url: this[`identitiyPack${num}`].photo
+            url: this.imgTemplateUrl
           })
+          URL.revokeObjectURL(this.imgTemplateUrl)
+          this.imgTemplateUrl = ''
         } catch (error) {
           alert(error)
         }
       }, 500)
     },
-    result () {
+    async result () {
       // ?在頁面上各欄位自呈現
-      const num = this.num
-      const resultImg = this.$refs[`resultImg${num}`]
-      this[`identitiyPack${num}`].preViewImg.result('base64').then(function (base64) {
-        resultImg.src = base64
-      })
-      setTimeout(() => {
-        // ?將編輯完成的base64準備起來打API
-        // this[`identitiyPack${num}`].file = this.jpeg2png(this.$refs[`resultImg${num}`].src)
-        this[`identitiyPack${num}`].file = this.$refs[`resultImg${num}`].src
-      }, 100)
+      const resultImg = this.$refs[`resultImg${this.num}`]
+      const base64 = await this[`identitiyPack${this.num}`].preViewImg.result('base64')
+      resultImg.src = base64
+      this[`identitiyPack${this.num}`].file = base64
+      this.$refs[`resultImg${this.num}`].style = `height:${this.clientHeight}px;`
       // ?編輯結束將相關物件資料銷毀
       this.CroppieModal.hide()
-      this.destroy(this.num)
+      this.destroy()
     },
-    destroy (num) {
-      this[`identitiyPack${num}`].preViewImg.destroy()
+    closeCroppieModal () {
+      this.destroy()
+    },
+    destroy () {
+      this[`identitiyPack${this.num}`].preViewImg.destroy()
+      this[`identitiyPack${this.num}`].preViewImg = ''
       document.getElementById('myIdentifident').innerHTML = ''
       document.getElementById('myIdentifident').classList.remove('croppie-container')
+      document.querySelector(`#upload${this.num}`).value = ''
       this.num = ''
     },
     clearFiles (num) {
@@ -790,6 +772,9 @@ export default {
     }
   },
   async mounted () {
+    setTimeout(() => {
+      this.clientHeight = this.$refs.resultImg1.clientHeight
+    }, 500)
     if (sessionStorage.getItem('OCR_Data')) {
       this.uploaded = true
       this.Form = JSON.parse(sessionStorage.getItem('OCR_Data'))
@@ -805,7 +790,7 @@ export default {
       await this.getAddress('2', 'session')
     }
     // this.makeModify()
-    this.CroppieModal = new this.$custom.bootstrap.Modal(this.$refs.CroppieModal)
+    this.CroppieModal = new this.$custom.bootstrap.Modal(this.$refs.CroppieModal, { backdrop: 'static' })
     // *進場先跳範例提醒
     this.NoticeModal = new this.$custom.bootstrap.Modal(this.$refs.NoticeModal)
     this.NoticeModal2 = new this.$custom.bootstrap.Modal(this.$refs.NoticeModa2)

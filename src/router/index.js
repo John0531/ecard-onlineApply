@@ -331,7 +331,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('card_apply'),
   scrollBehavior (to, from) {
     return {
       top: 0
@@ -342,12 +342,6 @@ const router = createRouter({
 
 router.beforeEach((to) => {
   const sessionPages = ['非卡友-申請書資料填寫', '非卡友-個資使用條款', '非卡友-確認填寫資料', '非卡友-書面驗證', '線上辦卡(已持有其他銀行信用卡)', '線上辦卡(已持有其他銀行帳戶)', '手機OTP驗證(他行信用卡)', '手機OTP驗證(他行帳戶)', '手機OTP驗證(書面)', '手機OTP驗證(自行存戶)', '非卡友線上申請']
-  // ?踢退沒有選首刷禮的user
-  const gift = JSON.parse(sessionStorage.getItem('keepPersonalData'))
-  if (sessionPages.includes(to.name) && !gift?.firstGift) {
-    router.push('/OnLineApply_Gift')
-    return
-  }
   // ?踢退沒有填寫 OCR 資料的 user
   if (sessionPages.includes(to.name) && !sessionStorage.getItem('OCR_Data')) {
     router.push('/OnLineApply_OCR')

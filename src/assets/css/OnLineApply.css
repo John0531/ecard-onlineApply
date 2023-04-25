@@ -132,11 +132,14 @@ box-shadow: 5px 5px 0 0 rgba(200, 200, 200, 0.8);
 }
 
 .Apply_input {
-width: 1rem;
-height: 1rem;
+width: 1.3rem;
+height: 1.3rem;
 }
 .form-check .form-check-input {
-float: none;}
+float: none;
+width: 1.3rem;
+height: 1.3rem;
+}
 .Apply_note_box {
 padding: 20px;
 border: 1px solid #3262a9;
@@ -751,16 +754,16 @@ box-shadow: 5px 5px 0 0 rgba(200, 200, 200, 0.8);
 
 /*------上傳附件-------*/    
 .mainArea .upload_title {
-    color: #FFFFFF;
-    font-size: 19pt;
-    background-color: #009999;
-    border-radius: 50px;
-    border: 1px solid #009999;
-    max-width: 350px;
-    margin: 0 auto 30px;
-    line-height: 28pt;
-    text-align: center;
-    font-weight: 400;
+color: #FFFFFF;
+font-size: 19pt;
+background-color: #009999;
+border-radius: 50px;
+border: 1px solid #009999;
+max-width: 350px;
+margin: 0 auto 30px;
+line-height: 28pt;
+text-align: center;
+font-weight: 400;
 }
 
 .upload_note_indent {

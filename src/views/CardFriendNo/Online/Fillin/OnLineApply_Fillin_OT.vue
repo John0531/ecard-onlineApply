@@ -543,8 +543,9 @@
                         name="帳單地址"
                         value="1"
                         :validateOnInput="true"
+                        id="帳單地址-同戶籍地址"
                       />
-                      <div class="form_Apply_txt">同戶籍地址</div>
+                      <label class="form_Apply_txt fw-normal" for="帳單地址-同戶籍地址">同戶籍地址</label>
                     </div>
                     <div class="form-check me-4">
                       <Field
@@ -556,8 +557,9 @@
                         name="帳單地址"
                         value="2"
                         :validateOnInput="true"
+                        id="帳單地址-同居住地址"
                       />
-                      <div class="form_Apply_txt">同居住地址</div>
+                      <label class="form_Apply_txt fw-normal" for="帳單地址-同居住地址">同居住地址</label>
                     </div>
                     <div class="form-check me-4">
                       <Field
@@ -569,8 +571,9 @@
                         name="帳單地址"
                         value="3"
                         :validateOnInput="true"
+                        id="帳單地址-同公司地址"
                       />
-                      <div class="form_Apply_txt">同公司地址</div>
+                      <label class="form_Apply_txt fw-normal" for="帳單地址-同公司地址">同公司地址</label>
                     </div>
                   </div>
                   <ErrorMessage
@@ -591,8 +594,9 @@
                         name="寄卡地址"
                         value="1"
                         :validateOnInput="true"
+                        id="寄卡地址-同戶籍地址"
                       />
-                      <div class="form_Apply_txt">同戶籍地址</div>
+                      <label class="form_Apply_txt fw-normal" for="寄卡地址-同戶籍地址">同戶籍地址</label>
                     </div>
                     <div class="form-check me-4">
                       <Field
@@ -604,8 +608,9 @@
                         name="寄卡地址"
                         value="2"
                         :validateOnInput="true"
+                        id="寄卡地址-同居住地址"
                       />
-                      <div class="form_Apply_txt">同居住地址</div>
+                      <label class="form_Apply_txt fw-normal" for="寄卡地址-同居住地址">同居住地址</label>
                     </div>
                     <div class="form-check me-4">
                       <Field
@@ -617,8 +622,9 @@
                         name="寄卡地址"
                         value="3"
                         :validateOnInput="true"
+                        id="寄卡地址-同公司地址"
                       />
-                      <div class="form_Apply_txt">同公司地址</div>
+                      <label class="form_Apply_txt fw-normal" for="寄卡地址-同公司地址">同公司地址</label>
                     </div>
                   </div>
                   <ErrorMessage
@@ -700,8 +706,9 @@
                         name="帳單形式"
                         :value="1"
                         :validateOnInput="true"
+                        id="帳單形式-EMAIL帳單"
                       />
-                      <div class="form_Apply_txt">EMAIL帳單</div>
+                      <label class="form_Apply_txt fw-normal" for="帳單形式-EMAIL帳單">EMAIL帳單</label>
                     </div>
                     <div class="form-check me-4" v-if="pageLoad.billType?.includes('sms')">
                       <Field
@@ -713,8 +720,9 @@
                         name="帳單形式"
                         :value="2"
                         :validateOnInput="true"
+                        id="帳單形式-行動帳單(簡訊)"
                       />
-                      <div class="form_Apply_txt">行動帳單(簡訊)</div>
+                      <label class="form_Apply_txt fw-normal" for="帳單形式-行動帳單(簡訊)">行動帳單(簡訊)</label>
                     </div>
                     <div class="form-check me-4" v-if="pageLoad.billType?.includes('line')">
                       <Field
@@ -726,8 +734,9 @@
                         name="帳單形式"
                         :value="3"
                         :validateOnInput="true"
+                        id="帳單形式-LINE帳單"
                       />
-                      <div class="form_Apply_txt">LINE帳單</div>
+                      <label class="form_Apply_txt fw-normal" for="帳單形式-LINE帳單">LINE帳單</label>
                     </div>
                     <div class="form-check" v-if="pageLoad.billType?.includes('paper')">
                       <Field
@@ -739,8 +748,9 @@
                         name="帳單形式"
                         :value="4"
                         :validateOnInput="true"
+                        id="帳單形式-紙本帳單"
                       />
-                      <div class="form_Apply_txt">紙本帳單</div>
+                      <div class="form_Apply_txt fw-normal" for="帳單形式-紙本帳單">紙本帳單</div>
                     </div>
                   </div>
                   <ErrorMessage
@@ -764,11 +774,11 @@
                         class="form-check-input mt-2 position-absolute"
                         type="radio"
                         name="申請數位卡"
-                        id="exampleRadios1"
+                        id="申請數位卡-是"
                         value="true"
                         :disabled="pageLoad.flgDigi==='M'"
                       />
-                      <div class="form_Apply_txt">是</div>
+                      <label class="form_Apply_txt fw-normal" for="申請數位卡-是">是</label>
                     </div>
                     <div class="form-check">
                       <Field
@@ -777,11 +787,11 @@
                         class="form-check-input mt-2 position-absolute"
                         type="radio"
                         name="申請數位卡"
-                        id="exampleRadios3"
+                        id="申請數位卡-否"
                         value="false"
                         :disabled="pageLoad.flgDigi==='M'"
                       />
-                      <div class="form_Apply_txt">否</div>
+                      <label class="form_Apply_txt fw-normal" for="申請數位卡-否">否</label>
                     </div>
                   </div>
                   <ErrorMessage
@@ -805,6 +815,7 @@
                     name="畢業國小名稱"
                     type="text"
                     class="form-control"
+                    maxlength="8"
                   />
                   <ErrorMessage
                     name="畢業國小名稱"
@@ -827,10 +838,11 @@
                           name="是否為學生"
                           value="true"
                           :validateOnInput="true"
+                          id="是否為學生-是"
                         />
-                        <div class="form_Apply_txt">
+                        <label class="form_Apply_txt fw-normal" for="是否為學生-是">
                           是
-                        </div>
+                        </label>
                       </div>
                       <div class="form-check me-4">
                         <Field
@@ -842,10 +854,11 @@
                           name="是否為學生"
                           value="false"
                           :validateOnInput="true"
+                          id="是否為學生-否"
                         />
-                        <div class="form_Apply_txt">
+                        <label class="form_Apply_txt fw-normal" for="是否為學生-否">
                           否
-                        </div>
+                        </label>
                       </div>
                     </div>
                     <ErrorMessage
@@ -1009,6 +1022,7 @@
                     name="公司名稱"
                     type="text"
                     class="form-control"
+                    maxlength="15"
                   />
                   <ErrorMessage
                     name="公司名稱"
@@ -1176,6 +1190,7 @@
                     name="職稱"
                     type="text"
                     class="form-control"
+                    maxlength="15"
                   />
                   <ErrorMessage
                     name="職稱"
@@ -1188,9 +1203,11 @@
                     v-model="Form.jobTenure"
                     rules="chkKeyValue"
                     :class="{ 'is-invalid': errors['年資'] }"
+                    @keyup="Form.jobTenure = $custom.validate.NumOnlyWithoutFirstZero(Form.jobTenure)"
                     name="年資"
                     type="text"
                     class="form-control"
+                    maxlength="2"
                   />
                   <ErrorMessage
                     name="年資"
@@ -1222,6 +1239,7 @@
                         name="職業別-其他"
                         type="text"
                         class="form-control other_input ms-1 my-2 my-md-0"
+                        maxlength="25"
                       />
                     </div>
                   </div>
@@ -1280,6 +1298,7 @@
                         name="主要所得及資金來源-其他"
                         type="text"
                         class="form-control other_input ms-1 my-2 my-md-0"
+                        maxlength="10"
                       />
                     </div>
                   </div>
@@ -1529,6 +1548,10 @@ export default {
         // ? 出生地
         if (n.birth.birthplaceKey) {
           n.birth.birthplace = n.birth.birthplaceKey
+          if (n.birth.birthplaceKey !== '其它') {
+            n.birth.birthOther = ''
+            n.birth.birthOtherKey = ''
+          }
         } else {
           n.birth.birthplace = ''
         }
