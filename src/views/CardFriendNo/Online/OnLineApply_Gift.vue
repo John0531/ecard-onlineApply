@@ -144,6 +144,10 @@ export default ({
     console.log(res)
     this.giftNote = res.data.giftNote
     this.giftList = res.data.giftInfoList
+    // ? 無首刷禮則直接導 OCR
+    if (this.giftList.length === 0) {
+      this.$router.push('/OnLineApply_OCR')
+    }
   }
 })
 </script>

@@ -1203,6 +1203,7 @@
                     v-model="Form.jobTenure"
                     rules="chkKeyValue"
                     :class="{ 'is-invalid': errors['年資'] }"
+                    @keyup="Form.jobTenure = $custom.validate.NumOnlyWithoutFirstZero(Form.jobTenure)"
                     name="年資"
                     type="text"
                     class="form-control"
@@ -1547,6 +1548,10 @@ export default {
         // ? 出生地
         if (n.birth.birthplaceKey) {
           n.birth.birthplace = n.birth.birthplaceKey
+          if (n.birth.birthplaceKey !== '其它') {
+            n.birth.birthOther = ''
+            n.birth.birthOtherKey = ''
+          }
         } else {
           n.birth.birthplace = ''
         }

@@ -62,7 +62,7 @@ export default {
   }
   .crop-width {
     max-width: 400px !important;
-    max-height: 200px !important;
+    max-height: 273px !important;
     height: auto;
   }
   .crop-test {

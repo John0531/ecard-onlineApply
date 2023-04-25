@@ -108,7 +108,7 @@
             aria-label="Close"
           >
             <img
-              src="@/assets/images/close.png"
+              src="@/assets/images/form/close.png"
               border="0"
               alt="close"
               data-bs-dismiss="modal"

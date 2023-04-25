@@ -12,7 +12,10 @@ axios.interceptors.request.use(
     if (TK && !config.url.includes('terms.json') && !config.url.includes('.html') && !config.url.includes('Utility.json')) {
       config.headers.Authorization = `Bearer ${TK}`
     }
-    store.commit('changeLoading', true)
+    // ? 地址 api 不顯示 Loading 動畫
+    if (!config.url.includes('MW3')) {
+      store.commit('changeLoading', true)
+    }
     return config
   }
 )
@@ -21,7 +24,7 @@ axios.interceptors.response.use(
   config => {
     store.commit('changeLoading', false)
     if (config.headers.authorization) {
-      const TK = `${config.headers['content-type']}`
+      const TK = `${config.headers.authorization}`
       sessionStorage.setItem('accessTK', TK)
     }
     return config
