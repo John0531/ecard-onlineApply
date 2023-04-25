@@ -20,7 +20,7 @@
                       <h3><img src="images/form/card_gift_icon.gif" class="img-fluid" alt="" />首刷禮：<span>(新戶定義：核卡前六個月內未曾持有任何一聯邦信用卡者。)</span>
                       </h3>
                       <div class="col-12 card_gift_txt">
-                          <p v-html="giftNote"></p>
+                          <div v-html="giftNote"></div>
                           <div class="form-check mt-2 ms-3" v-for="gift in  giftList" :key="gift+1">
                             <Field
                               v-model="applierInfo.firstGift"
