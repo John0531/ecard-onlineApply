@@ -91,23 +91,21 @@
                   <label for="input1">西元出生年月日</label>
                   <div class="d-flex flex-column mb-1">
                     <div class="d-flex align-items-center">
-                      <div>
-                        <Field
-                        as="select" name="年"
-                        rules="required"
-                        class="form-select form-control"
-                        :class="{ 'is-invalid': errors['年'] || errors['月'] || errors['日']}"
-                        :validateOnChange="true"
-                        v-model="OnlineApply_y_Data.brthyy"
-                        >
-                        <option value="" selected>--</option>
-                        <option v-for="item in taiwanYearOptions" :key="item.value" :value="item.value">
-                          {{item.label}}
-                        </option>
-                        </Field>
-                      </div>年
+                      <Field
+                      as="select" name="年"
+                      rules="required"
+                      class="form-select form-control"
+                      :class="{ 'is-invalid': errors['年'] || errors['月'] || errors['日']}"
+                      :validateOnChange="true"
+                      v-model="OnlineApply_y_Data.brthyy"
+                      >
+                      <option value="" selected>--</option>
+                      <option v-for="item in taiwanYearOptions" :key="item.value" :value="item.value">
+                        {{item.label}}
+                      </option>
+                      </Field>
+                    年
                       <!-- 辦卡人出生月 -->
-                      <div>
                         <Field
                         as="select" name="月"
                         rules="required"
@@ -117,10 +115,8 @@
                         v-model="OnlineApply_y_Data.brthMM" @change="getDay">
                         <option value="" selected>--</option>
                         <option v-for="item in monthOptions" :key="item.value" :value="item.value">{{ item.label }}</option>
-                        </Field>
-                      </div>月
+                        </Field>月
                       <!-- 辦卡人出生日 -->
-                      <div>
                         <Field
                         as="select" name="日"
                         rules="required"
@@ -131,8 +127,7 @@
                         >
                         <option value="" selected>--</option>
                         <option v-for="item in dayOptions" :key="item.value" :value="item.value">{{ item.label }}</option>
-                        </Field>
-                      </div>日
+                        </Field>日
                     </div>
                     <div class="d-flex text-center invalid-feedback my-1">
                       <span v-if="errors['年'] || errors['月'] || errors['日']">
@@ -712,6 +707,11 @@ border-color: #dc3545 !important;
   margin-bottom: 2rem;
 }
 
+/* .formList select:first-of-type {
+    margin-left: 0;
+    min-width: 85px;
+    max-width: 192px;
+} */
 /* .formList select:first-of-type {
   min-width: 85px !important;
   max-width: 192px !important;

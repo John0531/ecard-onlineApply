@@ -75,62 +75,62 @@
                           <span class="invalid-feedback">{{errors['推廣人員編號']}}</span>
                       </li>
                       <li class="col-12 col-md-12">
-                          <label for="" >*帳單形式</label>
-                          <div class="d-flex flex-wrap flex-column flex-md-row">
-                          <div class="form-check me-4">
-                              <Field  class="form-check-input mt-2 position-absolute" id="emailbill" type="radio" name="帳單形式"  value="1" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
-                              <label class="form_Apply_txts" for="emailbill">
-                                              EMAIL帳單
-                              </label>
-                          </div>
-                          <div class="form-check me-4">
-                              <Field  class="form-check-input mt-2 position-absolute" id="phonebill" type="radio" name="帳單形式"  value="2" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
-                              <label class="form_Apply_txts" for="phonebill">
-                                              行動帳單(簡訊)
-                              </label>
-                          </div>
-                          <div class="form-check me-4" v-if="!isDisableBillType('line')">
-                              <Field  class="form-check-input mt-2 position-absolute" id="linebill" type="radio" name="帳單形式"  value="3" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
-                              <label class="form_Apply_txts" for="linebill">
-                                              LINE帳單
-                              </label>
-                          </div>
-                          <div class="form-check" v-if="!isDisableBillType('paper')">
-                              <Field  class="form-check-input mt-2 position-absolute" id="paperbill" type="radio" name="帳單形式"  value="4" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
-                              <label class="form_Apply_txts" for="paperbill">
-                                              紙本帳單
-                              </label>
-                          </div>
-                          <span class="invalid-feedback d-block mt-auto">{{errors['帳單形式']}}</span>
-                          <div class="form_Apply_txt">
-                                  <span class="red_text">※申請E-mail帳單請務必收取聯邦銀行電子帳單認證信，點選驗證網址始完成申請。<br>
-                                  ※帳單接收型式將依本次選擇做為日後帳單寄送依據，如未點選E-mail認證信則依原帳單型式或紙本寄送。</span>
-                          </div>
-                          </div>
+                        <label for="" >*帳單形式</label>
+                        <div class="d-flex flex-wrap flex-column flex-md-row">
+                        <div class="form-check me-4">
+                            <Field  class="form-check-input mt-2 position-absolute" id="emailbill" type="radio" name="帳單形式"  value="1" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
+                            <label class="form_Apply_txts" for="emailbill">
+                                            EMAIL帳單
+                            </label>
+                        </div>
+                        <div class="form-check me-4">
+                            <Field  class="form-check-input mt-2 position-absolute" id="phonebill" type="radio" name="帳單形式"  value="2" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
+                            <label class="form_Apply_txts" for="phonebill">
+                                            行動帳單(簡訊)
+                            </label>
+                        </div>
+                        <div class="form-check me-4" v-if="!isDisableBillType('line')">
+                            <Field  class="form-check-input mt-2 position-absolute" id="linebill" type="radio" name="帳單形式"  value="3" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
+                            <label class="form_Apply_txts" for="linebill">
+                                            LINE帳單
+                            </label>
+                        </div>
+                        <div class="form-check" v-if="!isDisableBillType('paper')">
+                            <Field  class="form-check-input mt-2 position-absolute" id="paperbill" type="radio" name="帳單形式"  value="4" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
+                            <label class="form_Apply_txts" for="paperbill">
+                                            紙本帳單
+                            </label>
+                        </div>
+                        <span class="invalid-feedback d-block mt-auto">{{errors['帳單形式']}}</span>
+                        <div class="form_Apply_txt">
+                                <span class="red_text">※申請E-mail帳單請務必收取聯邦銀行電子帳單認證信，點選驗證網址始完成申請。<br>
+                                ※帳單接收型式將依本次選擇做為日後帳單寄送依據，如未點選E-mail認證信則依原帳單型式或紙本寄送。</span>
+                        </div>
+                        </div>
                       </li>
                       <li class="col-12 col-md-12">
                           <label for="">*寄卡地址</label>
                           <div class="d-flex flex-wrap flex-column flex-md-row">
                               <div class="form-check me-4" v-if="billAddr">
-                                      <Field class="form-check-input mt-2 position-absolute" id="samebill" type="radio" name="寄卡地址" value="1"
-                                      v-model="onLineApply_Fillin_Data.sendCardType" :class="{ 'is-invalid': errors['寄卡地址']}" :validateOnChange="true"/>
-                                      <label class="form_Apply_txts" for="samebill">
-                                              同帳單地址
-                                      </label>
+                                <Field class="form-check-input mt-2 position-absolute" id="samebill" type="radio" name="寄卡地址" value="1"
+                                v-model="onLineApply_Fillin_Data.sendCardType" :class="{ 'is-invalid': errors['寄卡地址']}" :validateOnChange="true"/>
+                                <label class="form_Apply_txts" for="samebill">
+                                        同帳單地址
+                                </label>
                               </div>
                               <div class="form-check me-4" v-if="compAddr">
-                                      <Field class="form-check-input mt-2 position-absolute" id="samecompany" type="radio" name="寄卡地址" value="2"
-                                      v-model="onLineApply_Fillin_Data.sendCardType" :class="{ 'is-invalid': errors['寄卡地址']}" :validateOnChange="true"/>
-                                      <label class="form_Apply_txts" for="samecompany">
-                                              同公司地址
-                                      </label>
+                                <Field class="form-check-input mt-2 position-absolute" id="samecompany" type="radio" name="寄卡地址" value="2"
+                                v-model="onLineApply_Fillin_Data.sendCardType" :class="{ 'is-invalid': errors['寄卡地址']}" :validateOnChange="true"/>
+                                <label class="form_Apply_txts" for="samecompany">
+                                        同公司地址
+                                </label>
                               </div>
                               <div class="form-check me-4">
-                                      <Field class="form-check-input mt-2 position-absolute" id="sendotheer" type="radio" name="寄卡地址" value="3"
-                                      v-model="onLineApply_Fillin_Data.sendCardType"  :class="{ 'is-invalid': errors['寄卡地址']}" :validateOnChange="true"/>
-                                      <label class="form_Apply_txts" for="sendotheer">
-                                              其他
-                                      </label>
+                                <Field class="form-check-input mt-2 position-absolute" id="sendotheer" type="radio" name="寄卡地址" value="3"
+                                v-model="onLineApply_Fillin_Data.sendCardType"  :class="{ 'is-invalid': errors['寄卡地址']}" :validateOnChange="true"/>
+                                <label class="form_Apply_txts" for="sendotheer">
+                                        其他
+                                </label>
                               </div>
                               <span class="invalid-feedback d-block mt-auto">{{errors['寄卡地址']}}</span>
                           </div>
@@ -271,7 +271,7 @@
             aria-label="Close"
           >
             <img
-              src="@/assets/images/close.png"
+              src="@/assets/images/form/close.png"
               border="0"
               alt="close"
               data-bs-dismiss="modal"
