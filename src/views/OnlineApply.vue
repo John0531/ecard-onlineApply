@@ -47,6 +47,7 @@
                     v-model="OnlineApply_y_Data.cardNo"
                     :class="{ 'is-invalid': errors['申請的信用卡'] }"
                     :validateOnInput="true"
+                    id="creditCardTick"
                   />
                   <label
                     class="form-check-label text-start text-md-center fw-bold"
@@ -62,94 +63,12 @@
             <!----------------fee ---------------->
             <!----------------yesgogogo ---------------->
             <div class="mt-3 mt-md-5" v-if="flgYesgo === 'Y'?true: false">
-                <div class="yesgogogo_box">
-                    <h3>yesgogogo即食購–在地美食，安心品質 (聯邦紅利指定折抵網站)</h3>
-                    <div class="yesgogogo_txt">
-                        <h4>yesgogogo會員加碼禮<span> (新舊戶卡友皆適用)</span></h4>
-                        活動期間：111年1月1日~111年6月30日。<br> 活動內容：活動期間至聯邦信用卡官網進行開卡並點選註冊成為yesgogogo會員，或經由yesgogogo即食購之聯邦卡友專屬註冊頁完成註冊者，即可獲贈加碼禮。
-                        <ul>
-                            <li>成為會員享1,000元折價券。(新舊會員皆適用)</li>
-                            <li>新會員首購單筆滿499元贈好禮+購物金點數回饋100%。</li>
-                            <li>週二聯邦日：週週享購物金點數回饋100%。</li>
-                        </ul>
-                        ※ 每會員限領乙份折價券，更多說明及限制詳參<a href="https://card.ubot.com.tw/eCard/activity/2022yesgogogo/index.htm"><u>活動官網</u>。</a>
-                    </div>
-                </div>
+              <div v-html="yesgoDetail"></div>
             </div>
             <div class="mt-3 mt-md-5">
               <div class="fee_box mb-3">
                 <h3><img src="images/form/fee_icon.gif" class="img-fluid" alt="" />年費政策</h3>
-              <div v-html="feeDetail"></div>
-              <div class="cardDetail_fee">
-                <table class="oddWhite">
-                  <tbody>
-                    <tr>
-                      <th colspan="3" nowrap="nowrap">LINE Bank VISA御璽卡</th>
-                    </tr>
-                    <tr>
-                      <td colspan="3"><span class="text-fee-green">使用電子化帳單（電子帳單、行動帳單、LINE帳單）成功且有效期間內享免年費</span></td>
-                    </tr>
-                    <tr>
-                      <td nowrap="nowrap">首年</td>
-                      <td nowrap="nowrap" colspan="2">免年費</td>
-                    </tr>
-                    <tr>
-                      <td rowspan="4" nowrap="nowrap">第二年起</td>
-                      <td colspan="2" class="text-left">依據每張卡片年費到期日往前推算一年，檢核同一身分證字號下之消費，若不符合標準則以單卡按以下標準計算收取年費(不分正、附卡)：</td>
-                    </tr>
-                    <tr>
-                      <td>年消費</td>
-                      <td>年費</td>
-                    </tr>
-                    <tr>
-                      <td>60,000元(含)以上</td>
-                      <td>免年費</td>
-                    </tr>
-                    <tr>
-                      <td>未達60,000元</td>
-                      <td>正卡1,000元、附卡1,000元
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div class="indentNote_OneText">
-                  <p>※每一卡別所提供之年費減免或折價優惠，每一持卡人僅得享有一次優惠，若於年費優惠期間截止前將卡片停用後又重新申請者，恕不再享有優惠。</p>
-                </div>
-              </div>
-                <!-- <table class="oddWhite">
-                  <tbody>
-                    <tr>
-                      <th colspan="3" nowrap="nowrap">LINE Bank VISA御璽卡</th>
-                    </tr>
-                    <tr>
-                      <td colspan="3" nowrap="nowrap"><span class="Green_text">使用電子化帳單（電子帳單、行動帳單、LINE帳單）成功且有效期間內享免年費</span></td>
-                    </tr>
-                    <tr>
-                      <td nowrap="nowrap">首年</td>
-                      <td nowrap="nowrap" colspan="2">免年費</td>
-                    </tr>
-                    <tr>
-                      <td rowspan="4" nowrap="nowrap">第二年起</td>
-                      <td colspan="2" class="text-left">依據每張卡片年費到期日往前推算一年，檢核同一身分證字號下之消費，若不符合標準則以單卡按以下標準計算收取年費(不分正、附卡)：</td>
-                    </tr>
-                    <tr>
-                      <td>年消費</td>
-                      <td>年費</td>
-                    </tr>
-                    <tr>
-                      <td>60,000元(含)以上</td>
-                      <td>免年費</td>
-                    </tr>
-                    <tr>
-                      <td>未達60,000元</td>
-                      <td>正卡1,000元、附卡1,000元
-                    </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div class="indentNote_OneText">
-                    <p>※每一卡別所提供之年費減免或折價優惠，每一持卡人僅得享有一次優惠，若於年費優惠期間截止前將卡片停用後又重新申請者，恕不再享有優惠。</p>
-                </div> -->
+                <div v-html="feeDetail"></div>
               </div>
             </div>
           </div>
@@ -236,6 +155,7 @@
                     v-model="OnlineApply_y_Data.cardNo"
                     :class="{ 'is-invalid': errors['申請的信用卡'] }"
                     :validateOnInput="true"
+                    id="creditCardTick"
                   />
                   <label
                     class="form-check-label text-start text-md-center fw-bold"
@@ -250,63 +170,12 @@
             </div>
            <!----------------yesgogogo ---------------->
            <div class="mt-3 mt-md-5" v-if="flgYesgo === 'Y'?true: false">
-                <div class="yesgogogo_box">
-                    <h3>yesgogogo即食購–在地美食，安心品質 (聯邦紅利指定折抵網站)</h3>
-                    <div class="yesgogogo_txt">
-                        <h4>yesgogogo會員加碼禮<span> (新舊戶卡友皆適用)</span></h4>
-                        活動期間：111年1月1日~111年6月30日。<br> 活動內容：活動期間至聯邦信用卡官網進行開卡並點選註冊成為yesgogogo會員，或經由yesgogogo即食購之聯邦卡友專屬註冊頁完成註冊者，即可獲贈加碼禮。
-                        <ul>
-                            <li>成為會員享1,000元折價券。(新舊會員皆適用)</li>
-                            <li>新會員首購單筆滿499元贈好禮+購物金點數回饋100%。</li>
-                            <li>週二聯邦日：週週享購物金點數回饋100%。</li>
-                        </ul>
-                        ※ 每會員限領乙份折價券，更多說明及限制詳參<a href="https://card.ubot.com.tw/eCard/activity/2022yesgogogo/index.htm"><u>活動官網</u>。</a>
-                    </div>
-                </div>
+            <div v-html="yesgoDetail"></div>
             </div>
             <div class="fee_box mb-3 mt-3 mt-md-5">
               <h3><img src="images/form/fee_icon.gif" class="img-fluid" alt="" />年費政策</h3>
-              <div class="cardDetail_fee">
-                <table class="oddWhite">
-                  <tbody>
-                    <tr>
-                      <th colspan="3" nowrap="nowrap">LINE Bank VISA御璽卡</th>
-                    </tr>
-                    <tr>
-                      <td colspan="3"><span class="text-fee-green">使用電子化帳單（電子帳單、行動帳單、LINE帳單）成功且有效期間內享免年費</span></td>
-                    </tr>
-                    <tr>
-                      <td nowrap="nowrap">首年</td>
-                      <td nowrap="nowrap" colspan="2">免年費</td>
-                    </tr>
-                    <tr>
-                      <td rowspan="4" nowrap="nowrap">第二年起</td>
-                      <td colspan="2" class="text-left">依據每張卡片年費到期日往前推算一年，檢核同一身分證字號下之消費，若不符合標準則以單卡按以下標準計算收取年費(不分正、附卡)：</td>
-                    </tr>
-                    <tr>
-                      <td>年消費</td>
-                      <td>年費</td>
-                    </tr>
-                    <tr>
-                      <td>60,000元(含)以上</td>
-                      <td>免年費</td>
-                    </tr>
-                    <tr>
-                      <td>未達60,000元</td>
-                      <td>正卡1,000元、附卡1,000元
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div class="indentNote_OneText">
-                  <p>※每一卡別所提供之年費減免或折價優惠，每一持卡人僅得享有一次優惠，若於年費優惠期間截止前將卡片停用後又重新申請者，恕不再享有優惠。</p>
-                </div>
-              </div>
-            </div>
-            <!-- <div class="fee_box mb-3 mt-3 mt-md-5">
-              <h3><img src="images/form/fee_icon.gif" class="img-fluid" alt="" />年費政策123</h3>
               <div v-html="feeDetail"></div>
-            </div> -->
+            </div>
           </div>
             <!----------------//fee ---------------->
             <!-------------------本人已詳閱---------------------->
@@ -467,7 +336,8 @@ export default {
         onLineApply_Fillin_Card: ''
       },
       wucUITCeBankTerms: null,
-      feeDetail: null
+      feeDetail: null,
+      yesgoDetail: null
     }
   },
   computed: {
@@ -598,7 +468,7 @@ export default {
         }
         const { status, message } = identity
         if (status !== '00199') {
-          const attrs = ['wucUITCeBankTerms', 'contractModal', 'schema']
+          const attrs = ['wucUITCeBankTerms', 'contractModal', 'schema', 'feeDetail', 'yesgoDetail']
           const temp$data = { ...this.$data }
           attrs.forEach(attr => {
             temp$data[attr] = null
@@ -773,8 +643,10 @@ export default {
     const termsName = ['聯邦銀行電子銀行服務申請約定條款', '']
     const termsHtml = await servicePublic.getTermsHtml(termsName)
     this.wucUITCeBankTerms = termsHtml[0]
-    // const feeHtml = await servicePublic.getYearFee()
-    // this.feeDetail = feeHtml
+    const feeHtml = await servicePublic.getYearFee()
+    this.feeDetail = feeHtml
+    const yesgoHtml = await servicePublic.getYesGo()
+    this.yesgoDetail = yesgoHtml
     this.contractModal = new bootstrap.Modal(this.$refs.contractModal, {
       backdrop: 'static'
     })
@@ -840,14 +712,14 @@ border-color: #dc3545 !important;
   margin-bottom: 2rem;
 }
 
-.formList select:first-of-type {
-  min-width: 85px;
-  max-width: 192px;
+/* .formList select:first-of-type {
+  min-width: 85px !important;
+  max-width: 192px !important;
 }
 
 .formList select {
-  margin-left: 5px;
-  margin-right: 5px;
-  min-width: 60px;
-}
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+  min-width: 60px !important;
+} */
 </style>

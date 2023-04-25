@@ -127,6 +127,7 @@
                         :class="{ 'is-invalid':  errors['職業別的其他'], 'form-control':true}"
                         v-model="onLineApply_Fillin_Card.jobOther"
                         :validateOnChange="true"
+                        maxlength="25"
                       />
                     </div>
                   </div>
@@ -179,6 +180,7 @@
                         class="form-control other_input ms-1 my-2 my-md-0"
                         v-model="onLineApply_Fillin_Card.incomeOther"
                         :validateOnChange="true"
+                        maxlength="10"
                       />
                     </div>
                   </div>

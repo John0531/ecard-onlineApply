@@ -54,6 +54,36 @@ const service = {
       console.log(err)
     }
   },
+  async getYearFee () {
+    try {
+      const url = 'https://card-beta.uitc.com.tw/eCard_source/html/CardDetail/cardDetail601.htm'
+      const res = await axios.get(url, { withCredentials: false })
+      // 將回應的HTML轉換為DOM物件
+      var parser = new DOMParser()
+      var htmlDoc = parser.parseFromString(res.data, 'text/html')
+
+      // 使用querySelector選擇元素
+      var element = htmlDoc.querySelector('.cardDetail_fee')
+      return element.outerHTML
+    } catch (err) {
+      console.log(err)
+    }
+  },
+  async getYesGo () {
+    try {
+      const url = 'https://card-beta.uitc.com.tw/eCard_source/includeBlock/yesgogogo.html'
+      const res = await axios.get(url, { withCredentials: false })
+      // 將回應的HTML轉換為DOM物件
+      var parser = new DOMParser()
+      var htmlDoc = parser.parseFromString(res.data, 'text/html')
+
+      // 使用querySelector選擇元素
+      var element = htmlDoc.querySelector('.yesgogogo_box')
+      return element.outerHTML
+    } catch (err) {
+      console.log(err)
+    }
+  },
   async otpGet () {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/Otp/Send`
