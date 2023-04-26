@@ -78,9 +78,9 @@
                 <li class="col-12 mb-2 formId">
                   <label for="">申請人身份證字號</label>
                   <div>
-                    <Field v-model="OnlineApply_y_Data.id" name="申請人身份證號" maxlength="10" type="text" class="formApply_form_control form-control" :class="{ 'is-invalid': errors['申請人身份證號'] }" :validateOnInput="true" @blur="OnlineApply_y_Data.id = $custom.validate.watchToUpper(OnlineApply_y_Data.id)"
+                    <Field v-model="OnlineApply_y_Data.id" name="申請人身份證字號" maxlength="10" type="text" class="formApply_form_control form-control" :class="{ 'is-invalid': errors['申請人身份證字號'] }" :validateOnInput="true" @blur="OnlineApply_y_Data.id = $custom.validate.watchToUpper(OnlineApply_y_Data.id)"
                     />
-                    <span style="color: #db0031;font-size: 1em !important;">{{ errors["申請人身份證號"] }}</span>
+                    <span style="color: #db0031;font-size: 1em !important;">{{ errors["申請人身份證字號"] }}</span>
                   </div>
                 </li>
                 <li class="col-12">
@@ -103,31 +103,30 @@
                       <option v-for="item in taiwanYearOptions" :key="item.value" :value="item.value">
                         {{item.label}}
                       </option>
-                      </Field>
-                    年
+                      </Field>年
                       <!-- 辦卡人出生月 -->
-                        <Field
-                        as="select" name="月"
-                        rules="required"
-                        :class="{ 'is-invalid': errors['年'] || errors['月'] || errors['日'] }"
-                        class="form-select form-control"
-                        :validateOnChange="true"
-                        v-model="OnlineApply_y_Data.brthMM" @change="getDay">
-                        <option value="" selected>--</option>
-                        <option v-for="item in monthOptions" :key="item.value" :value="item.value">{{ item.label }}</option>
-                        </Field>月
-                      <!-- 辦卡人出生日 -->
-                        <Field
-                        as="select" name="日"
-                        rules="required"
-                        :class="{ 'is-invalid': errors['年'] || errors['月'] || errors['日'] }"
-                        class="form-select form-control"
-                        :validateOnChange="true"
-                        v-model="OnlineApply_y_Data.brthdd"
-                        >
-                        <option value="" selected>--</option>
-                        <option v-for="item in dayOptions" :key="item.value" :value="item.value">{{ item.label }}</option>
-                        </Field>日
+                      <Field
+                      as="select" name="月"
+                      rules="required"
+                      :class="{ 'is-invalid': errors['年'] || errors['月'] || errors['日'] }"
+                      class="form-select form-control"
+                      :validateOnChange="true"
+                      v-model="OnlineApply_y_Data.brthMM" @change="getDay">
+                      <option value="" selected>--</option>
+                      <option v-for="item in monthOptions" :key="item.value" :value="item.value">{{ item.label }}</option>
+                      </Field>月
+                    <!-- 辦卡人出生日 -->
+                      <Field
+                      as="select" name="日"
+                      rules="required"
+                      :class="{ 'is-invalid': errors['年'] || errors['月'] || errors['日'] }"
+                      class="form-select form-control"
+                      :validateOnChange="true"
+                      v-model="OnlineApply_y_Data.brthdd"
+                      >
+                      <option value="" selected>--</option>
+                      <option v-for="item in dayOptions" :key="item.value" :value="item.value">{{ item.label }}</option>
+                      </Field>日
                     </div>
                     <div class="d-flex text-center invalid-feedback my-1">
                       <span v-if="errors['年'] || errors['月'] || errors['日']">
@@ -291,7 +290,7 @@
 <script>
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 import serviceY from '../service/CardFriend_Y.Service'
-import servicePublic from '../service/Public.Service'
+import service from '../service/Public.Service'
 import { defineRule } from 'vee-validate'
 
 export default {
@@ -364,7 +363,6 @@ export default {
   watch: {
     // ?監聽是否有勾選我已詳細閱讀
     agreement (n) {
-      // console.log('agreement', n)
       this.OnlineApply_y_Data.agreeTerms = n === true
     }
   },
@@ -461,7 +459,7 @@ export default {
         } else {
           identity = await serviceY.IdentityVerification(this.OnlineApply_y_Data)
         }
-        const { status, message } = identity
+        const { status } = identity
         if (status !== '00199') {
           const attrs = ['wucUITCeBankTerms', 'contractModal', 'schema', 'feeDetail', 'yesgoDetail']
           const temp$data = { ...this.$data }
@@ -493,10 +491,10 @@ export default {
             break
             // ?驗證失敗(直接顯示錯誤訊息。)
           case '00199' :
-            alert(message)
+            service.showAPIMsg(identity.message)
             break
           default:
-            alert('作業失敗，請重新輸入或洽聯邦信用卡客服專線，02-25455168、07-2269393。')
+            service.showAPIMsg(identity.message)
             break
         }
       } catch (error) {
@@ -549,7 +547,7 @@ export default {
       if (this.isLineBank) {
         const linkCard = await serviceY.cardApplyLoad_PageLoad_LB(GID, IDE, parm, PJN)
         console.log(linkCard)
-        const { status, result, message } = linkCard
+        const { status, result } = linkCard
         // const { id, brthDt, cardInfoList, flgYesgo } = result
         console.log(status)
         switch (status) {
@@ -575,16 +573,15 @@ export default {
             if (USC) this.OnlineApply_y_Data.uSC = result.USC
             break
           case '00799' :
-            alert(message)
-            window.location.href = 'https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014'
+            service.showAPIMsg(linkCard.message)
             break
           default:
-            alert('作業失敗，請重新輸入或洽聯邦信用卡客服專線，02-25455168、07-2269393。')
+            service.showAPIMsg(linkCard.message)
             break
         }
       } else {
         const linkCard = await serviceY.cardApplyLoad_PageLoad(GID, IDE, PJN)
-        const { status, message, result } = linkCard
+        const { status, result } = linkCard
         // const { cardInfoList, flgYesgo } = result
         console.log(linkCard)
         switch (status) {
@@ -602,11 +599,10 @@ export default {
             if (USC) this.OnlineApply_y_Data.uSC = USC
             break
           case '00799' :
-            alert(message)
-            window.location.href = 'https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014'
+            service.showAPIMsg(linkCard.message)
             break
           default:
-            alert('作業失敗，請重新輸入或洽聯邦信用卡客服專線，02-25455168、07-2269393。')
+            service.showAPIMsg(linkCard.message)
             break
         }
       }
@@ -636,11 +632,11 @@ export default {
     }
 
     const termsName = ['聯邦銀行電子銀行服務申請約定條款', '']
-    const termsHtml = await servicePublic.getTermsHtml(termsName)
+    const termsHtml = await service.getTermsHtml(termsName)
     this.wucUITCeBankTerms = termsHtml[0]
-    const feeHtml = await servicePublic.getYearFee()
+    const feeHtml = await service.getYearFee()
     this.feeDetail = feeHtml
-    const yesgoHtml = await servicePublic.getYesGo()
+    const yesgoHtml = await service.getYesGo()
     this.yesgoDetail = yesgoHtml
     this.contractModal = new bootstrap.Modal(this.$refs.contractModal, {
       backdrop: 'static'
@@ -654,7 +650,7 @@ export default {
       }
     } else {
       this.schema = {
-        申請人身份證號: 'required|checkIdandLive',
+        申請人身份證字號: 'required|checkIdandLive',
         年: 'customBirthVaild',
         月: 'customBirthVaild',
         日: 'customBirthVaild',
@@ -706,20 +702,4 @@ border-color: #dc3545 !important;
   align-items: center;
   margin-bottom: 2rem;
 }
-
-/* .formList select:first-of-type {
-    margin-left: 0;
-    min-width: 85px;
-    max-width: 192px;
-} */
-/* .formList select:first-of-type {
-  min-width: 85px !important;
-  max-width: 192px !important;
-}
-
-.formList select {
-  margin-left: 5px !important;
-  margin-right: 5px !important;
-  min-width: 60px !important;
-} */
 </style>

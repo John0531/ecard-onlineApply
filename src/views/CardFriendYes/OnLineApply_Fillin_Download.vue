@@ -101,7 +101,7 @@ export default {
             window.open(result.MyDataUrl, '_blank')
             break
           default:
-            alert('作業失敗，請重新輸入或洽聯邦信用卡客服專線，02-25455168、07-2269393。')
+            service.showAPIMsg(response.message)
             break
         }
       } catch (error) {

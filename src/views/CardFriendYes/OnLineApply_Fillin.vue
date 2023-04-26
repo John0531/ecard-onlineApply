@@ -21,7 +21,7 @@
                   v-slot="{ errors }" ref="form">
                   <ul class="formList-even">
                       <li class="col-12 col-md-6">
-                        <label for="">申請人身份證號</label>
+                        <label for="">申請人身份證字號</label>
                         <div class="form-text">{{ id }}</div>
                       </li>
                       <li class="col-12 col-md-6">
@@ -623,7 +623,7 @@ export default {
     },
     async init () {
       const getInformation = await serviceY.getDWInformation()
-      const { status, result, message } = getInformation
+      const { status, result } = getInformation
       switch (status) {
         case '00200':
           this.id = result.id
@@ -640,7 +640,7 @@ export default {
           this.termsHtml = await service.getTermsHtml(this.termsName)
           break
         default:
-          alert(message)
+          service.showAPIMsg(getInformation.message)
           break
       }
     }

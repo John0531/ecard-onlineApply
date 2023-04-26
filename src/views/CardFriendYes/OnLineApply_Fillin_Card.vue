@@ -264,6 +264,7 @@
 <script>
 import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 import serviceY from '../../service/CardFriend_Y.Service'
+import service from '../../service/Public.Service'
 
 export default {
   data () {
@@ -415,7 +416,7 @@ export default {
     },
     async init () {
       const kycInformation = await serviceY.getKYC()
-      const { status, result, message } = kycInformation
+      const { status, result } = kycInformation
       switch (status) {
         case '01101' :
           this.id = result.id
@@ -443,7 +444,7 @@ export default {
           }
           break
         default:
-          alert(message)
+          service.showAPIMsg(kycInformation.message)
           break
       }
     }
