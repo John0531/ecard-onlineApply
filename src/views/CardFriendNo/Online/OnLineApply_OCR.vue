@@ -1,13 +1,13 @@
 <template>
-  <div class="container">
-    <div class="shortKv">
-      <div class="fill-shortKv topimg-OnLineApply">
+  <!-- 主視覺 -->
+  <div class="shortKv">
+    <div class="fill-shortKv topimg-OnLineApply">
         <div class="container-xl shortKv-title-4">
-          <h2>線上辦卡</h2>
+            <h2>線上辦卡</h2>
         </div>
-      </div>
     </div>
-    <!-- //主視覺 -->
+  </div>
+  <div class="container">
     <!-- 主要內容 -->
     <section class="mainArea">
       <div class="container-xl">
@@ -359,7 +359,7 @@
       <div class="modal-dialog modal-xl modal-dialog-scrollable">
           <div class="modal-content">
               <div class="modal-header">
-                  <h5 class="modal-title OnLineApply">財力證明修改</h5>
+                  <h5 class="modal-title OnLineApply">上傳身分證</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click.prevent="closeCroppieModal">
                     <img src="@/assets/images/form/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
                   </button>
@@ -506,10 +506,9 @@ import ServiceN from '@/service/CardFriend_N.Service.js'
 export default {
   data () {
     return {
-      clientHeight: '',
+      clientHeight: '', // ? 背景圖片高
       preViewImage: '',
       times: -1,
-      Uploaded: false,
       num: '', // *修改完成要呈現的照片序
       identitiyPack1: {
         preViewImg: '',
@@ -661,7 +660,6 @@ export default {
       const res = await ServiceN.uploadImage(this.file)
       // this.message = res.data.message
       this.message = res.data.message === '作業成功。' ? '身分證辨識成功' : res.data.message
-      console.log(this.message = res.data.message === '作業成功。' ? '身分證辨識成功' : res.data.message)
       if (res.status === 200) {
         this.APIModal.show()
         this.uploaded = true

@@ -241,7 +241,7 @@
                   </h5>
                   <button type="button" class="btn-close" aria-label="Close" @click="this.agreeModal.hide();">
                     <img
-                      src="@/assets/images/close.png" border="0" alt="close">
+                      src="@/assets/images/form/close.png" border="0" alt="close">
                   </button>
               </div>
               <div class="modal-body">
@@ -414,10 +414,15 @@ export default {
       }
     },
     async applySubmit () {
+      this.$refs.myForm.setErrors({})
+      await this.$refs.myForm.validateField('銀行代號')
       this.$custom.validate.chkKeyValueLength(this.chkszData.oacctNo, this.$refs.myForm, '銀行帳號', '10', '14')
-      const collection = await this.$refs.myForm.validate()
-      collection.errors = this.$refs.myForm.getErrors()
-      if (Object.keys(collection.errors).length === 0) {
+      await this.$refs.myForm.validateField('行動電話')
+      await this.$refs.myForm.validateField('服務申請約定條款')
+      await this.$refs.myForm.validateField('個資使用同意')
+      // await this.$refs.myForm.validate()
+      const errors = this.$refs.myForm.getErrors()
+      if (Object.keys(errors).length === 0) {
         // ** ===全部通過前往下一頁===
         // ** ===資料整理===
         this.chkszData.personalDataAuthorized = this.checkagree
@@ -436,7 +441,7 @@ export default {
         }
       } else {
         // ** ===錯誤訊息彙整===
-        this.$custom.validate.showErrors(collection.errors)
+        this.$custom.validate.showErrors(errors)
       }
     }
   },

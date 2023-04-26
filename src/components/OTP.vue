@@ -27,7 +27,7 @@
                                     <span class="input-group-text">{{tag}}-</span>
                                     <Field
                                       v-model="mobileMsgCode"
-                                      name="驗簡訊驗證碼" type="text" maxlength="6"
+                                      name="簡訊驗證碼" type="text" maxlength="6"
                                       placeholder="" class="form-control"
                                       :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
                                       @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
@@ -158,7 +158,7 @@
                                     <span class="input-group-text">{{tag}}-</span>
                                     <Field
                                       v-model="mobileMsgCode"
-                                      name="驗證碼" type="text" maxlength="6"
+                                      name="簡訊驗證碼" type="text" maxlength="6"
                                       placeholder="" class="form-control"
                                       :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
                                       @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
@@ -221,7 +221,7 @@
                               <span class="input-group-text">{{tag}}-</span>
                               <Field
                                 v-model="mobileMsgCode"
-                                name="驗證碼" type="text" maxlength="6"
+                                name="簡訊驗證碼" type="text" maxlength="6"
                                 placeholder="" class="form-control"
                                 :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
                                 @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
@@ -283,7 +283,7 @@
                               <div class="input-group-text">{{tag}}-</div>
                               <Field
                                 v-model="mobileMsgCode"
-                                name="驗證碼" type="text" maxlength="6"
+                                name="簡訊驗證碼" type="text" maxlength="6"
                                 placeholder="" class="form-control"
                                 :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
                                 @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"

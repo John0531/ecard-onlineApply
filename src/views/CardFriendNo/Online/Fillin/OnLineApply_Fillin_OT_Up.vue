@@ -33,7 +33,7 @@
                 <div class="col-lg-10">
                     <h3 class="upload_title">檢附財力證明</h3>
                     <div class="mb-3">
-                        <h5 class="d-block text-primary">請留意！本網頁操作有效時間：9分40秒</h5>
+                        <h5 class="d-block text-primary">請留意！本網頁操作有效時間：{{this.countDown._data.minutes}}分{{this.countDown._data.seconds}}秒</h5>
                     </div>
                     <div class="row upload_group mb-4">
                         <div class="d-flex flex-column px-0">
@@ -83,7 +83,6 @@
                                 ref="resultImg1"
                                 src="@/assets/images/form/upload_photo.png"
                                 class="img-fluid "
-                                :class="{'crop-width':identitiyPack1.photo}"
                                 alt="">
                             </div>
                             <div
@@ -111,7 +110,6 @@
                                 ref="resultImg2"
                                 src="@/assets/images/form/upload_photo.png"
                                 class="img-fluid"
-                                :class="{'crop-width':identitiyPack2.photo}"
                                 alt="">
                             </div>
                             <div
@@ -144,7 +142,6 @@
                                 ref="resultImg3"
                                 src="@/assets/images/form/upload_photo.png"
                                 class="img-fluid"
-                                :class="{'crop-width':identitiyPack3.photo}"
                                 alt="">
                             </div>
                             <div
@@ -172,7 +169,6 @@
                                 ref="resultImg4"
                                 src="@/assets/images/form/upload_photo.png"
                                 class="img-fluid"
-                                :class="{'crop-width':identitiyPack4.photo}"
                                 alt="">
                             </div>
                             <div
@@ -186,13 +182,14 @@
                         <div class="d-flex flex-column px-0">
                           <div >
                               <Field
-                              v-model="proofType"
-                              class="form-check-input Apply_input"
-                              :class="{ 'is-invalid': errors['財力證明'] }"
-                              type="radio" name="財力證明"
-                              id="exampleRadios1"
-                              value="option2"
-                              rules="required"
+                                v-model="proofType"
+                                class="form-check-input Apply_input"
+                                :class="{ 'is-invalid': errors['財力證明'] }"
+                                type="radio" name="財力證明"
+                                id="exampleRadios1"
+                                value="option2"
+                                rules="required"
+                                :validateOnInput="true"
                               />
                               <label class="form-check-label fw-bold text-md-center" for="exampleRadios1">
                                   MyData平臺服務<span class="d-block d-md-inline mt-1 mt-md-0">(使用MyData調閱個人資料)</span>
@@ -220,10 +217,10 @@
                                 :class="{ 'is-invalid': errors['MyData服務授權條款'] }"
                                 type="checkbox"
                                 :validateOnChange="true"
-                                @click="checkAgreement"
+                                @click.prevent="checkAgreement"
                                 @change="checkdoubleAgree"
                                 />
-                                <label for="agree">本人已詳閱並同意｢ <a href="#" ><u>MyData服務授權條款</u></a>」</label>
+                                <label for="agree">本人已詳閱並同意｢ <a @click.prevent="checkAgreement" href="#" ><u>MyData服務授權條款</u></a>」</label>
                             </div>
                             <div class="d-flex text-center invalid-feedback my-1 px-0">
                               <div>{{errors['MyData服務授權條款']}}</div>
@@ -533,10 +530,9 @@
                   </div>
                   <div id="button_terms" class="button_terms">
                       <input
-                      v-model="this.agreement"
-                      type="checkbox"
-                      id="button_termsOpt_1"
-                      @click="checkTotal"
+                        v-model="agreementAll"
+                        type="checkbox"
+                        id="button_termsOpt_1"
                       />
                       <label id="read_1" for="button_termsOpt_1">我已詳細閱讀。(請勾選)</label>
                   </div>
@@ -571,10 +567,13 @@
 
 <script>
 import PublicService from '@/service/Public.Service.js'
+import Moment from 'moment'
 
 export default {
   data () {
     return {
+      countDown: Moment.duration({ minutes: 10 }), // ? 倒數10分鐘
+      clientHeight: '', // ? 背景圖片高
       imgTemplateUrl: '',
       imgTemplateInfo: '',
       NoticeModal: '', //* 一進畫面財力證明格式提醒
@@ -582,30 +581,25 @@ export default {
       MyDataModal: '', //* 倒轉 MyData
       MyDataAgreeModal: '', // * 同意MyData
       CroppieModal: '', // * 財力證明圖片修改
-      agreement: false, // *表單同意欄位
       agreementAll: false, // *modal上同意欄位
       proofType: '',
       doubleAgree: false, //* 若勾選myData，則為必填
       identitiyPack1: {
-        photo: '',
         preViewImg: '',
         resultImg: '',
         file: ''
       },
       identitiyPack2: {
-        photo: '',
         preViewImg: '',
         resultImg: '',
         file: ''
       },
       identitiyPack3: {
-        photo: '',
         preViewImg: '',
         resultImg: '',
         file: ''
       },
       identitiyPack4: {
-        photo: '',
         preViewImg: '',
         resultImg: '',
         file: ''
@@ -625,18 +619,13 @@ export default {
   methods: {
     async pickFiles (e) {
       // ? 轉base64
-      const reader = new FileReader()
       const file = await e.target.files[0]
       const maxAllowedSize = 5 * 1024 * 1024
       if (file.size > maxAllowedSize || file.type !== 'image/jpeg') {
         this.ImageLimit.show()
       } else {
         this.imgTemplateUrl = URL.createObjectURL(file)
-        reader.readAsDataURL(file)
-        reader.onload = () => {
-          this[`identitiyPack${this.num}`].photo = reader.result
-          this.makeModify(this.num)
-        }
+        this.makeModify(this.num)
       }
       // ? 清空value
       // this.clearFiles(this.num)
@@ -644,27 +633,20 @@ export default {
     async makeModify (num) {
       // ?呼叫modal準備呈現
       this.CroppieModal.show()
-      // await this.$refs.CroppieModal.addEventListener('shown.bs.modal', () => {
-      //   console.log(document.getElementById('imgTemplate').clientWidth)
-      //   return 123
-      // })
-      const imgTemplate = document.getElementById('imgTemplate')
-      imgTemplate.onload = function () {
-        console.log(document.getElementById('imgTemplate').clientWidth)
-      }
       setTimeout(async () => {
         const imgTemplate = document.getElementById('imgTemplate')
-        this.imgTemplateInfo = {
-          width: imgTemplate.clientWidth,
-          height: imgTemplate.clientHeight
-        }
-        this.imgTemplateUrl = ''
         try {
         // ?要呈現畫面的區域(在modal上)
           const croppieE = this.$refs.myIdentifident
           this[`identitiyPack${num}`].preViewImg = new this.$custom.Croppie(croppieE, {
-            viewport: { width: this.imgTemplateInfo.width, height: this.imgTemplateInfo.height },
-            boundary: { width: this.imgTemplateInfo.width + 20, height: this.imgTemplateInfo.height + 20 },
+            viewport: {
+              width: imgTemplate.clientWidth,
+              height: imgTemplate.clientHeight
+            },
+            boundary: {
+              width: imgTemplate.clientWidth + 20,
+              height: imgTemplate.clientHeight + 20
+            },
             showZoomer: true,
             enableResize: true,
             enableOrientation: true,
@@ -672,11 +654,12 @@ export default {
             enforceBoundary: true,
             mouseWheelZoom: 'ctrl'
           })
-          // const cropImage = document.querySelector('.cr-image')
-          // cropImage.classList.add('crop-test')
+          // ?bind在此時將jpg轉為png
           await this[`identitiyPack${num}`].preViewImg.bind({
-            url: this[`identitiyPack${num}`].photo
+            url: this.imgTemplateUrl
           })
+          URL.revokeObjectURL(this.imgTemplateUrl)
+          this.imgTemplateUrl = ''
         } catch (error) {
           alert(error)
         }
@@ -684,25 +667,21 @@ export default {
     },
     async result () {
       // ?在頁面上各欄位自呈現
-      const num = this.num
-      const resultImg = this.$refs[`resultImg${num}`]
-      await this[`identitiyPack${num}`].preViewImg.result('base64').then(function (base64) {
-        resultImg.src = base64
-      })
-      // ?
-      setTimeout(() => {
-        // ?將編輯完成的base64準備起來打API
-        // this[`identitiyPack${num}`].file = this.jpeg2png(this.$refs[`resultImg${num}`].src)
-        this[`identitiyPack${num}`].file = this.$refs[`resultImg${num}`].src
-      }, 100)
+      const resultImg = this.$refs[`resultImg${this.num}`]
+      const base64 = await this[`identitiyPack${this.num}`].preViewImg.result('base64')
+      resultImg.src = base64
+      this[`identitiyPack${this.num}`].file = base64
+      this.$refs[`resultImg${this.num}`].style = `height:${this.clientHeight}px;`
       // ?編輯結束將相關物件資料銷毀
       this.CroppieModal.hide()
-      this.destroy(this.num)
+      this.destroy()
     },
-    destroy (num) {
-      this[`identitiyPack${num}`].preViewImg.destroy()
+    destroy () {
+      this[`identitiyPack${this.num}`].preViewImg.destroy()
+      this[`identitiyPack${this.num}`].preViewImg = ''
       document.getElementById('myIdentifident').innerHTML = ''
       document.getElementById('myIdentifident').classList.remove('croppie-container')
+      document.querySelector(`#upload${this.num}`).value = ''
       this.num = ''
     },
     clearFiles (num) {
@@ -722,18 +701,17 @@ export default {
         // ** ===全部通過打API才前往下一頁===
         // ** ===整理資料===
         console.log(this.identitiyPack1.file.split(',')[1])
-        this.form.upload1 = this.identitiyPack1.file.split(',')[1]
-        this.form.upload2 = this.identitiyPack2.file.split(',')[1]
-        this.form.upload3 = this.identitiyPack3.file.split(',')[1]
-        this.form.upload4 = this.identitiyPack4.file.split(',')[1]
         if (this.proofType === 'option2') {
           this.form.isMydata = true
         }
         if (this.proofType === 'option1') {
           this.form.isMydata = false
+          this.form.upload1 = this.identitiyPack1.file.split(',')[1]
+          this.form.upload2 = this.identitiyPack2.file.split(',')[1]
+          this.form.upload3 = this.identitiyPack3.file.split(',')[1]
+          this.form.upload4 = this.identitiyPack4.file.split(',')[1]
         }
         const res = await PublicService.CardSendApply(this.form)
-        console.log(res)
         PublicService.showAPIMsg(res.data.message)
         if (res.status === 200) {
           // ?session全部清掉
@@ -741,8 +719,6 @@ export default {
           if (res.data.status === '00800') {
             // ? ===選擇自行上傳===
             // ?未來卡成功
-            // ?localStorage 的token全部清掉
-            localStorage.clear()
             setTimeout(() => {
               this.$router.push('/OnLineApply_Fillin_OT_finish')
             }, 1000)
@@ -757,8 +733,6 @@ export default {
           if (res.data.status === '00802') {
             // ? ===選擇MyData上傳===
             // ?讀取result內的URL轉導MyData上傳財力
-            // ?localStorage 的token全部清掉
-            localStorage.clear()
             this.url = res.result.MyDataUrl
             setTimeout(() => {
               window.open(this.url, '_blank')
@@ -787,19 +761,6 @@ export default {
     },
     checkAgreement () {
       this.MyDataAgreeModal.show()
-      const ck = document.querySelector('#checkbox')
-      if (!this.agreement) {
-        ck.checked = false
-        return
-      }
-      this.agreementAll = true
-      ck.checked = true
-    },
-    checkTotal () {
-      this.agreementAll = true
-      const ck = document.querySelector('#checkbox1')
-      ck.checked = true
-      this.MyDataAgreeModal.hide()
     },
     checkdoubleAgree () {
       const dom = this.$refs.myForm
@@ -819,7 +780,7 @@ export default {
       const dom = this.$refs.myForm
       dom.setFieldError('財力證明資料', '')
       if (this.proofType === 'option1') {
-        if (this.identitiyPack1.photo || this.identitiyPack2.photo || this.identitiyPack3.photo || this.identitiyPack4.photo) {
+        if (this.identitiyPack1.file || this.identitiyPack2.file || this.identitiyPack3.file || this.identitiyPack4.file) {
           return true
         } else {
           dom.setFieldError('財力證明資料', '勾選上傳財力資料請上傳任一證明')
@@ -846,7 +807,19 @@ export default {
     }
   },
   mounted () {
-    this.CroppieModal = new this.$custom.bootstrap.Modal(this.$refs.CroppieModal)
+    setTimeout(() => {
+      this.clientHeight = this.$refs.resultImg1.clientHeight
+    }, 500)
+    // ? 操作時間倒數計時
+    setInterval(() => {
+      this.countDown.subtract(1, 'seconds')
+      if (this.countDown._data.minutes === 0 && this.countDown._data.seconds === 0) {
+        this.$store.commit('getErrorMsg', '作業逾時')
+        this.$store.state.errorModal.show()
+      }
+    }, 1000)
+    // ? 操作時間倒數計時 end
+    this.CroppieModal = new this.$custom.bootstrap.Modal(this.$refs.CroppieModal, { backdrop: 'static' })
     this.NNBModal = new this.$custom.bootstrap.Modal(this.$refs.NNBModal)
     this.MyDataModal = new this.$custom.bootstrap.Modal(this.$refs.MyDataModal)
     this.MyDataAgreeModal = new this.$custom.bootstrap.Modal(this.$refs.MyDataAgreeModal)
@@ -859,7 +832,15 @@ export default {
   watch: {
     num (n) {
       document.getElementById('myIdentifident').classList.remove('croppie-container')
-      //
+    },
+    agreementAll (n) {
+      if (n) {
+        this.doubleAgree = true
+        this.$refs.myForm.setFieldError('MyData服務授權條款', '')
+        this.MyDataAgreeModal.hide()
+      } else {
+        this.doubleAgree = false
+      }
     }
   }
 }

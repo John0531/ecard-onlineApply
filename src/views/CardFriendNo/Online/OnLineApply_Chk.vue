@@ -215,7 +215,7 @@
           <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel-1">請向下滾動，仔細閱讀整份同意書所有內容<input id="myCheckCount" hidden></h5>
               <button type="button" class="btn-close" aria-label="Close" @click="this.agreeModal.hide()">
-                <img src="@/assets/images/close.png" border="0" alt="close" >
+                <img src="@/assets/images/form/close.png" border="0" alt="close" >
               </button>
           </div>
           <div class="modal-body" >

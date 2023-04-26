@@ -21,19 +21,19 @@
                       </h3>
                       <div class="col-12 card_gift_txt">
                           <div v-html="giftNote"></div>
-                          <div class="form-check mt-2 ms-3" v-for="gift in  giftList" :key="gift+1">
+                          <div class="form-check mt-2 ms-3" v-for="gift in giftList" :key="gift+1">
                             <Field
                               v-model="applierInfo.firstGift"
                               class="form-check-input Apply_input"
                               :class="{ 'is-invalid': errors['首刷禮'] }"
-                              name="首刷禮" id="firstGift1" type="radio"
+                              name="首刷禮" :id="gift.giftCode" type="radio"
                               :validateOnInput="true"
                               rules="required"
                               :value="gift.giftCode"
                               />
-                              <label class="form-check-label text-black fw-bold" for="exampleRadios4">
-                                  {{gift.giftItem}}
-                              </label>
+                            <label class="form-check-label text-black fw-bold" :for="gift.giftCode">
+                                {{gift.giftItem}}
+                            </label>
                           </div>
                           <!-- <div class="form-check mt-2 ms-3">
                               <Field
