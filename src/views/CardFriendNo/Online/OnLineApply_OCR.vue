@@ -160,7 +160,7 @@
                         </option>
                         </Field>日
                     </div>
-                    <p class="text-danger ms-2 mt-1">
+                    <p v-if="errors['身分證發證日期']" class="field-error">
                       {{ errors["身分證發證日期"] }}
                     </p>
                   </li>
@@ -201,7 +201,7 @@
                         <option value="3">換發</option>
                       </Field>
                     </div>
-                    <p class="text-danger ms-2 mt-1">
+                    <p v-if="errors['發證地點']||errors['發證類型']" class="field-error">
                       {{
                         errors["發證地點"]
                           ? errors["發證地點"]
@@ -225,7 +225,7 @@
                   />
                   <ErrorMessage
                     name="中文姓名"
-                    class="text-danger ms-2"
+                    class="field-error"
                   />
                   </li>
                   <li class="col-12 col-md-6 d-none d-md-block"></li>
@@ -335,7 +335,7 @@
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     />
                   </div>
-                  <p class="text-danger ms-2 mt-1">{{ errors['戶籍地址'] }}</p>
+                  <p v-if="errors['戶籍地址']" class="field-error">{{ errors['戶籍地址'] }}</p>
                   </li>
                 </ul>
               </div>
