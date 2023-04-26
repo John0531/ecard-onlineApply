@@ -58,7 +58,9 @@
                   </label>
                 </div>
               </div>
-              <span class="col-12 text-center red_text position-relative m-auto">{{errors['申請的信用卡']}}</span>
+              <div class="col-12 text-center red_text position-relative">
+                <span class="field-error m-auto" v-if="errors['申請的信用卡']">{{errors['申請的信用卡']}}</span>
+              </div>
             </div>
             <!----------------fee ---------------->
             <!----------------yesgogogo ---------------->
@@ -80,7 +82,7 @@
                   <div>
                     <Field v-model="OnlineApply_y_Data.id" name="申請人身份證字號" maxlength="10" type="text" class="formApply_form_control form-control" :class="{ 'is-invalid': errors['申請人身份證字號'] }" :validateOnInput="true" @blur="OnlineApply_y_Data.id = $custom.validate.watchToUpper(OnlineApply_y_Data.id)"
                     />
-                    <span style="color: #db0031;font-size: 1em !important;">{{ errors["申請人身份證字號"] }}</span>
+                    <span v-if="errors['申請人身份證字號']" class="field-error">{{ errors["申請人身份證字號"] }}</span>
                   </div>
                 </li>
                 <li class="col-12">
@@ -129,7 +131,7 @@
                       </Field>日
                     </div>
                     <div class="d-flex text-center invalid-feedback my-1">
-                      <span v-if="errors['年'] || errors['月'] || errors['日']">
+                      <span v-if="errors['年'] || errors['月'] || errors['日']" class="field-error">
                         {{ customAddressMes(errors) }}
                       </span>
                     </div>
@@ -160,7 +162,9 @@
                   </label>
                 </div>
               </div>
-              <span class="col-12 text-center red_text position-relative m-auto">{{errors['申請的信用卡']}}</span>
+              <div class="col-12 text-center red_text position-relative">
+                <span class="field-error m-auto" v-if="errors['申請的信用卡']">{{errors['申請的信用卡']}}</span>
+              </div>
             </div>
            <!----------------yesgogogo ---------------->
            <div class="mt-3 mt-md-5" v-if="flgYesgo === 'Y'?true: false">
@@ -196,7 +200,7 @@
                   >」內容。(請務必勾選)</label
                 >
               </div>
-              <span style="color: #db0031;font-size: 1em !important;">{{ errors["有關條款"] }}</span>
+              <span v-if="errors['有關條款']" class="field-error">{{ errors["有關條款"] }}</span>
               <div class="terms">
                 <input type="checkbox" class="checkimg position-absolute" id="agree1" v-model="OnlineApply_y_Data.userDataBK" @click="checkTerm"/>
                 <label for="agree1"

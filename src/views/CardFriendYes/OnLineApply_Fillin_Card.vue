@@ -72,8 +72,8 @@
                   <option v-for="national in option.citizenShip.filter((item=>item.VALUE!=='TW'))" :key="national.SORT" :value="national.VALUE">{{national.SHOW}}</option>
                   </Field>
                   </div>
-                  <span style="color: #db0031;font-size: 1em !important;">{{ errors['出生地'] }}</span>
-                  <span style="color: #db0031;font-size: 1em !important;">{{ errors['出生地的其他'] }}</span>
+                  <span v-if="errors['出生地']" class="field-error">{{ errors['出生地'] }}</span>
+                  <span v-if="errors['出生地的其他']" class="field-error">{{ errors['出生地的其他'] }}</span>
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">4.國籍</label>
@@ -94,7 +94,7 @@
                       {{ national.SHOW }}
                     </option>
                   </Field>
-                  <span style="color: #db0031;font-size: 1em !important;">{{ errors['國籍'] }}</span>
+                  <span v-if="errors['國籍']" class="field-error">{{ errors['國籍'] }}</span>
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">5.職業別</label>
@@ -131,8 +131,8 @@
                       />
                     </div>
                   </div>
-                  <span style="color: #db0031;font-size: 1em !important;">{{ errors['職業別'] }}</span>
-                  <span style="color: #db0031;font-size: 1em !important;">{{ errors['職業別的其他'] }}</span>
+                  <span v-if="errors['職業別']" class="field-error">{{ errors['職業別'] }}</span>
+                  <span v-if="errors['職業別的其他']" class="field-error">{{ errors['職業別的其他'] }}</span>
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">6.職級別</label>
@@ -149,7 +149,7 @@
                       {{ job.SHOW }}
                     </option>
                   </Field>
-                  <span style="color: #db0031;font-size: 1em !important;">{{ errors['職級別'] }}</span>
+                  <span v-if="errors['職級別']" class="field-error">{{ errors['職級別'] }}</span>
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">7.主要所得及資金來源</label>
@@ -184,8 +184,8 @@
                       />
                     </div>
                   </div>
-                  <span style="color: #db0031;font-size: 1em !important;">{{ errors['主要所得及資金來源'] }}</span>
-                  <span style="color: #db0031;font-size: 1em !important;">{{ errors['主要所得及資金來源的其他'] }}</span>
+                  <span v-if="errors['主要所得及資金來源']" class="field-error">{{ errors['主要所得及資金來源'] }}</span>
+                  <span v-if="errors['主要所得及資金來源的其他']" class="field-error">{{ errors['主要所得及資金來源的其他'] }}</span>
                 </li>
               </ul>
             </div>
