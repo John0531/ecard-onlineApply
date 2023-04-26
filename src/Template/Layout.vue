@@ -73,4 +73,23 @@ export default {
   .form-text{
     margin-top: 0;
   }
+  .field-error {
+    display: block;
+    position: relative;
+    width: fit-content;
+    font-size: 0.875em;
+    padding: 2px 8px;
+    border-radius: 3px;
+    color: #ffffff;
+    background-color: #dc3545;
+    margin-top: 6px;
+  }
+  .field-error::before {
+    border: 6px solid transparent;
+    border-bottom-color: #dc3545;
+    position: absolute;
+    content: "";
+    left: 47%;
+    top: -10px;
+  }
 </style>
