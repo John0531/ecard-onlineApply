@@ -44,7 +44,7 @@ import '@fortawesome/fontawesome-free/js/all.js'
 import './axios.setting.js'
 
 // ?css外部引入
-// import './cssImport.js'
+import './cssImport.js'
 
 // ?加入validate驗證規則
 Object.keys(validate).forEach((rule) => {

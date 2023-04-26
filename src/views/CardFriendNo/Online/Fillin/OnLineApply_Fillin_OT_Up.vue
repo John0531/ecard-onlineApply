@@ -186,12 +186,12 @@
                                 class="form-check-input Apply_input"
                                 :class="{ 'is-invalid': errors['財力證明'] }"
                                 type="radio" name="財力證明"
-                                id="exampleRadios1"
+                                id="exampleRadios2"
                                 value="option2"
                                 rules="required"
                                 :validateOnInput="true"
                               />
-                              <label class="form-check-label fw-bold text-md-center" for="exampleRadios1">
+                              <label class="form-check-label fw-bold text-md-center" for="exampleRadios2">
                                   MyData平臺服務<span class="d-block d-md-inline mt-1 mt-md-0">(使用MyData調閱個人資料)</span>
                               </label>
                           </div>
@@ -733,7 +733,7 @@ export default {
           if (res.data.status === '00802') {
             // ? ===選擇MyData上傳===
             // ?讀取result內的URL轉導MyData上傳財力
-            this.url = res.result.MyDataUrl
+            this.url = res.data.result.MyDataUrl
             setTimeout(() => {
               window.open(this.url, '_blank')
             }, 1000)

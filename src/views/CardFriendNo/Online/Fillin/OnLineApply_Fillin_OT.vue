@@ -523,10 +523,10 @@
                       class="form-check-input mt-2 position-absolute"
                       type="radio"
                       name="exampleRadios"
-                      id="exampleRadios1"
+                      id="居住地址-同戶籍地址"
                       value="option1"
                     />
-                    <div class="form_Apply_txt">同戶籍地址</div>
+                    <label class="form_Apply_txt fw-normal" for="居住地址-同戶籍地址">同戶籍地址</label>
                   </div>
                   <p class="text-danger ms-2 mt-1">{{ errors['居住地址'] }}</p>
                 </li>

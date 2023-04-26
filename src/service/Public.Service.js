@@ -24,7 +24,7 @@ const service = {
     try {
       const termsArr = []
       // ? 取得比對 json
-      const url = 'https://ecard.yesgogogo.com/ecard_source/terms.json'
+      const url = `${process.env.VUE_APP_STATIC}/terms/json/terms.json`
       const res = await axios.get(url, { withCredentials: false })
       if (typeof res.data === 'string') {
         store.commit('getErrorMsg', '檔案讀取有誤，請重新輸入或洽聯邦信用卡客服專線，02-25455168、07-2269393')
@@ -42,7 +42,7 @@ const service = {
       })
       const termsHtml = []
       for (let i = 0; i < termsArr.length; i++) {
-        const url = `https://ecard.yesgogogo.com/ecard_source/${termsArr[i].fileName}.html?${hash(8)}`
+        const url = `${process.env.VUE_APP_STATIC}/terms/html/${termsArr[i].fileName}.html?${hash(8)}`
         const res = await axios.get(url, { withCredentials: false })
         const safeHtml = res.data.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
         const parser = new DOMParser()
@@ -56,7 +56,7 @@ const service = {
   },
   async getYearFee () {
     try {
-      const url = 'https://card-beta.uitc.com.tw/eCard_source/html/CardDetail/cardDetail601.htm'
+      const url = `${process.env.VUE_APP_STATIC}/html/CardDetail/cardDetail601.htm`
       const res = await axios.get(url, { withCredentials: false })
       // 將回應的HTML轉換為DOM物件
       var parser = new DOMParser()
@@ -71,7 +71,7 @@ const service = {
   },
   async getYesGo () {
     try {
-      const url = 'https://card-beta.uitc.com.tw/eCard_source/includeBlock/yesgogogo.html'
+      const url = `${process.env.VUE_APP_STATIC}/includeBlock/yesgogogo.html`
       const res = await axios.get(url, { withCredentials: false })
       // 將回應的HTML轉換為DOM物件
       var parser = new DOMParser()
