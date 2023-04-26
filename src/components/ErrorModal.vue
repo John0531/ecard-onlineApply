@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     closeModal () {
-      if (this.$store.state.errorMsg.includes('440')) {
+      if (this.$store.state.errorRedirect === 'cardFamily') {
         sessionStorage.clear()
         window.location = 'https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014'
       }

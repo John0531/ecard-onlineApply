@@ -30,7 +30,7 @@
                         rules="checkPhone"
                         />
                         <span class="not_text">請填寫信用卡申請時之行動電話，以利資訊驗證</span>
-                        <div class="d-flex text-center invalid-feedback my-1" >
+                        <div v-if="errors['行動電話']" class="field-error" >
                           {{errors['行動電話']}}
                         </div>
                       </div>
@@ -65,7 +65,7 @@
                 </span>
                 內容。(請務必勾選)
               </label>
-              <p class="d-block text-danger ms-2">{{ errors["有關條款"] }}</p>
+              <p v-if="errors['有關條款']" class="field-error">{{ errors["有關條款"] }}</p>
             </div>
           </div>
           <!-------------------//本人已詳閱---------------------->

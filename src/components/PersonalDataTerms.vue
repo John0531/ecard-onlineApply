@@ -144,7 +144,7 @@
                       >
                       <ErrorMessage
                         name="第三人行銷"
-                        class="d-block text-danger ms-2"
+                        class="field-error"
                       />
                     </div>
                   </div>
@@ -216,7 +216,7 @@
                       for="Common_Promote_N"
                       >不同意</label
                     >
-                    <p class="d-block text-danger ms-2">
+                    <p v-if="errors['票證功能及帳單形式同意條款']" class="field-error">
                       {{ errors["票證功能及帳單形式同意條款"] }}
                     </p>
                   </div>
@@ -299,7 +299,7 @@
                     >
                     <ErrorMessage
                       name="聯邦銀行LINE官方綁定個人化服務"
-                      class="d-block text-danger ms-2"
+                      class="field-error"
                     />
                   </div>
                 </div>

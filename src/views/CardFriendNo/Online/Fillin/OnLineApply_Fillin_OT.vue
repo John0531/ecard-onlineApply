@@ -102,7 +102,7 @@
                     </Field
                     >日
                   </div>
-                  <p class="text-danger ms-2 mt-1">{{ errors['身分證發證日期'] }}</p>
+                  <p v-if="errors['身分證發證日期']" class="field-error">{{ errors['身分證發證日期'] }}</p>
                 </li>
                 <li class="col-12 col-md-6">
                   <label for=""><span class="red_text">* </span>發證地點</label>
@@ -133,7 +133,7 @@
                       <option value="3">換發</option>
                     </Field>
                   </div>
-                  <p class="text-danger ms-2 mt-1">{{ errors['發證地點']?errors['發證地點']:errors['發證類型'] }}</p>
+                  <p v-if="errors['發證地點']||errors['發證類型']" class="field-error">{{ errors['發證地點']?errors['發證地點']:errors['發證類型'] }}</p>
                 </li>
                 <li class="col-12 col-md-6">
                   <label for=""><span class="red_text">* </span>中文姓名</label>
@@ -149,7 +149,7 @@
                   />
                   <ErrorMessage
                     name="中文姓名"
-                    class="text-danger ms-2"
+                    class="field-error"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -169,7 +169,7 @@
                   </div>
                   <ErrorMessage
                     name="英文姓名"
-                    class="text-danger ms-2 mt-1"
+                    class="field-error"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -238,11 +238,11 @@
                   </div>
                   <ErrorMessage
                     name="出生地"
-                    class="text-danger ms-2 mt-1"
+                    class="field-error"
                   />
                   <ErrorMessage
                     name="出生地-其他"
-                    class="text-danger ms-2 mt-1"
+                    class="field-error"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -260,7 +260,7 @@
                   </Field>
                   <ErrorMessage
                     name="國籍"
-                    class="text-danger"
+                    class="field-error"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -293,7 +293,7 @@
                     />
                     <ErrorMessage
                       name="電子信箱"
-                      class="text-danger ms-2"
+                      class="field-error"
                     />
                   </template>
                   <Field
@@ -411,7 +411,7 @@
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     />
                   </div>
-                  <p class="text-danger ms-2 mt-1">{{ errors['戶籍地址'] }}</p>
+                  <p v-if="errors['戶籍地址']" class="field-error">{{ errors['戶籍地址'] }}</p>
                 </li>
                 <li class="col-12 col-md-12">
                   <label for=""><span class="red_text">* </span>居住地址</label>
@@ -528,7 +528,7 @@
                     />
                     <label class="form_Apply_txt fw-normal" for="居住地址-同戶籍地址">同戶籍地址</label>
                   </div>
-                  <p class="text-danger ms-2 mt-1">{{ errors['居住地址'] }}</p>
+                  <p v-if="errors['居住地址']" class="field-error">{{ errors['居住地址'] }}</p>
                 </li>
                 <li class="col-12 col-md-12">
                   <label for=""><span class="red_text">* </span>帳單地址</label>
@@ -578,7 +578,7 @@
                   </div>
                   <ErrorMessage
                     name="帳單地址"
-                    class="text-danger ms-2"
+                    class="field-error"
                   />
                 </li>
                 <li class="col-12 col-md-12">
@@ -629,7 +629,7 @@
                   </div>
                   <ErrorMessage
                     name="寄卡地址"
-                    class="text-danger ms-2"
+                    class="field-error"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -656,7 +656,7 @@
                       @keyup="Form.home.homeTel = $custom.validate.OnlyNumPress(Form.home.homeTel)"
                     />
                   </div>
-                  <p class="text-danger ms-2 mt-1">{{ errors['戶籍電話區碼']?errors['戶籍電話區碼']:errors['戶籍電話號碼'] }}</p>
+                  <p v-if="errors['戶籍電話區碼']||errors['戶籍電話號碼']" class="field-error">{{ errors['戶籍電話區碼']?errors['戶籍電話區碼']:errors['戶籍電話號碼'] }}</p>
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">居住電話</label>
@@ -682,7 +682,7 @@
                       @keyup="Form.live.liveTel = $custom.validate.OnlyNumPress(Form.live.liveTel)"
                     />
                   </div>
-                  <p class="text-danger ms-2 mt-1">{{ errors['居住電話區碼']?errors['居住電話區碼']:errors['居住電話號碼'] }}</p>
+                  <p v-if="errors['居住電話區碼']||errors['居住電話號碼']" class="field-error">{{ errors['居住電話區碼']?errors['居住電話區碼']:errors['居住電話號碼'] }}</p>
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">住所狀態</label>
@@ -755,7 +755,7 @@
                   </div>
                   <ErrorMessage
                     name="帳單形式"
-                    class="text-danger ms-2"
+                    class="field-error"
                   />
                   <div class="form_Apply_txt">
                       <span class="red_text">※申請E-mail帳單請務必收取聯邦銀行電子帳單認證信，點選驗證網址始完成申請。<br>
@@ -796,7 +796,7 @@
                   </div>
                   <ErrorMessage
                     name="申請數位卡"
-                    class="text-danger ms-2"
+                    class="field-error"
                   />
                 </li>
                 <li class="col-12 col-md-12 text-left" v-if="Apply_N_Type==='Online'">
@@ -819,7 +819,7 @@
                   />
                   <ErrorMessage
                     name="畢業國小名稱"
-                    class="text-danger ms-2"
+                    class="field-error"
                   />
                 </li>
                 <!-----新增學生欄位------->
@@ -863,7 +863,7 @@
                     </div>
                     <ErrorMessage
                       name="是否為學生"
-                      class="text-danger ms-2"
+                      class="field-error"
                     />
                   </li>
                   <li class="col-12 col-md-12 mb-2">
@@ -886,7 +886,7 @@
                     />
                     <ErrorMessage
                       name="家長姓名"
-                      class="text-danger ms-2"
+                      class="field-error"
                     />
                   </li>
                   <li class="col-12 col-md-6">
@@ -902,7 +902,7 @@
                     />
                     <ErrorMessage
                       name="家長聯絡電話"
-                      class="text-danger ms-2"
+                      class="field-error"
                     />
                   </li>
                   <li class="col-12 col-md-12">
@@ -1009,7 +1009,7 @@
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
                       />
                     </div>
-                    <p class="text-danger ms-2 mt-1">{{ errors['家長通訊地址'] }}</p>
+                    <p v-if="errors['家長通訊地址']" class="field-error">{{ errors['家長通訊地址'] }}</p>
                   </li>
                 </template>
                 <!-----//新增學生欄位----->
@@ -1026,7 +1026,7 @@
                   />
                   <ErrorMessage
                     name="公司名稱"
-                    class="text-danger ms-2"
+                    class="field-error"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -1043,7 +1043,7 @@
                   />
                   <ErrorMessage
                     name="公司統一編號"
-                    class="text-danger ms-2"
+                    class="field-error"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -1179,7 +1179,7 @@
                       :class="{ 'is-invalid': errors['公司地址'] }"
                     />
                   </div>
-                  <p class="text-danger ms-2 mt-1">{{ errors['公司地址'] }}</p>
+                  <p v-if="errors['公司地址']" class="field-error">{{ errors['公司地址'] }}</p>
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">職稱</label>
@@ -1194,7 +1194,7 @@
                   />
                   <ErrorMessage
                     name="職稱"
-                    class="text-danger ms-2"
+                    class="field-error"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -1211,7 +1211,7 @@
                   />
                   <ErrorMessage
                     name="年資"
-                    class="text-danger ms-2"
+                    class="field-error"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -1245,11 +1245,11 @@
                   </div>
                   <ErrorMessage
                     name="職業別"
-                    class="text-danger ms-2"
+                    class="field-error"
                   />
                   <ErrorMessage
                     name="職業別-其他"
-                    class="text-danger ms-2"
+                    class="field-error"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -1268,7 +1268,7 @@
                   </Field>
                   <ErrorMessage
                     name="職級別"
-                    class="text-danger ms-2"
+                    class="field-error"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -1304,11 +1304,11 @@
                   </div>
                   <ErrorMessage
                     name="主要所得及資金來源"
-                    class="text-danger ms-2"
+                    class="field-error"
                   />
                   <ErrorMessage
                     name="主要所得及資金來源-其他"
-                    class="text-danger ms-2"
+                    class="field-error"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -1324,7 +1324,7 @@
                   />
                   <ErrorMessage
                     name="月收入"
-                    class="text-danger ms-2"
+                    class="field-error"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -1342,7 +1342,7 @@
                   />
                   <ErrorMessage
                     name="推廣單位代號"
-                    class="text-danger ms-2"
+                    class="field-error"
                   />
                 </li>
                 <li class="col-12 col-md-6">
@@ -1360,7 +1360,7 @@
                   />
                   <ErrorMessage
                     name="推廣人員編號"
-                    class="text-danger ms-2"
+                    class="field-error"
                   />
                 </li>
                 <li class="col-12 col-md-6" v-if="pageLoad.flgAmwayNo==='Y'">
@@ -1375,7 +1375,7 @@
                     />
                     <ErrorMessage
                       name="安麗直銷商/會員編號"
-                      class="text-danger ms-2"
+                      class="field-error"
                     />
                 </li>
               </ul>

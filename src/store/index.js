@@ -5,6 +5,7 @@ export default createStore({
     isLoading: false,
     errorModal: null,
     errorMsg: '',
+    errorRedirect: '',
     apiModal: null,
     apiMsg: ''
   },
@@ -15,8 +16,11 @@ export default createStore({
     getErrorModal (state, payload) {
       state.errorModal = payload
     },
-    getErrorMsg (state, payload) {
-      state.errorMsg = payload
+    getErrorMsg (state, Msg) {
+      state.errorMsg = Msg
+    },
+    getErrorRedirect (state, Redirect) {
+      state.errorRedirect = Redirect
     },
     callAPIModal (state, payload) {
       state.apiModal = payload

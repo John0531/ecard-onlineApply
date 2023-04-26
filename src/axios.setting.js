@@ -33,21 +33,25 @@ axios.interceptors.response.use(
     store.commit('changeLoading', false)
     if (err.response && err.response.status.toString().charAt(0) === '5') {
       store.commit('getErrorMsg', `作業失敗，請重新輸入或洽聯邦信用卡客服專線，02-25455168、07-2269393。(${err.response.status})`)
+      store.commit('getErrorRedirect', 'cardFamily')
       store.state.errorModal.show()
       return Promise.reject(err)
     }
     if (err.response && err.response.status.toString().charAt(0) === '4') {
       if (err.response.status === 440) {
         store.commit('getErrorMsg', `操作逾時或執行錯誤，請重新登入。(${err.response.status})`)
+        store.commit('getErrorRedirect', 'cardFamily')
         store.state.errorModal.show()
         return Promise.reject(err)
       } else {
         store.commit('getErrorMsg', `作業失敗，請重新輸入或洽聯邦信用卡客服專線，02-25455168、07-2269393。(${err.response.status})`)
+        store.commit('getErrorRedirect', 'cardFamily')
         store.state.errorModal.show()
         return Promise.reject(err)
       }
     }
     store.commit('getErrorMsg', err.toString())
+    store.commit('getErrorRedirect', 'cardFamily')
     store.state.errorModal.show()
     return Promise.reject(err)
   }
