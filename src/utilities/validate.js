@@ -273,11 +273,12 @@ const validate = {
   },
   //* ==== 21. 中文字檢核 ====
   checkChinese (value) {
-    const Rule = /[^\u4e00-\u9fa5]/
-    if (!Rule.test(value)) {
-      return true
-    }
-    return '請輸入中文'
+    // const Rule = /[^\u4e00-\u9fa5]/
+    // if (!Rule.test(value)) {
+    //   return true
+    // }
+    // return '請輸入中文'
+    return true // TODO 開放卡處測試
   },
   //* ==== 22. 只可輸入數字，且首字不為零 ====
   // ? 搭配@keyup事件使用，直接過濾所有輸入字元必定為數字
