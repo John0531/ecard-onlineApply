@@ -47,11 +47,11 @@
                     v-model="OnlineApply_y_Data.cardNo"
                     :class="{ 'is-invalid': errors['申請的信用卡'] }"
                     :validateOnInput="true"
-                    id="creditCardTick"
+                    :id="'cardInfoList' + card.cardNo"
                   />
                   <label
                     class="form-check-label text-start text-md-center fw-bold"
-                    for="creditCardTick"
+                    :for="'cardInfoList' + card.cardNo"
                     style="color: black;"
                   >
                   {{card.cardName}}
@@ -151,11 +151,11 @@
                     v-model="OnlineApply_y_Data.cardNo"
                     :class="{ 'is-invalid': errors['申請的信用卡'] }"
                     :validateOnInput="true"
-                    id="creditCardTick"
+                    :id="'cardInfoList' + card.cardNo"
                   />
                   <label
                     class="form-check-label text-start text-md-center fw-bold"
-                    for="creditCardTick"
+                    :for="'cardInfoList' + card.cardNo"
                     style="color: black;"
                   >
                   {{card.cardName}}
@@ -370,6 +370,7 @@ export default {
       this.OnlineApply_y_Data.agreeTerms = n === true
     }
   },
+  inject: ['APIModal'],
   methods: {
     getYearMonth () {
       // ? 產生生日"年"、"月"選單
@@ -532,6 +533,7 @@ export default {
       for (const key of addressKeys) {
         delete errors[key]
       }
+
       this.$custom.validate.showErrors(errors)
     },
     isOver18 (year, month, day) {
@@ -577,6 +579,12 @@ export default {
             if (USC) this.OnlineApply_y_Data.uSC = result.USC
             break
           case '00799' :
+            //* 先監聽再拔掉
+            var modal = document.getElementById('noticeModal_2')
+            modal.addEventListener('hidden.bs.modal', this.handleModalHidden)
+            window.addEventListener('load', () => {
+              modal.removeEventListener('hidden.bs.modal', this.handleModalHidden)
+            })
             service.showAPIMsg(linkCard.message)
             break
           default:
@@ -603,6 +611,12 @@ export default {
             if (USC) this.OnlineApply_y_Data.uSC = USC
             break
           case '00799' :
+            //* 先監聽再拔掉
+            var modal2 = document.getElementById('noticeModal_2')
+            modal2.addEventListener('hidden.bs.modal', this.handleModalHidden)
+            window.addEventListener('load', () => {
+              modal2.removeEventListener('hidden.bs.modal', this.handleModalHidden)
+            })
             service.showAPIMsg(linkCard.message)
             break
           default:
@@ -610,6 +624,9 @@ export default {
             break
         }
       }
+    },
+    handleModalHidden () {
+      window.location = 'https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014'
     },
     handleImageError ($event) {
       $event.target.src = require('../assets/images/UBOT_logo_180x26.png')
