@@ -32,8 +32,7 @@
                     accept="image/*,.heic,.heif" class="upload"
                     data-sigil="file-input"
                     :class="{ 'is-invalid': errors['身份證'] }"
-                    @change.prevent="pickFiles"
-                    @blur="this.num = 1"
+                    @change.prevent="pickFiles($event,1)"
                     @mouseup.prevent="checkIsPics"
                   />
                   <!-- <textarea name="TBupload1" id="TBupload1"style="display: none"></textarea> -->
@@ -56,8 +55,7 @@
                     accept="image/*,.heic,.heif" class="upload"
                     data-sigil="file-input"
                     :class="{ 'is-invalid': errors['身份證'] }"
-                    @change.prevent="pickFiles"
-                    @blur="this.num = 2"
+                    @change.prevent="pickFiles($event,2)"
                     @mouseup.prevent="checkIsPics"
                   />
                   <!-- <textarea name="TBupload2" id="TBupload2" style="display: none"></textarea> -->
@@ -77,7 +75,7 @@
             <div class="text-center my-2">
               <div class="text-start d-inline-block note_text">
                 ※貼心提醒：<br />
-                <span class="red_text">1.上傳格式限JPG，單一檔案上限為3MB。</span
+                <span class="red_text">1.上傳格式限JPG、JEPG、PNG，單一檔案上限為5MB。</span
                 ><br />
                 2.拍攝時請將證件擺正並立於背景乾淨之平台上，建議在您的證件後墊一張白紙。<br />
                 3.手機請使用「橫向」拍攝，以避免反光、太暗，並確認影像清晰。
@@ -369,7 +367,7 @@
                           <div>
                               ◆<strong>原始圖片</strong><br>
                               (請框選可供辨識之大小範圍)
-                              <img id="imgTemplate" :src="imgTemplateUrl" alt="" class="img-fluid">
+                              <img v-if="imgTemplateUrl" id="imgTemplate" :src="imgTemplateUrl" alt="" class="img-fluid">
                           </div>
                           <div id="myIdentifident" class="myIdentifident" ref="myIdentifident">
                           </div>
@@ -464,7 +462,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="text-center py-3">上傳格式限JPG，單一檔案上限為3MB。</div>
+                    <div class="text-center py-3">上傳格式限JPG、JEPG、PNG，單一檔案上限為5MB。</div>
                     <hr>
                     <div class="text-center mb-3">
                         <div class="col-12 text-center">
@@ -568,11 +566,14 @@ export default {
     }
   },
   methods: {
-    async pickFiles (e) {
+    async pickFiles (e, num) {
+      console.log(123)
+      this.num = num
       // ? 轉base64
       const file = await e.target.files[0]
-      const maxAllowedSize = 3 * 1024 * 1024
-      if (file?.size > maxAllowedSize || file?.type !== 'image/jpeg') {
+      console.log(`檔案大小${Math.round(file.size / 1000)}k`)
+      const maxAllowedSize = 5 * 1024 * 1024
+      if (file?.size > maxAllowedSize || (file?.type !== 'image/jpg' && file?.type !== 'image/jpeg' && file?.type !== 'image/png')) {
         this.ImageLimit.show()
       } else {
         this.imgTemplateUrl = URL.createObjectURL(file)
@@ -581,7 +582,7 @@ export default {
       // ? 清空value
       // this.clearFiles(this.num)
     },
-    async makeModify (num) {
+    async makeModify () {
       // ?呼叫modal準備呈現
       this.CroppieModal.show()
       setTimeout(async () => {
@@ -589,14 +590,14 @@ export default {
         try {
         // ?要呈現畫面的區域(在modal上)
           const croppieE = this.$refs.myIdentifident
-          this[`identitiyPack${num}`].preViewImg = new this.$custom.Croppie(croppieE, {
+          this[`identitiyPack${this.num}`].preViewImg = new this.$custom.Croppie(croppieE, {
             viewport: {
-              width: imgTemplate.clientWidth,
-              height: imgTemplate.clientHeight
+              width: imgTemplate.clientWidth * 0.8,
+              height: imgTemplate.clientHeight * 0.8
             },
             boundary: {
-              width: imgTemplate.clientWidth + 20,
-              height: imgTemplate.clientHeight + 20
+              width: imgTemplate.clientWidth,
+              height: imgTemplate.clientHeight
             },
             showZoomer: true,
             enableResize: true,
@@ -604,9 +605,10 @@ export default {
             enableZoom: true,
             enforceBoundary: true,
             mouseWheelZoom: 'ctrl'
+            // maxZoom: 1
           })
           // ?bind在此時將jpg轉為png
-          await this[`identitiyPack${num}`].preViewImg.bind({
+          await this[`identitiyPack${this.num}`].preViewImg.bind({
             url: this.imgTemplateUrl
           })
           URL.revokeObjectURL(this.imgTemplateUrl)
@@ -619,10 +621,15 @@ export default {
     async result () {
       // ?在頁面上各欄位自呈現
       const resultImg = this.$refs[`resultImg${this.num}`]
-      const base64 = await this[`identitiyPack${this.num}`].preViewImg.result('base64')
-      resultImg.src = base64
-      this[`identitiyPack${this.num}`].file = base64
-      this.$refs[`resultImg${this.num}`].style = `height:${this.clientHeight}px;`
+      const base64 = await this[`identitiyPack${this.num}`].preViewImg.result({
+        type: 'canvas',
+        format: 'jpeg',
+        quality: 0.3
+      })
+      console.log(`檔案大小${Math.round(0.75 * base64.length / 1000)}k`)
+      resultImg.src = base64 // ? 外層瀏覽圖片
+      resultImg.style = `height:${this.clientHeight}px;`// ? 外層瀏覽圖片
+      this[`identitiyPack${this.num}`].file = base64 // ? 打給API的資料
       // ?編輯結束將相關物件資料銷毀
       this.CroppieModal.hide()
       this.destroy()
