@@ -89,7 +89,7 @@
                       <div class="flex-shrink-0">內容。(請務必勾選)</div>
                     </div>
                   </label>
-                  <div class="d-flex text-center invalid-feedback my-1" >
+                  <div v-if="errors['服務申請約定條款']" class="d-flex text-center  field-error my-1" >
                   {{errors['服務申請約定條款']}}
                 </div>
               </div>
@@ -106,7 +106,7 @@
                   />
                   <label for="checkbox2">同意，聯邦商業銀行股份有限公司將本人之基本資料(含身分證字號、信用卡卡號、信用卡有效期限、卡片背面簽名後三碼、行動電話等資料)，透過信用卡授權轉接處理中心(聯合信用卡處理中心)傳輸至發卡機構進行身分認證等相關作業。
                   </label>
-                  <div class="d-flex text-center invalid-feedback my-1">
+                  <div v-if="errors['信用卡基本資料使用同意']" class="d-flex text-center  field-error my-1">
                     {{errors['信用卡基本資料使用同意']}}
                   </div>
               </div>

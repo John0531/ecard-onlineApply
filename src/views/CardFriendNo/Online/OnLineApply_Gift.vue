@@ -78,7 +78,7 @@
                                 </label>
                           </div> -->
                           <div class="d-flex justify-content-start invalid-feedback my-1 ms-3">
-                            <div>
+                            <div v-if="errors['首刷禮']" class="field-error">
                                 {{errors['首刷禮']}}
                             </div>
                           </div>

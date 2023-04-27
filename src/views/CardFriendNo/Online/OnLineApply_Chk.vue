@@ -86,7 +86,7 @@
 														@change="checkValue($refs.myForm,cardNumber,'信用卡卡號','validThru')"
                             />
                         </div>
-                        <div class="d-flex text-center invalid-feedback my-1" >
+                        <div v-if="errors['信用卡卡號']" class="d-flex text-center field-error my-1" >
                           {{errors['信用卡卡號']}}
                         </div>
                       </div>
@@ -104,7 +104,7 @@
                           @focus="validThru=''"
 													@change="checkValue($refs.myForm,validThru,'信用卡有效期限','CSC')"/>
                           <span class="not_text">例如:2017年1月，請輸入0117</span>
-													<div class="d-flex text-center invalid-feedback my-1" >
+													<div v-if="errors['信用卡有效期限']" class="d-flex text-center field-error my-1" >
 														{{errors['信用卡有效期限']}}
 													</div>
                       </div>
@@ -120,9 +120,9 @@
                         :class="{ 'is-invalid': errors['信用卡背後末三碼'] }"
                         @keyup="CSC = $custom.validate.OnlyNumPress(CSC)"
                         @focus="CSC=''"
-                        @change="checkValue($refs.myForm,CSC,'信用卡背後末三碼','手機')"
+                        @change="checkValue($refs.myForm,CSC,'信用卡背後末三碼','行動電話')"
                         />
-                        <div class="d-flex text-center invalid-feedback my-1" >
+                        <div v-if="errors['信用卡背後末三碼']" class="d-flex text-center field-error my-1" >
                         {{errors['信用卡背後末三碼']}}
                         </div>
                       </div>
@@ -141,7 +141,7 @@
                           rules="checkPhone"
                           />
                           <span class="not_text">請填寫信用卡申請時之行動電話，以利資訊驗證</span>
-                          <div class="d-flex text-center invalid-feedback my-1" >
+                          <div v-if="errors['行動電話']" class="d-flex text-center field-error my-1" >
                             {{errors['行動電話']}}
                           </div>
                       </div>
@@ -172,7 +172,7 @@
                     <div class="flex-shrink-0">內容。(請務必勾選)</div>
                   </div>
                 </label>
-                <div class="d-flex text-center invalid-feedback my-1" >
+                <div v-if="errors['服務申請約定條款']" class="d-flex text-center field-error my-1" >
                   {{errors['服務申請約定條款']}}
                 </div>
             </div>
@@ -189,7 +189,7 @@
                 />
                 <label for="checkbox2">同意，聯邦商業銀行股份有限公司將本人之基本資料(含身分證字號、信用卡卡號、信用卡有效期限、卡片背面簽名後三碼、行動電話等資料)，透過信用卡授權轉接處理中心(聯合信用卡處理中心)傳輸至發卡機構進行身分認證等相關作業。
                 </label>
-                <div class="d-flex text-center invalid-feedback my-1">
+                <div v-if="errors['信用卡基本資料使用同意']" class="d-flex text-center field-error my-1">
                   {{errors['信用卡基本資料使用同意']}}
                 </div>
             </div>
@@ -454,14 +454,17 @@ export default {
       this.checkValue(this.$refs.myForm, this.cardNumber, '信用卡卡號', '')
       this.checkValue(this.$refs.myForm, this.validThru, '信用卡有效期限', '')
       this.checkValue(this.$refs.myForm, this.CSC, '信用卡背後末三碼', '')
-      // this.checkValue(this.$refs.myForm, this.phoneNumber, '手機', '')
+      // this.checkValue(this.$refs.myForm, this.phoneNumber, '行動電話', '')
       // ?先取得套件rules的errors
-      const collection = await dom.validate()
+      await this.$refs.myForm.validateField('行動電話')
+      await this.$refs.myForm.validateField('服務申請約定條款')
+      await this.$refs.myForm.validateField('信用卡基本資料使用同意')
+      // const collection = await dom.validate()
       // ?再整合取得自訂驗證的errors
-      collection.errors = dom.getErrors()
+      const errors = dom.getErrors()
       // *   ====送單判斷====
       // ? 信用卡欄位
-      if (Object.keys(collection.errors).length === 0) {
+      if (Object.keys(errors).length === 0) {
         // ** ===全部檢查通過前往下一頁===
         // ** ===資料整理===
         this.chkData.obCardNo = this.cardNumber.codeAll
@@ -484,7 +487,7 @@ export default {
         }
       } else {
         // ** ===錯誤訊息彙整===
-        this.$custom.validate.showErrors(collection.errors)
+        this.$custom.validate.showErrors(errors)
       }
     }
   },

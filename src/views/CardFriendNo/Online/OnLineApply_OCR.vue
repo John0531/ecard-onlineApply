@@ -22,8 +22,7 @@
             <div class="row IDupload_group">
               <div class="col-12 col-md-6">
                 <div
-                class="upload_IDtxt text-center"
-                :class="{ 'is-invalid': errors['身份證'] }"
+                class="text-center"
                 >
                 身分證 正面
                 </div>
@@ -32,7 +31,7 @@
                     type="file" name="upload1" id="upload1"
                     accept="image/*,.heic,.heif" class="upload"
                     data-sigil="file-input"
-                    :class="{ 'is-invalid': errors['身分證正面'] }"
+                    :class="{ 'is-invalid': errors['身份證'] }"
                     @change.prevent="pickFiles"
                     @blur="this.num = 1"
                     @mouseup.prevent="checkIsPics"
@@ -47,8 +46,7 @@
               </div>
               <div class="col-12 col-md-6">
                 <div
-                  class="upload_IDtxt text-center"
-                  :class="{ 'is-invalid': errors['身份證'] }"
+                  class="text-center"
                 >身分證 背面
                 </div>
                 <div class="upload_items text-center"
@@ -57,6 +55,7 @@
                     type="file" name="upload2" id="upload2"
                     accept="image/*,.heic,.heif" class="upload"
                     data-sigil="file-input"
+                    :class="{ 'is-invalid': errors['身份證'] }"
                     @change.prevent="pickFiles"
                     @blur="this.num = 2"
                     @mouseup.prevent="checkIsPics"
@@ -70,8 +69,8 @@
                   />
                 </div>
               </div>
-              <div class="d-flex text-center invalid-feedback my-1">
-                <div>{{errors['身份證']}}</div>
+              <div class="d-flex text-center justify-content-center  my-1">
+                <div v-if="errors['身份證']" class="field-error">{{errors['身份證']}}</div>
               </div>
             </div>
             <!-------------------//檢附證件---------------------->
@@ -652,13 +651,12 @@ export default {
       this.file.front = this.identitiyPack1.file.split(',')[1]
       this.file.back = this.identitiyPack2.file.split(',')[1]
       // ?將身分證傳到後端
-      // this.message = '資料驗證中'
-      // this.APIModal.show()
-      // setTimeout(() => {
-      //   this.APIModal.hide()
-      // }, 5000)
+      this.message = '資料驗證中'
+      this.APIModal.show()
+      setTimeout(() => {
+        this.APIModal.hide()
+      }, 5000)
       const res = await ServiceN.uploadImage(this.file)
-      // this.message = res.data.message
       this.message = res.data.message === '作業成功。' ? '身分證辨識成功' : res.data.message
       if (res.status === 200) {
         this.APIModal.show()
