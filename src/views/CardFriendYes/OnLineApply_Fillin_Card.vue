@@ -393,6 +393,12 @@ export default {
         (item) => item.VALUE === this.onLineApply_Fillin_Card.incomeKey
       ).SHOW
 
+      if (this.onLineApply_Fillin_Card.birthOther === '-----') {
+        this.onLineApply_Fillin_Card.birthOther = ''
+      }
+
+      // console.log(this.onLineApply_Fillin_Card)
+
       const response = await serviceY.postKYC(this.onLineApply_Fillin_Card)
       const { status } = response
       if (status === '01100') {

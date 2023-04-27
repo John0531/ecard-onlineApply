@@ -94,7 +94,7 @@ export default {
             break
           case '00801' :
             sessionStorage.clear()
-            this.$router.push('/OnLineApply_Fillin_Finish')
+            this.$router.push('/dspApplicationNNB')
             break
           case '00802' :
             sessionStorage.clear()
