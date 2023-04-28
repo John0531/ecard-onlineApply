@@ -586,6 +586,9 @@ export default {
               modal.removeEventListener('hidden.bs.modal', this.handleModalHidden)
             })
             service.showAPIMsg(linkCard.message)
+            setTimeout(() => {
+              window.location.assign('https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014')
+            }, 5000)
             break
           default:
             service.showAPIMsg(linkCard.message)
@@ -618,6 +621,9 @@ export default {
               modal2.removeEventListener('hidden.bs.modal', this.handleModalHidden)
             })
             service.showAPIMsg(linkCard.message)
+            setTimeout(() => {
+              window.location.assign('https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014')
+            }, 5000)
             break
           default:
             service.showAPIMsg(linkCard.message)

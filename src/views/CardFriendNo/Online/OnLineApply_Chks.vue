@@ -79,7 +79,7 @@
                   <label for="checkbox1">
                     <div  class="d-flex flex-wrap">
                       <div class="flex-shrink-0">同意，本人對</div>
-                        <div class="flex-shrink-0" >
+                        <div class="" >
                           <template v-for="terms in termsFile" :key="terms+1">
                             「<a href="#" @click.prevent="checkAgreement" >
                               <u>{{terms}}</u>
