@@ -14,6 +14,10 @@ module.exports = {
         }
       }
     } */
+  },
+  configureWebpack: config => {
+    const version = new Date().getTime()
+    config.output.filename = `js/[name].[chunkhash]._${version}.js`
+    config.output.chunkFilename = `js/[id].[chunkhash]._${version}.js`
   }
-  //
 }

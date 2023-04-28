@@ -129,8 +129,9 @@
                     <p>
                       {{FillinData.form.homeAddr?.County}}{{FillinData.form.homeAddr?.Area}}{{FillinData.form.homeAddr?.Road}}<span v-if="FillinData.form.homeAddr?.Lane">{{FillinData.form.homeAddr?.Lane}}巷</span>
                       <span v-if="FillinData.form.homeAddr?.Aly">{{FillinData.form.homeAddr?.Aly}}弄</span>
-                      <span v-if="FillinData.form.homeAddr?.Num">{{FillinData.form.homeAddr?.Num}}號</span>
-                      <span v-if="FillinData.form.homeAddr?.Of">之{{FillinData.form.homeAddr?.Of}}</span>
+                      <span v-if="FillinData.form.homeAddr?.Num&&FillinData.form.homeAddr?.Of">{{FillinData.form.homeAddr?.Num}}-{{FillinData.form.homeAddr?.Of}}號</span>
+                      <span v-if="FillinData.form.homeAddr?.Num&&!FillinData.form.homeAddr?.Of">{{FillinData.form.homeAddr?.Num}}號</span>
+                      <span v-if="!FillinData.form.homeAddr?.Num&&FillinData.form.homeAddr?.Of">{{FillinData.form.homeAddr?.Of}}號</span>
                       <span v-if="FillinData.form.homeAddr?.Flr">{{FillinData.form.homeAddr?.Flr}}樓</span>
                       <span v-if="FillinData.form.homeAddr?.Other">{{FillinData.form.homeAddr?.Other}}</span>
                     </p>
@@ -144,8 +145,9 @@
                     <p>
                       {{FillinData.form.liveAddr?.County}}{{FillinData.form.liveAddr?.Area}}{{FillinData.form.liveAddr?.Road}}<span v-if="FillinData.form.liveAddr?.Lane">{{FillinData.form.liveAddr?.Lane}}巷</span>
                       <span v-if="FillinData.form.liveAddr?.Aly">{{FillinData.form.liveAddr?.Aly}}弄</span>
-                      <span v-if="FillinData.form.liveAddr?.Num">{{FillinData.form.liveAddr?.Num}}號</span>
-                      <span v-if="FillinData.form.liveAddr?.Of">之{{FillinData.form.liveAddr?.Of}}</span>
+                      <span v-if="FillinData.form.liveAddr?.Num&&FillinData.form.liveAddr?.Of">{{FillinData.form.liveAddr?.Num}}-{{FillinData.form.liveAddr?.Of}}號</span>
+                      <span v-if="FillinData.form.liveAddr?.Num&&!FillinData.form.liveAddr?.Of">{{FillinData.form.liveAddr?.Num}}號</span>
+                      <span v-if="!FillinData.form.liveAddr?.Num&&FillinData.form.liveAddr?.Of">{{FillinData.form.liveAddr?.Of}}號</span>
                       <span v-if="FillinData.form.liveAddr?.Flr">{{FillinData.form.liveAddr?.Flr}}樓</span>
                       <span v-if="FillinData.form.liveAddr?.Other">{{FillinData.form.liveAddr?.Other}}</span>
                     </p>
@@ -253,8 +255,9 @@
                       <p>
                         {{FillinData.form.parentAddr?.County}}{{FillinData.form.parentAddr?.Area}}{{FillinData.form.parentAddr?.Road}}<span v-if="FillinData.form.parentAddr?.Lane">{{FillinData.form.parentAddr?.Lane}}巷</span>
                       <span v-if="FillinData.form.parentAddr?.Aly">{{FillinData.form.parentAddr?.Aly}}弄</span>
-                      <span v-if="FillinData.form.parentAddr?.Num">{{FillinData.form.parentAddr?.Num}}號</span>
-                      <span v-if="FillinData.form.parentAddr?.Of">之{{FillinData.form.parentAddr?.Of}}</span>
+                      <span v-if="FillinData.form.parentAddr?.Num&&FillinData.form.parentAddr?.Of">{{FillinData.form.parentAddr?.Num}}-{{FillinData.form.parentAddr?.Of}}號</span>
+                      <span v-if="FillinData.form.parentAddr?.Num&&!FillinData.form.parentAddr?.Of">{{FillinData.form.parentAddr?.Num}}號</span>
+                      <span v-if="!FillinData.form.parentAddr?.Num&&FillinData.form.parentAddr?.Of">{{FillinData.form.parentAddr?.Of}}號</span>
                       <span v-if="FillinData.form.parentAddr?.Flr">{{FillinData.form.parentAddr?.Flr}}樓</span>
                       <span v-if="FillinData.form.parentAddr?.Other">{{FillinData.form.parentAddr?.Other}}</span>
                       </p>
@@ -287,8 +290,9 @@
                     <p>
                       {{FillinData.form.compAddr?.County}}{{FillinData.form.compAddr?.Area}}{{FillinData.form.compAddr?.Road}}<span v-if="FillinData.form.compAddr?.Lane">{{FillinData.form.compAddr?.Lane}}巷</span>
                       <span v-if="FillinData.form.compAddr?.Aly">{{FillinData.form.compAddr?.Aly}}弄</span>
-                      <span v-if="FillinData.form.compAddr?.Num">{{FillinData.form.compAddr?.Num}}號</span>
-                      <span v-if="FillinData.form.compAddr?.Of">之{{FillinData.form.compAddr?.Of}}</span>
+                      <span v-if="FillinData.form.compAddr?.Num&&FillinData.form.compAddr?.Of">{{FillinData.form.compAddr?.Num}}-{{FillinData.form.compAddr?.Of}}號</span>
+                      <span v-if="FillinData.form.compAddr?.Num&&!FillinData.form.compAddr?.Of">{{FillinData.form.compAddr?.Num}}號</span>
+                      <span v-if="!FillinData.form.compAddr?.Num&&FillinData.form.compAddr?.Of">{{FillinData.form.compAddr?.Of}}號</span>
                       <span v-if="FillinData.form.compAddr?.Flr">{{FillinData.form.compAddr?.Flr}}樓</span>
                       <span v-if="FillinData.form.compAddr?.Other">{{FillinData.form.compAddr?.Other}}</span>
                     </p>
