@@ -358,7 +358,7 @@
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       @keyup="Form.homeAddr.Lane = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Lane)"
                       maxlength="5"
-                      class="form-control me-1"
+                      class="form-control input_number me-1"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     />巷
                     <Field
@@ -368,7 +368,7 @@
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       @keyup="Form.homeAddr.Aly = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Aly)"
                       maxlength="5"
-                      class="form-control mx-1"
+                      class="form-control input_number mx-1"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     />弄
                     <Field
@@ -378,7 +378,7 @@
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       @keyup="Form.homeAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Num)"
                       maxlength="5"
-                      class="form-control mx-1"
+                      class="form-control input_number mx-1"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     />-
                     <Field
@@ -388,7 +388,7 @@
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       @keyup="Form.homeAddr.Of = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Of)"
                       maxlength="5"
-                      class="form-control mx-1"
+                      class="form-control input_number ms-sm-1 me-1"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     />號
                     <Field
@@ -398,7 +398,7 @@
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       @keyup="Form.homeAddr.Flr = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Flr)"
                       maxlength="5"
-                      class="form-control mx-1"
+                      class="form-control input_number mx-1"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     />樓
                     <Field
@@ -407,7 +407,7 @@
                       v-model="Form.homeAddr.Other"
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       maxlength="100"
-                      class="form-control ms-1"
+                      class="form-control mb-0 ms-md-0 ms-lg-1"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     />
                   </div>
@@ -464,7 +464,7 @@
                       @blur="$custom.validate.CheckAddressAll(Form.liveAddr,$refs.form,'居住地址')"
                       @keyup="Form.liveAddr.Lane = $custom.validate.NumOnlyWithoutFirstZero(Form.liveAddr.Lane)"
                       maxlength="5"
-                      class="form-control me-1"
+                      class="form-control input_number me-1"
                       :class="{ 'is-invalid': errors['居住地址'] }"
                     />巷
                     <Field
@@ -474,7 +474,7 @@
                       @blur="$custom.validate.CheckAddressAll(Form.liveAddr,$refs.form,'居住地址')"
                       @keyup="Form.liveAddr.Aly = $custom.validate.NumOnlyWithoutFirstZero(Form.liveAddr.Aly)"
                       maxlength="5"
-                      class="form-control mx-1"
+                      class="form-control input_number mx-1"
                       :class="{ 'is-invalid': errors['居住地址'] }"
                     />弄
                     <Field
@@ -484,7 +484,7 @@
                       @blur="$custom.validate.CheckAddressAll(Form.liveAddr,$refs.form,'居住地址')"
                       @keyup="Form.liveAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.liveAddr.Num)"
                       maxlength="5"
-                      class="form-control mx-1"
+                      class="form-control input_number mx-1"
                       :class="{ 'is-invalid': errors['居住地址'] }"
                     />-
                     <Field
@@ -494,7 +494,7 @@
                       @blur="$custom.validate.CheckAddressAll(Form.liveAddr,$refs.form,'居住地址')"
                       @keyup="Form.liveAddr.Of = $custom.validate.NumOnlyWithoutFirstZero(Form.liveAddr.Of)"
                       maxlength="5"
-                      class="form-control mx-1"
+                      class="form-control input_number ms-sm-1 me-1"
                       :class="{ 'is-invalid': errors['居住地址'] }"
                     />號
                     <Field
@@ -504,7 +504,7 @@
                       @blur="$custom.validate.CheckAddressAll(Form.liveAddr,$refs.form,'居住地址')"
                       @keyup="Form.liveAddr.Flr = $custom.validate.NumOnlyWithoutFirstZero(Form.liveAddr.Flr)"
                       maxlength="5"
-                      class="form-control mx-1"
+                      class="form-control input_number mx-1"
                       :class="{ 'is-invalid': errors['居住地址'] }"
                     />樓
                     <Field
@@ -513,7 +513,7 @@
                       v-model="Form.liveAddr.Other"
                       @blur="$custom.validate.CheckAddressAll(Form.liveAddr,$refs.form,'居住地址')"
                       maxlength="100"
-                      class="form-control ms-1"
+                      class="form-control mb-0 ms-md-0 ms-lg-1"
                       :class="{ 'is-invalid': errors['居住地址'] }"
                     />
                   </div>
@@ -882,6 +882,7 @@
                       :class="{'is-invalid':errors['家長姓名']}"
                       name="家長姓名"
                       type="text"
+                      maxlength="13"
                       class="form-control"
                     />
                     <ErrorMessage
@@ -897,6 +898,7 @@
                       :class="{'is-invalid':errors['家長聯絡電話']}"
                       name="家長聯絡電話"
                       type="text"
+                      maxlength="10"
                       class="form-control"
                       @keyup="Form.parentTel = $custom.validate.OnlyNumPress(Form.parentTel)"
                     />
@@ -956,7 +958,7 @@
                         @blur="$custom.validate.CheckAddressAll(Form.parentAddr,$refs.form,'家長通訊地址')"
                         @keyup="Form.parentAddr.Lane = $custom.validate.NumOnlyWithoutFirstZero(Form.parentAddr.Lane)"
                         maxlength="5"
-                        class="form-control me-1"
+                        class="form-control input_number me-1"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
                       />巷
                       <Field
@@ -966,7 +968,7 @@
                         @blur="$custom.validate.CheckAddressAll(Form.parentAddr,$refs.form,'家長通訊地址')"
                         @keyup="Form.parentAddr.Aly = $custom.validate.NumOnlyWithoutFirstZero(Form.parentAddr.Aly)"
                         maxlength="5"
-                        class="form-control mx-1"
+                        class="form-control input_number mx-1"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
                       />弄
                       <Field
@@ -976,7 +978,7 @@
                         @blur="$custom.validate.CheckAddressAll(Form.parentAddr,$refs.form,'家長通訊地址')"
                         @keyup="Form.parentAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.parentAddr.Num)"
                         maxlength="5"
-                        class="form-control mx-1"
+                        class="form-control input_number mx-1"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
                       />-
                       <Field
@@ -986,7 +988,7 @@
                         @blur="$custom.validate.CheckAddressAll(Form.parentAddr,$refs.form,'家長通訊地址')"
                         @keyup="Form.parentAddr.Of = $custom.validate.NumOnlyWithoutFirstZero(Form.parentAddr.Of)"
                         maxlength="5"
-                        class="form-control mx-1"
+                        class="form-control input_number ms-sm-1 me-1"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
                       />號
                       <Field
@@ -996,7 +998,7 @@
                         @blur="$custom.validate.CheckAddressAll(Form.parentAddr,$refs.form,'家長通訊地址')"
                         @keyup="Form.parentAddr.Flr = $custom.validate.NumOnlyWithoutFirstZero(Form.parentAddr.Flr)"
                         maxlength="5"
-                        class="form-control mx-1"
+                        class="form-control input_number mx-1"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
                       />樓
                       <Field
@@ -1005,7 +1007,7 @@
                         v-model="Form.parentAddr.Other"
                         @blur="$custom.validate.CheckAddressAll(Form.parentAddr,$refs.form,'家長通訊地址')"
                         maxlength="100"
-                        class="form-control ms-1"
+                        class="form-control mb-0 ms-md-0 ms-lg-1"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
                       />
                     </div>
@@ -1126,7 +1128,7 @@
                       @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Lane = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Lane)"
                       maxlength="5"
-                      class="form-control me-1"
+                      class="form-control input_number me-1"
                       :class="{ 'is-invalid': errors['公司地址'] }"
                     />巷
                     <Field
@@ -1136,7 +1138,7 @@
                       @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Aly = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Aly)"
                       maxlength="5"
-                      class="form-control mx-1"
+                      class="form-control input_number mx-1"
                       :class="{ 'is-invalid': errors['公司地址'] }"
                     />弄
                     <Field
@@ -1146,7 +1148,7 @@
                       @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Num)"
                       maxlength="5"
-                      class="form-control mx-1"
+                      class="form-control input_number mx-1"
                       :class="{ 'is-invalid': errors['公司地址'] }"
                     />-
                     <Field
@@ -1156,7 +1158,7 @@
                       @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Of = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Of)"
                       maxlength="5"
-                      class="form-control mx-1"
+                      class="form-control input_number ms-sm-1 me-1"
                       :class="{ 'is-invalid': errors['公司地址'] }"
                     />號
                     <Field
@@ -1166,7 +1168,7 @@
                       @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Flr = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Flr)"
                       maxlength="5"
-                      class="form-control mx-1"
+                      class="form-control input_number mx-1"
                       :class="{ 'is-invalid': errors['公司地址'] }"
                     />樓
                     <Field
@@ -1175,7 +1177,7 @@
                       v-model="Form.compAddr.Other"
                       @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       maxlength="100"
-                      class="form-control ms-1"
+                      class="form-control mb-0 ms-md-0 ms-lg-1"
                       :class="{ 'is-invalid': errors['公司地址'] }"
                     />
                   </div>
@@ -1320,6 +1322,7 @@
                     name="月收入"
                     type="text"
                     class="form-control"
+                    maxlength="8"
                     @keyup="Form.salary = $custom.validate.NumOnlyWithoutFirstZero(Form.salary)"
                   />
                   <ErrorMessage
