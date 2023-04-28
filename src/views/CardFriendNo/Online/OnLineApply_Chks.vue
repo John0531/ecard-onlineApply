@@ -291,6 +291,7 @@ export default {
     // },
     // ? 檢核驗證碼
     async applySubmit () {
+      this.$refs.myForm.setErrors({})
       const collection = await this.$refs.myForm.validate()
       collection.errors = await this.$refs.myForm.getErrors()
       if (Object.keys(collection.errors).length === 0) {

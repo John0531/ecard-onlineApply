@@ -701,7 +701,6 @@ export default {
     },
     async submitSuitCase () {
       this.$refs.myForm.setErrors({})
-
       this.checkIsPics()
       this.checkdoubleAgree()
       await this.$refs.myForm.validateField('財力證明')

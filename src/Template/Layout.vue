@@ -96,4 +96,16 @@ export default {
     left: 47%;
     top: -10px;
   }
+
+  @font-face {
+  font-family: ubFont;
+          src: url("https://card-beta.uitc.com.tw/eCard_source/font/EUDC.TTE");
+  }
+  p,a,span,font,input,select,table,label,button,ul,li,div {
+      font-family: "RobotoSlab",ubFont;
+  }
+  input [type="text"]{
+      font-family: "RobotoSlab",ubFont;
+  }
+
 </style>
