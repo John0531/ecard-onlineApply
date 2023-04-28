@@ -7,8 +7,7 @@
         </div>
     </div>
   </div>
-  <div class="container">
-    <!-- 主要內容 -->
+  <!-- 主要內容 -->
     <section class="mainArea">
       <div class="container-xl">
         <div class="row justify-content-md-center pt-1 pt-md-3">
@@ -21,9 +20,7 @@
           >
             <div class="row IDupload_group">
               <div class="col-12 col-md-6">
-                <div
-                class="text-center"
-                >
+                <div class="upload_IDtxt text-center">
                 身分證 正面
                 </div>
                 <div class="upload_items text-center">
@@ -44,10 +41,7 @@
                 </div>
               </div>
               <div class="col-12 col-md-6">
-                <div
-                  class="text-center"
-                >身分證 背面
-                </div>
+                <div class="upload_IDtxt text-center">身分證 背面</div>
                 <div class="upload_items text-center"
                 >
                   <Field
@@ -87,7 +81,7 @@
                 type=""
                 @click.prevent="sendIdentity"
               >
-                下一步
+                送出證件
               </button>
             </div>
           </Form>
@@ -279,7 +273,7 @@
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       @keyup="Form.homeAddr.Lane = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Lane)"
                       maxlength="5"
-                      class="form-control me-1"
+                      class="form-control input_number me-1"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     />巷
                     <Field
@@ -289,7 +283,7 @@
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       @keyup="Form.homeAddr.Aly = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Aly)"
                       maxlength="5"
-                      class="form-control mx-1"
+                      class="form-control input_number mx-1"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     />弄
                     <Field
@@ -299,7 +293,7 @@
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       @keyup="Form.homeAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Num)"
                       maxlength="5"
-                      class="form-control mx-1"
+                      class="form-control input_number mx-1"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     />-
                     <Field
@@ -309,7 +303,7 @@
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       @keyup="Form.homeAddr.Of = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Of)"
                       maxlength="5"
-                      class="form-control mx-1"
+                      class="form-control input_number ms-sm-1 me-1"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     />號
                     <Field
@@ -319,7 +313,7 @@
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       @keyup="Form.homeAddr.Flr = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Flr)"
                       maxlength="5"
-                      class="form-control mx-1"
+                      class="form-control input_number mx-1"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     />樓
                     <Field
@@ -328,7 +322,7 @@
                       v-model="Form.homeAddr.Other"
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       maxlength="100"
-                      class="form-control ms-1"
+                      class="form-control mb-0 ms-md-0 ms-lg-1"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     />
                   </div>
@@ -349,7 +343,6 @@
         </div>
       </div>
     </section>
-  </div>
 
           <!---------------------modal-財力圖片修改操作 -------------->
   <div ref="CroppieModal" class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true">
@@ -567,7 +560,6 @@ export default {
   },
   methods: {
     async pickFiles (e, num) {
-      console.log(123)
       this.num = num
       // ? 轉base64
       const file = await e.target.files[0]
@@ -658,15 +650,11 @@ export default {
       this.file.front = this.identitiyPack1.file.split(',')[1]
       this.file.back = this.identitiyPack2.file.split(',')[1]
       // ?將身分證傳到後端
-      this.message = '資料驗證中'
-      this.APIModal.show()
-      setTimeout(() => {
-        this.APIModal.hide()
-      }, 5000)
+      // this.message = '資料驗證中'
+      // this.APIModal.show()
       const res = await ServiceN.uploadImage(this.file)
-      this.message = res.data.message === '作業成功。' ? '身分證辨識成功' : res.data.message
-      if (res.status === 200) {
-        this.APIModal.show()
+      // this.APIModal.hide()
+      if (res.data.status === '01200') {
         this.uploaded = true
         const front = res.data.result.Front
         this.Form.idCounty = front.發證地點
@@ -696,6 +684,7 @@ export default {
         this.Form.homeAddr.Flr = back.樓
         this.Form.homeAddr.Other = back.室
       } else {
+        this.message = `${res.data.message}(${res.data.status})`
         this.APIModal.show()
       }
     },

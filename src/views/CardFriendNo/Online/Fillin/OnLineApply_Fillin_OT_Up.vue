@@ -73,8 +73,7 @@
                                 accept="image/*,.heic,.heif" class="upload"
                                 data-sigil="file-input"
                                 :class="{ 'is-invalid': errors['財力證明資料'] }"
-                                @change.prevent="pickFiles"
-                                @blur="this.num = 1"
+                                @change.prevent="pickFiles($event,1)"
                                 @mouseleave="checkIsPics"
                                 />
                                 <!-- <textarea name="TBupload3" id="TBupload3" style="display: none;"></textarea> -->
@@ -100,8 +99,7 @@
                                 type="file" name="upload2" id="upload2"
                                 accept="image/*,.heic,.heif" class="upload"
                                 data-sigil="file-input"
-                                @change.prevent="pickFiles"
-                                @blur="this.num = 2"
+                                @change.prevent="pickFiles($event,2)"
                                 @mouseleave="checkIsPics"
                                 />
                                 <!-- <textarea name="TBupload4" id="TBupload4" style="display: none;"></textarea> -->
@@ -132,8 +130,7 @@
                                 accept="image/*,.heic,.heif" class="upload"
                                 data-sigil="file-input"
                                 :class="{ 'is-invalid': errors['財力證明資料'] }"
-                                @change.prevent="pickFiles"
-                                @blur="this.num = 3"
+                                @change.prevent="pickFiles($event,3)"
                                 @mouseleave="checkIsPics"
                                 />
                                 <!-- <textarea name="TBupload5" id="TBupload5" style="display: none;"></textarea> -->
@@ -159,8 +156,7 @@
                                 accept="image/*,.heic,.heif" class="upload"
                                 data-sigil="file-input"
                                 :class="{ 'is-invalid': errors['財力證明資料'] }"
-                                @change.prevent="pickFiles"
-                                @blur="this.num = 4"
+                                @change.prevent="pickFiles($event,4)"
                                 @mouseleave="checkIsPics"
                                 />
                                 <!-- <textarea name="TBupload6" id="TBupload6" style="display: none;"></textarea> -->
@@ -322,7 +318,7 @@
           <div class="modal-content">
               <div class="modal-header">
                   <h5 class="modal-title OnLineApply">財力證明修改</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click.prevent="destroy(this.num)">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click.prevent="destroy">
                     <img src="@/assets/images/form/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
                   </button>
               </div>
@@ -617,11 +613,12 @@ export default {
     }
   },
   methods: {
-    async pickFiles (e) {
+    async pickFiles (e, num) {
+      this.num = num
       // ? 轉base64
       const file = await e.target.files[0]
       const maxAllowedSize = 5 * 1024 * 1024
-      if (file.size > maxAllowedSize || file.type !== 'image/jpeg') {
+      if (file?.size > maxAllowedSize || (file?.type !== 'image/jpg' && file?.type !== 'image/jpeg' && file?.type !== 'image/png')) {
         this.ImageLimit.show()
       } else {
         this.imgTemplateUrl = URL.createObjectURL(file)
@@ -630,7 +627,7 @@ export default {
       // ? 清空value
       // this.clearFiles(this.num)
     },
-    async makeModify (num) {
+    async makeModify () {
       // ?呼叫modal準備呈現
       this.CroppieModal.show()
       setTimeout(async () => {
@@ -638,14 +635,14 @@ export default {
         try {
         // ?要呈現畫面的區域(在modal上)
           const croppieE = this.$refs.myIdentifident
-          this[`identitiyPack${num}`].preViewImg = new this.$custom.Croppie(croppieE, {
+          this[`identitiyPack${this.num}`].preViewImg = new this.$custom.Croppie(croppieE, {
             viewport: {
-              width: imgTemplate.clientWidth,
-              height: imgTemplate.clientHeight
+              width: imgTemplate.clientWidth * 0.8,
+              height: imgTemplate.clientHeight * 0.8
             },
             boundary: {
-              width: imgTemplate.clientWidth + 20,
-              height: imgTemplate.clientHeight + 20
+              width: imgTemplate.clientWidth,
+              height: imgTemplate.clientHeight
             },
             showZoomer: true,
             enableResize: true,
@@ -653,9 +650,10 @@ export default {
             enableZoom: true,
             enforceBoundary: true,
             mouseWheelZoom: 'ctrl'
+            // maxZoom: 1
           })
           // ?bind在此時將jpg轉為png
-          await this[`identitiyPack${num}`].preViewImg.bind({
+          await this[`identitiyPack${this.num}`].preViewImg.bind({
             url: this.imgTemplateUrl
           })
           URL.revokeObjectURL(this.imgTemplateUrl)
@@ -668,10 +666,14 @@ export default {
     async result () {
       // ?在頁面上各欄位自呈現
       const resultImg = this.$refs[`resultImg${this.num}`]
-      const base64 = await this[`identitiyPack${this.num}`].preViewImg.result('base64')
-      resultImg.src = base64
-      this[`identitiyPack${this.num}`].file = base64
-      this.$refs[`resultImg${this.num}`].style = `height:${this.clientHeight}px;`
+      const base64 = await this[`identitiyPack${this.num}`].preViewImg.result({
+        type: 'canvas',
+        format: 'jpeg',
+        quality: 0.3
+      })
+      resultImg.src = base64 // ? 外層瀏覽圖片
+      resultImg.style = `height:${this.clientHeight}px;`// ? 外層瀏覽圖片
+      this[`identitiyPack${this.num}`].file = base64 // ? 打給API的資料`
       // ?編輯結束將相關物件資料銷毀
       this.CroppieModal.hide()
       this.destroy()

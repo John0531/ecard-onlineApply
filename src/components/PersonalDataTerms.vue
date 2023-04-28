@@ -55,7 +55,7 @@
               <div class="accordion" id="accordionExample">
                 <div class="dashed_line mb-3">
                   <div
-                    class="card-header pb-3 collapsed"
+                    class="card-header pb-3 ps-0 collapsed"
                     id="headingOne"
                     data-bs-toggle="collapse"
                     data-bs-target="#collapseOne"
@@ -70,24 +70,22 @@
                     aria-labelledby="headingOne"
                     data-parent="#accordionExample"
                   >
-                    <div class="card-body">
+                    <div class="card-body pb-0">
                       <!-- API 回傳 -->
-                      <!-- <span class="red_text">※申請一卡通聯名卡者同意卡片已開啟自動加值功能。(AUTOLOAD)<br>
-                          ※申請聯邦微風聯名卡包括成為Breeze Rewards微風積點禮遇會員，並同意Breeze Rewards微風積點禮遇會員同意及注意事項。<br>
-                          ※申請聯邦全國加油聯名卡包括成為全國大利點會員，同享全國大利點會員優惠。<br>
-                          ※若不符聯邦全國加油聯名卡片申請資格，將同意由全國加油站改發現金大利會員卡一張(限每人一卡)。<br>
-                          ※全國加油站為行銷、提供各項產品、服務、權益及各式優惠資訊(包含特定商店、商品、保險等)之目的範圍內，得將本人之中英文姓名、身分證字號、生日、電話、地址、電子郵件、全國加油站會員資料、大利點及消費屬性等個人基本資料，提供予貴行，並基於特定目的範圍內，得為蒐集、處理、國際傳輸及利用。貴行應對該等個人資料依法保密。
-                      </span> -->
-                      <span class="red_text" style="white-space:pre-line;">
-                        {{consent}}
+                      <span v-html="consent" class="red_text" style="white-space:pre-line;"></span>
+                      <!-- API 回傳 -->
+                    </div>
+                    <div class="card-body pt-0">
+                      <span>
+                      <br>
+                      貴行之聯名/認同集團與有特約合作之第三人，為行銷、提供各項產品、服務、權益及各式優惠資訊(包含特定商店、商品、保險等)之目的範圍內，貴行得將本人之中英文姓名、身分證字號、生日、電話、地址、電子郵件、卡號及消費屬性個人基本資料，由貴行提供予聯名/認同集團與有特約合作之第三人、並基於特定目的範圍內，得為蒐集、處理、國際傳輸及利用。貴行之聯名/認同集團與有特約合作之第三人應對個人資料依法保密。
                       </span>
-                      <!-- API 回傳 -->
                     </div>
                   </div>
                 </div>
                 <div class="dashed_line mb-3">
                   <div
-                    class="card-header collapsed"
+                    class="card-header ps-0 collapsed"
                     id="headingTwo"
                     type="button"
                     data-bs-toggle="collapse"
@@ -155,15 +153,13 @@
                     data-parent="#accordionExample"
                   >
                     <div class="card-body">
-                      貴行之聯名/認同集團與有特約合作之第三人，為行銷、提供各項產品、服務、權益及各式優惠資訊(包含特定商店、商品、保險等)之目的範圍內，貴行得將本人之中英文姓名、身分證字號、生日、電話、地址、電子郵件、卡號及消費屬性個人基本資料，由貴行提供予聯名/認同集團與有特約合作之第三人、並基於特定目的範圍內，得為蒐集、處理、國際傳輸及利用。貴行之聯名/認同集團與有特約合作之第三人應對個人資料依法保密。<br>
-                      <br>
                       如不同意將無法享有第三人提供之相關資訊與服務。(特約合作第三人名單目前為保誠人壽保險股份有限公司、安達國際人壽保險股份有限公司、新加坡商三得利健益亞太股份有限公司台灣分公司、聯閤科技股份有限公司、富日科技股份有限公司。)
                     </div>
                   </div>
                 </div>
                 <div class="dashed_line mb-3">
                   <div
-                    class="card-header collapsed"
+                    class="card-header ps-0 collapsed"
                     id="headingThree"
                     type="button"
                     data-bs-toggle="collapse"
@@ -172,7 +168,7 @@
                     aria-controls="collapseThree"
                   >
                     <div>
-                      <strong>*票證功能及帳單形式同意條款：</strong>
+                      <strong>*票證功能及聯名同意條款：</strong>
                     </div>
                   </div>
                   <div class="col-12 mb-3">
@@ -227,20 +223,11 @@
                     data-parent="#accordionExample"
                   >
                     <div class="card-body pb-0">
-                        <span class="red_text">提供個人資料予下列附加電票功能之公司採取記名方式發行，並於行銷、提供各項產品、服務、權益及各項優惠資訊之目的範圍內使用本人之個人資料，如不同意將無法核發所申請之聯名/認同卡，並同意貴行得轉發其他信用卡 (另配合個人資料保護法實施，電票公司已將應告知事項載於官網，若有任何疑義，歡迎您撥打電票公司客服專線。)</span>
+                        <span class="red_text">提供個人資料予下列聯名/認同集團、附加電票功能之公司採取記名方式發行，並於行銷、提供各項產品、服務、權益及各項優惠資訊之目的範圍內使用本人之個人資料，如不同意將無法核發所申請之聯名/認同卡，並同意貴行得轉發其他信用卡 (另配合個人資料保護法實施，電票公司已將應告知事項載於官網，若有任何疑義，歡迎您撥打電票公司客服專線。)</span>
                     </div>
                     <div class="card-body py-0">
                         <!-- API 回傳 -->
-                        <!-- <span class="red_text">
-                          票證功能同意條款：<br>
-                          包含：<br>
-                          悠遊卡股份有限公司、一卡通票證股份有限公司<br>
-                          悠遊卡公司官網www.easycard.com.tw，客服專線412-8880<br>
-                          一卡通公司官網www.i-pass.com.tw，客服專線(07)791-2000
-                        </span> -->
-                        <span class="red_text" style="white-space:pre-line;">
-                          {{ticketInfo}}
-                        </span>
+                        <span v-html="ticketInfo" class="red_text" style="white-space:pre-line;"></span>
                         <!-- API 回傳 -->
                     </div>
                     <div class="card-body pt-0">
