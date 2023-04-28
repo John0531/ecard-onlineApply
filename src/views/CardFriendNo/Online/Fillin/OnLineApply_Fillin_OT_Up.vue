@@ -46,14 +46,15 @@
                             value="option1"
                             v-model="proofType"
                             :validateOnInput="true"
+                            @change="clearErrors()"
                             rules="required"
                             />
                             <label class="form-check-label text-md-center fw-bold" for="exampleRadios1">
                                 上傳財力資料
                             </label>
                           </div>
-                          <div class="d-flex text-center invalid-feedback my-1">
-                            <div>{{errors['財力證明資料']}}</div>
+                          <div v-if="errors['財力證明']" class="d-flex text-center field-error my-1">
+                            <div>{{errors['財力證明']}}</div>
                           </div>
                         </div>
                         <div class="form-check my-2">
@@ -117,8 +118,8 @@
                             財力證明(2)
                             </div>
                         </div>
-                        <div class="d-flex justify-content-center my-4 px-0 invalid-feedback">
-                            <div>{{errors['財力證明資料']}}</div>
+                        <div v-if="errors['財力證明資料']" class="d-flex justify-content-center my-4  ">
+                            <div class="field-error">{{errors['財力證明資料']}}</div>
                         </div>
                         <div class="col-12 col-md-6 ">
                             <div
@@ -185,13 +186,14 @@
                                 id="exampleRadios2"
                                 value="option2"
                                 rules="required"
+                                @change="clearErrors()"
                                 :validateOnInput="true"
                               />
                               <label class="form-check-label fw-bold text-md-center" for="exampleRadios2">
                                   MyData平臺服務<span class="d-block d-md-inline mt-1 mt-md-0">(使用MyData調閱個人資料)</span>
                               </label>
                           </div>
-                          <div class="d-flex text-center invalid-feedback my-1 px-0">
+                          <div v-if="errors['財力證明']" class="d-flex text-center field-error my-1 ">
                             <div>{{errors['財力證明']}}</div>
                           </div>
                         </div>
@@ -218,7 +220,7 @@
                                 />
                                 <label for="agree">本人已詳閱並同意｢ <a @click.prevent="checkAgreement" href="#" ><u>MyData服務授權條款</u></a>」</label>
                             </div>
-                            <div class="d-flex text-center invalid-feedback my-1 px-0">
+                            <div v-if="errors['MyData服務授權條款']" class="d-flex text-center field-error my-1 ">
                               <div>{{errors['MyData服務授權條款']}}</div>
                             </div>
                         </div>
@@ -690,19 +692,25 @@ export default {
       // ?清空暫存檔案
       document.querySelector(`#upload${num}`).value = null
     },
+    clearErrors () {
+      this.$refs.myForm.setErrors({})
+    },
     async goToNNB () {
       await this.NNBModal.hide()
       this.$router.push('/dspApplicationNNB')
     },
     async submitSuitCase () {
+      this.$refs.myForm.setErrors({})
+
       this.checkIsPics()
       this.checkdoubleAgree()
-      const collection = await this.$refs.myForm.validate()
-      collection.errors = await this.$refs.myForm.getErrors()
-      if (Object.keys(collection.errors).length === 0) {
+      await this.$refs.myForm.validateField('財力證明')
+      // const collection = await this.$refs.myForm.validate()
+      const errors = await this.$refs.myForm.getErrors()
+      console.log(errors)
+      if (Object.keys(errors).length === 0) {
         // ** ===全部通過打API才前往下一頁===
         // ** ===整理資料===
-        console.log(this.identitiyPack1.file.split(',')[1])
         if (this.proofType === 'option2') {
           this.form.isMydata = true
         }
@@ -743,7 +751,7 @@ export default {
         }
       } else {
         // ** ===錯誤訊息彙整===
-        this.$custom.validate.showErrors(collection.errors)
+        this.$custom.validate.showErrors(errors)
       }
     },
     goToMyDataTerms () {
@@ -816,8 +824,13 @@ export default {
     setInterval(() => {
       this.countDown.subtract(1, 'seconds')
       if (this.countDown._data.minutes === 0 && this.countDown._data.seconds === 0) {
+        clearInterval(this.countDown)
         this.$store.commit('getErrorMsg', '作業逾時')
         this.$store.state.errorModal.show()
+        setTimeout(() => {
+          // ?時間到跳去補件
+          window.location.assign('https://card.ubot.com.tw/eCard/CardApply/uploadDocs.aspx')
+        }, 1500)
       }
     }, 1000)
     // ? 操作時間倒數計時 end

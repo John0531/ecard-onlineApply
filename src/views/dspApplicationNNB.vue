@@ -43,7 +43,7 @@
 
 <script>
 import ServiceN from '@/service/CardFriend_N.Service.js'
-import PublicService from '@/service/Public.Service.js'
+// import PublicService from '@/service/Public.Service.js'
 
 export default {
   data () {
@@ -84,9 +84,9 @@ export default {
       const res = await ServiceN.newNewBankChk()
       if (res.status === 200) {
         console.log(res)
-        if (res.data.message) {
-          PublicService.showAPIMsg(res.data.message)
-        }
+        // if (res.data.message) {
+        //   PublicService.showAPIMsg(res.data.message)
+        // }
         if (res.data.status === '00900') {
           setTimeout(() => {
             this.$router.push('/dspApplicationNNB_Apply')

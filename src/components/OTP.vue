@@ -1,10 +1,10 @@
 <template>
     <div class="shortKv">
-      <div class="fill-shortKv topimg-OnLineApply">
-          <div class="container-xl shortKv-title-4">
-              <h2>線上辦卡</h2>
-          </div>
-      </div>
+        <div class="fill-shortKv topimg-OnLineApply">
+            <div class="container-xl shortKv-title-4">
+                <h2>線上辦卡</h2>
+            </div>
+        </div>
     </div>
     <!-- CHK -->
     <section v-if="$route.name === '手機OTP驗證(他行信用卡)'"  class="mainArea">
@@ -24,7 +24,12 @@
                             <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
                             <div class="d-flex flex-column">
                                 <div class="d-flex align-items-center">
-                                    <span class="input-group-text">{{tag}}-</span>
+                                    <span
+                                    class="input-group-text"
+                                    :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
+                                    >
+                                    {{tag}}-
+                                    </span>
                                     <Field
                                       v-model="mobileMsgCode"
                                       name="簡訊驗證碼" type="text" maxlength="6"
@@ -45,7 +50,7 @@
                                     </button>
                                 </div>
                                 <div v-show="!show" class="countdown">({{this.count}}秒後可重新發送)</div>
-                                <div class="d-flex justify-content-start invalid-feedback my-1">
+                                <div v-if="errors['簡訊驗證碼']" class="d-flex justify-content-start field-error my-1">
                                   <span>{{errors['簡訊驗證碼']}}</span>
                                 </div>
                             </div>
@@ -88,7 +93,12 @@
                           <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
                           <div class="d-flex flex-column">
                             <div class="d-flex align-items-center">
-                              <span class="input-group-text">{{tag}}-</span>
+                              <span
+                              class="input-group-text"
+                              :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
+                              >
+                              {{tag}}-
+                              </span>
                               <Field
                                 v-model="mobileMsgCode"
                                 name="簡訊驗證碼" type="text" maxlength="6"
@@ -108,7 +118,7 @@
                               </button>
                             </div>
                             <div v-show="!show" class="countdown">({{this.count}}秒後可重新發送)</div>
-                            <div class="d-flex justify-content-start invalid-feedback my-1">
+                            <div v-if="errors['簡訊驗證碼']" class="d-flex justify-content-start field-error my-1">
                               <span>{{errors['簡訊驗證碼']}}</span>
                             </div>
                           </div>
@@ -155,7 +165,12 @@
                             <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
                             <div class="d-flex flex-column">
                                 <div class="d-flex align-items-center">
-                                    <span class="input-group-text">{{tag}}-</span>
+                                    <span
+                                    class="input-group-text"
+                                    :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
+                                    >
+                                    {{tag}}-
+                                    </span>
                                     <Field
                                       v-model="mobileMsgCode"
                                       name="簡訊驗證碼" type="text" maxlength="6"
@@ -175,7 +190,7 @@
                                     </button>
                                 </div>
                                 <div v-show="!show" class="countdown">({{this.count}}秒後可重新發送)</div>
-                                <div class="d-flex justify-content-start invalid-feedback my-1">
+                                <div v-if="errors['簡訊驗證碼']" class="d-flex justify-content-start field-error my-1">
                                   <span>{{errors['簡訊驗證碼']}}</span>
                                 </div>
                             </div>
@@ -218,7 +233,12 @@
                           <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
                           <div class="d-flex flex-column">
                             <div class="d-flex align-items-center">
-                              <span class="input-group-text">{{tag}}-</span>
+                              <span
+                              class="input-group-text"
+                              :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
+                              >
+                              {{tag}}-
+                              </span>
                               <Field
                                 v-model="mobileMsgCode"
                                 name="簡訊驗證碼" type="text" maxlength="6"
@@ -238,7 +258,7 @@
                               </button>
                             </div>
                             <div v-show="!show" class="countdown">({{this.count}}秒後可重新發送)</div>
-                            <div class="d-flex justify-content-start invalid-feedback my-1">
+                            <div v-if="errors['簡訊驗證碼']" class="d-flex justify-content-start field-error my-1">
                               <span>{{errors['簡訊驗證碼']}}</span>
                             </div>
                           </div>
@@ -280,7 +300,12 @@
                           <label class="label mt-0 mt-md-3" for="">請輸入簡訊驗證碼</label>
                           <div class="d-flex flex-column">
                             <div class="d-flex align-items-center">
-                              <div class="input-group-text">{{tag}}-</div>
+                              <span
+                              class="input-group-text"
+                              :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
+                              >
+                              {{tag}}-
+                              </span>
                               <Field
                                 v-model="mobileMsgCode"
                                 name="簡訊驗證碼" type="text" maxlength="6"
@@ -300,7 +325,7 @@
                               </button>
                             </div>
                             <div v-show="!show" class="countdown">({{this.count}}秒後可重新發送)</div>
-                            <div class="d-flex justify-content-start invalid-feedback my-1">
+                            <div v-if="errors['簡訊驗證碼']" class="d-flex justify-content-start field-error my-1">
                               <span>{{errors['簡訊驗證碼']}}</span>
                             </div>
                           </div>

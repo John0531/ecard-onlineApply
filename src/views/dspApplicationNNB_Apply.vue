@@ -35,7 +35,7 @@
                           rules="required"
                           />
                           <label for="agree1">我不具美國公民身分及其他國家稅務居民身分</label>
-                          <div class="d-flex text-center invalid-feedback my-1">
+                          <div v-if="errors['我不具美國公民身分']" class="d-flex text-center field-error my-1">
                             <div>{{errors['我不具美國公民身分']}}</div>
                           </div>
                       </div>
@@ -43,15 +43,15 @@
                           <Field
                           v-model="checkErules"
                           type="checkbox"
-                          :class="{ 'is-invalid': errors['數位條款'] }"
+                          :class="{ 'is-invalid': errors['數位存款相關約定與條款'] }"
                           class="checkimg position-absolute"
-                          id="agree2" name="數位條款"
+                          id="agree2" name="數位存款相關約定與條款"
                           value="agree"
                           rules="required"
                           />
                           <label for="agree2">我已審慎 <a href="https://newnewbank.com.tw/OAO/generalAgreeView.action" target="_blank"><u>閱讀並同意數位存款相關約定與條款</u></a></label>
-                          <div class="d-flex text-center invalid-feedback my-1">
-                            <div>{{errors['數位條款']}}</div>
+                          <div v-if="errors['數位存款相關約定與條款']" class="d-flex text-center field-error my-1">
+                            <div>{{errors['數位存款相關約定與條款']}}</div>
                           </div>
                           <!--
                               <input id="checkbox" name="checkbox" value="checkbox" class="checkimg position-absolute" type="checkbox" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="checkAgreement(document.getElementById('button_termsOpt_1'));">
@@ -66,9 +66,10 @@
                           class="checkimg position-absolute"
                           id="agree3" name="我是推廣加入用戶"
                           value="agree"
+                          @change="clearErrors()"
                           />
                           <label for="agree3">我是推廣加入用戶(非必填)</label>
-                          <!-- <div class="d-flex text-center invalid-feedback my-1">
+                          <!-- <div class="d-flex text-center field-error my-1">
                             <div>{{errors['我是推廣加入用戶']}}</div>
                           </div> -->
                           <ul class="formList">
@@ -87,7 +88,7 @@
                                   @change="checkCode3(promoteUnit, '推廣單位', this.$refs.myForm,'NNBUserCode')"
                                   />
                               </li>
-                              <li class="text-start invalid-feedback justify-content-start mt-1 mb-3">
+                              <li v-if="errors['推廣單位']" class="text-start field-error justify-content-start mt-1 mb-3">
                                 <span>{{errors['推廣單位']}}</span>
                               </li>
                               <li
@@ -104,7 +105,7 @@
                                   @change="checkCode7(promoteEployeeCode, '推廣員編', this.$refs.myForm,'NNBProjCode')"
                                   />
                               </li>
-                              <li class="text-center invalid-feedback justify-content-start  mt-1 mb-3">
+                              <li v-if="errors['推廣員編']" class="text-center field-error justify-content-start  mt-1 mb-3">
                                 <span>{{errors['推廣員編']}}</span>
                               </li>
                               <li class="align-self-start mb-0">專案代碼
@@ -120,7 +121,7 @@
                                   @change="checkProjectCode(projectCode, '專案代碼', this.$refs.myForm)"
                                   />
                               </li>
-                              <li class="text-center invalid-feedback justify-content-start mt-1 mb-3">
+                              <li v-if="errors['專案代碼']" class="text-center field-error justify-content-start mt-1 mb-3">
                                 <span>{{errors['專案代碼']}}</span>
                               </li>
                           </ul>
@@ -177,6 +178,7 @@ export default {
   },
   methods: {
     async submitNNB () {
+      this.$refs.myForm.setErrors({})
       const collection = await this.$refs.myForm.validate()
       if (this.isBePromoted) {
         // ? ===選填推廣單位代號===
@@ -261,6 +263,11 @@ export default {
       } else {
         dom.setFieldError(fieldName, '請輸入10碼專案代碼')
       }
+    },
+    clearErrors () {
+      this.$refs.myForm.setFieldError('推廣單位', '')
+      this.$refs.myForm.setFieldError('推廣員編', '')
+      this.$refs.myForm.setFieldError('專案代碼', '')
     }
   },
   watch: {
