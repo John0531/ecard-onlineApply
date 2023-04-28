@@ -39,7 +39,7 @@
                           rules="checkId"
                           disabled
                           />
-                          <div class="d-flex text-center invalid-feedback my-1">
+                          <div class="d-flex text-center field-error my-1">
                               {{errors['身分證字號']}}
                           </div>
                       </div>
@@ -93,7 +93,7 @@
                                   </Field>
                               </div>日
                           </div>
-                          <div class="d-flex text-center invalid-feedback my-1">
+                          <div class="d-flex text-center field-error my-1">
                             <span v-if="errors['年'] || errors['月'] || errors['日']">
                               出生年月日為必填
                             </span>
@@ -127,7 +127,7 @@
                                     {{bank.SHOW}}
                                   </option>
                               </Field>
-                              <div class="col-12 invalid-feedback ">
+                              <div v-if="errors['銀行代號']" class="col-12 field-error ">
                                 {{errors['銀行代號']}}
                               </div>
                             </div>
@@ -146,7 +146,7 @@
                                 @change="$custom.validate.chkKeyValueLength(chkszData.oacctNo,$refs.myForm,'銀行帳號','10','14')"
                                 />
                                 <span class="not_text">請填寫臨櫃開立之存款帳戶(不含數位存款帳戶)</span>
-                                <div class="d-flex text-center invalid-feedback my-1" >
+                                <div v-if="errors['銀行帳號']" class="d-flex text-center field-error my-1" >
                                   {{errors['銀行帳號']}}
                                 </div>
                             </div>
@@ -165,7 +165,7 @@
                                 rules="checkPhone"
                                 />
                                 <span class="not_text">請填寫帳戶申請時之行動電話，以利資訊驗證</span>
-                                <div class="d-flex text-center invalid-feedback my-1" >
+                                <div v-if="errors['行動電話']" class="d-flex text-center field-error my-1" >
                                   {{errors['行動電話']}}
                                 </div>
                             </div>
@@ -187,7 +187,7 @@
                         <label for="checkbox1">
                           <div  class="d-flex flex-wrap">
                             <div class="flex-shrink-0">同意，本人對</div>
-                              <div class="flex-shrink-0" >
+                              <div class="" >
                                 <template v-for="terms in termsFile" :key="terms+1">
                                   「<a href="#" @click.prevent="checkAgreement" >
                                     <u>{{terms}}</u>
@@ -197,7 +197,7 @@
                             <div class="flex-shrink-0">內容。(請務必勾選)</div>
                           </div>
                         </label>
-                        <div class="d-flex text-center invalid-feedback my-1" >
+                        <div v-if="errors['服務申請約定條款']" class="d-flex text-center field-error my-1" >
                           {{errors['服務申請約定條款']}}
                         </div>
                     </div>
@@ -213,7 +213,7 @@
                         rules="required"
                         />
                         <label for="agree1">同意，聯邦商業銀行股份有限公司將本人之基本資料(含身分證字號、銀行代號、銀行帳號、行動電話等資料)，透過信用卡授權轉接財金公司「跨行金融帳戶資訊核驗」進行身分認證等相關作業。</label>
-                        <div class="d-flex text-center invalid-feedback my-1">
+                        <div v-if="errors['個資使用同意']" class="d-flex text-center field-error my-1">
                           {{errors['個資使用同意']}}
                         </div>
                     </div>

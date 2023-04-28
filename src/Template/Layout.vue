@@ -60,6 +60,10 @@ export default {
     color: #db0031 !important;
     border-color: #db0031 !important;
   }
+  span.is-invalid {
+    /* color: #db0031 !important; */
+    border-color: #db0031 !important;
+  }
   .crop-width {
     max-width: 400px !important;
     max-height: 273px !important;

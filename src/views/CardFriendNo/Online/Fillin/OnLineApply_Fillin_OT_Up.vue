@@ -52,7 +52,7 @@
                                 上傳財力資料
                             </label>
                           </div>
-                          <div class="d-flex text-center invalid-feedback my-1">
+                          <div v-if="errors['財力證明資料']" class="d-flex text-center field-error my-1">
                             <div>{{errors['財力證明資料']}}</div>
                           </div>
                         </div>
@@ -119,7 +119,7 @@
                             財力證明(2)
                             </div>
                         </div>
-                        <div class="d-flex justify-content-center my-4 px-0 invalid-feedback">
+                        <div v-if="errors['財力證明資料']" class="d-flex justify-content-center my-4 px-0 field-error">
                             <div>{{errors['財力證明資料']}}</div>
                         </div>
                         <div class="col-12 col-md-6 ">
@@ -195,7 +195,7 @@
                                   MyData平臺服務<span class="d-block d-md-inline mt-1 mt-md-0">(使用MyData調閱個人資料)</span>
                               </label>
                           </div>
-                          <div class="d-flex text-center invalid-feedback my-1 px-0">
+                          <div v-if="errors['財力證明']" class="d-flex text-center field-error my-1 px-0">
                             <div>{{errors['財力證明']}}</div>
                           </div>
                         </div>
@@ -222,7 +222,7 @@
                                 />
                                 <label for="agree">本人已詳閱並同意｢ <a @click.prevent="checkAgreement" href="#" ><u>MyData服務授權條款</u></a>」</label>
                             </div>
-                            <div class="d-flex text-center invalid-feedback my-1 px-0">
+                            <div v-if="errors['MyData服務授權條款']" class="d-flex text-center field-error my-1 px-0">
                               <div>{{errors['MyData服務授權條款']}}</div>
                             </div>
                         </div>
