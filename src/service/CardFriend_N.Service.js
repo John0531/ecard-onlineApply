@@ -157,6 +157,8 @@ const service = {
           isDepositor: false
         }
       } else {
+        store.commit('getErrorMsg', `${res.data.message}(${res.data.status})`)
+        store.state.errorModal.show()
         return {
           isSuccess: false
         }
