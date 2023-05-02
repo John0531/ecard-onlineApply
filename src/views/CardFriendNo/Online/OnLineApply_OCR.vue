@@ -611,17 +611,25 @@ export default {
       }, 500)
     },
     async result () {
+      this.$store.commit('changeLoading', true)
       // ?在頁面上各欄位自呈現
       const resultImg = this.$refs[`resultImg${this.num}`]
-      const base64 = await this[`identitiyPack${this.num}`].preViewImg.result({
+      const base64View = await this[`identitiyPack${this.num}`].preViewImg.result({
         type: 'canvas',
-        format: 'jpeg',
-        quality: 0.3
+        size: 'original'
       })
-      console.log(`檔案大小${Math.round(0.75 * base64.length / 1000)}k`)
-      resultImg.src = base64 // ? 外層瀏覽圖片
+      const base64Compression = await this[`identitiyPack${this.num}`].preViewImg.result({
+        type: 'canvas',
+        quality: 0.3,
+        format: 'jpeg',
+        size: 'viewport'
+      })
+      this.$store.commit('changeLoading', false)
+      console.log(`瀏覽圖檔案大小${Math.round(0.75 * base64View.length / 1000)}k`)
+      console.log(`壓縮檔案大小${Math.round(0.75 * base64Compression.length / 1000)}k`)
+      resultImg.src = base64View // ? 外層瀏覽圖片
       resultImg.style = `height:${this.clientHeight}px;`// ? 外層瀏覽圖片
-      this[`identitiyPack${this.num}`].file = base64 // ? 打給API的資料
+      this[`identitiyPack${this.num}`].file = base64Compression // ? 打給API的資料
       // ?編輯結束將相關物件資料銷毀
       this.CroppieModal.hide()
       this.destroy()
