@@ -18,7 +18,7 @@
               <div class="formGroup">
                   <ul class="formList">
                       <li class="form-group">
-                          <label class="label" for="">申請人身份證號</label>
+                          <label class="label" for="">申請人身分證字號</label>
                           <div class="form-text">{{chksData.oid}}</div>
                       </li>
                       <li class="form-group">
@@ -77,17 +77,13 @@
                     rules="required"
                     />
                   <label for="checkbox1">
-                    <div  class="d-flex flex-wrap">
-                      <div class="flex-shrink-0">同意，本人對</div>
-                        <div class="" >
+                      同意，本人對
                           <template v-for="terms in termsFile" :key="terms+1">
                             「<a href="#" @click.prevent="checkAgreement" >
                               <u>{{terms}}</u>
                             </a>」
                           </template>
-                        </div>
-                      <div class="flex-shrink-0">內容。(請務必勾選)</div>
-                    </div>
+                      內容。(請務必勾選)
                   </label>
                   <div v-if="errors['服務申請約定條款']" class="d-flex text-center  field-error my-1" >
                   {{errors['服務申請約定條款']}}

@@ -354,7 +354,7 @@
                           aria-label="Close"
                           @click="result(this.num)"
                           >
-                          修改完成
+                          財力證明修改
                           </button>
                       </div>
                   </div>
