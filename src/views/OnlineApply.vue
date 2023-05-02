@@ -22,7 +22,7 @@
             <div class="formGroup d-flex justify-content-center">
               <ul class="formList formApply">
                 <li class="col-12 mb-2 formId">
-                  <label for="">申請人身份證字號</label>
+                  <label for="">申請人身分證字號</label>
                   <div class="form-text">{{OnlineApply_y_Data.id}}</div>
                 </li>
                 <li class="col-12">
@@ -78,11 +78,11 @@
             <div class="formGroup d-flex justify-content-center">
               <ul class="formList formApply">
                 <li class="col-12 mb-2 formId">
-                  <label for="">申請人身份證字號</label>
+                  <label for="">申請人身分證字號</label>
                   <div>
-                    <Field v-model="OnlineApply_y_Data.id" name="申請人身份證字號" maxlength="10" type="text" class="formApply_form_control form-control" :class="{ 'is-invalid': errors['申請人身份證字號'] }" :validateOnInput="true" @blur="OnlineApply_y_Data.id = $custom.validate.watchToUpper(OnlineApply_y_Data.id)"
+                    <Field v-model="OnlineApply_y_Data.id" name="申請人身分證字號" maxlength="10" type="text" class="formApply_form_control form-control" :class="{ 'is-invalid': errors['申請人身分證字號'] }" :validateOnInput="true" @blur="OnlineApply_y_Data.id = $custom.validate.watchToUpper(OnlineApply_y_Data.id)"
                     />
-                    <span v-if="errors['申請人身份證字號']" class="field-error">{{ errors["申請人身份證字號"] }}</span>
+                    <span v-if="errors['申請人身分證字號']" class="field-error">{{ errors["申請人身分證字號"] }}</span>
                   </div>
                 </li>
                 <li class="col-12">
@@ -518,7 +518,7 @@ export default {
       return distinctArr.join('、')
     },
     // ?驗證表單
-    invalidCard ({ values, errors, results }) {
+    async invalidCard ({ values, errors, results }) {
       const addressKeys = ['年', '月', '日']
       let isHaveAddressKey = false
       for (const key of addressKeys) {
@@ -533,7 +533,6 @@ export default {
       for (const key of addressKeys) {
         delete errors[key]
       }
-
       this.$custom.validate.showErrors(errors)
     },
     isOver18 (year, month, day) {
@@ -677,7 +676,7 @@ export default {
       }
     } else {
       this.schema = {
-        申請人身份證字號: 'required|checkIdandLive',
+        申請人身分證字號: 'required|checkIdandLive',
         年: 'customBirthVaild',
         月: 'customBirthVaild',
         日: 'customBirthVaild',
