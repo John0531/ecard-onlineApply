@@ -448,9 +448,17 @@ export default {
   watch: {
     agreement (n) {
       if (n.length === this.termsFile.length) {
+        // * 處理程式邏輯
         this.agreementAll = true
+        // * 處理UI
+        const ck = document.querySelector('#checkbox1')
+        ck.checked = true
       } else {
+        // * 處理程式邏輯
         this.agreementAll = false
+        // * 處理UI
+        const ck = document.querySelector('#checkbox1')
+        ck.checked = false
       }
     },
     checkagree (n) {

@@ -13,7 +13,7 @@
         <div class="row justify-content-md-center pt-1 pt-md-3">
           <!-------------------檢附證件---------------------->
 
-          <h3 class="upload_title">上傳身份證</h3>
+          <h3 class="upload_title">上傳身分證</h3>
           <Form
             v-slot="{errors}"
             ref="myForm"
@@ -28,7 +28,7 @@
                     type="file" name="upload1" id="upload1"
                     accept="image/*,.heic,.heif" class="upload"
                     data-sigil="file-input"
-                    :class="{ 'is-invalid': errors['身份證'] }"
+                    :class="{ 'is-invalid': errors['身分證'] }"
                     @change.prevent="pickFiles($event,1)"
                     @mouseup.prevent="checkIsPics"
                   />
@@ -48,7 +48,7 @@
                     type="file" name="upload2" id="upload2"
                     accept="image/*,.heic,.heif" class="upload"
                     data-sigil="file-input"
-                    :class="{ 'is-invalid': errors['身份證'] }"
+                    :class="{ 'is-invalid': errors['身分證'] }"
                     @change.prevent="pickFiles($event,2)"
                     @mouseup.prevent="checkIsPics"
                   />
@@ -62,7 +62,7 @@
                 </div>
               </div>
               <div class="d-flex text-center justify-content-center  my-1">
-                <div v-if="errors['身份證']" class="field-error">{{errors['身份證']}}</div>
+                <div v-if="errors['身分證']" class="field-error">{{errors['身分證']}}</div>
               </div>
             </div>
             <!-------------------//檢附證件---------------------->
@@ -383,7 +383,7 @@
                           aria-label="Close"
                           @click="result(this.num)"
                           >
-                          修改完成
+                          財力證明修改
                           </button>
                       </div>
                   </div>
@@ -503,12 +503,12 @@ export default {
       identitiyPack1: {
         preViewImg: '',
         resultImg: '',
-        file: ''
+        file: null
       },
       identitiyPack2: {
         preViewImg: '',
         resultImg: '',
-        file: ''
+        file: null
       },
       imgTemplateUrl: '',
       NoticeModal: null, //* 一進畫面範例說明
@@ -643,61 +643,64 @@ export default {
     },
     async sendIdentity () {
       const dom = this.$refs.myForm
+      dom.setErrors({}) // ? 先清除所有上次驗證的錯誤再驗證
       if (!this.identitiyPack1.file || !this.identitiyPack2.file) {
-        dom.setFieldError('身份證', '身分證正反面為必填')
+        dom.setFieldError('身分證', '身分證正反面為必填')
       }
-      // ?整理檔案
-      this.file.front = this.identitiyPack1.file.split(',')[1]
-      this.file.back = this.identitiyPack2.file.split(',')[1]
-      // ?將身分證傳到後端
-      // this.message = '資料驗證中'
-      // this.APIModal.show()
-      const res = await ServiceN.uploadImage(this.file)
-      // this.APIModal.hide()
-      if (res.data.status === '01200') {
-        this.uploaded = true
-        const front = res.data.result.Front
-        this.Form.idCounty = front.發證地點
-        if (front.領補換類別 === '初發') {
-          this.Form.idissue = '1'
+      if (this.identitiyPack1.file && this.identitiyPack2.file) {
+        // ?整理檔案
+        this.file.front = this.identitiyPack1.file.split(',')[1]
+        this.file.back = this.identitiyPack2.file.split(',')[1]
+        // ?將身分證傳到後端
+        // this.message = '資料驗證中'
+        // this.APIModal.show()
+        const res = await ServiceN.uploadImage(this.file)
+        // this.APIModal.hide()
+        if (res.data.status === '01200') {
+          this.uploaded = true
+          const front = res.data.result.Front
+          this.Form.idCounty = front.發證地點
+          if (front.領補換類別 === '初發') {
+            this.Form.idissue = '1'
+          }
+          if (front.領補換類別 === '補發') {
+            this.Form.idissue = '2'
+          }
+          if (front.領補換類別 === '換發') {
+            this.Form.idissue = '3'
+          }
+          this.Form.cName = front.姓名
+          this.Form.iddate.Year = front.發證日期.年
+          this.Form.iddate.Month = front.發證日期.月
+          this.Form.iddate.Day = front.發證日期.日
+          const back = res.data.result.Back.住址
+          this.Form.homeAddr.County = back.縣市
+          await this.getAddress('1')
+          this.Form.homeAddr.Area = back.鄉鎮區
+          await this.getAddress('2')
+          this.Form.homeAddr.Road = back.路
+          this.Form.homeAddr.Lane = back.巷
+          this.Form.homeAddr.Aly = back.弄
+          this.Form.homeAddr.Num = back.號
+          // this.Form.homeAddr.Of = back.之號
+          this.Form.homeAddr.Flr = back.樓
+          this.Form.homeAddr.Other = back.室
+        } else {
+          this.message = `${res.data.message}(${res.data.status})`
+          this.APIModal.show()
         }
-        if (front.領補換類別 === '補發') {
-          this.Form.idissue = '2'
-        }
-        if (front.領補換類別 === '換發') {
-          this.Form.idissue = '3'
-        }
-        this.Form.cName = front.姓名
-        this.Form.iddate.Year = front.發證日期.年
-        this.Form.iddate.Month = front.發證日期.月
-        this.Form.iddate.Day = front.發證日期.日
-        const back = res.data.result.Back.住址
-        this.Form.homeAddr.County = back.縣市
-        await this.getAddress('1')
-        this.Form.homeAddr.Area = back.鄉鎮區
-        await this.getAddress('2')
-        this.Form.homeAddr.Road = back.路
-        this.Form.homeAddr.Lane = back.巷
-        this.Form.homeAddr.Aly = back.弄
-        this.Form.homeAddr.Num = back.號
-        // this.Form.homeAddr.Of = back.之號
-        this.Form.homeAddr.Flr = back.樓
-        this.Form.homeAddr.Other = back.室
-      } else {
-        this.message = `${res.data.message}(${res.data.status})`
-        this.APIModal.show()
       }
     },
     checkIsPics () {
       const dom = this.$refs.myForm
-      dom.setFieldError('身份證', '')
+      dom.setFieldError('身分證', '')
       if (this.identitiyPack1.file && this.identitiyPack2.file) {
         return true
       }
       if (!this.identitiyPack1.file || !this.identitiyPack2.file) {
         if (this.identitiyPack1.preViewImg && this.identitiyPack2.preViewImg) {
           // ?一進來不驗證
-          dom.setFieldError('身份證', '身分證正反面為必填')
+          dom.setFieldError('身分證', '身分證正反面為必填')
         }
         // return false
       }

@@ -15,12 +15,12 @@
         <div class="formGroup">
             <ul class="formList">
                 <li class="form-group">
-                    <label class="label" for="">申請人身份證號</label>
-                    <div class="form-text" v-html="brthDt"></div>
+                    <label class="label" for="">申請人身分證字號</label>
+                    <div class="form-text" v-html="oid"></div>
                 </li>
                 <li class="form-group">
                     <label class="label" for="">西元出生年月日</label>
-                    <div class="form-text" v-html="oid"></div>
+                    <div class="form-text"  v-html="brthDt"></div>
                 </li>
             </ul>
         </div>
@@ -451,6 +451,7 @@ export default {
       this.agreeModal.hide()
     },
     async applySubmit (dom) {
+      this.$refs.myForm.setErrors({})
       this.checkValue(this.$refs.myForm, this.cardNumber, '信用卡卡號', '')
       this.checkValue(this.$refs.myForm, this.validThru, '信用卡有效期限', '')
       this.checkValue(this.$refs.myForm, this.CSC, '信用卡背後末三碼', '')
@@ -493,10 +494,18 @@ export default {
   },
   watch: {
     agreement (n) {
-      if (n.length === 4) {
+      if (n.length === this.termsFile.length) {
+        // * 處理程式邏輯
         this.agreementAll = true
+        // * 處理UI
+        const ck = document.querySelector('#checkbox1')
+        ck.checked = true
       } else {
+        // * 處理程式邏輯
         this.agreementAll = false
+        // * 處理UI
+        const ck = document.querySelector('#checkbox1')
+        ck.checked = false
       }
     },
     checkagree (n) {
