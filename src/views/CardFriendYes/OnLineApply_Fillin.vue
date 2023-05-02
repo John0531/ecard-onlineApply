@@ -61,16 +61,16 @@
                       <li class="col-12 col-md-6">
                       <label for="">推廣單位代號</label>
                       <Field
-                          name="推廣單位代號"
-                          type="text"
-                          maxlength="6"
-                          :class="{ 'is-invalid': errors['推廣單位代號'],'form-control':true}"
-                          v-model="onLineApply_Fillin_Data.unitCode"
-                          :validateOnInput="true"
-                          ></Field>
-                          <div>
-                            <span v-if="errors['推廣單位代號']" class="field-error">{{errors['推廣單位代號']}}</span>
-                          </div>
+                        name="推廣單位代號"
+                        type="text"
+                        maxlength="6"
+                        :class="{ 'is-invalid': errors['推廣單位代號'],'form-control':true}"
+                        v-model="onLineApply_Fillin_Data.unitCode"
+                        :validateOnInput="true"
+                        ></Field>
+                        <div>
+                          <span v-if="errors['推廣單位代號']" class="field-error">{{errors['推廣單位代號']}}</span>
+                        </div>
                       </li>
                       <li class="col-12 col-md-6">
                           <label for="">推廣人員編號</label>
@@ -109,8 +109,8 @@
                           <span class="field-error" v-if="errors['帳單形式']">{{errors['帳單形式']}}</span>
                         </div>
                         <div class="form_Apply_txt">
-                                <span class="red_text">※申請E-mail帳單請務必收取聯邦銀行電子帳單認證信，點選驗證網址始完成申請。<br>
-                                ※帳單接收型式將依本次選擇做為日後帳單寄送依據，如未點選E-mail認證信則依原帳單型式或紙本寄送。</span>
+                          <span class="red_text">※申請E-mail帳單請務必收取聯邦銀行電子帳單認證信，點選驗證網址始完成申請。<br>
+                          ※帳單接收型式將依本次選擇做為日後帳單寄送依據，如未點選E-mail認證信則依原帳單型式或紙本寄送。</span>
                         </div>
                         </div>
                       </li>
@@ -144,72 +144,74 @@
                           </div>
                           <div class="form_Apply_txt">{{ selectedContent}}</div>
                           <div class="d-flex flex-wrap justify-content-start align-items-center" v-if="onLineApply_Fillin_Data.sendCardType === '3'">
-                              <div class="d-inline-flex">
-                                  <label for="" class="me-0">
-                                  請輸入您持有之本行任一卡號末四碼：
-                                  </label>
-                                  <div>
-                                    <Field v-model="onLineApply_Fillin_Data.sendCardlast4no" name="卡號末四碼" maxlength="4" type="text" class="form-control end_four" :class="{ 'is-invalid': errors['卡號末四碼'] }" :validateOnInput="true" @keyup="onLineApply_Fillin_Data.sendCardlast4no = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardlast4no)"/>
-                                    <span v-if="errors['卡號末四碼']" class="field-error">{{ errors["卡號末四碼"] }}</span>
-                                  </div>
+                            <div class="d-flex flex-wrap justify-content-start align-items-center">
+                              <label for="" class="me-0">
+                              請輸入您持有之本行任一卡號末四碼：
+                              </label>
+                              <div>
+                                <Field v-model="onLineApply_Fillin_Data.sendCardlast4no" name="卡號末四碼" maxlength="4" type="text" class="form-control end_four" :class="{ 'is-invalid': errors['卡號末四碼'] }" :validateOnInput="true" @keyup="onLineApply_Fillin_Data.sendCardlast4no = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardlast4no)"/>
                               </div>
-                              <li style="padding-left: 0px;" class="mt-3Address.L mt-3" >
-                                <div class="d-flex flex-wrap flex-md-nowrap apply_address align-items-center">
-                                    <!-- 下拉選單型別Field => select -->
-                                    <Field v-model="onLineApply_Fillin_Data.sendCardAddr.County" as="select"  name="郵遞區號" class="form-select form-control ZIP mb-2" type="select" :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}" @change="getAddress('1')">
-                                        <option v-for="cardAddress in selectJson.County" :key="cardAddress.SORT" :value="cardAddress.VALUE">{{ cardAddress.SHOW }}</option>
-                                    </Field>
-                                    <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Area"  as="select" name="市區" class="form-select form-control Area mx-1 mx-md-2 mb-2" type="select" :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}" @change="getAddress('2')">
-                                        <option value="">-----</option>
-                                        <option v-for="cardAddress in homeAddrList.area" :key="cardAddress.varArea" :value="cardAddress.varArea">{{ cardAddress.varArea }}</option>
-                                    </Field>
-                                    <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Road" as="select" name="路段" class="form-select form-control Road mb-2" type="select" :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}">
-                                        <option value="">-----</option>
-                                        <option v-for="cardAddress in homeAddrList.road" :key="cardAddress.varRoad" :value="cardAddress.varRoad">{{ cardAddress.varRoad }}</option>
-                                    </Field>
-                                </div>
-                                <div class="d-flex apply_address align-items-center">
-                                    <!-- errors不要綁錯 -->
-                                    <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Lane" name="巷" maxlength="5" type="text" class="form-control input_number me-1"
-                                    :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}" :validateOnChange="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Lane = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Lane)"></Field>巷
-                                    <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Aly" name="弄" maxlength="5" type="text" class="form-control input_number mx-1"
-                                    :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}" :validateOnChange="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Aly = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Aly)"></Field>弄
-                                    <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Num" name="號1" maxlength="5" type="text" class="form-control input_number mx-1"
-                                    :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}" :validateOnChange="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Num = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Num)"></Field>-
-                                    <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Of"  name="號2" maxlength="5" type="text" class="form-control input_number ms-sm-1 me-1"
-                                    :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}" :validateOnChange="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Of = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Of)"></Field>號
-                                    <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Flr" name="樓" maxlength="5" type="text" class="form-control input_number mx-1"
-                                    :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}" :validateOnChange="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Flr = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Flr)"></Field>樓
-                                    <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Other" name="其他" maxlength="100" type="text" class="form-control mb-2 ms-md-0 ms-lg-1"
-                                    :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}" :validateOnChange="true"></Field>
-                                </div>
-                                <!-- 郵遞區號9個欄位是一組，所以共用一個errorMessage -->
-                                <div>
-                                  <span v-if="errors['郵遞區號']&&errors['市區']&&errors['路段']&&errors['其他']&&errors['巷']&&errors['弄']&&errors['號1']&&errors['號2']&&errors['樓']" class="field-error">{{ addressErrMsg(errors) }}</span>
-                                </div>
-                              </li>
+                              <div>
+                                <span v-if="errors['卡號末四碼']" class="field-error">{{ errors["卡號末四碼"] }}</span>
+                              </div>
+                            </div>
+                            <li style="padding-left: 0px;" class="mt-3Address.L mt-4 w-100" >
+                              <div class="d-flex flex-wrap flex-md-nowrap apply_address align-items-center">
+                                <!-- 下拉選單型別Field => select -->
+                                <Field v-model="onLineApply_Fillin_Data.sendCardAddr.County" as="select"  name="郵遞區號" class="form-select form-control ZIP mb-2" type="select" :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}" @change="getAddress('1')">
+                                    <option v-for="cardAddress in selectJson.County" :key="cardAddress.SORT" :value="cardAddress.VALUE">{{ cardAddress.SHOW }}</option>
+                                </Field>
+                                <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Area"  as="select" name="市區" class="form-select form-control Area mx-1 mx-md-2 mb-2" type="select" :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}" @change="getAddress('2')">
+                                    <option value="">-----</option>
+                                    <option v-for="cardAddress in homeAddrList.area" :key="cardAddress.varArea" :value="cardAddress.varArea">{{ cardAddress.varArea }}</option>
+                                </Field>
+                                <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Road" as="select" name="路段" class="form-select form-control Road mb-2" type="select" :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}">
+                                    <option value="">-----</option>
+                                    <option v-for="cardAddress in homeAddrList.road" :key="cardAddress.varRoad" :value="cardAddress.varRoad">{{ cardAddress.varRoad }}</option>
+                                </Field>
+                              </div>
+                              <div class="d-flex apply_address align-items-center">
+                                  <!-- errors不要綁錯 -->
+                                  <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Lane" name="巷" maxlength="5" type="text" class="form-control input_number me-1"
+                                  :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}" :validateOnChange="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Lane = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Lane)"></Field>巷
+                                  <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Aly" name="弄" maxlength="5" type="text" class="form-control input_number mx-1"
+                                  :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}" :validateOnChange="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Aly = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Aly)"></Field>弄
+                                  <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Num" name="號1" maxlength="5" type="text" class="form-control input_number mx-1"
+                                  :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}" :validateOnChange="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Num = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Num)"></Field>-
+                                  <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Of"  name="號2" maxlength="5" type="text" class="form-control input_number ms-sm-1 me-1"
+                                  :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}" :validateOnChange="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Of = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Of)"></Field>號
+                                  <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Flr" name="樓" maxlength="5" type="text" class="form-control input_number mx-1"
+                                  :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}" :validateOnChange="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Flr = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Flr)"></Field>樓
+                                  <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Other" name="其他" maxlength="100" type="text" class="form-control mb-2 ms-md-0 ms-lg-1"
+                                  :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號1'] || errors['號2'] || errors['樓'] || errors['其他']}" :validateOnChange="true"></Field>
+                              </div>
+                              <!-- 郵遞區號9個欄位是一組，所以共用一個errorMessage -->
+                              <div>
+                                <span v-if="errors['郵遞區號']||errors['市區']||errors['路段']||errors['其他']||errors['巷']||errors['弄']||errors['號1']||errors['號2']||errors['樓']" class="field-error">{{ addressErrMsg(errors) }}</span>
+                              </div>
+                            </li>
                           </div>
                       </li>
                       <li class="col-12 col-md-12" v-if="digiFlag === 'Y'? true: false">
-                          <label for="">申請數位卡</label>
-                          <div class="d-flex flex-wrap flex-column flex-md-row">
-                              <div class="form-check me-4">
-                                  <Field class="form-check-input mt-2 position-absolute" id="digitrue" type="radio" name="申請數位卡" value="yes" v-model="onLineApply_Fillin_Data.digiFlag"/>
-                                  <label class="form_Apply_txts text-nowrap" for="digitrue">
-                                          是 (有效期至核卡後次月底)
-                                  </label>
-                              </div>
-                              <div class="form-check me-4">
-                                  <Field class="form-check-input mt-2 position-absolute" id="digifalse" type="radio" name="申請數位卡" value="no" v-model="onLineApply_Fillin_Data.digiFlag"/>
-                                  <label class="form_Apply_txts" for="digifalse">
-                                          否
-                                  </label>
-                              </div>
+                        <label for="">申請數位卡</label>
+                        <div class="d-flex flex-wrap flex-column flex-md-row">
+                          <div class="form-check me-4">
+                              <Field class="form-check-input mt-2 position-absolute" id="digitrue" type="radio" name="申請數位卡" value="yes" v-model="onLineApply_Fillin_Data.digiFlag"/>
+                              <label class="form_Apply_txts text-nowrap" for="digitrue">
+                                      是 (有效期至核卡後次月底)
+                              </label>
                           </div>
-                          <div class="note_text pt-0">
-                              <strong>(非必填欄位)</strong><br>
-                              數位卡說明：如果您急需用卡，請勾選「是」，將立即享有網路購物及行動支付之便利，本行將於審核通過後先行發送簡訊代碼至申請人之行動電話，您可憑此代碼至本行網站中查詢信用卡資訊。
+                          <div class="form-check me-4">
+                              <Field class="form-check-input mt-2 position-absolute" id="digifalse" type="radio" name="申請數位卡" value="no" v-model="onLineApply_Fillin_Data.digiFlag"/>
+                              <label class="form_Apply_txts" for="digifalse">
+                                      否
+                              </label>
                           </div>
+                        </div>
+                        <div class="note_text pt-0">
+                          <strong>(非必填欄位)</strong><br>
+                          數位卡說明：如果您急需用卡，請勾選「是」，將立即享有網路購物及行動支付之便利，本行將於審核通過後先行發送簡訊代碼至申請人之行動電話，您可憑此代碼至本行網站中查詢信用卡資訊。
+                        </div>
                       </li>
                   </ul>
                   <!-------------------本人已詳閱---------------------->
