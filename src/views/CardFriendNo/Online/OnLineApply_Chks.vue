@@ -18,7 +18,7 @@
               <div class="formGroup">
                   <ul class="formList">
                       <li class="form-group">
-                          <label class="label" for="">申請人身份證號</label>
+                          <label class="label" for="">申請人身分證字號</label>
                           <div class="form-text">{{chksData.oid}}</div>
                       </li>
                       <li class="form-group">

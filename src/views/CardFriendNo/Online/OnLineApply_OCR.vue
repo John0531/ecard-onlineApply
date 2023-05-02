@@ -383,7 +383,7 @@
                           aria-label="Close"
                           @click="result(this.num)"
                           >
-                          財力證明修改
+                          確認修改
                           </button>
                       </div>
                   </div>
