@@ -97,10 +97,10 @@ export default {
     top: -10px;
   }
 
-  @font-face {
+  /* @font-face {
   font-family: ubFont;
-          src: url("https://card-beta.uitc.com.tw/eCard_source/font/EUDC.TTE");
-  }
+    src: url(https://card-beta.uitc.com.tw/eCard_source/font/EUDC.TTE)
+  } */
   p,a,span,font,input,select,table,label,button,ul,li,div {
       font-family: "RobotoSlab",ubFont;
   }
