@@ -615,8 +615,9 @@ export default {
       // ?在頁面上各欄位自呈現
       const resultImg = this.$refs[`resultImg${this.num}`]
       const base64View = await this[`identitiyPack${this.num}`].preViewImg.result({
-        type: 'canvas',
-        size: 'original'
+        type: 'base64',
+        size: 'original',
+        format: 'png'
       })
       const base64Compression = await this[`identitiyPack${this.num}`].preViewImg.result({
         type: 'canvas',
