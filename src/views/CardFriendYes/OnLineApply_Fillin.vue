@@ -21,7 +21,7 @@
                   v-slot="{ errors }" ref="form">
                   <ul class="formList-even">
                       <li class="col-12 col-md-6">
-                        <label for="">申請人身份證字號</label>
+                        <label for="">申請人身分證字號</label>
                         <div class="form-text">{{ id }}</div>
                       </li>
                       <li class="col-12 col-md-6">
@@ -145,13 +145,9 @@
                           <div class="form_Apply_txt">{{ selectedContent}}</div>
                           <div class="d-flex flex-wrap justify-content-start align-items-center" v-if="onLineApply_Fillin_Data.sendCardType === '3'">
                             <div class="d-flex flex-wrap justify-content-start align-items-center">
-                              <label for="" class="me-0">
-                              請輸入您持有之本行任一卡號末四碼：
-                              </label>
+                              <label for="" class="me-0">請輸入您持有之本行任一卡號末四碼：</label>
                               <div>
                                 <Field v-model="onLineApply_Fillin_Data.sendCardlast4no" name="卡號末四碼" maxlength="4" type="text" class="form-control end_four" :class="{ 'is-invalid': errors['卡號末四碼'] }" :validateOnInput="true" @keyup="onLineApply_Fillin_Data.sendCardlast4no = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardlast4no)"/>
-                              </div>
-                              <div>
                                 <span v-if="errors['卡號末四碼']" class="field-error">{{ errors["卡號末四碼"] }}</span>
                               </div>
                             </div>
