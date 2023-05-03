@@ -533,7 +533,21 @@ export default {
       for (const key of addressKeys) {
         delete errors[key]
       }
-      this.$custom.validate.showErrors(errors)
+      //* 調整順序
+      const orderSet = new Map()
+      orderSet.set('申請人身分證字號', 1)
+      orderSet.set('出生年月日', 2)
+      orderSet.set('申請的信用卡', 3)
+      orderSet.set('有關條款', 4)
+
+      //* 排序且重新賦值
+      const orderedData = {}
+      Object.keys(errors)
+        .sort((a, b) => (orderSet.get(a) > orderSet.get(b) ? 1 : -1))
+        .forEach((key) => {
+          orderedData[key] = errors[key]
+        })
+      this.$custom.validate.showErrors(orderedData)
     },
     isOver18 (year, month, day) {
       var today = new Date()
@@ -551,10 +565,8 @@ export default {
       const { parm, GID, IDE, PJN, UTC, USC } = this.$route.query
       if (this.isLineBank) {
         const linkCard = await serviceY.cardApplyLoad_PageLoad_LB(GID, IDE, parm, PJN)
-        console.log(linkCard)
         const { status, result } = linkCard
         // const { id, brthDt, cardInfoList, flgYesgo } = result
-        console.log(status)
         switch (status) {
           case '00700' :
             if (result.id) {
@@ -580,14 +592,8 @@ export default {
           case '00799' :
             //* 先監聽再拔掉
             var modal = document.getElementById('noticeModal_2')
-            modal.addEventListener('hidden.bs.modal', this.handleModalHidden)
-            window.addEventListener('load', () => {
-              modal.removeEventListener('hidden.bs.modal', this.handleModalHidden)
-            })
+            modal.addEventListener('hidden.bs.modal', this.handleModalHidden, { once: true })
             service.showAPIMsg(linkCard.message)
-            setTimeout(() => {
-              window.location.assign('https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014')
-            }, 5000)
             break
           default:
             service.showAPIMsg(linkCard.message)
@@ -597,7 +603,6 @@ export default {
         const linkCard = await serviceY.cardApplyLoad_PageLoad(GID, IDE, PJN)
         const { status, result } = linkCard
         // const { cardInfoList, flgYesgo } = result
-        console.log(linkCard)
         switch (status) {
           case '00700' :
             if (result.cardInfoList) {
@@ -615,14 +620,8 @@ export default {
           case '00799' :
             //* 先監聽再拔掉
             var modal2 = document.getElementById('noticeModal_2')
-            modal2.addEventListener('hidden.bs.modal', this.handleModalHidden)
-            window.addEventListener('load', () => {
-              modal2.removeEventListener('hidden.bs.modal', this.handleModalHidden)
-            })
+            modal2.addEventListener('hidden.bs.modal', this.handleModalHidden, { once: true })
             service.showAPIMsg(linkCard.message)
-            setTimeout(() => {
-              window.location.assign('https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014')
-            }, 5000)
             break
           default:
             service.showAPIMsg(linkCard.message)

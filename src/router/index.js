@@ -362,13 +362,13 @@ router.beforeEach((to) => {
   if (process.env.NODE_ENV === 'development') {
     if (to.path === '/1') {
       // 設置預設的query參數
-      router.push({ path: '/', query: { parm: 'LB23041218270380023452', GID: '81', IDE: 'A' } })
+      router.push({ path: '/', query: { parm: 'LB23050310122026040714', GID: '99', IDE: 'A' } })
     } else if (to.path === '/2') {
       router.push({ path: '/', query: { GID: '99', IDE: 'A' } })
     } else if (to.path === '/3') {
       router.push({ path: '/', query: { GID: '99', IDE: 'A' } })
     } else if (to.path === '/4') {
-      router.push({ path: '/', query: { parm: 'LB23041218270380023452', GID: '81', IDE: 'A', PJN: 'BBB', UTC: '123', USC: '456' } })
+      router.push({ path: '/', query: { parm: 'LB23050310122026040714', GID: '99', IDE: 'A', PJN: 'BBB', UTC: '123', USC: '456' } })
     } else if (to.path === '/5') {
       router.push({ path: '/', query: { GID: '99', IDE: 'A', PJN: 'BBB', UTC: '123', USC: '456' } })
     }
