@@ -5,7 +5,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title"><input id="myCheckCount" hidden></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="closeModal()">
                       <img src="@/assets/images/form/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
                     </button>
                 </div>
@@ -14,7 +14,9 @@
                     <hr>
                     <div class="text-center mb-3">
                         <div class="col-12 text-center">
-                            <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" aria-label="Close">關閉</button>
+                            <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" aria-label="Close" @click="closeModal()">
+                              關閉
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -28,6 +30,15 @@ export default ({
   data () {
     return {
       //
+    }
+  },
+  methods: {
+    closeModal () {
+      if (this.$store.state.errorRedirect === 'cardFamily') {
+        sessionStorage.clear()
+        window.location = 'https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014'
+      }
+      this.$store.state.apiModal.hide()
     }
   },
   mounted () {
