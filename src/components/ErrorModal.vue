@@ -4,14 +4,14 @@
       <div class="modal-content">
           <div class="modal-header">
             <button @click.prevent="closeModal" type="button" class="close" aria-label="Close">
-              <span aria-hidden="true">×</span>
+              <img src="@/assets/images/form/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
             </button>
           </div>
           <div class="modal-body">
             <span v-html="$store.state.errorMsg" style="font-size:1rem"></span>
           </div>
-          <div class="modal-footer" >
-              <div class="text-center" >
+          <div class="modal-footer">
+              <div class="text-center">
               <button @click.prevent="closeModal" type="button" class="btn btn-primary btn-lg" style="border-radius: 0.3rem;">關閉</button>
           </div>
           </div>

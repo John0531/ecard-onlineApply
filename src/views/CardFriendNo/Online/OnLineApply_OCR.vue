@@ -623,7 +623,7 @@ export default {
         type: 'canvas',
         quality: 0.3,
         format: 'jpeg',
-        size: 'viewport'
+        size: 'original'
       })
       this.$store.commit('changeLoading', false)
       console.log(`瀏覽圖檔案大小${Math.round(0.75 * base64View.length / 1000)}k`)
