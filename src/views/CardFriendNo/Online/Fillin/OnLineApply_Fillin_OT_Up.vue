@@ -570,6 +570,7 @@ import Moment from 'moment'
 export default {
   data () {
     return {
+      timing: null,
       countDown: Moment.duration({ minutes: 10 }), // ? 倒數10分鐘
       clientHeight: '', // ? 背景圖片高
       imgTemplateUrl: '',
@@ -828,8 +829,9 @@ export default {
       this.clientHeight = this.$refs.resultImg1.clientHeight
     }, 500)
     // ? 操作時間倒數計時
-    setInterval(() => {
+    this.timing = setInterval(() => {
       this.countDown.subtract(1, 'seconds')
+      console.log(this.countDown)
       if (this.countDown._data.minutes === 0 && this.countDown._data.seconds === 0) {
         clearInterval(this.countDown)
         this.$store.commit('getErrorMsg', '作業逾時')
@@ -850,6 +852,9 @@ export default {
     // *進場先跳範例提醒
     this.NoticeModal = new this.$custom.bootstrap.Modal(this.$refs.NoticeModal)
     this.NoticeModal.show()
+  },
+  unmounted () {
+    clearInterval(this.timing)
   },
   watch: {
     num (n) {
