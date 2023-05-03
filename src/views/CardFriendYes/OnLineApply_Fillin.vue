@@ -592,7 +592,25 @@ export default {
       for (const key of addressKeys) {
         delete errors[key]
       }
-      this.$custom.validate.showErrors(errors)
+
+      //* 調整順序
+      const orderSet = new Map()
+      orderSet.set('電子信箱', 1)
+      orderSet.set('推廣單位代號', 2)
+      orderSet.set('推廣人員編號', 3)
+      orderSet.set('帳單形式', 4)
+      orderSet.set('寄卡地址', 5)
+      orderSet.set('卡號末四碼', 6)
+      orderSet.set('有關條款', 7)
+
+      //* 排序且重新賦值
+      const orderedData = {}
+      Object.keys(errors)
+        .sort((a, b) => (orderSet.get(a) > orderSet.get(b) ? 1 : -1))
+        .forEach((key) => {
+          orderedData[key] = errors[key]
+        })
+      this.$custom.validate.showErrors(orderedData)
     },
     // ?檢查滾軸是否有到底部
     checkTermsScroll (event, num) {
