@@ -433,7 +433,9 @@ export default ({
       collection.errors = await this.$refs.myForm.getErrors()
       if (Object.keys(collection.errors).length === 0) {
         // ** ===全部通過打API才前往下一頁===
-        const res = await PublicService.otpSend(this.mobileMsgCode)
+        // const res = await PublicService.otpSend(`${this.tag}${this.mobileMsgCode}`)
+        const res = await PublicService.otpSend(`${this.mobileMsgCode}`)
+        console.log(res)
         if (res.status === 200) {
           if (res.data.status === '40198') {
             PublicService.showAPIMsg(res.data.message)

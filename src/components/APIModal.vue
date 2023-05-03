@@ -1,6 +1,6 @@
 <template>
     <!-- API情境彈窗 -->
-    <div ref="APIModal" class="modal fade" id="noticeModal_2" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true">
+    <div ref="APIModal" class="modal fade" id="noticeModal_2" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true" >
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -34,6 +34,7 @@ export default ({
   },
   methods: {
     closeModal () {
+      console.log(1)
       if (this.$store.state.errorRedirect === 'cardFamily') {
         sessionStorage.clear()
         window.location = 'https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014'
@@ -42,7 +43,7 @@ export default ({
     }
   },
   mounted () {
-    this.$store.commit('callAPIModal', new this.$custom.bootstrap.Modal(this.$refs.APIModal))
+    this.$store.commit('callAPIModal', new this.$custom.bootstrap.Modal(this.$refs.APIModal, { backdrop: 'static' }))
   }
 })
 </script>
