@@ -13,12 +13,9 @@ axios.interceptors.request.use(
       config.headers.Authorization = `Bearer ${TK}`
     }
     // ? 地址 api 不顯示 Loading 動畫
-    if (!config.url.includes('MW3')) {
-      store.commit('changeLoading', true)
-    }
     // ? 首刷禮API回覆過快 不顯示 Loading 動畫
-    if (config.url.includes('FirstGift')) {
-      store.commit('changeLoading', false)
+    if (!config.url.includes('MW3') && !config.url.includes('FirstGift')) {
+      store.commit('changeLoading', true)
     }
     return config
   }
