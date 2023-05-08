@@ -16,6 +16,10 @@ axios.interceptors.request.use(
     if (!config.url.includes('MW3')) {
       store.commit('changeLoading', true)
     }
+    // ? 首刷禮API回覆過快 不顯示 Loading 動畫
+    if (config.url.includes('FirstGift')) {
+      store.commit('changeLoading', false)
+    }
     return config
   }
 )

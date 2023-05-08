@@ -16,29 +16,33 @@
                 <div class="dataTitle">
                     <h3><span>請選擇身分驗證方式</span></h3>
                 </div>
+                <div class="red_text pb-4 text-lg-star text-xl-center">
+                    您可以使用「他行信用卡」或「他行實體存款帳戶」進行身份驗證；若無上述驗證項目，可選擇「書面申請」方式，於線上填寫完成後列印寄回。
+                </div>
                 <div class="col-md-4 col-lg-4 col-xl-3 text-center">
                     <div class="not_UBfriend">
                         <div class="item">
-                            <h3>他行信用卡 <img src="@/assets/images/form/Apply_icon02.png" class="img-fluid" alt="" /></h3>
-                            <button @click="toOnLineApply_Chk" class="btn btn-primary btn-lg rounded-pill">立即辦卡 <i class="fa fa-arrow-circle-right"></i></button><br>
+                          <h3 class="mb-0">他行信用卡 <img src="@/assets/images/form/Apply_icon02.png" class="img-fluid" alt="" /></h3>
+                          <h4 class="my-2 d-block">&ensp;</h4>
+                          <button @click="toOnLineApply_Chk" class="btn btn-primary btn-lg rounded-pill" >立即辦卡 <i class="fa fa-arrow-circle-right"></i></button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-4 col-xl-3 text-center">
                     <div class="not_UBfriend">
                         <div class="item">
-                            <h3>他行存款帳戶 <img src="@/assets/images/form/Apply_icon03.png" class="img-fluid" alt="" /></h3>
-                            <button @click="OnLineApply_ChkSZ" class="btn btn-primary btn-lg rounded-pill">立即辦卡 <i class="fa fa-arrow-circle-right"></i></button><br>
-                            <h4>(純網銀或數存不適用)</h4>
+                          <h3 class="mb-0">他行實體存款帳戶 <img src="@/assets/images/form/Apply_icon03.png" class="img-fluid" alt="" /></h3>
+                          <h4 class="my-2 d-block red_text">(純網銀及數位存款帳戶不適用)</h4>
+                          <button @click="OnLineApply_ChkSZ" class="btn btn-primary btn-lg rounded-pill" >立即辦卡 <i class="fa fa-arrow-circle-right"></i></button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-4 col-xl-3 text-center">
                     <div class="not_UBfriend">
                         <div class="item">
-                            <h3>書面申請 <img src="@/assets/images/form/Apply_icon01.png" class="img-fluid" alt="" /></h3>
-                            <button @click="OnLineApply_OTP" class="btn btn-primary btn-lg rounded-pill">立即辦卡 <i class="fa fa-arrow-circle-right"></i></button><br>
-                            <h4>(無其他銀行信用卡)</h4>
+                          <h3 class="mb-0">書面申請 <img src="@/assets/images/form/Apply_icon01.png" class="img-fluid" alt="" /></h3>
+                          <h4 class="my-2 d-block red_text">(無他行信用卡及他行帳戶)</h4>
+                          <button @click="OnLineApply_OTP" class="btn btn-primary btn-lg rounded-pill" >立即辦卡 <i class="fa fa-arrow-circle-right"></i></button>
                         </div>
                     </div>
                 </div>
