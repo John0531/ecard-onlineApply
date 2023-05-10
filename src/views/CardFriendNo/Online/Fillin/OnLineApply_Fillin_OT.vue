@@ -58,16 +58,15 @@
                   <label for=""
                     ><span class="red_text">* </span>身分證發證日期</label
                   >
-                  <div class="d-flex align-items-center">
+                  <div class="d-flex align-items-center ID_date">
                     <span class="text-nowrap">民國</span>
                     <Field
                       v-model="Form.iddate.Year"
                       as="select"
                       name="iddate_Year"
                       runat="server"
-                      class="form-select form-control mx-1 mx-md-2"
+                      class="birth_date form-select form-control mx-1 mx-md-2"
                       :class="{ 'is-invalid': errors['身分證發證日期'] }"
-                      @blur="$custom.validate.checkDate(Form.iddate,$refs.form,'身分證發證日期')"
                     >
                       <option value="" selected>---</option>
                       <option v-for="n in iddateList.year" :key="n" :value="n">{{n}}</option>
@@ -81,7 +80,6 @@
                       id="SelM"
                       class="form-select form-control mx-1 mx-md-2"
                       :class="{ 'is-invalid': errors['身分證發證日期'] }"
-                      @blur="$custom.validate.checkDate(Form.iddate,$refs.form,'身分證發證日期')"
                     >
                       <option value="" selected>---</option>
                       <option v-for="n in iddateList.month" :key="n" :value="n">{{n}}</option>
@@ -316,11 +314,10 @@
                       as="select"
                       name="homeAddr_County"
                       v-model="Form.homeAddr.County"
-                      @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       runat="server"
                       class="form-select form-control ZIP mb-2"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
-                      @change="getAddress('1','homeAddr')"
+                      @change="getAddress('1','homeAddr');clearAddressInput('homeAddr')"
                     >
                       <option v-for="item in selectJson.County" :key="item.SORT" :value="item.VALUE">{{item.SHOW}}</option>
                     </Field>
@@ -328,11 +325,10 @@
                       as="select"
                       name="homeAddr_Area"
                       v-model="Form.homeAddr.Area"
-                      @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       runat="server"
                       class="form-select form-control Area mx-1 mx-md-2 mb-2"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
-                      @change="getAddress('2','homeAddr')"
+                      @change="getAddress('2','homeAddr');clearAddressInput('homeAddr')"
                     >
                       <option value="">-----</option>
                       <option v-for="item in addrList.homeAddr.area" :key="item.varArea" :value="item.varArea">{{item.varArea}}</option>
@@ -341,10 +337,10 @@
                       as="select"
                       name="homeAddr_Road"
                       v-model="Form.homeAddr.Road"
-                      @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       runat="server"
                       class="form-select form-control Road mb-2"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
+                      @change="clearAddressInput('homeAddr')"
                     >
                       <option value="">-----</option>
                       <option v-for="item in addrList.homeAddr.road" :key="item.varRoad" :value="item.varRoad">{{item.varRoad}}</option>
@@ -407,7 +403,7 @@
                       v-model="Form.homeAddr.Other"
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       maxlength="100"
-                      class="form-control mb-0 ms-md-0 ms-lg-1"
+                      class="form-control mb-2 ms-md-0 ms-lg-1"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     />
                   </div>
@@ -422,11 +418,10 @@
                       as="select"
                       name="liveAddr_County"
                       v-model="Form.liveAddr.County"
-                      @blur="$custom.validate.CheckAddressAll(Form.liveAddr,$refs.form,'居住地址')"
                       runat="server"
                       class="form-select form-control ZIP mb-2"
                       :class="{ 'is-invalid': errors['居住地址'] }"
-                      @change="getAddress('1','liveAddr')"
+                      @change="getAddress('1','liveAddr');clearAddressInput('liveAddr')"
                     >
                       <option v-for="item in selectJson.County" :key="item.SORT" :value="item.VALUE">{{item.SHOW}}</option>
                     </Field>
@@ -434,11 +429,10 @@
                       as="select"
                       name="liveAddr_Area"
                       v-model="Form.liveAddr.Area"
-                      @blur="$custom.validate.CheckAddressAll(Form.liveAddr,$refs.form,'居住地址')"
                       runat="server"
                       class="form-select form-control Area mx-1 mx-md-2 mb-2"
                       :class="{ 'is-invalid': errors['居住地址'] }"
-                      @change="getAddress('2','liveAddr')"
+                      @change="getAddress('2','liveAddr');clearAddressInput('liveAddr')"
                     >
                       <option value="">-----</option>
                       <option v-for="item in addrList.liveAddr.area" :key="item.varArea" :value="item.varArea">{{item.varArea}}</option>
@@ -447,10 +441,10 @@
                       as="select"
                       name="liveAddr_Road"
                       v-model="Form.liveAddr.Road"
-                      @blur="$custom.validate.CheckAddressAll(Form.liveAddr,$refs.form,'居住地址')"
                       runat="server"
                       class="form-select form-control Road mb-2"
                       :class="{ 'is-invalid': errors['居住地址'] }"
+                      @change="clearAddressInput('liveAddr')"
                     >
                       <option value="">-----</option>
                       <option v-for="item in addrList.liveAddr.road" :key="item.varRoad" :value="item.varRoad">{{item.varRoad}}</option>
@@ -513,7 +507,7 @@
                       v-model="Form.liveAddr.Other"
                       @blur="$custom.validate.CheckAddressAll(Form.liveAddr,$refs.form,'居住地址')"
                       maxlength="100"
-                      class="form-control mb-0 ms-md-0 ms-lg-1"
+                      class="form-control mb-2 ms-md-0 ms-lg-1"
                       :class="{ 'is-invalid': errors['居住地址'] }"
                     />
                   </div>
@@ -916,11 +910,10 @@
                         as="select"
                         name="parentAddr_County"
                         v-model="Form.parentAddr.County"
-                        @blur="$custom.validate.CheckAddressAll(Form.parentAddr,$refs.form,'家長通訊地址')"
                         runat="server"
                         class="form-select form-control ZIP mb-2"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
-                        @change="getAddress('1','parentAddr')"
+                        @change="getAddress('1','parentAddr');clearAddressInput('parentAddr')"
                       >
                         <option v-for="item in selectJson.County" :key="item.SORT" :value="item.VALUE">{{item.SHOW}}</option>
                       </Field>
@@ -928,11 +921,10 @@
                         as="select"
                         name="parentAddr_Area"
                         v-model="Form.parentAddr.Area"
-                        @blur="$custom.validate.CheckAddressAll(Form.parentAddr,$refs.form,'家長通訊地址')"
                         runat="server"
                         class="form-select form-control Area mx-1 mx-md-2 mb-2"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
-                        @change="getAddress('2','parentAddr')"
+                        @change="getAddress('2','parentAddr');clearAddressInput('parentAddr')"
                       >
                         <option value="">-----</option>
                         <option v-for="item in addrList.parentAddr.area" :key="item.varArea" :value="item.varArea">{{item.varArea}}</option>
@@ -941,10 +933,10 @@
                         as="select"
                         name="parentAddr_Road"
                         v-model="Form.parentAddr.Road"
-                        @blur="$custom.validate.CheckAddressAll(Form.parentAddr,$refs.form,'家長通訊地址')"
                         runat="server"
                         class="form-select form-control Road mb-2"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
+                        @change="clearAddressInput('parentAddr')"
                       >
                         <option value="">-----</option>
                         <option v-for="item in addrList.parentAddr.road" :key="item.varRoad" :value="item.varRoad">{{item.varRoad}}</option>
@@ -1007,7 +999,7 @@
                         v-model="Form.parentAddr.Other"
                         @blur="$custom.validate.CheckAddressAll(Form.parentAddr,$refs.form,'家長通訊地址')"
                         maxlength="100"
-                        class="form-control mb-0 ms-md-0 ms-lg-1"
+                        class="form-control mb-2 ms-md-0 ms-lg-1"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
                       />
                     </div>
@@ -1035,7 +1027,7 @@
                   <label for="">公司統一編號</label>
                   <Field
                     v-model="Form.uniformNum"
-                    rules="chkKeyValue"
+                    rules="validUniformNum"
                     :class="{'is-invalid':errors['公司統一編號']}"
                     name="公司統一編號"
                     maxlength="8"
@@ -1086,23 +1078,21 @@
                       as="select"
                       name="compAddr_County"
                       v-model="Form.compAddr.County"
-                      @blur="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       runat="server"
                       class="form-select form-control ZIP mb-2"
                       :class="{ 'is-invalid': errors['公司地址'] }"
-                      @change="getAddress('1','compAddr')"
+                      @change="getAddress('1','compAddr');clearAddressInput('compAddr')"
                     >
                       <option v-for="item in selectJson.County" :key="item.SORT" :value="item.VALUE">{{item.SHOW}}</option>
                     </Field>
                     <Field
                       as="select"
                       name="compAddr_Area"
-                      @blur="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       v-model="Form.compAddr.Area"
                       runat="server"
                       class="form-select form-control Area mx-1 mx-md-2 mb-2"
                       :class="{ 'is-invalid': errors['公司地址'] }"
-                      @change="getAddress('2','compAddr')"
+                      @change="getAddress('2','compAddr');clearAddressInput('compAddr')"
                     >
                       <option value="">-----</option>
                       <option v-for="item in addrList.compAddr.area" :key="item.varArea" :value="item.varArea">{{item.varArea}}</option>
@@ -1110,11 +1100,11 @@
                     <Field
                       as="select"
                       name="compAddr_Road"
-                      @blur="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       v-model="Form.compAddr.Road"
                       runat="server"
                       class="form-select form-control Road mb-2"
                       :class="{ 'is-invalid': errors['公司地址'] }"
+                      @change="clearAddressInput('compAddr')"
                     >
                       <option value="">-----</option>
                       <option v-for="item in addrList.compAddr.road" :key="item.varRoad" :value="item.varRoad">{{item.varRoad}}</option>
@@ -1177,7 +1167,7 @@
                       v-model="Form.compAddr.Other"
                       @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       maxlength="100"
-                      class="form-control mb-0 ms-md-0 ms-lg-1"
+                      class="form-control mb-2 ms-md-0 ms-lg-1"
                       :class="{ 'is-invalid': errors['公司地址'] }"
                     />
                   </div>
@@ -1704,6 +1694,14 @@ export default {
       await this.getAddress('1', 'liveAddr', 'session')
       await this.getAddress('2', 'liveAddr', 'session')
       this.$custom.validate.CheckAddressAll(this.Form.liveAddr, this.$refs.form, '居住地址')
+    },
+    clearAddressInput (addressType) {
+      this.Form[addressType].Lane = ''
+      this.Form[addressType].Aly = ''
+      this.Form[addressType].Num = ''
+      this.Form[addressType].Of = ''
+      this.Form[addressType].Flr = ''
+      this.Form[addressType].Other = ''
     },
     async submit () {
       this.$refs.form.setErrors({}) // ? 先清除所有上次驗證的錯誤再驗證

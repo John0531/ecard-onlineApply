@@ -395,6 +395,67 @@ const validate = {
       return true
     }
     return '請輸入正確的信用卡有效期限'
+  },
+  //* ==== 30. 檢查統一編號 ====
+  validUniformNum (input) {
+    if (input === '') {
+      return true
+    }
+    const Rule = /^[0-9]{8}$/
+    if (!Rule.test(input)) {
+      return '請輸入正確格式'
+    }
+    const countTaxNumber = input.split('').map(Number)
+    const TaxIdNumber = [1, 2, 1, 2, 1, 2, 4, 1]// ?  統一編號驗證邏輯乘數
+    if (countTaxNumber[6] === 7) {
+      const sum = []
+      countTaxNumber.forEach((item, index) => {
+        item = item * TaxIdNumber[index]
+        if (item >= 10) {
+          item = item % 10 + Math.floor(item / 10)
+          sum.push(item)
+        } else {
+          sum.push(item)
+        }
+      })
+      sum[6] = 1
+      const sumTax1 = [...this.sum]
+      sum[6] = 0
+      const sumTax2 = [...this.sum]
+      let finaltotal2 = 0
+      sumTax1.forEach((item) => {
+        finaltotal2 = item + finaltotal2
+      })
+      let finaltotal3 = 0
+      sumTax2.forEach((item) => {
+        finaltotal3 = item + finaltotal3
+      })
+      if (finaltotal2 % 10 === 0 || finaltotal3 % 10 === 0) {
+        return true
+      } else {
+        return '統一編號格式有誤'
+      }
+    } else if (countTaxNumber[6] !== 7) {
+      const sum = []
+      countTaxNumber.forEach((item, index) => {
+        item = item * TaxIdNumber[index]
+        if (item >= 10) {
+          item = item % 10 + Math.floor(item / 10)
+          sum.push(item)
+        } else {
+          sum.push(item)
+        }
+      })
+      let finaltotal = 0
+      sum.forEach((item) => {
+        finaltotal += item
+      })
+      if (finaltotal % 10 === 0) {
+        return true
+      } else {
+        return '統一編號格式有誤'
+      }
+    }
   }
 }
 
