@@ -17,10 +17,10 @@
               <div class="row justify-content-md-center">
                   <!----------------首刷禮---------------->
                   <div class="col-12 col-lg-8 card_gift_box">
-                      <h3><img src="images/form/card_gift_icon.gif" class="img-fluid" alt="" />首刷禮：<span>(新戶定義：核卡前六個月內未曾持有任何一聯邦信用卡者。)</span>
+                      <h3><img src="@/assets/images/form/card_gift_icon.gif" class="img-fluid" alt="" />首刷禮：<span>(新戶定義：核卡前六個月內未曾持有任何一聯邦信用卡者。)</span>
                       </h3>
-                      <div class="col-12 card_gift_txt">
-                          <div v-html="giftNote"></div>
+                      <div class="col-12 ">
+                          <div v-html="giftNote" class="card_gift_txt"></div>
                           <div class="form-check mt-2 ms-3" v-for="gift in giftList" :key="gift+1">
                             <Field
                               v-model="applierInfo.firstGift"
@@ -88,7 +88,6 @@
                   <div class="text-center button_group">
                     <button
                       class="btn btn-primary btn-lg mx-1"
-                      type="submit"
                       @click.prevent="applySubmit"
                       >
                       下一步
@@ -102,7 +101,7 @@
 
 <script>
 import ServiceN from '@/service/CardFriend_N.Service.js'
-// import PublicService from '@/service/Public.Service.js'
+import PublicService from '@/service/Public.Service.js'
 
 export default ({
   data () {
@@ -124,13 +123,15 @@ export default ({
         sessionStorage.setItem('keepPersonalData', JSON.stringify(this.applierInfo))
         // ** ===全部通過前往下一頁===
         const res = await ServiceN.postFirstGift(this.applierInfo.firstGift)
-        console.log(res)
         if (res.status === 200) {
           if (res.data.message) {
-            // PublicService.showAPIMsg(res.data.message)
             setTimeout(() => {
               this.$router.push('/OnLineApply_OCR')
-            }, 800)
+            }, 1000)
+          }
+        } else {
+          if (res.data.message) {
+            PublicService.showAPIMsg(res.data.message)
           }
         }
       } else {

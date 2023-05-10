@@ -385,15 +385,6 @@ export default {
           break
         }
       }
-      // if (this.$custom.validate.checkCode(code) === true) {
-      //   document.getElementById(nextid).focus()
-      // } else {
-      //   // ? 清空errors
-      //   dom.setFieldError(name, '')
-      //   const error = this.$custom.validate.checkCode(code)
-      //   // ? 設定errors
-      //   dom.setFieldError(name, error)
-      // }
     },
     textHandler2 () {
       document.getElementById('cardCode2').setAttribute('type', 'text')

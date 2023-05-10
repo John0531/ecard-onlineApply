@@ -13,7 +13,8 @@ axios.interceptors.request.use(
       config.headers.ecard = `Bearer ${TK}`
     }
     // ? 地址 api 不顯示 Loading 動畫
-    if (!config.url.includes('MW3')) {
+    // ? 首刷禮API回覆過快 不顯示 Loading 動畫
+    if (!config.url.includes('MW3') && !config.url.includes('FirstGift')) {
       store.commit('changeLoading', true)
     }
     return config
