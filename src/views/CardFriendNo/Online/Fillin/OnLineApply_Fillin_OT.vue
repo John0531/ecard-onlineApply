@@ -1616,9 +1616,6 @@ export default {
         this.Form.digiFlag = 'true'
       }
       if (FillinData?.OT) {
-        if (FillinData.OT.liveStatusKey === 0) {
-          FillinData.OT.liveStatusKey = ''
-        }
         FillinData.OT.liveStatusKey = FillinData.OT.liveStatusKey.toString()
         FillinData.OT.IncomeMain.incomeKey = FillinData.OT.IncomeMain.incomeKey.toString()
         FillinData.OT.job.jobTypeKey = FillinData.OT.job.jobTypeKey.toString()
@@ -1753,9 +1750,6 @@ export default {
           Flr: '',
           Other: ''
         }
-      }
-      if (this.Form.liveStatusKey === '') {
-        this.Form.liveStatusKey = 0
       }
       const postData = JSON.parse(JSON.stringify(this.Form))
       postData.iddate = {
