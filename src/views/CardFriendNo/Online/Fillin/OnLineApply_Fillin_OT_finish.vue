@@ -23,6 +23,12 @@
                                 我們會儘速為您處理，祝您 順心如意。
                             </p>
                         </div>
+                        <div class="pb-2 pb-md-3">
+                            <div class="text-center pb-2 pb-md-3">
+                                <button @click.prevent="downloadFile" class="btn btn-primary btn-md mx-1" >下載/列印申請書</button>
+                            </div>
+                            <p class="text-center">如您為<span class="red_text">『書面申請』</span>，請務必列印申請書並親簽後寄回，以完成申請，謝謝</p>
+                        </div>
                         <div class="d-flex flex-wrap justify-content-center my-2 my-md-3">
                             <div class="col-12 col-md-4 Apply_OT my-4">
                                 <div class="Apply_OT_pic">
@@ -59,3 +65,30 @@
     </section>
     <!-- 主要內容 END -->
 </template>
+
+<script>
+import PublicService from '@/service/Public.Service.js'
+
+export default {
+  data () {
+    //
+  },
+  methods: {
+    async downloadFile () {
+      const response = await PublicService.previewPdf()
+      if (response.status === '01799') {
+        PublicService.showAPIMsg(response.message)
+        return
+      }
+      if (response.status === 200) {
+        const blob = new Blob([response.data], { type: 'application/pdf' })
+        const link = document.createElement('a')
+        link.href = window.URL.createObjectURL(blob)
+        link.download = response.headers['content-disposition'].split(';')[1].split('=')[1]
+        // link.download = `test.pdf`
+        link.click()
+      }
+    }
+  }
+}
+</script>

@@ -228,7 +228,7 @@
                         <!--------------------------------------------->
                         <div class="Apply_note_box">
                             <span
-                                class="red_text"><strong>貼心提醒：<br>下載預覽申請書確認無誤後，需回本頁點選送出申請方可完成申辦流程。送出申請尚未完成前，請勿中途離開本網頁或做其它操作，以免上傳失敗。</strong></span>
+                                class="red_text"><strong>＊財力資料上傳確認無誤後，請按送出申請。</strong></span>
                         </div>
                     </div>
                 </div>
@@ -239,13 +239,6 @@
                     @click.prevent="submitSuitCase"
                     >
                     送出申請
-                    </button>
-                    <button
-                    class="btn btn-primary btn-lg mx-1"
-                    type=""
-                    @click.prevent="downloadFile"
-                    >
-                      預覽申請書
                     </button>
                 </div>
             </div>
@@ -732,25 +725,34 @@ export default {
         const res = await PublicService.CardSendApply(this.form)
         PublicService.showAPIMsg(res.data.message)
         if (res.status === 200) {
-          // ?session全部清掉
-          sessionStorage.clear()
           if (res.data.status === '00800') {
             // ? ===選擇自行上傳===
             // ?未來卡成功
+            // ?session全部清掉
+            sessionStorage.clear()
             setTimeout(() => {
               this.$router.push('/OnLineApply_Fillin_OT_finish')
             }, 1000)
+            return
           }
           if (res.data.status === '00801') {
             // ? ===選擇自行上傳===
             // ?顯示NNB畫面
+            const tk = sessionStorage.getItem('accessTK')
+            // ?清除個資
+            sessionStorage.clear()
+            // ?留存token
+            sessionStorage.setItem('accessTK', tk)
             setTimeout(() => {
               this.$router.push('/dspApplicationNNB')
             }, 1000)
+            return
           }
           if (res.data.status === '00802') {
             // ? ===選擇MyData上傳===
             // ?讀取result內的URL轉導MyData上傳財力
+            // ?session全部清掉
+            sessionStorage.clear()
             this.url = res.data.result.MyDataUrl
             setTimeout(() => {
               window.open(this.url, '_blank')
@@ -806,21 +808,6 @@ export default {
         }
       } else {
         return true
-      }
-    },
-    async downloadFile () {
-      const response = await PublicService.previewPdf()
-      if (response.status === '01799') {
-        PublicService.showAPIMsg(response.message)
-        return
-      }
-      if (response.status === 200) {
-        const blob = new Blob([response.data], { type: 'application/pdf' })
-        const link = document.createElement('a')
-        link.href = window.URL.createObjectURL(blob)
-        link.download = response.headers['content-disposition'].split(';')[1].split('=')[1]
-        // link.download = `test.pdf`
-        link.click()
       }
     }
   },

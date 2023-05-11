@@ -1,7 +1,7 @@
 <template>
-  <div class="position-fixed w-100 h-100 d-flex justify-content-center align-items-center" style="background:rgba(60,60,60,0.8);z-index:1000" v-if="$store.state.isLoading">
-    <img src="@/assets/images/ajaxDog.gif" alt="">
-  </div>
+    <div class="position-fixed w-100 h-100 d-flex justify-content-center align-items-center" style="background:rgba(120,120,120,0.8);z-index:1000" v-if="$store.state.isLoading">
+      <img src="@/assets/images/ajaxDog.gif" alt="">
+    </div>
   <Header></Header>
   <router-view/>
   <Footer></Footer>
@@ -106,6 +106,31 @@ export default {
   }
   input [type="text"]{
       font-family: "RobotoSlab",ubFont;
+  }
+  .v-leave {
+    opacity: 1;
+  }
+  .v-leave-active {
+    transition: opacity 0.8s;
+  }
+  .v-leave-to {
+    opacity: 0.4;
+  }
+  .v-enter {
+    opacity: 0.4;
+  }
+  .v-enter-active {
+    transition: opacity 0.8s;
+  }
+  .v-enter-to {
+    opacity: 1;
+  }
+  /* .modal-content-bg {
+    background-color:rgba(60,60,60,0.2) !important;
+  } */
+
+  .modal-backdrop {
+    background-color:rgba(120,120,120,0.8) !important;
   }
 
 </style>

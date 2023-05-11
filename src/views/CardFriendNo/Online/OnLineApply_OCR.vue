@@ -796,8 +796,8 @@ export default {
     // this.makeModify()
     this.CroppieModal = new this.$custom.bootstrap.Modal(this.$refs.CroppieModal, { backdrop: 'static' })
     // *進場先跳範例提醒
-    this.NoticeModal = new this.$custom.bootstrap.Modal(this.$refs.NoticeModal)
-    this.NoticeModal2 = new this.$custom.bootstrap.Modal(this.$refs.NoticeModa2)
+    this.NoticeModal = new this.$custom.bootstrap.Modal(this.$refs.NoticeModal, { backdrop: 'static' })
+    this.NoticeModal2 = new this.$custom.bootstrap.Modal(this.$refs.NoticeModa2, { backdrop: 'static' })
     this.ImageLimit = new this.$custom.bootstrap.Modal(this.$refs.ImageLimit)
     this.APIModal = new this.$custom.bootstrap.Modal(this.$refs.APIModal)
     this.NoticeModal.show()

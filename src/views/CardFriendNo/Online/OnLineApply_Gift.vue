@@ -127,7 +127,7 @@ export default ({
           if (res.data.message) {
             setTimeout(() => {
               this.$router.push('/OnLineApply_OCR')
-            }, 1000)
+            }, 500)
           }
         } else {
           if (res.data.message) {
