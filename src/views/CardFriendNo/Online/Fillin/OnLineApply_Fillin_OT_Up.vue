@@ -618,12 +618,12 @@ export default {
         this.ImageLimit.show()
       } else {
         this.imgTemplateUrl = URL.createObjectURL(file)
-        this.makeModify(this.num)
+        this.makeModify(file.size)
       }
       // ? 清空value
       // this.clearFiles(this.num)
     },
-    async makeModify () {
+    async makeModify (fileSize) {
       // ?呼叫modal準備呈現
       this.CroppieModal.show()
       setTimeout(async () => {
@@ -631,14 +631,15 @@ export default {
         try {
         // ?要呈現畫面的區域(在modal上)
           const croppieE = this.$refs.myIdentifident
+          this[`identitiyPack${this.num}`].fileSize = fileSize
           this[`identitiyPack${this.num}`].preViewImg = new this.$custom.Croppie(croppieE, {
             viewport: {
-              width: imgTemplate.clientWidth * 0.8,
-              height: imgTemplate.clientHeight * 0.8
-            },
-            boundary: {
               width: imgTemplate.clientWidth,
               height: imgTemplate.clientHeight
+            },
+            boundary: {
+              width: imgTemplate.clientWidth + 20,
+              height: imgTemplate.clientHeight + 20
             },
             showZoomer: true,
             enableResize: true,
@@ -668,9 +669,16 @@ export default {
         size: 'original',
         format: 'png'
       })
+      // ? 檔案大小超過 1MB 則壓縮
+      let imgQuality = 1
+      const compressSizeLimit = 1 * 1024 * 1024
+      if (this[`identitiyPack${this.num}`].fileSize > compressSizeLimit) {
+        imgQuality = 0.3
+      }
+      // ? 檔案大小超過 1MB 則壓縮 end
       const base64Compression = await this[`identitiyPack${this.num}`].preViewImg.result({
         type: 'canvas',
-        quality: 0.3,
+        quality: imgQuality,
         format: 'jpeg',
         size: 'original'
       })
