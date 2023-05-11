@@ -23,7 +23,7 @@
               <ul class="formList formApply">
                 <li class="col-12 mb-2 formId">
                   <label for="">申請人身分證字號</label>
-                  <div class="form-text">{{OnlineApply_y_Data.id}}</div>
+                  <input style="outline:none;caret-color: transparent;" class="form-text" :value="OnlineApply_y_Data.id" />
                 </li>
                 <li class="col-12">
                   <label for=""></label>
@@ -31,7 +31,7 @@
                 </li>
                 <li class="col-12">
                   <label for="input1">西元出生年月日</label>
-                  <div class="form-text">{{OnlineApply_y_Data.brthyy}}/{{OnlineApply_y_Data.brthMM}}/{{OnlineApply_y_Data.brthdd}}</div>
+                  <input style="outline:none;caret-color: transparent;" class="form-text" :value="birthDay" />
                 </li>
               </ul>
             </div>
@@ -123,7 +123,7 @@
                       rules="required"
                       :class="{ 'is-invalid': errors['年'] || errors['月'] || errors['日'] }"
                       class="form-select form-control"
-                      :validateOnChange="true"
+                      :validateOnBlur="true"
                       v-model="OnlineApply_y_Data.brthdd"
                       >
                       <option value="" selected>--</option>
@@ -361,6 +361,9 @@ export default {
         options.push({ label: `${i}`, value: i })
       }
       return options
+    },
+    birthDay () {
+      return `${this.OnlineApply_y_Data.brthyy}/${this.OnlineApply_y_Data.brthMM}/${this.OnlineApply_y_Data.brthdd}`
     }
   },
 
@@ -676,15 +679,15 @@ export default {
     } else {
       this.schema = {
         申請人身分證字號: 'required|checkIdandLive',
-        年: 'customBirthVaild',
-        月: 'customBirthVaild',
+        年: '',
+        月: '',
         日: 'customBirthVaild',
         申請的信用卡: 'required',
         有關條款: 'customAgreeTerms'
       }
     }
     defineRule('customBirthVaild', value => {
-      if (this.OnlineApply_y_Data.brthyy === '' || this.OnlineApply_y_Data.brthMM === '' || this.OnlineApply_y_Data.brthdd === '') {
+      if (this.OnlineApply_y_Data.brthdd === '') {
         return '出生年月日為必填'
       } else if (!this.isOver18(this.OnlineApply_y_Data.brthyy, this.OnlineApply_y_Data.brthMM, this.OnlineApply_y_Data.brthdd)) {
         return ''
