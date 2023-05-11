@@ -130,6 +130,14 @@ const service = {
     store.commit('setAPIMsg', APIMsg)
     store.state.apiModal.show()
   },
+  async CardFormPreview () {
+    try {
+      const url = `${process.env.VUE_APP_BASE_API}/CardFormPreview/Preview`
+      const res = await axios.get(url)
+      return res.data.result
+    } catch (err) {
+    }
+  },
   async createPdf () {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/CardFromPDF/CreatePDF`
