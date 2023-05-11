@@ -471,7 +471,7 @@ export default {
     const res = await ServiceN.otherDepositorPageLoad()
     const data = res.data.result
     sessionStorage.setItem('Apply_N_Type', 'Online')
-    console.log(data)
+    console.log(this.$refs.myForm)
     this.brthDt = data.brthDt
     this.oid = data.oid
     this.termsFile = data.termsList
