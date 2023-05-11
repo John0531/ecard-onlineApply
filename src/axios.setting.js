@@ -14,7 +14,7 @@ axios.interceptors.request.use(
     }
     // ? 地址 api 不顯示 Loading 動畫
     // ? 首刷禮API回覆過快 不顯示 Loading 動畫
-    if (!config.url.includes('MW3') && !config.url.includes('FirstGift')) {
+    if (!config.url.includes('MW3') && !config.url.includes('FirstGift') && !config.url.includes('Otp/Check')) {
       store.commit('changeLoading', true)
     }
     return config

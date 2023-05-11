@@ -82,16 +82,10 @@ export default {
   methods: {
     async newNewBankChk () {
       const res = await ServiceN.newNewBankChk()
-      if (res.status === 200) {
-        console.log(res)
-        // if (res.data.message) {
-        //   PublicService.showAPIMsg(res.data.message)
-        // }
-        if (res.data.status === '00900') {
-          setTimeout(() => {
-            this.$router.push('/dspApplicationNNB_Apply')
-          }, 1000)
-        }
+      if (res.data.status === '00900') {
+        setTimeout(() => {
+          this.$router.push('/dspApplicationNNB_Apply')
+        }, 1000)
       }
     }
   },
