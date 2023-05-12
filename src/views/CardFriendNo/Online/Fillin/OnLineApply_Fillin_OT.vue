@@ -270,7 +270,7 @@
                     runat="server"
                     class="form-select form-control"
                   >
-                    <option :value="0">-----</option>
+                    <option :value="''">-----</option>
                     <option v-for="item in eduLevelList" :key="item.value" :value="item.value">{{item.name}}</option>
                   </Field>
                 </li>
@@ -1420,7 +1420,7 @@ export default {
       pageLoad: {},
       Apply_N_Type: sessionStorage.getItem('Apply_N_Type'),
       selectJson: JSON.parse(localStorage.getItem('SELECT_JSON')),
-      eduLevelList: [{ name: '博士', value: 1 }, { name: '碩士', value: 2 }, { name: '大學', value: 3 }, { name: '專科', value: 4 }, { name: '高中高職', value: 5 }, { name: '其他', value: 6 }],
+      eduLevelList: [{ name: '博士', value: '1' }, { name: '碩士', value: '2' }, { name: '大學', value: '3' }, { name: '專科', value: '4' }, { name: '高中高職', value: '5' }, { name: '其他', value: '6' }],
       Form: {
         id: '',
         iddate: {
@@ -1441,7 +1441,7 @@ export default {
         },
         nationalityKey: '',
         nationality: '',
-        eduLevelKey: 0,
+        eduLevelKey: '',
         eduLevel: '',
         homeZIP: '',
         homeAddr: new Address(),
