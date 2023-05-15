@@ -72,10 +72,10 @@ const service = {
   async getYesGo () {
     try {
       const url = `${process.env.VUE_APP_STATIC}/includeBlock/yesgogogo.html`
-      const res = await axios.get(url, { withCredentials: false })
+      const safeHtml = await axios.get(url, { withCredentials: false })
       // 將回應的HTML轉換為DOM物件
       var parser = new DOMParser()
-      var htmlDoc = parser.parseFromString(res.data, 'text/html')
+      var htmlDoc = parser.parseFromString(safeHtml.split('&lt;/head&gt;')[1], 'text/html')
 
       // 使用querySelector選擇元素
       var element = htmlDoc.querySelector('.yesgogogo_box')
