@@ -59,7 +59,7 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_STATIC}/includeBlock/yesgogogo.html`
       const res = await axios.get(url, { withCredentials: false })
-      const cleanHTML = res.data.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+      const cleanHTML = res.data.toString().replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
       // 將回應的HTML轉換為DOM物件
       var parser = new DOMParser()
       var htmlDoc = parser.parseFromString(cleanHTML, 'text/html')
@@ -76,7 +76,7 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_STATIC}/html/CardDetail/cardDetail601.htm`
       const res = await axios.get(url, { withCredentials: false })
-      const cleanHTML = res.data.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+      const cleanHTML = res.data.toString().replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
       console.log(res)
       // 將回應的HTML轉換為DOM物件
       const parser = new DOMParser()
