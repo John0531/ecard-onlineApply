@@ -67,7 +67,6 @@
                       :class="{ 'is-invalid': errors['推廣單位代號'],'form-control':true, 'form-text':onLineApply_Fillin_Data.unitCode,'is-hasval-input':onLineApply_Fillin_Data.unitCode}"
                       v-model="onLineApply_Fillin_Data.unitCode"
                       :validateOnInput="true"
-                      :readonly="onLineApply_Fillin_Data.unitCode!==''"
                       ></Field>
                       <div>
                         <span v-if="errors['推廣單位代號']" class="field-error">{{errors['推廣單位代號']}}</span>
