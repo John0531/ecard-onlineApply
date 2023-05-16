@@ -54,31 +54,36 @@ const service = {
       console.log(err)
     }
   },
-  async getYearFee () {
+  //* yesgogogo
+  async getYesGo () {
     try {
-      const url = `${process.env.VUE_APP_STATIC}/html/CardDetail/cardDetail601.htm`
-      const safeHtml = await axios.get(url, { withCredentials: false })
+      const url = `${process.env.VUE_APP_STATIC}/includeBlock/yesgogogo.html`
+      const res = await axios.get(url, { withCredentials: false })
+      const cleanHTML = res.data.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
       // 將回應的HTML轉換為DOM物件
       var parser = new DOMParser()
-      var htmlDoc = parser.parseFromString(safeHtml.split('&lt;/head&gt;')[1], 'text/html')
+      var htmlDoc = parser.parseFromString(cleanHTML, 'text/html')
 
       // 使用querySelector選擇元素
-      var element = htmlDoc.querySelector('.cardDetail_fee')
+      var element = htmlDoc.querySelector('.yesgogogo_box')
       return element.outerHTML
     } catch (err) {
       console.log(err)
     }
   },
-  async getYesGo () {
+  //* 年費政策
+  async getYearFee () {
     try {
-      const url = `${process.env.VUE_APP_STATIC}/includeBlock/yesgogogo.html`
-      const safeHtml = await axios.get(url, { withCredentials: false })
+      const url = `${process.env.VUE_APP_STATIC}/html/CardDetail/cardDetail601.htm`
+      const res = await axios.get(url, { withCredentials: false })
+      const cleanHTML = res.data.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+      console.log(res)
       // 將回應的HTML轉換為DOM物件
-      var parser = new DOMParser()
-      var htmlDoc = parser.parseFromString(safeHtml.split('&lt;/head&gt;')[1], 'text/html')
-
+      const parser = new DOMParser()
+      const htmlDoc = parser.parseFromString(cleanHTML, 'text/html')
+      console.log(res)
       // 使用querySelector選擇元素
-      var element = htmlDoc.querySelector('.yesgogogo_box')
+      var element = htmlDoc.querySelector('.cardDetail_fee')
       return element.outerHTML
     } catch (err) {
       console.log(err)
