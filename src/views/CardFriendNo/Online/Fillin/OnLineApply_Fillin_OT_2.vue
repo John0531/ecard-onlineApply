@@ -594,7 +594,7 @@ export default {
       }
       this.FillinData.term.autoBonus = !this.FillinData.term.autoBonus
       // ? 回塞 sessionStorage
-      const sessionData = JSON.parse(sessionStorage.getItem('FillinData'))
+      /* const sessionData = JSON.parse(sessionStorage.getItem('FillinData'))
       const fillinData = JSON.parse(JSON.stringify(this.FillinData))
       sessionData.OT = {
         brthDt: fillinData.brthDt,
@@ -624,7 +624,7 @@ export default {
       sessionData.OT_1 = {
         ...fillinData.term
       }
-      sessionStorage.setItem('FillinData', JSON.stringify(sessionData))
+      sessionStorage.setItem('FillinData', JSON.stringify(sessionData)) */
       // ? 回塞 sessionStorage end
     },
     async nextPage () {
