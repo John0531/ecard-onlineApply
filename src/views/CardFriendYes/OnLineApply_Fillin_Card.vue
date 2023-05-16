@@ -356,7 +356,7 @@ export default {
     },
     'onLineApply_Fillin_Card.birthplaceKey': {
       handler (n, o) {
-        if (n !== '其他') {
+        if (n !== '其它') {
           this.onLineApply_Fillin_Card.birthOtherKey = ''
           this.onLineApply_Fillin_Card.birthOther = ''
         }
@@ -396,8 +396,6 @@ export default {
       if (this.onLineApply_Fillin_Card.birthOther === '-----') {
         this.onLineApply_Fillin_Card.birthOther = ''
       }
-
-      // console.log(this.onLineApply_Fillin_Card)
 
       const response = await serviceY.postKYC(this.onLineApply_Fillin_Card)
       const { status } = response
@@ -440,7 +438,7 @@ export default {
           }
           this.onLineApply_Fillin_Card.nationalityKey = result.nationality
           this.onLineApply_Fillin_Card.jobTypeKey = result.jobType
-          if (result.jobType === '5') {
+          if (result.jobType === '0') {
             this.onLineApply_Fillin_Card.jobOther = result.jobOther
           }
           this.onLineApply_Fillin_Card.jobLVKey = result.jobLV

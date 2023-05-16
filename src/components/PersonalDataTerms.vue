@@ -406,8 +406,19 @@ export default {
           sessionStorage.setItem('FillinData', JSON.stringify(FillinData))
           this.$router.push('/OnLineApply_Fillin_OT_2')
         } else if (this.$route.name === '卡友-個資使用條款') {
-          const result = await PublicService.createPdf()
           if (result) {
+            const FillinData = {}
+            FillinData.OT_1 = {
+              ...this.Form
+            }
+            FillinData.OT_1_Flag = {
+              flgLine: this.flgLine
+            }
+            FillinData.OT_1_TermsContent = {
+              consent: this.consent,
+              ticketInfo: this.ticketInfo
+            }
+            sessionStorage.setItem('FillinData', JSON.stringify(FillinData))
             this.$router.push('/OnLineApply_Fillin_Download')
           }
         }
