@@ -230,7 +230,7 @@
                     <p v-if="FillinData.form.isStudent==='false'">否</p>
                   </div>
                 </li>
-                <template v-if="FillinData.form.isStudent">
+                <template v-if="FillinData.form.isStudent==='true'">
                   <li>
                     <div class="label_confirm">
                       <span class="red_text">* </span>家長姓名
