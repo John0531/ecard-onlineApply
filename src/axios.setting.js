@@ -10,7 +10,7 @@ axios.interceptors.request.use(
   config => {
     const TK = sessionStorage.getItem('accessTK')
     if (TK && !config.url.includes('terms.json') && !config.url.includes('.html') && !config.url.includes('Utility.json') && !config.url.includes('MW3')) {
-      config.headers.ecard = `Bearer ${TK}`
+      config.headers.ecard = TK
     }
     // ? 地址 api 不顯示 Loading 動畫
     // ? 首刷禮API回覆過快 不顯示 Loading 動畫
