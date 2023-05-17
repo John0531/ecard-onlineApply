@@ -142,39 +142,6 @@ const routes = [
           title: '非卡友線上申請'
         }
       },
-      // ? 非卡友-書面
-      {
-        path: '/OnLineApply_Written',
-        name: '申請資料填寫',
-        component: () => import('../views/CardFriendNo/Written/OnLineApply_Written.vue'),
-        meta: {
-          title: '申請資料填寫'
-        }
-      },
-      {
-        path: '/OnLineApply_Written_1',
-        name: '職業資料',
-        component: () => import('../views/CardFriendNo/Written/OnLineApply_Written_1.vue'),
-        meta: {
-          title: '職業資料'
-        }
-      },
-      {
-        path: '/OnLineApply_Written_2',
-        name: '個資使用條款',
-        component: () => import('../views/CardFriendNo/Written/OnLineApply_Written_2.vue'),
-        meta: {
-          title: '個資使用條款'
-        }
-      },
-      {
-        path: '/OnLineApply_Written_3',
-        name: '確認填寫資料',
-        component: () => import('../views/CardFriendNo/Written/OnLineApply_Written_3.vue'),
-        meta: {
-          title: '確認填寫資料'
-        }
-      },
       // ? 非卡友-線上-存戶
       {
         path: '/OnLineApply_Chks',
