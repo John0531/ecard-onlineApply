@@ -185,7 +185,6 @@
                     <p>{{FillinData.userCode}}</p>
                   </div>
                 </li>
-                <!-- <li v-if="FillinDataFlag.flgAmwayNo==='Y'"> -->
                 <li>
                   <div class="label_confirm">
                     <span class="red_text">* </span>安麗直銷商/會員編號
@@ -401,7 +400,6 @@ export default {
   methods: {
     async pageLoad () {
       this.FillinData = await service.fillin_OT2_PageLoad()
-      console.log(this.FillinData)
     },
     async onSubmit () {
       const result = await PublicService.createPdf()
