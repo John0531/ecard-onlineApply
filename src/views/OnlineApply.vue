@@ -565,7 +565,20 @@ export default {
       return age >= 18
     },
     async init () {
-      sessionStorage.setItem('OnlineApplyRouteInfo', JSON.stringify(this.$route))
+      const filteredObject = (obj) => {
+        const seen = new WeakSet()
+        return JSON.stringify(obj, function (key, value) {
+          if (typeof value === 'object' && value !== null) {
+            if (seen.has(value)) {
+              return // 遇到循環參照的物件，返回 undefined
+            }
+            seen.add(value)
+          }
+          return value
+        })
+      }
+      const serializedData = filteredObject(this.$route)
+      sessionStorage.setItem('OnlineApplyRouteInfo', serializedData)
       const { parm, GID, IDE, PJN, UTC, USC } = this.$route.query
       if (this.isLineBank) {
         const linkCard = await serviceY.cardApplyLoad_PageLoad_LB(GID, IDE, parm, PJN)
