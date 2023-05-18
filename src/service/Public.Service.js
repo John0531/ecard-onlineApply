@@ -61,14 +61,24 @@ const service = {
       const url = `${process.env.VUE_APP_STATIC}/includeBlock/yesgogogo.html`
       const res = await axios.get(url, { withCredentials: false })
       const cleanHTML = DOMPurify.sanitize(res.data)
-
-      // 將回應的HTML轉換為DOM物件
+      // 将回应的HTML转换为DOM对象
       var parser = new DOMParser()
       var htmlDoc = parser.parseFromString(cleanHTML, 'text/html')
-
-      // 使用querySelector選擇元素
+      // 使用querySelector选择元素
       var element = htmlDoc.querySelector('.yesgogogo_box')
-      return element.outerHTML
+      // 创建一个新的div元素
+      var div = document.createElement('div')
+      // 将原始元素的内容复制到新的div元素中
+      div.innerHTML = element.outerHTML
+      // 将新的div元素插入到文档中，以便应用相关的CSS样式
+      document.body.appendChild(div)
+      // 提取带有应用的CSS样式的元素内容
+      var contentWithStyles = div.innerHTML
+      // 输出提取到的带有CSS样式的元素内容
+      console.log(contentWithStyles)
+      // 在完成后，从文档中移除新的div元素
+      document.body.removeChild(div)
+      return contentWithStyles
     } catch (err) {
       console.log(err)
     }
@@ -79,14 +89,24 @@ const service = {
       const url = `${process.env.VUE_APP_STATIC}/html/CardDetail/cardDetail601.htm`
       const res = await axios.get(url, { withCredentials: false })
       const cleanHTML = DOMPurify.sanitize(res.data)
-      console.log(res)
-      // 將回應的HTML轉換為DOM物件
+      // 将回应的HTML转换为DOM对象
       const parser = new DOMParser()
       const htmlDoc = parser.parseFromString(cleanHTML, 'text/html')
-      console.log(res)
-      // 使用querySelector選擇元素
-      var element = htmlDoc.querySelector('.cardDetail_fee')
-      return element.outerHTML
+      // 使用querySelector选择元素
+      const element = htmlDoc.querySelector('.cardDetail_fee')
+      // 创建一个新的<div>元素
+      const div = document.createElement('div')
+      // 将原始元素的内容复制到新的<div>元素中
+      div.innerHTML = element.outerHTML
+      // 将新的<div>元素插入到文档中，以便应用相关的CSS样式
+      document.body.appendChild(div)
+      // 提取带有应用的CSS样式的元素内容
+      const contentWithStyles = div.innerHTML
+      // 输出提取到的带有CSS样式的元素内容
+      console.log(contentWithStyles)
+      // 在完成后，从文档中移除新的<div>元素
+      document.body.removeChild(div)
+      return contentWithStyles
     } catch (err) {
       console.log(err)
     }
