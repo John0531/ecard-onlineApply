@@ -630,34 +630,7 @@ export default {
     async nextPage () {
       const result = await PublicService.createPdf()
       if (result) {
-        if (!this.FillinData.financialStatement) {
-          const res = await PublicService.CardSendApply({})
-          // ?session全部清掉
-          sessionStorage.clear()
-          if (res.data.status === '00800') {
-            // ? ===選擇自行上傳===
-            // ?未來卡成功
-            setTimeout(() => {
-              this.$router.push('/OnLineApply_Fillin_OT_finish')
-            }, 1000)
-          }
-          if (res.data.status === '00801') {
-            // ? ===選擇自行上傳===
-            // ?顯示NNB畫面
-            setTimeout(() => {
-              this.$router.push('/dspApplicationNNB')
-            }, 1000)
-          }
-          if (res.data.status === '00802') {
-            // ? ===選擇MyData上傳===
-            // ?讀取result內的URL轉導MyData上傳財力
-            this.url = res.data.result.MyDataUrl
-            setTimeout(() => {
-              window.open(this.url, '_blank')
-            }, 1000)
-          }
-          return
-        }
+        sessionStorage.setItem('FinancialStatement', this.FillinData.financialStatement)
         this.$router.push('/OnLineApply_Fillin_OT_Up')
       }
     }

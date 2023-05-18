@@ -30,6 +30,11 @@ export default createStore({
     }
   },
   actions: {
+    clearSession () {
+      const TK = sessionStorage.getItem('accessTK')
+      sessionStorage.clear()
+      sessionStorage.setItem('accessTK', TK)
+    }
   },
   modules: {
   }

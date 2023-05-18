@@ -733,11 +733,10 @@ export default {
         const res = await PublicService.CardSendApply(this.form)
         PublicService.showAPIMsg(res.data.message)
         if (res.status === 200) {
+          this.$store.dispatch('clearSession')
           if (res.data.status === '00800') {
             // ? ===選擇自行上傳===
             // ?未來卡成功
-            // ?session全部清掉
-            sessionStorage.clear()
             setTimeout(() => {
               this.$router.push('/OnLineApply_Fillin_OT_finish')
             }, 1000)
@@ -746,11 +745,6 @@ export default {
           if (res.data.status === '00801') {
             // ? ===選擇自行上傳===
             // ?顯示NNB畫面
-            const tk = sessionStorage.getItem('accessTK')
-            // ?清除個資
-            sessionStorage.clear()
-            // ?留存token
-            sessionStorage.setItem('accessTK', tk)
             setTimeout(() => {
               this.$router.push('/dspApplicationNNB')
             }, 1000)
@@ -759,8 +753,6 @@ export default {
           if (res.data.status === '00802') {
             // ? ===選擇MyData上傳===
             // ?讀取result內的URL轉導MyData上傳財力
-            // ?session全部清掉
-            sessionStorage.clear()
             this.url = res.data.result.MyDataUrl
             setTimeout(() => {
               window.open(this.url, '_blank')
