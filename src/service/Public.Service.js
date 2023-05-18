@@ -2,7 +2,7 @@ import axios from 'axios'
 import { hash } from '@/utilities/hash.js'
 // import termsJson from '@/assets/terms.json'
 import store from '@/store'
-import DOMPurify from 'dompurify'
+// import DOMPurify from 'dompurify'
 
 const service = {
   async getJson () {
@@ -60,15 +60,11 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_STATIC}/includeBlock/yesgogogo.html`
       const res = await axios.get(url, { withCredentials: false })
-      const cleanHTML = DOMPurify.sanitize(res.data)
-
-      // 將回應的HTML轉換為DOM物件
-      var parser = new DOMParser()
-      var htmlDoc = parser.parseFromString(cleanHTML, 'text/html')
-
-      // 使用querySelector選擇元素
-      var element = htmlDoc.querySelector('.yesgogogo_box')
-      return element.outerHTML
+      const safeHtml = res.data.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
+      console.log(safeHtml)
+      const parser = new DOMParser()
+      const doc = parser.parseFromString(safeHtml, 'text/html')
+      return doc.body.innerText
     } catch (err) {
       console.log(err)
     }
@@ -78,7 +74,7 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_STATIC}/html/CardDetail/cardDetail601.htm`
       const res = await axios.get(url, { withCredentials: false })
-      const cleanHTML = DOMPurify.sanitize(res.data)
+      const cleanHTML = res.data.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
       console.log(res)
       // 將回應的HTML轉換為DOM物件
       const parser = new DOMParser()
