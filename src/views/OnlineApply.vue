@@ -565,6 +565,7 @@ export default {
       return age >= 18
     },
     async init () {
+      sessionStorage.setItem('OnlineApplyRouteInfo', JSON.stringify(this.$route))
       const { parm, GID, IDE, PJN, UTC, USC } = this.$route.query
       if (this.isLineBank) {
         const linkCard = await serviceY.cardApplyLoad_PageLoad_LB(GID, IDE, parm, PJN)
