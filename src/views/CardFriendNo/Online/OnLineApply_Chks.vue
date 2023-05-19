@@ -92,11 +92,10 @@
               <div class="terms">
                   <Field
                     v-model="checkagree"
-                    id="agree1" name="信用卡基本資料使用同意"
+                    id="checkbox2" name="信用卡基本資料使用同意"
                     type="checkbox"
                     class=" checkimg position-absolute"
                     :class="{ 'is-invalid': errors['信用卡基本資料使用同意'] }"
-                    @click="toggle"
                     value="agree"
                     rules="required"
                   />
@@ -256,35 +255,6 @@ export default {
       ck.checked = true
       this.agreeModal.hide()
     },
-    // //  ? 手機驗證碼
-    // async getMobileMsgCode () {
-    //   // this.isLoading = true
-    //   const time = new Date()
-    //   const getTimer = time.getTime()
-    //   //* 一天的時間(86400)
-    //   time.setTime(getTimer + 1000 * (86400 - 100))
-    //   //* 有成功打入API才算
-    //   const res = await PublicService.otpGet()
-    //   if (res.status === 200) {
-    //     PublicService.showAPIMsg(res.data.message)
-    //     //* 驗證碼倒數計時
-    //     this.count = 30
-    //     this.show = false
-    //     //* 鎖發送
-    //     const btn = document.querySelector('#countBtn')
-    //     btn.setAttribute('disabled', '')
-    //     //* 計時
-    //     this.timer = setInterval(() => {
-    //       if (this.count > 0 && this.count <= 30) {
-    //         this.count--
-    //       } else {
-    //         this.show = true
-    //         clearInterval(this.timer)
-    //         this.timer = null
-    //       }
-    //     }, 1000)
-    //   }
-    // },
     // ? 檢核驗證碼
     async applySubmit () {
       this.$refs.myForm.setErrors({})

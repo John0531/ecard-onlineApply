@@ -710,66 +710,65 @@ export default {
       this.$router.push('/dspApplicationNNB')
     },
     async submitSuitCase () {
-      this.$refs.myForm.setErrors({})
-      this.checkIsPics()
-      this.checkdoubleAgree()
-      await this.$refs.myForm.validateField('財力證明')
-      // const collection = await this.$refs.myForm.validate()
-      const errors = await this.$refs.myForm.getErrors()
-      console.log(errors)
-      if (Object.keys(errors).length === 0) {
-        // ** ===全部通過打API才前往下一頁===
-        // ** ===整理資料===
-        if (this.proofType === 'option2') {
-          this.form.isMydata = true
-        }
-        if (this.proofType === 'option1') {
-          this.form.isMydata = false
-          this.form.upload1 = this.identitiyPack1.file.split(',')[1]
-          this.form.upload2 = this.identitiyPack2.file.split(',')[1]
-          this.form.upload3 = this.identitiyPack3.file.split(',')[1]
-          this.form.upload4 = this.identitiyPack4.file.split(',')[1]
-        }
-        const res = await PublicService.CardSendApply(this.form)
-        PublicService.showAPIMsg(res.data.message)
-        if (res.status === 200) {
-          if (res.data.status === '00800') {
-            // ? ===選擇自行上傳===
-            // ?未來卡成功
-            // ?session全部清掉
-            sessionStorage.clear()
-            setTimeout(() => {
-              this.$router.push('/OnLineApply_Fillin_OT_finish')
-            }, 1000)
-            return
+      if (sessionStorage.getItem('FinancialStatement')) {
+        this.$refs.myForm.setErrors({})
+        this.checkIsPics()
+        this.checkdoubleAgree()
+        await this.$refs.myForm.validateField('財力證明')
+        // const collection = await this.$refs.myForm.validate()
+        const errors = await this.$refs.myForm.getErrors()
+        console.log(errors)
+        if (Object.keys(errors).length === 0) {
+          // ** ===全部通過打API才前往下一頁===
+          // ** ===整理資料===
+          if (this.proofType === 'option2') {
+            this.form.isMydata = true
           }
-          if (res.data.status === '00801') {
-            // ? ===選擇自行上傳===
-            // ?顯示NNB畫面
-            const tk = sessionStorage.getItem('accessTK')
-            // ?清除個資
-            sessionStorage.clear()
-            // ?留存token
-            sessionStorage.setItem('accessTK', tk)
-            setTimeout(() => {
-              this.$router.push('/dspApplicationNNB')
-            }, 1000)
-            return
+          if (this.proofType === 'option1') {
+            this.form.isMydata = false
+            this.form.upload1 = this.identitiyPack1.file.split(',')[1]
+            this.form.upload2 = this.identitiyPack2.file.split(',')[1]
+            this.form.upload3 = this.identitiyPack3.file.split(',')[1]
+            this.form.upload4 = this.identitiyPack4.file.split(',')[1]
           }
-          if (res.data.status === '00802') {
-            // ? ===選擇MyData上傳===
-            // ?讀取result內的URL轉導MyData上傳財力
-            // ?session全部清掉
-            sessionStorage.clear()
-            this.url = res.data.result.MyDataUrl
-            setTimeout(() => {
-              window.open(this.url, '_blank')
-            }, 1000)
+          const res = await PublicService.CardSendApply(this.form)
+          PublicService.showAPIMsg(res.data.message)
+          if (res.status === 200) {
+            this.$store.dispatch('clearSession')
+            if (res.data.status === '00800') {
+              // ? ===選擇自行上傳===
+              // ?未來卡成功
+              setTimeout(() => {
+                this.$router.push('/OnLineApply_Fillin_OT_finish')
+              }, 1000)
+              return
+            }
+            if (res.data.status === '00801') {
+              // ? ===選擇自行上傳===
+              // ?顯示NNB畫面
+              setTimeout(() => {
+                this.$router.push('/dspApplicationNNB')
+              }, 1000)
+              return
+            }
+            if (res.data.status === '00802') {
+              // ? ===選擇MyData上傳===
+              // ?讀取result內的URL轉導MyData上傳財力
+              this.url = res.data.result.MyDataUrl
+              setTimeout(() => {
+                window.open(this.url, '_blank')
+              }, 1000)
+            }
           }
+        } else {
+          // ** ===錯誤訊息彙整===
+          this.$custom.validate.showErrors(errors)
         }
       } else {
-        // ** ===錯誤訊息彙整===
-        this.$custom.validate.showErrors(errors)
+        // ? 無須提供財力證明
+        setTimeout(() => {
+          this.$router.push('/OnLineApply_Fillin_OT_finish')
+        }, 1000)
       }
     },
     goToMyDataTerms () {
