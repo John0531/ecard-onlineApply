@@ -710,7 +710,7 @@ export default {
       this.$router.push('/dspApplicationNNB')
     },
     async submitSuitCase () {
-      if (sessionStorage.getItem('FinancialStatement')) {
+      if (sessionStorage.getItem('FinancialStatement') === 'true') {
         this.$refs.myForm.setErrors({})
         this.checkIsPics()
         this.checkdoubleAgree()
