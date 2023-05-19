@@ -130,7 +130,6 @@
                 </li>
                 <li>
                   <div class="label_confirm">
-                    <span class="red_text">* </span>
                     申請數位卡
                   </div>
                   <div class="input-data_confirm">
@@ -185,12 +184,12 @@
                     <p>{{FillinData.userCode}}</p>
                   </div>
                 </li>
-                <li>
+                <li v-if="FillinData.amwayNo === 'Y'">
                   <div class="label_confirm">
                     <span class="red_text">* </span>安麗直銷商/會員編號
                   </div>
                   <div class="input-data_confirm">
-                    <p>{{FillinData.amwayNo}}</p>
+                    <p>{{}}</p>
                   </div>
                 </li>
               </ul>
@@ -287,9 +286,6 @@
               <!-- API 回傳 -->
               <span v-html="ticketInfo" class="red_text" style="white-space:pre-line;"></span>
               <!-- API 回傳 -->
-            </div>
-            <div class="card-body pt-0">
-              <span v-html="ticketInfo" class="red_text" style="white-space:pre-line;"></span>
             </div>
           </div>
         </div>
@@ -407,17 +403,15 @@ export default {
         try {
           const response = await PublicService.CardSendApply(this.request)
           const { status, result } = response.data
+          this.$store.dispatch('clearSession')
           switch (status) {
             case '00800' :
-              sessionStorage.clear()
               this.$router.push('/OnLineApply_Fillin_Finish')
               break
             case '00801' :
-              sessionStorage.clear()
               this.$router.push('/dspApplicationNNB')
               break
             case '00802' :
-              sessionStorage.clear()
               window.open(result.MyDataUrl, '_blank')
               break
             default:
