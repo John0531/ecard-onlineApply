@@ -60,11 +60,14 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_STATIC}/includeBlock/yesgogogo.html`
       const res = await axios.get(url, { withCredentials: false })
-      const safeHtml = res.data.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
-      console.log(safeHtml)
-      const parser = new DOMParser()
-      const doc = parser.parseFromString(safeHtml, 'text/html')
-      return doc.body.innerText
+      const cleanHTML = res.data.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
+
+      // 將回應的HTML轉換為DOM物件
+      var parser = new DOMParser()
+
+      // 使用querySelector選擇元素
+      var element = parser.parseFromString(cleanHTML, 'text/html')
+      return element.body.innerText
     } catch (err) {
       console.log(err)
     }

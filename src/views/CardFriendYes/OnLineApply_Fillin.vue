@@ -445,14 +445,15 @@ export default {
     isEditUserCode () {
       const onlineApplyRouteInfo = JSON.parse(sessionStorage.getItem('OnlineApplyRouteInfo'))
       const { USC } = onlineApplyRouteInfo.query
-      const reuslt = Boolean(this.onLineApply_Fillin_Data.userCode && USC)
-      return reuslt
+      const result = Boolean(this.onLineApply_Fillin_Data.userCode && USC)
+      console.log(result)
+      return result
     },
     isEditUnitCode () {
       const onlineApplyRouteInfo = JSON.parse(sessionStorage.getItem('OnlineApplyRouteInfo'))
       const { UTC } = onlineApplyRouteInfo.query
-      const reuslt = Boolean(this.onLineApply_Fillin_Data.unitCode && UTC)
-      return reuslt
+      const result = Boolean(this.onLineApply_Fillin_Data.unitCode && UTC)
+      return result
     }
   },
   watch: {
