@@ -92,11 +92,10 @@
               <div class="terms">
                   <Field
                     v-model="checkagree"
-                    id="agree1" name="信用卡基本資料使用同意"
+                    id="checkbox2" name="信用卡基本資料使用同意"
                     type="checkbox"
                     class=" checkimg position-absolute"
                     :class="{ 'is-invalid': errors['信用卡基本資料使用同意'] }"
-                    @click="toggle"
                     value="agree"
                     rules="required"
                   />

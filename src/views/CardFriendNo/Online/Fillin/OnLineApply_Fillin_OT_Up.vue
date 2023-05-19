@@ -711,11 +711,6 @@ export default {
     },
     async submitSuitCase () {
       if (sessionStorage.getItem('FinancialStatement')) {
-        // ? 無須提供財力證明
-        setTimeout(() => {
-          this.$router.push('/OnLineApply_Fillin_OT_finish')
-        }, 1000)
-      } else {
         this.$refs.myForm.setErrors({})
         this.checkIsPics()
         this.checkdoubleAgree()
@@ -769,6 +764,11 @@ export default {
           // ** ===錯誤訊息彙整===
           this.$custom.validate.showErrors(errors)
         }
+      } else {
+        // ? 無須提供財力證明
+        setTimeout(() => {
+          this.$router.push('/OnLineApply_Fillin_OT_finish')
+        }, 1000)
       }
     },
     goToMyDataTerms () {
