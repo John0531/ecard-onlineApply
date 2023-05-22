@@ -2,7 +2,7 @@ import axios from 'axios'
 import { hash } from '@/utilities/hash.js'
 // import termsJson from '@/assets/terms.json'
 import store from '@/store'
-// import DOMPurify from 'dompurify'
+import DOMPurify from 'dompurify'
 
 const service = {
   async getJson () {
@@ -74,40 +74,34 @@ const service = {
   },
   //* 年費政策
   async getYearFee () {
-    try {
-      const url = `${process.env.VUE_APP_STATIC}/html/CardDetail/cardDetail601.htm`
-      const res = await axios.get(url, { withCredentials: false })
-      const cleanHTML = res.data.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
-      console.log(res)
-      // 將回應的HTML轉換為DOM物件
-      const parser = new DOMParser()
-      const htmlDoc = parser.parseFromString(cleanHTML, 'text/html')
-      console.log(htmlDoc)
-      const parser2 = new DOMParser()
-      const htmlDoc2 = parser2.parseFromString(htmlDoc.body.textContent, 'text/html')
-      console.log(htmlDoc2)
-      return htmlDoc2.body.querySelector('.cardDetail_fee').innerHTML
-    } catch (err) {
-      console.log(err)
-    }
     // try {
     //   const url = `${process.env.VUE_APP_STATIC}/html/CardDetail/cardDetail601.htm`
     //   const res = await axios.get(url, { withCredentials: false })
+    //   const cleanHTML = res.data.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
     //   console.log(res)
     //   // 將回應的HTML轉換為DOM物件
     //   const parser = new DOMParser()
-    //   const htmlDoc = parser.parseFromString(res.data, 'text/html')
+    //   const htmlDoc = parser.parseFromString(cleanHTML, 'text/html')
     //   console.log(htmlDoc)
-    //   // 創建一個新的<div>元素
-    //   const newElement = document.createElement('div')
-    //   // 將純文本內容賦值給新元素的textContent
-    //   newElement.textContent = htmlDoc.body.textContent
-    //   // 將新元素插入到指定位置
-    //   const targetElement = document.querySelector('.cardDetail_fee')
-    //   targetElement.appendChild(newElement)
+    //   const parser2 = new DOMParser()
+    //   const htmlDoc2 = parser2.parseFromString(htmlDoc.body.textContent, 'text/html')
+    //   console.log(htmlDoc2)
+    //   return htmlDoc2.body.querySelector('.cardDetail_fee').innerHTML
     // } catch (err) {
     //   console.log(err)
     // }
+    try {
+      const url = `${process.env.VUE_APP_STATIC}/html/CardDetail/cardDetail601.htm`
+      const res = await axios.get(url, { withCredentials: false })
+      const htmlContent = res.data
+      const sanitizedHTML = DOMPurify.sanitize(htmlContent)
+      const parser = new DOMParser()
+      const htmlDoc = parser.parseFromString(sanitizedHTML, 'text/html')
+      console.log(htmlDoc)
+      return htmlDoc.body.querySelector('.cardDetail_fee').innerHTML
+    } catch (err) {
+      console.log(err)
+    }
   },
   async otpGet () {
     try {
