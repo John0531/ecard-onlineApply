@@ -77,15 +77,16 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_STATIC}/html/CardDetail/cardDetail601.htm`
       const res = await axios.get(url, { withCredentials: false })
-      const cleanHTML = res.data.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+      const cleanHTML = res.data.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
       console.log(res)
       // 將回應的HTML轉換為DOM物件
       const parser = new DOMParser()
       const htmlDoc = parser.parseFromString(cleanHTML, 'text/html')
-      console.log(res)
-      // 使用querySelector選擇元素
-      var element = htmlDoc.querySelector('.cardDetail_fee')
-      return element.outerHTML
+      console.log(htmlDoc)
+      const parser2 = new DOMParser()
+      const htmlDoc2 = parser2.parseFromString(htmlDoc.body.innerText, 'text/html')
+      console.log(htmlDoc2)
+      return htmlDoc2.body.querySelector('.cardDetail_fee').innerHTML
     } catch (err) {
       console.log(err)
     }
