@@ -603,7 +603,7 @@ export default {
         upload2: '',
         upload3: '',
         upload4: '',
-        isMydata: null
+        isMydata: false
       },
       url: ''
     }
@@ -852,7 +852,6 @@ export default {
     // ? 操作時間倒數計時
     this.timing = setInterval(() => {
       this.countDown.subtract(1, 'seconds')
-      console.log(this.countDown)
       if (this.countDown._data.minutes === 0 && this.countDown._data.seconds === 0) {
         clearInterval(this.countDown)
         this.$store.commit('getErrorMsg', '作業逾時')
