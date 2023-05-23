@@ -603,7 +603,7 @@ export default {
         upload2: '',
         upload3: '',
         upload4: '',
-        isMydata: null
+        isMydata: false
       },
       url: ''
     }
@@ -710,7 +710,7 @@ export default {
       this.$router.push('/dspApplicationNNB')
     },
     async submitSuitCase () {
-      if (sessionStorage.getItem('FinancialStatement')) {
+      if (sessionStorage.getItem('FinancialStatement') === 'true') {
         this.$refs.myForm.setErrors({})
         this.checkIsPics()
         this.checkdoubleAgree()
@@ -766,9 +766,36 @@ export default {
         }
       } else {
         // ? 無須提供財力證明
-        setTimeout(() => {
-          this.$router.push('/OnLineApply_Fillin_OT_finish')
-        }, 1000)
+        // ? 無需上傳也要打API
+        const res = await PublicService.CardSendApply(this.form)
+        PublicService.showAPIMsg(res.data.message)
+        if (res.status === 200) {
+          this.$store.dispatch('clearSession')
+          if (res.data.status === '00800') {
+            // ? ===選擇自行上傳===
+            // ?未來卡成功
+            setTimeout(() => {
+              this.$router.push('/OnLineApply_Fillin_OT_finish')
+            }, 1000)
+            return
+          }
+          if (res.data.status === '00801') {
+            // ? ===選擇自行上傳===
+            // ?顯示NNB畫面
+            setTimeout(() => {
+              this.$router.push('/dspApplicationNNB')
+            }, 1000)
+            return
+          }
+          if (res.data.status === '00802') {
+            // ? ===選擇MyData上傳===
+            // ?讀取result內的URL轉導MyData上傳財力
+            this.url = res.data.result.MyDataUrl
+            setTimeout(() => {
+              window.open(this.url, '_blank')
+            }, 1000)
+          }
+        }
       }
     },
     goToMyDataTerms () {
@@ -825,7 +852,6 @@ export default {
     // ? 操作時間倒數計時
     this.timing = setInterval(() => {
       this.countDown.subtract(1, 'seconds')
-      console.log(this.countDown)
       if (this.countDown._data.minutes === 0 && this.countDown._data.seconds === 0) {
         clearInterval(this.countDown)
         this.$store.commit('getErrorMsg', '作業逾時')

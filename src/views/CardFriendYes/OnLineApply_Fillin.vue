@@ -424,7 +424,7 @@ export default {
         schema.路段 = ''
         schema.巷 = 'customAddressVaild'
         schema.弄 = 'customAddressVaild'
-        schema.號1 = 'customAddressVaild'
+        schema.號1 = 'required'
         schema.號2 = 'customAddressVaild'
         schema.樓 = 'customAddressVaild'
         schema.其他 = 'customAddressVaild'
@@ -443,16 +443,12 @@ export default {
       return schema
     },
     isEditUserCode () {
-      const onlineApplyRouteInfo = JSON.parse(sessionStorage.getItem('OnlineApplyRouteInfo'))
-      const { USC } = onlineApplyRouteInfo.query
-      const reuslt = Boolean(this.onLineApply_Fillin_Data.userCode && USC)
-      return reuslt
+      const result = Boolean(this.onLineApply_Fillin_Data.userCode)
+      return result
     },
     isEditUnitCode () {
-      const onlineApplyRouteInfo = JSON.parse(sessionStorage.getItem('OnlineApplyRouteInfo'))
-      const { UTC } = onlineApplyRouteInfo.query
-      const reuslt = Boolean(this.onLineApply_Fillin_Data.unitCode && UTC)
-      return reuslt
+      const result = Boolean(this.onLineApply_Fillin_Data.unitCode)
+      return result
     }
   },
   watch: {

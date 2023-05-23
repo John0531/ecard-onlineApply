@@ -60,11 +60,14 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_STATIC}/includeBlock/yesgogogo.html`
       const res = await axios.get(url, { withCredentials: false })
-      const safeHtml = res.data.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
-      console.log(safeHtml)
-      const parser = new DOMParser()
-      const doc = parser.parseFromString(safeHtml, 'text/html')
-      return doc.body.innerText
+      const cleanHTML = res.data.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
+
+      // 將回應的HTML轉換為DOM物件
+      var parser = new DOMParser()
+
+      // 使用querySelector選擇元素
+      var element = parser.parseFromString(cleanHTML, 'text/html')
+      return element.body.innerText
     } catch (err) {
       console.log(err)
     }
@@ -74,18 +77,31 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_STATIC}/html/CardDetail/cardDetail601.htm`
       const res = await axios.get(url, { withCredentials: false })
-      const cleanHTML = res.data.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+      const cleanHTML = res.data.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
       console.log(res)
       // 將回應的HTML轉換為DOM物件
       const parser = new DOMParser()
       const htmlDoc = parser.parseFromString(cleanHTML, 'text/html')
-      console.log(res)
-      // 使用querySelector選擇元素
-      var element = htmlDoc.querySelector('.cardDetail_fee')
-      return element.outerHTML
+      console.log(htmlDoc)
+      const parser2 = new DOMParser()
+      const htmlDoc2 = parser2.parseFromString(htmlDoc.body.textContent, 'text/html')
+      console.log(htmlDoc2)
+      return htmlDoc2.body.querySelector('.cardDetail_fee').innerHTML
     } catch (err) {
       console.log(err)
     }
+    // try {
+    //   const url = `${process.env.VUE_APP_STATIC}/html/CardDetail/cardDetail601.htm`
+    //   const res = await axios.get(url, { withCredentials: false })
+    //   const htmlContent = res.data
+    //   const sanitizedHTML = DOMPurify.sanitize(htmlContent)
+    //   const parser = new DOMParser()
+    //   const htmlDoc = parser.parseFromString(sanitizedHTML, 'text/html')
+    //   console.log(htmlDoc)
+    //   return htmlDoc.body.querySelector('.cardDetail_fee').innerHTML
+    // } catch (err) {
+    //   console.log(err)
+    // }
   },
   async otpGet () {
     try {
