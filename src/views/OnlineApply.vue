@@ -479,7 +479,6 @@ export default {
           sessionStorage.setItem('onlineApplyUrl', this.$route.fullPath)
         }
 
-        console.log(identity)
         switch (status) {
         // ?卡友驗證成功
           case '00101' :
@@ -602,9 +601,9 @@ export default {
             }
             this.OnlineApply_y_Data.gID = GID
             this.OnlineApply_y_Data.iDE = IDE
-            if (PJN) this.OnlineApply_y_Data.projNum = result.PJN
-            if (UTC) this.OnlineApply_y_Data.uTC = result.UTC
-            if (USC) this.OnlineApply_y_Data.uSC = result.USC
+            if (PJN) this.OnlineApply_y_Data.projNum = PJN
+            if (UTC) this.OnlineApply_y_Data.uTC = UTC
+            if (USC) this.OnlineApply_y_Data.uSC = USC
             break
           case '00799' :
             //* 先監聽再拔掉

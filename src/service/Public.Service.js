@@ -61,11 +61,7 @@ const service = {
       const url = `${process.env.VUE_APP_STATIC}/includeBlock/yesgogogo.html`
       const res = await axios.get(url, { withCredentials: false })
       const cleanHTML = res.data.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
-
-      // 將回應的HTML轉換為DOM物件
       var parser = new DOMParser()
-
-      // 使用querySelector選擇元素
       var element = parser.parseFromString(cleanHTML, 'text/html')
       return element.body.innerText
     } catch (err) {
@@ -77,15 +73,19 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_STATIC}/html/CardDetail/cardDetail601.htm`
       const res = await axios.get(url, { withCredentials: false })
-      const cleanHTML = res.data.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-      console.log(res)
-      // 將回應的HTML轉換為DOM物件
+      // HTML
+      const regex = /<div class="cardDetail_fee">(.*?)<\/div>/s
+      const htmlMatch = regex.exec(res.data.toString())
+      const text = htmlMatch ? htmlMatch[0] : null
+      const cleanHTML = text
+        .toString()
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/'/g, '&#39;')
+        .replace(/"/g, '&#34;')
       const parser = new DOMParser()
-      const htmlDoc = parser.parseFromString(cleanHTML, 'text/html')
-      console.log(res)
-      // 使用querySelector選擇元素
-      var element = htmlDoc.querySelector('.cardDetail_fee')
-      return element.outerHTML
+      const element = parser.parseFromString(cleanHTML, 'text/html')
+      return element.body.innerText
     } catch (err) {
       console.log(err)
     }

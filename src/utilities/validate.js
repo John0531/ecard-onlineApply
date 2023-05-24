@@ -199,12 +199,18 @@ const validate = {
     const test = Address.Lane + Address.Aly + Address.Num + Address.Of + Address.Flr + Address.Other
     if (test.length < 1) {
       FormDom.setFieldError(fieldName, '地址格式有誤')
+      return
     }
     if (!Address.County || !Address.Area || !Address.Road) {
       FormDom.setFieldError(fieldName, '地址格式有誤')
+      return
     }
     if (Address.Lane.length > 5 || Address.Aly.length > 5 || Address.Num.length > 5 || Address.Of.length > 5 || Address.Flr.length > 5 || Address.Other.length > 100) {
       FormDom.setFieldError(fieldName, '地址格式有誤')
+      return
+    }
+    if ((Address.County && Address.Area && Address.Road) && !Address.Num) {
+      FormDom.setFieldError(fieldName, '地址格式 號 為必填')
     }
   },
 
@@ -419,9 +425,9 @@ const validate = {
         }
       })
       sum[6] = 1
-      const sumTax1 = [...this.sum]
+      const sumTax1 = [...sum]
       sum[6] = 0
-      const sumTax2 = [...this.sum]
+      const sumTax2 = [...sum]
       let finaltotal2 = 0
       sumTax1.forEach((item) => {
         finaltotal2 = item + finaltotal2

@@ -86,7 +86,7 @@
             </div>
           </Form>
           <!---------------------------------------------------->
-          <Form class="px-0" ref="form" v-slot="{ errors }" v-if="uploaded">
+          <Form  id="checkForm" class="px-0"  v-slot="{ errors }" v-if="uploaded">
             <div class="px-2 mb-4 text-left">
               <small class="red_text">*請務必填寫</small>
             </div>
@@ -542,6 +542,11 @@ export default {
       // TODO sheng end
     }
   },
+  watch: {
+    num (n) {
+      document.getElementById('myIdentifident').classList.remove('croppie-container')
+    }
+  },
   computed: {
     iddateList () {
       return this.$custom.validate.getDateSelect(this.Form.iddate, '民國')
@@ -566,6 +571,10 @@ export default {
     async makeModify (fileSize) {
       // ?呼叫modal準備呈現
       this.CroppieModal.show()
+      // this.$refs.CroppieModal.addEventListener('shown.bs.modal', function (event) {
+      //   console.log(document.getElementById('imgTemplate').clientWidth)
+      // })
+      this.$store.commit('changeLoading', true)
       setTimeout(async () => {
         const imgTemplate = document.getElementById('imgTemplate')
         try {
@@ -595,10 +604,11 @@ export default {
           })
           URL.revokeObjectURL(this.imgTemplateUrl)
           this.imgTemplateUrl = ''
+          this.$store.commit('changeLoading', false)
         } catch (error) {
           alert(error)
         }
-      }, 500)
+      }, 1500)
     },
     async result () {
       this.$store.commit('changeLoading', true)
@@ -664,6 +674,11 @@ export default {
         // this.APIModal.hide()
         if (res.data.status === '01200') {
           this.uploaded = true
+          setTimeout(() => {
+            document.getElementById('checkForm').scrollIntoView({
+              behavior: 'smooth'
+            })
+          }, 500)
           const front = res.data.result.Front
           this.Form.idCounty = front.發證地點
           if (front.領補換類別 === '初發') {
@@ -806,11 +821,6 @@ export default {
     this.ImageLimit = new this.$custom.bootstrap.Modal(this.$refs.ImageLimit)
     this.APIModal = new this.$custom.bootstrap.Modal(this.$refs.APIModal)
     this.NoticeModal.show()
-  },
-  watch: {
-    num (n) {
-      document.getElementById('myIdentifident').classList.remove('croppie-container')
-    }
   }
 }
 </script>

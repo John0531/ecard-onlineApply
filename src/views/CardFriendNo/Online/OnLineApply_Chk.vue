@@ -101,7 +101,6 @@
                           class="Apply_Chk_form_control form-control"
                           :class="{ 'is-invalid': errors['信用卡有效期限'] }"
                           @keyup="validThru = $custom.validate.OnlyNumPress(validThru)"
-                          @focus="validThru=''"
 													@change="checkValue($refs.myForm,validThru,'信用卡有效期限','CSC')"/>
                           <span class="not_text">例如:2017年1月，請輸入0117</span>
 													<div v-if="errors['信用卡有效期限']" class="d-flex text-center field-error my-1" >
@@ -119,7 +118,6 @@
                         class="Apply_Chk_form_control form-control"
                         :class="{ 'is-invalid': errors['信用卡背後末三碼'] }"
                         @keyup="CSC = $custom.validate.OnlyNumPress(CSC)"
-                        @focus="CSC=''"
                         @change="checkValue($refs.myForm,CSC,'信用卡背後末三碼','行動電話')"
                         />
                         <div v-if="errors['信用卡背後末三碼']" class="d-flex text-center field-error my-1" >
@@ -137,7 +135,6 @@
                           class="Apply_Chk_form_control form-control"
                           :class="{ 'is-invalid': errors['行動電話'] }"
                           @keyup="phoneNumber = $custom.validate.OnlyNumPress(phoneNumber)"
-                          @focus="phoneNumber=''"
                           rules="checkPhone"
                           />
                           <span class="not_text">請填寫信用卡申請時之行動電話，以利資訊驗證</span>
