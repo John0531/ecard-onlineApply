@@ -34,11 +34,6 @@ export default ({
   },
   methods: {
     closeModal () {
-      console.log(1)
-      if (this.$store.state.errorRedirect === 'cardFamily') {
-        sessionStorage.clear()
-        window.location = 'https://card.ubot.com.tw/eCard/dspPageContent.aspx?strID=2008060014'
-      }
       this.$store.state.apiModal.hide()
     }
   },

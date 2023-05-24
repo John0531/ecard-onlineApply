@@ -86,7 +86,7 @@
             </div>
           </Form>
           <!---------------------------------------------------->
-          <Form class="px-0" ref="form" v-slot="{ errors }" v-if="uploaded">
+          <Form  id="checkForm" class="px-0"  v-slot="{ errors }" v-if="uploaded">
             <div class="px-2 mb-4 text-left">
               <small class="red_text">*請務必填寫</small>
             </div>
@@ -674,6 +674,11 @@ export default {
         // this.APIModal.hide()
         if (res.data.status === '01200') {
           this.uploaded = true
+          setTimeout(() => {
+            document.getElementById('checkForm').scrollIntoView({
+              behavior: 'smooth'
+            })
+          }, 500)
           const front = res.data.result.Front
           this.Form.idCounty = front.發證地點
           if (front.領補換類別 === '初發') {
