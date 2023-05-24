@@ -419,12 +419,12 @@ export default {
       }
       if (this.onLineApply_Fillin_Data.sendCardType === '3') {
         schema.卡號末四碼 = 'required|checkCode'
-        schema.郵遞區號 = ''
-        schema.市區 = ''
-        schema.路段 = ''
+        schema.郵遞區號 = 'required'
+        schema.市區 = 'required'
+        schema.路段 = 'required'
         schema.巷 = 'customAddressVaild'
         schema.弄 = 'customAddressVaild'
-        schema.號 = 'customAddressVaild'
+        schema.號 = 'required'
         schema.號2 = 'customAddressVaild'
         schema.樓 = 'customAddressVaild'
         schema.其他 = 'customAddressVaild'
@@ -730,13 +730,13 @@ export default {
       有關條款: 'customAgreeTerms'
     }
     defineRule('customAddressVaild', value => {
-      const tempAddress = this.onLineApply_Fillin_Data.sendCardAddr.Lane + this.onLineApply_Fillin_Data.sendCardAddr.Aly + this.onLineApply_Fillin_Data.sendCardAddr.Of + this.onLineApply_Fillin_Data.sendCardAddr.Flr + this.onLineApply_Fillin_Data.sendCardAddr.Other
-      if (tempAddress.length < 1) {
-        return '地址格式有誤'
+      const tempAddress = this.onLineApply_Fillin_Data.sendCardAddr.Lane + this.onLineApply_Fillin_Data.sendCardAddr.Aly + this.onLineApply_Fillin_Data.sendCardAddr.Num + this.onLineApply_Fillin_Data.sendCardAddr.Of + this.onLineApply_Fillin_Data.sendCardAddr.Flr + this.onLineApply_Fillin_Data.sendCardAddr.Other
+      if (tempAddress.length < 1 || !this.onLineApply_Fillin_Data.sendCardAddr.County ||
+        !this.onLineApply_Fillin_Data.sendCardAddr.Area || !this.onLineApply_Fillin_Data.sendCardAddr.Road) {
+        return ''
       }
       return true
     })
-
     defineRule('customAgreeTerms', value => {
       if (!value) {
         return '您尚未勾選詳細閱讀並同意服務約定書。'
