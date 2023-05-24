@@ -542,6 +542,11 @@ export default {
       // TODO sheng end
     }
   },
+  watch: {
+    num (n) {
+      document.getElementById('myIdentifident').classList.remove('croppie-container')
+    }
+  },
   computed: {
     iddateList () {
       return this.$custom.validate.getDateSelect(this.Form.iddate, '民國')
@@ -566,6 +571,10 @@ export default {
     async makeModify (fileSize) {
       // ?呼叫modal準備呈現
       this.CroppieModal.show()
+      // this.$refs.CroppieModal.addEventListener('shown.bs.modal', function (event) {
+      //   console.log(document.getElementById('imgTemplate').clientWidth)
+      // })
+      this.$store.commit('changeLoading', true)
       setTimeout(async () => {
         const imgTemplate = document.getElementById('imgTemplate')
         try {
@@ -595,10 +604,11 @@ export default {
           })
           URL.revokeObjectURL(this.imgTemplateUrl)
           this.imgTemplateUrl = ''
+          this.$store.commit('changeLoading', false)
         } catch (error) {
           alert(error)
         }
-      }, 500)
+      }, 1500)
     },
     async result () {
       this.$store.commit('changeLoading', true)
@@ -806,11 +816,6 @@ export default {
     this.ImageLimit = new this.$custom.bootstrap.Modal(this.$refs.ImageLimit)
     this.APIModal = new this.$custom.bootstrap.Modal(this.$refs.APIModal)
     this.NoticeModal.show()
-  },
-  watch: {
-    num (n) {
-      document.getElementById('myIdentifident').classList.remove('croppie-container')
-    }
   }
 }
 </script>

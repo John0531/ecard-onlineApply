@@ -425,9 +425,9 @@ const validate = {
         }
       })
       sum[6] = 1
-      const sumTax1 = [...this.sum]
+      const sumTax1 = [...sum]
       sum[6] = 0
-      const sumTax2 = [...this.sum]
+      const sumTax2 = [...sum]
       let finaltotal2 = 0
       sumTax1.forEach((item) => {
         finaltotal2 = item + finaltotal2

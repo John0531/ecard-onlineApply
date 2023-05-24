@@ -626,6 +626,7 @@ export default {
     async makeModify (fileSize) {
       // ?呼叫modal準備呈現
       this.CroppieModal.show()
+      this.$store.commit('changeLoading', true)
       setTimeout(async () => {
         const imgTemplate = document.getElementById('imgTemplate')
         try {
@@ -655,10 +656,11 @@ export default {
           })
           URL.revokeObjectURL(this.imgTemplateUrl)
           this.imgTemplateUrl = ''
+          this.$store.commit('changeLoading', false)
         } catch (error) {
           alert(error)
         }
-      }, 500)
+      }, 1500)
     },
     async result () {
       this.$store.commit('changeLoading', true)
