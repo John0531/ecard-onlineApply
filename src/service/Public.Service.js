@@ -7,18 +7,19 @@ import store from '@/store'
 const service = {
   async getJson () {
     try {
-      const url =
-        'https://yesgoimages.s3.ap-northeast-1.amazonaws.com/ecard/Utility.json'
+      const url = 'https://yesgoimages.s3.ap-northeast-1.amazonaws.com/ecard/Utility.json'
       const res = await axios.get(url, { withCredentials: false })
       return res.data
-    } catch (err) {}
+    } catch (err) {
+    }
   },
   async getAddress (postData) {
     try {
       const url = `${process.env.VUE_APP_BASE}/MW3/DB/PROC`
       const res = await axios.post(url, postData, { withCredentials: false })
       return res.data.info
-    } catch (err) {}
+    } catch (err) {
+    }
   },
   async getTermsHtml (termsName) {
     try {
@@ -27,16 +28,13 @@ const service = {
       const url = `${process.env.VUE_APP_STATIC}/terms/json/terms.json`
       const res = await axios.get(url, { withCredentials: false })
       if (typeof res.data === 'string') {
-        store.commit(
-          'getErrorMsg',
-          '檔案讀取有誤，請重新輸入或洽聯邦信用卡客服專線，02-25455168、07-2269393'
-        )
+        store.commit('getErrorMsg', '檔案讀取有誤，請重新輸入或洽聯邦信用卡客服專線，02-25455168、07-2269393')
         store.state.errorModal.show()
         return
       }
       const termsJson = res.data
       // ? 取得比對 json end
-      termsName.forEach((item1) => {
+      termsName.forEach(item1 => {
         termsJson.forEach((item2) => {
           if (item1 === item2.name) {
             termsArr.push(item2)
@@ -45,21 +43,11 @@ const service = {
       })
       const termsHtml = []
       for (let i = 0; i < termsArr.length; i++) {
-        const url = `${process.env.VUE_APP_STATIC}/terms/html/${
-          termsArr[i].fileName
-        }.html?${hash(8)}`
+        const url = `${process.env.VUE_APP_STATIC}/terms/html/${termsArr[i].fileName}.html?${hash(8)}`
         const res = await axios.get(url, { withCredentials: false })
-        const safeHtml = res.data
-          .toString()
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/'/g, '&#39;')
-          .replace(/"/g, '&#34;')
+        const safeHtml = res.data.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
         const parser = new DOMParser()
-        const doc = parser.parseFromString(
-          safeHtml.split('&lt;/head&gt;')[1],
-          'text/html'
-        )
+        const doc = parser.parseFromString(safeHtml.split('&lt;/head&gt;')[1], 'text/html')
         termsHtml.push(doc.body.innerText)
       }
       return termsHtml
@@ -72,17 +60,8 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_STATIC}/includeBlock/yesgogogo.html`
       const res = await axios.get(url, { withCredentials: false })
-      const cleanHTML = res.data
-        .toString()
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/'/g, '&#39;')
-        .replace(/"/g, '&#34;')
-
-      // 將回應的HTML轉換為DOM物件
+      const cleanHTML = res.data.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
       var parser = new DOMParser()
-
-      // 使用querySelector選擇元素
       var element = parser.parseFromString(cleanHTML, 'text/html')
       return element.body.innerText
     } catch (err) {
@@ -94,35 +73,22 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_STATIC}/html/CardDetail/cardDetail601.htm`
       const res = await axios.get(url, { withCredentials: false })
-      var regex = /<div class="cardDetail_fee">(.*?)<\/div>/s
-      var match = regex.exec(res.data.toString())
-      var text = match ? match[0] : null
-      const cleanHTML =
-        text +
-        '</div>'
-          .toString()
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/'/g, '&#39;')
-          .replace(/"/g, '&#34;')
-      var parser = new DOMParser()
-      var element = parser.parseFromString(cleanHTML, 'text/html')
+      // HTML
+      const regex = /<div class="cardDetail_fee">(.*?)<\/div>/s
+      const htmlMatch = regex.exec(res.data.toString())
+      const text = htmlMatch ? htmlMatch[0] : null
+      const cleanHTML = text
+        .toString()
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/'/g, '&#39;')
+        .replace(/"/g, '&#34;')
+      const parser = new DOMParser()
+      const element = parser.parseFromString(cleanHTML, 'text/html')
       return element.body.innerText
     } catch (err) {
       console.log(err)
     }
-    // try {
-    //   const url = `${process.env.VUE_APP_STATIC}/html/CardDetail/cardDetail601.htm`
-    //   const res = await axios.get(url, { withCredentials: false })
-    //   const htmlContent = res.data
-    //   const sanitizedHTML = DOMPurify.sanitize(htmlContent)
-    //   const parser = new DOMParser()
-    //   const htmlDoc = parser.parseFromString(sanitizedHTML, 'text/html')
-    //   console.log(htmlDoc)
-    //   return htmlDoc.body.querySelector('.cardDetail_fee').innerHTML
-    // } catch (err) {
-    //   console.log(err)
-    // }
   },
   async otpGet () {
     try {
@@ -130,7 +96,8 @@ const service = {
       const res = await axios.get(url)
       console.log(res)
       return res
-    } catch (err) {}
+    } catch (err) {
+    }
   },
   async terms_pageLoad () {
     const url = `${process.env.VUE_APP_BASE_API}/CardFormTerms/GetTermsInfo`
@@ -147,7 +114,8 @@ const service = {
         store.commit('getErrorMsg', `${res.data.message}(${res.data.status})`)
         store.state.errorModal.show()
       }
-    } catch (err) {}
+    } catch (err) {
+    }
   },
   async otpSend (code) {
     try {
@@ -159,7 +127,8 @@ const service = {
       const res = await axios.post(url, msgCode, options)
       console.log(res)
       return res
-    } catch (err) {}
+    } catch (err) {
+    }
   },
   async showAPIMsg (Msg) {
     let APIMsg = ''
@@ -172,7 +141,8 @@ const service = {
       const url = `${process.env.VUE_APP_BASE_API}/CardFormPreview/Preview`
       const res = await axios.get(url)
       return res.data.result
-    } catch (err) {}
+    } catch (err) {
+    }
   },
   async createPdf () {
     try {
@@ -209,7 +179,8 @@ const service = {
       const res = await axios.post(url, data, options)
       console.log(res)
       return res
-    } catch {}
+    } catch {
+    }
   }
 }
 
