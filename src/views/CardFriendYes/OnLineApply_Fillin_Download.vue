@@ -123,8 +123,8 @@
                     <p>
                       <span v-if="FillinData.billType==='1'">EMAIL帳單</span>
                       <span v-if="FillinData.billType==='2'">行動帳單(簡訊)</span>
-                      <span v-if="FillinData.billType==='3'">LINE帳單</span>
-                      <span v-if="FillinData.billType==='4'">紙本帳單</span>
+                      <span v-if="FillinData.billType==='3'">紙本帳單</span>
+                      <span v-if="FillinData.billType==='4'">LINE帳單</span>
                     </p>
                   </div>
                 </li>

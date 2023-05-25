@@ -86,7 +86,7 @@
             </div>
           </Form>
           <!---------------------------------------------------->
-          <Form  id="checkForm" class="px-0"  v-slot="{ errors }" v-if="uploaded">
+          <Form ref="form" id="checkForm" class="px-0"  v-slot="{ errors }" v-if="uploaded">
             <div class="px-2 mb-4 text-left">
               <small class="red_text">*請務必填寫</small>
             </div>
