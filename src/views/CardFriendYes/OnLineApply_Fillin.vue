@@ -93,13 +93,13 @@
                         </label>
                       </div>
                       <div class="form-check me-4" v-if="!isDisableBillType('line')">
-                        <Field  class="form-check-input mt-2 position-absolute" id="linebill" type="radio" name="帳單形式"  value="3" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
+                        <Field  class="form-check-input mt-2 position-absolute" id="linebill" type="radio" name="帳單形式"  value="4" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
                         <label class="form_Apply_txts" for="linebill">
                                         LINE帳單
                         </label>
                       </div>
                       <div class="form-check" v-if="!isDisableBillType('paper')">
-                        <Field  class="form-check-input mt-2 position-absolute" id="paperbill" type="radio" name="帳單形式"  value="4" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
+                        <Field  class="form-check-input mt-2 position-absolute" id="paperbill" type="radio" name="帳單形式"  value="3" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
                         <label class="form_Apply_txts" for="paperbill">
                                         紙本帳單
                         </label>

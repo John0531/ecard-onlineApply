@@ -18,11 +18,11 @@ url.forEach((item) => {
 })
 
 // ? 難字字體檔案引入
-const newStyle = document.createElement('style')
-newStyle.appendChild(document.createTextNode(`\
-@font-face {\
-    font-family: ubFont;\
-    src: url(${process.env.VUE_APP_STATIC}/font/EUDC.TTE);\
-}\
-`))
-document.head.appendChild(newStyle)
+// const newStyle = document.createElement('style')
+// newStyle.appendChild(document.createTextNode(`\
+// @font-face {\
+//     font-family: ubFont;\
+//     src: url(${process.env.VUE_APP_STATIC}/font/EUDC.TTE);\
+// }\
+// `))
+// document.head.appendChild(newStyle)
