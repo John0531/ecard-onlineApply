@@ -349,9 +349,12 @@
                           <div>
                               ◆<strong>原始圖片</strong><br>
                               (請框選可供辨識之大小範圍)
-                              <img v-if="imgTemplateUrl" id="imgTemplate" :src="imgTemplateUrl" alt="" class="img-fluid">
+                              <img v-if="imgTemplateUrl" id="imgTemplate" :src="imgTemplateUrl"
+                              ref="imgTemplate"
+                              alt=""
+                              class="img-fluid">
                           </div>
-                          <div id="myIdentifident" class="myIdentifident" ref="myIdentifident">
+                          <div id="myIdentifident" class="myIdentifident p-0" ref="myIdentifident">
                           </div>
                       </div>
                       <!-- <div class="row mb-4">
@@ -570,45 +573,103 @@ export default {
     },
     async makeModify (fileSize) {
       // ?呼叫modal準備呈現
-      this.CroppieModal.show()
+      // this.CroppieModal.show()
+      this.$store.commit('changeLoading', true)
+      async function modalOpen (dom, ref) {
+        dom.show()
+        console.log(dom)
+        return new Promise(resolve =>
+          ref.addEventListener('shown.bs.modal', function (event) {
+            resolve({
+              clientWidth: document.getElementById('imgTemplate').clientWidth,
+              clientHeight: document.getElementById('imgTemplate').clientHeight
+            })
+          })
+        )
+      }
+      const imgTemplate = await modalOpen(this.CroppieModal, this.$refs.CroppieModal)
+      console.log(imgTemplate)
       // this.$refs.CroppieModal.addEventListener('shown.bs.modal', function (event) {
       //   console.log(document.getElementById('imgTemplate').clientWidth)
       // })
-      this.$store.commit('changeLoading', true)
-      setTimeout(async () => {
-        const imgTemplate = document.getElementById('imgTemplate')
-        try {
+      // this.$nextTick(() => {
+      //   const imgTemplate = document.getElementById('imgTemplate')
+      //   console.log(this.$refs.imgTemplate.complete)
+      //   requestAnimationFrame(() => {
+      //     console.log(imgTemplate.clientWidth)
+      //   })
+      // })
+      // this.$watch(() => this.$refs.imgTemplate.complete, (n, o) => {
+      //   console.log(123)
+      // })
+      try {
         // ?要呈現畫面的區域(在modal上)
-          const croppieE = this.$refs.myIdentifident
-          this[`identitiyPack${this.num}`].fileSize = fileSize
-          this[`identitiyPack${this.num}`].preViewImg = new this.$custom.Croppie(croppieE, {
-            viewport: {
-              width: imgTemplate.clientWidth,
-              height: imgTemplate.clientHeight
-            },
-            boundary: {
-              width: imgTemplate.clientWidth + 20,
-              height: imgTemplate.clientHeight + 20
-            },
-            showZoomer: true,
-            enableResize: true,
-            enableOrientation: true,
-            enableZoom: true,
-            enforceBoundary: true,
-            mouseWheelZoom: 'ctrl'
-            // maxZoom: 1
-          })
-          // ?bind在此時將jpg轉為png
-          await this[`identitiyPack${this.num}`].preViewImg.bind({
-            url: this.imgTemplateUrl
-          })
-          URL.revokeObjectURL(this.imgTemplateUrl)
-          this.imgTemplateUrl = ''
-          this.$store.commit('changeLoading', false)
-        } catch (error) {
-          alert(error)
-        }
-      }, 1500)
+        const croppieE = this.$refs.myIdentifident
+        this[`identitiyPack${this.num}`].fileSize = fileSize
+        this[`identitiyPack${this.num}`].preViewImg = new this.$custom.Croppie(croppieE, {
+          viewport: {
+            width: imgTemplate.clientWidth,
+            height: imgTemplate.clientHeight
+          },
+          boundary: {
+            width: imgTemplate.clientWidth + 20,
+            height: imgTemplate.clientHeight + 20
+          },
+          showZoomer: true,
+          enableResize: true,
+          enableOrientation: true,
+          enableZoom: true,
+          enforceBoundary: true,
+          mouseWheelZoom: 'ctrl'
+          // maxZoom: 1
+        })
+        // ?bind在此時將jpg轉為png
+        await this[`identitiyPack${this.num}`].preViewImg.bind({
+          url: this.imgTemplateUrl
+        })
+        console.log(document.querySelector('#myIdentifident'))
+        URL.revokeObjectURL(this.imgTemplateUrl)
+        this.imgTemplateUrl = ''
+        this.$store.commit('changeLoading', false)
+      } catch (error) {
+        alert(error)
+      }
+      // this.$store.commit('changeLoading', true)
+      // setTimeout(async () => {
+      //   const imgTemplate = document.getElementById('imgTemplate')
+      //   console.log(imgTemplate.clientWidth, imgTemplate.clientHeight)
+      //   try {
+      //     // ?要呈現畫面的區域(在modal上)
+      //     const croppieE = this.$refs.myIdentifident
+      //     this[`identitiyPack${this.num}`].fileSize = fileSize
+      //     this[`identitiyPack${this.num}`].preViewImg = new this.$custom.Croppie(croppieE, {
+      //       viewport: {
+      //         width: imgTemplate.clientWidth,
+      //         height: imgTemplate.clientHeight
+      //       },
+      //       boundary: {
+      //         width: imgTemplate.clientWidth + 20,
+      //         height: imgTemplate.clientHeight + 20
+      //       },
+      //       showZoomer: true,
+      //       enableResize: true,
+      //       enableOrientation: true,
+      //       enableZoom: true,
+      //       enforceBoundary: true,
+      //       mouseWheelZoom: 'ctrl'
+      //       // maxZoom: 1
+      //     })
+      //     // ?bind在此時將jpg轉為png
+      //     await this[`identitiyPack${this.num}`].preViewImg.bind({
+      //       url: this.imgTemplateUrl
+      //     })
+      //     URL.revokeObjectURL(this.imgTemplateUrl)
+      //     this.imgTemplateUrl = ''
+      //     this.$store.commit('changeLoading', false)
+      //   } catch (error) {
+      //     alert(error)
+      //   }
+      // }, 1500)
     },
     async result () {
       this.$store.commit('changeLoading', true)
@@ -630,9 +691,10 @@ export default {
         type: 'canvas',
         quality: imgQuality,
         format: 'jpeg',
-        size: 'original'
+        size: 'viewport'
       })
       this.$store.commit('changeLoading', false)
+      console.log(base64Compression)
       console.log(`瀏覽圖檔案大小${Math.round(0.75 * base64View.length / 1000)}k`)
       console.log(`壓縮檔案大小${Math.round(0.75 * base64Compression.length / 1000)}k`)
       resultImg.src = base64View // ? 外層瀏覽圖片
