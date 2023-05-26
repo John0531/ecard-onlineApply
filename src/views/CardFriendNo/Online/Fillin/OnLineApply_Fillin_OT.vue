@@ -718,7 +718,7 @@
                       />
                       <label class="form_Apply_txt fw-normal" for="帳單形式-行動帳單(簡訊)">行動帳單(簡訊)</label>
                     </div>
-                    <div class="form-check me-4" v-if="pageLoad.billType?.includes('line')">
+                    <div class="form-check me-4" v-if="pageLoad.billType?.includes('paper')">
                       <Field
                         rules="required"
                         :class="{ 'is-invalid': errors['帳單形式'] }"
@@ -728,11 +728,11 @@
                         name="帳單形式"
                         :value="3"
                         :validateOnInput="true"
-                        id="帳單形式-LINE帳單"
+                        id="帳單形式-紙本帳單"
                       />
-                      <label class="form_Apply_txt fw-normal" for="帳單形式-LINE帳單">LINE帳單</label>
+                      <div class="form_Apply_txt fw-normal" for="帳單形式-紙本帳單">紙本帳單</div>
                     </div>
-                    <div class="form-check" v-if="pageLoad.billType?.includes('paper')">
+                    <div class="form-check" v-if="pageLoad.billType?.includes('line')">
                       <Field
                         rules="required"
                         :class="{ 'is-invalid': errors['帳單形式'] }"
@@ -742,9 +742,9 @@
                         name="帳單形式"
                         :value="4"
                         :validateOnInput="true"
-                        id="帳單形式-紙本帳單"
+                        id="帳單形式-LINE帳單"
                       />
-                      <div class="form_Apply_txt fw-normal" for="帳單形式-紙本帳單">紙本帳單</div>
+                      <label class="form_Apply_txt fw-normal" for="帳單形式-LINE帳單">LINE帳單</label>
                     </div>
                   </div>
                   <ErrorMessage
