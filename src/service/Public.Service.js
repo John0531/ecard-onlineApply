@@ -41,15 +41,21 @@ const service = {
           }
         })
       })
+      console.log(termsArr)
       const termsHtml = []
       for (let i = 0; i < termsArr.length; i++) {
-        const url = `${process.env.VUE_APP_STATIC}/terms/html/${termsArr[i].fileName}.html?${hash(8)}`
-        const res = await axios.get(url, { withCredentials: false })
-        const safeHtml = res.data.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
-        const parser = new DOMParser()
-        const doc = parser.parseFromString(safeHtml.split('&lt;/head&gt;')[1], 'text/html')
-        termsHtml.push(doc.body.innerText)
+        let htmlStr = ''
+        for (let j = 0; j < termsArr[i].fileName.length; j++) {
+          const url = `${process.env.VUE_APP_STATIC}/terms/html/${termsArr[i].fileName[j]}.html?${hash(8)}`
+          const res = await axios.get(url, { withCredentials: false })
+          const safeHtml = res.data.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
+          const parser = new DOMParser()
+          const doc = parser.parseFromString(safeHtml.split('&lt;/head&gt;')[1], 'text/html')
+          htmlStr += doc.body.innerText
+        }
+        termsHtml.push(htmlStr)
       }
+      console.log(termsHtml)
       return termsHtml
     } catch (err) {
       console.log(err)

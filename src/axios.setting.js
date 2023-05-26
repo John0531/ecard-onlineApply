@@ -24,7 +24,6 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   config => {
     store.commit('changeLoading', false)
-    console.log(config)
     if (config.headers.ecard) {
       const TK = config.headers.ecard
       sessionStorage.setItem('accessTK', TK)
