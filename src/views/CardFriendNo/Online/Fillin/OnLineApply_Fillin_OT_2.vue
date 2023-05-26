@@ -474,7 +474,7 @@
             </div>
           </div>
         </div>
-        <template v-if="flgLine==='Y'">
+        <template v-if="flag.flgLine==='Y'">
           <div class="mb-4 text-left">
             <strong>聯邦銀行LINE官方綁定個人化服務：</strong>
           </div>
@@ -579,7 +579,7 @@ export default {
       FillinDataFlag: JSON.parse(sessionStorage.getItem('FillinDataFlag')),
       consent: JSON.parse(sessionStorage.getItem('FillinData')).OT_1_TermsContent.consent,
       ticketInfo: JSON.parse(sessionStorage.getItem('FillinData')).OT_1_TermsContent.ticketInfo,
-      flgLine: JSON.parse(sessionStorage.getItem('FillinData')).OT_1_Flag.flgLine
+      flag: JSON.parse(sessionStorage.getItem('FillinData')).OT_1_Flag
     }
   },
   methods: {
@@ -630,8 +630,40 @@ export default {
     async nextPage () {
       const result = await PublicService.createPdf()
       if (result) {
-        sessionStorage.setItem('FinancialStatement', this.FillinData.financialStatement)
-        this.$router.push('/OnLineApply_Fillin_OT_Up')
+        if (this.flag.flgTravel === 'Y') {
+          const res = await PublicService.CardSendApply({})
+          PublicService.showAPIMsg(res.data.message)
+          if (res.status === 200) {
+            this.$store.dispatch('clearSession')
+            if (res.data.status === '00800') {
+              // ? ===選擇自行上傳===
+              // ?未來卡成功
+              setTimeout(() => {
+                this.$router.push('/OnLineApply_Fillin_OT_finish')
+              }, 1000)
+              return
+            }
+            if (res.data.status === '00801') {
+              // ? ===選擇自行上傳===
+              // ?顯示NNB畫面
+              setTimeout(() => {
+                this.$router.push('/dspApplicationNNB')
+              }, 1000)
+              return
+            }
+            if (res.data.status === '00802') {
+              // ? ===選擇MyData上傳===
+              // ?讀取result內的URL轉導MyData上傳財力
+              this.url = res.data.result.MyDataUrl
+              setTimeout(() => {
+                window.open(this.url, '_blank')
+              }, 1000)
+            }
+          }
+        } else {
+          sessionStorage.setItem('FinancialStatement', this.FillinData.financialStatement)
+          this.$router.push('/OnLineApply_Fillin_OT_Up')
+        }
       }
     }
   },

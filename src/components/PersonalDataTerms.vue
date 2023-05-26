@@ -330,7 +330,7 @@ export default {
   data () {
     return {
       flgLine: '',
-      // flgTravel: '',
+      flgTravel: '',
       consent: '',
       ticketInfo: '',
       radioALL: false,
@@ -367,7 +367,7 @@ export default {
     async pageLoad () {
       const result = await PublicService.terms_pageLoad()
       this.flgLine = result.flgLine
-      // this.flgTravel = result.flgTravel
+      this.flgTravel = result.flgTravel
       this.consent = result.consent
       this.ticketInfo = result.ticketInfo
     },
@@ -397,7 +397,8 @@ export default {
           }
           console.log(FillinData.OT_1)
           FillinData.OT_1_Flag = {
-            flgLine: this.flgLine
+            flgLine: this.flgLine,
+            flgTravel: this.flgTravel
           }
           FillinData.OT_1_TermsContent = {
             consent: this.consent,
@@ -444,15 +445,4 @@ export default {
   }
 }
 
-// 點擊換圖
-// var toggle = true;
-//     $(".terms_check_btn1").click(function () {
-//         if (toggle) {
-//             toggle = false;
-//             document.getElementById('checkboxUnEnd').checked = true;
-//         } else {
-//             toggle = true;
-//             document.getElementById('checkboxUnEnd').checked = false;
-//         }
-//     });
 </script>

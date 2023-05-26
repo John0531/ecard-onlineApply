@@ -592,16 +592,6 @@ export default {
       // this.$refs.CroppieModal.addEventListener('shown.bs.modal', function (event) {
       //   console.log(document.getElementById('imgTemplate').clientWidth)
       // })
-      // this.$nextTick(() => {
-      //   const imgTemplate = document.getElementById('imgTemplate')
-      //   console.log(this.$refs.imgTemplate.complete)
-      //   requestAnimationFrame(() => {
-      //     console.log(imgTemplate.clientWidth)
-      //   })
-      // })
-      // this.$watch(() => this.$refs.imgTemplate.complete, (n, o) => {
-      //   console.log(123)
-      // })
       try {
         // ?要呈現畫面的區域(在modal上)
         const croppieE = this.$refs.myIdentifident
@@ -634,42 +624,6 @@ export default {
       } catch (error) {
         alert(error)
       }
-      // this.$store.commit('changeLoading', true)
-      // setTimeout(async () => {
-      //   const imgTemplate = document.getElementById('imgTemplate')
-      //   console.log(imgTemplate.clientWidth, imgTemplate.clientHeight)
-      //   try {
-      //     // ?要呈現畫面的區域(在modal上)
-      //     const croppieE = this.$refs.myIdentifident
-      //     this[`identitiyPack${this.num}`].fileSize = fileSize
-      //     this[`identitiyPack${this.num}`].preViewImg = new this.$custom.Croppie(croppieE, {
-      //       viewport: {
-      //         width: imgTemplate.clientWidth,
-      //         height: imgTemplate.clientHeight
-      //       },
-      //       boundary: {
-      //         width: imgTemplate.clientWidth + 20,
-      //         height: imgTemplate.clientHeight + 20
-      //       },
-      //       showZoomer: true,
-      //       enableResize: true,
-      //       enableOrientation: true,
-      //       enableZoom: true,
-      //       enforceBoundary: true,
-      //       mouseWheelZoom: 'ctrl'
-      //       // maxZoom: 1
-      //     })
-      //     // ?bind在此時將jpg轉為png
-      //     await this[`identitiyPack${this.num}`].preViewImg.bind({
-      //       url: this.imgTemplateUrl
-      //     })
-      //     URL.revokeObjectURL(this.imgTemplateUrl)
-      //     this.imgTemplateUrl = ''
-      //     this.$store.commit('changeLoading', false)
-      //   } catch (error) {
-      //     alert(error)
-      //   }
-      // }, 1500)
     },
     async result () {
       this.$store.commit('changeLoading', true)
@@ -686,12 +640,12 @@ export default {
       if (this[`identitiyPack${this.num}`].fileSize > compressSizeLimit) {
         imgQuality = 0.3
       }
-      // ? 檔案大小超過 1MB 則壓縮 end
+      // ? 檔案大小超過 1MB 則壓縮 ends
       const base64Compression = await this[`identitiyPack${this.num}`].preViewImg.result({
         type: 'canvas',
         quality: imgQuality,
         format: 'jpeg',
-        size: 'viewport'
+        size: 'original'
       })
       this.$store.commit('changeLoading', false)
       console.log(base64Compression)
