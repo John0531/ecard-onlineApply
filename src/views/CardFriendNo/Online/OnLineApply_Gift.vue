@@ -17,7 +17,7 @@
               <div class="row justify-content-md-center">
                   <!----------------首刷禮---------------->
                   <div class="col-12 col-lg-8 card_gift_box">
-                      <h3><img src="@/assets/images/form/card_gift_icon.gif" class="img-fluid" alt="" />首刷禮：<span>(新戶定義：核卡前六個月內未曾持有任何一聯邦信用卡者。)</span>
+                      <h3><img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/card_gift_icon.gif" class="img-fluid" alt="" />首刷禮：<span>(新戶定義：核卡前六個月內未曾持有任何一聯邦信用卡者。)</span>
                       </h3>
                       <div class="col-12 ">
                           <div v-html="giftNote" class="card_gift_txt"></div>

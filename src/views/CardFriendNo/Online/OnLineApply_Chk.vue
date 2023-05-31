@@ -102,7 +102,7 @@
                           :class="{ 'is-invalid': errors['信用卡有效期限'] }"
                           @keyup="validThru = $custom.validate.OnlyNumPress(validThru)"
 													@change="checkValue($refs.myForm,validThru,'信用卡有效期限','CSC')"/>
-                          <span class="not_text">例如:2017年1月，請輸入0117</span>
+                          <span class="not_text">例如:2028年1月，請輸入0128</span>
 													<div v-if="errors['信用卡有效期限']" class="d-flex text-center field-error my-1" >
 														{{errors['信用卡有效期限']}}
 													</div>
@@ -208,7 +208,7 @@
           <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel-1">請向下滾動，仔細閱讀整份同意書所有內容<input id="myCheckCount" hidden></h5>
               <button type="button" class="btn-close" aria-label="Close" @click="this.agreeModal.hide()">
-                <img src="@/assets/images/form/close.png" border="0" alt="close" >
+                <img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/close.png" border="0" alt="close" >
               </button>
           </div>
           <div class="modal-body" >
