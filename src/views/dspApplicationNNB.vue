@@ -12,8 +12,8 @@
         <div class="container-xl">
             <div class="row justify-content-md-center">
                 <div class="new-new-bank-title">
-                    <img id="NewNewBank_img" src="@/assets/images/form/NewNewBank_banner.gif" class="img-fluid" alt="">
-                    <img id="NewNewBank_img_s" src="@/assets/images/form/NewNewBank_banner_s.gif" class="img-fluid" alt="">
+                    <img id="NewNewBank_img" src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/NewNewBank_banner.gif" class="img-fluid" alt="">
+                    <img id="NewNewBank_img_s" src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/NewNewBank_banner_s.gif" class="img-fluid" alt="">
                 </div>
                 <div id="NNB_Intro" class="new-new-bank">
                     <div class="new-new-bank-txt">

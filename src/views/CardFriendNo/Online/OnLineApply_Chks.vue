@@ -128,7 +128,7 @@
                   <h5 class="modal-title" id="exampleModalLabel-1">請向下滾動，仔細閱讀整份同意書所有內容<input id="myCheckCount" hidden>
                   </h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img
-                          src="@/assets/images/close.png" border="0" alt="close" data-bs-dismiss="modal"></button>
+                          src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/close.png" border="0" alt="close" data-bs-dismiss="modal"></button>
 
               </div>
               <div class="modal-body">

@@ -12,8 +12,8 @@
       <div class="container-xl">
           <div class="row justify-content-md-center">
               <div class="new-new-bank-title">
-                  <img id="NewNewBank_img" src="@/assets/images/form/NewNewBank_banner.gif" class="img-fluid" alt="">
-                  <img id="NewNewBank_img_s" src="@/assets/images/form/NewNewBank_banner_s.gif" class="img-fluid" alt="">
+                  <img id="NewNewBank_img" src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/NewNewBank_banner.gif" class="img-fluid" alt="">
+                  <img id="NewNewBank_img_s" src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/NewNewBank_banner_s.gif" class="img-fluid" alt="">
               </div>
               <div class="new-new-bank-txt py-4">
                   <div class="text-left text-md-center mb-3"><strong>感謝您！您已經是聯邦客戶，且已設定自動扣繳完成！</strong></div>
