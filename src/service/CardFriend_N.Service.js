@@ -126,6 +126,7 @@ const service = {
       console.log(res)
       return res
     } catch (err) {
+      console.log(err)
     }
   },
   async uploadImage (file) {

@@ -11,9 +11,9 @@
   <section class="mainArea">
     <div class="container-xl">
       <div class="row justify-content-md-center pt-1 pt-md-3">
-        <div class="col-lg-2 mb-4">
+        <div class="col-lg-2 mb-4 Card_img text-start text-md-center">
           <img
-            src="@/assets/images/form/card_b4s.jpg"
+            :src="FillinData.cardInfoPicture"
             class="img-fluid"
             alt=""
           />
@@ -21,24 +21,24 @@
         <div class="col-lg-10 mb-4 Apply_text">
           <p>
             <img
-              src="@/assets/images/form/Apply_icon.gif"
+              src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/Apply_icon.gif"
               class="img-fluid me-1"
               alt=""
-            />微風悠遊聯名卡MasterCard悠遊鈦金卡
+            />{{FillinData.cardInfoCardName}}
           </p>
           <p>
             <img
-              src="@/assets/images/form/Apply_icon.gif"
+              src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/Apply_icon.gif"
               class="img-fluid me-1"
               alt=""
-            />推廣資料<span class="red_text">專案代號：ETU</span>
+            />推廣資料<span class="red_text">專案代號：{{FillinData.projNum}}</span>
           </p>
-          <p>
+          <p v-if="FillinData.firstGift">
             <img
-              src="@/assets/images/form/Apply_icon.gif"
+              src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/Apply_icon.gif"
               class="img-fluid me-1"
               alt=""
-            />首刷禮：(代碼1) 刷卡金500元
+            />首刷禮：{{FillinData.firstGift}}
           </p>
         </div>
         <div class="mb-4"><strong>申請人資料</strong></div>
@@ -333,12 +333,11 @@
                 </li>
                 <li>
                   <div class="label_confirm">
-                    <span class="red_text">* </span>主要所得及資金來源
+                    <span class="red_text">* </span>所得及資金來源
                   </div>
                   <div class="input-data_confirm">
                     <p>
-                      {{FillinData.form.IncomeMain?.income}}
-                      <span v-if="FillinData.form.IncomeMain?.incomeOther">{{FillinData.form.IncomeMain?.incomeOther}}</span>
+                      {{FillinData.form.IncomeMain?.income.filter(item=>item!=='9其他').join()}}<span v-if="FillinData.form.IncomeMain?.income.includes('9其他')">,9其他-{{FillinData.form.IncomeMain?.incomeOther}}</span>
                     </p>
                   </div>
                 </li>
@@ -540,9 +539,9 @@
             ></span
           >
         </div>
-        <div class="Apply_note_box mb-4 indentNote_star" v-if="Apply_N_Type==='Written'">
-          <p><span class="blue_text"><strong>＊申請書資料已確認完成請按下一步同意送出，並請繼續完成財力上傳流程。</strong></span></p>
-          <p><span class="blue_text"><strong>＊請務必填寫至最後步驟，並列印出「簽名欄位」及黏貼「身分證影本欄位」，完成後請依回郵資訊將紙本寄回本行。</strong></span></p>
+        <div class="Apply_note_box mb-4" v-if="Apply_N_Type==='Written'">
+          <span class="blue_text"><strong>＊申請書資料已確認完成請按下一步同意送出，並請繼續完成財力上傳流程。</strong></span><br>
+          <span class="blue_text"><strong>＊您為<span class="red_text">『書面申請』</span>，請於線上完成申請後，務必<span class="red_text">列印申請書</span>並於<span class="red_text">簽名欄位親簽</span>，依回郵資訊寄回本行。</strong></span>
         </div>
         <div class="text-center button_group">
           <router-link

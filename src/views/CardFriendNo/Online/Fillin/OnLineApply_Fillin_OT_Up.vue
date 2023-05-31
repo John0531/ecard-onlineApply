@@ -81,7 +81,7 @@
                                 <div class="upload_txt text-center mt-2">存款(含戶名、帳號)</div>
                                 <img
                                 ref="resultImg1"
-                                src="@/assets/images/form/upload_photo.png"
+                                src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/upload_photo.png"
                                 class="img-fluid "
                                 alt="">
                             </div>
@@ -107,7 +107,7 @@
                                 <div class="upload_txt text-center mt-2">存款(含帳號之內頁)</div>
                                 <img
                                 ref="resultImg2"
-                                src="@/assets/images/form/upload_photo.png"
+                                src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/upload_photo.png"
                                 class="img-fluid"
                                 alt="">
                             </div>
@@ -138,7 +138,7 @@
                                 <div class="upload_txt text-center mt-2">存款(含戶名、帳號)</div>
                                 <img
                                 ref="resultImg3"
-                                src="@/assets/images/form/upload_photo.png"
+                                src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/upload_photo.png"
                                 class="img-fluid"
                                 alt="">
                             </div>
@@ -164,7 +164,7 @@
                                 <div class="upload_txt text-center mt-2">存款(含帳號之內頁)</div>
                                 <img
                                 ref="resultImg4"
-                                src="@/assets/images/form/upload_photo.png"
+                                src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/upload_photo.png"
                                 class="img-fluid"
                                 alt="">
                             </div>
@@ -260,41 +260,41 @@
                               ◆<strong>實體銀行存摺明細</strong><br>
                               (檢附存摺封面及內頁，需包含帳號、戶名、近一個月交易明細)
                           </div>
-                          <div class="col-12 text-center"><img src="@/assets/images/form/FinancialProof_01.jpg" class="img-fluid"></div>
+                          <div class="col-12 text-center"><img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/FinancialProof_01.jpg" class="img-fluid"></div>
                       </div>
                       <div class="row mb-4">
                           <div>
                               ◆<strong>數位銀行</strong><br>
                               (檢附資料需包含帳號、戶名、近一個月交易明細)
                           </div>
-                          <div class="col-12 text-center"><img src="@/assets/images/form/FinancialProof_02.jpg" class="img-fluid"></div>
+                          <div class="col-12 text-center"><img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/FinancialProof_02.jpg" class="img-fluid"></div>
                       </div>
                       <div class="row mb-4">
                           <div>
                               ◆<strong>薪資單</strong><br>
                               (為現職公司需包含公司名稱、姓名、薪資月份、所得明細)
                           </div>
-                          <div class="col-12 text-center"><img src="@/assets/images/form/FinancialProof_03.jpg" class="img-fluid"></div>
+                          <div class="col-12 text-center"><img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/FinancialProof_03.jpg" class="img-fluid"></div>
                       </div>
                       <div class="row mb-4">
                           <div>
                               ◆<strong>扣繳憑單</strong><br>
                               (需檢附現職最近一年度完整扣繳憑單)
                           </div>
-                          <div class="col-12 text-center"><img src="@/assets/images/form/FinancialProof_04.jpg" class="img-fluid"></div>
+                          <div class="col-12 text-center"><img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/FinancialProof_04.jpg" class="img-fluid"></div>
                       </div>
                       <div class="row mb-4">
                           <div>
                               ◆<strong>所得清單</strong><br>
                               (需檢附現職最近一年度完整所得清單)
                           </div>
-                          <div class="col-12 text-center"><img src="@/assets/images/form/FinancialProof_05.jpg" class="img-fluid"></div>
+                          <div class="col-12 text-center"><img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/FinancialProof_05.jpg" class="img-fluid"></div>
                       </div>
                       <div class="row mb-4">
                           <div>
                               ◆<strong>健保快易通</strong>
                           </div>
-                          <div class="col-12 text-center"><img src="@/assets/images/form/FinancialProof_06.jpg" class="img-fluid"></div>
+                          <div class="col-12 text-center"><img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/FinancialProof_06.jpg" class="img-fluid"></div>
                       </div>
                   </div>
                   <hr>
@@ -313,7 +313,7 @@
           <div class="modal-content">
               <div class="modal-header">
                   <h5 class="modal-title OnLineApply">財力證明修改</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click.prevent="destroy">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click.prevent="closeCroppieModal">
                     <img src="@/assets/images/form/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
                   </button>
               </div>
@@ -347,7 +347,7 @@
                           aria-label="Close"
                           @click="result(this.num)"
                           >
-                          財力證明修改
+                          確認
                           </button>
                       </div>
                   </div>
@@ -391,7 +391,7 @@
           <div class="modal-content MyData_modal">
               <div class="modal-header text-center">
                   <h5 class="modal-title w-100 pl-4"><strong>進入MyData平臺</strong></h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img src="@/assets/images/form/close.png" border="0" alt="close" data-bs-dismiss="modal"></button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/close.png" border="0" alt="close" data-bs-dismiss="modal"></button>
               </div>
               <p class="modal-body text-left">
                   您已充分了解個人化資料自主運用(MyData)平臺服務內容，並同意<a href="#" target="_blank" @click.prevent="goToMyDataTerms"><u>服務授權條款</u></a>。接下來您即將離開聯邦銀行網頁，前往MyData平臺，您可透過自然人憑證、行動自然人憑證或健保卡取得下列資訊：<br/> ●勞工保險被保險人投保資料(明細)
@@ -425,7 +425,7 @@
           <div class="modal-content">
               <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel-1">請向下滾動，仔細閱讀整份同意書所有內容<input id="myCheckCount" hidden></h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img src="@/assets/images/form/close.png" border="0" alt="close" data-bs-dismiss="modal"></button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/close.png" border="0" alt="close" data-bs-dismiss="modal"></button>
               </div>
               <div class="modal-body">
                   <!------------------1-------------------------------------------->
@@ -539,7 +539,7 @@
               <div class="modal-header">
                   <h5 class="modal-title"><input id="myCheckCount" hidden></h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <img src="@/assets/images/form/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
+                    <img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
                   </button>
               </div>
               <div class="modal-body">
@@ -620,57 +620,66 @@ export default {
         this.imgTemplateUrl = URL.createObjectURL(file)
         this.makeModify(file.size)
       }
-      // ? 清空value
-      // this.clearFiles(this.num)
     },
     async makeModify (fileSize) {
-      // ?呼叫modal準備呈現
-      this.CroppieModal.show()
+      // // ?呼叫modal準備呈現
+      // this.CroppieModal.show()
       this.$store.commit('changeLoading', true)
-      setTimeout(async () => {
-        const imgTemplate = document.getElementById('imgTemplate')
-        try {
-        // ?要呈現畫面的區域(在modal上)
-          const croppieE = this.$refs.myIdentifident
-          this[`identitiyPack${this.num}`].fileSize = fileSize
-          this[`identitiyPack${this.num}`].preViewImg = new this.$custom.Croppie(croppieE, {
-            viewport: {
-              width: imgTemplate.clientWidth,
-              height: imgTemplate.clientHeight
-            },
-            boundary: {
-              width: imgTemplate.clientWidth + 20,
-              height: imgTemplate.clientHeight + 20
-            },
-            showZoomer: true,
-            enableResize: true,
-            enableOrientation: true,
-            enableZoom: true,
-            enforceBoundary: true,
-            mouseWheelZoom: 'ctrl'
-            // maxZoom: 1
+      async function modalShow (dom, ref) {
+        dom.show()
+        return new Promise(resolve => {
+          ref.addEventListener('shown.bs.modal', function (event) {
+            resolve({
+              clientWidth: document.getElementById('imgTemplate').clientWidth,
+              clientHeight: document.getElementById('imgTemplate').clientHeight
+            })
           })
-          // ?bind在此時將jpg轉為png
-          await this[`identitiyPack${this.num}`].preViewImg.bind({
+        })
+      }
+      const imgTemplate = await modalShow(this.CroppieModal, this.$refs.CroppieModal)
+      try {
+      // ?要呈現畫面的區域(在modal上)
+        const croppieE = this.$refs.myIdentifident
+        this[`identitiyPack${this.num}`].fileSize = fileSize
+        this[`identitiyPack${this.num}`].preViewImg = new this.$custom.Croppie(croppieE, {
+          viewport: {
+            width: imgTemplate.clientWidth,
+            height: imgTemplate.clientHeight
+          },
+          boundary: {
+            width: imgTemplate.clientWidth + 20,
+            height: imgTemplate.clientHeight + 20
+          },
+          showZoomer: true,
+          enableResize: true,
+          enableOrientation: true,
+          enableZoom: true,
+          enforceBoundary: true,
+          mouseWheelZoom: 'ctrl'
+          // maxZoom: 1
+        })
+        // ?bind在此時將jpg轉為png
+        await this[`identitiyPack${this.num}`].preViewImg
+          .bind({
             url: this.imgTemplateUrl
           })
-          URL.revokeObjectURL(this.imgTemplateUrl)
-          this.imgTemplateUrl = ''
-          this.$store.commit('changeLoading', false)
-        } catch (error) {
-          alert(error)
-        }
-      }, 1500)
+        URL.revokeObjectURL(this.imgTemplateUrl)
+        this.imgTemplateUrl = ''
+        this.$store.commit('changeLoading', false)
+      } catch (error) {
+        alert(error)
+      }
     },
     async result () {
       this.$store.commit('changeLoading', true)
       // ?在頁面上各欄位自呈現
       const resultImg = this.$refs[`resultImg${this.num}`]
-      const base64View = await this[`identitiyPack${this.num}`].preViewImg.result({
-        type: 'base64',
-        size: 'original',
-        format: 'png'
-      })
+      const base64View = await this[`identitiyPack${this.num}`].preViewImg
+        .result({
+          type: 'base64',
+          size: 'original',
+          format: 'png'
+        })
       // ? 檔案大小超過 1MB 則壓縮
       let imgQuality = 1
       const compressSizeLimit = 1 * 1024 * 1024
@@ -678,18 +687,22 @@ export default {
         imgQuality = 0.3
       }
       // ? 檔案大小超過 1MB 則壓縮 end
-      const base64Compression = await this[`identitiyPack${this.num}`].preViewImg.result({
-        type: 'canvas',
-        quality: imgQuality,
-        format: 'jpeg',
-        size: 'original'
-      })
+      const base64Compression = await this[`identitiyPack${this.num}`].preViewImg
+        .result({
+          type: 'canvas',
+          quality: imgQuality,
+          format: 'jpeg',
+          size: 'original'
+        })
       this.$store.commit('changeLoading', false)
       resultImg.src = base64View // ? 外層瀏覽圖片
       resultImg.style = `height:${this.clientHeight}px;`// ? 外層瀏覽圖片
       this[`identitiyPack${this.num}`].file = base64Compression // ? 打給API的資料
       // ?編輯結束將相關物件資料銷毀
       this.CroppieModal.hide()
+      this.destroy()
+    },
+    closeCroppieModal () {
       this.destroy()
     },
     destroy () {
@@ -700,26 +713,24 @@ export default {
       document.querySelector(`#upload${this.num}`).value = ''
       this.num = ''
     },
-    clearFiles (num) {
-      // ?清空暫存檔案
-      document.querySelector(`#upload${num}`).value = null
-    },
     clearErrors () {
       this.$refs.myForm.setErrors({})
+      this.doubleAgree = false
     },
     async goToNNB () {
       await this.NNBModal.hide()
       this.$router.push('/dspApplicationNNB')
     },
     async submitSuitCase () {
+      console.log(this.form)
+      this.$refs.myForm.setErrors({})
       if (sessionStorage.getItem('FinancialStatement') === 'true') {
-        this.$refs.myForm.setErrors({})
+        console.log(true)
         this.checkIsPics()
         this.checkdoubleAgree()
         await this.$refs.myForm.validateField('財力證明')
         // const collection = await this.$refs.myForm.validate()
         const errors = await this.$refs.myForm.getErrors()
-        console.log(errors)
         if (Object.keys(errors).length === 0) {
           // ** ===全部通過打API才前往下一頁===
           // ** ===整理資料===
@@ -728,11 +739,13 @@ export default {
           }
           if (this.proofType === 'option1') {
             this.form.isMydata = false
+            console.log(this.identitiyPack1.file)
             this.form.upload1 = this.identitiyPack1.file.split(',')[1]
             this.form.upload2 = this.identitiyPack2.file.split(',')[1]
             this.form.upload3 = this.identitiyPack3.file.split(',')[1]
             this.form.upload4 = this.identitiyPack4.file.split(',')[1]
           }
+          console.log(this.form)
           const res = await PublicService.CardSendApply(this.form)
           PublicService.showAPIMsg(res.data.message)
           if (res.status === 200) {
@@ -769,6 +782,7 @@ export default {
       } else {
         // ? 無須提供財力證明
         // ? 無需上傳也要打API
+        console.log(false)
         const res = await PublicService.CardSendApply(this.form)
         PublicService.showAPIMsg(res.data.message)
         if (res.status === 200) {
@@ -816,6 +830,7 @@ export default {
       }
     },
     checkAgreement () {
+      this.agreementAll = false
       this.MyDataAgreeModal.show()
     },
     checkdoubleAgree () {

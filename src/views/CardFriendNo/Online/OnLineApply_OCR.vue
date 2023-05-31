@@ -35,7 +35,7 @@
                   <!-- <textarea name="TBupload1" id="TBupload1"style="display: none"></textarea> -->
                   <img
                   ref="resultImg1"
-                  src="@/assets/images/form/ID_photo.png"
+                  src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/ID_photo.png"
                   class="img-fluid"
                   alt="" />
                 </div>
@@ -55,7 +55,7 @@
                   <!-- <textarea name="TBupload2" id="TBupload2" style="display: none"></textarea> -->
                   <img
                     ref="resultImg2"
-                    src="@/assets/images/form/ID_photo_b.png"
+                    src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/ID_photo_b.png"
                     class="img-fluid"
                     alt=""
                   />
@@ -262,9 +262,9 @@
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       @keyup="Form.homeAddr.Lane = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Lane)"
                       maxlength="5"
-                      class="form-control input_number me-1"
+                      class="form-control input_number"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
-                    />巷
+                    /><span class="input_number_text">巷</span>
                     <Field
                       name="homeAddr_Aly"
                       type="text"
@@ -272,9 +272,9 @@
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       @keyup="Form.homeAddr.Aly = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Aly)"
                       maxlength="5"
-                      class="form-control input_number mx-1"
+                      class="form-control input_number"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
-                    />弄
+                    /><span class="input_number_text">弄</span>
                     <Field
                       name="homeAddr_Num"
                       type="text"
@@ -282,9 +282,9 @@
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       @keyup="Form.homeAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Num)"
                       maxlength="5"
-                      class="form-control input_number mx-1"
-                      :class="{ 'is-invalid': errors['戶籍地址'] }"
-                    />-
+                      class="form-control input_number"
+                      :class="{ 'is-invalid': errors['戶籍地址']||errors['戶籍地址-號'] }"
+                    /><span class="input_number_text">-</span>
                     <Field
                       name="homeAddr_Of"
                       type="text"
@@ -292,9 +292,9 @@
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       @keyup="Form.homeAddr.Of = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Of)"
                       maxlength="5"
-                      class="form-control input_number ms-sm-1 me-1"
+                      class="form-control input_number"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
-                    />號
+                    /><span class="input_number_text">號</span>
                     <Field
                       name="homeAddr_Flr"
                       type="text"
@@ -302,9 +302,9 @@
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       @keyup="Form.homeAddr.Flr = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Flr)"
                       maxlength="5"
-                      class="form-control input_number mx-1"
+                      class="form-control input_number"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
-                    />樓
+                    /><span class="input_number_text">樓</span>
                     <Field
                       name="homeAddr_Other"
                       type="text"
@@ -316,6 +316,7 @@
                     />
                   </div>
                   <p v-if="errors['戶籍地址']" class="field-error">{{ errors['戶籍地址'] }}</p>
+                  <p v-if="errors['戶籍地址-號']" class="field-error">{{ errors['戶籍地址-號'] }}</p>
                   </li>
                 </ul>
               </div>
@@ -375,7 +376,7 @@
                           aria-label="Close"
                           @click="result(this.num)"
                           >
-                          確認修改
+                          確認
                           </button>
                       </div>
                   </div>
@@ -391,12 +392,12 @@
                 <div class="modal-header">
                     <h5 class="modal-title OnLineApply">身分證拍照小技巧</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                      <img src="@/assets/images/form/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
+                      <img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="text-center py-3">
-                      <img src="@/assets/images/form/ID_photo_m.png" class="img-fluid" alt=""></div>
+                      <img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/ID_photo_m.png" class="img-fluid" alt=""></div>
                     <div class="text-center py-3">
                         <div class="text-start d-inline-block">
                             ①拍攝時手機請使用「橫向」拍攝，以避免反光。<br>
@@ -421,7 +422,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title"><input id="myCheckCount" hidden></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                      <img src="@/assets/images/form/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
+                      <img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
                     </button>
                 </div>
                 <div class="modal-body">

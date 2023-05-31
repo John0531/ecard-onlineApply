@@ -237,7 +237,7 @@
                   </h5>
                   <button type="button" class="btn-close" aria-label="Close" @click="this.agreeModal.hide();">
                     <img
-                      src="@/assets/images/form/close.png" border="0" alt="close">
+                      src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/close.png" border="0" alt="close">
                   </button>
               </div>
               <div class="modal-body">
