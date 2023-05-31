@@ -337,8 +337,7 @@
                   </div>
                   <div class="input-data_confirm">
                     <p>
-                      {{FillinData.form.IncomeMain?.income}}
-                      <span v-if="FillinData.form.IncomeMain?.incomeOther">{{FillinData.form.IncomeMain?.incomeOther}}</span>
+                      {{FillinData.form.IncomeMain?.income.filter(item=>item!=='9其他').join()}}<span v-if="FillinData.form.IncomeMain?.income.includes('9其他')">,9其他-{{FillinData.form.IncomeMain?.incomeOther}}</span>
                     </p>
                   </div>
                 </li>

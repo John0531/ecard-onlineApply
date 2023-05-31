@@ -377,7 +377,7 @@
                       @keyup="Form.homeAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Num)"
                       maxlength="5"
                       class="form-control input_number"
-                      :class="{ 'is-invalid': errors['戶籍地址'] }"
+                      :class="{ 'is-invalid': errors['戶籍地址']||errors['戶籍地址-號'] }"
                     /><span class="input_number_text">-</span>
                     <Field
                       name="homeAddr_Of"
@@ -410,6 +410,7 @@
                     />
                   </div>
                   <p v-if="errors['戶籍地址']" class="field-error">{{ errors['戶籍地址'] }}</p>
+                  <p v-if="errors['戶籍地址-號']" class="field-error">{{ errors['戶籍地址-號'] }}</p>
                 </li>
                 <li class="col-12 col-md-12">
                   <label for=""><span class="red_text">* </span>居住地址<button @click.prevent="sameHomeAddr" type="button" class="OnLineApply_button ms-2 mb-2">同戶籍地址</button></label>
@@ -483,7 +484,7 @@
                       @keyup="Form.liveAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.liveAddr.Num)"
                       maxlength="5"
                       class="form-control input_number"
-                      :class="{ 'is-invalid': errors['居住地址'] }"
+                      :class="{ 'is-invalid': errors['居住地址']||errors['居住地址-號'] }"
                     /><span class="input_number_text">-</span>
                     <Field
                       name="liveAddr_Of"
@@ -527,6 +528,7 @@
                     <label class="form_Apply_txt fw-normal" for="居住地址-同戶籍地址">同戶籍地址</label>
                   </div> -->
                   <p v-if="errors['居住地址']" class="field-error">{{ errors['居住地址'] }}</p>
+                  <p v-if="errors['居住地址-號']" class="field-error">{{ errors['居住地址-號'] }}</p>
                 </li>
                 <li class="col-12 col-md-12">
                   <label for=""><span class="red_text">* </span>帳單地址</label>
@@ -977,7 +979,7 @@
                         @keyup="Form.parentAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.parentAddr.Num)"
                         maxlength="5"
                         class="form-control input_number"
-                        :class="{ 'is-invalid': errors['家長通訊地址'] }"
+                        :class="{ 'is-invalid': errors['家長通訊地址']||errors['家長通訊地址-號'] }"
                       /><span class="input_number_text">-</span>
                       <Field
                         name="parentAddr_Of"
@@ -1010,6 +1012,7 @@
                       />
                     </div>
                     <p v-if="errors['家長通訊地址']" class="field-error">{{ errors['家長通訊地址'] }}</p>
+                    <p v-if="errors['家長通訊地址-號']" class="field-error">{{ errors['家長通訊地址-號'] }}</p>
                   </li>
                 </template>
                 <!-----//新增學生欄位----->
@@ -1147,7 +1150,7 @@
                       @keyup="Form.compAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Num)"
                       maxlength="5"
                       class="form-control input_number mx-1"
-                      :class="{ 'is-invalid': errors['公司地址'] }"
+                      :class="{ 'is-invalid': errors['公司地址']||errors['公司地址-號'] }"
                     /><span class="input_number_text">-</span>
                     <Field
                       name="compAddr_Of"
@@ -1180,6 +1183,7 @@
                     />
                   </div>
                   <p v-if="errors['公司地址']" class="field-error">{{ errors['公司地址'] }}</p>
+                  <p v-if="errors['公司地址-號']" class="field-error">{{ errors['公司地址-號'] }}</p>
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">職稱</label>
@@ -1287,6 +1291,7 @@
                           runat="server"
                           class="form-check-input mt-2 position-absolute"
                           :value="item.VALUE"
+                          :validateOnInput="true"
                         />
                         <div class="form_Apply_txt">
                           {{item.SHOW}}
@@ -1302,6 +1307,8 @@
                           runat="server"
                           class="form-check-input mt-2 position-absolute"
                           :value="item.VALUE"
+                          :validateOnInput="true"
+                          @click="Form.IncomeMain.incomeKey.includes('9')?Form.IncomeMain.incomeOther='':''"
                         />
                         <div class="d-flex align-items-center">
                           <span class="text-nowrap form_Apply_txt">{{item.SHOW}}</span>
@@ -1313,6 +1320,7 @@
                             type="text"
                             class="form-control other_input ms-1"
                             maxlength="10"
+                            @blur="(Form.IncomeMain.incomeOther&&!Form.IncomeMain.incomeKey.includes('9'))?(Form.IncomeMain.incomeKey.push('9'),$refs.form.setFieldError('主要所得及資金來源', '')):''"
                           />
                         </div>
                       </label>
@@ -1601,19 +1609,26 @@ export default {
           n.liveStatus = ''
         }
         // ? 主要收入來源
-        if (n.IncomeMain.incomeKey.length !== 0) {
-          const arr = []
-          this.selectJson.INCOME.forEach((item1) => {
-            n.IncomeMain.incomeKey.forEach((item2) => {
-              if (item1.VALUE === item2) {
-                arr.push(item1.SHOW)
-              }
-            })
-          })
-          n.IncomeMain.income = arr
-        } else {
-          n.IncomeMain.income = []
-        }
+        // if (!n.IncomeMain.incomeKey.includes('9')) {
+        //   n.IncomeMain.incomeOther = ''
+        // }
+        // if (n.IncomeMain.incomeKey.length !== 0) {
+        //   const arr = []
+        //   this.selectJson.INCOME.forEach((item1) => {
+        //     n.IncomeMain.incomeKey.forEach((item2) => {
+        //       if (item1.VALUE === item2) {
+        //         arr.push(item1.SHOW)
+        //       }
+        //     })
+        //   })
+        //   n.IncomeMain.income = arr
+        // } else {
+        //   n.IncomeMain.income = []
+        // }
+        // ? 主要收入來源-其他
+        // if (n.IncomeMain.incomeOther !== '') {
+        //   n.IncomeMain.incomeKey.push('9')
+        // }
         // ? 職業別
         if (n.job.jobTypeKey) {
           n.job.jobType = this.selectJson.JOBTYPE.find(item => item.VALUE === n.job.jobTypeKey).SHOW
@@ -1782,6 +1797,14 @@ export default {
           Other: ''
         }
       }
+      this.Form.IncomeMain.income = []
+      this.selectJson.INCOME.forEach((item1) => {
+        this.Form.IncomeMain.incomeKey.forEach((item2) => {
+          if (item1.VALUE === item2) {
+            this.Form.IncomeMain.income.push(item1.SHOW)
+          }
+        })
+      })
       const postData = JSON.parse(JSON.stringify(this.Form))
       postData.iddate = {
         ...this.Form.iddate,
