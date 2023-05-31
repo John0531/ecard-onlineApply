@@ -354,9 +354,9 @@
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       @keyup="Form.homeAddr.Lane = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Lane)"
                       maxlength="5"
-                      class="form-control input_number me-1"
+                      class="form-control input_number"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
-                    />巷
+                    /><span class="input_number_text">巷</span>
                     <Field
                       name="homeAddr_Aly"
                       type="text"
@@ -366,17 +366,19 @@
                       maxlength="5"
                       class="form-control input_number mx-1"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
-                    />弄
+                    /><span class="input_number_text">弄</span>
+                    <div class="w-100 d-block d-md-none"></div>
                     <Field
+                      placeholder="必填"
                       name="homeAddr_Num"
                       type="text"
                       v-model="Form.homeAddr.Num"
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       @keyup="Form.homeAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Num)"
                       maxlength="5"
-                      class="form-control input_number mx-1"
+                      class="form-control input_number"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
-                    />-
+                    /><span class="input_number_text">-</span>
                     <Field
                       name="homeAddr_Of"
                       type="text"
@@ -384,9 +386,9 @@
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       @keyup="Form.homeAddr.Of = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Of)"
                       maxlength="5"
-                      class="form-control input_number ms-sm-1 me-1"
+                      class="form-control input_number"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
-                    />號
+                    /><span class="input_number_text">號</span>
                     <Field
                       name="homeAddr_Flr"
                       type="text"
@@ -394,9 +396,9 @@
                       @blur="$custom.validate.CheckAddressAll(Form.homeAddr,$refs.form,'戶籍地址')"
                       @keyup="Form.homeAddr.Flr = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Flr)"
                       maxlength="5"
-                      class="form-control input_number mx-1"
+                      class="form-control input_number"
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
-                    />樓
+                    /><span class="input_number_text">樓</span>
                     <Field
                       name="homeAddr_Other"
                       type="text"
@@ -410,7 +412,7 @@
                   <p v-if="errors['戶籍地址']" class="field-error">{{ errors['戶籍地址'] }}</p>
                 </li>
                 <li class="col-12 col-md-12">
-                  <label for=""><span class="red_text">* </span>居住地址</label>
+                  <label for=""><span class="red_text">* </span>居住地址<button @click.prevent="sameHomeAddr" type="button" class="OnLineApply_button ms-2 mb-2">同戶籍地址</button></label>
                   <div
                     class="d-flex flex-wrap flex-md-nowrap apply_address align-items-center"
                   >
@@ -458,9 +460,9 @@
                       @blur="$custom.validate.CheckAddressAll(Form.liveAddr,$refs.form,'居住地址')"
                       @keyup="Form.liveAddr.Lane = $custom.validate.NumOnlyWithoutFirstZero(Form.liveAddr.Lane)"
                       maxlength="5"
-                      class="form-control input_number me-1"
+                      class="form-control input_number"
                       :class="{ 'is-invalid': errors['居住地址'] }"
-                    />巷
+                    /><span class="input_number_text">巷</span>
                     <Field
                       name="liveAddr_Aly"
                       type="text"
@@ -468,19 +470,21 @@
                       @blur="$custom.validate.CheckAddressAll(Form.liveAddr,$refs.form,'居住地址')"
                       @keyup="Form.liveAddr.Aly = $custom.validate.NumOnlyWithoutFirstZero(Form.liveAddr.Aly)"
                       maxlength="5"
-                      class="form-control input_number mx-1"
+                      class="form-control input_number"
                       :class="{ 'is-invalid': errors['居住地址'] }"
-                    />弄
+                    /><span class="input_number_text">弄</span>
+                    <div class="w-100 d-block d-md-none"></div>
                     <Field
+                      placeholder="必填"
                       name="liveAddr_Num"
                       type="text"
                       v-model="Form.liveAddr.Num"
                       @blur="$custom.validate.CheckAddressAll(Form.liveAddr,$refs.form,'居住地址')"
                       @keyup="Form.liveAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.liveAddr.Num)"
                       maxlength="5"
-                      class="form-control input_number mx-1"
+                      class="form-control input_number"
                       :class="{ 'is-invalid': errors['居住地址'] }"
-                    />-
+                    /><span class="input_number_text">-</span>
                     <Field
                       name="liveAddr_Of"
                       type="text"
@@ -488,9 +492,9 @@
                       @blur="$custom.validate.CheckAddressAll(Form.liveAddr,$refs.form,'居住地址')"
                       @keyup="Form.liveAddr.Of = $custom.validate.NumOnlyWithoutFirstZero(Form.liveAddr.Of)"
                       maxlength="5"
-                      class="form-control input_number ms-sm-1 me-1"
+                      class="form-control input_number"
                       :class="{ 'is-invalid': errors['居住地址'] }"
-                    />號
+                    /><span class="input_number_text">號</span>
                     <Field
                       name="liveAddr_Flr"
                       type="text"
@@ -498,9 +502,9 @@
                       @blur="$custom.validate.CheckAddressAll(Form.liveAddr,$refs.form,'居住地址')"
                       @keyup="Form.liveAddr.Flr = $custom.validate.NumOnlyWithoutFirstZero(Form.liveAddr.Flr)"
                       maxlength="5"
-                      class="form-control input_number mx-1"
+                      class="form-control input_number"
                       :class="{ 'is-invalid': errors['居住地址'] }"
-                    />樓
+                    /><span class="input_number_text">樓</span>
                     <Field
                       name="liveAddr_Other"
                       type="text"
@@ -511,7 +515,7 @@
                       :class="{ 'is-invalid': errors['居住地址'] }"
                     />
                   </div>
-                  <div class="form-check">
+                  <!-- <div class="form-check">
                     <input
                       @click="sameHomeAddr"
                       class="form-check-input mt-2 position-absolute"
@@ -521,7 +525,7 @@
                       value="option1"
                     />
                     <label class="form_Apply_txt fw-normal" for="居住地址-同戶籍地址">同戶籍地址</label>
-                  </div>
+                  </div> -->
                   <p v-if="errors['居住地址']" class="field-error">{{ errors['居住地址'] }}</p>
                 </li>
                 <li class="col-12 col-md-12">
@@ -862,7 +866,7 @@
                   </li>
                   <li class="col-12 col-md-12 mb-2">
                     <div>
-                      <span>※貼心提醒：學生辦卡依金融法令規範發卡行應將發卡情事通知父母或法定代理人，請您提供1.家長姓名(直系血親尊親屬)、2.家長手機、3.通知書寄送地址以利後續通知事宜。
+                      <span>※貼心提醒：學生辦卡依金融法令規範發卡行應將發卡情事通知父母或法定代理人，請您提供1.家長姓名(直系血親尊親屬)2.家長手機(如無手機請改提供居住電話)3.通知書寄送地址以利後續通知事宜。
                       </span>
                     </div>
                   </li>
@@ -892,7 +896,7 @@
                       :class="{'is-invalid':errors['家長聯絡電話']}"
                       name="家長聯絡電話"
                       type="text"
-                      maxlength="10"
+                      maxlength="12"
                       class="form-control"
                       @keyup="Form.parentTel = $custom.validate.OnlyNumPress(Form.parentTel)"
                     />
@@ -950,9 +954,9 @@
                         @blur="$custom.validate.CheckAddressAll(Form.parentAddr,$refs.form,'家長通訊地址')"
                         @keyup="Form.parentAddr.Lane = $custom.validate.NumOnlyWithoutFirstZero(Form.parentAddr.Lane)"
                         maxlength="5"
-                        class="form-control input_number me-1"
+                        class="form-control input_number"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
-                      />巷
+                      /><span class="input_number_text">巷</span>
                       <Field
                         name="parentAddr_Aly"
                         type="text"
@@ -960,19 +964,21 @@
                         @blur="$custom.validate.CheckAddressAll(Form.parentAddr,$refs.form,'家長通訊地址')"
                         @keyup="Form.parentAddr.Aly = $custom.validate.NumOnlyWithoutFirstZero(Form.parentAddr.Aly)"
                         maxlength="5"
-                        class="form-control input_number mx-1"
+                        class="form-control input_number"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
-                      />弄
+                      /><span class="input_number_text">弄</span>
+                      <div class="w-100 d-block d-md-none"></div>
                       <Field
+                        placeholder="必填"
                         name="parentAddr_Num"
                         type="text"
                         v-model="Form.parentAddr.Num"
                         @blur="$custom.validate.CheckAddressAll(Form.parentAddr,$refs.form,'家長通訊地址')"
                         @keyup="Form.parentAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.parentAddr.Num)"
                         maxlength="5"
-                        class="form-control input_number mx-1"
+                        class="form-control input_number"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
-                      />-
+                      /><span class="input_number_text">-</span>
                       <Field
                         name="parentAddr_Of"
                         type="text"
@@ -980,9 +986,9 @@
                         @blur="$custom.validate.CheckAddressAll(Form.parentAddr,$refs.form,'家長通訊地址')"
                         @keyup="Form.parentAddr.Of = $custom.validate.NumOnlyWithoutFirstZero(Form.parentAddr.Of)"
                         maxlength="5"
-                        class="form-control input_number ms-sm-1 me-1"
+                        class="form-control input_number"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
-                      />號
+                      /><span class="input_number_text">號</span>
                       <Field
                         name="parentAddr_Flr"
                         type="text"
@@ -990,9 +996,9 @@
                         @blur="$custom.validate.CheckAddressAll(Form.parentAddr,$refs.form,'家長通訊地址')"
                         @keyup="Form.parentAddr.Flr = $custom.validate.NumOnlyWithoutFirstZero(Form.parentAddr.Flr)"
                         maxlength="5"
-                        class="form-control input_number mx-1"
+                        class="form-control input_number"
                         :class="{ 'is-invalid': errors['家長通訊地址'] }"
-                      />樓
+                      /><span class="input_number_text">樓</span>
                       <Field
                         name="parentAddr_Other"
                         type="text"
@@ -1046,7 +1052,7 @@
                     <Field
                       v-model="Form.comp.compAreaCode"
                       name="compAreaCode"
-                      maxlength="3"
+                      maxlength="4"
                       @keyup="Form.comp.compAreaCode = $custom.validate.OnlyNumPress(Form.comp.compAreaCode)"
                       type="text"
                       class="form-control AreaCode me-1"
@@ -1062,7 +1068,7 @@
                     <Field
                       v-model="Form.comp.compExt"
                       name="compExt"
-                      maxlength="8"
+                      maxlength="6"
                       @keyup="Form.comp.compExt = $custom.validate.OnlyNumPress(Form.comp.compExt)"
                       type="text"
                       class="form-control Ext ms-1"
@@ -1118,9 +1124,9 @@
                       @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Lane = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Lane)"
                       maxlength="5"
-                      class="form-control input_number me-1"
+                      class="form-control input_number"
                       :class="{ 'is-invalid': errors['公司地址'] }"
-                    />巷
+                    /><span class="input_number_text">巷</span>
                     <Field
                       name="compAddr_Aly"
                       type="text"
@@ -1128,10 +1134,12 @@
                       @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Aly = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Aly)"
                       maxlength="5"
-                      class="form-control input_number mx-1"
+                      class="form-control input_number"
                       :class="{ 'is-invalid': errors['公司地址'] }"
-                    />弄
+                    /><span class="input_number_text">弄</span>
+                    <div class="w-100 d-block d-md-none"></div>
                     <Field
+                      placeholder="必填"
                       name="compAddr_Num"
                       type="text"
                       v-model="Form.compAddr.Num"
@@ -1140,7 +1148,7 @@
                       maxlength="5"
                       class="form-control input_number mx-1"
                       :class="{ 'is-invalid': errors['公司地址'] }"
-                    />-
+                    /><span class="input_number_text">-</span>
                     <Field
                       name="compAddr_Of"
                       type="text"
@@ -1148,9 +1156,9 @@
                       @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Of = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Of)"
                       maxlength="5"
-                      class="form-control input_number ms-sm-1 me-1"
+                      class="form-control input_number"
                       :class="{ 'is-invalid': errors['公司地址'] }"
-                    />號
+                    /><span class="input_number_text">號</span>
                     <Field
                       name="compAddr_Flr"
                       type="text"
@@ -1158,9 +1166,9 @@
                       @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Flr = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Flr)"
                       maxlength="5"
-                      class="form-control input_number mx-1"
+                      class="form-control input_number"
                       :class="{ 'is-invalid': errors['公司地址'] }"
-                    />樓
+                    /><span class="input_number_text">樓</span>
                     <Field
                       name="compAddr_Other"
                       type="text"
@@ -1263,35 +1271,51 @@
                     class="field-error"
                   />
                 </li>
-                <li class="col-12 col-md-6">
+                <li class="col-12 col-md-12">
                   <label for=""
-                    ><span class="red_text">* </span>主要所得及資金來源</label
+                    ><span class="red_text">* </span>所得及資金來源</label
                   >
-                  <div class="d-flex flex-wrap flex-md-nowrap align-items-center">
-                    <Field
-                      v-model="Form.IncomeMain.incomeKey"
-                      rules="required"
-                      :class="{ 'is-invalid': errors['主要所得及資金來源'] }"
-                      as="select"
-                      name="主要所得及資金來源"
-                      runat="server"
-                      id="SelM"
-                      class="form-select form-control me-1"
-                      @change="Form.IncomeMain.incomeKey!=='9'?Form.IncomeMain.incomeOther='':''"
-                    >
-                      <option v-for="item in selectJson.INCOME" :key="item.VALUE" :value="item.VALUE">{{item.SHOW}}</option>
-                    </Field>
-                    <div class="d-flex align-items-center" v-if="Form.IncomeMain.incomeKey==='9'">
-                      <span class="text-nowrap">其他</span>
-                      <Field
-                        v-model="Form.IncomeMain.incomeOther"
-                        rules="required"
-                        :class="{ 'is-invalid': errors['主要所得及資金來源-其他'] }"
-                        name="主要所得及資金來源-其他"
-                        type="text"
-                        class="form-control other_input ms-1 my-2 my-md-0"
-                        maxlength="10"
-                      />
+                  <div class="d-flex flex-wrap flex-column flex-md-row">
+                    <div class="form-check me-4" v-for="item in selectJson.INCOME.filter(item=>item.VALUE)" :key="item.VALUE">
+                      <label v-if="item.VALUE!=='9'">
+                        <Field
+                          v-model="Form.IncomeMain.incomeKey"
+                          rules="required"
+                          :class="{ 'is-invalid': errors['主要所得及資金來源'] }"
+                          type="checkbox"
+                          name="主要所得及資金來源"
+                          runat="server"
+                          class="form-check-input mt-2 position-absolute"
+                          :value="item.VALUE"
+                        />
+                        <div class="form_Apply_txt">
+                          {{item.SHOW}}
+                        </div>
+                      </label>
+                      <label v-if="item.VALUE==='9'">
+                        <Field
+                          v-model="Form.IncomeMain.incomeKey"
+                          rules="required"
+                          :class="{ 'is-invalid': errors['主要所得及資金來源'] }"
+                          type="checkbox"
+                          name="主要所得及資金來源"
+                          runat="server"
+                          class="form-check-input mt-2 position-absolute"
+                          :value="item.VALUE"
+                        />
+                        <div class="d-flex align-items-center">
+                          <span class="text-nowrap form_Apply_txt">{{item.SHOW}}</span>
+                          <Field
+                            v-model="Form.IncomeMain.incomeOther"
+                            :rules="{'required':Form.IncomeMain.incomeKey.includes('9')}"
+                            :class="{ 'is-invalid': errors['主要所得及資金來源-其他'] }"
+                            name="主要所得及資金來源-其他"
+                            type="text"
+                            class="form-control other_input ms-1"
+                            maxlength="10"
+                          />
+                        </div>
+                      </label>
                     </div>
                   </div>
                   <ErrorMessage
@@ -1488,8 +1512,8 @@ export default {
         jobLVKey: '',
         jobLV: '',
         IncomeMain: {
-          incomeKey: '',
-          income: '',
+          incomeKey: [],
+          income: [],
           incomeOther: ''
         },
         salary: '',
@@ -1577,10 +1601,18 @@ export default {
           n.liveStatus = ''
         }
         // ? 主要收入來源
-        if (n.IncomeMain.incomeKey) {
-          n.IncomeMain.income = this.selectJson.INCOME.find(item => item.VALUE === n.IncomeMain.incomeKey).SHOW
+        if (n.IncomeMain.incomeKey.length !== 0) {
+          const arr = []
+          this.selectJson.INCOME.forEach((item1) => {
+            n.IncomeMain.incomeKey.forEach((item2) => {
+              if (item1.VALUE === item2) {
+                arr.push(item1.SHOW)
+              }
+            })
+          })
+          n.IncomeMain.income = arr
         } else {
-          n.IncomeMain.income = ''
+          n.IncomeMain.income = []
         }
         // ? 職業別
         if (n.job.jobTypeKey) {
@@ -1617,7 +1649,6 @@ export default {
       }
       if (FillinData?.OT) {
         FillinData.OT.liveStatusKey = FillinData.OT.liveStatusKey.toString()
-        FillinData.OT.IncomeMain.incomeKey = FillinData.OT.IncomeMain.incomeKey.toString()
         FillinData.OT.job.jobTypeKey = FillinData.OT.job.jobTypeKey.toString()
         FillinData.OT.jobLVKey = FillinData.OT.jobLVKey.toString()
         if (FillinData.OT.compAddr === null) {

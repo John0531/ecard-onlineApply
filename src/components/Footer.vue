@@ -2,7 +2,7 @@
   <div class="footer">
         <div class="serviceItems">
             <div class="container-fluid">
-                <div class="contact">服務專線：<a href="tel:+886-2-25455168">(02)2545-5168</a>、<a href="tel:+886-7-226-9393">(07)226-9393</a>、拒絕接受行銷專線<a href="tel:+886-800-066-678">0800-066-678</a>、<a href="https://web.ubot.com.tw/call/notice_ecard202101.html" target="_blank">線上客服</a></div>
+                <div class="contact">服務專線：<a href="tel:+886-2-25455168">(02)2545-5168</a>、<a href="tel:+886-7-226-9393">(07)226-9393</a>、拒絕接受行銷專線<a href="tel:+886-800-066-678">0800-066-678</a>、<a href="https://card.ubot.com.tw/eCard/activity/quickSearch/index.htm?nt01=1" target="_blank">線上客服</a></div>
                 <div class="links">
                     <a href="index.htm">回首頁</a>
                     <a href="https://www.ubot.com.tw/" target="_blank">關於聯邦</a>

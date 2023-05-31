@@ -7,7 +7,7 @@ import store from '@/store'
 const service = {
   async getJson () {
     try {
-      const url = 'https://yesgoimages.s3.ap-northeast-1.amazonaws.com/ecard/Utility.json'
+      const url = `${process.env.VUE_APP_STATIC}/files/OnlineApply/Utility.json?${hash(8)}`
       const res = await axios.get(url, { withCredentials: false })
       return res.data
     } catch (err) {
@@ -25,7 +25,7 @@ const service = {
     try {
       const termsArr = []
       // ? 取得比對 json
-      const url = `${process.env.VUE_APP_STATIC}/terms/json/terms.json`
+      const url = `${process.env.VUE_APP_STATIC}/terms/json/terms.json?${hash(8)}`
       const res = await axios.get(url, { withCredentials: false })
       if (typeof res.data === 'string') {
         store.commit('getErrorMsg', '檔案讀取有誤，請重新輸入或洽聯邦信用卡客服專線，02-25455168、07-2269393')
@@ -64,7 +64,7 @@ const service = {
   //* yesgogogo
   async getYesGo () {
     try {
-      const url = `${process.env.VUE_APP_STATIC}/includeBlock/yesgogogo.html`
+      const url = `${process.env.VUE_APP_STATIC}/includeBlock/yesgogogo.html?${hash(8)}`
       const res = await axios.get(url, { withCredentials: false })
       const cleanHTML = res.data.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
       var parser = new DOMParser()
@@ -77,7 +77,7 @@ const service = {
   //* 年費政策
   async getYearFee () {
     try {
-      const url = `${process.env.VUE_APP_STATIC}/html/CardDetail/cardDetail601.htm`
+      const url = `${process.env.VUE_APP_STATIC}/html/CardDetail/cardDetail601.htm?${hash(8)}`
       const res = await axios.get(url, { withCredentials: false })
       // HTML
       const regex = /<div class="cardDetail_fee">(.*?)<\/div>/s

@@ -1,12 +1,14 @@
+import { hash } from '@/utilities/hash.js'
+
 const url = [
-  `${process.env.VUE_APP_STATIC}/applyCss/animate.min.css`,
-  `${process.env.VUE_APP_STATIC}/css/style_B5.css`,
-  `${process.env.VUE_APP_STATIC}/applyCss/form_Common.css`,
-  `${process.env.VUE_APP_STATIC}/applyCss/OnLineApply.css`,
-  `${process.env.VUE_APP_STATIC}/applyCss/NNB.css`,
-  `${process.env.VUE_APP_STATIC}/includeBlock/yesgogogo.css`,
-  `${process.env.VUE_APP_STATIC}/terms/css/terms.css`,
-  `${process.env.VUE_APP_STATIC}/applyCss/alert.css`
+  `${process.env.VUE_APP_STATIC}/applyCss/animate.min.css?${hash(8)}`,
+  `${process.env.VUE_APP_STATIC}/css/style_B5.css?${hash(8)}`,
+  `${process.env.VUE_APP_STATIC}/applyCss/form_Common.css?${hash(8)}`,
+  `${process.env.VUE_APP_STATIC}/applyCss/OnLineApply.css?${hash(8)}`,
+  `${process.env.VUE_APP_STATIC}/applyCss/NNB.css?${hash(8)}`,
+  `${process.env.VUE_APP_STATIC}/includeBlock/yesgogogo.css?${hash(8)}`,
+  `${process.env.VUE_APP_STATIC}/terms/css/terms.css?${hash(8)}`,
+  `${process.env.VUE_APP_STATIC}/applyCss/alert.css?${hash(8)}`
 ]
 
 url.forEach((item) => {
