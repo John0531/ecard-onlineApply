@@ -407,8 +407,8 @@ export default ({
       const res = await PublicService.otpGet()
       if (res.status === 200) {
         //* 更新tag
-        this.tag = res.data.result.tag
-        this.mbleTelNbr = res.data.result.mbleTelNbr
+        this.tag = res.data.result?.tag
+        this.mbleTelNbr = res.data.result?.mbleTelNbr
         PublicService.showAPIMsg(res.data.message)
         //* 驗證碼倒數計時
         this.count = 30
@@ -462,12 +462,8 @@ export default ({
     // this.mbleTelNbr = res.data.result.mbleTelNbr
     // this.tag = res.data.result.tag
     this.getMobileMsgCode()
-    // console.log(res)
-    // if (res.status === 200) {
     //   //* 資料處理
     //   //* 確認手機是否有值?若有發送簡訊碼
-    //   this.getMobileMsgCode()
-    // }
   }
 })
 </script>

@@ -693,6 +693,7 @@ export default {
         size: 'original'
       })
       this.$store.commit('changeLoading', false)
+      //
       resultImg.src = base64View // ? 外層瀏覽圖片
       resultImg.style = `height:${this.clientHeight}px;`// ? 外層瀏覽圖片
       this[`identitiyPack${this.num}`].file = base64Compression // ? 打給API的資料
