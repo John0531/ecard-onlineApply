@@ -323,7 +323,7 @@
                           <div>
                               ◆<strong>原始圖片</strong><br>
                               (請框選可供辨識之大小範圍)
-                              <img id="imgTemplate" :src="imgTemplateUrl" alt="" class="img-fluid">
+                              <img v-if="imgTemplateUrl" id="imgTemplate" :src="imgTemplateUrl" alt="" class="img-fluid">
                           </div>
                           <div id="myIdentifident" class="myIdentifident" ref="myIdentifident">
                           </div>
@@ -674,12 +674,11 @@ export default {
       this.$store.commit('changeLoading', true)
       // ?在頁面上各欄位自呈現
       const resultImg = this.$refs[`resultImg${this.num}`]
-      const base64View = await this[`identitiyPack${this.num}`].preViewImg
-        .result({
-          type: 'base64',
-          size: 'original',
-          format: 'png'
-        })
+      const base64View = await this[`identitiyPack${this.num}`].preViewImg.result({
+        type: 'base64',
+        size: 'original',
+        format: 'png'
+      })
       // ? 檔案大小超過 1MB 則壓縮
       let imgQuality = 1
       const compressSizeLimit = 1 * 1024 * 1024
@@ -687,13 +686,12 @@ export default {
         imgQuality = 0.3
       }
       // ? 檔案大小超過 1MB 則壓縮 end
-      const base64Compression = await this[`identitiyPack${this.num}`].preViewImg
-        .result({
-          type: 'canvas',
-          quality: imgQuality,
-          format: 'jpeg',
-          size: 'original'
-        })
+      const base64Compression = await this[`identitiyPack${this.num}`].preViewImg.result({
+        type: 'canvas',
+        quality: imgQuality,
+        format: 'jpeg',
+        size: 'original'
+      })
       this.$store.commit('changeLoading', false)
       resultImg.src = base64View // ? 外層瀏覽圖片
       resultImg.style = `height:${this.clientHeight}px;`// ? 外層瀏覽圖片
@@ -780,7 +778,7 @@ export default {
           this.$custom.validate.showErrors(errors)
         }
       } else {
-        // ? 無須提供財力證明
+        // ? Preview判斷無須提供財力證明，API也會判斷
         // ? 無需上傳也要打API
         console.log(false)
         const res = await PublicService.CardSendApply(this.form)
