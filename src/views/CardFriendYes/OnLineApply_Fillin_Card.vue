@@ -36,7 +36,40 @@
                   <div class="d-flex flex-wrap">
                     <div class="form_Apply_txt">{{ homeAddr }}</div>
                   </div>
+                  <!-- <button type="button" class="OnLineApply_button">變更</button> -->
                 </li>
+                <!-- <li class="col-12 col-md-12">
+                  <div class="d-flex flex-wrap flex-md-nowrap apply_address align-items-center">
+                    <select name="" runat="server" class="form-select form-control ZIP mb-2">
+                        <option>110000</option>
+                        <option>110000</option>
+                    </select>
+                    <select name="" runat="server" id="" class="form-select form-control Area mx-1 mx-md-2 mb-2">
+                        <option>南港區</option>
+                        <option>松山區</option>
+                        <option>內湖區</option>
+                    </select>
+                    <select name="" runat="server" id="" class="form-select form-control Road mb-2">
+                        <option>忠孝東路五段</option>
+                        <option>忠孝東路五段</option>
+                        <option>忠孝東路五段</option>
+                    </select>
+                  </div>
+                  <div class="d-flex apply_address align-items-center">
+                    <input required="" name="login[id]" type="text" placeholder=" " class="form-control input_number">
+                    <span class="input_number_text">巷</span>
+                    <input required="" name="login[id]" type="text" placeholder=" " class="form-control input_number">
+                    <span class="input_number_text">弄</span>
+                    <div class="w-100 d-block d-md-none"></div>
+                    <input required="" name="login[id]" type="text" placeholder="必填" class="form-control input_number">
+                    <span class="input_number_text">-</span>
+                    <input required="" name="login[id]" type="text" placeholder=" " class="form-control input_number">
+                    <span class="input_number_text">號</span>
+                    <input required="" name="login[id]" type="text" placeholder=" " class="form-control input_number">
+                    <span class="input_number_text">樓</span>
+                    <input required="" name="login[id]" type="text" placeholder=" " class="form-control mb-2 ms-md-0 ms-lg-1">
+                  </div>
+                </li> -->
                 <li class="col-12 col-md-6">
                   <label for="">3.出生地</label>
                   <div class="d-flex flex-wrap flex-md-nowrap align-items-center Birthplace">
@@ -97,16 +130,16 @@
                   <span v-if="errors['國籍']" class="field-error">{{ errors['國籍'] }}</span>
                 </li>
                 <li class="col-12 col-md-6">
-                  <label for="">5.職業別</label>
+                  <label for="">5.職業類別</label>
                   <div class="d-flex flex-wrap flex-md-nowrap align-items-center">
                     <Field
-                      name="職業別"
+                      name="職業類別"
                       runat="server"
                       as="select"
                       class="form-select form-control me-1"
                       v-model="onLineApply_Fillin_Card.jobTypeKey"
                       value="jobSort"
-                      :class="{ 'is-invalid': errors['職業別']}"
+                      :class="{ 'is-invalid': errors['職業類別']}"
                       :validateOnChange="true"
                     >
                       <option
@@ -131,7 +164,7 @@
                       />
                     </div>
                   </div>
-                  <span v-if="errors['職業別']" class="field-error">{{ errors['職業別'] }}</span>
+                  <span v-if="errors['職業類別']" class="field-error">{{ errors['職業類別'] }}</span>
                   <span v-if="errors['職業別的其他']" class="field-error">{{ errors['職業別的其他'] }}</span>
                 </li>
                 <li class="col-12 col-md-6">
@@ -151,41 +184,35 @@
                   </Field>
                   <span v-if="errors['職級別']" class="field-error">{{ errors['職級別'] }}</span>
                 </li>
-                <li class="col-12 col-md-6">
-                  <label for="">7.主要所得及資金來源</label>
-                  <div class="d-flex flex-wrap flex-md-nowrap align-items-center">
-                    <Field
-                      name="主要所得及資金來源"
-                      as="select"
-                      runat="server"
-                      class="form-select form-control me-1"
-                      v-model="onLineApply_Fillin_Card.incomeKey"
-                      :class="{ 'is-invalid': errors['主要所得及資金來源']}"
-                      :validateOnChange="true"
-                    >
-                      <option
-                        v-for="incomes in option.incomeOptions"
-                        :key="incomes.SORT"
-                        :value="incomes.VALUE"
-                      >
-                        {{ incomes.SHOW }}
-                      </option>
-                    </Field>
-                    <div class="d-flex align-items-center" v-if="onLineApply_Fillin_Card.incomeKey === '9'">
-                      <span class="text-nowrap">其他</span>
+                <li class="col-12 col-md-12">
+                  <label for="">7.所得及資金來源</label>
+                  <div class="d-flex flex-wrap flex-column flex-md-row">
+                    <template  v-for="incomes in option.incomeOptions" :key="incomes.VALUE">
+                      <Field v-slot="{ field }" name="所得及資金來源" type="checkbox" :value="Number(incomes.VALUE)" :validateOnChange="true" :class="{ 'is-invalid': errors['所得及資金來源']}"  v-model="onLineApply_Fillin_Card.incomeKey">
+                        <div class="form-check " :class="{'me-4':incomes.VALUE !== '9'}">
+                        <label>
+                          <input class="form-check-input mt-2 position-absolute" type="checkbox" v-bind="field" name="所得及資金來源"  :value="Number(incomes.VALUE)">
+                          <div class="form_Apply_txt">
+                            0{{ incomes.SHOW }}
+                          </div>
+                        </label>
+                      </div>
+                        </Field>
+                    </template>
+                    <div v-if="onLineApply_Fillin_Card.incomeKey.includes(9)">
                       <Field
-                        name="主要所得及資金來源的其他"
+                        name="所得及資金來源的其他"
                         type="text"
-                        :class="{ 'is-invalid':  errors['主要所得及資金來源的其他'], 'form-control':true}"
-                        class="form-control other_input ms-1 my-2 my-md-0"
+                        :class="{ 'is-invalid':  errors['所得及資金來源的其他']}"
+                        class="form-control other_input ms-1"
                         v-model="onLineApply_Fillin_Card.incomeOther"
                         :validateOnChange="true"
                         maxlength="10"
                       />
                     </div>
                   </div>
-                  <span v-if="errors['主要所得及資金來源']" class="field-error">{{ errors['主要所得及資金來源'] }}</span>
-                  <span v-if="errors['主要所得及資金來源的其他']" class="field-error">{{ errors['主要所得及資金來源的其他'] }}</span>
+                  <span v-if="errors['所得及資金來源']" class="field-error">{{ errors['所得及資金來源'] }}</span>
+                  <span v-if="errors['所得及資金來源的其他']" class="field-error">{{ errors['所得及資金來源的其他'] }}</span>
                 </li>
               </ul>
             </div>
@@ -292,8 +319,8 @@ export default {
         jobOther: '',
         jobLVKey: '',
         jobLV: '',
-        incomeKey: '',
-        income: '',
+        incomeKey: [],
+        income: [],
         incomeOther: ''
       },
       tempOnlineApply: {
@@ -304,11 +331,11 @@ export default {
       option: {
         //* 出生地
         birthPlace: [],
-        //* 主要所得及資金來源的其他
+        //* 所得及資金來源的其他
         incomeOptions: [],
         //* 國籍
         citizenShip: [],
-        //* 職業別
+        //* 職業類別
         jobSort: [],
         //* 職業級
         jobLevel: []
@@ -331,10 +358,10 @@ export default {
         schema.職業別的其他 = ''
       }
       // ?主要所得及資金來源選擇其他，其他要為必填
-      if (this.onLineApply_Fillin_Card.incomeKey === '9') {
-        schema.主要所得及資金來源的其他 = 'required'
+      if (this.onLineApply_Fillin_Card.incomeKey.includes(9)) {
+        schema.所得及資金來源的其他 = 'required'
       } else {
-        schema.主要所得及資金來源的其他 = ''
+        schema.所得及資金來源的其他 = ''
       }
       return schema
     }
@@ -349,7 +376,7 @@ export default {
     },
     'onLineApply_Fillin_Card.incomeKey': {
       handler (n, o) {
-        if (n !== '9') {
+        if (!n.includes(9)) {
           this.onLineApply_Fillin_Card.incomeOther = ''
         }
       }
@@ -367,7 +394,7 @@ export default {
     getUtilities () {
       const res = JSON.parse(localStorage.getItem('SELECT_JSON'))
       this.option.birthPlace = res.BIRTHPLACE
-      this.option.incomeOptions = res.INCOME
+      this.option.incomeOptions = res.INCOME.slice(1, 12)
       this.option.citizenShip = res.NATIONALITY
       this.option.jobSort = res.JOBTYPE
       this.option.jobLevel = res.JOBLV
@@ -389,14 +416,16 @@ export default {
       this.onLineApply_Fillin_Card.jobLV = this.option.jobLevel.find(
         (item) => item.VALUE === this.onLineApply_Fillin_Card.jobLVKey
       ).SHOW
-      this.onLineApply_Fillin_Card.income = this.option.incomeOptions.find(
-        (item) => item.VALUE === this.onLineApply_Fillin_Card.incomeKey
-      ).SHOW
+      const tempIncome = this.onLineApply_Fillin_Card.incomeKey.map((key) => {
+        const temp = this.option.incomeOptions.find((item) => item.VALUE === String(key))
+        return temp.SHOW
+      })
+      this.onLineApply_Fillin_Card.income = tempIncome
 
       if (this.onLineApply_Fillin_Card.birthOther === '-----') {
         this.onLineApply_Fillin_Card.birthOther = ''
       }
-
+      console.log(this.onLineApply_Fillin_Card)
       const response = await serviceY.postKYC(this.onLineApply_Fillin_Card)
       const { status } = response
       if (status === '01100') {
@@ -421,6 +450,7 @@ export default {
     async init () {
       const kycInformation = await serviceY.getKYC()
       const { status, result } = kycInformation
+      console.log(kycInformation)
       switch (status) {
         case '01101' :
           this.id = result.id
@@ -442,8 +472,8 @@ export default {
             this.onLineApply_Fillin_Card.jobOther = result.jobOther
           }
           this.onLineApply_Fillin_Card.jobLVKey = result.jobLV
-          this.onLineApply_Fillin_Card.incomeKey = result.income
-          if (result.income === '9') {
+          this.onLineApply_Fillin_Card.incomeKey = [...result.income.split(',').map(i => Number(i))]
+          if (result.income.includes('9')) {
             this.onLineApply_Fillin_Card.incomeOther = result.incomeOther
           }
           break
@@ -455,7 +485,6 @@ export default {
   },
   async mounted () {
     const session = JSON.parse(sessionStorage.getItem('tempOnlineApply'))
-
     if (session?.onLineApply_Fillin_Card) {
       const temp = JSON.parse(session.onLineApply_Fillin_Card)
       Object.keys(temp).forEach(key => {
@@ -475,11 +504,11 @@ export default {
       出生地: 'required',
       出生地的其他: '',
       國籍: 'required',
-      職業別: 'required',
+      職業類別: 'required',
       職業別的其他: '',
       職級別: 'required',
-      主要所得及資金來源: 'required',
-      主要所得及資金來源的其他: ''
+      所得及資金來源: 'required',
+      所得及資金來源的其他: ''
     }
 
     this.noticeModal = new bootstrap.Modal(this.$refs.noticeModal, {
