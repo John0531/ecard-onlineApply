@@ -35,7 +35,7 @@
                 </li>
               </ul>
             </div>
-            <div class="col-xl-12 d-flex flex-wrap">
+            <div class="col-xl-12 d-flex flex-wrap Card_img">
               <div class="col-12 col-md-4 text-center m-auto" v-for="card in cardInfoList" :key="card.cardNo">
                 <img class="img-fluid" alt="申請卡片圖片" :src="card.cardPic" @error="handleImageError"/>
                 <div class="form-check my-2 position-relative">
@@ -69,7 +69,7 @@
             </div>
             <div class="mt-3 mt-md-5">
               <div class="fee_box mb-3">
-                <h3><img src="images/form/fee_icon.gif" class="img-fluid" alt="" />年費政策</h3>
+                <h3>年費政策</h3>
                 <div v-html="feeDetail"></div>
               </div>
             </div>
@@ -140,7 +140,7 @@
               </ul>
             </div>
             <div class="col-xl-12 d-flex flex-wrap">
-              <div class="col-12 col-md-4 text-center m-auto" v-for="card in cardInfoList" :key="card.cardNo">
+              <div class="col-12 col-md-4 text-center m-auto Card_img" v-for="card in cardInfoList" :key="card.cardNo">
                 <img class="img-fluid" alt="申請卡片圖片" :src="card.cardPic" @error="handleImageError"/>
                 <div class="form-check my-2 position-relative">
                   <Field
@@ -171,7 +171,7 @@
             <div v-html="yesgoDetail"></div>
             </div>
             <div class="fee_box mb-3 mt-3 mt-md-5">
-              <h3><img src="images/form/fee_icon.gif" class="img-fluid" alt="" />年費政策</h3>
+              <h3>年費政策</h3>
               <div v-html="feeDetail"></div>
             </div>
           </div>
@@ -604,6 +604,11 @@ export default {
             if (PJN) this.OnlineApply_y_Data.projNum = PJN
             if (UTC) this.OnlineApply_y_Data.uTC = UTC
             if (USC) this.OnlineApply_y_Data.uSC = USC
+            console.log(result.fee)
+            // eslint-disable-next-line no-case-declarations
+            const feeHtml = await service.getYearFee(result.fee)
+            this.feeDetail = feeHtml
+
             break
           case '00799' :
             //* 先監聽再拔掉
@@ -632,6 +637,10 @@ export default {
             if (PJN) this.OnlineApply_y_Data.projNum = PJN
             if (UTC) this.OnlineApply_y_Data.uTC = UTC
             if (USC) this.OnlineApply_y_Data.uSC = USC
+            console.log(result.fee)
+            // eslint-disable-next-line no-case-declarations
+            const feeHtml = await service.getYearFee(result.fee)
+            this.feeDetail = feeHtml
             break
           case '00799' :
             //* 先監聽再拔掉
@@ -675,8 +684,6 @@ export default {
     const termsName = ['聯邦銀行電子銀行服務申請約定條款', '']
     const termsHtml = await service.getTermsHtml(termsName)
     this.wucUITCeBankTerms = termsHtml[0]
-    const feeHtml = await service.getYearFee()
-    this.feeDetail = feeHtml
     const yesgoHtml = await service.getYesGo()
     this.yesgoDetail = yesgoHtml
     this.contractModal = new bootstrap.Modal(this.$refs.contractModal, {

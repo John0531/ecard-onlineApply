@@ -66,6 +66,7 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_STATIC}/includeBlock/yesgogogo.html?${hash(8)}`
       const res = await axios.get(url, { withCredentials: false })
+      console.log(res.data)
       const cleanHTML = res.data.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
       var parser = new DOMParser()
       var element = parser.parseFromString(cleanHTML, 'text/html')
@@ -75,20 +76,22 @@ const service = {
     }
   },
   //* 年費政策
-  async getYearFee () {
+  async getYearFee (gidHtml) {
     try {
-      const url = `${process.env.VUE_APP_STATIC}/html/CardDetail/cardDetail601.htm?${hash(8)}`
+      const url = `${process.env.VUE_APP_STATIC}/html/${gidHtml}.htm`
       const res = await axios.get(url, { withCredentials: false })
+      console.log(gidHtml)
       // HTML
       const regex = /<div class="cardDetail_fee">(.*?)<\/div>/s
       const htmlMatch = regex.exec(res.data.toString())
-      const text = htmlMatch ? htmlMatch[0] : null
+      const text = htmlMatch ? htmlMatch[0].replace('fade', '') + '</div>' : null
       const cleanHTML = text
         .toString()
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
         .replace(/'/g, '&#39;')
         .replace(/"/g, '&#34;')
+      console.log(cleanHTML)
       const parser = new DOMParser()
       const element = parser.parseFromString(cleanHTML, 'text/html')
       return element.body.innerText
