@@ -283,7 +283,7 @@
                       @keyup="Form.homeAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Num)"
                       maxlength="5"
                       class="form-control input_number"
-                      :class="{ 'is-invalid': errors['戶籍地址'] }"
+                      :class="{ 'is-invalid': errors['戶籍地址']||errors['戶籍地址-號'] }"
                     /><span class="input_number_text">-</span>
                     <Field
                       name="homeAddr_Of"
@@ -316,6 +316,7 @@
                     />
                   </div>
                   <p v-if="errors['戶籍地址']" class="field-error">{{ errors['戶籍地址'] }}</p>
+                  <p v-if="errors['戶籍地址-號']" class="field-error">{{ errors['戶籍地址-號'] }}</p>
                   </li>
                 </ul>
               </div>
@@ -375,7 +376,7 @@
                           aria-label="Close"
                           @click="result(this.num)"
                           >
-                          確認修改
+                          確認
                           </button>
                       </div>
                   </div>

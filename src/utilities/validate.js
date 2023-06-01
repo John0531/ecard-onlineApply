@@ -196,6 +196,7 @@ const validate = {
   // * fieldName(字串): 驗證欄位的名稱，用於設定套件錯誤訊息
   CheckAddressAll (Address, FormDom, fieldName) {
     FormDom.setFieldError(fieldName, '')
+    FormDom.setFieldError(`${fieldName}-號`, '')
     const test = Address.Lane + Address.Aly + Address.Num + Address.Of + Address.Flr + Address.Other
     if (test.length < 1) {
       FormDom.setFieldError(fieldName, '地址格式有誤')
@@ -210,7 +211,7 @@ const validate = {
       return
     }
     if ((Address.County && Address.Area && Address.Road) && !Address.Num) {
-      FormDom.setFieldError(fieldName, '地址格式 號 為必填')
+      FormDom.setFieldError(`${fieldName}-號`, '地址格式「號」為必填')
     }
   },
 
