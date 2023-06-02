@@ -66,19 +66,17 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_STATIC}/includeBlock/yesgogogo.html?${hash(8)}`
       const res = await axios.get(url, { withCredentials: false })
-      console.log(res.data)
       const cleanHTML = res.data.toString().replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/'/g, '&#39;').replace(/"/g, '&#34;')
       var parser = new DOMParser()
       var element = parser.parseFromString(cleanHTML, 'text/html')
       return element.body.innerText
     } catch (err) {
-      console.log(err)
     }
   },
   //* 年費政策
   async getYearFee (gidHtml) {
     try {
-      const url = `${process.env.VUE_APP_STATIC}/html/${gidHtml}.htm`
+      const url = `${process.env.VUE_APP_STATIC}/html/${gidHtml}.htm?${hash(8)}`
       const res = await axios.get(url, { withCredentials: false })
       console.log(gidHtml)
       // HTML
