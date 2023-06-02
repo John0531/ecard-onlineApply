@@ -276,6 +276,7 @@
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     /><span class="input_number_text">弄</span>
                     <Field
+                      placeholder="必填"
                       name="homeAddr_Num"
                       type="text"
                       v-model="Form.homeAddr.Num"
@@ -348,12 +349,12 @@
                   <div class="container-fluid">
                       <div class="row mb-4">
                           <div>
-                              ◆<strong>原始圖片</strong><br>
-                              (請框選可供辨識之大小範圍)
-                              <img v-if="imgTemplateUrl" id="imgTemplate" :src="imgTemplateUrl"
-                              ref="imgTemplate"
-                              alt=""
-                              class="img-fluid">
+                            ◆<strong>原始圖片</strong><br>
+                            (請框選可供辨識之大小範圍)
+                            <img v-if="imgTemplateUrl" id="imgTemplate" :src="imgTemplateUrl"
+                            ref="imgTemplate"
+                            alt=""
+                            class="img-fluid">
                           </div>
                           <div id="myIdentifident" class="myIdentifident p-0" ref="myIdentifident">
                           </div>
