@@ -420,8 +420,12 @@ export default {
         const temp = this.option.incomeOptions.find((item) => item.VALUE === String(key))
         return temp.SHOW
       })
+
+      tempIncome.sort((a, b) => parseFloat(a) - parseFloat(b))
+
       this.onLineApply_Fillin_Card.income = tempIncome
 
+      this.onLineApply_Fillin_Card.income = tempIncome
       if (this.onLineApply_Fillin_Card.birthOther === '-----') {
         this.onLineApply_Fillin_Card.birthOther = ''
       }
@@ -472,7 +476,7 @@ export default {
             this.onLineApply_Fillin_Card.jobOther = result.jobOther
           }
           this.onLineApply_Fillin_Card.jobLVKey = result.jobLV
-          this.onLineApply_Fillin_Card.incomeKey = [...result.income.replace(/^,/, '').replace(/,$/, '').split(',').map(i => Number(i))]
+          this.onLineApply_Fillin_Card.incomeKey = [...result.income.split(',').map(i => Number(i))]
           if (result.income.includes(9)) {
             this.onLineApply_Fillin_Card.incomeOther = result.incomeOther
           }
