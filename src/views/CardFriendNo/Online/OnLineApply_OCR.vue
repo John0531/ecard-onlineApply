@@ -579,7 +579,6 @@ export default {
       this.$store.commit('changeLoading', true)
       async function modalOpen (dom, ref) {
         dom.show()
-        console.log(dom)
         return new Promise(resolve =>
           ref.addEventListener('shown.bs.modal', function (event) {
             resolve({
@@ -590,10 +589,12 @@ export default {
         )
       }
       const imgTemplate = await modalOpen(this.CroppieModal, this.$refs.CroppieModal)
-      console.log(imgTemplate)
-      // this.$refs.CroppieModal.addEventListener('shown.bs.modal', function (event) {
-      //   console.log(document.getElementById('imgTemplate').clientWidth)
-      // })
+      if (!imgTemplate.clientWidth || !imgTemplate.clientHeight) {
+        console.log('取得圖片寬高失敗')
+        imgTemplate.clientWidth = this.$refs.CroppieModal.querySelector('.modal-body').clientWidth - 20 - 32
+        imgTemplate.clientHeight = (this.$refs.CroppieModal.querySelector('.modal-body').clientWidth - 20 - 32) * document.getElementById('imgTemplate').naturalHeight / document.getElementById('imgTemplate').naturalWidth
+      }
+      console.log(imgTemplate.clientWidth, imgTemplate.clientHeight)
       try {
         // ?要呈現畫面的區域(在modal上)
         const croppieE = this.$refs.myIdentifident
@@ -615,11 +616,9 @@ export default {
           mouseWheelZoom: 'ctrl'
           // maxZoom: 1
         })
-        // ?bind在此時將jpg轉為png
         await this[`identitiyPack${this.num}`].preViewImg.bind({
           url: this.imgTemplateUrl
         })
-        console.log(document.querySelector('#myIdentifident'))
         URL.revokeObjectURL(this.imgTemplateUrl)
         this.imgTemplateUrl = ''
         this.$store.commit('changeLoading', false)
@@ -650,7 +649,6 @@ export default {
         size: 'original'
       })
       this.$store.commit('changeLoading', false)
-      console.log(base64Compression)
       console.log(`瀏覽圖檔案大小${Math.round(0.75 * base64View.length / 1000)}k`)
       console.log(`壓縮檔案大小${Math.round(0.75 * base64Compression.length / 1000)}k`)
       resultImg.src = base64View // ? 外層瀏覽圖片

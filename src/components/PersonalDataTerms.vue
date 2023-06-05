@@ -384,7 +384,7 @@ export default {
         this.Form.linePNPType = ''
       }
       const postData = JSON.parse(JSON.stringify(this.Form))
-      postData.autoBonus = !postData.autoBonus
+      // postData.autoBonus = !postData.autoBonus
       for (const i in postData) {
         postData[i] = postData[i].toString()
       }
