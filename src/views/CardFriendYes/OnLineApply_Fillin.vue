@@ -450,15 +450,33 @@ export default {
     },
     isEditUserCode () {
       const onlineApplyRouteInfo = JSON.parse(sessionStorage.getItem('OnlineApplyRouteInfo'))
-      const { USC } = onlineApplyRouteInfo.query
-      const result = Boolean(this.onLineApply_Fillin_Data.userCode && USC)
-      return result
+      if (onlineApplyRouteInfo) {
+        const { query } = onlineApplyRouteInfo
+        if (query) {
+          const { USC } = query
+          const result = Boolean(USC)
+          return result
+        } else {
+          return false
+        }
+      } else {
+        return false
+      }
     },
     isEditUnitCode () {
       const onlineApplyRouteInfo = JSON.parse(sessionStorage.getItem('OnlineApplyRouteInfo'))
-      const { UTC } = onlineApplyRouteInfo.query
-      const result = Boolean(this.onLineApply_Fillin_Data.unitCode && UTC)
-      return result
+      if (onlineApplyRouteInfo) {
+        const { query } = onlineApplyRouteInfo
+        if (query) {
+          const { UTC } = query
+          const result = Boolean(UTC)
+          return result
+        } else {
+          return false
+        }
+      } else {
+        return false
+      }
     }
   },
   watch: {

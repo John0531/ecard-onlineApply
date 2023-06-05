@@ -167,8 +167,8 @@
                   </div>
                   <div class="input-data_confirm">
                     <p>
-                      {{FillinData.income}}
-                      <span v-if="FillinData.incomeOther">{{FillinData.incomeOther}}</span>
+                      {{FillinData.income?.split(',').join('、')}}
+                      <span v-if="FillinData.incomeOther">-{{FillinData.incomeOther}}</span>
                     </p>
                   </div>
                 </li>
