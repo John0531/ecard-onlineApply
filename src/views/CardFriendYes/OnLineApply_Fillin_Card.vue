@@ -35,8 +35,8 @@
                   <label for="">2.戶籍地址：</label>
                   <div class="d-flex flex-wrap">
                     <div class="form_Apply_txt">{{ homeAddr }}</div>
+                    <!-- <button type="button" class="OnLineApply_button">變更</button> -->
                   </div>
-                  <!-- <button type="button" class="OnLineApply_button">變更</button> -->
                 </li>
                 <!-- <li class="col-12 col-md-12">
                   <div class="d-flex flex-wrap flex-md-nowrap apply_address align-items-center">
@@ -472,8 +472,8 @@ export default {
             this.onLineApply_Fillin_Card.jobOther = result.jobOther
           }
           this.onLineApply_Fillin_Card.jobLVKey = result.jobLV
-          this.onLineApply_Fillin_Card.incomeKey = [...result.income.split(',').map(i => Number(i))]
-          if (result.income.includes('9')) {
+          this.onLineApply_Fillin_Card.incomeKey = [...result.income.replace(/^,/, '').replace(/,$/, '').split(',').map(i => Number(i))]
+          if (result.income.includes(9)) {
             this.onLineApply_Fillin_Card.incomeOther = result.incomeOther
           }
           break
