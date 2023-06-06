@@ -280,26 +280,17 @@
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">電子信箱</label>
-                  <template v-if="Form.billType===1">
-                    <Field
-                      v-model="Form.email"
-                      rules="required|email"
-                      :class="{ 'is-invalid': errors['電子信箱'] }"
-                      name="電子信箱"
-                      type="text"
-                      class="form-control"
-                    />
-                    <ErrorMessage
-                      name="電子信箱"
-                      class="field-error"
-                    />
-                  </template>
                   <Field
-                    v-else
                     v-model="Form.email"
+                    :rules="{'email':Form.billType===1,'required':Form.billType===1}"
+                    :class="{ 'is-invalid': errors['電子信箱'] }"
                     name="電子信箱"
                     type="text"
                     class="form-control"
+                  />
+                  <ErrorMessage
+                    name="電子信箱"
+                    class="field-error"
                   />
                 </li>
                 <li class="col-12">
@@ -1608,27 +1599,6 @@ export default {
         } else {
           n.liveStatus = ''
         }
-        // ? 主要收入來源
-        // if (!n.IncomeMain.incomeKey.includes('9')) {
-        //   n.IncomeMain.incomeOther = ''
-        // }
-        // if (n.IncomeMain.incomeKey.length !== 0) {
-        //   const arr = []
-        //   this.selectJson.INCOME.forEach((item1) => {
-        //     n.IncomeMain.incomeKey.forEach((item2) => {
-        //       if (item1.VALUE === item2) {
-        //         arr.push(item1.SHOW)
-        //       }
-        //     })
-        //   })
-        //   n.IncomeMain.income = arr
-        // } else {
-        //   n.IncomeMain.income = []
-        // }
-        // ? 主要收入來源-其他
-        // if (n.IncomeMain.incomeOther !== '') {
-        //   n.IncomeMain.incomeKey.push('9')
-        // }
         // ? 職業別
         if (n.job.jobTypeKey) {
           n.job.jobType = this.selectJson.JOBTYPE.find(item => item.VALUE === n.job.jobTypeKey).SHOW
