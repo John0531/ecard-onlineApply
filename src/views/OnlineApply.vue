@@ -243,7 +243,7 @@
               aria-label="Close"
             >
               <img
-                src="@/assets/images/form/close.png"
+                src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/close.png"
                 border="0"
                 alt="close"
                 data-bs-dismiss="modal"
