@@ -14,7 +14,7 @@
       <div class="row justify-content-md-center pt-1 pt-md-3">
         <div class="col-lg-2 mb-4">
           <img
-            src="@/assets/images/form/card_b4s.jpg"
+            :src="FillinData.cardInfoPicture"
             class="img-fluid"
             alt=""
           />
@@ -25,14 +25,14 @@
               src="@/assets/images/form/Apply_icon.gif"
               class="img-fluid me-1"
               alt=""
-            />微風悠遊聯名卡MasterCard悠遊鈦金卡
+            />{{FillinData.cardInfoCardName}}
           </p>
           <p>
             <img
               src="@/assets/images/form/Apply_icon.gif"
               class="img-fluid me-1"
               alt=""
-            />推廣資料<span class="red_text">專案代號：ETU</span>
+            />推廣資料<span class="red_text">專案代號:{{FillinData.projNum}}</span>
           </p>
         </div>
         <div class="mb-4"><strong>申請人資料</strong></div>
@@ -142,7 +142,7 @@
                 </li>
                 <li>
                   <div class="label_confirm">
-                    <span class="red_text">* </span>職業別
+                    <span class="red_text">* </span>職業類別
                   </div>
                   <div class="input-data_confirm">
                     <p>
@@ -163,12 +163,12 @@
                 </li>
                 <li>
                   <div class="label_confirm">
-                    <span class="red_text">* </span>主要所得及資金來源
+                    <span class="red_text">* </span>所得及資金來源
                   </div>
                   <div class="input-data_confirm">
                     <p>
-                      {{FillinData.income}}
-                      <span v-if="FillinData.incomeOther">{{FillinData.incomeOther}}</span>
+                      {{FillinData.income?.split(',').join('、')}}
+                      <span v-if="FillinData.incomeOther">-{{FillinData.incomeOther}}</span>
                     </p>
                   </div>
                 </li>

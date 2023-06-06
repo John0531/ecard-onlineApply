@@ -337,7 +337,7 @@
                   </div>
                   <div class="input-data_confirm">
                     <p>
-                      {{FillinData.form.IncomeMain?.income.filter(item=>item!=='9其他').join()}}<span v-if="FillinData.form.IncomeMain?.income.includes('9其他')">,9其他-{{FillinData.form.IncomeMain?.incomeOther}}</span>
+                      {{FillinData.form.IncomeMain?.income.filter(item=>item!=='9其他').join('、')}}<span v-if="FillinData.form.IncomeMain?.income.includes('9其他')">、9其他-{{FillinData.form.IncomeMain?.incomeOther}}</span>
                     </p>
                   </div>
                 </li>
@@ -591,40 +591,7 @@ export default {
           this.FillinData.term[i] = false
         }
       }
-      this.FillinData.term.autoBonus = !this.FillinData.term.autoBonus
-      // ? 回塞 sessionStorage
-      /* const sessionData = JSON.parse(sessionStorage.getItem('FillinData'))
-      const fillinData = JSON.parse(JSON.stringify(this.FillinData))
-      sessionData.OT = {
-        brthDt: fillinData.brthDt,
-        digiFlag: fillinData.digiFlag,
-        id: fillinData.id,
-        mbleTelNbr: fillinData.mbleTelNbr,
-        primarySchool: fillinData.primarySchool,
-        ...fillinData.form
-      }
-      if (sessionData.OT.billAddr === '同戶籍地址') {
-        sessionData.OT.billAddr = '1'
-      } else if (sessionData.OT.billAddr === '同居住地址') {
-        sessionData.OT.billAddr = '2'
-      } else if (sessionData.OT.billAddr === '同公司地址') {
-        sessionData.OT.billAddr = '3'
-      }
-      if (sessionData.OT.sendCardAddr === '同戶籍地址') {
-        sessionData.OT.sendCardAddr = '1'
-      } else if (sessionData.OT.sendCardAddr === '同居住地址') {
-        sessionData.OT.sendCardAddr = '2'
-      } else if (sessionData.OT.sendCardAddr === '同公司地址') {
-        sessionData.OT.sendCardAddr = '3'
-      }
-      sessionData.OT.iddate.Year = sessionData.OT.iddate.idyear
-      sessionData.OT.iddate.Month = sessionData.OT.iddate.idMonth
-      sessionData.OT.iddate.Day = sessionData.OT.iddate.idDay
-      sessionData.OT_1 = {
-        ...fillinData.term
-      }
-      sessionStorage.setItem('FillinData', JSON.stringify(sessionData)) */
-      // ? 回塞 sessionStorage end
+      // this.FillinData.term.autoBonus = !this.FillinData.term.autoBonus
     },
     async nextPage () {
       const result = await PublicService.createPdf()

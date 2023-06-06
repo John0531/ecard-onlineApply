@@ -280,26 +280,17 @@
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">電子信箱</label>
-                  <template v-if="Form.billType===1">
-                    <Field
-                      v-model="Form.email"
-                      rules="required|email"
-                      :class="{ 'is-invalid': errors['電子信箱'] }"
-                      name="電子信箱"
-                      type="text"
-                      class="form-control"
-                    />
-                    <ErrorMessage
-                      name="電子信箱"
-                      class="field-error"
-                    />
-                  </template>
                   <Field
-                    v-else
                     v-model="Form.email"
+                    :rules="{'email':Form.billType===1,'required':Form.billType===1}"
+                    :class="{ 'is-invalid': errors['電子信箱'] }"
                     name="電子信箱"
                     type="text"
                     class="form-control"
+                  />
+                  <ErrorMessage
+                    name="電子信箱"
+                    class="field-error"
                   />
                 </li>
                 <li class="col-12">
@@ -1124,7 +1115,7 @@
                       name="compAddr_Lane"
                       type="text"
                       v-model="Form.compAddr.Lane"
-                      @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @blur="(Form.billAddr==='3'||Form.sendCardAddr==='3'||Object.values(Form.compAddr).join('')!=='')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Lane = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Lane)"
                       maxlength="5"
                       class="form-control input_number"
@@ -1134,7 +1125,7 @@
                       name="compAddr_Aly"
                       type="text"
                       v-model="Form.compAddr.Aly"
-                      @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @blur="(Form.billAddr==='3'||Form.sendCardAddr==='3'||Object.values(Form.compAddr).join('')!=='')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Aly = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Aly)"
                       maxlength="5"
                       class="form-control input_number"
@@ -1146,7 +1137,7 @@
                       name="compAddr_Num"
                       type="text"
                       v-model="Form.compAddr.Num"
-                      @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @blur="(Form.billAddr==='3'||Form.sendCardAddr==='3'||Object.values(Form.compAddr).join('')!=='')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Num)"
                       maxlength="5"
                       class="form-control input_number mx-1"
@@ -1156,7 +1147,7 @@
                       name="compAddr_Of"
                       type="text"
                       v-model="Form.compAddr.Of"
-                      @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @blur="(Form.billAddr==='3'||Form.sendCardAddr==='3'||Object.values(Form.compAddr).join('')!=='')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Of = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Of)"
                       maxlength="5"
                       class="form-control input_number"
@@ -1166,7 +1157,7 @@
                       name="compAddr_Flr"
                       type="text"
                       v-model="Form.compAddr.Flr"
-                      @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @blur="(Form.billAddr==='3'||Form.sendCardAddr==='3'||Object.values(Form.compAddr).join('')!=='')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       @keyup="Form.compAddr.Flr = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Flr)"
                       maxlength="5"
                       class="form-control input_number"
@@ -1176,7 +1167,7 @@
                       name="compAddr_Other"
                       type="text"
                       v-model="Form.compAddr.Other"
-                      @change="(Form.billAddr==='3'||Form.sendCardAddr==='3')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
+                      @blur="(Form.billAddr==='3'||Form.sendCardAddr==='3'||Object.values(Form.compAddr).join('')!=='')?$custom.validate.CheckAddressAll(Form.compAddr,$refs.form,'公司地址'):''"
                       maxlength="100"
                       class="form-control mb-2 ms-md-0 ms-lg-1"
                       :class="{ 'is-invalid': errors['公司地址'] }"
@@ -1608,27 +1599,6 @@ export default {
         } else {
           n.liveStatus = ''
         }
-        // ? 主要收入來源
-        // if (!n.IncomeMain.incomeKey.includes('9')) {
-        //   n.IncomeMain.incomeOther = ''
-        // }
-        // if (n.IncomeMain.incomeKey.length !== 0) {
-        //   const arr = []
-        //   this.selectJson.INCOME.forEach((item1) => {
-        //     n.IncomeMain.incomeKey.forEach((item2) => {
-        //       if (item1.VALUE === item2) {
-        //         arr.push(item1.SHOW)
-        //       }
-        //     })
-        //   })
-        //   n.IncomeMain.income = arr
-        // } else {
-        //   n.IncomeMain.income = []
-        // }
-        // ? 主要收入來源-其他
-        // if (n.IncomeMain.incomeOther !== '') {
-        //   n.IncomeMain.incomeKey.push('9')
-        // }
         // ? 職業別
         if (n.job.jobTypeKey) {
           n.job.jobType = this.selectJson.JOBTYPE.find(item => item.VALUE === n.job.jobTypeKey).SHOW
@@ -1767,8 +1737,15 @@ export default {
       if (this.Form.billAddr === '3' || this.Form.sendCardAddr === '3') {
         this.$custom.validate.CheckAddressAll(this.Form.compAddr, this.$refs.form, '公司地址')
       }
+      if (Object.values(this.Form.compAddr).join('') !== '') {
+        this.$custom.validate.CheckAddressAll(this.Form.compAddr, this.$refs.form, '公司地址')
+      }
       const errors = this.$refs.form.getErrors()
       if (Object.keys(errors).length !== 0) {
+        // * 自動編排順序
+        sortJson.forEach((item, index) => {
+          item.sort = index + 1
+        })
         this.$custom.validate.showErrors(errors, sortJson)
         return
       }
