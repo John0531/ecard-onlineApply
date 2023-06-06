@@ -641,7 +641,7 @@ export default {
       // ?要呈現畫面的區域(在modal上)
         const croppieE = this.$refs.myIdentifident
         this[`identitiyPack${this.num}`].fileSize = fileSize
-        this[`identitiyPack${this.num}`].preViewImg = new this.$custom.Croppie(croppieE, {
+        this[`identitiyPack${this.num}`].preViewImg = await new this.$custom.Croppie(croppieE, {
           viewport: {
             width: imgTemplate.clientWidth,
             height: imgTemplate.clientHeight
