@@ -31,7 +31,7 @@
                         <div class="d-flex flex-wrap my-2 my-md-3 justify-content-center">
                           <div class="col-12 col-md-4 Apply_OT">
                             <div class="Apply_OT_pic">
-                                <a href="https://lin.ee/15Gfbt4" target="_blank"><img src="../../assets/images/form/OT_icon01.png" alt="聯邦LINE官方好友" title="聯邦LINE官方好友" /></a>
+                                <a href="https://lin.ee/15Gfbt4" target="_blank"><img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/OT_icon01.png" alt="聯邦LINE官方好友" title="聯邦LINE官方好友" /></a>
                             </div>
                             <div class="Apply_OT_txt pt-3">
                                 <h3>聯邦LINE官方好友</h3>
@@ -43,7 +43,7 @@
                           </div>
                           <div class="col-12 col-md-4 Apply_OT">
                             <div class="Apply_OT_pic">
-                              <a href="https://web.ubot.com.tw/reload/transferUbotAPP.htm" target="_blank"><img src="../../assets/images/form/OT_icon02.png" alt="聯邦行動銀行" title="聯邦行動銀行" /></a>
+                              <a href="https://web.ubot.com.tw/reload/transferUbotAPP.htm" target="_blank"><img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/OT_icon02.png" alt="聯邦行動銀行" title="聯邦行動銀行" /></a>
                             </div>
                             <div class="Apply_OT_txt pt-3">
                               <h3>聯邦行動銀行</h3>
