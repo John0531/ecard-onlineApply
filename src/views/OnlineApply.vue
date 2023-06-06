@@ -604,7 +604,6 @@ export default {
             if (PJN) this.OnlineApply_y_Data.projNum = PJN
             if (UTC) this.OnlineApply_y_Data.uTC = UTC
             if (USC) this.OnlineApply_y_Data.uSC = USC
-            console.log(result.fee)
             // eslint-disable-next-line no-case-declarations
             const feeHtml = await service.getYearFee(result.fee)
             this.feeDetail = feeHtml
@@ -637,7 +636,6 @@ export default {
             if (PJN) this.OnlineApply_y_Data.projNum = PJN
             if (UTC) this.OnlineApply_y_Data.uTC = UTC
             if (USC) this.OnlineApply_y_Data.uSC = USC
-            console.log(result.fee)
             // eslint-disable-next-line no-case-declarations
             const feeHtml = await service.getYearFee(result.fee)
             this.feeDetail = feeHtml

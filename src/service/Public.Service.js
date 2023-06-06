@@ -78,7 +78,6 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_STATIC}/html/${gidHtml}.htm?${hash(8)}`
       const res = await axios.get(url, { withCredentials: false })
-      console.log(gidHtml)
       // HTML
       const regex = /<div class="cardDetail_fee">(.*?)<\/div>/s
       const htmlMatch = regex.exec(res.data.toString())
@@ -89,7 +88,6 @@ const service = {
         .replace(/>/g, '&gt;')
         .replace(/'/g, '&#39;')
         .replace(/"/g, '&#34;')
-      console.log(cleanHTML)
       const parser = new DOMParser()
       const element = parser.parseFromString(cleanHTML, 'text/html')
       return element.body.innerText
