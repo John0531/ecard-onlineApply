@@ -12,7 +12,7 @@
   <section class="mainArea">
     <div class="container-xl">
       <div class="row justify-content-md-center pt-1 pt-md-3">
-        <div class="col-lg-2 mb-4">
+        <div class="col-lg-2 mb-4 Card_img text-start text-md-center">
           <img
             :src="FillinData.cardInfoPicture"
             class="img-fluid"
@@ -22,14 +22,14 @@
         <div class="col-lg-10 mb-4 Apply_text">
           <p>
             <img
-              src="@/assets/images/form/Apply_icon.gif"
+              src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/Apply_icon.gif"
               class="img-fluid me-1"
               alt=""
             />{{FillinData.cardInfoCardName}}
           </p>
           <p>
             <img
-              src="@/assets/images/form/Apply_icon.gif"
+              src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/Apply_icon.gif"
               class="img-fluid me-1"
               alt=""
             />推廣資料<span class="red_text">專案代號:{{FillinData.projNum}}</span>
