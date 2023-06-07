@@ -22,7 +22,7 @@
                 <div class="col-md-4 col-lg-4 col-xl-3 text-center">
                     <div class="not_UBfriend">
                         <div class="item">
-                          <h3 class="mb-0">他行信用卡 <img src="@/assets/images/form/Apply_icon02.png" class="img-fluid" alt="" /></h3>
+                          <h3 class="mb-0">他行信用卡 <img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/Apply_icon02.png" class="img-fluid" alt="" /></h3>
                           <h4 class="my-2 d-block">&ensp;</h4>
                           <button @click="toOnLineApply_Chk" class="btn btn-primary btn-lg rounded-pill" >立即辦卡 <i class="fa fa-arrow-circle-right"></i></button>
                         </div>
@@ -31,7 +31,7 @@
                 <div class="col-md-4 col-lg-4 col-xl-3 text-center">
                     <div class="not_UBfriend">
                         <div class="item">
-                          <h3 class="mb-0">他行實體存款帳戶 <img src="@/assets/images/form/Apply_icon03.png" class="img-fluid" alt="" /></h3>
+                          <h3 class="mb-0">他行實體存款帳戶 <img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/Apply_icon03.png" class="img-fluid" alt="" /></h3>
                           <h4 class="my-2 d-block red_text">(純網銀及數位存款帳戶不適用)</h4>
                           <button @click="OnLineApply_ChkSZ" class="btn btn-primary btn-lg rounded-pill" >立即辦卡 <i class="fa fa-arrow-circle-right"></i></button>
                         </div>
@@ -40,7 +40,7 @@
                 <div class="col-md-4 col-lg-4 col-xl-3 text-center">
                     <div class="not_UBfriend">
                         <div class="item">
-                          <h3 class="mb-0">書面申請 <img src="@/assets/images/form/Apply_icon01.png" class="img-fluid" alt="" /></h3>
+                          <h3 class="mb-0">書面申請 <img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/Apply_icon01.png" class="img-fluid" alt="" /></h3>
                           <h4 class="my-2 d-block red_text">(無他行信用卡及他行帳戶)</h4>
                           <button @click="OnLineApply_OTP" class="btn btn-primary btn-lg rounded-pill" >立即辦卡 <i class="fa fa-arrow-circle-right"></i></button>
                         </div>

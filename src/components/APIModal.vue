@@ -6,7 +6,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title"><input id="myCheckCount" hidden></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="closeModal()">
-                      <img src="@/assets/images/form/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
+                      <img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
                     </button>
                 </div>
                 <div class="modal-body">

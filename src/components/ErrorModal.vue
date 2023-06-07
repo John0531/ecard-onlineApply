@@ -4,7 +4,7 @@
       <div class="modal-content">
           <div class="modal-header">
             <button @click.prevent="closeModal" type="button" class="close" aria-label="Close">
-              <img src="@/assets/images/form/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
+              <img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
             </button>
           </div>
           <div class="modal-body">

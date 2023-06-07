@@ -342,7 +342,7 @@
               <div class="modal-header">
                   <h5 class="modal-title OnLineApply">上傳身分證</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click.prevent="closeCroppieModal">
-                    <img src="@/assets/images/form/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
+                    <img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
                   </button>
               </div>
               <div class="modal-body">
@@ -359,13 +359,6 @@
                           <div id="myIdentifident" class="myIdentifident p-0" ref="myIdentifident">
                           </div>
                       </div>
-                      <!-- <div class="row mb-4">
-                          <div>
-                              ◆<strong>數位銀行</strong><br>
-                              (檢附資料需包含帳號、戶名、近一個月交易明細)
-                          </div>
-                          <div class="col-12 text-center"><img src="@/assets/images/form/FinancialProof_02.jpg" class="img-fluid"></div>
-                      </div> -->
                   </div>
                   <hr>
                   <div class="text-center mb-3">
@@ -445,7 +438,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title"><input id="myCheckCount" hidden></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                      <img src="@/assets/images/form/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
+                      <img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
                     </button>
                 </div>
                 <div class="modal-body">
@@ -467,7 +460,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title"><input id="myCheckCount" hidden></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                      <img src="@/assets/images/form/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
+                      <img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
                     </button>
                 </div>
                 <div class="modal-body">
