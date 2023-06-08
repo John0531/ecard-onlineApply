@@ -33,7 +33,7 @@
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">2.戶籍地址：</label>
-                  <div class="d-flex flex-wrap">
+                  <div class="d-flex">
                     <div class="form_Apply_txt">{{ homeAddr }}</div>
                     <!-- <button type="button" class="OnLineApply_button">變更</button> -->
                   </div>
@@ -188,28 +188,37 @@
                   <label for="">7.所得及資金來源</label>
                   <div class="d-flex flex-wrap flex-column flex-md-row">
                     <template  v-for="incomes in option.incomeOptions" :key="incomes.VALUE">
-                      <Field v-slot="{ field }" name="所得及資金來源" type="checkbox" :value="Number(incomes.VALUE)" :validateOnChange="true" :class="{ 'is-invalid': errors['所得及資金來源']}"  v-model="onLineApply_Fillin_Card.incomeKey">
-                        <div class="form-check " :class="{'me-4':incomes.VALUE !== '9'}">
-                        <label>
-                          <input class="form-check-input mt-2 position-absolute" type="checkbox" v-bind="field" name="所得及資金來源"  :value="Number(incomes.VALUE)">
-                          <div class="form_Apply_txt">
-                            0{{ incomes.SHOW }}
-                          </div>
-                        </label>
-                      </div>
-                        </Field>
+                      <Field v-if="incomes.VALUE.trim()!== '9'" v-slot="{ field }" name="所得及資金來源" type="checkbox" :value="Number(incomes.VALUE)" :validateOnChange="true" :class="{ 'is-invalid': errors['所得及資金來源']}"  v-model="onLineApply_Fillin_Card.incomeKey">
+                        <div class="form-check me-4">
+                          <label>
+                            <input class="form-check-input mt-2 position-absolute" type="checkbox" v-bind="field" name="所得及資金來源"  :value="Number(incomes.VALUE)">
+                            <div class="form_Apply_txt">
+                              0{{ incomes.SHOW }}
+                            </div>
+                          </label>
+                        </div>
+                      </Field>
+                      <Field v-else v-slot="{ field }" name="所得及資金來源" type="checkbox" :value="Number(incomes.VALUE)" :validateOnChange="true" :class="{ 'is-invalid': errors['所得及資金來源']}"  v-model="onLineApply_Fillin_Card.incomeKey">
+                        <div class="form-check">
+                          <label>
+                            <input class="form-check-input mt-2 position-absolute" type="checkbox" v-bind="field" name="所得及資金來源"  :value="Number(incomes.VALUE)">
+                            <div class="d-flex align-items-center">
+                              <span class="text-nowrap form_Apply_txt">0{{ incomes.SHOW }}</span>
+                              <Field
+                                name="所得及資金來源的其他"
+                                type="text"
+                                :class="{ 'is-invalid':  errors['所得及資金來源的其他']}"
+                                v-model="onLineApply_Fillin_Card.incomeOther"
+                                :validateOnChange="true"
+                                maxlength="10"
+                                class="form-control other_input ms-1"
+                                v-if="onLineApply_Fillin_Card.incomeKey.includes(9)"
+                              />
+                            </div>
+                          </label>
+                        </div>
+                      </Field>
                     </template>
-                    <div v-if="onLineApply_Fillin_Card.incomeKey.includes(9)">
-                      <Field
-                        name="所得及資金來源的其他"
-                        type="text"
-                        :class="{ 'is-invalid':  errors['所得及資金來源的其他']}"
-                        class="form-control other_input ms-1"
-                        v-model="onLineApply_Fillin_Card.incomeOther"
-                        :validateOnChange="true"
-                        maxlength="10"
-                      />
-                    </div>
                   </div>
                   <span v-if="errors['所得及資金來源']" class="field-error">{{ errors['所得及資金來源'] }}</span>
                   <span v-if="errors['所得及資金來源的其他']" class="field-error">{{ errors['所得及資金來源的其他'] }}</span>
