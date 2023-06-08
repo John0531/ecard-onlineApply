@@ -163,7 +163,7 @@
                       class="form-control me-0 me-md-2"
                       @change="Form.eName=$custom.validate.watchToUpper(Form.eName)"
                     />
-                    <span class="red_text text-nowrap">(必須與護照相同)</span>
+                    <span class="red_text text-nowrap">(英文拼音須與護照相同)</span>
                   </div>
                   <ErrorMessage
                     name="英文姓名"

@@ -7,7 +7,9 @@
     "build-uat": "vue-cli-service build --mode uat",
     "build-prod": "vue-cli-service build --mode prod",
     "lint": "vue-cli-service lint",
-    "cypress":"npx cypress open"
+    "cypress-open-dev":"npx cypress open --env mode=dev",
+    "cypress-open-prod":"npx cypress open --env mode=prod",
+    "cypress-run":"npx cypress run --record --key 6f5b64e3-84e8-4d81-aecb-2bc4fdd2d78a"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.3.0",
