@@ -7,8 +7,7 @@ const url = [
   `${process.env.VUE_APP_STATIC}/applyCss/OnLineApply.css?${hash(8)}`,
   `${process.env.VUE_APP_STATIC}/applyCss/NNB.css?${hash(8)}`,
   `${process.env.VUE_APP_STATIC}/includeBlock/yesgogogo.css?${hash(8)}`,
-  `${process.env.VUE_APP_STATIC}/terms/css/terms.css?${hash(8)}`,
-  `${process.env.VUE_APP_STATIC}/applyCss/alert.css?${hash(8)}`
+  `${process.env.VUE_APP_STATIC}/terms/css/terms.css?${hash(8)}`
 ]
 
 url.forEach((item) => {

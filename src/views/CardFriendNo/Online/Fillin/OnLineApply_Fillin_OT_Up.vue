@@ -630,6 +630,9 @@ export default {
         })
       }
       const imgTemplate = await modalShow(this.CroppieModal, this.$refs.CroppieModal)
+      // *若user裝置速度異常，保底值
+      imgTemplate.clientWidth = imgTemplate.clientWidth === 0 ? document.getElementById('imgTemplate').offsetWidth * 0.9 : imgTemplate.clientWidth
+      imgTemplate.clientHeight = imgTemplate.clientHeight === 0 ? document.getElementById('imgTemplate').offsetWidth * 0.9 * 0.63953488 * 0.9 : imgTemplate.clientHeight
       try {
       // ?要呈現畫面的區域(在modal上)
         const croppieE = this.$refs.myIdentifident

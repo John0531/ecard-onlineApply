@@ -660,6 +660,8 @@ export default {
     }
   },
   async mounted () {
+    // *銜接AWS入口頁動畫
+    this.$store.commit('changeLoading', true)
     this.scrollEvent()
     this.getYearMonth()
     this.getDay()
