@@ -262,11 +262,11 @@ const routes = [
         }
       },
       {
-        path: '/dspApplicationNNB',
-        name: '非卡友-NewNewBank',
+        path: '/OnLineApply_Fillin_OT_finish_NNB',
+        name: '非卡友-送出申請完成頁_NNB ',
         component: () => import('../views/dspApplicationNNB.vue'),
         meta: {
-          title: '非卡友-NewNewBank'
+          title: '非卡友-送出申請完成頁_NNB '
         }
       },
       {

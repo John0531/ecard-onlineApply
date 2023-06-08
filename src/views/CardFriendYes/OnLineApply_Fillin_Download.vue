@@ -409,7 +409,7 @@ export default {
               this.$router.push('/OnLineApply_Fillin_Finish')
               break
             case '00801' :
-              this.$router.push('/dspApplicationNNB')
+              this.$router.push('/OnLineApply_Fillin_OT_finish_NNB')
               break
             case '00802' :
               window.open(result.MyDataUrl, '_blank')
