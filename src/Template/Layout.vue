@@ -1,6 +1,6 @@
 <template>
     <div class="position-fixed w-100 h-100 d-flex justify-content-center align-items-center" style="background:rgba(120,120,120,0.8);z-index:9999" v-if="$store.state.isLoading">
-      <img src="@/assets/images/ajaxDog.gif" alt="">
+      <img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/loading_UBDog.gif" alt="">
     </div>
   <Header></Header>
   <router-view/>
