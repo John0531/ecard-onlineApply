@@ -1,7 +1,6 @@
 import { hash } from '@/utilities/hash.js'
 
 const url = [
-  `${process.env.VUE_APP_STATIC}/applyCss/animate.min.css?${hash(8)}`,
   `${process.env.VUE_APP_STATIC}/css/style_B5.css?${hash(8)}`,
   `${process.env.VUE_APP_STATIC}/applyCss/form_Common.css?${hash(8)}`,
   `${process.env.VUE_APP_STATIC}/applyCss/OnLineApply.css?${hash(8)}`,

@@ -830,7 +830,7 @@ export default {
                 // ? ===選擇MyData上傳===
                 // ?讀取result內的URL轉導MyData上傳財力
                 this.url = res.data.result.MyDataUrl
-                window.open(this.url, '_blank')
+                window.open(this.url)
               }
             }
             break
@@ -847,14 +847,14 @@ export default {
         // ? ===選擇MyData上傳===
         // ?讀取result內的URL轉導MyData上傳財力
         this.url = res.data.result?.MyDataUrl
-        window.open(this.url, '_blank')
+        window.open(this.url)
         this.MyDataModal.hide()
       }
     },
     goToMyDataTerms () {
       // ?路由反向解析
       const routeData = this.$router.resolve({ name: '非卡友- MyData服務授權條款' })
-      window.open(routeData.href, '_blank')
+      window.open(routeData.href)
     },
     scrollEvent () {
       this.$refs.terms_box_1.onscroll = function () {
