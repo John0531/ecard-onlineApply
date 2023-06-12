@@ -722,14 +722,13 @@ export default {
       return true
     })
 
-    if (process.env.NODE_ENV !== 'production') {
-      const { cardFriend, depositor } = this.$route.query
-      if (cardFriend) {
-        this.OnlineApply_y_Data.cardFriend = String(cardFriend).toLowerCase() === 'true'
-      }
-      if (depositor) {
-        this.OnlineApply_y_Data.depositor = String(depositor).toLowerCase() === 'true'
-      }
+    //* 卡友存戶測試用
+    const { cardFriend, depositor } = this.$route.query
+    if (cardFriend) {
+      this.OnlineApply_y_Data.cardFriend = String(cardFriend).toLowerCase() === 'true'
+    }
+    if (depositor) {
+      this.OnlineApply_y_Data.depositor = String(depositor).toLowerCase() === 'true'
     }
   }
 }

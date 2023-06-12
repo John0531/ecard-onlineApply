@@ -198,12 +198,12 @@ const validate = {
     FormDom.setFieldError(fieldName, '')
     FormDom.setFieldError(`${fieldName}-號`, '')
     const test = Address.Lane + Address.Aly + Address.Num + Address.Of + Address.Flr + Address.Other
-    if (test.length < 1) {
+    if (!Address.County || !Address.Area || !Address.Road) {
       FormDom.setFieldError(fieldName, '地址格式有誤')
       return
     }
-    if (!Address.County || !Address.Area || !Address.Road) {
-      FormDom.setFieldError(fieldName, '地址格式有誤')
+    if (test.length < 1) {
+      FormDom.setFieldError(fieldName, '地址填寫不完整')
       return
     }
     if (Address.Lane.length > 5 || Address.Aly.length > 5 || Address.Num.length > 5 || Address.Of.length > 5 || Address.Flr.length > 5 || Address.Other.length > 100) {

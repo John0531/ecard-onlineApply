@@ -105,7 +105,7 @@
                         </label>
                       </div>
                       <div class="form-check" v-if="!isDisableBillType('paper')">
-                        <label for="">
+                        <label>
                           <Field class="form-check-input mt-2 position-absolute" id="paperbill" type="radio" name="帳單形式"  value="3" :class="{ 'is-invalid': errors['帳單形式']}" v-model="onLineApply_Fillin_Data.billType" :validateOnChange="true"></Field>
                           <div class="form_Apply_txts" for="paperbill">
                                           紙本帳單
@@ -152,7 +152,7 @@
                             <span class="field-error" v-if="errors['寄卡地址']">{{errors['寄卡地址']}}</span>
                           </div>
                         </div>
-                        <div class="form_Apply_txt">{{ selectedContent}}</div>
+                        <div class="form_Apply_txt">{{ selectedContent }}</div>
                         <div class="d-flex flex-wrap justify-content-start align-items-center" v-if="onLineApply_Fillin_Data.sendCardType === '3'">
                           <div class="d-flex flex-wrap justify-content-start align-items-center">
                             <label for="" class="me-0">請輸入您持有之本行任一卡號末四碼：</label>
