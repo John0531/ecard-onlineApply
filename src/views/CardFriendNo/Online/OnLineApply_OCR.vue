@@ -69,7 +69,7 @@
             <div class="text-center my-2">
               <div class="text-start d-inline-block note_text">
                 ※貼心提醒：<br />
-                <span class="red_text">1.上傳格式限JPG、JEPG、PNG，單一檔案上限為5MB。</span
+                <span class="red_text">1.上傳格式限JPG、JPEG、PNG，單一檔案上限為5MB。</span
                 ><br />
                 2.拍攝時請將證件擺正並立於背景乾淨之平台上，建議在您的證件後墊一張白紙。<br />
                 3.手機請使用「橫向」拍攝，以避免反光、太暗，並確認影像清晰。
@@ -442,7 +442,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="text-center py-3">上傳格式限JPG、JEPG、PNG，單一檔案上限為5MB。</div>
+                    <div class="text-center py-3">上傳格式限JPG、JPEG、PNG，單一檔案上限為5MB。</div>
                     <hr>
                     <div class="text-center mb-3">
                         <div class="col-12 text-center">
