@@ -3,19 +3,76 @@ describe('線上辦卡', () => {
     if(Cypress.env('mode')==='dev'){
       cy.visit('http://localhost:8080/card_apply/?&GID=99&IDE=A')
     } else if(Cypress.env('mode')==='prod'){
+      cy.visit('https://card-beta.uitc.com.tw/card_apply/?&GID=81&IDE=A')
       cy.intercept('https://cardapi-beta.uitc.com.tw/LINEBank_Co-brandedCard_SIT/chk').as('AwsSubmit')
       cy.visit('https://yesgoimages.s3.ap-northeast-1.amazonaws.com/test/EcardAWS/FeatureCard.html')
-      cy.get('input[name="birth"]').type('19800101')
-      cy.get('input[name="phone"]').type('0966666666')
-      cy.get('button').contains(' 確認 ').click()
-      cy.wait('@AwsSubmit',{timeout:30000})
+      cy.origin('https://yesgoimages.s3.ap-northeast-1.amazonaws.com',()=>{
+        cy.get('input[name="birth"]').type('19800101')
+        cy.get('input[name="phone"]').type('0966666666')
+        cy.get('button').contains(' 確認 ').click()
+        cy.wait('@AwsSubmit',{timeout:30000})
+      })
     }
-    onlineApply()
+    OnlineApply()
     OnLineApply_Gift()
     OnLineApply_OCR()
-    OnLineApply_n1()
+    OnLineApply_n1('書面')
     OnLineApply_Chkw()
     OnLineApply_Written_OTP()
+    OnLineApply_Fillin_OT()
+    OnLineApply_Fillin_OT_1()
+    OnLineApply_Fillin_OT_2()
+    OnLineApply_Fillin_OT_Up()
+    OnLineApply_Fillin_OT_finish()
+  })
+
+  it('非卡友-他行卡驗證',{timeout:10000},() => {
+    if(Cypress.env('mode')==='dev'){
+      cy.visit('http://localhost:8080/card_apply/?&GID=99&IDE=A')
+    } else if(Cypress.env('mode')==='prod'){
+      cy.visit('https://card-beta.uitc.com.tw/card_apply/?&GID=81&IDE=A')
+      cy.intercept('https://cardapi-beta.uitc.com.tw/LINEBank_Co-brandedCard_SIT/chk').as('AwsSubmit')
+      cy.visit('https://yesgoimages.s3.ap-northeast-1.amazonaws.com/test/EcardAWS/FeatureCard.html')
+      cy.origin('https://yesgoimages.s3.ap-northeast-1.amazonaws.com',()=>{
+        cy.get('input[name="birth"]').type('19800101')
+        cy.get('input[name="phone"]').type('0966666666')
+        cy.get('button').contains(' 確認 ').click()
+        cy.wait('@AwsSubmit',{timeout:30000})
+      })
+    }
+    OnlineApply()
+    OnLineApply_Gift()
+    OnLineApply_OCR()
+    OnLineApply_n1('他行卡驗證')
+    OnLineApply_Chk()
+    OnLineApply_Chk_OTP()
+    OnLineApply_Fillin_OT()
+    OnLineApply_Fillin_OT_1()
+    OnLineApply_Fillin_OT_2()
+    OnLineApply_Fillin_OT_Up()
+    OnLineApply_Fillin_OT_finish()
+  })
+
+  it('非卡友-他行帳戶驗證',{timeout:10000},() => {
+    if(Cypress.env('mode')==='dev'){
+      cy.visit('http://localhost:8080/card_apply/?&GID=99&IDE=A')
+    } else if(Cypress.env('mode')==='prod'){
+      cy.visit('https://card-beta.uitc.com.tw/card_apply/?&GID=81&IDE=A')
+      cy.intercept('https://cardapi-beta.uitc.com.tw/LINEBank_Co-brandedCard_SIT/chk').as('AwsSubmit')
+      cy.visit('https://yesgoimages.s3.ap-northeast-1.amazonaws.com/test/EcardAWS/FeatureCard.html')
+      cy.origin('https://yesgoimages.s3.ap-northeast-1.amazonaws.com',()=>{
+        cy.get('input[name="birth"]').type('19800101')
+        cy.get('input[name="phone"]').type('0966666666')
+        cy.get('button').contains(' 確認 ').click()
+        cy.wait('@AwsSubmit',{timeout:30000})
+      })
+    }
+    OnlineApply()
+    OnLineApply_Gift()
+    OnLineApply_OCR()
+    OnLineApply_n1('他行帳戶驗證')
+    OnLineApply_ChkSZ()
+    OnLineApply_ChkSZ_OTP()
     OnLineApply_Fillin_OT()
     OnLineApply_Fillin_OT_1()
     OnLineApply_Fillin_OT_2()
@@ -26,7 +83,7 @@ describe('線上辦卡', () => {
 
 
 
-function onlineApply(){
+function OnlineApply(){
   if(Cypress.env('mode')==='dev'){
     cy.get('input[name="申請人身分證字號"]').type('U121825032')
     cy.get('select[name="年"]').select('1996')
@@ -72,9 +129,61 @@ function OnLineApply_OCR(){
 }
 
 
-function OnLineApply_n1(){
+function OnLineApply_n1(verifyType){
   cy.url().should('include', '/OnLineApply_n1')
-  cy.get('button').eq(2).click()
+  if(verifyType==='書面'){
+    cy.get('button').eq(2).click()
+  } else if (verifyType==='他行卡驗證'){
+    cy.get('button').eq(0).click()
+  } else if (verifyType==='他行帳戶驗證'){
+    cy.get('button').eq(1).click()
+  }
+}
+
+
+
+function OnLineApply_Chk(){
+  cy.url().should('include', '/OnLineApply_Chk')
+  cy.get('input[name="code1"]').type('0000')
+  cy.get('input[name="code2"]').type('0000')
+  cy.get('input[name="code3"]').type('0000')
+  cy.get('input[name="code4"]').type('0000')
+  cy.get('input[name="validThru"]').type('0827')
+  cy.get('input[name="CSC"]').type('345')
+  cy.get('input[name="行動電話"]').type('0963550051')
+  cy.get('input[name="服務申請約定條款"]').click()
+  cy.get('#terms_box_1').scrollTo('bottom',{ duration: 500 })
+  cy.get('#button_termsOpt_1').check()
+  cy.get('#terms_box_2').scrollTo('bottom',{ duration: 500 })
+  cy.get('#button_termsOpt_2').check()
+  cy.get('#terms_box_3').scrollTo('bottom',{ duration: 500 })
+  cy.get('#button_termsOpt_3').check()
+  cy.get('#terms_box_4').scrollTo('bottom',{ duration: 500 })
+  cy.get('#button_termsOpt_4').check()
+  cy.get('button').contains('確定').click()
+  cy.get('#agree1').check()
+  cy.get('button').contains('下一步').click()
+}
+
+
+
+function OnLineApply_ChkSZ(){
+  cy.url().should('include', '/OnLineApply_ChkSZ')
+  cy.get('select[name="銀行代號"]').select('004')
+  cy.get('input[name="account"]').type('11111111111111')
+  cy.get('input[name="行動電話"]').type('0963550051')
+  cy.get('input[name="服務申請約定條款"]').click()
+  cy.get('#terms_box_1').scrollTo('bottom',{ duration: 500 })
+  cy.get('#button_termsOpt_1').check()
+  cy.get('#terms_box_2').scrollTo('bottom',{ duration: 500 })
+  cy.get('#button_termsOpt_2').check()
+  cy.get('#terms_box_3').scrollTo('bottom',{ duration: 500 })
+  cy.get('#button_termsOpt_3').check()
+  cy.get('#terms_box_4').scrollTo('bottom',{ duration: 500 })
+  cy.get('#button_termsOpt_4').check()
+  cy.get('button').contains('確定').click()
+  cy.get('#agree1').check()
+  cy.get('button').contains('下一步').click()
 }
 
 
@@ -90,6 +199,30 @@ function OnLineApply_Chkw(){
 
 function OnLineApply_Written_OTP(){
   cy.url().should('include', '/OnLineApply_Written_OTP')
+  cy.get('button').contains(' 關閉 ').should('be.visible').then(()=>{
+    cy.wait(500)
+    cy.get('button').contains(' 關閉 ').click()
+    cy.get('input[name="簡訊驗證碼"]').type('000000')
+    cy.get('button').contains('下一步').click()
+  })
+}
+
+
+
+function OnLineApply_Chk_OTP(){
+  cy.url().should('include', '/OnLineApply_Chk_OTP')
+  cy.get('button').contains(' 關閉 ').should('be.visible').then(()=>{
+    cy.wait(500)
+    cy.get('button').contains(' 關閉 ').click()
+    cy.get('input[name="簡訊驗證碼"]').type('000000')
+    cy.get('button').contains('下一步').click()
+  })
+}
+
+
+
+function OnLineApply_ChkSZ_OTP(){
+  cy.url().should('include', '/OnLineApply_ChkSZ_OTP')
   cy.get('button').contains(' 關閉 ').should('be.visible').then(()=>{
     cy.wait(500)
     cy.get('button').contains(' 關閉 ').click()
