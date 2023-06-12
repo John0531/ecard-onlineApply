@@ -309,12 +309,6 @@ export default {
       } else {
         schema.出生地的其他 = ''
       }
-      // ?職業別選擇其他，其他要為必填
-      if (this.onLineApply_Fillin_Card.jobTypeKey === '0') {
-        schema.職業別的其他 = 'required'
-      } else {
-        schema.職業別的其他 = ''
-      }
       // ?主要所得及資金來源選擇其他，其他要為必填
       if (this.onLineApply_Fillin_Card.incomeKey.includes(9)) {
         schema.所得及資金來源的其他 = 'required'
@@ -467,7 +461,7 @@ export default {
       出生地的其他: '',
       國籍: 'required',
       職業類別: 'required',
-      職業別的其他: '',
+      職業類別的其他: '',
       職級別: 'required',
       所得及資金來源: 'required',
       所得及資金來源的其他: ''
