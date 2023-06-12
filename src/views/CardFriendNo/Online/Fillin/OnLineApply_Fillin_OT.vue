@@ -1229,7 +1229,6 @@
                       <span class="text-nowrap">其他</span>
                       <Field
                         v-model="Form.job.jobOther"
-                        rules="required"
                         :class="{ 'is-invalid': errors['職業別-其他'] }"
                         name="職業別-其他"
                         type="text"
