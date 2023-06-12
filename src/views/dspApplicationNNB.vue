@@ -116,6 +116,7 @@ export default {
         const blob = new Blob([response.data], { type: 'application/pdf' })
         const link = document.createElement('a')
         link.href = window.URL.createObjectURL(blob)
+        link.target = '_blank'
         link.download = response.headers['content-disposition'].split(';')[1].split('=')[1]
         // link.download = `test.pdf`
         link.click()

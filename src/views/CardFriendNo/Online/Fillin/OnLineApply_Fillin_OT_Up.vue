@@ -398,13 +398,12 @@
                   注意事項：
                   <span>• 提醒您，MyData平臺未支援IE瀏覽器；使用自然人憑證請確認您已備妥讀卡機，並安裝驅動程式。</span>
                   <span>• MyData平臺服務由國發會提供，若服務過程異常以致無法完成申請，您可轉由本行官網透過自行拍照上傳方式進行補件，以維護您的申辦權益。</span>
-                  <span class="red_text">• 點選「同意並前往MyData」前，請先「下載/列印申請書」；如您為「書面申請」 ，請務必列印申請書並親簽後寄回，以完成申請，謝謝！</span>
+                  <span class="red_text">•點選「同意並前往MyData」時，即會以新視窗自動下載申請書；如您為「書面申請」 ，請務必列印申請書並親簽後寄回，以完成申請，謝謝！</span>
               </p>
 
               <div class="text-center">
                   <button type="button" class="btn btn-lg MyData-modal-btn " data-dismiss="modal" @click.prevent="this.MyDataModal.hide()">取消回上一頁</button>
-                  <button type="button" class="btn btn-lg MyData-modal-btn-y" data-dismiss="modal" @click.prevent="downloadFile()">下載/列印申請書</button>
-                  <button type="button" class="btn btn-lg MyData-modal-btn-y" data-dismiss="modal" @click="submitMydata()">同意並前往MyData</button>
+                  <button type="button" class="btn btn-lg MyData-modal-btn-y" data-dismiss="modal" @click="submitMydata()">同意並前往MyData及下載申請書</button>
               </div>
               <br/>
           </div>
@@ -841,13 +840,15 @@ export default {
     async submitMydata () {
       console.log('sumitMydata')
       const res = await PublicService.CardSendApply(this.form)
+      await this.downloadFile()
       this.$store.dispatch('clearSession')
       // PublicService.showAPIMsg(res.data.message)
       if (res.status === 200) {
         // ? ===選擇MyData上傳===
         // ?讀取result內的URL轉導MyData上傳財力
         this.url = res.data.result?.MyDataUrl
-        window.open(this.url)
+        window.open(this.url, '_self')
+        console.log(this.url)
         this.MyDataModal.hide()
       }
     },
@@ -908,9 +909,11 @@ export default {
         const blob = new Blob([response.data], { type: 'application/pdf' })
         const link = document.createElement('a')
         link.href = window.URL.createObjectURL(blob)
+        link.target = '_blank'
+        console.log(link)
         link.download = response.headers['content-disposition'].split(';')[1].split('=')[1]
         // link.download = `test.pdf`
-        link.click()
+        await link.click()
       }
     }
   },
