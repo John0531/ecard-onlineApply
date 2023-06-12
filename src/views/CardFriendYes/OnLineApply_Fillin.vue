@@ -443,12 +443,12 @@ export default {
         schema.郵遞區號 = 'required'
         schema.市區 = 'required'
         schema.路段 = 'required'
-        schema.巷 = 'customAddressVaild'
-        schema.弄 = 'customAddressVaild'
+        schema.巷 = 'customAddressValid'
+        schema.弄 = 'customAddressValid'
         schema.號 = 'required'
-        schema.號2 = 'customAddressVaild'
-        schema.樓 = 'customAddressVaild'
-        schema.其他 = 'customAddressVaild'
+        schema.號2 = 'customAddressValid'
+        schema.樓 = 'customAddressValid'
+        schema.其他 = 'customAddressValid'
       } else {
         schema.卡號末四碼 = ''
         schema.郵遞區號 = ''
@@ -772,12 +772,12 @@ export default {
       申請數位卡: '',
       有關條款: 'customAgreeTerms'
     }
-    defineRule('customAddressVaild', value => {
+    defineRule('customAddressValid', value => {
       const tempAddress = this.onLineApply_Fillin_Data.sendCardAddr.Lane + this.onLineApply_Fillin_Data.sendCardAddr.Aly + this.onLineApply_Fillin_Data.sendCardAddr.Num + this.onLineApply_Fillin_Data.sendCardAddr.Of + this.onLineApply_Fillin_Data.sendCardAddr.Flr + this.onLineApply_Fillin_Data.sendCardAddr.Other
       console.log(tempAddress)
       if (tempAddress.length === 0 || !this.onLineApply_Fillin_Data.sendCardAddr.County ||
         !this.onLineApply_Fillin_Data.sendCardAddr.Area || !this.onLineApply_Fillin_Data.sendCardAddr.Road) {
-        return '地址格式有誤'
+        return '地址填寫不完整'
       }
       return true
     })

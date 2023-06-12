@@ -701,12 +701,12 @@ export default {
         申請人身分證字號: 'required|checkIdandLive',
         年: '',
         月: '',
-        日: 'customBirthVaild',
+        日: 'customBirthValid',
         申請的信用卡: 'required',
         有關條款: 'customAgreeTerms'
       }
     }
-    defineRule('customBirthVaild', value => {
+    defineRule('customBirthValid', value => {
       if (this.OnlineApply_y_Data.brthdd === '') {
         return '出生年月日為必填'
       } else if (!this.isOver18(this.OnlineApply_y_Data.brthyy, this.OnlineApply_y_Data.brthMM, this.OnlineApply_y_Data.brthdd)) {
