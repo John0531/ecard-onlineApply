@@ -251,7 +251,9 @@
           <div class="modal-content">
               <div class="modal-header">
                   <h5 class="modal-title OnLineApply">財力證明範例</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal"></button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
+                  </button>
               </div>
               <div class="modal-body">
                   <div class="container-fluid">
@@ -396,11 +398,13 @@
                   注意事項：
                   <span>• 提醒您，MyData平臺未支援IE瀏覽器；使用自然人憑證請確認您已備妥讀卡機，並安裝驅動程式。</span>
                   <span>• MyData平臺服務由國發會提供，若服務過程異常以致無法完成申請，您可轉由本行官網透過自行拍照上傳方式進行補件，以維護您的申辦權益。</span>
+                  <span class="red_text">• 點選「同意並前往MyData」前，請先「下載/列印申請書」；如您為「書面申請」 ，請務必列印申請書並親簽後寄回，以完成申請，謝謝！</span>
               </p>
 
               <div class="text-center">
-                  <button type="button" class="btn btn-lg MyData-modal-btn" data-dismiss="modal" @click="location.replace(location.href);">取消回上一頁</button>
-                  <button type="button" class="btn btn-lg MyData-modal-btn-y" data-dismiss="modal" @click="location.href='url'">同意並前往MyData</button>
+                  <button type="button" class="btn btn-lg MyData-modal-btn " data-dismiss="modal" @click.prevent="this.MyDataModal.hide()">取消回上一頁</button>
+                  <button type="button" class="btn btn-lg MyData-modal-btn-y" data-dismiss="modal" @click.prevent="downloadFile()">下載/列印申請書</button>
+                  <button type="button" class="btn btn-lg MyData-modal-btn-y" data-dismiss="modal" @click="submitMydata()">同意並前往MyData</button>
               </div>
               <br/>
           </div>
@@ -632,7 +636,7 @@ export default {
       const imgTemplate = await modalShow(this.CroppieModal, this.$refs.CroppieModal)
       // *若user裝置速度異常，保底值
       imgTemplate.clientWidth = imgTemplate.clientWidth === 0 ? document.getElementById('imgTemplate').offsetWidth * 0.9 : imgTemplate.clientWidth
-      imgTemplate.clientHeight = imgTemplate.clientHeight === 0 ? document.getElementById('imgTemplate').offsetWidth * 0.9 * 0.63953488 * 0.9 : imgTemplate.clientHeight
+      imgTemplate.clientHeight = imgTemplate.clientHeight === 0 ? document.getElementById('imgTemplate').offsetHeight * 0.9 : imgTemplate.clientHeight
       try {
       // ?要呈現畫面的區域(在modal上)
         const croppieE = this.$refs.myIdentifident
@@ -714,12 +718,13 @@ export default {
     },
     async goToNNB () {
       await this.NNBModal.hide()
-      this.$router.push('/dspApplicationNNB')
+      this.$router.push('/OnLineApply_Fillin_OT_finish_NNB')
     },
     async submitSuitCase () {
       console.log(this.form)
       this.$refs.myForm.setErrors({})
       if (sessionStorage.getItem('FinancialStatement') === 'true') {
+        // ? Preview判斷須提供財力證明驗證，API也會判斷
         console.log(true)
         this.checkIsPics()
         this.checkdoubleAgree()
@@ -727,47 +732,40 @@ export default {
         // const collection = await this.$refs.myForm.validate()
         const errors = await this.$refs.myForm.getErrors()
         if (Object.keys(errors).length === 0) {
-          // ** ===全部通過打API才前往下一頁===
-          // ** ===整理資料===
-          if (this.proofType === 'option2') {
-            this.form.isMydata = true
-          }
-          if (this.proofType === 'option1') {
-            this.form.isMydata = false
-            console.log(this.identitiyPack1.file)
-            this.form.upload1 = this.identitiyPack1.file.split(',')[1]
-            this.form.upload2 = this.identitiyPack2.file.split(',')[1]
-            this.form.upload3 = this.identitiyPack3.file.split(',')[1]
-            this.form.upload4 = this.identitiyPack4.file.split(',')[1]
-          }
-          console.log(this.form)
-          const res = await PublicService.CardSendApply(this.form)
-          PublicService.showAPIMsg(res.data.message)
-          if (res.status === 200) {
-            this.$store.dispatch('clearSession')
-            if (res.data.status === '00800') {
-              // ? ===選擇自行上傳===
-              // ?未來卡成功
-              setTimeout(() => {
-                this.$router.push('/OnLineApply_Fillin_OT_finish')
-              }, 1000)
-              return
+          // ** ===驗證通過，分流打API才前往下一頁===
+          switch (this.proofType) {
+            case 'option2': {
+              this.form.isMydata = true
+              this.MyDataModal.show()
+              break
             }
-            if (res.data.status === '00801') {
-              // ? ===選擇自行上傳===
-              // ?顯示NNB畫面
-              setTimeout(() => {
-                this.$router.push('/dspApplicationNNB')
-              }, 1000)
-              return
+            case 'option1': {
+              this.form.isMydata = false
+              console.log(this.identitiyPack1.file)
+              // ** ===整理資料===
+              this.form.upload1 = this.identitiyPack1.file.split(',')[1]
+              this.form.upload2 = this.identitiyPack2.file.split(',')[1]
+              this.form.upload3 = this.identitiyPack3.file.split(',')[1]
+              this.form.upload4 = this.identitiyPack4.file.split(',')[1]
+              const res = await PublicService.CardSendApply(this.form)
+              if (res.status === 200) {
+                PublicService.showAPIMsg(res.data.message)
+                this.$store.dispatch('clearSession')
+                if (res.data.status === '00800') {
+                  // ? ===選擇自行上傳===
+                  // ?未來卡成功
+                  this.$router.push('/OnLineApply_Fillin_OT_finish')
+                }
+                if (res.data.status === '00801') {
+                  // ? ===選擇自行上傳===
+                  // ?顯示NNB畫面
+                  this.$router.push('/OnLineApply_Fillin_OT_finish_NNB')
+                }
+              }
+              break
             }
-            if (res.data.status === '00802') {
-              // ? ===選擇MyData上傳===
-              // ?讀取result內的URL轉導MyData上傳財力
-              this.url = res.data.result.MyDataUrl
-              setTimeout(() => {
-                window.open(this.url, '_blank')
-              }, 1000)
+            default: {
+              break
             }
           }
         } else {
@@ -775,38 +773,82 @@ export default {
           this.$custom.validate.showErrors(errors)
         }
       } else {
-        // ? Preview判斷無須提供財力證明，API也會判斷
+        // ? Preview判斷無須提供財力證明驗證，API也會判斷
         // ? 無需上傳也要打API
-        console.log(false)
-        const res = await PublicService.CardSendApply(this.form)
-        PublicService.showAPIMsg(res.data.message)
-        if (res.status === 200) {
-          this.$store.dispatch('clearSession')
-          if (res.data.status === '00800') {
-            // ? ===選擇自行上傳===
-            // ?未來卡成功
-            setTimeout(() => {
-              this.$router.push('/OnLineApply_Fillin_OT_finish')
-            }, 1000)
-            return
+        switch (this.proofType) {
+          case 'option2': {
+            console.log('不須財力證明，mydata上傳證明')
+            this.form.isMydata = true
+            this.MyDataModal.show()
+            break
           }
-          if (res.data.status === '00801') {
-            // ? ===選擇自行上傳===
-            // ?顯示NNB畫面
-            setTimeout(() => {
-              this.$router.push('/dspApplicationNNB')
-            }, 1000)
-            return
+          case 'option1': {
+            console.log('不須財力證明，自行上傳證明')
+            this.form.isMydata = false
+            console.log(this.identitiyPack1.file)
+            // ** ===整理資料===
+            this.form.upload1 = this.identitiyPack1.file.split(',')[1]
+            this.form.upload2 = this.identitiyPack2.file.split(',')[1]
+            this.form.upload3 = this.identitiyPack3.file.split(',')[1]
+            this.form.upload4 = this.identitiyPack4.file.split(',')[1]
+            const res = await PublicService.CardSendApply(this.form)
+            if (res.status === 200) {
+              PublicService.showAPIMsg(res.data.message)
+              this.$store.dispatch('clearSession')
+              if (res.data.status === '00800') {
+                // ? ===選擇自行上傳===
+                // ?未來卡成功
+                this.$router.push('/OnLineApply_Fillin_OT_finish')
+              }
+              if (res.data.status === '00801') {
+                // ? ===選擇自行上傳===
+                // ?顯示NNB畫面
+                this.$router.push('/OnLineApply_Fillin_OT_finish_NNB')
+              }
+            }
+            break
           }
-          if (res.data.status === '00802') {
-            // ? ===選擇MyData上傳===
-            // ?讀取result內的URL轉導MyData上傳財力
-            this.url = res.data.result.MyDataUrl
-            setTimeout(() => {
-              window.open(this.url, '_blank')
-            }, 1000)
+          default: {
+            console.log('不須財力證明，無上傳任何證明')
+            const res = await PublicService.CardSendApply(this.form)
+            this.$store.dispatch('clearSession')
+            PublicService.showAPIMsg(res.data.message)
+            if (res.status === 200) {
+              if (res.data.status === '00800') {
+                // ? ===選擇自行上傳===
+                // ?未來卡成功
+                this.$router.push('/OnLineApply_Fillin_OT_finish')
+                return
+              }
+              if (res.data.status === '00801') {
+                // ? ===選擇自行上傳===
+                // ?顯示NNB畫面
+                this.$router.push('/OnLineApply_Fillin_OT_finish_NNB')
+                return
+              }
+              if (res.data.status === '00802') {
+                // ? ===選擇MyData上傳===
+                // ?讀取result內的URL轉導MyData上傳財力
+                this.url = res.data.result.MyDataUrl
+                window.open(this.url, '_blank')
+              }
+            }
+            break
           }
         }
+      }
+    },
+    async submitMydata () {
+      console.log('sumitMydata')
+      const res = await PublicService.CardSendApply(this.form)
+      this.$store.dispatch('clearSession')
+      // PublicService.showAPIMsg(res.data.message)
+      if (res.status === 200) {
+        // ? ===選擇MyData上傳===
+        // ?讀取result內的URL轉導MyData上傳財力
+        this.url = res.data.result?.MyDataUrl
+        window.open(this.url, '_blank')
+        this.MyDataModal.hide()
       }
     },
     goToMyDataTerms () {
@@ -854,6 +896,21 @@ export default {
         }
       } else {
         return true
+      }
+    },
+    async downloadFile () {
+      const response = await PublicService.previewPdf()
+      if (response.status === '01799') {
+        PublicService.showAPIMsg(response.message)
+        return
+      }
+      if (response.status === 200) {
+        const blob = new Blob([response.data], { type: 'application/pdf' })
+        const link = document.createElement('a')
+        link.href = window.URL.createObjectURL(blob)
+        link.download = response.headers['content-disposition'].split(';')[1].split('=')[1]
+        // link.download = `test.pdf`
+        link.click()
       }
     }
   },

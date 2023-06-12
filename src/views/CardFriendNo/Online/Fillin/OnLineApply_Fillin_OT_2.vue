@@ -613,7 +613,7 @@ export default {
               // ? ===選擇自行上傳===
               // ?顯示NNB畫面
               setTimeout(() => {
-                this.$router.push('/dspApplicationNNB')
+                this.$router.push('/OnLineApply_Fillin_OT_finish_NNB')
               }, 1000)
               return
             }
