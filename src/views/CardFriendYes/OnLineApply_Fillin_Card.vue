@@ -245,16 +245,66 @@
         </div>
       </section>
     </Form>
+    <!---------------modal---------------->
+    <!-- modal-注意事項 -->
+    <div
+      class="modal fade"
+      ref="noticeModal"
+      id="noticeModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl modal-dialog-scrollable act_T">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"><input id="myCheckCount" hidden /></h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            >
+              <img
+                src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/close.png"
+                border="0"
+                alt="close"
+                data-bs-dismiss="modal"
+              />
+            </button>
+          </div>
+          <div class="modal-body">
+            親愛的客戶您好：<br />
+            為因應洗錢防制相關法令規定，請您配合本行辦理個人基本資料確認及更新作業(如:行/職業別、主要所得及資金來源...等)，以避免可能影響您使用信用卡權益，如有疑問請進線本行客服洽詢。
+            <hr />
+            <div class="text-center mb-3">
+              <div class="col-12 text-center">
+                <button
+                  type="button"
+                  class="btn btn-primary btn-lg"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                >
+                  關閉
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import bootstrap from 'bootstrap/dist/js/bootstrap.bundle.js'
 import serviceY from '../../service/CardFriend_Y.Service'
 import service from '../../service/Public.Service'
 
 export default {
   data () {
     return {
+      noticeModal: '',
       schema: {},
       // get
       id: '',
@@ -381,11 +431,10 @@ export default {
       if (this.onLineApply_Fillin_Card.birthOther === '-----') {
         this.onLineApply_Fillin_Card.birthOther = ''
       }
-      console.log(this.onLineApply_Fillin_Card)
       const response = await serviceY.postKYC(this.onLineApply_Fillin_Card)
       const { status } = response
       if (status === '01100') {
-        const attrs = ['schema']
+        const attrs = ['noticeModal', 'schema']
         const temp$data = { ...this.$data }
         attrs.forEach(attr => {
           temp$data[attr] = null
@@ -406,7 +455,6 @@ export default {
     async init () {
       const kycInformation = await serviceY.getKYC()
       const { status, result } = kycInformation
-      console.log(kycInformation)
       switch (status) {
         case '01101' :
           this.id = result.id
@@ -453,9 +501,7 @@ export default {
     if (session) {
       this.tempOnlineApply = { ...session }
     }
-    console.log('before', this.option)
     this.getUtilities()
-    console.log('after', this.option)
     this.schema = {
       出生地: 'required',
       出生地的其他: '',
@@ -466,6 +512,11 @@ export default {
       所得及資金來源: 'required',
       所得及資金來源的其他: ''
     }
+    this.noticeModal = new bootstrap.Modal(this.$refs.noticeModal, {
+      keyboard: false,
+      backdrop: 'static'
+    })
+    this.noticeModal.show()
   }
 }
 </script>

@@ -419,7 +419,6 @@ export default {
               break
           }
         } catch (error) {
-          console.error('onSubmit error', error)
         }
       }
     }

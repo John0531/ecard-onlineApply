@@ -774,7 +774,6 @@ export default {
     }
     defineRule('customAddressValid', value => {
       const tempAddress = this.onLineApply_Fillin_Data.sendCardAddr.Lane + this.onLineApply_Fillin_Data.sendCardAddr.Aly + this.onLineApply_Fillin_Data.sendCardAddr.Num + this.onLineApply_Fillin_Data.sendCardAddr.Of + this.onLineApply_Fillin_Data.sendCardAddr.Flr + this.onLineApply_Fillin_Data.sendCardAddr.Other
-      console.log(tempAddress)
       if (tempAddress.length === 0 || !this.onLineApply_Fillin_Data.sendCardAddr.County ||
         !this.onLineApply_Fillin_Data.sendCardAddr.Area || !this.onLineApply_Fillin_Data.sendCardAddr.Road) {
         return '地址填寫不完整'
