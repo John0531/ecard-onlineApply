@@ -459,7 +459,6 @@ export default {
         this.chkData.agreeTerms = this.agreementAll
         this.chkData.personalDataAuthorized = this.checkagree
         const res = await ServiceN.otherCardholderVerification(this.chkData)
-        console.log(res)
         if (res.status === 200) {
           if (res.data.message) {
             PublicService.showAPIMsg(res.data.message)

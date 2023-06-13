@@ -424,7 +424,6 @@ export default {
         this.chkszData.personalDataAuthorized = this.checkagree
         this.chkszData.agreeTerms = this.agreementAll
         const res = await ServiceN.otherDepositorVerification(this.chkszData)
-        console.log(res)
         if (res.status === 200) {
           if (res.data.message) {
             PublicService.showAPIMsg(res.data.message)
@@ -471,7 +470,6 @@ export default {
     const res = await ServiceN.otherDepositorPageLoad()
     const data = res.data.result
     sessionStorage.setItem('Apply_N_Type', 'Online')
-    console.log(this.$refs.myForm)
     this.brthDt = data.brthDt
     this.oid = data.oid
     this.termsFile = data.termsList

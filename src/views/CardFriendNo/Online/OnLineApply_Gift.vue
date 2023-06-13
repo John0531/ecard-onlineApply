@@ -142,7 +142,6 @@ export default ({
   },
   async mounted () {
     const res = await ServiceN.getFirstGift()
-    console.log(res)
     this.giftNote = res.data.giftNote
     this.giftList = res.data.giftInfoList
     // ? 無首刷禮則直接導 OCR

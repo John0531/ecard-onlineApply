@@ -41,7 +41,6 @@ const service = {
           }
         })
       })
-      console.log(termsArr)
       const termsHtml = []
       for (let i = 0; i < termsArr.length; i++) {
         let htmlStr = ''
@@ -55,10 +54,8 @@ const service = {
         }
         termsHtml.push(htmlStr)
       }
-      console.log(termsHtml)
       return termsHtml
     } catch (err) {
-      console.log(err)
     }
   },
   //* yesgogogo
@@ -92,14 +89,12 @@ const service = {
       const element = parser.parseFromString(cleanHTML, 'text/html')
       return element.body.innerText
     } catch (err) {
-      console.log(err)
     }
   },
   async otpGet () {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/Otp/Send`
       const res = await axios.get(url)
-      console.log(res)
       return res
     } catch (err) {
     }
@@ -130,7 +125,6 @@ const service = {
         headers: { 'content-type': 'application/json' }
       }
       const res = await axios.post(url, msgCode, options)
-      console.log(res)
       return res
     } catch (err) {
     }
@@ -160,17 +154,14 @@ const service = {
         store.state.errorModal.show()
       }
     } catch (err) {
-      console.log(err)
     }
   },
   async previewPdf () {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/CardFromPDF/DownloadPDF`
       const res = await axios.get(url, { responseType: 'blob' })
-      console.log(res)
       return res
     } catch (err) {
-      console.log(err)
       return null
     }
   },
@@ -182,7 +173,6 @@ const service = {
         headers: { 'content-type': 'application/json' }
       }
       const res = await axios.post(url, data, options)
-      console.log(res)
       return res
     } catch {
     }

@@ -16,7 +16,6 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/CardPapper/Papper`
       const res = await axios.post(url, postData)
-      console.log(res)
       if (res.data.status === '01300') {
         return true
       }
@@ -27,7 +26,6 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/CardFormFillin/PageLoad`
       const res = await axios.get(url)
-      console.log(res)
       return res.data.result
     } catch (err) {
     }
@@ -57,7 +55,6 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/OtherCardholderVerification/PageLoad`
       const res = await axios.get(url)
-      console.log(res)
       return res
     } catch (err) {
     }
@@ -70,7 +67,6 @@ const service = {
         headers: { 'content-type': 'application/json' }
       }
       const res = await axios.post(url, form, options)
-      console.log(res)
       return res
     } catch (err) {
     }
@@ -79,7 +75,6 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/OtherDepositorVerification/PageLoad`
       const res = await axios.get(url)
-      console.log(res)
       return res
     } catch (err) {
     }
@@ -92,7 +87,6 @@ const service = {
         headers: { 'content-type': 'application/json' }
       }
       const res = await axios.post(url, form, options)
-      console.log(res)
       return res
     } catch (err) {
     }
@@ -101,7 +95,6 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/DepositorVerification/PageLoad`
       const res = await axios.get(url)
-      console.log(res)
       return res
     } catch (err) {
     }
@@ -114,7 +107,6 @@ const service = {
         headers: { 'content-type': 'application/json' }
       }
       const res = await axios.post(url, form, options)
-      console.log(res)
       return res
     } catch (err) {
     }
@@ -123,10 +115,8 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/CardSendApply/CardSendApply`
       const res = await axios.get(url)
-      console.log(res)
       return res
     } catch (err) {
-      console.log(err)
     }
   },
   async uploadImage (file) {
@@ -146,7 +136,6 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/OCR/OCRChkInfo`
       const res = await axios.post(url, postData)
-      console.log(res)
       if (res.data.status === '00102') {
         return {
           isSuccess: true,
@@ -171,7 +160,6 @@ const service = {
     try {
       const url = `${process.env.VUE_APP_BASE_API}/FirstGift`
       const res = await axios.get(url)
-      console.log(res)
       return res
     } catch {
     }

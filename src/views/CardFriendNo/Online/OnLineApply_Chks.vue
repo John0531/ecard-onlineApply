@@ -266,7 +266,6 @@ export default {
         this.chksForm.agreeTerms = this.agreementAll
         this.chksForm.personalDataAuthorized = this.checkagree
         const res = await ServiceN.DepositorCheckTerms(this.chksForm)
-        console.log(res)
         if (res.status === 200) {
           if (res.data.message) {
             PublicService.showAPIMsg(res.data.message)
@@ -314,7 +313,6 @@ export default {
     //* pageLoad接值
     const res = await ServiceN.DepositorPageLoad()
     if (res.status === 200) {
-      console.log(res)
       const data = res.data.result
       //* 資料處理
       this.chksData.brthDt = data.brthDt

@@ -395,7 +395,7 @@ export default {
           FillinData.OT_1 = {
             ...this.Form
           }
-          console.log(FillinData.OT_1)
+          // console.log(FillinData.OT_1)
           FillinData.OT_1_Flag = {
             flgLine: this.flgLine,
             flgTravel: this.flgTravel

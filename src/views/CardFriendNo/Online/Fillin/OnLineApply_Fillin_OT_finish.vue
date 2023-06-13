@@ -89,6 +89,12 @@ export default {
         link.click()
       }
     }
+  },
+  mounted () {
+    window.scroll({
+      top: 0,
+      behavior: 'smooth'
+    })
   }
 }
 </script>

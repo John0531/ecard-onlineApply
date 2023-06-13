@@ -124,7 +124,10 @@ export default {
     }
   },
   mounted () {
-    //
+    window.scroll({
+      top: 0,
+      behavior: 'smooth'
+    })
   }
 }
 </script>

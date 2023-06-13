@@ -225,7 +225,6 @@ export default {
       await this.$refs.form.validate()
       this.checkRadioAll()
       const errors = this.$refs.form.getErrors()
-      console.log(errors)
       if (Object.keys(errors).length !== 0) {
         this.$custom.validate.showErrors(errors)
         return

@@ -720,11 +720,9 @@ export default {
       this.$router.push('/OnLineApply_Fillin_OT_finish_NNB')
     },
     async submitSuitCase () {
-      console.log(this.form)
       this.$refs.myForm.setErrors({})
       if (sessionStorage.getItem('FinancialStatement') === 'true') {
         // ? Preview判斷須提供財力證明驗證，API也會判斷
-        console.log(true)
         this.checkIsPics()
         this.checkdoubleAgree()
         await this.$refs.myForm.validateField('財力證明')
@@ -740,7 +738,6 @@ export default {
             }
             case 'option1': {
               this.form.isMydata = false
-              console.log(this.identitiyPack1.file)
               // ** ===整理資料===
               this.form.upload1 = this.identitiyPack1.file.split(',')[1]
               this.form.upload2 = this.identitiyPack2.file.split(',')[1]
@@ -776,15 +773,14 @@ export default {
         // ? 無需上傳也要打API
         switch (this.proofType) {
           case 'option2': {
-            console.log('不須財力證明，mydata上傳證明')
+            // console.log('不須財力證明，mydata上傳證明')
             this.form.isMydata = true
             this.MyDataModal.show()
             break
           }
           case 'option1': {
-            console.log('不須財力證明，自行上傳證明')
+            // console.log('不須財力證明，自行上傳證明')
             this.form.isMydata = false
-            console.log(this.identitiyPack1.file)
             // ** ===整理資料===
             this.form.upload1 = this.identitiyPack1.file.split(',')[1]
             this.form.upload2 = this.identitiyPack2.file.split(',')[1]
@@ -808,7 +804,7 @@ export default {
             break
           }
           default: {
-            console.log('不須財力證明，無上傳任何證明')
+            // console.log('不須財力證明，無上傳任何證明')
             const res = await PublicService.CardSendApply(this.form)
             this.$store.dispatch('clearSession')
             PublicService.showAPIMsg(res.data.message)
@@ -838,7 +834,6 @@ export default {
       }
     },
     async submitMydata () {
-      console.log('sumitMydata')
       const res = await PublicService.CardSendApply(this.form)
       await this.downloadFile()
       this.$store.dispatch('clearSession')
@@ -848,7 +843,6 @@ export default {
         // ?讀取result內的URL轉導MyData上傳財力
         this.url = res.data.result?.MyDataUrl
         window.open(this.url, '_self')
-        console.log(this.url)
         this.MyDataModal.hide()
       }
     },
@@ -910,7 +904,6 @@ export default {
         const link = document.createElement('a')
         link.href = window.URL.createObjectURL(blob)
         link.target = '_blank'
-        console.log(link)
         link.download = response.headers['content-disposition'].split(';')[1].split('=')[1]
         // link.download = `test.pdf`
         await link.click()

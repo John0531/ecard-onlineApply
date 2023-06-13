@@ -33,7 +33,7 @@
                                     <Field
                                       v-model="mobileMsgCode"
                                       name="簡訊驗證碼" type="text" maxlength="6"
-                                      placeholder="" class="form-control"
+                                      placeholder="" class="form-control px-1"
                                       :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
                                       @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
                                       rules="checkOTP"
@@ -102,7 +102,7 @@
                               <Field
                                 v-model="mobileMsgCode"
                                 name="簡訊驗證碼" type="text" maxlength="6"
-                                placeholder="" class="form-control"
+                                placeholder="" class="form-control px-1"
                                 :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
                                 @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
                                 rules="checkOTP"
@@ -174,7 +174,7 @@
                                     <Field
                                       v-model="mobileMsgCode"
                                       name="簡訊驗證碼" type="text" maxlength="6"
-                                      placeholder="" class="form-control"
+                                      placeholder="" class="form-control px-1"
                                       :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
                                       @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
                                       rules="checkOTP"
@@ -242,7 +242,7 @@
                               <Field
                                 v-model="mobileMsgCode"
                                 name="簡訊驗證碼" type="text" maxlength="6"
-                                placeholder="" class="form-control"
+                                placeholder="" class="form-control px-1"
                                 :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
                                 @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
                                 rules="checkOTP"
@@ -309,7 +309,7 @@
                               <Field
                                 v-model="mobileMsgCode"
                                 name="簡訊驗證碼" type="text" maxlength="6"
-                                placeholder="" class="form-control"
+                                placeholder="" class="form-control px-1"
                                 :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
                                 @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
                                 rules="checkOTP"
@@ -436,7 +436,6 @@ export default ({
         // ** ===全部通過打API才前往下一頁===
         // const res = await PublicService.otpSend(`${this.tag}${this.mobileMsgCode}`)
         const res = await PublicService.otpSend(`${this.mobileMsgCode}`)
-        console.log(res)
         if (res.status === 200) {
           if (res.data.status === '40198') {
             PublicService.showAPIMsg(res.data.message)

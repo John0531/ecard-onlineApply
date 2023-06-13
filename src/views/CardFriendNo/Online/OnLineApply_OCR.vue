@@ -555,7 +555,7 @@ export default {
       this.num = num
       // ? 轉base64
       const file = await e.target.files[0]
-      console.log(`檔案大小${Math.round(file.size / 1000)}k`)
+      // console.log(`檔案大小${Math.round(file.size / 1000)}k`)
       const maxAllowedSize = 5 * 1024 * 1024
       if (file?.size > maxAllowedSize || (file?.type !== 'image/jpg' && file?.type !== 'image/jpeg' && file?.type !== 'image/png')) {
         this.ImageLimit.show()
@@ -583,11 +583,11 @@ export default {
       }
       const imgTemplate = await modalOpen(this.CroppieModal, this.$refs.CroppieModal)
       if (!imgTemplate.clientWidth || !imgTemplate.clientHeight) {
-        console.log('取得圖片寬高失敗')
+        // console.log('取得圖片寬高失敗')
         imgTemplate.clientWidth = this.$refs.CroppieModal.querySelector('.modal-body').clientWidth - 20 - 32
         imgTemplate.clientHeight = (this.$refs.CroppieModal.querySelector('.modal-body').clientWidth - 20 - 32) * document.getElementById('imgTemplate').naturalHeight / document.getElementById('imgTemplate').naturalWidth
       }
-      console.log(imgTemplate.clientWidth, imgTemplate.clientHeight)
+      // console.log(imgTemplate.clientWidth, imgTemplate.clientHeight)
       try {
         // ?要呈現畫面的區域(在modal上)
         const croppieE = this.$refs.myIdentifident
@@ -642,8 +642,8 @@ export default {
         size: 'original'
       })
       this.$store.commit('changeLoading', false)
-      console.log(`瀏覽圖檔案大小${Math.round(0.75 * base64View.length / 1000)}k`)
-      console.log(`壓縮檔案大小${Math.round(0.75 * base64Compression.length / 1000)}k`)
+      // console.log(`瀏覽圖檔案大小${Math.round(0.75 * base64View.length / 1000)}k`)
+      // console.log(`壓縮檔案大小${Math.round(0.75 * base64Compression.length / 1000)}k`)
       resultImg.src = base64View // ? 外層瀏覽圖片
       resultImg.style = `height:${this.clientHeight}px;`// ? 外層瀏覽圖片
       this[`identitiyPack${this.num}`].file = base64Compression // ? 打給API的資料
