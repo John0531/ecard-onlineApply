@@ -153,11 +153,11 @@
                     <div class="d-flex align-items-center" v-if="this.onLineApply_Fillin_Card.jobTypeKey === '0'">
                       <span class="text-nowrap">其他</span>
                       <Field
-                        name="職業別的其他"
+                        name="職業類別的其他"
                         type="text"
                         placeholder=" "
                         class="form-control other_input ms-1 my-2 my-md-0"
-                        :class="{ 'is-invalid':  errors['職業別的其他'], 'form-control':true}"
+                        :class="{ 'is-invalid':  errors['職業類別的其他'], 'form-control':true}"
                         v-model="onLineApply_Fillin_Card.jobOther"
                         :validateOnChange="true"
                         maxlength="25"
@@ -165,7 +165,7 @@
                     </div>
                   </div>
                   <span v-if="errors['職業類別']" class="field-error">{{ errors['職業類別'] }}</span>
-                  <span v-if="errors['職業別的其他']" class="field-error">{{ errors['職業別的其他'] }}</span>
+                  <span v-if="errors['職業類別的其他']" class="field-error">{{ errors['職業類別的其他'] }}</span>
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">6.職級別</label>
