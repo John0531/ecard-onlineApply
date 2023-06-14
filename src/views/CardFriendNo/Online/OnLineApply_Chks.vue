@@ -89,7 +89,8 @@
                   {{errors['服務申請約定條款']}}
                 </div>
               </div>
-              <div class="terms">
+              <!-- 20230613移除 -->
+              <!-- <div class="terms">
                   <Field
                     v-model="checkagree"
                     id="checkbox2" name="信用卡基本資料使用同意"
@@ -104,7 +105,7 @@
                   <div v-if="errors['信用卡基本資料使用同意']" class="d-flex text-center  field-error my-1">
                     {{errors['信用卡基本資料使用同意']}}
                   </div>
-              </div>
+              </div> -->
           </div>
           <!-------------------//本人已詳閱---------------------->
           <div class="text-center button_group">
@@ -217,8 +218,7 @@ export default {
       },
       chksForm:
       {
-        agreeTerms: null,
-        personalDataAuthorized: null
+        agreeTerms: null
       },
       MsgModal: null
     }
@@ -264,7 +264,6 @@ export default {
         // ** ===全部通過前往下一頁===
         // ** 資料整理
         this.chksForm.agreeTerms = this.agreementAll
-        this.chksForm.personalDataAuthorized = this.checkagree
         const res = await ServiceN.DepositorCheckTerms(this.chksForm)
         if (res.status === 200) {
           if (res.data.message) {
