@@ -58,7 +58,7 @@ import ServiceN from '@/service/CardFriend_N.Service.js'
 export default {
   data () {
     return {
-      flgWritten: true
+      flgWritten: false
     }
   },
   methods: {
@@ -76,9 +76,15 @@ export default {
     }
   },
   async mounted () {
+    this.$store.commit('changeLoading', true)
     const res = await ServiceN.applyType()
-    if (res.result?.CardInfoFlgWritten === 'Y') {
+    console.log(res.data.result?.CardInfoFlgWritten)
+    if (res.data.result?.CardInfoFlgWritten === 'Y') {
+      console.log(res.result?.CardInfoFlgWritten)
       this.flgWritten = true
+      this.$store.commit('changeLoading', false)
+    } else {
+      this.$store.commit('changeLoading', false)
     }
   }
 }
