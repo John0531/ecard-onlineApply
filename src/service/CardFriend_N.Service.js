@@ -202,6 +202,15 @@ const service = {
     } catch (err) {
       return err
     }
+  },
+  async applyType () {
+    try {
+      const url = `${process.env.VUE_APP_BASE_API}/ApplyType/PageLoad`
+      const res = await axios.get(url)
+      return res
+    } catch (err) {
+      return err
+    }
   }
 
 }

@@ -17,7 +17,7 @@
                     <h3><span>請選擇身分驗證方式</span></h3>
                 </div>
                 <div class="red_text pb-4 text-lg-star text-xl-center">
-                    您可以使用「他行信用卡」或「他行實體存款帳戶」進行身份驗證；若無上述驗證項目，可選擇「書面申請」方式，於線上填寫完成後列印寄回。
+                    <span>您可以使用「他行信用卡」或「他行實體存款帳戶」進行身份驗證</span><span v-if="flgWritten">；若無上述驗證項目，可選擇「書面申請」方式，於線上填寫完成後列印寄回。</span>
                 </div>
                 <div class="col-md-4 col-lg-4 col-xl-3 text-center">
                     <div class="not_UBfriend">
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 col-lg-4 col-xl-3 text-center">
+                <div class="col-md-4 col-lg-4 col-xl-3 text-center" v-if="flgWritten">
                     <div class="not_UBfriend">
                         <div class="item">
                           <h3 class="mb-0">書面申請 <img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/Apply_icon01.png" class="img-fluid" alt="" /></h3>
@@ -53,7 +53,14 @@
 </template>
 
 <script>
+import ServiceN from '@/service/CardFriend_N.Service.js'
+
 export default {
+  data () {
+    return {
+      flgWritten: true
+    }
+  },
   methods: {
     toOnLineApply_Chk () {
       sessionStorage.setItem('Apply_N_Type', 'Online')
@@ -66,6 +73,12 @@ export default {
     OnLineApply_OTP () {
       sessionStorage.setItem('Apply_N_Type', 'Written')
       this.$router.push('/OnLineApply_Chkw')
+    }
+  },
+  async mounted () {
+    const res = await ServiceN.applyType()
+    if (res.result?.CardInfoFlgWritten === 'Y') {
+      this.flgWritten = true
     }
   }
 }
