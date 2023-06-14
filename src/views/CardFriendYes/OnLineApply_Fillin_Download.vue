@@ -95,13 +95,7 @@
                   </div>
                   <div class="input-data_confirm">
                     <p>
-                      {{FillinData.homeAddr?.County}}{{FillinData.homeAddr?.Area}}{{FillinData.homeAddr?.Road}}<span v-if="FillinData.homeAddr?.Lane">{{FillinData.homeAddr?.Lane}}巷</span>
-                      <span v-if="FillinData.homeAddr?.Aly">{{FillinData.homeAddr?.Aly}}弄</span>
-                      <span v-if="FillinData.homeAddr?.Num&&FillinData.homeAddr?.Of">{{FillinData.homeAddr?.Num}}-{{FillinData.homeAddr?.Of}}號</span>
-                      <span v-if="FillinData.homeAddr?.Num&&!FillinData.homeAddr?.Of">{{FillinData.homeAddr?.Num}}號</span>
-                      <span v-if="!FillinData.homeAddr?.Num&&FillinData.homeAddr?.Of">{{FillinData.homeAddr?.Of}}號</span>
-                      <span v-if="FillinData.homeAddr?.Flr">{{FillinData.homeAddr?.Flr}}樓</span>
-                      <span v-if="FillinData.homeAddr?.Other">{{FillinData.homeAddr?.Other}}</span>
+                      {{FillinData.homeAddr}}
                     </p>
                   </div>
                 </li>
