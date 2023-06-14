@@ -78,9 +78,9 @@ export default {
   async mounted () {
     this.$store.commit('changeLoading', true)
     const res = await ServiceN.applyType()
-    console.log(res.data.result?.CardInfoFlgWritten)
+    // console.log(res.data.result?.CardInfoFlgWritten)
     if (res.data.result?.CardInfoFlgWritten === 'Y') {
-      console.log(res.result?.CardInfoFlgWritten)
+      // console.log(res.result?.CardInfoFlgWritten)
       this.flgWritten = true
       this.$store.commit('changeLoading', false)
     } else {
