@@ -1,5 +1,7 @@
 describe('線上辦卡', () => {
-  it('非卡友-書面',{timeout:10000},() => {
+  beforeEach(() => {
+    cy.fixture('CardFriend_N.json').as('CardFriendNJson')
+
     if(Cypress.env('mode')==='dev'){
       cy.visit('http://localhost:8080/card_apply/?&GID=99&IDE=A')
     } else if(Cypress.env('mode')==='prod'){
@@ -13,33 +15,23 @@ describe('線上辦卡', () => {
         cy.wait('@AwsSubmit',{timeout:30000})
       })
     }
+  })
+
+  it('非卡友-書面',{timeout:10000},function(){
     OnlineApply()
     OnLineApply_Gift()
     OnLineApply_OCR()
     OnLineApply_n1('書面')
     OnLineApply_Chkw()
     OnLineApply_Written_OTP()
-    OnLineApply_Fillin_OT()
+    OnLineApply_Fillin_OT(this.CardFriendNJson.Fillin_OT)
     OnLineApply_Fillin_OT_1()
     OnLineApply_Fillin_OT_2()
     OnLineApply_Fillin_OT_Up()
     OnLineApply_Fillin_OT_finish()
   })
 
-  it('非卡友-他行卡驗證',{timeout:10000},() => {
-    if(Cypress.env('mode')==='dev'){
-      cy.visit('http://localhost:8080/card_apply/?&GID=99&IDE=A')
-    } else if(Cypress.env('mode')==='prod'){
-      cy.visit('https://card-beta.uitc.com.tw/card_apply/?&GID=81&IDE=A')
-      cy.intercept('https://cardapi-beta.uitc.com.tw/LINEBank_Co-brandedCard_SIT/chk').as('AwsSubmit')
-      cy.visit('https://yesgoimages.s3.ap-northeast-1.amazonaws.com/test/EcardAWS/FeatureCard.html')
-      cy.origin('https://yesgoimages.s3.ap-northeast-1.amazonaws.com',()=>{
-        cy.get('input[name="birth"]').type('19800101')
-        cy.get('input[name="phone"]').type('0966666666')
-        cy.get('button').contains(' 確認 ').click()
-        cy.wait('@AwsSubmit',{timeout:30000})
-      })
-    }
+  it('非卡友-他行卡驗證',{timeout:10000},function(){
     OnlineApply()
     OnLineApply_Gift()
     OnLineApply_OCR()
@@ -53,20 +45,7 @@ describe('線上辦卡', () => {
     OnLineApply_Fillin_OT_finish()
   })
 
-  it('非卡友-他行帳戶驗證',{timeout:10000},() => {
-    if(Cypress.env('mode')==='dev'){
-      cy.visit('http://localhost:8080/card_apply/?&GID=99&IDE=A')
-    } else if(Cypress.env('mode')==='prod'){
-      cy.visit('https://card-beta.uitc.com.tw/card_apply/?&GID=81&IDE=A')
-      cy.intercept('https://cardapi-beta.uitc.com.tw/LINEBank_Co-brandedCard_SIT/chk').as('AwsSubmit')
-      cy.visit('https://yesgoimages.s3.ap-northeast-1.amazonaws.com/test/EcardAWS/FeatureCard.html')
-      cy.origin('https://yesgoimages.s3.ap-northeast-1.amazonaws.com',()=>{
-        cy.get('input[name="birth"]').type('19800101')
-        cy.get('input[name="phone"]').type('0966666666')
-        cy.get('button').contains(' 確認 ').click()
-        cy.wait('@AwsSubmit',{timeout:30000})
-      })
-    }
+  it('非卡友-他行帳戶驗證',{timeout:10000},function(){
     OnlineApply()
     OnLineApply_Gift()
     OnLineApply_OCR()
@@ -119,8 +98,48 @@ function OnLineApply_OCR(){
   cy.get('#upload2').selectFile('cypress/file/4b45d5329a362.jpg')
   cy.get('button').contains('確認').click()
   cy.get('button').contains('送出證件').click()
-  cy.wait('@UploadImage',{timeout:30000})
-  cy.get('select[name="homeAddr_County"]').should('be.visible')
+  function UploadImage(){
+    cy.wait('@UploadImage',{timeout:30000}).then((intercept)=>{
+      if(intercept.response.body.status!=='01200'){
+        cy.wait(500)
+        cy.get('#noticeModal_5 button').contains('關閉').click()
+        cy.get('button').contains('送出證件').click()
+        UploadImage()
+      }
+    })
+  }
+  UploadImage()
+  cy.get('#checkForm').should('be.visible')
+  cy.get('select[name="iddate_Year"]').then((select)=>{
+    if(!select[0].value){
+      cy.get('select[name="iddate_Year"]').select('100')
+    }
+  })
+  cy.get('select[name="iddate_Month"]').then((select)=>{
+    if(!select[0].value){
+      cy.get('select[name="iddate_Month"]').select('1')
+    }
+  })
+  cy.get('select[name="iddate_Day"]').then((select)=>{
+    if(!select[0].value){
+      cy.get('select[name="iddate_Day"]').select('1')
+    }
+  })
+  cy.get('select[name="發證地點"]').then((select)=>{
+    if(!select[0].value){
+      cy.get('select[name="發證地點"]').select('新北市')
+    }
+  })
+  cy.get('select[name="發證類型"]').then((select)=>{
+    if(!select[0].value){
+      cy.get('select[name="發證類型"]').select('換發')
+    }
+  })
+  cy.get('input[name="中文姓名"]').then((select)=>{
+    if(!select[0].value){
+      cy.get('input[name="中文姓名"]').type('晏聖')
+    }
+  })
   cy.get('select[name="homeAddr_County"]').select('臺北市')
   cy.get('select[name="homeAddr_Area"]').select('士林區')
   cy.get('select[name="homeAddr_Road"]').select('力行街')
@@ -233,11 +252,11 @@ function OnLineApply_ChkSZ_OTP(){
 
 
 
-function OnLineApply_Fillin_OT(){
+function OnLineApply_Fillin_OT(formData){
   cy.url().should('include', '/OnLineApply_Fillin_OT')
-  cy.get('input[name="英文姓名"]').type('John')
-  cy.get('select[name="出生地"]').select('臺北市')
-  cy.get('select[name="國籍"]').select('本國')
+  cy.get('input[name="英文姓名"]').type(formData.英文姓名)
+  cy.get('select[name="出生地"]').select(formData.出生地)
+  cy.get('select[name="國籍"]').select(formData.國籍)
   cy.get('button').contains('同戶籍地址').click()
   cy.get('input[id="帳單地址-同居住地址"]').check()
   cy.get('input[id="寄卡地址-同居住地址"]').check()
@@ -286,8 +305,10 @@ function OnLineApply_Fillin_OT_Up(){
 
 
 function OnLineApply_Fillin_OT_finish(){
+  cy.intercept('https://card-beta.uitc.com.tw/CardApply/api/CardFromPDF/DownloadPDF').as('DownloadPDF')
   cy.url().should('include', '/OnLineApply_Fillin_OT_finish')
   cy.wait(1000)
   cy.get('button').contains(' 關閉 ').click()
   cy.get('button').contains('下載/列印申請書').click()
+  cy.wait('@DownloadPDF',{timeout:30000})
 }

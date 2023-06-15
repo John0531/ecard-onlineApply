@@ -336,7 +336,7 @@
     </section>
 
           <!---------------------modal-財力圖片修改操作 -------------->
-  <div ref="CroppieModal" class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true">
+  <div ref="CroppieModal" class="modal fade" id="noticeModal_1" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true">
       <div class="modal-dialog modal-xl modal-dialog-scrollable">
           <div class="modal-content">
               <div class="modal-header">
@@ -380,7 +380,7 @@
   </div>
         <!---------------------modal-財力證明範例 (彈跳視窗) -------------->
       <!-- modal-範例說明 -->
-    <div ref="NoticeModal" class="modal fade" id="noticeModal" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true">
+    <div ref="NoticeModal" class="modal fade" id="noticeModal_2" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -410,7 +410,7 @@
     </div>
     <!-- modal-範例說明end -->
     <!-- modal-提醒 -->
-    <div ref="NoticeModa2" class="modal fade" id="noticeModal_2" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true">
+    <div ref="NoticeModa2" class="modal fade" id="noticeModal_3" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -432,7 +432,7 @@
         </div>
     </div>
     <!-- modal-提醒上傳檔案限制提醒  -->
-    <div ref="ImageLimit" class="modal fade" id="noticeModal_2" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true">
+    <div ref="ImageLimit" class="modal fade" id="noticeModal_4" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -454,7 +454,7 @@
         </div>
     </div>
         <!-- API情境彈窗 -->
-    <div ref="APIModal" class="modal fade" id="noticeModal_2" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true">
+    <div ref="APIModal" class="modal fade" id="noticeModal_5" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -666,6 +666,7 @@ export default {
       // ?清空暫存檔案
       document.querySelector(`#upload${num}`).value = null
     },
+    // ? 上船證件圖片
     async sendIdentity () {
       const dom = this.$refs.myForm
       dom.setErrors({}) // ? 先清除所有上次驗證的錯誤再驗證
