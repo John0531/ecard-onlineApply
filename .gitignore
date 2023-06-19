@@ -3,7 +3,8 @@ node_modules
 /dist
 dist.zip
 cypress.config.js
-
+/cypress/downloads
+/cypress/video
 
 # local env files
 .env.local

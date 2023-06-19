@@ -20,9 +20,7 @@
           >
             <div class="row IDupload_group">
               <div class="col-12 col-md-6">
-                <div class="upload_IDtxt text-center">
-                身分證 正面
-                </div>
+                <div class="upload_IDtxt text-center">身分證 正面</div>
                 <div class="upload_items text-center">
                   <Field
                     type="file" name="upload1" id="upload1"
@@ -483,8 +481,6 @@ import ServiceN from '@/service/CardFriend_N.Service.js'
 export default {
   data () {
     return {
-      clientHeight: '', // ? 背景圖片高
-      preViewImage: '',
       times: -1,
       num: '', // *修改完成要呈現的照片序
       identitiyPack1: {
@@ -553,6 +549,7 @@ export default {
   methods: {
     async pickFiles (e, num) {
       this.num = num
+      console.log(456)
       // ? 轉base64
       const file = await e.target.files[0]
       // console.log(`檔案大小${Math.round(file.size / 1000)}k`)
@@ -645,7 +642,7 @@ export default {
       // console.log(`瀏覽圖檔案大小${Math.round(0.75 * base64View.length / 1000)}k`)
       // console.log(`壓縮檔案大小${Math.round(0.75 * base64Compression.length / 1000)}k`)
       resultImg.src = base64View // ? 外層瀏覽圖片
-      resultImg.style = `height:${this.clientHeight}px;`// ? 外層瀏覽圖片
+      resultImg.style = `height:${this.$refs.resultImg1.clientHeight}px;`// ? 外層瀏覽圖片
       this[`identitiyPack${this.num}`].file = base64Compression // ? 打給API的資料
       // ?編輯結束將相關物件資料銷毀
       this.CroppieModal.hide()
@@ -806,9 +803,6 @@ export default {
     }
   },
   async mounted () {
-    setTimeout(() => {
-      this.clientHeight = this.$refs.resultImg1.clientHeight
-    }, 500)
     if (sessionStorage.getItem('OCR_Data')) {
       this.uploaded = true
       this.Form = JSON.parse(sessionStorage.getItem('OCR_Data'))
