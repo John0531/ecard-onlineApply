@@ -694,7 +694,7 @@ export default {
       this.$store.commit('changeLoading', false)
       //
       resultImg.src = base64View // ? 外層瀏覽圖片
-      resultImg.style = `height:${this.clientHeight}px;`// ? 外層瀏覽圖片
+      resultImg.style = `height:${this.$refs.resultImg1.clientHeight}px;`// ? 外層瀏覽圖片
       this[`identitiyPack${this.num}`].file = base64Compression // ? 打給API的資料
       // ?編輯結束將相關物件資料銷毀
       this.CroppieModal.hide()
@@ -911,9 +911,6 @@ export default {
     }
   },
   mounted () {
-    setTimeout(() => {
-      this.clientHeight = this.$refs.resultImg1.clientHeight
-    }, 500)
     // ? 操作時間倒數計時
     this.timing = setInterval(() => {
       this.countDown.subtract(1, 'seconds')
