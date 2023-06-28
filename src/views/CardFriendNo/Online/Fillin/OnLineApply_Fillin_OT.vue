@@ -1396,12 +1396,6 @@
               </ul>
             </div>
           </div>
-          <div class="text-center mb-4" v-if="Apply_N_Type==='Written'">
-            <div class="text-start d-inline-block red_text indentNote_star">
-              <p>* 請務必填寫至最後步驟，並列印出「簽名欄位」及黏貼「身分證影本欄位」，完成後請依回郵資訊將紙本寄回本行。</p>
-              <p>* 切勿自行按瀏覽器之列印功能，以避免資料不全造成辦卡時間之延誤。 </p>
-            </div>
-          </div>
           <div class="text-center button_group">
             <button
               @click.prevent="submit"
