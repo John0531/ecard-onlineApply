@@ -27,7 +27,7 @@
                             <div class="text-center pb-2 pb-md-3">
                                 <button @click.prevent="downloadFile" class="btn btn-primary btn-md mx-1" >下載/列印申請書</button>
                             </div>
-                            <p class="text-center">如您為<span class="red_text">『書面申請』</span>，請務必列印申請書並親簽後寄回，以完成申請，謝謝</p>
+                            <p class="text-center">如您為<span class="red_text">『書面申請』，尚未申辦完成</span>，請務必列印申請書並親簽後寄回，以完成申請，謝謝</p>
                         </div>
                         <div class="d-flex flex-wrap justify-content-center my-2 my-md-3">
                             <div class="col-12 col-md-4 Apply_OT my-4">
