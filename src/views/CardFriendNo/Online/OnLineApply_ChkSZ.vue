@@ -294,10 +294,10 @@ export default {
       },
       applierInfo: {
         // ?使用者輸入的出生年月日
-        Identification: 'A111111111',
-        year: '1955',
-        month: '01',
-        day: '01'
+        Identification: '',
+        year: '',
+        month: '',
+        day: ''
       },
       bankCodes: {
       },

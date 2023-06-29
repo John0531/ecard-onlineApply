@@ -76,7 +76,7 @@ export default {
         code2: '',
         code3: '',
         code4: '',
-        codeAll: '3567030082389103'
+        codeAll: ''
       },
       validThru: '',
       CSC: '',

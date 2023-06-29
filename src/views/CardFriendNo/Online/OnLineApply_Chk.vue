@@ -268,7 +268,7 @@ export default {
         code2: '',
         code3: '',
         code4: '',
-        codeAll: '3567030082389103'
+        codeAll: ''
       },
       validThru: '',
       CSC: '',
@@ -452,6 +452,7 @@ export default {
       if (Object.keys(errors).length === 0) {
         // ** ===全部檢查通過前往下一頁===
         // ** ===資料整理===
+        this.cardNumber.codeAll = this.cardNumber.code1 + this.cardNumber.code2 + this.cardNumber.code3 + this.cardNumber.code4
         this.chkData.obCardNo = this.cardNumber.codeAll
         this.chkData.oExpDay = this.validThru
         this.chkData.oCvv = this.CSC
