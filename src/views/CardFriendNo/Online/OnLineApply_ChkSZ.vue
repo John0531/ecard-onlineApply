@@ -161,7 +161,7 @@
                                 class="form-control"
                                 :class="{ 'is-invalid': errors['行動電話'] }"
                                 @keyup="chkszData.omobilePhone = $custom.validate.OnlyNumPress(chkszData.omobilePhone)"
-                                @focus="chkszData.omobilePhone=''"
+                                @click.prevent="chkszData.omobilePhone=''"
                                 rules="checkPhone"
                                 />
                                 <span class="not_text">請填寫帳戶申請時之行動電話，以利資訊驗證</span>
