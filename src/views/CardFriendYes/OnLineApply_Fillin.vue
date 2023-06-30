@@ -209,7 +209,7 @@
                       <div class="d-flex flex-wrap flex-column flex-md-row">
                         <div class="form-check me-4">
                           <label>
-                            <Field class="form-check-input mt-2 position-absolute" id="digitrue" type="radio" name="申請數位卡" value="yes" v-model="onLineApply_Fillin_Data.digiFlag"/>
+                            <Field class="form-check-input mt-2 position-absolute" id="digitrue" type="radio" name="申請數位卡" value="true" v-model="onLineApply_Fillin_Data.digiFlag"/>
                             <div class="form_Apply_txts text-nowrap" for="digitrue">
                                     是 (有效期至核卡後次月底)
                             </div>
@@ -217,7 +217,7 @@
                         </div>
                         <div class="form-check me-4">
                           <label>
-                            <Field class="form-check-input mt-2 position-absolute" id="digifalse" type="radio" name="申請數位卡" value="no" v-model="onLineApply_Fillin_Data.digiFlag"/>
+                            <Field class="form-check-input mt-2 position-absolute" id="digifalse" type="radio" name="申請數位卡" value="false" v-model="onLineApply_Fillin_Data.digiFlag"/>
                             <div class="form_Apply_txts" for="digifalse">
                                     否
                             </div>
