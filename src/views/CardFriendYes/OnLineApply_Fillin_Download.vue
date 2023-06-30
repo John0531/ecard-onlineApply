@@ -128,8 +128,8 @@
                   </div>
                   <div class="input-data_confirm">
                     <p>
-                      <span v-if="FillinData.digiFlag==='yes'">是</span>
-                      <span v-if="FillinData.digiFlag==='no'">否</span>
+                      <span v-if="FillinData.digiFlag==='true'">是</span>
+                      <span v-if="FillinData.digiFlag==='false'">否</span>
                       <span v-if="FillinData.digiFlag===''"></span>
                     </p>
                   </div>
