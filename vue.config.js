@@ -25,7 +25,7 @@ module.exports = {
   chainWebpack: config => {
     // 生產版本
     if (process.env.NODE_ENV === 'production') {
-      config.optimization.delete('splitChunks'); // 禁用代碼分割
+      config.optimization.delete('splitChunks') // 禁用代碼分割
 
       config.optimization.minimizer('terser').tap(args => {
         args[0].terserOptions = {

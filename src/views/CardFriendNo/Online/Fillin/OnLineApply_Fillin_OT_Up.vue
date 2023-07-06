@@ -218,7 +218,7 @@
                                 @click.prevent="checkAgreement"
                                 @change="checkdoubleAgree"
                                 />
-                                <label for="agree">本人已詳閱並同意｢ <a @click.prevent="checkAgreement" href="#" ><u>MyData服務授權條款</u></a>」</label>
+                                <label for="checkbox1">本人已詳閱並同意｢ <a @click.prevent="checkAgreement" href="#" ><u>MyData服務授權條款</u></a>」</label>
                             </div>
                             <div v-if="errors['MyData服務授權條款']" class="d-flex text-center field-error my-1 ">
                               <div>{{errors['MyData服務授權條款']}}</div>
@@ -550,6 +550,28 @@
           </div>
       </div>
   </div>
+        <!-- API情境彈窗 -->
+  <div ref="APIModal" class="modal fade" id="noticeModal_5" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title"><input id="myCheckCount" hidden></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <div class="text-center py-3" v-html="message"></div>
+                  <hr>
+                  <div class="text-center mb-3">
+                      <div class="col-12 text-center">
+                          <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" aria-label="Close">關閉</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -601,7 +623,8 @@ export default {
         upload4: '',
         isMydata: false
       },
-      url: ''
+      url: '',
+      APIModal: null // API提醒Modal
     }
   },
   methods: {
@@ -835,15 +858,19 @@ export default {
     },
     async submitMydata () {
       const res = await PublicService.CardSendApply(this.form)
-      await this.downloadFile()
-      this.$store.dispatch('clearSession')
       // PublicService.showAPIMsg(res.data.message)
       if (res.status === 200) {
+        await this.downloadFile()
         // ? ===選擇MyData上傳===
         // ?讀取result內的URL轉導MyData上傳財力
         this.url = res.data.result?.MyDataUrl
+        this.$store.dispatch('clearSession')
         window.open(this.url, '_self')
         this.MyDataModal.hide()
+      } else {
+        // this.message = `${res.data.message}(${res.data.status})`
+        this.message = '請重新選擇上傳財力證明方式，或洽客服!'
+        this.APIModal.show()
       }
     },
     goToMyDataTerms () {
@@ -934,6 +961,7 @@ export default {
     // *進場先跳範例提醒
     this.NoticeModal = new this.$custom.bootstrap.Modal(this.$refs.NoticeModal)
     this.NoticeModal.show()
+    this.APIModal = new this.$custom.bootstrap.Modal(this.$refs.APIModal)
   },
   unmounted () {
     clearInterval(this.timing)
