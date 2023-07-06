@@ -32,10 +32,11 @@ module.exports = {
           ...args[0].terserOptions,
           output: {
             comments: false // 隱藏註解
-          },
-        };
+          }
+        }
         return args
-      });
+      })
     }
   },
+  productionSourceMap: process.env.NODE_ENV !== 'production'
 }
