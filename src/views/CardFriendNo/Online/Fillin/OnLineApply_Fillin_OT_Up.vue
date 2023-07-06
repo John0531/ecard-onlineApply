@@ -975,8 +975,12 @@ export default {
         this.doubleAgree = true
         this.$refs.myForm.setFieldError('MyData服務授權條款', '')
         this.MyDataAgreeModal.hide()
+        const ck = document.querySelector('#checkbox1')
+        ck.checked = true
       } else {
         this.doubleAgree = false
+        const ck = document.querySelector('#checkbox1')
+        ck.checked = false
       }
     }
   }
