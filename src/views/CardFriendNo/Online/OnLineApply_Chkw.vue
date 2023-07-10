@@ -28,6 +28,7 @@
                         :class="{ 'is-invalid': errors['行動電話'] }"
                         @change="form.mbleTelNbr = $custom.validate.OnlyNumPress(form.mbleTelNbr)"
                         @keyup="form.mbleTelNbr = $custom.validate.OnlyNumPress(form.mbleTelNbr)"
+                        @change="form.mbleTelNbr = $custom.validate.OnlyNumPress(form.mbleTelNbr)"
                         rules="checkPhone"
                         />
                         <span class="not_text">請填寫信用卡申請時之行動電話，以利資訊驗證</span>

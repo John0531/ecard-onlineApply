@@ -170,7 +170,8 @@ const validate = {
 
   //* ==== 12. 只可輸入數字
   //* 來源： Utility.js
-  // ? 搭配@keyup事件使用，直接過濾所有輸入字元必定為數字
+  // ? 搭配@keyup與@change事件使用，直接過濾所有輸入字元必定為數字
+  // ! @keyup 事件在使用滑鼠貼上或手機貼上時，無法觸發
   OnlyNumPress (value) {
     return value.replace(/[^\d]+/g, '')
   },
@@ -288,7 +289,8 @@ const validate = {
     return true // TODO 開放卡處測試
   },
   //* ==== 22. 只可輸入數字，且首字不為零 ====
-  // ? 搭配@keyup事件使用，直接過濾所有輸入字元必定為數字
+  // ? 搭配@keyup與@change事件使用，直接過濾所有輸入字元必定為數字
+  // ! @keyup 事件在使用滑鼠貼上或手機貼上時，無法觸發
   NumOnlyWithoutFirstZero (value) {
     return value.replace(/^(0+)|[^\d]+/g, '')
     // /^(0+)|[^\d]+/g 不可是 0 開頭
