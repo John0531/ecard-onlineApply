@@ -26,6 +26,7 @@
                         type="text" maxlength="10"
                         class="form-control"
                         :class="{ 'is-invalid': errors['行動電話'] }"
+                        @change="form.mbleTelNbr = $custom.validate.OnlyNumPress(form.mbleTelNbr)"
                         @keyup="form.mbleTelNbr = $custom.validate.OnlyNumPress(form.mbleTelNbr)"
                         rules="checkPhone"
                         />

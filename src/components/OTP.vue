@@ -36,6 +36,7 @@
                                       placeholder="" class="form-control px-1"
                                       :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
                                       @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
+                                      @change="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
                                       rules="checkOTP"
                                     />
                                     <button
@@ -105,6 +106,7 @@
                                 placeholder="" class="form-control px-1"
                                 :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
                                 @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
+                                @change="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
                                 rules="checkOTP"
                               />
                               <button
@@ -177,6 +179,7 @@
                                       placeholder="" class="form-control px-1"
                                       :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
                                       @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
+                                      @change="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
                                       rules="checkOTP"
                                     />
                                     <button
@@ -245,6 +248,7 @@
                                 placeholder="" class="form-control px-1"
                                 :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
                                 @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
+                                @change="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
                                 rules="checkOTP"
                               />
                               <button
@@ -312,6 +316,7 @@
                                 placeholder="" class="form-control px-1"
                                 :class="{ 'is-invalid': errors['簡訊驗證碼'] }"
                                 @keyup="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
+                                @change="mobileMsgCode = $custom.validate.OnlyNumPress(mobileMsgCode)"
                                 rules="checkOTP"
                               />
                               <button

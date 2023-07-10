@@ -143,7 +143,7 @@
                                 :class="{ 'is-invalid': errors['銀行帳號'] }"
                                 :validateOnChange="true"
                                 @keyup="chkszData.oacctNo = $custom.validate.OnlyNumPress(chkszData.oacctNo)"
-                                @change="$custom.validate.chkKeyValueLength(chkszData.oacctNo,$refs.myForm,'銀行帳號','10','14')"
+                                @change="$custom.validate.chkKeyValueLength(chkszData.oacctNo,$refs.myForm,'銀行帳號','10','14');chkszData.oacctNo = $custom.validate.OnlyNumPress(chkszData.oacctNo)"
                                 />
                                 <span class="not_text">請填寫臨櫃開立之存款帳戶(不含數位存款帳戶)</span>
                                 <div v-if="errors['銀行帳號']" class="d-flex text-center field-error my-1" >
@@ -160,6 +160,7 @@
                                 type="text" maxlength="10"
                                 class="form-control"
                                 :class="{ 'is-invalid': errors['行動電話'] }"
+                                @change="chkszData.omobilePhone = $custom.validate.OnlyNumPress(chkszData.omobilePhone)"
                                 @keyup="chkszData.omobilePhone = $custom.validate.OnlyNumPress(chkszData.omobilePhone)"
                                 @click.prevent="chkszData.omobilePhone=''"
                                 rules="checkPhone"

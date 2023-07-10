@@ -85,7 +85,7 @@
                                   class="p-number-box form-control"
                                   :validateOnChange="true"
                                   @keyup="promoteUnit = $custom.validate.OnlyNumPress(promoteUnit)"
-                                  @change="checkCode3(promoteUnit, '推廣單位', this.$refs.myForm,'NNBUserCode')"
+                                  @change="checkCode3(promoteUnit, '推廣單位', this.$refs.myForm,'NNBUserCode');promoteUnit = $custom.validate.OnlyNumPress(promoteUnit)"
                                   />
                               </li>
                               <li v-if="errors['推廣單位']" class="text-start field-error justify-content-start mt-1 mb-3">
@@ -102,7 +102,7 @@
                                   :class="{ 'is-invalid': errors['推廣員編'] }"
                                   class="p-number-box form-control"
                                   @keyup="promoteEployeeCode = $custom.validate.OnlyNumPress(promoteEployeeCode)"
-                                  @change="checkCode7(promoteEployeeCode, '推廣員編', this.$refs.myForm,'NNBProjCode')"
+                                  @change="checkCode7(promoteEployeeCode, '推廣員編', this.$refs.myForm,'NNBProjCode');promoteEployeeCode = $custom.validate.OnlyNumPress(promoteEployeeCode)"
                                   />
                               </li>
                               <li v-if="errors['推廣員編']" class="text-center field-error justify-content-start  mt-1 mb-3">
@@ -118,7 +118,7 @@
                                   class="p-number-box form-control"
                                   :validateOnChange="true"
                                   @keyup="projectCode = $custom.validate.OnlyNumPress(projectCode)"
-                                  @change="checkProjectCode(projectCode, '專案代碼', this.$refs.myForm)"
+                                  @change="checkProjectCode(projectCode, '專案代碼', this.$refs.myForm);projectCode = $custom.validate.OnlyNumPress(projectCode)"
                                   />
                               </li>
                               <li v-if="errors['專案代碼']" class="text-center field-error justify-content-start mt-1 mb-3">
