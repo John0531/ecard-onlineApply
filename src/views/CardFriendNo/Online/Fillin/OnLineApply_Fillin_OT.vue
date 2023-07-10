@@ -653,7 +653,7 @@
                       class="form-control ms-1"
                       :class="{ 'is-invalid': errors['戶籍電話號碼'] }"
                       maxlength="8"
-                      @change="Form.home.homeTel?$custom.validate.chkKeyValueLength(Form.home.homeTel,formDom,'戶籍電話號碼',6,8):'';Form.home.homeTel = $custom.validate.OnlyNumPress(Form.home.homeTel)"
+                      @change="Form.home.homeTel?$custom.validate.chkKeyValueLength(Form.home.homeTel,$refs.form,'戶籍電話號碼',6,8):'';Form.home.homeTel = $custom.validate.OnlyNumPress(Form.home.homeTel)"
                       @keyup="Form.home.homeTel = $custom.validate.OnlyNumPress(Form.home.homeTel)"
                     />
                   </div>
@@ -669,7 +669,7 @@
                       class="form-control AreaCode me-1"
                       :class="{ 'is-invalid': errors['居住電話區碼'] }"
                       maxlength="4"
-                      @change="Form.live.liveAreaCode?$custom.validate.chkKeyValueLength(Form.live.liveAreaCode,formDom,'居住電話區碼',2,4):'';Form.live.liveAreaCode = $custom.validate.OnlyNumPress(Form.live.liveAreaCode)"
+                      @change="Form.live.liveAreaCode?$custom.validate.chkKeyValueLength(Form.live.liveAreaCode,$refs.form,'居住電話區碼',2,4):'';Form.live.liveAreaCode = $custom.validate.OnlyNumPress(Form.live.liveAreaCode)"
                       @keyup="Form.live.liveAreaCode = $custom.validate.OnlyNumPress(Form.live.liveAreaCode)"
                     />-
                     <Field
@@ -679,7 +679,7 @@
                       class="form-control ms-1"
                       :class="{ 'is-invalid': errors['居住電話號碼'] }"
                       maxlength="8"
-                      @change="Form.live.liveTel?$custom.validate.chkKeyValueLength(Form.live.liveTel,formDom,'居住電話號碼',6,8):'';Form.live.liveTel = $custom.validate.OnlyNumPress(Form.live.liveTel)"
+                      @change="Form.live.liveTel?$custom.validate.chkKeyValueLength(Form.live.liveTel,$refs.form,'居住電話號碼',6,8):'';Form.live.liveTel = $custom.validate.OnlyNumPress(Form.live.liveTel)"
                       @keyup="Form.live.liveTel = $custom.validate.OnlyNumPress(Form.live.liveTel)"
                     />
                   </div>
@@ -1563,13 +1563,10 @@ export default {
   computed: {
     iddateList () {
       return this.$custom.validate.getDateSelect(this.Form.iddate, '民國')
-    },
+    }
     /* BirthDateList () {
       return this.$custom.validate.getDateSelect(this.Form.BirthDay, '民國')
     }, */
-    formDom () {
-      return this.$refs.form
-    }
   },
   watch: {
     Form: {
@@ -1582,7 +1579,7 @@ export default {
           this.$refs.form.setFieldError('戶籍電話號碼', '')
         }
         if (!n.live.liveAreaCode && !n.live.liveTel) {
-          this.$refs.form.setFieldError('居住電話號碼', '')
+          this.$refs.form.setFieldError('居住電話區碼', '')
           this.$refs.form.setFieldError('居住電話號碼', '')
         }
         // ? 出生地
