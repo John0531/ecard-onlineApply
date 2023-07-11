@@ -554,7 +554,6 @@ export default {
   methods: {
     async pickFiles (e, num) {
       this.num = num
-      console.log(456)
       // ? 轉base64
       const file = await e.target.files[0]
       // console.log(`檔案大小${Math.round(file.size / 1000)}k`)
