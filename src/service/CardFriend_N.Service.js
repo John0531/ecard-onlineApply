@@ -111,14 +111,6 @@ const service = {
     } catch (err) {
     }
   },
-  async cardSendApply () {
-    try {
-      const url = `${process.env.VUE_APP_BASE_API}/CardSendApply/CardSendApply`
-      const res = await axios.get(url)
-      return res
-    } catch (err) {
-    }
-  },
   async uploadImage (file) {
     try {
       const data = JSON.stringify(file)
