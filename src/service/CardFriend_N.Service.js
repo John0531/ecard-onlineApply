@@ -81,12 +81,12 @@ const service = {
   },
   async otherDepositorVerification (data) {
     try {
-      const form = JSON.stringify(data)
+      // const form = JSON.stringify(data)
       const url = `${process.env.VUE_APP_BASE_API}/OtherDepositorVerification/Verification`
-      const options = {
-        headers: { 'content-type': 'application/json' }
-      }
-      const res = await axios.post(url, form, options)
+      // const options = {
+      //   headers: { 'content-type': 'application/json' }
+      // }
+      const res = await axios.post(url, data)
       return res
     } catch (err) {
     }
@@ -113,12 +113,12 @@ const service = {
   },
   async uploadImage (file) {
     try {
-      const data = JSON.stringify(file)
+      // const data = JSON.stringify(file)
       const url = `${process.env.VUE_APP_BASE_API}/OCR/UploadImage`
-      const options = {
-        headers: { 'content-type': 'application/json' }
-      }
-      const res = await axios.post(url, data, options)
+      // const options = {
+      //   headers: { 'content-type': 'application/json' }
+      // }
+      const res = await axios.post(url, file)
       return res
     } catch (err) {
       return err
