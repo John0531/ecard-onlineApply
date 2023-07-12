@@ -159,11 +159,12 @@ const service = {
   async postFirstGift (gift) {
     try {
       // const gift = JSON.stringify(data)
-      const url = `${process.env.VUE_APP_BASE_API}/FirstGift`
-      const options = {
-        params: { firstGift: gift }
-      }
-      const res = await axios.post(url, null, options)
+      const url = `${process.env.VUE_APP_BASE_API}/FirstGift?firstGift=${gift}`
+      // const options = {
+      //   params: { firstGift: gift }
+      // }
+      // const res = await axios.post(url, null, options)
+      const res = await axios.post(url, null)
       return res
     } catch {
     }
