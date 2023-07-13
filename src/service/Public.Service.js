@@ -167,13 +167,13 @@ const service = {
   },
   async CardSendApply (approvals) {
     try {
-      // const data = JSON.stringify(approvals)
+      const data = JSON.stringify(approvals)
       const url = `${process.env.VUE_APP_BASE_API}/CardSendApply/CardSendApply`
-      // const options = {
-      //   headers: { 'content-type': 'application/json' }
-      // }
-      // const res = await axios.post(url, data, options)
-      const res = await axios.post(url, approvals)
+      const options = {
+        headers: { 'content-type': 'application/json' }
+      }
+      const res = await axios.post(url, data, options)
+      // const res = await axios.post(url, approvals)
       return res
     } catch {
     }
