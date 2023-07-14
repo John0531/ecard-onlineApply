@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
+import sortJson from '@/assets/json/Fillin_OT_sort.json'
 // import { hash } from '@/utilities/hash.js'
 // import termsJson from '@/assets/terms.json'
 
@@ -36,6 +37,22 @@ const service = {
       const res = await axios.post(url, postData)
       if (res.data.status === '00400') {
         return true
+      } else if (res.data.status === '00498') {
+        // ? 後端驗證欄位填寫有誤時，前端顯示錯誤
+        const errorArray = []
+        res.data.result.forEach((item) => {
+          sortJson.forEach((item2) => {
+            if (item === item2.key) {
+              errorArray.push(item2)
+            }
+          })
+        })
+        let errMsg = ''
+        errorArray.forEach((item) => {
+          errMsg += `*【${item.field}】 : ${res.data.message}<br>`
+        })
+        store.commit('getErrorMsg', errMsg)
+        store.state.errorModal.show()
       } else {
         store.commit('getErrorMsg', `${res.data.message}(${res.data.status})`)
         store.state.errorModal.show()

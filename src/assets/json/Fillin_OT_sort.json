@@ -1,128 +1,342 @@
 [
   {
+    "key":"id",
+    "field":"身分證字號"
+  },
+  {
+    "key":"iddate",
     "field":"身分證發證日期"
   },
   {
+    "key":"iddate-idyear",
+    "field":"身分證發證日期-年"
+  },
+  {
+    "key":"iddate-idMonth",
+    "field":"身分證發證日期-月"
+  },
+  {
+    "key":"iddate-idDay",
+    "field":"身分證發證日期-日"
+  },
+  {
+    "key":"idCounty",
     "field":"發證地點"
   },
   {
+    "key":"idissue",
     "field":"發證類型"
   },
   {
+    "key":"cName",
     "field":"中文姓名"
   },
   {
+    "key":"eName",
     "field":"英文姓名"
   },
   {
+    "key":"brthDt",
+    "field":"出生日期"
+  },
+  {
+    "key":"birth-birthplace",
     "field":"出生地"
   },
   {
+    "key":"birth-birthOther",
     "field":"出生地-其他"
   },
   {
+    "key":"nationality",
     "field":"國籍"
   },
   {
+    "key":"eduLevel",
+    "field":"教育程度"
+  },
+  {
+    "key":"mbleTelNbr",
+    "field":"行動電話"
+  },
+  {
+    "key":"email",
     "field":"電子信箱"
   },
   {
+    "key":"homeAddr",
     "field":"戶籍地址"
   },
   {
+    "key":"homeAddr-County",
+    "field":"戶籍地址-縣市"
+  },
+  {
+    "key":"homeAddr-Area",
+    "field":"戶籍地址-區"
+  },
+  {
+    "key":"homeAddr-Road",
+    "field":"戶籍地址-路"
+  },
+  {
+    "key":"homeAddr-Lane",
+    "field":"戶籍地址-巷"
+  },
+  {
+    "key":"homeAddr-Aly",
+    "field":"戶籍地址-弄"
+  },
+  {
+    "key":"homeAddr-Num",
     "field":"戶籍地址-號"
   },
   {
+    "key":"homeAddr-Of",
+    "field":"戶籍地址-號2"
+  },
+  {
+    "key":"homeAddr-Flr",
+    "field":"戶籍地址-樓"
+  },
+  {
+    "key":"homeAddr-Other",
+    "field":"戶籍地址-其他"
+  },
+  {
+    "key":"liveAddr",
     "field":"居住地址"
   },
   {
+    "key":"liveAddr-County",
+    "field":"居住地址-縣市"
+  },
+  {
+    "key":"liveAddr-Area",
+    "field":"居住地址-區"
+  },
+  {
+    "key":"liveAddr-Road",
+    "field":"居住地址-路"
+  },
+  {
+    "key":"liveAddr-Lane",
+    "field":"居住地址-巷"
+  },
+  {
+    "key":"liveAddr-Aly",
+    "field":"居住地址-弄"
+  },
+  {
+    "key":"liveAddr-Num",
     "field":"居住地址-號"
   },
   {
+    "key":"liveAddr-Of",
+    "field":"居住地址-號2"
+  },
+  {
+    "key":"liveAddr-Flr",
+    "field":"居住地址-樓"
+  },
+  {
+    "key":"liveAddr-Other",
+    "field":"居住地址-其他"
+  },
+  {
+    "key":"billAddr",
     "field":"帳單地址"
   },
   {
+    "key":"sendCardAddr",
     "field":"寄卡地址"
   },
   {
+    "key":"home-homeAreaCode",
     "field":"戶籍電話區碼"
   },
   {
+    "key":"home-homeTel",
     "field":"戶籍電話號碼"
   },
   {
+    "key":"live-liveAreaCode",
     "field":"居住電話區碼"
   },
   {
+    "key":"live-liveTel",
     "field":"居住電話號碼"
   },
   {
+    "key":"liveStatus",
+    "field":"住所狀態"
+  },
+  {
+    "key":"billType",
     "field":"帳單形式"
   },
   {
+    "key":"digiFlag",
     "field":"申請數位卡"
   },
   {
+    "key":"primarySchool",
     "field":"畢業國小名稱"
   },
   {
+    "key":"isStudent",
     "field":"是否為學生"
   },
   {
+    "key":"parentName",
     "field":"家長姓名"
   },
   {
+    "key":"parentTel",
     "field":"家長聯絡電話"
   },
   {
+    "key":"parentAddr",
     "field":"家長通訊地址"
   },
   {
+    "key":"parentAddr-County",
+    "field":"家長通訊地址-縣市"
+  },
+  {
+    "key":"parentAddr-Area",
+    "field":"家長通訊地址-區"
+  },
+  {
+    "key":"parentAddr-Road",
+    "field":"家長通訊地址-路"
+  },
+  {
+    "key":"parentAddr-Lane",
+    "field":"家長通訊地址-巷"
+  },
+  {
+    "key":"parentAddr-Aly",
+    "field":"家長通訊地址-弄"
+  },
+  {
+    "key":"parentAddr-Num",
     "field":"家長通訊地址-號"
   },
   {
+    "key":"parentAddr-Of",
+    "field":"家長通訊地址-號2"
+  },
+  {
+    "key":"parentAddr-Flr",
+    "field":"家長通訊地址-樓"
+  },
+  {
+    "key":"parentAddr-Other",
+    "field":"家長通訊地址-其他"
+  },
+  {
+    "key":"compName",
     "field":"公司名稱"
   },
   {
+    "key":"uniformNum",
     "field":"公司統一編號"
   },
   {
+    "key":"comp-compAreaCode",
+    "field":"公司電話-區碼"
+  },
+  {
+    "key":"comp-compTel",
+    "field":"公司電話-號碼"
+  },
+  {
+    "key":"comp-compExt",
+    "field":"公司電話-分機"
+  },
+  {
+    "key":"compAddr",
     "field":"公司地址"
   },
   {
+    "key":"compAddr-County",
+    "field":"公司地址-縣市"
+  },
+  {
+    "key":"compAddr-Area",
+    "field":"公司地址-區"
+  },
+  {
+    "key":"compAddr-Road",
+    "field":"公司地址-路"
+  },
+  {
+    "key":"compAddr-Lane",
+    "field":"公司地址-巷"
+  },
+  {
+    "key":"compAddr-Aly",
+    "field":"公司地址-弄"
+  },
+  {
+    "key":"compAddr-Num",
     "field":"公司地址-號"
   },
   {
+    "key":"compAddr-Of",
+    "field":"公司地址-號2"
+  },
+  {
+    "key":"compAddr-Flr",
+    "field":"公司地址-樓"
+  },
+  {
+    "key":"compAddr-Other",
+    "field":"公司地址-其他"
+  },
+  {
+    "key":"jobTitle",
     "field":"職稱"
   },
   {
+    "key":"jobTenure",
     "field":"年資"
   },
   {
+    "key":"job-jobType",
     "field":"職業別"
   },
   {
+    "key":"job-jobOther",
     "field":"職業別-其他"
   },
   {
+    "key":"jobLV",
     "field":"職級別"
   },
   {
+    "key":"IncomeMain-income",
     "field":"主要所得及資金來源"
   },
   {
+    "key":"IncomeMain-incomeOther",
     "field":"主要所得及資金來源-其他"
   },
   {
+    "key":"salary",
     "field":"月收入"
   },
   {
+    "key":"unitCode",
     "field":"推廣單位代號"
   },
   {
+    "key":"userCode",
     "field":"推廣人員編號"
   },
   {
+    "key":"amwayNo",
     "field":"安麗直銷商/會員編號"
   }
 ]
