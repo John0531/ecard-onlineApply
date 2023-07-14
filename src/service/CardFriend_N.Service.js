@@ -98,12 +98,12 @@ const service = {
   },
   async otherDepositorVerification (data) {
     try {
-      const form = JSON.stringify(data)
+      // const form = JSON.stringify(data)
       const url = `${process.env.VUE_APP_BASE_API}/OtherDepositorVerification/Verification`
-      const options = {
-        headers: { 'content-type': 'application/json' }
-      }
-      const res = await axios.post(url, form, options)
+      // const options = {
+      //   headers: { 'content-type': 'application/json' }
+      // }
+      const res = await axios.post(url, data)
       return res
     } catch (err) {
     }
@@ -128,22 +128,14 @@ const service = {
     } catch (err) {
     }
   },
-  async cardSendApply () {
-    try {
-      const url = `${process.env.VUE_APP_BASE_API}/CardSendApply/CardSendApply`
-      const res = await axios.get(url)
-      return res
-    } catch (err) {
-    }
-  },
   async uploadImage (file) {
     try {
-      const data = JSON.stringify(file)
+      // const data = JSON.stringify(file)
       const url = `${process.env.VUE_APP_BASE_API}/OCR/UploadImage`
-      const options = {
-        headers: { 'content-type': 'application/json' }
-      }
-      const res = await axios.post(url, data, options)
+      // const options = {
+      //   headers: { 'content-type': 'application/json' }
+      // }
+      const res = await axios.post(url, file)
       return res
     } catch (err) {
       return err
@@ -184,11 +176,12 @@ const service = {
   async postFirstGift (gift) {
     try {
       // const gift = JSON.stringify(data)
-      const url = `${process.env.VUE_APP_BASE_API}/FirstGift`
-      const options = {
-        params: { firstGift: gift }
-      }
-      const res = await axios.post(url, null, options)
+      const url = `${process.env.VUE_APP_BASE_API}/FirstGift?firstGift=${gift}`
+      // const options = {
+      //   params: { firstGift: gift }
+      // }
+      // const res = await axios.post(url, null, options)
+      const res = await axios.post(url, null)
       return res
     } catch {
     }

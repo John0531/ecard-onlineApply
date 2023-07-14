@@ -10,7 +10,7 @@
       </div>
     </div>
     <!-- 主要內容 -->
-    <Form :validation-schema="customSchema" @submit="onSubmit" @invalid-submit="onInvalidSubmit" v-slot="{ errors }" ref="addressForm">
+    <Form @submit="onSubmit" @invalid-submit="onInvalidSubmit" v-slot="{ errors }" ref="addressForm">
       <section class="mainArea">
         <div class="container-xl">
           <div class="row justify-content-md-center pt-1 pt-md-3">
@@ -35,45 +35,13 @@
                   <label for="">2.戶籍地址：</label>
                   <div class="d-flex">
                     <div class="form_Apply_txt">{{ homeAddr }}</div>
-                    <!-- <button type="button" class="OnLineApply_button">變更</button> -->
                   </div>
                 </li>
-                <!-- <li class="col-12 col-md-12">
-                  <div class="d-flex flex-wrap flex-md-nowrap apply_address align-items-center">
-                    <select name="" runat="server" class="form-select form-control ZIP mb-2">
-                        <option>110000</option>
-                        <option>110000</option>
-                    </select>
-                    <select name="" runat="server" id="" class="form-select form-control Area mx-1 mx-md-2 mb-2">
-                        <option>南港區</option>
-                        <option>松山區</option>
-                        <option>內湖區</option>
-                    </select>
-                    <select name="" runat="server" id="" class="form-select form-control Road mb-2">
-                        <option>忠孝東路五段</option>
-                        <option>忠孝東路五段</option>
-                        <option>忠孝東路五段</option>
-                    </select>
-                  </div>
-                  <div class="d-flex apply_address align-items-center">
-                    <input required="" name="login[id]" type="text" placeholder=" " class="form-control input_number">
-                    <span class="input_number_text">巷</span>
-                    <input required="" name="login[id]" type="text" placeholder=" " class="form-control input_number">
-                    <span class="input_number_text">弄</span>
-                    <div class="w-100 d-block d-md-none"></div>
-                    <input required="" name="login[id]" type="text" placeholder="必填" class="form-control input_number">
-                    <span class="input_number_text">-</span>
-                    <input required="" name="login[id]" type="text" placeholder=" " class="form-control input_number">
-                    <span class="input_number_text">號</span>
-                    <input required="" name="login[id]" type="text" placeholder=" " class="form-control input_number">
-                    <span class="input_number_text">樓</span>
-                    <input required="" name="login[id]" type="text" placeholder=" " class="form-control mb-2 ms-md-0 ms-lg-1">
-                  </div>
-                </li> -->
                 <li class="col-12 col-md-6">
                   <label for="">3.出生地</label>
                   <div class="d-flex flex-wrap flex-md-nowrap align-items-center Birthplace">
                   <Field
+                    rules="required"
                     name="出生地"
                     as="select"
                     runat="server"
@@ -92,6 +60,7 @@
                     </option>
                   </Field>
                   <Field
+                    rules="required"
                     name="出生地的其他"
                     as="select"
                     type="select"
@@ -105,12 +74,13 @@
                   <option v-for="national in option.citizenShip.filter((item=>item.VALUE!=='TW'))" :key="national.SORT" :value="national.VALUE">{{national.SHOW}}</option>
                   </Field>
                   </div>
-                  <span v-if="errors['出生地']" class="field-error">{{ errors['出生地'] }}</span>
-                  <span v-if="errors['出生地的其他']" class="field-error">{{ errors['出生地的其他'] }}</span>
+                  <span v-if="errors['出生地'] || errors['出生地的其他']" class="field-error">{{ errors['出生地'] ? errors['出生地'] : errors['出生地的其他'] }}</span>
+                  <!-- <span v-if="errors['出生地的其他']" class="field-error">{{ errors['出生地的其他'] }}</span> -->
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">4.國籍</label>
                   <Field
+                    rules="required"
                     name="國籍"
                     as="select"
                     runat="server"
@@ -133,14 +103,15 @@
                   <label for="">5.職業類別</label>
                   <div class="d-flex flex-wrap flex-md-nowrap align-items-center">
                     <Field
+                      rules="required"
                       name="職業類別"
-                      runat="server"
                       as="select"
+                      runat="server"
                       class="form-select form-control me-1"
                       v-model="onLineApply_Fillin_Card.jobTypeKey"
                       value="jobSort"
-                      :class="{ 'is-invalid': errors['職業類別']}"
-                      :validateOnChange="true"
+                      :class="{ 'is-invalid':  errors['職業類別'], 'form-control':true}"
+                      :validateOnChange="false"
                     >
                       <option
                         v-for="jobType in option.jobSort"
@@ -164,12 +135,13 @@
                       />
                     </div>
                   </div>
-                  <span v-if="errors['職業類別']" class="field-error">{{ errors['職業類別'] }}</span>
-                  <span v-if="errors['職業類別的其他']" class="field-error">{{ errors['職業類別的其他'] }}</span>
+                  <span v-if="errors['職業類別'] || errors['職業類別的其他']" class="field-error">{{ errors['職業類別'] ?errors['職業類別'] : errors['職業類別的其他'] }}</span>
+                  <!-- <span v-if="errors['職業類別的其他']" class="field-error">{{ errors['職業類別的其他'] }}</span> -->
                 </li>
                 <li class="col-12 col-md-6">
                   <label for="">6.職級別</label>
                   <Field
+                    rules="required"
                     name="職級別"
                     as="select"
                     runat="server"
@@ -188,7 +160,7 @@
                   <label for="">7.所得及資金來源</label>
                   <div class="d-flex flex-wrap flex-column flex-md-row">
                     <template  v-for="incomes in option.incomeOptions" :key="incomes.VALUE">
-                      <Field v-if="incomes.VALUE.trim()!== '9'" v-slot="{ field }" name="所得及資金來源" type="checkbox" :value="Number(incomes.VALUE)" :validateOnChange="true" :class="{ 'is-invalid': errors['所得及資金來源']}"  v-model="onLineApply_Fillin_Card.incomeKey">
+                      <Field v-if="incomes.VALUE.trim()!== '9'" v-slot="{ field }" name="所得及資金來源" type="checkbox" :value="Number(incomes.VALUE)" :validateOnChange="true" :class="{ 'is-invalid': errors['所得及資金來源']}"  v-model="onLineApply_Fillin_Card.incomeKey" rules="required">
                         <div class="form-check me-4">
                           <label>
                             <input class="form-check-input mt-2 position-absolute" type="checkbox" v-bind="field" name="所得及資金來源"  :value="Number(incomes.VALUE)">
@@ -198,21 +170,22 @@
                           </label>
                         </div>
                       </Field>
-                      <Field v-else v-slot="{ field }" name="所得及資金來源" type="checkbox" :value="Number(incomes.VALUE)" :validateOnChange="true" :class="{ 'is-invalid': errors['所得及資金來源']}"  v-model="onLineApply_Fillin_Card.incomeKey">
+                      <Field v-else v-slot="{ field }" name="所得及資金來源" type="checkbox" :value="Number(incomes.VALUE)" :validateOnChange="true" :class="{ 'is-invalid': errors['所得及資金來源']}"  v-model="onLineApply_Fillin_Card.incomeKey" rules="required">
                         <div class="form-check">
                           <label>
                             <input class="form-check-input mt-2 position-absolute" type="checkbox" v-bind="field" name="所得及資金來源"  :value="Number(incomes.VALUE)">
                             <div class="d-flex align-items-center">
                               <span class="text-nowrap form_Apply_txt">0{{ incomes.SHOW }}</span>
                               <Field
+                                rules="required"
                                 name="所得及資金來源的其他"
                                 type="text"
                                 :class="{ 'is-invalid':  errors['所得及資金來源的其他']}"
                                 v-model="onLineApply_Fillin_Card.incomeOther"
-                                :validateOnChange="true"
                                 maxlength="10"
                                 class="form-control other_input ms-1"
                                 v-if="onLineApply_Fillin_Card.incomeKey.includes(9)"
+                                :validateOnChange="true"
                               />
                             </div>
                           </label>
@@ -220,8 +193,8 @@
                       </Field>
                     </template>
                   </div>
-                  <span v-if="errors['所得及資金來源']" class="field-error">{{ errors['所得及資金來源'] }}</span>
-                  <span v-if="errors['所得及資金來源的其他']" class="field-error">{{ errors['所得及資金來源的其他'] }}</span>
+                  <span v-if="errors['所得及資金來源'] || errors['所得及資金來源的其他']" class="field-error">{{ errors['所得及資金來源'] ? errors['所得及資金來源'] : errors['所得及資金來源的其他']}}</span>
+                  <!-- <span v-if="errors['所得及資金來源的其他']" class="field-error">{{ errors['所得及資金來源的其他'] }}</span> -->
                 </li>
               </ul>
             </div>
@@ -305,7 +278,6 @@ export default {
   data () {
     return {
       noticeModal: '',
-      schema: {},
       // get
       id: '',
       brth: '',
@@ -348,24 +320,6 @@ export default {
         //* 職業級
         jobLevel: []
       }
-    }
-  },
-  computed: {
-    customSchema () {
-      const schema = { ...this.schema }
-      // ?出生地選擇其他，其他要為必填
-      if (this.onLineApply_Fillin_Card.birthplaceKey === '其它') {
-        schema.出生地的其他 = 'required'
-      } else {
-        schema.出生地的其他 = ''
-      }
-      // ?主要所得及資金來源選擇其他，其他要為必填
-      if (this.onLineApply_Fillin_Card.incomeKey.includes(9)) {
-        schema.所得及資金來源的其他 = 'required'
-      } else {
-        schema.所得及資金來源的其他 = ''
-      }
-      return schema
     }
   },
   watch: {
@@ -434,7 +388,7 @@ export default {
       const response = await serviceY.postKYC(this.onLineApply_Fillin_Card)
       const { status } = response
       if (status === '01100') {
-        const attrs = ['noticeModal', 'schema']
+        const attrs = ['noticeModal']
         const temp$data = { ...this.$data }
         attrs.forEach(attr => {
           temp$data[attr] = null
@@ -506,16 +460,6 @@ export default {
       this.tempOnlineApply = { ...session }
     }
     this.getUtilities()
-    this.schema = {
-      出生地: 'required',
-      出生地的其他: '',
-      國籍: 'required',
-      職業類別: 'required',
-      職業類別的其他: '',
-      職級別: 'required',
-      所得及資金來源: 'required',
-      所得及資金來源的其他: ''
-    }
     this.noticeModal = new bootstrap.Modal(this.$refs.noticeModal, {
       keyboard: false,
       backdrop: 'static'

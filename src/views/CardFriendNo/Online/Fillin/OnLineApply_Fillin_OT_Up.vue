@@ -796,13 +796,13 @@ export default {
         // ? 無需上傳也要打API
         switch (this.proofType) {
           case 'option2': {
-            // console.log('不須財力證明，mydata上傳證明')
+            // *此為無須上傳仍選mydata情境
             this.form.isMydata = true
             this.MyDataModal.show()
             break
           }
           case 'option1': {
-            // console.log('不須財力證明，自行上傳證明')
+            // *此為無須上傳仍上傳檔案情境
             this.form.isMydata = false
             // ** ===整理資料===
             this.form.upload1 = this.identitiyPack1.file.split(',')[1]
@@ -827,7 +827,6 @@ export default {
             break
           }
           default: {
-            // console.log('不須財力證明，無上傳任何證明')
             const res = await PublicService.CardSendApply(this.form)
             this.$store.dispatch('clearSession')
             PublicService.showAPIMsg(res.data.message)
@@ -932,7 +931,6 @@ export default {
         link.href = window.URL.createObjectURL(blob)
         link.target = '_blank'
         link.download = response.headers['content-disposition'].split(';')[1].split('=')[1]
-        // link.download = `test.pdf`
         await link.click()
       }
     }
