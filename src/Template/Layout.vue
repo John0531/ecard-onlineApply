@@ -127,4 +127,7 @@ export default {
     background-color:rgba(120,120,120,0.8) !important;
   }
 
+  .num::-webkit-input-placeholder{
+    font-size: 16px;
+  }
 </style>

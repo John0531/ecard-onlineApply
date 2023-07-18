@@ -276,7 +276,7 @@
                       :class="{ 'is-invalid': errors['戶籍地址'] }"
                     /><span class="input_number_text">弄</span>
                     <Field
-                      placeholder="必填"
+                      placeholder="號(必填)"
                       name="homeAddr_Num"
                       type="text"
                       v-model="Form.homeAddr.Num"
@@ -284,9 +284,9 @@
                       @keyup="Form.homeAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Num)"
                       @change="Form.homeAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Num)"
                       maxlength="5"
-                      class="form-control input_number"
+                      class="form-control input_number num"
                       :class="{ 'is-invalid': errors['戶籍地址']||errors['戶籍地址-號'] }"
-                    /><span class="input_number_text">-</span>
+                    /><span class="input_number_text">之</span>
                     <Field
                       name="homeAddr_Of"
                       type="text"
