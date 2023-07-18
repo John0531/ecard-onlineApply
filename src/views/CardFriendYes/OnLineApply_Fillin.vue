@@ -185,7 +185,7 @@
                                 :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號2'] || errors['樓'] || errors['其他'] }" :validateOnBlur="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Aly = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Aly)" @change="onLineApply_Fillin_Data.sendCardAddr.Aly = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Aly)"></Field>
                                 <span class="input_number_text">弄</span>
                                 <div class="w-100 d-block d-md-none"></div>
-                               <Field  v-model="onLineApply_Fillin_Data.sendCardAddr.Num" name="號" maxlength="5" type="text" class="form-control input_number"
+                               <Field  v-model="onLineApply_Fillin_Data.sendCardAddr.Num" name="號" maxlength="5" type="text" class="form-control input_number num"
                                 :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號']|| errors['號2'] || errors['樓'] || errors['其他'] }" :validateOnBlur="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Num = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Num)" placeholder="號(必填)"></Field>
                                 <span class="input_number_text">之</span>
                                 <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Of"  name="號2" maxlength="5" type="text" class="form-control input_number"
