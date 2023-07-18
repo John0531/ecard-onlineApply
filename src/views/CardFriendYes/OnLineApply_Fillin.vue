@@ -164,14 +164,14 @@
                           <li style="padding-left: 0px;" class="mt-3Address.L mt-4 w-100">
                             <div class="d-flex flex-wrap flex-md-nowrap apply_address align-items-center">
                               <!-- 下拉選單型別Field => select -->
-                              <Field v-model="onLineApply_Fillin_Data.sendCardAddr.County" as="select" name="郵遞區號" class="form-select form-control ZIP mb-2" type="select" :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] ||  errors['號2'] || errors['樓'] || errors['其他']}" @change="getAddress('1')" :validateOnBlur="true" >
+                              <Field v-model="onLineApply_Fillin_Data.sendCardAddr.County" as="select" name="縣市" class="form-select form-control ZIP mb-2" type="select" :class="{ 'is-invalid': errors['縣市'] || errors['鄉鎮市區'] || errors['路段'] || errors['巷'] || errors['弄'] ||  errors['號2'] || errors['樓'] || errors['其他']}" @change="getAddress('1')" :validateOnBlur="true" >
                                 <option v-for="cardAddress in selectJson.County" :key="cardAddress.SORT" :value="cardAddress.VALUE">{{ cardAddress.SHOW }}</option>
                               </Field>
-                              <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Area" as="select" name="市區" class="form-select form-control Area mx-1 mx-md-2 mb-2" type="select" :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號2'] || errors['樓'] || errors['其他']}" @change="getAddress('2')" :validateOnBlur="true" >
+                              <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Area" as="select" name="鄉鎮市區" class="form-select form-control Area mx-1 mx-md-2 mb-2" type="select" :class="{ 'is-invalid': errors['縣市'] || errors['鄉鎮市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號2'] || errors['樓'] || errors['其他']}" @change="getAddress('2')" :validateOnBlur="true" >
                                   <option value="">-----</option>
                                   <option v-for="cardAddress in homeAddrList.area" :key="cardAddress.varArea" :value="cardAddress.varArea">{{ cardAddress.varArea }}</option>
                               </Field>
-                              <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Road" as="select" name="路段" class="form-select form-control Road mb-2" type="select" :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] ||  errors['號2'] || errors['樓'] || errors['其他']}" :validateOnBlur="true">
+                              <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Road" as="select" name="路段" class="form-select form-control Road mb-2" type="select" :class="{ 'is-invalid': errors['縣市'] || errors['鄉鎮市區'] || errors['路段'] || errors['巷'] || errors['弄'] ||  errors['號2'] || errors['樓'] || errors['其他']}" :validateOnBlur="true">
                                   <option value="">-----</option>
                                   <option v-for="cardAddress in homeAddrList.road" :key="cardAddress.varRoad" :value="cardAddress.varRoad">{{ cardAddress.varRoad }}</option>
                               </Field>
@@ -179,27 +179,27 @@
                             <div class="d-flex apply_address align-items-center">
                                 <!-- errors不要綁錯 -->
                                 <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Lane" name="巷" maxlength="5" type="text" class="form-control input_number"
-                                :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號2'] || errors['樓'] || errors['其他'] }" :validateOnBlur="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Lane = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Lane)" @change="onLineApply_Fillin_Data.sendCardAddr.Lane = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Lane)"></Field>
+                                :class="{ 'is-invalid': errors['縣市'] || errors['鄉鎮市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號2'] || errors['樓'] || errors['其他'] }" :validateOnBlur="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Lane = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Lane)" @change="onLineApply_Fillin_Data.sendCardAddr.Lane = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Lane)"></Field>
                                 <span class="input_number_text">巷</span>
                                 <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Aly" name="弄" maxlength="5" type="text" class="form-control input_number"
-                                :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號2'] || errors['樓'] || errors['其他'] }" :validateOnBlur="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Aly = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Aly)" @change="onLineApply_Fillin_Data.sendCardAddr.Aly = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Aly)"></Field>
+                                :class="{ 'is-invalid': errors['縣市'] || errors['鄉鎮市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號2'] || errors['樓'] || errors['其他'] }" :validateOnBlur="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Aly = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Aly)" @change="onLineApply_Fillin_Data.sendCardAddr.Aly = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Aly)"></Field>
                                 <span class="input_number_text">弄</span>
                                 <div class="w-100 d-block d-md-none"></div>
                                <Field  v-model="onLineApply_Fillin_Data.sendCardAddr.Num" name="號" maxlength="5" type="text" class="form-control input_number num"
-                                :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號']|| errors['號2'] || errors['樓'] || errors['其他'] }" :validateOnBlur="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Num = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Num)" placeholder="號(必填)"></Field>
+                                :class="{ 'is-invalid': errors['縣市'] || errors['鄉鎮市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號']|| errors['號2'] || errors['樓'] || errors['其他'] }" :validateOnBlur="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Num = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Num)" placeholder="號(必填)"></Field>
                                 <span class="input_number_text">之</span>
                                 <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Of"  name="號2" maxlength="5" type="text" class="form-control input_number"
-                                :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號2'] || errors['樓'] || errors['其他'] }" :validateOnBlur="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Of = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Of)" @change="onLineApply_Fillin_Data.sendCardAddr.Of = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Of)"></Field>
+                                :class="{ 'is-invalid': errors['縣市'] || errors['鄉鎮市區'] || errors['路段'] || errors['巷'] || errors['弄'] || errors['號2'] || errors['樓'] || errors['其他'] }" :validateOnBlur="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Of = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Of)" @change="onLineApply_Fillin_Data.sendCardAddr.Of = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Of)"></Field>
                                 <span class="input_number_text">號</span>
                                 <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Flr" name="樓" maxlength="5" type="text" class="form-control input_number"
-                                :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] ||  errors['號2'] || errors['樓'] || errors['其他'] }" :validateOnBlur="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Flr = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Flr)" @change="onLineApply_Fillin_Data.sendCardAddr.Flr = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Flr)"></Field>
+                                :class="{ 'is-invalid': errors['縣市'] || errors['鄉鎮市區'] || errors['路段'] || errors['巷'] || errors['弄'] ||  errors['號2'] || errors['樓'] || errors['其他'] }" :validateOnBlur="true" @keyup="onLineApply_Fillin_Data.sendCardAddr.Flr = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Flr)" @change="onLineApply_Fillin_Data.sendCardAddr.Flr = $custom.validate.OnlyNumPress(onLineApply_Fillin_Data.sendCardAddr.Flr)"></Field>
                                 <span class="input_number_text">樓</span>
                                 <Field v-model="onLineApply_Fillin_Data.sendCardAddr.Other" name="其他" maxlength="100" type="text" class="form-control mb-2 ms-md-0 ms-lg-1"
-                                :class="{ 'is-invalid': errors['郵遞區號'] || errors['市區'] || errors['路段'] || errors['巷'] || errors['弄'] ||  errors['號2'] || errors['樓'] || errors['其他'] }" :validateOnBlur="true"></Field>
+                                :class="{ 'is-invalid': errors['縣市'] || errors['鄉鎮市區'] || errors['路段'] || errors['巷'] || errors['弄'] ||  errors['號2'] || errors['樓'] || errors['其他'] }" :validateOnBlur="true"></Field>
                             </div>
-                            <!-- 郵遞區號9個欄位是一組，所以共用一個errorMessage -->
+                            <!-- 縣市9個欄位是一組，所以共用一個errorMessage -->
                             <div>
-                              <span v-if="errors['郵遞區號']||errors['市區']||errors['路段']||errors['其他']||errors['巷']||errors['弄']||errors['號']||errors['號2']||errors['樓']" class="field-error">{{ addressErrMsg(Object.fromEntries(Object.entries(errors).filter(([key, value]) => !value.includes("無效")))) }}</span>
+                              <span v-if="errors['縣市']||errors['鄉鎮市區']||errors['路段']||errors['其他']||errors['巷']||errors['弄']||errors['號']||errors['號2']||errors['樓']" class="field-error">{{ addressErrMsg(Object.fromEntries(Object.entries(errors).filter(([key, value]) => !value.includes("無效")))) }}</span>
                             </div>
                           </li>
                         </div>
@@ -430,7 +430,7 @@ export default {
         return ''
       }
     },
-    // ? 客製化驗證郵遞區號schema 電子信箱與寄件地址
+    // ? 客製化驗證縣市schema 電子信箱與寄件地址
     customSchema () {
       const schema = { ...this.schema }
       if (this.onLineApply_Fillin_Data.billType === '1') {
@@ -440,8 +440,8 @@ export default {
       }
       if (this.onLineApply_Fillin_Data.sendCardType === '3') {
         schema.卡號末四碼 = 'required|checkCode'
-        schema.郵遞區號 = 'required'
-        schema.市區 = 'required'
+        schema.縣市 = 'required'
+        schema.鄉鎮市區 = 'required'
         schema.路段 = 'required'
         schema.巷 = 'customAddressValid'
         schema.弄 = 'customAddressValid'
@@ -451,8 +451,8 @@ export default {
         schema.其他 = 'customAddressValid'
       } else {
         schema.卡號末四碼 = ''
-        schema.郵遞區號 = ''
-        schema.市區 = ''
+        schema.縣市 = ''
+        schema.鄉鎮市區 = ''
         schema.路段 = ''
         schema.巷 = ''
         schema.弄 = ''
@@ -556,11 +556,11 @@ export default {
     // ? 客製化地址錯誤訊息(頁面上顯示)
     addressErrMsg (errors) {
       const errMsgs = []
-      if (errors.郵遞區號) {
-        errMsgs.push(errors.郵遞區號)
+      if (errors.縣市) {
+        errMsgs.push(errors.縣市)
       }
-      if (errors.市區) {
-        errMsgs.push(errors.市區)
+      if (errors.鄉鎮市區) {
+        errMsgs.push(errors.鄉鎮市區)
       }
       if (errors.路段) {
         errMsgs.push(errors.路段)
@@ -640,7 +640,7 @@ export default {
     },
     // ?驗證表單
     onInvalidSubmit ({ values, errors, results }) {
-      const addressKeys = ['郵遞區號', '市區', '路段', '巷', '弄', '號', '號2', '樓', '其他']
+      const addressKeys = ['縣市', '鄉鎮市區', '路段', '巷', '弄', '號', '號2', '樓', '其他']
       let isHaveAddressKey = false
       for (const key of addressKeys) {
         if (Object.prototype.hasOwnProperty.call(errors, key)) {
@@ -760,8 +760,8 @@ export default {
       帳單形式: 'required',
       寄卡地址: 'required',
       卡號末四碼: '',
-      郵遞區號: '',
-      市區: '',
+      縣市: '',
+      鄉鎮市區: '',
       路段: '',
       巷: '',
       弄: '',
