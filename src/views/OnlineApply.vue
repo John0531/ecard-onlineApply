@@ -287,6 +287,35 @@
         </div>
       </div>
     </div>
+
+    <!-- API Msg 彈窗 -->
+    <div ref="APIMsgModal" class="modal fade" id="APIMsgModal" tabindex="-1" aria-labelledby="exampleModalLabel-1"  aria-hidden="true" >
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><input id="myCheckCount" hidden></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="hideMsgModal()">
+                      <img src="https://activity.ubot.com.tw/eCardWeb/OnLineApply_img/close_NoText.png" border="0" alt="close" data-bs-dismiss="modal">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center py-3" >
+                        {{ APIMsgModalContent }}
+
+                    </div>
+                    <hr>
+                    <div class="text-center mb-3">
+                        <div class="col-12 text-center">
+                            <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal" aria-label="Close" @click="hideMsgModal()">
+                              關閉
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
   </div>
   <!-- Modal-1 end -->
 </template>
@@ -300,6 +329,8 @@ import { defineRule } from 'vee-validate'
 export default {
   data () {
     return {
+      APIMsgModal: '',
+      APIMsgModalContent: '',
       contractModal: '',
       agreement: false,
       terms: false,
@@ -467,6 +498,7 @@ export default {
         } else {
           identity = await serviceY.IdentityVerification(this.OnlineApply_y_Data)
         }
+
         const { status } = identity
         if (status !== '00199') {
           const attrs = ['wucUITCeBankTerms', 'contractModal', 'schema', 'feeDetail', 'yesgoDetail']
@@ -479,30 +511,72 @@ export default {
           sessionStorage.setItem('onlineApplyUrl', this.$route.fullPath)
         }
 
-        switch (status) {
-        // ?卡友驗證成功
-          case '00101' :
-            this.$router.push('/OnLineApply_OTP')
-            break
+        if (identity.message !== '') {
+          this.openMsgModal()
+          this.APIMsgModalContent = identity.message
+
+          this.$refs.APIMsgModal.addEventListener('hidden.bs.modal', () => {
+            this.APIMsgModalContent = ''
+            switch (status) {
+            // ?卡友驗證成功
+              case '00101' :
+
+                this.$router.push('/OnLineApply_OTP')
+                break
+                // ?非卡友-存戶
+              case '00102' :
+
+                this.$router.push('/OnLineApply_OCR')
+                break
+                // ?非卡友-非存戶(改他行驗證流程)
+              case '00103' :
+
+                this.$router.push('/OnLineApply_OCR')
+                break
+                // ?首刷禮
+              case '00104' :
+
+                this.$router.push('/OnLineApply_Gift')
+                break
+                // ?驗證失敗(直接顯示錯誤訊息。)
+              case '00199' :
+
+                break
+              default:
+
+                break
+            }
+          })
+        } else {
+          switch (status) {
+            // ?卡友驗證成功
+            case '00101' :
+
+              this.$router.push('/OnLineApply_OTP')
+              break
             // ?非卡友-存戶
-          case '00102' :
-            this.$router.push('/OnLineApply_OCR')
-            break
+            case '00102' :
+
+              this.$router.push('/OnLineApply_OCR')
+              break
             // ?非卡友-非存戶(改他行驗證流程)
-          case '00103' :
-            this.$router.push('/OnLineApply_OCR')
-            break
+            case '00103' :
+
+              this.$router.push('/OnLineApply_OCR')
+              break
             // ?首刷禮
-          case '00104' :
-            this.$router.push('/OnLineApply_Gift')
-            break
+            case '00104' :
+
+              this.$router.push('/OnLineApply_Gift')
+              break
             // ?驗證失敗(直接顯示錯誤訊息。)
-          case '00199' :
-            service.showAPIMsg(identity.message)
-            break
-          default:
-            service.showAPIMsg(identity.message)
-            break
+            case '00199' :
+
+              break
+            default:
+
+              break
+          }
         }
       } catch (error) {
       }
@@ -656,9 +730,17 @@ export default {
     },
     handleImageError ($event) {
       $event.target.src = require('../assets/images/UBOT_logo_180x26.png')
+    },
+    openMsgModal () {
+      this.APIMsgModal.show()
+    },
+    hideMsgModal () {
+      this.APIMsgModal.hide()
     }
   },
   async mounted () {
+    this.APIMsgModal = new bootstrap.Modal(this.$refs.APIMsgModal, { backdrop: 'static' })
+
     // *銜接AWS入口頁動畫
     this.$store.commit('changeLoading', true)
     this.scrollEvent()
