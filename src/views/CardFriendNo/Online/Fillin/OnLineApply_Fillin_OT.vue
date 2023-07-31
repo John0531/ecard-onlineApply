@@ -362,7 +362,7 @@
                     /><span class="input_number_text">弄</span>
                     <div class="w-100 d-block d-md-none"></div>
                     <Field
-                      placeholder="必填"
+                      placeholder="號(必填)"
                       name="homeAddr_Num"
                       type="text"
                       v-model="Form.homeAddr.Num"
@@ -370,9 +370,9 @@
                       @keyup="Form.homeAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Num)"
                       @change="Form.homeAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.homeAddr.Num)"
                       maxlength="5"
-                      class="form-control input_number"
+                      class="form-control input_number num"
                       :class="{ 'is-invalid': errors['戶籍地址']||errors['戶籍地址-號'] }"
-                    /><span class="input_number_text">-</span>
+                    /><span class="input_number_text">之</span>
                     <Field
                       name="homeAddr_Of"
                       type="text"
@@ -474,7 +474,7 @@
                     /><span class="input_number_text">弄</span>
                     <div class="w-100 d-block d-md-none"></div>
                     <Field
-                      placeholder="必填"
+                      placeholder="號(必填)"
                       name="liveAddr_Num"
                       type="text"
                       v-model="Form.liveAddr.Num"
@@ -482,9 +482,9 @@
                       @keyup="Form.liveAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.liveAddr.Num)"
                       @change="Form.liveAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.liveAddr.Num)"
                       maxlength="5"
-                      class="form-control input_number"
+                      class="form-control input_number num"
                       :class="{ 'is-invalid': errors['居住地址']||errors['居住地址-號'] }"
-                    /><span class="input_number_text">-</span>
+                    /><span class="input_number_text">之</span>
                     <Field
                       name="liveAddr_Of"
                       type="text"
@@ -975,7 +975,7 @@
                       /><span class="input_number_text">弄</span>
                       <div class="w-100 d-block d-md-none"></div>
                       <Field
-                        placeholder="必填"
+                        placeholder="號(必填)"
                         name="parentAddr_Num"
                         type="text"
                         v-model="Form.parentAddr.Num"
@@ -983,9 +983,9 @@
                         @keyup="Form.parentAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.parentAddr.Num)"
                         @change="Form.parentAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.parentAddr.Num)"
                         maxlength="5"
-                        class="form-control input_number"
+                        class="form-control input_number num"
                         :class="{ 'is-invalid': errors['家長通訊地址']||errors['家長通訊地址-號'] }"
-                      /><span class="input_number_text">-</span>
+                      /><span class="input_number_text">之</span>
                       <Field
                         name="parentAddr_Of"
                         type="text"
@@ -1155,7 +1155,7 @@
                     /><span class="input_number_text">弄</span>
                     <div class="w-100 d-block d-md-none"></div>
                     <Field
-                      placeholder="必填"
+                      placeholder="號(必填)"
                       name="compAddr_Num"
                       type="text"
                       v-model="Form.compAddr.Num"
@@ -1163,9 +1163,9 @@
                       @keyup="Form.compAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Num)"
                       @change="Form.compAddr.Num = $custom.validate.NumOnlyWithoutFirstZero(Form.compAddr.Num)"
                       maxlength="5"
-                      class="form-control input_number mx-1"
+                      class="form-control input_number mx-1 num"
                       :class="{ 'is-invalid': errors['公司地址']||errors['公司地址-號'] }"
-                    /><span class="input_number_text">-</span>
+                    /><span class="input_number_text">之</span>
                     <Field
                       name="compAddr_Of"
                       type="text"
