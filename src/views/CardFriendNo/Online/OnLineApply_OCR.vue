@@ -556,10 +556,9 @@ export default {
       this.num = num
       // ? 轉base64
       const file = await e.target.files[0]
-      console.log(`檔案大小${Math.round(file.size / (1024 * 1024))}mb`)
-      console.log(file.size)
+      // console.log(`檔案大小${Math.round(file.size / (1024 * 1024))}mb`)
+      // console.log(file.size)
       const maxAllowedSize = 5 * 1024 * 1024
-      alert(file?.type)
       if (file?.size > maxAllowedSize || (file?.type !== 'image/jpg' && file?.type !== 'image/jpeg' && file?.type !== 'image/png')) {
         this.ImageLimit.show()
       } else {
@@ -632,11 +631,11 @@ export default {
         format: 'png'
       })
       // ? 檔案大小超過 1MB 則壓縮
-      let imgQuality = 1
-      const compressSizeLimit = 1 * 1024 * 1024
-      if (this[`identitiyPack${this.num}`].fileSize > compressSizeLimit) {
-        imgQuality = 0.3
-      }
+      const imgQuality = 0.3
+      // const compressSizeLimit = 1 * 1024 * 1024
+      // if (this[`identitiyPack${this.num}`].fileSize > compressSizeLimit) {
+      //   imgQuality = 0.3
+      // }
       // ? 檔案大小超過 1MB 則壓縮 ends
       const base64Compression = await this[`identitiyPack${this.num}`].preViewImg.result({
         type: 'canvas',
@@ -644,11 +643,10 @@ export default {
         format: 'jpeg',
         size: 'original'
       })
-      console.log(base64Compression)
+      // console.log(base64Compression)
       this.$store.commit('changeLoading', false)
-      console.log(`瀏覽圖檔案大小${Math.round(0.75 * base64View.length / 1000)}k`)
-      console.log(`壓縮檔案大小${Math.round(0.75 * base64Compression.length / 1000)}k`)
-      alert(`壓縮檔案大小${(base64Compression.length / 1000)}kb`)
+      // console.log(`瀏覽圖檔案大小${Math.round(0.75 * base64View.length / 1000)}k`)
+      // console.log(`壓縮檔案大小${Math.round(0.75 * base64Compression.length / 1000)}k`)
       resultImg.src = base64View // ? 外層瀏覽圖片
       resultImg.style = `height:${this.$refs.resultImg1.clientHeight}px;`// ? 外層瀏覽圖片
       this[`identitiyPack${this.num}`].file = base64Compression // ? 打給API的資料
