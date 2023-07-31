@@ -556,8 +556,10 @@ export default {
       this.num = num
       // ? 轉base64
       const file = await e.target.files[0]
-      // console.log(`檔案大小${Math.round(file.size / 1000)}k`)
+      console.log(`檔案大小${Math.round(file.size / (1024 * 1024))}mb`)
+      console.log(file.size)
       const maxAllowedSize = 5 * 1024 * 1024
+      alert(file?.type)
       if (file?.size > maxAllowedSize || (file?.type !== 'image/jpg' && file?.type !== 'image/jpeg' && file?.type !== 'image/png')) {
         this.ImageLimit.show()
       } else {
@@ -642,9 +644,11 @@ export default {
         format: 'jpeg',
         size: 'original'
       })
+      console.log(base64Compression)
       this.$store.commit('changeLoading', false)
-      // console.log(`瀏覽圖檔案大小${Math.round(0.75 * base64View.length / 1000)}k`)
-      // console.log(`壓縮檔案大小${Math.round(0.75 * base64Compression.length / 1000)}k`)
+      console.log(`瀏覽圖檔案大小${Math.round(0.75 * base64View.length / 1000)}k`)
+      console.log(`壓縮檔案大小${Math.round(0.75 * base64Compression.length / 1000)}k`)
+      alert(`壓縮檔案大小${(base64Compression.length / 1000)}kb`)
       resultImg.src = base64View // ? 外層瀏覽圖片
       resultImg.style = `height:${this.$refs.resultImg1.clientHeight}px;`// ? 外層瀏覽圖片
       this[`identitiyPack${this.num}`].file = base64Compression // ? 打給API的資料
