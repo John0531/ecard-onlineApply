@@ -511,6 +511,12 @@ export default {
           sessionStorage.setItem('onlineApplyUrl', this.$route.fullPath)
         }
 
+        // ?卡友驗證成功 不跳訊息直接導頁
+        if (status === '00101') {
+          this.$router.push('/OnLineApply_OTP')
+          return
+        }
+
         if (identity.message !== '') {
           this.openMsgModal()
           this.APIMsgModalContent = identity.message
@@ -518,12 +524,7 @@ export default {
           this.$refs.APIMsgModal.addEventListener('hidden.bs.modal', () => {
             this.APIMsgModalContent = ''
             switch (status) {
-            // ?卡友驗證成功
-              case '00101' :
-
-                this.$router.push('/OnLineApply_OTP')
-                break
-                // ?非卡友-存戶
+              // ?非卡友-存戶
               case '00102' :
 
                 this.$router.push('/OnLineApply_OCR')
@@ -549,11 +550,6 @@ export default {
           })
         } else {
           switch (status) {
-            // ?卡友驗證成功
-            case '00101' :
-
-              this.$router.push('/OnLineApply_OTP')
-              break
             // ?非卡友-存戶
             case '00102' :
 
