@@ -563,7 +563,22 @@ export default {
         this.ImageLimit.show()
       } else {
         this.imgTemplateUrl = URL.createObjectURL(file)
-        this.makeModify(file.size)
+        // if (!this.imgTemplateUrl) {
+        //   this.message = `
+        //   檔案上傳失敗，請重新整理 </br>
+        //   您現在使用的裝置是${navigator.userAgent}
+        //   `
+        //   this.APIModal.show()
+        //   return
+        // }
+        this.message = `
+          檔案上傳失敗，請重新整理! </br>
+          您現在的設備為:</br>
+          裝置-${navigator.userAgentData?.platform} </br>
+          瀏覽器-${navigator.userAgentData?.brands[1].brand}[${navigator.userAgentData?.brands[1].version}]
+          `
+        this.APIModal.show()
+        // this.makeModify(file.size)
       }
       // ? 清空value
       // this.clearFiles(this.num)
@@ -631,6 +646,7 @@ export default {
         format: 'png'
       })
       // ? 檔案大小超過 1MB 則壓縮
+      // ? 臨界點900kb之檔案有機率會產生大於檔案本身之base64字串，2023/08/01，AP人員建議並決議一律壓縮
       const imgQuality = 0.3
       // const compressSizeLimit = 1 * 1024 * 1024
       // if (this[`identitiyPack${this.num}`].fileSize > compressSizeLimit) {
