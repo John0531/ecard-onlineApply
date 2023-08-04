@@ -1823,7 +1823,7 @@ export default {
     }
   },
   mounted () {
-    // this.getPageData()
+    this.getPageData()
   }
 }
 </script>
