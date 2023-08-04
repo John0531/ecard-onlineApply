@@ -637,6 +637,16 @@ export default {
         this.ImageLimit.show()
       } else {
         this.imgTemplateUrl = URL.createObjectURL(file)
+        if (!this.imgTemplateUrl) {
+          this.message = `
+          檔案上傳失敗，請重新整理! </br>
+          您現在的設備為:</br>
+          裝置-${navigator.userAgentData?.platform} </br>
+          瀏覽器-${navigator.userAgentData?.brands[1].brand}[${navigator.userAgentData?.brands[1].version}]
+          `
+          this.APIModal.show()
+          return
+        }
         this.makeModify(file.size)
       }
     },
@@ -702,11 +712,11 @@ export default {
         format: 'png'
       })
       // ? 檔案大小超過 1MB 則壓縮
-      let imgQuality = 1
+      const imgQuality = 0.3
       const compressSizeLimit = 1 * 1024 * 1024
-      if (this[`identitiyPack${this.num}`].fileSize > compressSizeLimit) {
-        imgQuality = 0.3
-      }
+      // if (this[`identitiyPack${this.num}`].fileSize > compressSizeLimit) {
+      //   imgQuality = 0.3
+      // }
       // ? 檔案大小超過 1MB 則壓縮 end
       const base64Compression = await this[`identitiyPack${this.num}`].preViewImg.result({
         type: 'canvas',
