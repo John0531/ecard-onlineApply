@@ -713,7 +713,7 @@ export default {
       })
       // ? 檔案大小超過 1MB 則壓縮
       const imgQuality = 0.3
-      const compressSizeLimit = 1 * 1024 * 1024
+      // const compressSizeLimit = 1 * 1024 * 1024
       // if (this[`identitiyPack${this.num}`].fileSize > compressSizeLimit) {
       //   imgQuality = 0.3
       // }
