@@ -115,7 +115,7 @@
                       <div class="invalid-feedback d-block mt-auto ">
                         <span class="field-error" v-if="errors['帳單形式']">{{errors['帳單形式']}}</span>
                       </div>
-                      <div class="form_Apply_txt">
+                      <div class="note_text pt-0 ">
                         <span class="red_text">※申請E-mail帳單請務必收取聯邦銀行電子帳單認證信，點選驗證網址始完成申請。<br>
                         ※帳單接收型式將依本次選擇做為日後帳單寄送依據，如未點選E-mail認證信則依原帳單型式或紙本寄送。</span>
                       </div>
@@ -226,7 +226,8 @@
                       </div>
                       <div class="note_text pt-0">
                         <strong>(非必填欄位)</strong><br>
-                        數位卡說明：如果您急需用卡，請勾選「是」，將立即享有網路購物及行動支付之便利，本行將於審核通過後先行發送簡訊代碼至申請人之行動電話，您可憑此代碼至本行網站中查詢信用卡資訊。
+                       數位卡說明：若您急需用卡，可勾選「是」；於本行核卡時，將以簡訊發送個人代碼至您留存於本行的行動電話，在<u>收到實體卡前</u>，您可憑代碼至指定網站中查詢信用卡資訊，即可綁定行動支付或網路購物，更快體驗聯邦銀行提供的便利刷卡服務。
+
                       </div>
                     </li>
                 </ul>

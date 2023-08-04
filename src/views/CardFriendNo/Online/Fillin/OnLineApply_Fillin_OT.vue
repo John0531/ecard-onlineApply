@@ -758,7 +758,7 @@
                     name="帳單形式"
                     class="field-error"
                   />
-                  <div class="form_Apply_txt">
+                  <div class="note_text pt-0">
                       <span class="red_text">※申請E-mail帳單請務必收取聯邦銀行電子帳單認證信，點選驗證網址始完成申請。<br>
                       ※帳單接收型式將依本次選擇做為日後帳單寄送依據，如未點選E-mail認證信則依原帳單型式或紙本寄送。</span>
                   </div>
@@ -800,10 +800,8 @@
                     class="field-error"
                   />
                 </li>
-                <li class="col-12 col-md-12 text-left" v-if="Apply_N_Type==='Online'">
-                  <span
-                    >數位卡說明：同意進件申請後，本行於審核通過即以簡訊發送個人代碼至申請之行動電話，您可憑代碼至指定網站中查詢信用卡資訊，以更快體驗聯邦銀行提供予您在行動支付或網路購物上更便利的服務。</span
-                  >
+                <li class="col-12 col-md-12 text-left note_text pt-0" v-if="Apply_N_Type==='Online'">
+                  <span>數位卡說明：若您急需用卡，可勾選「是」；於本行核卡時，將以簡訊發送個人代碼至您留存於本行的行動電話，在<u>收到實體卡前</u>，您可憑代碼至指定網站中查詢信用卡資訊，即可綁定行動支付或網路購物，更快體驗聯邦銀行提供的便利刷卡服務。</span>
                 </li>
                 <li class="col-12 col-md-6">
                   <label for=""
@@ -868,7 +866,7 @@
                     />
                   </li>
                   <li class="col-12 col-md-12 mb-2">
-                    <div>
+                    <div class="note_text pt-0">
                       <span>※貼心提醒：學生辦卡依金融法令規範發卡行應將發卡情事通知父母或法定代理人，請您提供1.家長姓名(直系血親尊親屬)2.家長手機(如無手機請改提供居住電話)3.通知書寄送地址以利後續通知事宜。
                       </span>
                     </div>

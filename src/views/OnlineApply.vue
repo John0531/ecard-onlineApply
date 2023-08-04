@@ -35,8 +35,8 @@
                 </li>
               </ul>
             </div>
-            <div class="col-xl-12 d-flex flex-wrap Card_img">
-              <div class="col-12 col-md-4 text-center m-auto" v-for="card in cardInfoList" :key="card.cardNo">
+            <div class="col-lg-10 d-flex flex-wrap justify-content-md-center mx-auto  ">
+              <div class="col-12 col-md-4 text-center Card_img mb-3" v-for="card in cardInfoList" :key="card.cardNo">
                 <img class="img-fluid" alt="申請卡片圖片" :src="card.cardPic" @error="handleImageError"/>
                 <div class="form-check my-2 position-relative">
                   <Field
@@ -50,7 +50,7 @@
                     :id="'cardInfoList' + card.cardNo"
                   />
                   <label
-                    class="form-check-label text-start text-md-center fw-bold"
+                    class="form-check-label text-start text-md-center fw-bold ms-1"
                     :for="'cardInfoList' + card.cardNo"
                     style="color: black;"
                   >
@@ -64,7 +64,7 @@
             </div>
             <!----------------fee ---------------->
             <!----------------yesgogogo ---------------->
-            <div class="mt-3 mt-md-5" v-if="flgYesgo === 'Y'?true: false">
+            <div class="mt-3 mt-md-4" v-if="flgYesgo === 'Y'?true: false">
               <div v-html="yesgoDetail"></div>
             </div>
             <div class="mt-3 mt-md-5">
@@ -139,8 +139,8 @@
                 </li>
               </ul>
             </div>
-            <div class="col-xl-12 d-flex flex-wrap">
-              <div class="col-12 col-md-4 text-center m-auto Card_img" v-for="card in cardInfoList" :key="card.cardNo">
+            <div class="col-lg-10 d-flex flex-wrap justify-content-md-center mx-auto">
+              <div class="col-12 col-md-4 text-center mb-3 Card_img" v-for="card in cardInfoList" :key="card.cardNo">
                 <img class="img-fluid" alt="申請卡片圖片" :src="card.cardPic" @error="handleImageError"/>
                 <div class="form-check my-2 position-relative">
                   <Field
@@ -154,7 +154,7 @@
                     :id="'cardInfoList' + card.cardNo"
                   />
                   <label
-                    class="form-check-label text-start text-md-center fw-bold"
+                    class="form-check-label text-start text-md-center fw-bold ms-1"
                     :for="'cardInfoList' + card.cardNo"
                     style="color: black;"
                   >
@@ -162,12 +162,13 @@
                   </label>
                 </div>
               </div>
+
               <div class="col-12 text-center red_text position-relative">
                 <span class="field-error m-auto" v-if="errors['申請的信用卡']">{{errors['申請的信用卡']}}</span>
               </div>
             </div>
            <!----------------yesgogogo ---------------->
-           <div class="mt-3 mt-md-5" v-if="flgYesgo === 'Y'?true: false">
+           <div class="mt-3 mt-md-4" v-if="flgYesgo === 'Y'?true: false">
             <div v-html="yesgoDetail"></div>
             </div>
             <div class="fee_box mb-3 mt-3 mt-md-5">
@@ -511,6 +512,12 @@ export default {
           sessionStorage.setItem('onlineApplyUrl', this.$route.fullPath)
         }
 
+        // ?卡友驗證成功 不跳訊息直接導頁
+        if (status === '00101') {
+          this.$router.push('/OnLineApply_OTP')
+          return
+        }
+
         if (identity.message !== '') {
           this.openMsgModal()
           this.APIMsgModalContent = identity.message
@@ -518,12 +525,7 @@ export default {
           this.$refs.APIMsgModal.addEventListener('hidden.bs.modal', () => {
             this.APIMsgModalContent = ''
             switch (status) {
-            // ?卡友驗證成功
-              case '00101' :
-
-                this.$router.push('/OnLineApply_OTP')
-                break
-                // ?非卡友-存戶
+              // ?非卡友-存戶
               case '00102' :
 
                 this.$router.push('/OnLineApply_OCR')
@@ -549,11 +551,6 @@ export default {
           })
         } else {
           switch (status) {
-            // ?卡友驗證成功
-            case '00101' :
-
-              this.$router.push('/OnLineApply_OTP')
-              break
             // ?非卡友-存戶
             case '00102' :
 
