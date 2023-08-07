@@ -130,4 +130,8 @@ export default {
   .num::-webkit-input-placeholder{
     font-size: 16px;
   }
+
+  .modal.show .modal-dialog {
+    transform: none !important;
+  }
 </style>
