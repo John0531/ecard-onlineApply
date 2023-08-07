@@ -563,7 +563,7 @@ export default {
         this.ImageLimit.show()
       } else {
         this.imgTemplateUrl = URL.createObjectURL(file)
-        if (!this.imgTemplateUrl) {
+        if (this.imgTemplateUrl) {
           this.message = `
           檔案上傳失敗，請重新整理! </br>
           您現在的設備為:</br>
