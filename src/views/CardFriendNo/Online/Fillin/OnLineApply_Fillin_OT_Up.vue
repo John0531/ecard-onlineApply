@@ -637,16 +637,16 @@ export default {
         this.ImageLimit.show()
       } else {
         this.imgTemplateUrl = URL.createObjectURL(file)
-        if (!this.imgTemplateUrl) {
-          this.message = `
-          檔案上傳失敗，請重新整理! </br>
-          您現在的設備為:</br>
-          裝置-${navigator.userAgentData?.platform} </br>
-          瀏覽器-${navigator.userAgentData?.brands[1].brand}[${navigator.userAgentData?.brands[1].version}]
-          `
-          this.APIModal.show()
-          return
-        }
+        // if (!this.imgTemplateUrl) {
+        //   this.message = `
+        //   檔案上傳失敗，請重新整理! </br>
+        //   您現在的設備為:</br>
+        //   裝置-${navigator.userAgentData?.platform} </br>
+        //   瀏覽器-${navigator.userAgentData?.brands[1].brand}[${navigator.userAgentData?.brands[1].version}]
+        //   `
+        //   this.APIModal.show()
+        //   return
+        // }
         this.makeModify(file.size)
       }
     },
