@@ -846,3 +846,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+::v-deep.croppie-container .cr-boundary { min-height: 300px; }
+</style>
