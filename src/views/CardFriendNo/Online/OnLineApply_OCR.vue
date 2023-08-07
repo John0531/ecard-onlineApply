@@ -567,6 +567,7 @@ export default {
           this.message = `
           檔案上傳失敗，請重新整理! </br>
           您現在的設備為:</br>
+          ${navigator.userAgent}
           裝置-${navigator.userAgentData?.platform} </br>
           瀏覽器-${navigator.userAgentData?.brands[1].brand}[${navigator.userAgentData?.brands[1].version}]
           `
