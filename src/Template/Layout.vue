@@ -132,6 +132,6 @@ export default {
   }
 
   .modal.show .modal-dialog {
-    transform: none !important;
+    transform: unset !important;
   }
 </style>
