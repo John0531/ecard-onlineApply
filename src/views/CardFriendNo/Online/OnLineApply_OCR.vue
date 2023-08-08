@@ -569,6 +569,8 @@ export default {
           const res = await compressImg(file, 0.3)
           file = res.file
         }
+        // const res = await compressImg(file, 0.3)
+        // file = res.file
         this.imgTemplateUrl = URL.createObjectURL(file)
         console.log(this.imgTemplateUrl)
         this.makeModify(file.size)
@@ -626,7 +628,7 @@ export default {
         this.imgTemplateUrl = ''
         this.$store.commit('changeLoading', false)
       } catch (error) {
-        alert(error)
+        alert(JSON.stringify(error))
       }
     },
     async result () {
