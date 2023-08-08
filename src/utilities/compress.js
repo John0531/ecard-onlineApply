@@ -15,9 +15,11 @@ async function compressImg (file, quality) {
         const image = new Image() // 创建 img 元素
         image.onload = async () => {
           const canvas = document.createElement('canvas') // 创建 canvas 元素
-          canvas.width = image.width
-          canvas.height = image.height
-          canvas.getContext('2d').drawImage(image, 0, 0, image.width, image.height) // 绘制 canvas
+          const maxWidth = 768 // Max width for compressed image
+          const scale = Math.min(maxWidth / image.width, 1)
+          canvas.width = image.width * scale
+          canvas.height = image.height * scale
+          canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height) // 绘制 canvas
           const canvasURL = canvas.toDataURL('image/jpeg', quality)
           const buffer = atob(canvasURL.split(',')[1])
           let length = buffer.length

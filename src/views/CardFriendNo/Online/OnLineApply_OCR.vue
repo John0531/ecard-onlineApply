@@ -369,9 +369,8 @@
                           <button
                           type="button"
                           class="btn btn-primary btn-lg"
-                          data-bs-dismiss="modal"
                           aria-label="Close"
-                          @click="result(this.num)"
+                          @click.prevent="result"
                           >
                           確認
                           </button>
@@ -555,28 +554,29 @@ export default {
   },
   methods: {
     async pickFiles (e, num) {
-      this.num = num
-      // ? 轉base64
-      let file = await e.target.files[0]
-      // console.log(`檔案大小${Math.round(file.size / (1024 * 1024))}mb`)
-      // console.log(file.size)
-      const maxAllowedSize = 5 * 1024 * 1024
-      if (file?.size > maxAllowedSize || (file?.type !== 'image/jpg' && file?.type !== 'image/jpeg' && file?.type !== 'image/png')) {
-        this.ImageLimit.show()
-      } else {
-        alert(`${navigator.vendor},${navigator.vendor.includes('Apple')}`)
-        if (navigator.vendor.includes('Apple')) {
-          const res = await compressImg(file, 0.3)
-          file = res.file
+      try {
+        this.$store.commit('changeLoading', true)
+        this.num = num
+        // ? 轉base64
+        let file = await e.target.files[0]
+        // console.log(`檔案大小${Math.round(file.size / (1024 * 1024))}mb`)
+        // console.log(file.size)
+        const maxAllowedSize = 5 * 1024 * 1024
+        if (file?.size > maxAllowedSize || (file?.type !== 'image/jpg' && file?.type !== 'image/jpeg' && file?.type !== 'image/png')) {
+          this.$store.commit('changeLoading', false)
+          this.ImageLimit.show()
+        } else {
+          if (navigator.vendor.includes('Apple')) {
+            const res = await compressImg(file, 0.3)
+            file = res.file
+          }
+          this.imgTemplateUrl = URL.createObjectURL(file)
+          this.makeModify(file.size)
         }
-        // const res = await compressImg(file, 0.3)
-        // file = res.file
-        this.imgTemplateUrl = URL.createObjectURL(file)
-        console.log(this.imgTemplateUrl)
-        this.makeModify(file.size)
+      } catch (error) {
+        this.$store.commit('changeLoading', false)
+        alert(JSON.stringify(error))
       }
-      // ? 清空value
-      // this.clearFiles(this.num)
     },
     async makeModify (fileSize) {
       // ?呼叫modal準備呈現
@@ -628,42 +628,45 @@ export default {
         this.imgTemplateUrl = ''
         this.$store.commit('changeLoading', false)
       } catch (error) {
+        this.$store.commit('changeLoading', false)
         alert(JSON.stringify(error))
       }
     },
     async result () {
       this.$store.commit('changeLoading', true)
-      // ?在頁面上各欄位自呈現
-      const resultImg = this.$refs[`resultImg${this.num}`]
-      const base64View = await this[`identitiyPack${this.num}`].preViewImg.result({
-        type: 'base64',
-        size: 'original',
-        format: 'png'
-      })
-      // ? 檔案大小超過 1MB 則壓縮
-      // ? 臨界點900kb之檔案有機率會產生大於檔案本身之base64字串，2023/08/01，AP人員建議並決議一律壓縮
-      const imgQuality = 0.3
-      // const compressSizeLimit = 1 * 1024 * 1024
-      // if (this[`identitiyPack${this.num}`].fileSize > compressSizeLimit) {
-      //   imgQuality = 0.3
-      // }
-      // ? 檔案大小超過 1MB 則壓縮 ends
-      const base64Compression = await this[`identitiyPack${this.num}`].preViewImg.result({
-        type: 'canvas',
-        quality: imgQuality,
-        format: 'jpeg',
-        size: 'original'
-      })
-      // console.log(base64Compression)
-      this.$store.commit('changeLoading', false)
-      // console.log(`瀏覽圖檔案大小${Math.round(0.75 * base64View.length / 1000)}k`)
-      // console.log(`壓縮檔案大小${Math.round(0.75 * base64Compression.length / 1000)}k`)
-      resultImg.src = base64View // ? 外層瀏覽圖片
-      resultImg.style = `height:${this.$refs.resultImg1.clientHeight}px;`// ? 外層瀏覽圖片
-      this[`identitiyPack${this.num}`].file = base64Compression // ? 打給API的資料
-      // ?編輯結束將相關物件資料銷毀
-      this.CroppieModal.hide()
-      this.destroy()
+      setTimeout(async () => {
+        // ?在頁面上各欄位自呈現
+        const resultImg = this.$refs[`resultImg${this.num}`]
+        const base64View = await this[`identitiyPack${this.num}`].preViewImg.result({
+          type: 'base64',
+          size: 'original',
+          format: 'png'
+        })
+        // ? 檔案大小超過 1MB 則壓縮
+        // ? 臨界點900kb之檔案有機率會產生大於檔案本身之base64字串，2023/08/01，AP人員建議並決議一律壓縮
+        const imgQuality = 0.3
+        // const compressSizeLimit = 1 * 1024 * 1024
+        // if (this[`identitiyPack${this.num}`].fileSize > compressSizeLimit) {
+        //   imgQuality = 0.3
+        // }
+        // ? 檔案大小超過 1MB 則壓縮 ends
+        const base64Compression = await this[`identitiyPack${this.num}`].preViewImg.result({
+          type: 'canvas',
+          quality: imgQuality,
+          format: 'jpeg',
+          size: 'original'
+        })
+        // console.log(base64Compression)
+        // console.log(`瀏覽圖檔案大小${Math.round(0.75 * base64View.length / 1000)}k`)
+        // console.log(`壓縮檔案大小${Math.round(0.75 * base64Compression.length / 1000)}k`)
+        resultImg.src = base64View // ? 外層瀏覽圖片
+        resultImg.style = `height:${this.$refs.resultImg1.clientHeight}px;`// ? 外層瀏覽圖片
+        this[`identitiyPack${this.num}`].file = base64Compression // ? 打給API的資料
+        // ?編輯結束將相關物件資料銷毀
+        this.destroy()
+        this.CroppieModal.hide()
+        this.$store.commit('changeLoading', false)
+      }, 500)
     },
     closeCroppieModal () {
       this.destroy()
