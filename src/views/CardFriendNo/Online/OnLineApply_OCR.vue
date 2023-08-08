@@ -564,8 +564,8 @@ export default {
       if (file?.size > maxAllowedSize || (file?.type !== 'image/jpg' && file?.type !== 'image/jpeg' && file?.type !== 'image/png')) {
         this.ImageLimit.show()
       } else {
-        alert(`${JSON.stringify(navigator.userAgentData.brands)}, ${navigator.userAgentData.brands.some(item => item === 'Safari')}`)
-        if (navigator.userAgentData.brands.some(item => item === 'Safari')) {
+        alert(`${navigator.vendor},${navigator.vendor.includes('Apple')}`)
+        if (navigator.vendor.includes('Apple')) {
           const res = await compressImg(file, 0.3)
           file = res.file
         }
