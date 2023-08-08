@@ -483,6 +483,8 @@
 <script>
 import PublicService from '@/service/Public.Service.js'
 import ServiceN from '@/service/CardFriend_N.Service.js'
+import compressImg from '@/utilities/compress.js'
+
 export default {
   data () {
     return {
@@ -555,25 +557,20 @@ export default {
     async pickFiles (e, num) {
       this.num = num
       // ? 轉base64
-      const file = await e.target.files[0]
+      let file = await e.target.files[0]
       // console.log(`檔案大小${Math.round(file.size / (1024 * 1024))}mb`)
       // console.log(file.size)
       const maxAllowedSize = 5 * 1024 * 1024
       if (file?.size > maxAllowedSize || (file?.type !== 'image/jpg' && file?.type !== 'image/jpeg' && file?.type !== 'image/png')) {
         this.ImageLimit.show()
       } else {
+        alert(`${JSON.stringify(navigator.userAgentData.brands)}, ${navigator.userAgentData.brands.some(item => item === 'Safari')}`)
+        if (navigator.userAgentData.brands.some(item => item === 'Safari')) {
+          const res = await compressImg(file, 0.3)
+          file = res.file
+        }
         this.imgTemplateUrl = URL.createObjectURL(file)
-        // if (this.imgTemplateUrl) {
-        //   this.message = `
-        //   檔案上傳失敗，請重新整理! </br>
-        //   您現在的設備為:</br>
-        //   ${navigator.userAgent}
-        //   裝置-${navigator.userAgentData?.platform} </br>
-        //   瀏覽器-${navigator.userAgentData?.brands[1].brand}[${navigator.userAgentData?.brands[1].version}]
-        //   `
-        //   this.APIModal.show()
-        //   return
-        // }
+        console.log(this.imgTemplateUrl)
         this.makeModify(file.size)
       }
       // ? 清空value
