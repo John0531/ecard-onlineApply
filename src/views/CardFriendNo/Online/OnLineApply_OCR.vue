@@ -483,7 +483,7 @@
 <script>
 import PublicService from '@/service/Public.Service.js'
 import ServiceN from '@/service/CardFriend_N.Service.js'
-import compressImg from '@/utilities/compress.js'
+// import compressImg from '@/utilities/compress.js'
 
 export default {
   data () {
@@ -557,20 +557,20 @@ export default {
     async pickFiles (e, num) {
       this.num = num
       // ? 轉base64
-      let file = await e.target.files[0]
+      const file = await e.target.files[0]
       // console.log(`檔案大小${Math.round(file.size / (1024 * 1024))}mb`)
       // console.log(file.size)
       const maxAllowedSize = 5 * 1024 * 1024
       if (file?.size > maxAllowedSize || (file?.type !== 'image/jpg' && file?.type !== 'image/jpeg' && file?.type !== 'image/png')) {
         this.ImageLimit.show()
       } else {
-        alert(`${JSON.stringify(navigator.userAgentData.brands)}, ${navigator.userAgentData.brands.some(item => item === 'Safari')}`)
-        if (navigator.userAgentData.brands.some(item => item === 'Safari')) {
-          const res = await compressImg(file, 0.3)
-          file = res.file
-        }
+        // alert(`${JSON.stringify(navigator.userAgentData.brands)}, ${navigator.userAgentData.brands.some(item => item === 'Safari')}`)
+        // if (navigator.userAgentData.brands.some(item => item === 'Safari')) {
+        //   const res = await compressImg(file, 0.3)
+        //   file = res.file
+        // }
         this.imgTemplateUrl = URL.createObjectURL(file)
-        console.log(this.imgTemplateUrl)
+        // console.log(this.imgTemplateUrl)
         this.makeModify(file.size)
       }
       // ? 清空value
