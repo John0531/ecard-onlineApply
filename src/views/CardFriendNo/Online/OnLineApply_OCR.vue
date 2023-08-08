@@ -626,7 +626,7 @@ export default {
         this.imgTemplateUrl = ''
         this.$store.commit('changeLoading', false)
       } catch (error) {
-        alert(error)
+        alert(JSON.stringify(error))
       }
     },
     async result () {
