@@ -566,9 +566,13 @@ export default {
           this.$store.commit('changeLoading', false)
           this.ImageLimit.show()
         } else {
+          // ? 使用 safari 瀏覽器時，預先壓縮圖片
           if (navigator.vendor.includes('Apple')) {
-            const res = await compressImg(file, 0.3)
-            file = res.file
+            const maxAllowedSize = 1.5 * 1024 * 1024
+            if (file?.size > maxAllowedSize) {
+              const res = await compressImg(file, 1)
+              file = res.file
+            }
           }
           this.imgTemplateUrl = URL.createObjectURL(file)
           this.makeModify(file.size)

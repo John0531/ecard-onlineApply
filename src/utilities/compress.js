@@ -15,6 +15,7 @@ async function compressImg (file, quality) {
         const image = new Image() // 创建 img 元素
         image.onload = async () => {
           const canvas = document.createElement('canvas') // 创建 canvas 元素
+          // ? 限制canvas繪圖大小，當在ios手機尺寸過大時，會無法顯示
           const maxWidth = 768 // Max width for compressed image
           const scale = Math.min(maxWidth / image.width, 1)
           canvas.width = image.width * scale
