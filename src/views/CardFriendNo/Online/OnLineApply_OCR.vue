@@ -566,7 +566,7 @@ export default {
           this.$store.commit('changeLoading', false)
           this.ImageLimit.show()
         } else {
-          // ? 使用 safari 瀏覽器時，預先壓縮圖片
+          // ? 使用 safari 瀏覽器及apple裝置時，預先壓縮圖片
           if (navigator.vendor.includes('Apple')) {
             const maxAllowedSize = 1.5 * 1024 * 1024
             if (file?.size > maxAllowedSize) {

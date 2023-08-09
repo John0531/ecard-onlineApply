@@ -176,7 +176,7 @@
                             </div>
                         </div>
                         <!----------------------MyData----------------------->
-                        <div class="d-flex flex-column px-0 d-none">
+                        <div class="d-flex flex-column px-0 ">
                           <div >
                               <Field
                                 v-model="proofType"
@@ -197,14 +197,14 @@
                             <div>{{errors['財力證明']}}</div>
                           </div>
                         </div>
-                        <div class="justify-content-center MyData_input_note my-2 d-none">
+                        <div class="justify-content-center MyData_input_note my-2 ">
                             <span class="red_text">※勾選此項目需使用自然人憑證、行動自然人憑證或健保卡</span>
                             <span>使用MyData調閱個人資料可於國發會個人化資料自主運用(MyData)平臺透過自然人憑證、行動自然人憑證或健保卡取得下列資訊，相關資訊將轉由聯邦銀行做為您申請信用卡相關業務之<a href="https://card.ubot.com.tw/eCard/activity/MyData/index.htm" target="_blank"><u>財力證明使用</u></a>。更多關於
                                 <a href="#" target="_blank"><u>MyData平臺</u></a>。</span>
                             <span>●勞工保險被保險人投保資料(明細)<br>●財產資料<br>●個人所得資料</span>
                         </div>
                         <!-------------------本人已詳閱---------------------->
-                        <div class="terms-group d-none">
+                        <div class="terms-group ">
                             <div class="terms">
                                 <input
                                 v-model="doubleAgree"
@@ -577,6 +577,7 @@
 <script>
 import PublicService from '@/service/Public.Service.js'
 import Moment from 'moment'
+import compressImg from '@/utilities/compress.js'
 
 export default {
   data () {
@@ -631,22 +632,20 @@ export default {
     async pickFiles (e, num) {
       this.num = num
       // ? 轉base64
-      const file = await e.target.files[0]
+      let file = await e.target.files[0]
       const maxAllowedSize = 5 * 1024 * 1024
       if (file?.size > maxAllowedSize || (file?.type !== 'image/jpg' && file?.type !== 'image/jpeg' && file?.type !== 'image/png')) {
         this.ImageLimit.show()
       } else {
+        // ? 使用 safari 瀏覽器及apple裝置時，預先壓縮圖片
+        if (navigator.vendor.includes('Apple')) {
+          const maxAllowedSize = 1.5 * 1024 * 1024
+          if (file?.size > maxAllowedSize) {
+            const res = await compressImg(file, 1)
+            file = res.file
+          }
+        }
         this.imgTemplateUrl = URL.createObjectURL(file)
-        // if (!this.imgTemplateUrl) {
-        //   this.message = `
-        //   檔案上傳失敗，請重新整理! </br>
-        //   您現在的設備為:</br>
-        //   裝置-${navigator.userAgentData?.platform} </br>
-        //   瀏覽器-${navigator.userAgentData?.brands[1].brand}[${navigator.userAgentData?.brands[1].version}]
-        //   `
-        //   this.APIModal.show()
-        //   return
-        // }
         this.makeModify(file.size)
       }
     },
