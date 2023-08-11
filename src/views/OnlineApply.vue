@@ -52,7 +52,6 @@
                   <label
                     class="form-check-label text-start text-md-center fw-bold ms-1"
                     :for="'cardInfoList' + card.cardNo"
-                    style="color: black;"
                   >
                   {{card.cardName}}
                   </label>
@@ -156,7 +155,6 @@
                   <label
                     class="form-check-label text-start text-md-center fw-bold ms-1"
                     :for="'cardInfoList' + card.cardNo"
-                    style="color: black;"
                   >
                   {{card.cardName}}
                   </label>
