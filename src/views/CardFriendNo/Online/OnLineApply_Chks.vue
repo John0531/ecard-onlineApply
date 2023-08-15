@@ -15,6 +15,12 @@
           ref="myForm"
           >
           <div class="row justify-content-md-center pt-1 pt-md-3">
+              <div class="red_text text-md-center mb-4">
+                    ※因您為本行存戶，將以留存本行帳戶資料進行驗證，確認並勾選條款後，「下一步」繼續申辦；<span class="w-100 d-md-block d-none"></span>如您選擇以其他驗證方式（如：他行信用卡、他行帳戶），可點選
+                    <router-link to="/OnLineApply_n1" class="OnLineApply_button text-white">
+                      其他身分驗證
+                    </router-link>
+              </div>
               <div class="formGroup">
                   <ul class="formList">
                       <li class="form-group">
@@ -60,10 +66,10 @@
                       </li> -->
                   </ul>
               </div>
-              <div class="col-xxl-9 Apply_note mb-5">
+              <!-- <div class="col-xxl-9 Apply_note mb-5">
                   <strong>提醒您：</strong><br>按<span class="Green_text">「獲取簡訊驗證碼」</span>按鈕，系統將產生一組簡訊驗證碼至您行動電話，若10分鐘「內」未輸入簡訊驗證碼，本申請將自動取消。<br> 按
                   <span class="Green_text">「獲取簡訊驗證碼」</span>按鈕，可重送簡訊驗證碼，一天最多重送兩次，如有疑問，請洽(02)2545-5168、(07)226-9393與本行客服中心聯繫。
-              </div>
+              </div> -->
               <!-------------------本人已詳閱---------------------->
               <div class="terms-group">
               <div class="terms">
