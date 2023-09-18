@@ -628,6 +628,7 @@ export default {
           }
         } else {
           sessionStorage.setItem('FinancialStatement', this.FillinData.financialStatement)
+          sessionStorage.setItem('MydataOpen', this.FillinData.mydataOpen)
           this.$router.push('/OnLineApply_Fillin_OT_Up')
         }
       }
