@@ -114,7 +114,7 @@
                         <Field
                         v-model="CSC"
                         id="CSC" name="CSC" ref="CSC"
-                        type="text" maxlength="3"
+                        type="password" maxlength="3"
                         class="Apply_Chk_form_control form-control"
                         :class="{ 'is-invalid': errors['信用卡背後末三碼'] }"
                         @keyup="CSC = $custom.validate.OnlyNumPress(CSC)"
