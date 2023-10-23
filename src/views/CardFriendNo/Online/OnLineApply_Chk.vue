@@ -114,9 +114,10 @@
                         <Field
                         v-model="CSC"
                         id="CSC" name="CSC" ref="CSC"
-                        type="password" maxlength="3"
+                        type="text" maxlength="3"
                         class="Apply_Chk_form_control form-control"
                         :class="{ 'is-invalid': errors['信用卡背後末三碼'] }"
+                        @input="textHandler4"
                         @keyup="CSC = $custom.validate.OnlyNumPress(CSC)"
                         @change="checkValue($refs.myForm,CSC,'信用卡背後末三碼','行動電話')"
                         />
@@ -384,15 +385,24 @@ export default {
       }
     },
     textHandler2 () {
-      document.getElementById('cardCode2').setAttribute('type', 'text')
+      const dom = document.getElementById('cardCode2')
+      dom.setAttribute('type', 'text')
       setTimeout(() => {
-        document.getElementById('cardCode2').setAttribute('type', 'password')
+        dom.setAttribute('type', 'password')
       }, 1000)
     },
     textHandler3 () {
-      document.getElementById('cardCode3').setAttribute('type', 'text')
+      const dom = document.getElementById('cardCode3')
+      dom.setAttribute('type', 'text')
       setTimeout(() => {
-        document.getElementById('cardCode3').setAttribute('type', 'password')
+        dom.setAttribute('type', 'password')
+      }, 1000)
+    },
+    textHandler4 () {
+      const dom = document.getElementById('CSC')
+      dom.setAttribute('type', 'text')
+      setTimeout(() => {
+        dom.setAttribute('type', 'password')
       }, 1000)
     },
     scrollEvent (event, num) {
