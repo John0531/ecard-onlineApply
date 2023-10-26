@@ -377,7 +377,7 @@ export default {
       userCode: '',
       amwayNo: '',
       disableBillType: [
-        'paper'
+
       ],
       digiFlag: '',
       termsList: [],
