@@ -510,28 +510,30 @@
             </div>
           </div>
         </template>
-        <div class="mb-4 text-left">
-          <strong>申請悠遊聯名卡者同意卡片已開啟自動加值功能</strong>
-        </div>
-        <div class="blue_box mb-4">
-          <div class="blue_box_bg">
-            <div class="col-12 mb-3">
-              <div class="my-3">
-                <input
-                  v-model="FillinData.term.autoBonus"
-                  class="Apply_input"
-                  runat="server"
-                  type="checkbox"
-                  :value="true"
-                  disabled
-                />
-                <label class="form-check-label me-3" for="redWord"
-                  >不同意開啟</label
-                >
+        <template v-if="flag.cardType==='悠遊卡'">
+          <div class="mb-4 text-left">
+            <strong>申請悠遊聯名卡者同意卡片已開啟自動加值功能</strong>
+          </div>
+          <div class="blue_box mb-4">
+            <div class="blue_box_bg">
+              <div class="col-12 mb-3">
+                <div class="my-3">
+                  <input
+                    v-model="FillinData.term.autoBonus"
+                    class="Apply_input"
+                    runat="server"
+                    type="checkbox"
+                    :value="true"
+                    disabled
+                  />
+                  <label class="form-check-label me-3" for="redWord"
+                    >不同意開啟</label
+                  >
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </template>
         <div class="Apply_note_box mb-4" v-if="Apply_N_Type==='Online'">
           <span class="blue_text"
             ><strong

@@ -290,7 +290,7 @@
                     />
                   </div>
                 </div>
-                <div class="dashed_line mb-3">
+                <div class="dashed_line mb-3" v-if="cardType==='悠遊卡'">
                   <div class="card-header_blue">
                     <strong>申請悠遊聯名卡者同意卡片已開啟自動加值功能</strong>
                   </div>
@@ -333,6 +333,7 @@ export default {
       flgTravel: '',
       consent: '',
       ticketInfo: '',
+      cardType: '',
       radioALL: false,
       Form: {
         parentType: '',
@@ -370,6 +371,7 @@ export default {
       this.flgTravel = result.flgTravel
       this.consent = result.consent
       this.ticketInfo = result.ticketInfo
+      this.cardType = result.cardType
     },
     async submit () {
       // ? 前端驗證所有規則
@@ -398,7 +400,8 @@ export default {
           // console.log(FillinData.OT_1)
           FillinData.OT_1_Flag = {
             flgLine: this.flgLine,
-            flgTravel: this.flgTravel
+            flgTravel: this.flgTravel,
+            cardType: this.cardType
           }
           FillinData.OT_1_TermsContent = {
             consent: this.consent,
@@ -413,7 +416,8 @@ export default {
               ...this.Form
             }
             FillinData.OT_1_Flag = {
-              flgLine: this.flgLine
+              flgLine: this.flgLine,
+              cardType: this.cardType
             }
             FillinData.OT_1_TermsContent = {
               consent: this.consent,

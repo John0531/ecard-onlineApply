@@ -1,5 +1,6 @@
 import AllRules from '@vee-validate/rules'
 import store from '../store'
+import moment from 'moment'
 
 const validate = {
   ...AllRules,
@@ -319,6 +320,7 @@ const validate = {
   // ?   Day:''
   // ? }
   getDateSelect (selectedDate, dateType) {
+    const thisYear = parseInt(moment().format('YYYY'))
     const dateList = {
       year: [],
       month: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
@@ -326,11 +328,11 @@ const validate = {
     }
     // ? 判斷為"民國"或"西元"
     if (dateType === '西元') {
-      for (let i = new Date().getFullYear() - 100; i <= new Date().getFullYear(); i++) {
+      for (let i = thisYear - 100; i <= thisYear; i++) {
         dateList.year.unshift(i.toString())
       }
     } else if (dateType === '民國') {
-      for (let i = new Date().getFullYear() - 100 - 1911; i <= new Date().getFullYear() - 1911; i++) {
+      for (let i = thisYear - 100 - 1911; i <= thisYear - 1911; i++) {
         dateList.year.unshift(i.toString())
       }
     }
@@ -372,9 +374,43 @@ const validate = {
   // ?   Day: ''
   // ? }
   checkDate (Date, FormDom, fieldName) {
+    const thisYear = parseInt(moment().format('YYYY'))
     FormDom.setFieldError(fieldName, '')
     if (!Date.Year || !Date.Month || !Date.Day) {
       FormDom.setFieldError(fieldName, '日期格式有誤')
+    }
+    // ? 判斷年區間(100年內)
+    if (parseInt(Date.Year) > 1000) {
+      if (parseInt(Date.Year) > thisYear || parseInt(Date.Year) < thisYear - 100) {
+        FormDom.setFieldError(fieldName, '日期格式有誤')
+      }
+    } else {
+      if (parseInt(Date.Year) > thisYear - 1911 || parseInt(Date.Year) < thisYear - 1911 - 100) {
+        FormDom.setFieldError(fieldName, '日期格式有誤')
+      }
+    }
+    // ? 判斷月區間
+    if (parseInt(Date.Month) > 12 || parseInt(Date.Month) < 1) {
+      FormDom.setFieldError(fieldName, '日期格式有誤')
+    }
+    // ? 判斷日區間
+    if (parseInt(Date.Day) < 1) {
+      FormDom.setFieldError(fieldName, '日期格式有誤')
+    }
+    const BigMonth = ['1', '3', '5', '7', '8', '10', '12']
+    const SmallMonth = ['4', '6', '9', '11']
+    if (BigMonth.includes(Date.Month) && parseInt(Date.Day) > 31) {
+      FormDom.setFieldError(fieldName, '日期格式有誤')
+    } else if (SmallMonth.includes(Date.Month) && parseInt(Date.Day) > 30) {
+      FormDom.setFieldError(fieldName, '日期格式有誤')
+    } else if (Date.Month === '2') {
+      // ? 判斷是否為閏年
+      const year = parseInt(Date.Year) > 1000 ? parseInt(Date.Year) : parseInt(Date.Year) + 1911
+      if (year % 4 === 0 && parseInt(Date.Day) > 29) {
+        FormDom.setFieldError(fieldName, '日期格式有誤')
+      } else if (year % 4 !== 0 && parseInt(Date.Day) > 28) {
+        FormDom.setFieldError(fieldName, '日期格式有誤')
+      }
     }
   },
   //* ==== 27.簡訊驗證碼驗證 ====
