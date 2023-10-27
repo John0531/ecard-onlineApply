@@ -763,46 +763,48 @@
                       ※帳單接收型式將依本次選擇做為日後帳單寄送依據，如未點選E-mail認證信則依原帳單型式或紙本寄送。</span>
                   </div>
                 </li>
-                <li class="col-12 col-md-12 mb-0" v-if="Apply_N_Type==='Online'&&pageLoad.flgDigi!=='N'">
-                  <label for=""
-                    >申請數位卡</label
-                  >
-                  <div class="d-flex flex-wrap flex-column flex-md-row">
-                    <div class="form-check me-4">
-                      <Field
-                        :class="{ 'is-invalid': errors['申請數位卡'] }"
-                        v-model="Form.digiFlag"
-                        class="form-check-input mt-2 position-absolute"
-                        type="radio"
-                        name="申請數位卡"
-                        id="申請數位卡-是"
-                        value="true"
-                        :disabled="pageLoad.flgDigi==='M'"
-                      />
-                      <label class="form_Apply_txt fw-normal" for="申請數位卡-是">是</label>
+                <template v-if="Apply_N_Type==='Online'&&pageLoad.flgDigi!=='N'">
+                  <li class="col-12 col-md-12 mb-0">
+                    <label for=""
+                      >申請數位卡</label
+                    >
+                    <div class="d-flex flex-wrap flex-column flex-md-row">
+                      <div class="form-check me-4">
+                        <Field
+                          :class="{ 'is-invalid': errors['申請數位卡'] }"
+                          v-model="Form.digiFlag"
+                          class="form-check-input mt-2 position-absolute"
+                          type="radio"
+                          name="申請數位卡"
+                          id="申請數位卡-是"
+                          value="true"
+                          :disabled="pageLoad.flgDigi==='M'"
+                        />
+                        <label class="form_Apply_txt fw-normal" for="申請數位卡-是">是</label>
+                      </div>
+                      <div class="form-check">
+                        <Field
+                          :class="{ 'is-invalid': errors['申請數位卡'] }"
+                          v-model="Form.digiFlag"
+                          class="form-check-input mt-2 position-absolute"
+                          type="radio"
+                          name="申請數位卡"
+                          id="申請數位卡-否"
+                          value="false"
+                          :disabled="pageLoad.flgDigi==='M'"
+                        />
+                        <label class="form_Apply_txt fw-normal" for="申請數位卡-否">否</label>
+                      </div>
                     </div>
-                    <div class="form-check">
-                      <Field
-                        :class="{ 'is-invalid': errors['申請數位卡'] }"
-                        v-model="Form.digiFlag"
-                        class="form-check-input mt-2 position-absolute"
-                        type="radio"
-                        name="申請數位卡"
-                        id="申請數位卡-否"
-                        value="false"
-                        :disabled="pageLoad.flgDigi==='M'"
-                      />
-                      <label class="form_Apply_txt fw-normal" for="申請數位卡-否">否</label>
-                    </div>
-                  </div>
-                  <ErrorMessage
-                    name="申請數位卡"
-                    class="field-error"
-                  />
-                </li>
-                <li class="col-12 col-md-12 text-left note_text pt-0" v-if="Apply_N_Type==='Online'">
-                  <span>數位卡說明：若您急需用卡，可勾選「是」；於本行核卡時，將以簡訊發送個人代碼至您留存於本行的行動電話，在<u>收到實體卡前</u>，您可憑代碼至指定網站中查詢信用卡資訊，即可綁定行動支付或網路購物，更快體驗聯邦銀行提供的便利刷卡服務。</span>
-                </li>
+                    <ErrorMessage
+                      name="申請數位卡"
+                      class="field-error"
+                    />
+                  </li>
+                  <li class="col-12 col-md-12 text-left note_text pt-0">
+                    <span>數位卡說明：若您急需用卡，可勾選「是」；於本行核卡時，將以簡訊發送個人代碼至您留存於本行的行動電話，在<u>收到實體卡前</u>，您可憑代碼至指定網站中查詢信用卡資訊，即可綁定行動支付或網路購物，更快體驗聯邦銀行提供的便利刷卡服務。</span>
+                  </li>
+                </template>
                 <li class="col-12 col-md-6">
                   <label for=""
                     ><span class="red_text">* </span>畢業國小名稱</label
