@@ -48,15 +48,18 @@
                       <span  v-if="errors['電子信箱']" class="field-error">{{errors['電子信箱']}}</span>
                     </div>
                     </li>
-                    <li class="col-12 col-md-6" v-if="amwayNo === 'Y'? true: false">
+                    <li class="col-12 col-md-6" v-if="amwayNo === 'Y' ? true :false  ">
                       <label for="">*安麗直銷商會員編號</label>
                       <Field
                       name="安麗直銷商會員編號"
                       type="text"
                       placeholder="" :validateOnInput="true"
+                      class="form-control"
+                      rules="required"
                       :class="{ 'is-invalid': errors['安麗直銷商會員編號'],'form-control':true}"
                       v-model="onLineApply_Fillin_Data.amwayNo" value="tbAmwayNo"></Field>
-                      <span class="field-error">{{errors['安麗直銷商會員編號']}}</span>
+                      <span v-if="errors['安麗直銷商會員編號']" class="field-error">{{errors['安麗直銷商會員編號']}}</span>
+
                     </li>
                     <li class="col-12 col-md-6">
                       <label for="">推廣單位代號</label>
@@ -439,6 +442,11 @@ export default {
       } else {
         schema.電子信箱 = 'email'
       }
+
+      if (this.amwayNo === 'Y') {
+        schema.安麗直銷商會員編號 = 'required'
+      }
+
       if (this.onLineApply_Fillin_Data.sendCardType === '3') {
         schema.卡號末四碼 = 'required|checkCode'
         schema.縣市 = 'required'
@@ -725,7 +733,8 @@ export default {
           this.onLineApply_Fillin_Data.unitCode = result.unitCode
           this.onLineApply_Fillin_Data.userCode = result.userCode
           this.digiFlag = result.digiFlag
-          this.onLineApply_Fillin_Data.amwayNo = result.amwayNo
+          // this.onLineApply_Fillin_Data.amwayNo = result.amwayNo
+          this.amwayNo = result.amwayNo
           this.termsName = result.termsList
           this.termsHtml = await service.getTermsHtml(this.termsName)
           break

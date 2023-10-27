@@ -178,12 +178,12 @@
                     <p>{{FillinData.userCode}}</p>
                   </div>
                 </li>
-                <li v-if="FillinData.amwayNo === 'Y'">
+                <li v-if="FillinData.amwayNo !== '' ">
                   <div class="label_confirm">
                     <span class="red_text">* </span>安麗直銷商/會員編號
                   </div>
                   <div class="input-data_confirm">
-                    <p>{{}}</p>
+                    <p>{{  FillinData.amwayNo }}</p>
                   </div>
                 </li>
               </ul>
