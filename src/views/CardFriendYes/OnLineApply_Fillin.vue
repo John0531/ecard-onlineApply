@@ -52,6 +52,7 @@
                       <label for="">*安麗直銷商會員編號</label>
                       <Field
                       name="安麗直銷商會員編號"
+                      maxlength="7"
                       type="text"
                       placeholder="" :validateOnInput="true"
                       class="form-control"
