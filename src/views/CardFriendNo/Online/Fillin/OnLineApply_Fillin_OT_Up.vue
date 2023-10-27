@@ -176,7 +176,7 @@
                             </div>
                         </div>
                         <!----------------------MyData----------------------->
-                        <div class="d-flex flex-column px-0 d-none">
+                        <div class="d-flex flex-column px-0 " :class="{'d-none':!myDataOpen}">
                           <div >
                               <Field
                                 v-model="proofType"
@@ -197,14 +197,14 @@
                             <div>{{errors['財力證明']}}</div>
                           </div>
                         </div>
-                        <div class="justify-content-center MyData_input_note my-2 d-none">
+                        <div class="justify-content-center MyData_input_note my-2 " :class="{'d-none': !myDataOpen}">
                             <span class="red_text">※勾選此項目需使用自然人憑證、行動自然人憑證或健保卡</span>
                             <span>使用MyData調閱個人資料可於國發會個人化資料自主運用(MyData)平臺透過自然人憑證、行動自然人憑證或健保卡取得下列資訊，相關資訊將轉由聯邦銀行做為您申請信用卡相關業務之<a href="https://card.ubot.com.tw/eCard/activity/MyData/index.htm" target="_blank"><u>財力證明使用</u></a>。更多關於
                                 <a href="#" target="_blank"><u>MyData平臺</u></a>。</span>
                             <span>●勞工保險被保險人投保資料(明細)<br>●財產資料<br>●個人所得資料</span>
                         </div>
                         <!-------------------本人已詳閱---------------------->
-                        <div class="terms-group d-none">
+                        <div class="terms-group " :class="{'d-none': !myDataOpen}">
                             <div class="terms">
                                 <input
                                 v-model="doubleAgree"
@@ -625,7 +625,8 @@ export default {
         isMydata: false
       },
       url: '',
-      APIModal: null // API提醒Modal
+      APIModal: null, // API提醒Modal
+      myDataOpen: true
     }
   },
   methods: {
@@ -969,6 +970,9 @@ export default {
     this.NoticeModal = new this.$custom.bootstrap.Modal(this.$refs.NoticeModal)
     this.NoticeModal.show()
     this.APIModal = new this.$custom.bootstrap.Modal(this.$refs.APIModal)
+    if (sessionStorage.getItem('MydataOpen') === 'false') {
+      this.myDataOpen = false
+    }
   },
   unmounted () {
     clearInterval(this.timing)

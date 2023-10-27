@@ -377,7 +377,7 @@ export default {
       userCode: '',
       amwayNo: '',
       disableBillType: [
-        'paper'
+
       ],
       digiFlag: '',
       termsList: [],
@@ -716,6 +716,7 @@ export default {
       switch (status) {
         case '00200':
           this.id = result.id
+          this.disableBillType = result.disableBillType
           this.name = result.name
           this.phone = result.phone
           this.onLineApply_Fillin_Data.email = result.email
