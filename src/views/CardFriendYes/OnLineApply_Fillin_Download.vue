@@ -320,6 +320,7 @@
             </div>
           </div>
         </template>
+        <template v-if="cardType==='悠遊卡'">
         <div class="mb-4 text-left">
           <strong>申請悠遊聯名卡者同意卡片已開啟自動加值功能</strong>
         </div>
@@ -342,6 +343,7 @@
             </div>
           </div>
         </div>
+        </template>
         <div class="Apply_note_box mb-4 indentNote_star">
           <span class="red_text"><strong>＊申請書資料確認無誤後，請按送出申請。</strong></span>
         </div>
@@ -384,7 +386,8 @@ export default {
       },
       consent: JSON.parse(sessionStorage.getItem('FillinData')).OT_1_TermsContent.consent,
       ticketInfo: JSON.parse(sessionStorage.getItem('FillinData')).OT_1_TermsContent.ticketInfo,
-      flgLine: JSON.parse(sessionStorage.getItem('FillinData')).OT_1_Flag.flgLine
+      flgLine: JSON.parse(sessionStorage.getItem('FillinData')).OT_1_Flag.flgLine,
+      cardType: JSON.parse(sessionStorage.getItem('FillinData')).OT_1_Flag.cardType
     }
   },
   methods: {
