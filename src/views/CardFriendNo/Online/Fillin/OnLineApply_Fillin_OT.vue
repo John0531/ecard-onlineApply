@@ -1414,6 +1414,7 @@
                       name="安麗直銷商/會員編號"
                       type="text"
                       class="form-control"
+                      maxlength="7"
                     />
                     <ErrorMessage
                       name="安麗直銷商/會員編號"
