@@ -320,7 +320,7 @@
             </div>
           </div>
         </template>
-        <template v-if="cardType!=='一卡通'">
+        <template v-if="cardType==='悠遊卡'">
         <div class="mb-4 text-left">
           <strong>申請悠遊聯名卡者同意卡片已開啟自動加值功能</strong>
         </div>
