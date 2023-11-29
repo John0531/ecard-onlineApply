@@ -849,7 +849,6 @@ export default {
     this.ImageLimit = new this.$custom.bootstrap.Modal(this.$refs.ImageLimit)
     this.APIModal = new this.$custom.bootstrap.Modal(this.$refs.APIModal)
     this.NoticeModal.show()
-    console.log('test')
   }
 }
 </script>
